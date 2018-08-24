@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="Java 数组
+
+先来看一个 Java 中的例子，Java 中的数组是协变的。也就是说，一个 String 数组(String[])是可以被当成 Object 数组(Object[])处理的：
+
+String[] a1 = { &quot;abc&quot; };
+Object[] a2 = a1;
+
+
+这种协变虽然在读取数组内容时不会有问题（a1 数组中的 String 元素可以被当成 Object 使用），但是修改数组内容时就会出现无法在编译期检测出来的错误了：
+
+a2[0] = new Integer(17)
+String s  = a1[0]  // java.lang.ArrayStoreException
+
+
+">
+    <meta name="author" content="zellux">
+
+    <title> Scala 中的协变和逆变 &middot; Aiur · Zellux 的博客 </title>
+
+    <script src="/js/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
+    <script src="/js/jquery-3.0.47.fancybox.min.js"></script>
+
+    
+    
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.52ea10a8f3a0b8f145adadb8d3761e17a42a7634869f775ef5830ed4de77d3fa.css">
+    
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+    
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    
+    <link href="" rel="alternate" type="application/rss+xml" title="Aiur · Zellux 的博客" />
+    
+<script type="application/ld+json">
+{
+    "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https://blog.yxwang.me/"
+    },
+    "articleSection" : "post",
+    "name" : "Scala 中的协变和逆变",
+    "headline" : "Scala 中的协变和逆变",
+    "description" : "<h2 id="java-数组">Java 数组</h2>
+
+<p>先来看一个 Java 中的例子，Java 中的数组是协变的。也就是说，一个 String 数组(String[])是可以被当成 Object 数组(Object[])处理的：</p>
+
+<pre><code class="language-java">String[] a1 = { &quot;abc&quot; };
+Object[] a2 = a1;
+</code></pre>
+
+<p>这种协变虽然在读取数组内容时不会有问题（a1 数组中的 String 元素可以被当成 Object 使用），但是修改数组内容时就会出现无法在编译期检测出来的错误了：</p>
+
+<pre><code class="language-java">a2[0] = new Integer(17)
+String s  = a1[0]  // java.lang.ArrayStoreException
+</code></pre>
+
+<p></p>",
+    "inLanguage" : "en-US",
+    "author" : "zellux",
+    "creator" : "zellux",
+    "publisher": "zellux",
+    "accountablePerson" : "",
+    "copyrightHolder" : "",
+    "copyrightYear" : "2012",
+    "datePublished": "2012-06-30 00:00:00 &#43;0000 UTC",
+    "dateModified" : "2012-06-30 00:00:00 &#43;0000 UTC",
+    "url" : "https://blog.yxwang.me/2012/06/variances-in-scala/",
+    "wordCount" : "250",
+    "keywords" : [ "Programming","Scala","Blog" ]
+}
+</script>
+
+  </head>
+
+  <body>
+    <nav class="nav">
+  <div class="nav-container">
+    <span class="site-title">
+      <a href="https://blog.yxwang.me/">Aiur · Zellux 的博客</a>
+    </span>
+    
+    <div class="nav-list">
+      
+      <span class="nav-item"><a href="/about">About</a></span>
+      
+      <span class="nav-item"><a href="/archive">Archive</a></span>
+      
+      <span class="nav-item"><a href="/notes">Notes</a></span>
+      
+    </div>
+  </div>
+</nav>
+
+    <div class="container">
+
+
+<div class="content">
+  <div class="post">
+    <h1 class="post-title"><a href="https://blog.yxwang.me/2012/06/variances-in-scala/">Scala 中的协变和逆变</a></h1>
+    <span class="post-meta">
+  <time datetime='Sat, Jun 30, 2012' data-updated="true" itemprop="datePublished">Sat, Jun 30, 2012</time>
+  
+  <span class="post-categories">
+    •
+	<a href="https://blog.yxwang.me/categories/programming">Programming</a>
+  </span>
+  
+</span>
+
+    <div class="post-content">
+      <h2 id="java-数组">Java 数组</h2>
+
+<p>先来看一个 Java 中的例子，Java 中的数组是协变的。也就是说，一个 String 数组(String[])是可以被当成 Object 数组(Object[])处理的：</p>
+
+<pre><code class="language-java">String[] a1 = { &quot;abc&quot; };
+Object[] a2 = a1;
+</code></pre>
+
+<p>这种协变虽然在读取数组内容时不会有问题（a1 数组中的 String 元素可以被当成 Object 使用），但是修改数组内容时就会出现无法在编译期检测出来的错误了：</p>
+
+<pre><code class="language-java">a2[0] = new Integer(17)
+String s  = a1[0]  // java.lang.ArrayStoreException
+</code></pre>
+
+<p></p>
+
+<p>之所以要采用这种设计，Java 的发明者 James Gosling 曾解释说，这样做就能用一种简单通用的方式处理 Java 数组了。例如 java.util.Arrays 提供了sort 方法用于所有数组类型的排序，它的函数声明是 <code>sort(Object[] a, Comparator c)</code>，如果 Java 数组不支持协变，那么就很难简单的写出这样通用的排序方法了。</p>
+
+<h2 id="scala-中的协变和逆变">Scala 中的协变和逆变</h2>
+
+<p>wikipedia 上关于[协变和逆变的解释](<a href="http://en.wikipedia.org/wiki/Covariance_and_contravariance_(computer_science)是：">http://en.wikipedia.org/wiki/Covariance_and_contravariance_(computer_science)是：</a></p>
+
+<blockquote>
+<p>Within the type system of a programming language, covariance and contravariance refers to the ordering of types from narrower to wider and their interchangeability or equivalence in certain situations (such as parameters, generics, and return types).</p>
+</blockquote>
+
+<p>简单来说，它们指定了不同类型相互之间的可转换性。协变类型可以从较普通的类（动物）转换到更精细的类（猫），而逆变则允许从较精细的类（三角形）转换到较普通的类（几何图形）。</p>
+
+<p>Scala 中默认的参数类型是不变（invariant）的，也就是说，下面代码中 Invariant[Object] 类和 Invariant[String] 类的实例，均无法转化成另外一种类型。</p>
+
+<pre><code class="language-scala">scala&gt; class Invariant[T]
+defined class Invariant
+
+scala&gt; var x: Invariant[Object] = new Invariant[Object]
+x: Invariant[java.lang.Object] = Invariant@8e43b44
+
+scala&gt; var x: Invariant[Object] = new Invariant[String]
+&lt;console&gt;:8: error: type mismatch;
+ found   : Invariant[String]
+ required: Invariant[java.lang.Object]
+                                  
+scala&gt; var x: Invariant[String] = new Invariant[Object]
+&lt;console&gt;:8: error: type mismatch;
+ found   : Invariant[java.lang.Object]
+ required: Invariant[String]
+</code></pre>
+
+<p>在 Scala 中，如果要把某一参数类型 T 声明为协变，只需要在它的前面加上 + 号即可：</p>
+
+<pre><code class="language-scala">scala&gt; class Covariant[+T]
+defined class Covariant
+
+scala&gt; var x: Covariant[Object] = new Covariant[String]
+x: Covariant[java.lang.Object] = Covariant@36527386
+</code></pre>
+
+<p>类似的，声明 T 为逆变的方式是在它前面加上 - 号。</p>
+
+<p>判断一个类型是逆变、协变还是不变的方法，被称为<strong>里氏替换原则</strong>(Liskov Substitution Principle)。LSP 指出，如果所有类型 U 出现的地方都能用类型 T 替换，那么 T 就可以被认为是 U 的一个子类型。</p>
+
+<p>协变和逆变有时候可以同时作用在一个类型上，比较经典的一个例子就是 Scala 中的 Function1。当出现类似 A =&gt; B 的 lambda 函数时，编译器会自动将它转成一个 Function1[A, B] 的定义。标准库中 Function1 的定义如下：</p>
+
+<p>{% codeblock lang:scala %}
+trait Function1[-S, +T] {
+  def apply(x: S): T
+}
+{% endcodeblock %}</p>
+
+<p>这里 S 是函数参数，T 是函数的返回类型。不难理解，当一个函数 f 能替换另一个函数 g 时，f 接受的参数必须是 g 的父类，而 f 的返回结果必须是 g 的返回结果的子类。因此这里 S 是逆变的，而 T 则是协变的。</p>
+
+<p>参考：</p>
+
+<ul>
+<li><a href="http://www.amazon.com/Programming-Scala-Step---Step-ebook/dp/B004Z1FTXS/ref=sr_1_2?ie=UTF8&amp;qid=1342872487&amp;sr=8-2&amp;keywords=programming+in+scala">《Programming in Scala》</a></li>
+<li><a href="http://daily-scala.blogspot.com/2010/03/intra-and-co-variance-of-type.html">In- and Co- variance of type parameters</a></li>
+</ul>
+    </div>
+        <div class="cc-license">
+      本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.zh">知识共享署名-非商业性使用 3.0 版本许可协议</a>进行许可，欢迎转载，演绎，但是必须保留本文的署名 <a href="https://blog.yxwang.me/2012/06/variances-in-scala/">zellux</a>（包含链接），且不得用于商业目的。
+    </div>
+
+  </div>
+  <div class="pagination">
+    <a class="btn previous " href="https://blog.yxwang.me/2012/07/android-tap-timetout/"> Prev</a>  
+    <a class="btn next " href="https://blog.yxwang.me/2012/06/revisiting-storage-for-smartphones/"> Next</a> 
+  </div>
+</div>
+
+
+<div id="disqus_thread"></div>
+<script>
+  var disqus_config = function () {
+  this.page.url = "https://blog.yxwang.me/2012/06/variances-in-scala/";
+  
+  };
+  (function() {
+  var d = document, s = d.createElement('script');
+  s.src = '//aiur-zellux.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+
+<div class="footer">
+  
+  <p>Powered by <a href="http://gohugo.io">Hugo</a> and <a href="https://github.com/zhe/hugo-theme-slim">Slim theme</a>.
+  
+      Follow me on <a href="https://twitter.com/zellux">Twitter</a>.
+      </p>
+  </p>
+  
+</div>
+
+                   
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+    Macros: {
+      argmax: "\\operatorname*{argmax}",
+      argmin: "\\operatorname*{argmin}"
+    }
+  },
+  jax: ["input/TeX","output/CommonHTML"]
+});
+</script>
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML">
+</script>
+
+</script>
+
+<script src="https://blog.yxwang.me/js/slim.min.aef36e671f72c9042139aae327dbe693b7ebaa67fd56f30dad4c985a91ba9294.js"></script>
+
+
+<link rel="stylesheet" href="https://blog.yxwang.me/css/solarized-light.min.5499f6bc45da0c78f070be4f720fd28b19af75306b569b77837d57c3cf819430.css" />
+<script src="/js/highlight.pack.js"></script>
+<script>
+  hljs.initHighlightingOnLoad();
+</script>
+
+</div>
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-25551121-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+<script type="text/javascript">
+    window.heap=window.heap||[],heap.load=function(e,t){window.heap.appid=e,window.heap.config=t=t||{};var r=t.forceSSL||"https:"===document.location.protocol,a=document.createElement("script");a.type="text/javascript",a.async=!0,a.src=(r?"https:":"http:")+"//cdn.heapanalytics.com/js/heap-"+e+".js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(a,n);for(var o=function(e){return function(){heap.push([e].concat(Array.prototype.slice.call(arguments,0)))}},p=["addEventProperties","addUserProperties","clearEventProperties","identify","removeEventProperty","setEventProperties","track","unsetEventProperty"],c=0;c<p.length;c++)heap[p[c]]=o(p[c])};
+      heap.load("3166778701");
+</script>
+
+
+</body>
+
+</html>
+

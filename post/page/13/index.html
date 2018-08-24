@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="zellux">
+
+    <title> Posts &middot; Aiur · Zellux 的博客 </title>
+
+    <script src="/js/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
+    <script src="/js/jquery-3.0.47.fancybox.min.js"></script>
+
+    
+    
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.52ea10a8f3a0b8f145adadb8d3761e17a42a7634869f775ef5830ed4de77d3fa.css">
+    
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+    
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    
+    <link href="https://blog.yxwang.me/post/index.xml" rel="alternate" type="application/rss+xml" title="Aiur · Zellux 的博客" />
+    
+<script type="application/ld+json">
+{
+    "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https://blog.yxwang.me/"
+    },
+    "articleSection" : "post",
+    "name" : "Posts",
+    "headline" : "Posts",
+    "description" : "",
+    "inLanguage" : "en-US",
+    "author" : "zellux",
+    "creator" : "zellux",
+    "publisher": "zellux",
+    "accountablePerson" : "",
+    "copyrightHolder" : "",
+    "copyrightYear" : "2008",
+    "datePublished": "2008-06-23 00:00:00 &#43;0000 UTC",
+    "dateModified" : "2008-06-23 00:00:00 &#43;0000 UTC",
+    "url" : "https://blog.yxwang.me/post/",
+    "wordCount" : "0",
+    "keywords" : [ "Blog" ]
+}
+</script>
+
+  </head>
+
+  <body>
+    <nav class="nav">
+  <div class="nav-container">
+    <span class="site-title">
+      <a href="https://blog.yxwang.me/">Aiur · Zellux 的博客</a>
+    </span>
+    
+    <div class="nav-list">
+      
+      <span class="nav-item"><a href="/about">About</a></span>
+      
+      <span class="nav-item"><a href="/archive">Archive</a></span>
+      
+      <span class="nav-item"><a href="/notes">Notes</a></span>
+      
+    </div>
+  </div>
+</nav>
+
+    <div class="container">
+
+
+<div class="content">
+  <div class="posts">
+     
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2008/06/ics-lab-8-a-simple-proxy/">ICS Lab 8 - 实现一个简单的代理服务器</a></h2>
+      <span class="post-date">Jun 23, 2008</span>
+      
+      <span class="post-tags">
+	
+	#<a href="https://blog.yxwang.me/tags/courses">Courses</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/ics">ICS</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/lab">Lab</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/network">Network</a>&nbsp;
+	
+      </span>
+      
+      
+      
+      <div class="summary">
+	折腾了一下午加晚上，看了一堆包后总算把HTTPS协议搞定了，趁热写点心得。
+这个Lab很强大，把11 12 13三章的内容全串起来了。
+HTTP部分很简单，读个请求头把主机分析出来（有现成的函数），然后把客户端的所有请求传给Web服务器，再把服务器的所有反馈信息传给客户端就行了。另外注意传信息的时候不要使用Rio_readlineb之类的函数，而要用Rio_readnb，否则传图像时会碰到问题。
+另外把版本统一成HTTP 1.0能明显的提高代理服务器的速度，具体原因还不清楚，明天再问问。
+如果要把这个代理服务器写得健壮一点，要注意各种异常的处理，比如通常浏览器都能发送正确的报头，但是如果有人通过telnet发送了错误的报头也要能够正确的释放内存再结束线程。
+然后是线程，这个问题也不大，使用信号量实现互斥锁，另外在即时free资源就好。
+最后就是HTTPS协议的处理了，由于没正确理解文档的意思，在这上面花了很多时间，不过倒也接触了不少新东西。
+首先是用gdb调试多线程程序，使用info threads查看当前所有线程，然后thread #切换到该线程就能查看那个线程的相关信息了。
+然后来说下HTTPS协议的处理。一开始我有个错误的概念，就是代理服务器的责任是把所有客户端的信息转发到服务器端，把所有服务器端的信息转发到客户端，或者说在浏览器的眼中代理服务器和普通的Web服务器没有区别。其实并非如此，在我用OmniPeek截包看了半天后才意识到自己错了 =_=
+浏览器不通过代理进行HTTPS连接时，只发送加密后的数据；而通过代理服务器时，先告诉代理服务器相关信息，然后再发送密文。另外，HTTPS的明码报头一般不会像文档中那样只有一行，代理服务器要记得所有的明文都读进来（但不转发给Web服务器），然后回复HTTP/1.0 200 Connection established，最后再负责密文的转发。
+HTTPS的数据转发也和HTTP不一样，它需要客户端和服务器端多次的双向数据传输。而默认的read方法在没有信息读取和其他中断发生的时候是会block的。对于这个问题我的解决方法是结合I/O Multiplexing和Non-blocking I/O（搜资料的时候看到过这样处理的效率也比较高，见http://www.kegel.com/c10k.html）。用fcntl设置两个file descriptor的模式为O_NONBLOCK，然后再用select/poll实现multiplexing即可。不知道还有没有更好的方法。
+另外测试HTTPS时建议使用https://mail.google.com，文档中的两个网页貌似firefox都打不开的。
+	<a class="read-more" href="/2008/06/ics-lab-8-a-simple-proxy/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2008/06/ics-lab-7-data-structure-related/">ICS Lab 7 数据结构相关</a></h2>
+      <span class="post-date">Jun 16, 2008</span>
+      
+      <span class="post-tags">
+	
+	#<a href="https://blog.yxwang.me/tags/courses">Courses</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/ics">ICS</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/lab">Lab</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/malloc">malloc</a>&nbsp;
+	
+      </span>
+      
+      
+      
+      <div class="summary">
+	这个Lab是要自己实现一个malloc函数，要求内存利用率和速度尽可能高。 用红黑树的版本最后得分是97/100，没有针对测试数据作任何优化，据说可以改到100/100，不过95分以上就满分了我也懒得再改了。
+这个Lab的重点在可用内存的管理上。关于数据的组织，似乎有两种比较常见的形式（我不知道的就不算进来了，下同 =_=）。一是slab/buddy系统，就是书上讲的segregated list；还有一种用二叉树实现，这个lab我用了二叉树。
+第一种方法对提高性能很有帮助，但是利用率方面就比较有限了。而这个lab似乎提高性能比较容易，难点在于利用率的提高。
+二叉树方面，也有两种：平衡二叉搜索树（AVL树、红黑树等），字典树（Trie, 似乎也叫Radix tree）
+这些数据结构都比较经典，很多书上都有现成的代码，网上也有一堆，拿来改一下就行了（注意算法导论上的红黑树的left-rotate是有bug的，见勘误表）。
+另外还有个优化，树的结点要保存很多数据，比如父结点、左右结点、前后结点（考虑到同一大小的块的存在），红黑树中还需要保存一个颜色值（当然这个值可以保存在header中）。如果所有的空结点都以这种形式保存的话，势必对利用率影响很大。
+所以建议另外维护一个block size相对较小的（比如小于128字节）的list，把小于这个值的空闲块都放到那个list里。
+差不多就这样了，思路还是蛮简单的，就是实现起来很恶心。
+另外做的时候还可以考虑考虑多线程的情况下这个malloc的表现会如何。
+感觉下学期的几个lab，Lab 4 5 7都和优化程序性能有关，颗粒度不断提高，从最底层的汇编指令，到语言级别的unrolling、splitting，直到现在和具体语言无关的算法层次，对写高效代码的帮助蛮大的。
+	<a class="read-more" href="/2008/06/ics-lab-7-data-structure-related/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2008/05/application-level-isolation-and-recovery-with-solitude/">EuroSys 08 - Solitude: App-Level Isolation and Recovery</a></h2>
+      <span class="post-date">May 28, 2008</span>
+      
+      <span class="post-tags">
+	
+	#<a href="https://blog.yxwang.me/tags/computer-system">Computer System</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/eurosys">EuroSys</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/paper">Paper</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/research">Research</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/security">Security</a>&nbsp;
+	
+      </span>
+      
+      
+      
+      <div class="summary">
+	Application-Level Isolation and Recovery with Solitude
+Shvetank Jain, Fareha Shafique, Vladan Djeric, Ashvin Goel
+Department of Electrical and Computer Engineering, University of Toronto
+http://portal.acm.org/citation.cfm?id=1357010.1352603
+引入一个新的文件系统层(Isolation File System)将安全可信的基础文件系统和不可信的环境（如网上下载的文件等）隔离开来，并对不可信的环境中做出的改动加以记录，一旦发现问题就能即使恢复。
+	<a class="read-more" href="/2008/05/application-level-isolation-and-recovery-with-solitude/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2008/05/ics-lab-6/">ICS Lab 6</a></h2>
+      <span class="post-date">May 27, 2008</span>
+      
+      <span class="post-tags">
+	
+	#<a href="https://blog.yxwang.me/tags/courses">Courses</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/ics">ICS</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/lab">Lab</a>&nbsp;
+	
+      </span>
+      
+      
+      
+      <div class="summary">
+	重定向：
+主要用到open, close, read和write这几个函数，关于它们的使用方法可以使用 man 2 &lt;函数名&gt; 查看。
+这里简单介绍下： Linux内核为每个进程维护了一张已打开的文件的表格，用File Descriptor（整型，以下简写成fd）可以访问到这些文件。所以很容易理解tsh.c中的函数listjobs为什么需要一个output_fd的整型参数，注意它的后面有这么一行： if (writer(output_fd, buf, strlen(buf)) &lt; 0) …
+这一行就把前面构造好的buf字符串（包括当前进程的信息）输出到这个output_fd对应的文件中了。
+每个进程的值为0, 1, 2的fd都指向相同的文件，0对应标准输入（通常是键盘输入），1对应标准输出（通常为屏幕），2对应标准错误输出。
+可以看到在main方法的开头，有这么一句 dup2(1, 2);
+dup2的作用是把参数二指向的文件改成和参数一一样（如果之前打开了文件，则先关闭），这句话的作用就是把原来要输出到标准错误端(stderr)的内容 输出到标准输出端(stdout)，便于调试。
+理解了fd和dup2的作用后，重定向也就很容易实现了，一种最简单的方法就是先用open函数打开输出文件并得到对应的fd，然后用dup2把标准输出/输入端的指向改成文件的fd。
+另外注意用open创建输出重定向的文件的时候要加上S_IRUSR和S_IWUSR选项，否则创建后的文件没有读写权限。（不过好像这个lab的测试数据比较厚道，会事先touch一下，不加这两个选项应该也能通过测试）
+一些文档中未定义的行为： argv 假如我输入的命令是/bin/ls -l &gt; ls.txt，对应的argv应该包括哪些内容呢？ 一般的情况argv的内容应该是[&lsquo;/bin/ls&rsquo;, &lsquo;-l&rsquo;]，后面的重定向符是不包括的不过在这个lab中似乎没有这个限制，不去掉重定向和管道部分应该还是能通过测试的。
+Job ID的分配 如果现在1, 2, 4号子任务在后台运行，再新增一个进程的话应该给它分配多少呢？ 这个问题不需要处理，只要所有的jobs队列操作统一使用tsh.c中给出的几个函数就行。
+其他： 关于信号的转发、后台前台的转换等内容，文档和书上都说得很清楚了，这里不再赘述。
+P.S. 多进程程序的调试大家之前应该接触的比较少，其实这个lab大致的代码不难写，难点在于细节上的debug比较困难，调试过程对第八章的理解很有帮助。
+	<a class="read-more" href="/2008/05/ics-lab-6/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2008/05/subvirt-implementing-malware-with-virtual-machines/">SubVirt: Implementing malware with virtual machines</a></h2>
+      <span class="post-date">May 5, 2008</span>
+      
+      <span class="post-tags">
+	
+	#<a href="https://blog.yxwang.me/tags/computer-system">Computer System</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/paper">Paper</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/research">Research</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/security">Security</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/virtualization">Virtualization</a>&nbsp;
+	
+      </span>
+      
+      
+      
+      <div class="summary">
+	http://ieeexplore.ieee.org/xpl/freeabs_all.jsp?arnumber=1624022&fromcon Proceedings of the 2006 IEEE Symposium on Security and Privacy 作者来自密西根大学和微软研究部门 一个利用虚拟机进行攻击的rootkit。 1. Introduction 传统的攻击程序通常和安全工具（杀毒软件等）在同一个级别上（kernel mode），两者间没有绝对优势可言，因此有很大的限制，比如强大的功能和良好的隐蔽性不能兼得。而虚拟机的出现则可以解决这个问题，通过把恶意程序放在虚拟机上，可以做到对目标机(guest os)的完全监控，同时目标机完全不会知情。这种程序称为VMBR(virtual-machine based rootkit)。 2. Virtual machines VMM(virtual-machine monitor)这里就不多介绍了。VMM上跑着一些其他服务进程，主要用于操作系统的debug，运行中的虚拟机的迁移等功能。这些服务的主要面临的一个问题是理解对应的guest os状态和事件。因为在VMM和虚拟机处在不同的抽象级别，前者只能看到磁盘块(disk blocks)，网络包(network packets)，以及内存；而后者则把这些东西抽象为例如文件、TCP连接、变量等概念，这种差异称为语义差异(semantic gap)。 于是有了Virutal-machine introspection(VMI)，它包含了一系列让VMM上的服务了解并修改guest os的技术。 3. Virtual-machine based rootkit design and implementation 3.1 Installation VMBR的安装和一般病毒程序类似，通过欺骗有管理员权限的用户执行安装程序实现。 当目标机是WinXP时，VMBR被安装在第一个活动分区的开始部分；目标机是Linux时，安装程序会禁止swap分区，把VMBR放在swap分区上（够狠的。。。） 修改系统引导信息的时候还有一个细节，直接修改容易被安全检查程序发现。WinXP上的一种解决方案就是尽可能的在所有程序退出之后再修改（通过注册一个LastChanceShutdownNotification事件处理器），并且使用底层的磁盘驱动进行VMBR启动代码的复制，这样可以绕过文件系统层，而大多数反病毒软件都跑在文件系统层上。Linux上，通过修改关机脚本来保证安装程序在其他程序退出后执行。 安装完成后，目标系统的内容就被保存到了一个虚拟磁盘上。重启后就由VMM控制最底层，它把目标机的对虚拟磁盘的访问转换为对应的物理磁盘的访问。 3.2 Malicious services VMBR使用一个独立的系统执行各种攻击程序，这样目标机就无法察觉到了。对目标系统的攻击主要分三种： 一种是不需要和目标系统进行交互的恶意服务，例如垃圾电子邮件的发送(spam relays)，DDoS攻击，网络钓鱼(phishing web servers)。 第二种恶意服务需要监视目标系统的数据和事件。通过修改VMM的设备模拟软件就能记录下所有硬件级的数据（比如按键信息、网络包等），而这个过程不需要修改guest os，所以目标系统完全不知情。 VMBR还可以用VMI帮助理解目标系统软件级的抽象信息，VMI可以中断目标系统的任意指令，并重新组织数据。例如一个目标应用程序将要使用一个加密的socket发送信息，攻击者可以截获所有的SSL write函数调用并且在明文被加密前得到它。同样这个过程对目标系统完全透明，因为攻击程序跑在它的外层，或者说是“上帝”层 ;-) 第三种攻击是恶意修改目标系统的执行。例如篡改网络通讯，删除email，改变目标应用程序的行为。 3.3 Example malicious services 下面介绍这篇paper提到的4个恶意程序 最简单的，开了个thttpd web服务器进行网络钓鱼，任何发送到8080端口的TCP请求都会被这个服务器截获。 然后是一个按键记录程序，号称只用了60行代码就搞定了这个模块，然后写了一个254行的带图形界面的程序来分析日志并显示。 一个扫描目标机文件系统的程序，这是一个24小时运行的perl脚本，会把诸如/etc/shadow, user_home/.ssh/id_dsa之类的机密信息保存下来。 最后是防止VMM被目标机侦测到的一个服务。paper中提到了一种叫做redpill的虚拟机侦测手段，通过使用sidt指令。这个指令会读出处理器的中断列表(interrupt descritor table)，在VMM上跑的系统和普通的操作系统读出来的结果不一样，当这个指令在内核态被执行时，VMM会模拟这个指令的执行；但是用户态却不会被截获（考虑到性能因素）。所以redpill通过用户态执行sidt来判断当前系统是否运行在虚拟机上。这篇paper提到的针对redpill的解决方案是在每个可执行文件的sidt指令前设置一个断点，截获这个指令后就模拟这个指令，以此绕过redpill检测。但是这种方法不适合于在程序运行期动态生成二进制的sidt指令的程序（想到我的lab4了，呵呵）。道高一丈魔高一尺（原文是Continuing the arms race，军备战争），通过二进制转换(binary translation)，动态生成的sidt同样可以被截获，但是这种方法的overhead会很大。 3.
+	<a class="read-more" href="/2008/05/subvirt-implementing-malware-with-virtual-machines/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2008/04/sorting-networks/">Sorting Networks</a></h2>
+      <span class="post-date">Apr 23, 2008</span>
+      
+      <span class="post-tags">
+	
+	#<a href="https://blog.yxwang.me/tags/algorithms">Algorithms</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/parallel-computing">Parallel Computing</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/tcs">TCS</a>&nbsp;
+	
+      </span>
+      
+      
+      
+      <div class="summary">
+	算法导论第27章，在并行处理的条件下效率很高的排序算法。
+介绍 如下面左图所示，每条横线(wire)代表一个待 比较的数值，竖线(comparator)表示连接的两条横线要做一次比较，并将较小的值放在输出横线的上方，较大的放在下面。排序过程就是从左往右依次 调用各个comparator（在同一位置上的comparator可以同时做） 有图表示了四个数字3, 2, 4, 1在经过这个Sorting Network时的行为。（由于背景为深色，建议点击图片查看）
+
+下图是一个冒泡排序的Sorting Network表示
+
+可以看到所有的比较都没有并行，效率很低。接下来先介绍一个0-1原理，然后利用它来构造一些比较高效的网络。
+性质 首先是引理27.1： 对 于输入数据A = ，如果某个比较网络(comparison network)的输出是B = ，那么对于任一单调递增的函数f，这个网络能把输入数据f(A) = 变为f(B) = 这个引理的证明很简单，关键在于min(f(x), f(y)) = f(min(x,y))
+接下来就是0-1原理： 一个有n个输入数据的比较网络，如果它能将仅由0和1组成的序列正确的排序（这种输入共有2^n种可能），那么它也能正确的将任意数字组成的序列排序。 证明也不难，利用前面的引理反正即可得到这个定理。
+双调排序 接 下来先考虑双调序列(bitonic sequence)这种特殊情况，所谓双调序列就是先单调递增，后单调递减，或者可以通过环形旋转变化出上述特性的序列，比如和都满足条件（对于后面一种序列，只要把最后的3, 5移到序列开头就行了）。 双调排序(bitonic sorter)有若干步骤，其中有一步叫做half-cleaner，每一次half-cleaner讲数据放到一个深度为1的排序网络中，第i行和第i+n/2行比较(i=1,2,..,n/2)
+
+引理27.3： 做完上述的half-cleaner后，输出的上半部分和下半部分都保持双调的特点，而且上半部分的每个元素都不大于下半部分的任一元素。 分四种情况讨论即可。
+通过递归调用half-cleaner即可完成双调队列的排序。要对n个元素进行双调排序Bitonic-Sorter(n)，首先调用Half-Cleaner(n)，将元素分成上下两部分，接着依次对这两部分执行Bitonic-Sorter(n/2)即可。 调用的深度D(n) = lgn
+归并网络 书上只给出了对0-1序列排序的算法，任意数字的排序算法留作了习题。 合并网络基于这样一个事实：对于两个已经排序了的序列X = 00000111，Y = 00001111，将Y倒过来后和X拼接的结果是一个双调序列。对这个双调序列再做一次Bitonic-Sorter就能有序。 通 过修改Bitonic-Sorter方法的第一步就能实现Merger，关键在于隐式的反转输入的下半部分。Half-Cleaner方法中比较了第i和 第i+n/2两个元素，如果下半部分反转的话就相当于比较第i和第n-i+1个元素。直接继续执行Bitonic-Sorter方法即可，如下图所示。
+
+排序网络 我们已经有了构造一个排序网络所需的工具，接下来介绍一种利用归并网络进行排序的并行版本。 大致方法和传统的归并排序类似，从最小的颗粒开始二分增长，直到整个序列有序。 这样，一共需要lg(n)次Merger，每次归并中需要做lg(i)次Sorter，排序的总深度 D(n) = 0 (n = 1) D(n/2) + lg(n) (n = 2^k且 k&gt;=1) 由Master Method可推出D(n) = big-omega(lg^2(n)) 也就是说理想的并行环境中，n个数可以在O(lg^2(n))时间内完成排序。
+	<a class="read-more" href="/2008/04/sorting-networks/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2008/04/streamware/">ASPLOS 08 - Streamware</a></h2>
+      <span class="post-date">Apr 16, 2008</span>
+      
+      <span class="post-tags">
+	
+	#<a href="https://blog.yxwang.me/tags/asplos">ASPLOS</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/computer-system">Computer System</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/paper">Paper</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/parallel-computing">Parallel Computing</a>&nbsp;
+	
+      </span>
+      
+      
+      
+      <div class="summary">
+	Streamware: Programming General-Purpose Multicore Processors Using Streams
+Jayanth Gummaraju, Joel Coburn, Yoshio Turner, Mendel Rosenblum
+ASPLOS 08上的文章 http://portal.acm.org/citation.cfm?id=1353534.1346319
+提出了一个通用的多核平台，支持Cell CUDA Brook等多种体系结构，用户只需使用这个平台统一提供的API。
+另外还加入了cache hierarchy的管理，能很好的安排各级cache保存的内容，以至于某个测试结果中单核的情况下用了Streamware的程序比不用的程序跑得还快。
+	<a class="read-more" href="/2008/04/streamware/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2008/04/count-1-bits-in-an-int32/">《编程之美》一个二进制趣题的讨论</a></h2>
+      <span class="post-date">Apr 15, 2008</span>
+      
+      <span class="post-tags">
+	
+	#<a href="https://blog.yxwang.me/tags/algorithms">Algorithms</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/bit-hacking">Bit Hacking</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/featured">Featured</a>&nbsp;
+	
+      </span>
+      
+      
+      
+      <div class="summary">
+	问题很简单，给定一个 8 位整型，要求写程序计算这个数的二进制表示中 1 的个数，要求算法的执行效率尽可能的高。
+先来看看样章上给出的几个算法：
+解法一，每次除二，看是否为奇数，是的话就累计加一，最后这个结果就是二进制表示中1的个数。
+解法二，同样用到一个循环，只是里面的操作用位移操作简化了。
+int Count(int v) { int num = 0; while (v) { num += v &amp; 0x01; v &gt;&gt;= 1; } return num; }  解法三，用到一个巧妙的与操作，v &amp; (v - 1) 每次能消去二进制表示中最后一位 1，利用这个技巧可以减少一定的循环次数。
+解法四，查表法，因为 8 位整型的范围是 0 - 255，可以直接把结果保存在一张表中，然后查表就行。书上强调这个算法的复杂度为 O(1)。
+int countTable[256] = { 0, 1, 1, 2, 1, ..., 7, 7, 8 }; int Count(int v) { return countTable[v]; }  好了，这就是样章上给出的四种方案，下面谈谈我的看法。
+首先是对算法的衡量上，复杂度真的是唯一的标准吗？尤其对于这种数据规模给定，而且很小的情况下，复杂度其实是个比较次要的因素。
+	<a class="read-more" href="/2008/04/count-1-bits-in-an-int32/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2008/03/ics-lab-4-optimizations/">ICS Lab4 常用优化方法</a></h2>
+      <span class="post-date">Mar 23, 2008</span>
+      
+      <span class="post-tags">
+	
+	#<a href="https://blog.yxwang.me/tags/courses">Courses</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/ics">ICS</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/lab">Lab</a>&nbsp;
+	
+      </span>
+      
+      
+      
+      <div class="summary">
+	几个基本的优化：
+ 用iaddl代替irmovl, opl，效果显著 删去不必要的andl，效果显著 改变判断分支（大多数是正数），效果显著 实现Load Forwarding，效果显著 函数结束时使用自己的epilogue，效果一般  Unrolling相关：
+ 通过合并相邻两个循环，把mrmovl和rmmovl拆开，效果显著 32, 16, 8, 4, 1分段处理，效果显著，我用这个方法做到过7.2左右  Jump Table
+由Duff&rsquo;s Device引申出来的想法，代替了我原来那个32-16-8-4-1程序。 很好用的一个技巧，配合unrolling就不需要不断比较i和len的大小了。 比如len=15的时候，只要跳转到倒数第15个复制段落，就可以挨个做下来，而不需要多余的判断。 具体的实现可以想想x86里的情况，假设几个复制段落的标签为Loop1, Loop2, &hellip;
+jump: .long Loop1 .long Loop2 &hellip;
+之后就只要取出jump + (len - 1) * 4处的值，然后跳到这个位置就行了。 跳的时候还有个技巧，最简单的是把这个值push到栈，然后再ret。这样的话bubble很多。
+考虑到这个模拟器里代码段是不受保护的，也就是说运行的时候可以动态修改内存中的代码，于是在跳转的地方写个jmp 0，然后运行的时候动态把这个0改掉就行。
+另外要注意用这个方法的时候得手动写几个nop，或者在改内存的语句和jmp语句之间加几个其他命令，因为y86模拟器是默认程序不会修改自己的代码的(p328 灰色背景部分)。
+用这个方法的时候还有一些细节可以优化，就不列举了。另外不知道利用自我修改这个特点能不能做出更神奇的效果呢？
+比如我还想到另一种类似的方法，让程序从头到尾运行，不跳转，而是在程序运行时动态的插入ret语句直接把程序运行流掐断。我还没试过，有兴趣的同学可以试一试。
+不知道还有没有其他的优化方法，欢迎讨论~
+	<a class="read-more" href="/2008/03/ics-lab-4-optimizations/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2008/03/ics-lab4/">ICS Lab4 经验</a></h2>
+      <span class="post-date">Mar 16, 2008</span>
+      
+      <span class="post-tags">
+	
+	#<a href="https://blog.yxwang.me/tags/courses">Courses</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/ics">ICS</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/lab">Lab</a>&nbsp;
+	
+      </span>
+      
+      
+      
+      <div class="summary">
+	编译 不安装图形界面： 修改sim/Makefile，把前三行非注释部分用#注释掉，变成
+# GUIMODE ... # TKLIB ... # TKINC ...  保存后运行 make
+图形界面 安装Tcl/Tk库  Redhat 9： 可以在Redhat菜单-&gt;System Settings-&gt;Add/Remove Applications中添加X Software Development，根据提示载入相关镜像文件。 然后在 sim 目录下运行 make
+ Arch Linux： 有包管理机制的发行版直接用相关软件安装（比如 Arch 中 pacman -S tcl tk），注意安装好以后生成的动态链接库可能带有版本号（比如 libtcl8.5.so libtk8.5.so）
+  具体版本号通过 pacman -Ql tcl tk | grep '.so' 查得
+接着只要修改Makefile中的TKLIBS参数，或者用ln建个链接即可
+ Ubuntu 由于ubuntu默认没有lex词法分析工具，在编译时需要先安装flex：sudo apt-get install flex  图形界面和Arch类似 sudo apt-get install tcl8.5-dev tk8.5-dev tcl8.5 tk8.5
+然后修改 Makefile
+	<a class="read-more" href="/2008/03/ics-lab4/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
+  </div>
+  <div class="pagination">
+  
+  <a class="btn previous" href="/post/page/12/">Newer</a>  
+  <a class="btn next" href="/post/page/14/">Older</a> 
+</div>
+</div>
+
+
+
+
+<div class="footer">
+  
+  <p>Powered by <a href="http://gohugo.io">Hugo</a> and <a href="https://github.com/zhe/hugo-theme-slim">Slim theme</a>.
+  
+      Follow me on <a href="https://twitter.com/zellux">Twitter</a>.
+      </p>
+  </p>
+  
+</div>
+
+                   
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+    Macros: {
+      argmax: "\\operatorname*{argmax}",
+      argmin: "\\operatorname*{argmin}"
+    }
+  },
+  jax: ["input/TeX","output/CommonHTML"]
+});
+</script>
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML">
+</script>
+
+</script>
+
+<script src="https://blog.yxwang.me/js/slim.min.aef36e671f72c9042139aae327dbe693b7ebaa67fd56f30dad4c985a91ba9294.js"></script>
+
+
+<link rel="stylesheet" href="https://blog.yxwang.me/css/solarized-light.min.5499f6bc45da0c78f070be4f720fd28b19af75306b569b77837d57c3cf819430.css" />
+<script src="/js/highlight.pack.js"></script>
+<script>
+  hljs.initHighlightingOnLoad();
+</script>
+
+</div>
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-25551121-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+<script type="text/javascript">
+    window.heap=window.heap||[],heap.load=function(e,t){window.heap.appid=e,window.heap.config=t=t||{};var r=t.forceSSL||"https:"===document.location.protocol,a=document.createElement("script");a.type="text/javascript",a.async=!0,a.src=(r?"https:":"http:")+"//cdn.heapanalytics.com/js/heap-"+e+".js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(a,n);for(var o=function(e){return function(){heap.push([e].concat(Array.prototype.slice.call(arguments,0)))}},p=["addEventProperties","addUserProperties","clearEventProperties","identify","removeEventProperty","setEventProperties","track","unsetEventProperty"],c=0;c<p.length;c++)heap[p[c]]=o(p[c])};
+      heap.load("3166778701");
+</script>
+
+
+</body>
+
+</html>
+

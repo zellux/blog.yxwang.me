@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Os on Aiur · Zellux 的博客</title>
+    <link>https://blog.yxwang.me/tags/os/</link>
+    <description>Recent content in Os on Aiur · Zellux 的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Mon, 01 Sep 2008 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.yxwang.me/tags/os/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>OSLab 之中断处理</title>
+      <link>https://blog.yxwang.me/2008/09/oslab-interrupt-handling/</link>
+      <pubDate>Mon, 01 Sep 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2008/09/oslab-interrupt-handling/</guid>
+      <description>1. 准备工作 在开始分析Support Code之前，先配置下我们的Source Insight，使它能够支持.s文件的搜索。
+在Options-&amp;gt;Document Options-&amp;gt;Document Types中选择x86 Asm Source File，在File fileter中增加一个.s，变成.asm;.inc;.s 然后在Project-&amp;gt;Add and Remove Project Files中重新将整个oslab的目录加入，这样以后进行文本搜索时.s文件也不会漏掉了。
+2. Source Insight使用 接下来简单分析下内核启动的过程，在浏览代码的过程中可以迅速的掌握Source Insight的使用技巧。
+lib/multiboot /multiboot.s完成了初始化工作，可以看到其中一句call EXT(multiboot_main)调用了C函数multiboot_main，使用ctrl+/搜索包含multiboot_main的所有文件，最终base_multiboot_main.c中找到了它的定义。依次进行cpu、内存的初 始化，然后开启中断，跳转到kernel_main函数，也是Lab1中所要改写的函数之一。另外 在这里可以通过ctrl+单击或者ctrl+=跳转到相应的函数定义处，很方便。
+3. irq处理初始化工作 来看下Lab 1的重点之一，irq的处理。跟踪multiboot_main-&amp;gt;base_cpu_setup-&amp;gt;base_cp u_init-&amp;gt;base_irq_init，可以看到这行代码
+gate_init(base_idt, base_irq_inittab, KERNEL_CS);  继续使用ctrl+/找到base_irq_inittab的藏身之处：base_irq_inittab.s
+4. base_irq_inittab.s 这个汇编文件做了不少重复性工作，方便我们在c语言级别实现各种handler。
+GATE_INITTAB_BEGIN(base_irq_inittab) /* irq处理函数表的起始，还记得jump table 吗？ */ MASTER(0, 0) /* irq0 对应的函数 */  来看看这个MASTER(0, 0)宏展开后是什么样子：
+#define MASTER(irq, num) GATE_ENTRY(BASE_IRQ_MASTER_BASE + (num), 0f, ACC_PL_K|ACC_INTR_GATE) ; P2ALIGN(TEXT_ALIGN) ; 0: ; pushl $(irq) /* error code = irq vector */ ; pushl $BASE_IRQ_MASTER_BASE + (num) /* trap number */ ; pusha /* save general registers */ ; movl $(irq),%ecx /* irq vector number */ ; movb $1 &amp;lt;&amp;lt; num,%dl /* pic mask for this irq */ ; jmp master_ints  依次push irq号，trap号（0x20+irq号），通用寄存器（eax ecx等）入栈，把irq号保 存到ecx寄存器，然后跳转到master_ints，master_ints是所有master interrupts公用 的代码。</description>
+    </item>
+    
+    <item>
+      <title>OS Lab 5 Debugging Notes</title>
+      <link>https://blog.yxwang.me/2008/08/os-lab5-debug-notes/</link>
+      <pubDate>Sun, 31 Aug 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2008/08/os-lab5-debug-notes/</guid>
+      <description>还算顺利，不过这个lab蛮无聊的，等有空了把syscall改成类似linux的做法，单一中断号+寄存器选择syscall。
+ 最花时间的一个bug是ls返回值没有改成应用程序数，结果一开始一直以为是brk系统调用没写好，最后才发现问题出在这么小的地方。
+ brk的逻辑还不是很清楚，尽管通过了简单的测试，但是debug输出的信息显示brk增长的很快，经常是一个页一个页涨的，看来还得查下brk的具体行为。
+ 写了个比MAGIC_BREAK好用一点的宏，因为用户态的程序都是按二进制读入的，Simics无法得到函数信息（函数名、当前行数等），利用C99的宏写了个新的INFO_BREAK
+  #define INFO_BREAK \ do { \ lprintf_kern(&amp;quot;break in %s:%d&amp;quot;, __FUNCTION__, __LINE__); \ MAGIC_BREAK; \ } while (0) \  </description>
+    </item>
+    
+    <item>
+      <title>关于smalloc函数与malloc函数的区别</title>
+      <link>https://blog.yxwang.me/2008/08/smalloc-vs-malloc/</link>
+      <pubDate>Sun, 24 Aug 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2008/08/smalloc-vs-malloc/</guid>
+      <description>s前缀的malloc函数（包括smalloc、smemalign等）不记录分配块的大小，比较节省空间，但是要求用户在用sfree释放内存的时候指定被释放的内存块大小。
+malloc则和libc中的同名函数很相似。
+整个分配信息（包括哪些块已被使用）都记录在malloc_lmm这个全局变量中，内存被分为若干个region，每个region中有若干个nodes，这些信息可以通过lmm_dump查看（需要include ）。
+smemalign很适合分配需要页对齐的内存块，因为如果使用memalign分配的话，每个页面就需要多用8字节的空间来记录当前块的大小了（保存在每个内存块的前面），会产生大量内存碎片。</description>
+    </item>
+    
+    <item>
+      <title>OS Lab 4 Debugging Notes</title>
+      <link>https://blog.yxwang.me/2008/08/bugs-related-to-my-fork/</link>
+      <pubDate>Fri, 22 Aug 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2008/08/bugs-related-to-my-fork/</guid>
+      <description> 系统调用 fork() 用Simics跟踪一条条汇编分析页表映射、寄存器值还真是体力活啊。。
+ 实现 Copy On Write 时，如果某一个用户态页面有多个进程共享，其中一个进程修改该页面时需要创建一个新的页面。一开始偶忘了把原来页面的内容复制到新的页面了 =_= 另外由于新的页面要代替老的页面，或者说它们的物理地址不同，但虚拟地址相同，我的方法是在内核态开辟一个大小为一个页面的空间作为中转。
+ do_fork函数中，子进程复制父进程的页表的同时会把父进程页表项置为不可写，注意最后要flush tlb。因为一开始没有flush tlb，导致最后用户态fork返回以后读取的信息来自于tlb，直接改写了共享页面中fork的返回地址，导致切换到子进程时fork的返回地址丢失。这个bug让我郁闷了两三个小时。。
+ 使用两次fork时，第二次fork返回的pid会被改掉。查了下发现为用户空间分配物理页面的代码里居然在分配好以后没有把对应的struct置为已使用，结果导致第二个子进程COW创建新页面时得到了原来的父进程页面，改写了父进程页面内容。
+  系统调用 exec()  清空页表的用户空间映射的函数一开始写得yts，bug到处都是，比如free的时候没使用指向内存块首地址的指针，记录内存地址的变量没有累加。 exec传递给内核态的两个参数必须先在内核态保存一个副本，否则清空用户态页表后就无法得到这两个参数信息了。 分配给用户态的页面必须先清零，一方面考虑到安全性，另一方面不清零会隐藏一些潜在的bug。一开始我没有在内核执行exec的时候完整的复制所有的参数，而是直接指向了原进程的内存空间，由于清空页表后再次申请新页表时得到了原来的页面，结果正好原来那个保存参数的页面和新进程的该页面重合了 =_= 于是浪费了不少时间在这个bug上  </description>
+    </item>
+    
+    <item>
+      <title>Flux OSKit 中 trap_state 的存放位置</title>
+      <link>https://blog.yxwang.me/2008/08/trap_state-in-flux-oskit/</link>
+      <pubDate>Wed, 20 Aug 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2008/08/trap_state-in-flux-oskit/</guid>
+      <description>写fork函数的时候发现实际传给trap handler的ts地址和用(struct trap_state *) (KSTACK_TOP(old))) - 1
+计算出来的结果不一样，后者比前者小0x10。另外ts的实际地址加上ts的大小(92个字节)后就超出了内核栈的范围。
+/* * This structure corresponds to the state of user registers * as saved upon kernel trap/interrupt entry. * As always, it is only a default implementation; * a well-optimized kernel will probably want to override it * with something that allows better optimization. */ struct trap_state { /* Saved segment registers */ unsigned int	gs; unsigned int	fs; unsigned int	es; unsigned int	ds; /* PUSHA register state frame */ unsigned int	edi; unsigned int	esi; unsigned int	ebp; unsigned int	cr2;	/* we save cr2 over esp for page faults */ unsigned int	ebx; unsigned int	edx; unsigned int	ecx; unsigned int	eax; /* Processor trap number, 0-31.</description>
+    </item>
+    
+    <item>
+      <title>汇编文件中导出函数符号</title>
+      <link>https://blog.yxwang.me/2008/08/export-symbols-in-asm/</link>
+      <pubDate>Wed, 20 Aug 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2008/08/export-symbols-in-asm/</guid>
+      <description>Linux 2.4.18的linux/linkage.h文件定义了若干相关的宏
+#define SYMBOL_NAME(X) X #ifdef __STDC__ #define SYMBOL_NAME_LABEL(X) X##: #else #define SYMBOL_NAME_LABEL(X) X/**/: #endif #define __ALIGN .align 16,0x90 #define __ALIGN_STR &amp;quot;.align 16,0x90&amp;quot; #define ALIGN __ALIGN #define ALIGN_STR __ALIGN_STR #define ENTRY(name) .globl SYMBOL_NAME(name); ALIGN; SYMBOL_NAME_LABEL(name)  用ENTRY(name)就能定义函数了。后来发现Flux OSKit中本来就提供了类似功能的宏，定义在inc/asm.h中。
+使用的时候需要再写一个c语言的wrapper function（至少2.4.18里面是这么做的）
+asmlinkage void ret_from_fork(void) __asm__(&amp;quot;ret_from_fork&amp;quot;);  </description>
+    </item>
+    
+  </channel>
+</rss>

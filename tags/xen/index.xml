@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Xen on Aiur · Zellux 的博客</title>
+    <link>https://blog.yxwang.me/tags/xen/</link>
+    <description>Recent content in Xen on Aiur · Zellux 的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Thu, 17 Dec 2009 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.yxwang.me/tags/xen/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Ubuntu 下编译 Linux-xen 的问题</title>
+      <link>https://blog.yxwang.me/2009/12/linux-xen-compiling-error-in-ubuntu/</link>
+      <pubDate>Thu, 17 Dec 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2009/12/linux-xen-compiling-error-in-ubuntu/</guid>
+      <description>在Ubuntu下编译Linux-xen时碰到arch/i386/kernel/head-xen.o无法找到的问题，而该目录下有head-xen.S这个文件，说明make之前的的工作并没有把这个.S文件编译成.o。而同样的代码，在ArchLinux和Fedora上svn checkout后编译没有任何问题。
+最后发现问题在于Ubuntu默认会把/bin/sh指向/bin/dash，在scripts/Makefile.build里面加上一行SHELL=/bin/bash指定$(shell)使用bash即可。后来还搜了一下为什么Ubuntu使用dash而不是bash，其理由是dash的执行效率更高，但不可否认的是这个改动也导致了一些项目无法成功编译，虽然无法成功编译的原因可能是Makefile里使用了一些bash的特性而非POSIX shell所提供的那些。
+另外在debug过程中在网上找到了一些debug Makefile的技巧：
+make -n 可以仅仅打印出将要被执行的命令，而不去实际执行
+make -np 可以打印出更多的信息（使用的规则和变量），并执行每一条命令
+remake也是个不错的选择：“remake is a patched and modernized version of GNU make utility that adds improved error reporting, the ability to trace execution in a comprehensible way, and a debugger.”
+在检查shell命令的时候，可以使用set -x使得所有shell命令在执行前都能被输出。</description>
+    </item>
+    
+    <item>
+      <title>Xen 警告 Time went backwards 的暴力解决方法</title>
+      <link>https://blog.yxwang.me/2009/07/xen-time-went-backwards-solution/</link>
+      <pubDate>Tue, 07 Jul 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2009/07/xen-time-went-backwards-solution/</guid>
+      <description>前几天给测试Xen用的虚拟机挂了，只能用VMware的snapshot返回到之前的镜像，然后似乎因为时间问题启动Xen的时候总是会定时打印出类似
+571 Timer ISR/0: Time went backwards: delta=-11072481 delta_cpu=298927519 shadow=196807680595 off=288495093 processed=197107247546 cpu_processed=196797247546 572 0: 196797247546 573 1: 197107247546  的信息，google了下发现是时间同步的问题，用ntp协议同步时间即可解决这个问题。另外这里再给出一个最暴力的解决方法：在linux-xen源码的arch/i386/kernel/time-xen.c文件中找到Time went backwards，把这行打印语句以及后面的循环打印删除，然后重新编译内核。x86_64体系结构也是修改这个文件。方法很暴力，也没真正解决问题，但是至少不影响我看/var/log/messages的输出了。</description>
+    </item>
+    
+    <item>
+      <title>利用 VMware 的虚拟串口调试 Xen</title>
+      <link>https://blog.yxwang.me/2009/05/debug-xen-with-vmware-serial-port/</link>
+      <pubDate>Wed, 27 May 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2009/05/debug-xen-with-vmware-serial-port/</guid>
+      <description>VMware支持虚拟串口设备，对于调试内核或者虚拟机的帮助很大，具体设置如下（VMware Server 2, Xen 3.3）：
+ VMware中为虚拟机增加串口设备 Add Hardware-&amp;gt;Serial Port，然后在设置中将Connection模式设为File，指定相应的文件路径(如[standard] debian-xen/serial-port.log)
+ 修改虚拟机的grub启动参数，以我的/boot/menu/lst为例
+  title Xen 3.3.0 / Debian GNU/Linux, kernel 2.6.18.8-xen root (hd0,0) kernel /boot/xen-3.3.0.gz com1=115200,8n1 loglvl=all guest_loglvl=all console_to_ring console=com1,vga sync_console module /boot/vmlinuz-2.6.18.8-xen root=/dev/sda1 ro console=tty0 savedefault   重启虚拟机，即可在之前指定的文件中(Host机上的/opt/vmware/Virtual Machines/debian-xen/serial-port.log)中看到虚拟机的输出信息了。  </description>
+    </item>
+    
+    <item>
+      <title>Xen DomainU 自动测试脚本</title>
+      <link>https://blog.yxwang.me/2009/04/xen-test-script/</link>
+      <pubDate>Tue, 07 Apr 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2009/04/xen-test-script/</guid>
+      <description>写完代码测试时重复的最多的步骤就是
+ 编译，复制vmlinuz和xen.gz 重启VMware虚拟机 启动domainU xm create domU.conf 4. 开一个screen窗口attach到domainU的console xm console #domid 5. 在domainU中运行测试程序  于是写了个自动执行3 4 5的脚步，主要用到了熊熊推荐的pexpect，这东东很赞啊
+为了提高用户体验，读取domainU的启动信息时我采用的方法是读一行输出一行，读到结尾登陆字符时通过超时设置退出循环，这样可能效率比较低，不过测试脚本也不care这个了
+实际使用时碰到了另一个问题，domainU执行完自动命令后命令行会出现很严重的对齐问题，最后发现登陆后运行一次reset就可以了。
+脚本如下
+#!/usr/bin/python # Automatic test script for Xen DomainU # Author: zellux import pexpect, os conf = { &#39;login_name&#39; : &#39;m2-vm2&#39;, &#39;domainU_name&#39; : &#39;R900-DomU0&#39;, &#39;domainU_conf&#39; : &#39;/home/wyx/domU1&#39;, &#39;domainU_id&#39; : &#39;2&#39;, &#39;domainU_user&#39; : &#39;wyx&#39;, &#39;domainU_passwd&#39; : &#39;wyx&#39;, } # Command to be executed after domainU starts cmd = &amp;quot;&amp;quot;&amp;quot; cd m2 cd reg_test .</description>
+    </item>
+    
+    <item>
+      <title>VMware上能跑起来的Linux Kernel配置</title>
+      <link>https://blog.yxwang.me/2009/04/vmware-linux-kernel-config/</link>
+      <pubDate>Fri, 03 Apr 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2009/04/vmware-linux-kernel-config/</guid>
+      <description>在默认的基础上，把这几个都改成built-in (*)，通过Xen启动时就不需要额外加载initrd了
+2010.1.19更新：支持网络
+Device Drivers SCSI device support ---&amp;gt; &amp;lt;*&amp;gt; SCSI disk support &amp;lt;*&amp;gt; SCSI generic support SCSI low-level drivers ---&amp;gt; [*] LSI Logic New Generation RAID Device Drivers &amp;lt;*&amp;gt; Serial ATA (SATA) support &amp;lt;*&amp;gt; Intel PIIX/ICH SATA support Fusion MPT device support ---&amp;gt; &amp;lt;*&amp;gt; Fusion MPT ScsiHost drivers for SPI &amp;lt;*&amp;gt; Fusion MPT ScsiHost drivers for FC &amp;lt;*&amp;gt; Fusion MPT ScsiHost drivers for SAS (128) Maximum number of scatter gather entries (16 - 128) &amp;lt;*&amp;gt; Fusion MPT misc device (ioctl) driver &amp;lt;*&amp;gt; Fusion MPT LAN driver Network device support ---&amp;gt; Ethernet (10 or 100Mbit) ---&amp;gt; [*] EISA, VLB, PCI and on board controllers &amp;lt;*&amp;gt; AMD PCnet32 PCI support  </description>
+    </item>
+    
+    <item>
+      <title>Xen 学习笔记 2009-02-19</title>
+      <link>https://blog.yxwang.me/2009/02/2009-02-19-notes/</link>
+      <pubDate>Thu, 19 Feb 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2009/02/2009-02-19-notes/</guid>
+      <description>今天下午真是惊悚，我想把机房的winxp分区删了，ftp上好放点美剧，结果winxp的那个分区是扩展分区，删掉后导致linux的几个分区都消失了。赶紧把硬盘拆下来装到实验室用Disk Genius修复了下，数据基本没什么损坏，分区表还是有点问题。差一点俺就见不到这个博客了 =_=
+然后把昨天折腾了一晚上没搞定的debian 4安装搞定了，关键在于netinst.iso的版本号要和hd-media的完全一致，4.0r7。
+ 编译xen/linux所需的包 apt-get install gettext zlib1g-dev python-dev libncurses-dev libssl-dev libx11-dev bridge-utils iproute gawk  另外 initrd文件的生成需要安装initrd-tools包
+ kernel中memory barrier的实现很简单，barrier宏展开后就是 asm volatile(&amp;ldquo;&amp;rdquo; : : : &amp;ldquo;memory&amp;rdquo;) 这样就保证了在barrier()执行后，cpu不会直接读取寄存器中cache的内存值。
+ 生成initrd mkinitramfs -o /boot/initrd-2.6.18.8-xen.img 2.6.18.8-xen
+ syscall和m2_fastcall的性能测试 测的是getpid()函数，当然为了保证m2_fastcall不在运行逻辑上吃亏，它的对应功能仅仅是返回current-&amp;gt;pid，第一次测出来的结果是syscall明显由于m2_fastcall。宋大牛指出很有可能是glibc做了缓存，果然，自己用汇编发软中断后的数据就正常了。
+  </description>
+    </item>
+    
+    <item>
+      <title>Xen 学习笔记 2009-02-09</title>
+      <link>https://blog.yxwang.me/2009/02/2009-02-09-notes/</link>
+      <pubDate>Wed, 11 Feb 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2009/02/2009-02-09-notes/</guid>
+      <description>Fishing reading Xen 内存管理综述 and have a superficial look on Xen source code.
+ 在Debian x86-64上编译并安装了Xen 3.3.0，安装需要的几个包zlib1g-dev python-dev libncurses-dev libssl-dev libx11-dev bridge-utils iproute gawk gettext
+  3.interrupt gate的注册
+[arch/x86/traps.c] set_swint_gate(TRAP_int3,&amp;amp;int3); /* usable from all privileges */ set_swint_gate(TRAP_overflow,&amp;amp;overflow); /* usable from all privileges */ set_intr_gate(TRAP_bounds,&amp;amp;bounds); set_intr_gate(TRAP_invalid_op,&amp;amp;invalid_op); set_intr_gate(TRAP_no_device,&amp;amp;device_not_available); set_intr_gate(TRAP_copro_seg,&amp;amp;coprocessor_segment_overrun); set_intr_gate(TRAP_invalid_tss,&amp;amp;invalid_TSS);  以page_fault为例 [arch/x86/x86_64/entry.s] ENTRY(handle_exception) SAVE_ALL handle_exception_saved: testb $X86_EFLAGS_IF&amp;gt;&amp;gt;8,UREGS_eflags+1(%rsp) jz exception_with_ints_disabled sti 1: movq %rsp,%rdi movl UREGS_entry_vector(%rsp),%eax leaq exception_table(%rip),%rdx GET_CURRENT(%rbx) PERFC_INCR(PERFC_exceptions, %rax, %rbx) callq *(%rdx,%rax,8) testb $3,UREGS_cs(%rsp) jz restore_all_xen leaq VCPU_trap_bounce(%rbx),%rdx movq VCPU_domain(%rbx),%rax testb $1,DOMAIN_is_32bit_pv(%rax) jnz compat_post_handle_exception testb $TBF_EXCEPTION,TRAPBOUNCE_flags(%rdx) jz test_all_events call create_bounce_frame movb $0,TRAPBOUNCE_flags(%rdx) jmp test_all_events</description>
+    </item>
+    
+    <item>
+      <title>Xen 学习笔记 2009-02-10</title>
+      <link>https://blog.yxwang.me/2009/02/2009-02-10-notes/</link>
+      <pubDate>Wed, 11 Feb 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2009/02/2009-02-10-notes/</guid>
+      <description>x86_64上不支持segment机制，Xen是通过页表机制来控制访问权限的，Xen及其相关数据驻留在0xffff8000 00000000 - 0xffff87ff ffffffff，也就是在原来的kernel space的低地址部分，而x86_32上驻留在最上面的。  [include/asm-x86/config.h] /* * Memory layout: * 0x0000000000000000 - 0x00007fffffffffff [128TB, 2^47 bytes, PML4:0-255] * Guest-defined use (see below for compatibility mode guests). * 0x0000800000000000 - 0xffff7fffffffffff [16EB] * Inaccessible: current arch only supports 48-bit sign-extended VAs. * 0xffff800000000000 - 0xffff803fffffffff [256GB, 2^38 bytes, PML4:256] * Read-only machine-to-phys translation table (GUEST ACCESSIBLE). * 0xffff804000000000 - 0xffff807fffffffff [256GB, 2^38 bytes, PML4:256] * Reserved for future shared info with the guest OS (GUEST ACCESSIBLE).</description>
+    </item>
+    
+    <item>
+      <title>DomainU 中调用 do_console_io</title>
+      <link>https://blog.yxwang.me/2008/09/calling-do_console_io-from-domainu/</link>
+      <pubDate>Thu, 25 Sep 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2008/09/calling-do_console_io-from-domainu/</guid>
+      <description>The Definitive Guide to Xen Hypervisor 第二章的 Exercise，通过调用 hypercall page 中的 console_io 项输出Hello World。
+void start_kernel(start_info_t * start_info) { HYPERVISOR_console_io(CONSOLEIO_write,12,&amp;quot;Hello Worldn&amp;quot;); while(1); }  但是默认选项编译和启动的Xen是不会保留DomainU中输出的信息。参考 drivers/char/console.c，可以看到主要有两个选项控制了 DomainU 的 do_console_io 输出：
+#ifndef VERBOSE /* Only domain 0 may access the emergency console. */ if ( current-&amp;gt;domain-&amp;gt;domain_id != 0 ) return -EPERM; #endif  if ( opt_console_to_ring ) { for ( kptr = kbuf; *kptr != &#39;&#39;; kptr++ ) putchar_console_ring(*kptr); send_guest_global_virq(dom0, VIRQ_CON_RING); }  在编译 Xen 的时候开启 debug 选项即可置上 VERBOSE，而 opt_console_to_ring 则是一个启动选项，在 grub 的启动选项中增加 loglvl=all guest_loglvl=all console_to_ring 即可。</description>
+    </item>
+    
+    <item>
+      <title>第一个 testkernel 在 Xen 中的载入</title>
+      <link>https://blog.yxwang.me/2008/09/first-test-kernel-in-xen/</link>
+      <pubDate>Thu, 18 Sep 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2008/09/first-test-kernel-in-xen/</guid>
+      <description>The Definitive Guide to Xen Hypervisor 中第二章的例子，make 成功后运行 xen create domain_config，报错
+Error: (2, &#39;Invalid kernel&#39;, &#39;xc_dom_compat_check: guest type xen-3.0-x86_32 not supported by xen kernel, sorryn&#39;)  Google 之后发现是虚拟机类型设置的问题，运行 xm info 可以看到
+xen_caps : xen-3.0-x86_32p  末尾的 p 表示 Xen 内核开启了 PAE 模式，所以载入的 kernel 也必须开启 PAE，在bootstrap.x86_32.S 中加入 PAE=yes 选项即可。</description>
+    </item>
+    
+  </channel>
+</rss>

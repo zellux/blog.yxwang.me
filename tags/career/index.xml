@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Career on Aiur · Zellux 的博客</title>
+    <link>https://blog.yxwang.me/tags/career/</link>
+    <description>Recent content in Career on Aiur · Zellux 的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Wed, 26 Dec 2012 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.yxwang.me/tags/career/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>北美求职记（三）：Hulu &amp; Twitter</title>
+      <link>https://blog.yxwang.me/2012/12/job-hunting-in-usa-3/</link>
+      <pubDate>Wed, 26 Dec 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2012/12/job-hunting-in-usa-3/</guid>
+      <description>&lt;h4 id=&#34;北美求职记系列文章&#34;&gt;北美求职记系列文章&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.yxwang.me/2012/12/job-hunting-in-usa-1/&#34;&gt;北美求职记（一）：Microsoft&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.yxwang.me/2012/12/job-hunting-in-usa-2/&#34;&gt;北美求职记（二）：Google &amp;amp; Facebook&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;北美求职记（三）：Hulu &amp;amp; Twitter&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;hulu&#34;&gt;Hulu&lt;/h2&gt;
+
+&lt;p&gt;Hulu 是这几个公司里唯一一个我没有找人内推而拿到面试机会的，也是面试体验最好的一个公司。Hulu 和 Twitter、Zynga、Foursquare 等公司一样，用了 &lt;a href=&#34;https://hire.jobvite.com/&#34;&gt;jobvite&lt;/a&gt; 接受和追踪职位申请。因为是申请的第一家公司，我在申请 Hulu 时的 cover letter 写得很详细，针对职位需求上的每一条都写了我的相关工作经验，这也许是最后能拿到面试机会的原因吧。其他公司的 cover letter 都写得很简单，短短两段就结束了。&lt;/p&gt;
+
+&lt;p&gt;Hulu 的第一轮电面和其他公司的有些不同。45 分钟里要做四个题。面试官提前十分钟发了一封邮件给我，上面有两段代码。第一段代码是一个检查两个字符串是否是 &lt;a href=&#34;http://en.wikipedia.org/wiki/Anagram&#34;&gt;anagram&lt;/a&gt; 的程序，写得很绕而且性能很差。面试官先问我这段代码的用途，然后问有什么方法优化，并要求我把代码写在 titanpad 上。接着他问了我第二段代码是做什么的。第二段代码也写得有点复杂，不过可以看出是一个检查有向图里面是否存在环的程序。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>北美求职记（二）：Google &amp; Facebook</title>
+      <link>https://blog.yxwang.me/2012/12/job-hunting-in-usa-2/</link>
+      <pubDate>Tue, 25 Dec 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2012/12/job-hunting-in-usa-2/</guid>
+      <description>&lt;h4 id=&#34;北美求职记系列文章&#34;&gt;北美求职记系列文章&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.yxwang.me/2012/12/job-hunting-in-usa-1/&#34;&gt;北美求职记（一）：Microsoft&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;北美求职记（二）：Google &amp;amp; Facebook&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.yxwang.me/2012/12/job-hunting-in-usa-3/&#34;&gt;北美求职记（三）：Hulu &amp;amp; Twitter&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;google&#34;&gt;Google&lt;/h2&gt;
+
+&lt;p&gt;Google 面试也是托学长推荐了。HR 说我的简历看起来很不错，先给我安排了两轮电面。&lt;/p&gt;
+
+&lt;p&gt;电面都和 coding 有关，面试官会给你一个 Google Docs 链接，在电话里描述题目后要求你在 Google Docs 上写程序。题目的难度不高，两轮一共四题，都是对基本数据结构的操作，例如给在一个未排序的数组中去掉重复的数字，还有把一个有序数组转成一个平衡二叉搜索树，在一个已排序但有重复数字的数组中查找元素等。&lt;/p&gt;
+
+&lt;p&gt;第一轮电面聊天的时候还发现第一轮的面试官是在 ITA Software 做的。正好前几天用他们的产品 &lt;a href=&#34;http://matrix.itasoftware.com/&#34;&gt;Matrix Airfare Search&lt;/a&gt; 订到了低价的去土耳其的机票，过了一星期神奇的在面试的时候碰到了这个团队的工程师。当时一下子就兴奋起来，聊了不少和 Matrix 的有关的话题。这位面试官听说中国的机票也能用他们的平台查询，还挺吃惊的。他还提到他们原本想把计算任务放到 Google 内部的计算框架上，但是由于和合作方的合同的限制，没法把一些商业数据放到 Google 的平台里，只能继续用原有的计算引擎。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>北美求职记（一）：Microsoft</title>
+      <link>https://blog.yxwang.me/2012/12/job-hunting-in-usa-1/</link>
+      <pubDate>Mon, 24 Dec 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2012/12/job-hunting-in-usa-1/</guid>
+      <description>&lt;h4 id=&#34;北美求职记系列文章&#34;&gt;北美求职记系列文章&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;北美求职记（一）：Microsoft&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.yxwang.me/2012/12/job-hunting-in-usa-2/&#34;&gt;北美求职记（二）：Google &amp;amp; Facebook&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.yxwang.me/2012/12/job-hunting-in-usa-3/&#34;&gt;北美求职记（三）：Hulu &amp;amp; Twitter&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;最近签掉了 offer，找工作的事情算是告一段落。在这里写一点面试体验和心得，希望对有兴趣去北美工作的朋友有所帮助。&lt;/p&gt;
+
+&lt;p&gt;先简单介绍下自己，国内硕士在读，明年毕业，没有牛 paper，也没参加过 ACM-ICPC 竞赛。在实验室做过内核、虚拟机和 Android 底层相关的研究工作，接过一些网页和移动开发的外包，2011 年开始在&lt;a href=&#34;http://tangcha.tc/&#34;&gt;字节社&lt;/a&gt;兼职负责后台开发。另外也经常上 &lt;a href=&#34;http://stackoverflow.com/users/111896/zellux&#34;&gt;Stackoverflow&lt;/a&gt; 和 &lt;a href=&#34;http://github.com/zellux&#34;&gt;GitHub&lt;/a&gt;。&lt;/p&gt;
+
+&lt;p&gt;这次决定直接申请美国的职位后，由于心里没底，不知道国外公司招聘的难度，所以一开始投了很多公司。几个大公司都找人内推或者直接投了，小公司也投了不少，比如 Foursquare、Path、Pinterest 和 Square 等都试了。当时甚至在手机上找了一圈应用，把可能涉及后端开发的应用都投了一遍。不过大多数公司都没给我安排面试，最后 Microsoft、Google、Facebook、Twitter 和 Hulu 这五家公司愿意给我面试机会。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

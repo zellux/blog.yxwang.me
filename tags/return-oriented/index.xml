@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Return Oriented on Aiur · Zellux 的博客</title>
+    <link>https://blog.yxwang.me/tags/return-oriented/</link>
+    <description>Recent content in Return Oriented on Aiur · Zellux 的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sun, 16 Jan 2011 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.yxwang.me/tags/return-oriented/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>良性代码，恶意利用：浅谈 Return-Oriented 攻击（二）</title>
+      <link>https://blog.yxwang.me/2011/01/return-oriented-intro-2/</link>
+      <pubDate>Sun, 16 Jan 2011 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2011/01/return-oriented-intro-2/</guid>
+      <description>在上一篇文章中我们介绍了 return-oriented 这种攻击手段，它的强大之处在于攻击者不需要插入恶意代码，通过构造特殊的函数返回栈利用程序中原有的代码即可达到攻击者的目地。
+北卡州立大学的学者们提出了一种防止 return-oriented 攻击的思路，思路很简单，一句话概括，就是去掉代码里所有的 ret 指令！
+思路很简单，真正做起来还是很复杂的。x86 中的 ret 指令只有一个字节，即 0xc3。要去掉所有的 0xc3，不仅要修改原来代码中的 ret 指令，还要移除其他指令片段中的 0xc3（例如 movl $0xc3, %rax）。接下来我们来看看 EuroSys 10 上的这篇文章是怎么解决这些问题的。
+首先是原来就作为 ret 指令用的 0xc3 代码。注意 return-oriented 之所以成功一大原因就是 ret 指令在返回时不会检查栈上的返回地址是否正确。要保证这一点，需要引入一个间接跳转层。传统的调用过程是调用者把返回地址压入栈上，然后被调用函数返回时从栈上得到返回地址并返回。现在我们加入一个新的跳转表，这张表里记录了所有的返回地址，而且它不在栈上，因此不能被攻击者修改。当调用者调用函数时，把返回地址在表中的序号压入栈上；函数返回时，从栈上读出地址序号，再查表得到实际地址，然后返回。通过引入这样一层额外的地址转换机制，攻击者就不能通过修改栈上返回地址让函数返回到任意地址了。
+接下来我们要解决其他指令引入的 0xc3，这里面也分几类情况。首先是由于寄存器分配引起的。例如 movl %rax, %rbx 对应的机器码是 48 89 c3，这边就有个 0xc3。对于这一类代码，只需要在编译器做寄存器分配时把有可能产生 0xc3 的情况排除掉即可。
+另一类是代码中直接使用了 0xc3 作为直接数。这种情况需要对代码进行适当的修补，以 cmp $0xc3, %ecx 为例，0xc3 这个直接数可以通过 0xc4 - 1 得到，于是这条指令可以被修改为：
+mov $0xc4, %reg dec %reg cmp %reg, %ecx  到这里所有包含 0xc3 的代码都已经被修改成具有同等功能的不包含 0xc3 的版本了，也就彻底杜绝了 ret 指令被用来做 return-oriented 攻击的可能。对具体实现细节有兴趣的同学可以读一下这篇论文，作者借助 LLVM 生成了一个没有 0xc3 的 FreeBSD 内核。</description>
+    </item>
+    
+    <item>
+      <title>良性代码，恶意利用：浅谈 Return-Oriented 攻击（一）</title>
+      <link>https://blog.yxwang.me/2010/11/return-oriented-intro-1/</link>
+      <pubDate>Fri, 19 Nov 2010 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2010/11/return-oriented-intro-1/</guid>
+      <description>众多的安全漏洞中，栈溢出（stack-based buffer overflows）算是非常常见的了。一方面因为程序员的疏忽，使用了 strcpy、sprintf 等不安全的函数，增加了栈溢出漏洞的可能。另一方面，因为栈上保存了函数的返回地址等信息，因此如果攻击者能任意覆盖栈上的数据，通常情况下就意味着他能修改程序的执行流程，从而造成更大的破坏。
+对于栈溢出漏洞，传统的攻击方式是嵌入攻击代码，然后修改栈上的返回地址，使它指向攻击代码段，从而执行攻击者指定的代码。本科时候上过一门计算机系统基础，其中的某一个lab就要求学生做这么一件事。
+现在的安全技术已经能比较好的防范传统的栈溢出攻击了。常见的技术有这么几种：
+随机空间，前面提到攻击者需要修改栈上返回地址，使它指向注入的代码起始地址。但如果用户栈的起始地址是随机分布的，甚至每次新建一个栈帧时的地址都有一定程度的随机波动，要获得准确的返回地址就很困难了。这个技术大大增加了代码嵌入攻击的难度，但是却没用从理论上杜绝成功的可能性。攻击者可以使用大量的空指令（nop），并在可以修改的区域重复添加攻击代码，以此增加攻击成功的几率。
+W ^ X，把所有的可读可写页标记为不可执行，也就是说攻击者无法添加或修改可执行代码，这样包含了嵌入代码的页面就无法被攻击者调用执行了。Windows 的 DEP、 Linux 的 PaX 都利用了这一项技术。
+此外还有一些诸如 StackGuard 等栈保护手段，不过由于它们对性能影响很大，实际中使用并不广泛。
+这些手段使得在受保护的进程中利用栈溢出嵌入恶意代码并执行变得几乎不可能，然而这并不意味着栈溢出漏洞没有利用的价值了。聪明的黑客们想到了另外一种自定义程序行为的途径：利用程序或者动态库中原有的代码。这些代码虽然本身是良性的，但适当利用的话，同样可以产生恶意的效果。
+最简单的手段就是著名的 return-to-libc 攻击。libc 中有一些函数可以用于执行其他的进程，例如 execve 和 system。这些函数很容易被攻击者利用，只要找到一个栈溢出漏洞，并适当的构造函数调用参数，并使栈上返回地址指向这些函数的起始地址，攻击者就能以这个程序的权限执行任意其他程序了！注意这里所有执行的代码都是合法的，所以前面提到的W^X技术对此就无能为力了。
+return-to-libc 这种攻击方式也有一个局限，就是需要代码库中有 system 这样符合要求的函数，如果对于内核代码，或是检查调用来源的库，return-to-libc 就不那么给力了。于是另一种理论上更强大、也更难构造的攻击方式浮出水面，也就是标题的 return-oriented 攻击。
+关于 return-oriented 攻击，我之前的一篇博文已经介绍过这个概念了，这里再解释一下。
+一般程序中都包含着大量的返回指令（ret），它们通常位于一个函数的结尾，或是中途返回的地方。而这些返回指令之前的一两条指令，成为了 return-oriented 攻击指令的来源。攻击者要做的就是把这些零零碎碎的指令拼接起来，拼成一段恶意的代码。这里的难点有两个地方，一是怎么找到符合要求的代码片段，二是找到之后怎么拼接。
+先来看第一个问题，可用的代码片段虽然多，但是都是固定的。这就意味着原来的一条指令现在可能需要多条指令执行后得到相同的效果了。举例来说，要把一个寄存器赋值为 4 的话，可能没有现成的直接赋值的代码片段，需要一条赋值为 1 的指令，和三条寄存器加 1 的指令拼凑而成。这样通过拼凑，受限的指令可以完成一些基本的操作，再由这些基本的操作，组成一段有实际意义的攻击代码。这里涉及到不少编译相关的知识，具体细节就不赘述了。
+关于第二个问题，因为前面找到的代码片段都是以 ret 指令结尾的，所以只要把栈上的返回地址改成片段1的起始地址，代码片段1执行之后就会通过 ret 指令返回，此时读取的返回地址还是在被攻击的栈上，所以攻击者只要把对应位置的值改成代码片段2的起始地址，就能紧接着执行代码片段2了，如此循环，只要栈够大，就可以把攻击片段跑完。
+对于 Linux 内核、glibc 这些庞大的程序来说，ret 指令前面一两条指令组成的代码库非常巨大，基本上可以达到图灵完备的要求了，也就是说，只要栈够大，任何程序都能由这些代码片段表达出来。另外这里为什么强调“一两条指令”呢？当然四五条甚至十几条指令的复用也是可以的，只是这样会大大增加搜索空间，要通过这些可能的代码片段生成一个程序需要太多的时间了。
+那么如何防范 return-oriented 攻击呢？之后的博文里，我会介绍一些和它相关的国外研究。</description>
+    </item>
+    
+    <item>
+      <title>基于函数调用栈的 rootkit</title>
+      <link>https://blog.yxwang.me/2009/08/return-oriented-rookit/</link>
+      <pubDate>Wed, 12 Aug 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2009/08/return-oriented-rookit/</guid>
+      <description>这篇题目为Return-Oriented Rootkits: Bypassing Kernel Code Integrity Protection Mechanisms的论文发在了今年的Usenix Security上，现在在Usenix网站上还不能下到这篇paper的pdf，可以去作者的主页上下。
+现在有不少用来防止栈溢出攻击的技术，比如操作系统保证任何一个页不能同时为可写且可读（WinXP SP2、Win 2003、Exec Shield for Linux等都采用了这个策略），这个方法实现起来比较简单，但只能防范部分形式的攻击，如果攻击者事先准备一张含有恶意代码的用户态的只读页，然后跳转到这个页，就能绕开这种保护措施了；另外也有人提出在操作系统的下面再加一层虚拟层，让它来保证上层系统没有因为各种buffer overflow而执行恶意代码（NICKLE）。
+而这里提到的return-oriented的攻击方法不同于传统的攻击机制，它所采用的攻击代码都是内核自身的代码，因此能绕过前面提到的各种保护手段。
+所谓return-oriented programming，简单的说就是把原来已经存在的代码块拼接起来，拼接的方式是通过一个预先准备好的特殊的返回栈，里面包含了各条指令结束后下一条指令的地址。
+例如现在函数A里面有这么一段指令 instruction A ret
+函数B里面有另外一段： instruction B ret
+它们在正常的运行情况下没有任何关系，但是我发现如果把A和B拼起来就能达到我想要的结果，于是我构造了一个包含有A和B的地址的栈，先通过ret指令返回到instruction A处，之后再执行ret指令时，由于栈是精心构造的，因此接下来会执行到instruction B，这样就得到我想要的结果了。只要这个ret前的指令库足够大，就能实现几乎所有的程序。
+这种攻击方式并非这篇paper的首创，最早是由Shacham提出的（http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.140.9210，http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.78.7135）
+这篇paper的一大贡献在于实现了一个自动从libc和驱动、内核等代码中找到可用的指令，并拼接成所需程序的系统，这里面包括一个扫描可利用代码、并把它们结合起来的Constructor，一套专用的语言，以及把这套语言编译成对应代码片段之和的编译器，最后还有一个计算实际代码地址的Loader。
+这套攻击机制在WinXP SP2/Sp3, Vista SP1等系统上都获得了成功，尽管查找代码并生成这个过程的overhead很大，但对于一次成功的rootkit攻击来说影响并不大。</description>
+    </item>
+    
+  </channel>
+</rss>

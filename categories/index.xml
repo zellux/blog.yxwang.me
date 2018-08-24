@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Categories on Aiur · Zellux 的博客</title>
+    <link>https://blog.yxwang.me/categories/</link>
+    <description>Recent content in Categories on Aiur · Zellux 的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sat, 14 Jul 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.yxwang.me/categories/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Algorithms</title>
+      <link>https://blog.yxwang.me/categories/algorithms/</link>
+      <pubDate>Sat, 14 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/categories/algorithms/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Computer System</title>
+      <link>https://blog.yxwang.me/categories/computer-system/</link>
+      <pubDate>Thu, 09 Aug 2012 17:37:12 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/categories/computer-system/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Cooking</title>
+      <link>https://blog.yxwang.me/categories/cooking/</link>
+      <pubDate>Sat, 21 Jul 2018 15:14:53 -0700</pubDate>
+      
+      <guid>https://blog.yxwang.me/categories/cooking/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Courses</title>
+      <link>https://blog.yxwang.me/categories/courses/</link>
+      <pubDate>Mon, 01 Sep 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/categories/courses/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Featured</title>
+      <link>https://blog.yxwang.me/categories/featured/</link>
+      <pubDate>Fri, 04 Jul 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/categories/featured/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Life</title>
+      <link>https://blog.yxwang.me/categories/life/</link>
+      <pubDate>Sun, 15 Oct 2017 00:09:39 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/categories/life/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Meta</title>
+      <link>https://blog.yxwang.me/categories/meta/</link>
+      <pubDate>Mon, 31 Dec 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/categories/meta/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Programming</title>
+      <link>https://blog.yxwang.me/categories/programming/</link>
+      <pubDate>Thu, 14 Feb 2013 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/categories/programming/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Robotics</title>
+      <link>https://blog.yxwang.me/categories/robotics/</link>
+      <pubDate>Tue, 07 Aug 2018 00:56:13 -0700</pubDate>
+      
+      <guid>https://blog.yxwang.me/categories/robotics/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Tooling</title>
+      <link>https://blog.yxwang.me/categories/tooling/</link>
+      <pubDate>Thu, 13 Feb 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/categories/tooling/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

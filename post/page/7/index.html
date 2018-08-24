@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="zellux">
+
+    <title> Posts &middot; Aiur · Zellux 的博客 </title>
+
+    <script src="/js/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
+    <script src="/js/jquery-3.0.47.fancybox.min.js"></script>
+
+    
+    
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.52ea10a8f3a0b8f145adadb8d3761e17a42a7634869f775ef5830ed4de77d3fa.css">
+    
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+    
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    
+    <link href="https://blog.yxwang.me/post/index.xml" rel="alternate" type="application/rss+xml" title="Aiur · Zellux 的博客" />
+    
+<script type="application/ld+json">
+{
+    "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https://blog.yxwang.me/"
+    },
+    "articleSection" : "post",
+    "name" : "Posts",
+    "headline" : "Posts",
+    "description" : "",
+    "inLanguage" : "en-US",
+    "author" : "zellux",
+    "creator" : "zellux",
+    "publisher": "zellux",
+    "accountablePerson" : "",
+    "copyrightHolder" : "",
+    "copyrightYear" : "2009",
+    "datePublished": "2009-12-13 00:00:00 &#43;0000 UTC",
+    "dateModified" : "2009-12-13 00:00:00 &#43;0000 UTC",
+    "url" : "https://blog.yxwang.me/post/",
+    "wordCount" : "0",
+    "keywords" : [ "Blog" ]
+}
+</script>
+
+  </head>
+
+  <body>
+    <nav class="nav">
+  <div class="nav-container">
+    <span class="site-title">
+      <a href="https://blog.yxwang.me/">Aiur · Zellux 的博客</a>
+    </span>
+    
+    <div class="nav-list">
+      
+      <span class="nav-item"><a href="/about">About</a></span>
+      
+      <span class="nav-item"><a href="/archive">Archive</a></span>
+      
+      <span class="nav-item"><a href="/notes">Notes</a></span>
+      
+    </div>
+  </div>
+</nav>
+
+    <div class="container">
+
+
+<div class="content">
+  <div class="posts">
+     
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2009/12/chomp-game/">Chomp 游戏</a></h2>
+      <span class="post-date">Dec 13, 2009</span>
+      
+      <span class="post-tags">
+	
+	#<a href="https://blog.yxwang.me/tags/algorithms">Algorithms</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/game-theory">Game Theory</a>&nbsp;
+	
+      </span>
+      
+      
+      
+      <div class="summary">
+	把一堆石子排成n行m列，两人轮流从里面取出石子，条件是取出一个石子后所有在它右边和上面的石子也要被取走。谁取走最后一个石子就算输。以3*5的棋盘举例来说，先手取了(2,5)，因此(3,5)也要被取走；后手取了(3,3)，同时也要取走(3,4)。现在棋盘的状态如下（O代表这个位子的石子还没被取走，x代表已经被取走）：
+3 O O x x x 2 O O O O x 1 O O O O O 1 2 3 4 5  接下来先手又取了(2,1)，于是第二排和第三排就一颗石子都不剩了
+3 x x x x x 2 x x x x x 1 O O O O O 1 2 3 4 5  后手取(1,2)
+3 x x x x x 2 x x x x x 1 O x x x x 1 2 3 4 5  接下来先手就只能取最后一个石子了，后手胜。
+	<a class="read-more" href="/2009/12/chomp-game/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2009/12/emacs-set-styles-by-projects/">Emacs 中对不同项目指定不同的风格</a></h2>
+      <span class="post-date">Dec 1, 2009</span>
+      
+      <span class="post-tags">
+	
+	#<a href="https://blog.yxwang.me/tags/c">C</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/emacs">Emacs</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/tooling">Tooling</a>&nbsp;
+	
+      </span>
+      
+      
+      
+      <div class="summary">
+	我的Emacs配置里C语言默认的缩进风格是用4个空格，最近要修改Chromium的代码，而Google的C/C++风格统一为2个空格缩进，所以改代码的时候要把c-basic-offset设置为2。这样在不同项目间切换的时候很不方便。
+在stackoverflow上发帖求助后发现了Emacs 23.1一个很好用的新功能，Per-Directory Local Variables，只需要在项目主目录下放一个.dir-locals.el文件，里面设置该项目特有的变量值，就能应用到整个项目了。
+以我的Chromium为例，Google已经提供了一份C/C++风格的配置，只需要在~/chromius/src/.dir-locals.el里把google-c-style常量粘贴进去即可。另外我不知道为啥加上c-offsets-alist那段后Emacs缩进会变得很奇怪，所以我把它删了。附修改后的.dir-locals.el
+((c++-mode . ((c-recognize-knr-p . nil) (c-enable-xemacs-performance-kludge-p . t) ; speed up indentation in XEmacs (c-basic-offset . 2) (indent-tabs-mode . nil) (c-comment-only-line-offset . 0) (c-hanging-braces-alist . ((defun-open after) (defun-close before after) (class-open after) (class-close before after) (namespace-open after) (inline-open after) (inline-close before after) (block-open after) (block-close . c-snug-do-while) (extern-lang-open after) (extern-lang-close after) (statement-case-open after) (substatement-open after))) (c-hanging-colons-alist . ((case-label) (label after) (access-label after) (member-init-intro before) (inher-intro))) (c-hanging-semi&amp;comma-criteria .
+	<a class="read-more" href="/2009/12/emacs-set-styles-by-projects/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2009/11/noteexpress-and-bibtex/">NoteExpress and BibTex</a></h2>
+      <span class="post-date">Nov 30, 2009</span>
+      
+      <span class="post-tags">
+	
+	#<a href="https://blog.yxwang.me/tags/latex">LaTeX</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/tooling">Tooling</a>&nbsp;
+	
+      </span>
+      
+      
+      
+      <div class="summary">
+	最近写了篇survey，分享下用NoteExpress一些经验
+ bibtex 关键字设置：  工具-&gt;样式-&gt;选择当前输出样式，选择BibTex，然后就能在题录的字段中找到bibtex 关键字一项了
+ 导出bibtex时选择ANSI编码，如果设置为UTF-8貌似编译latex时会给出类似You&rsquo;re missing an entry type&mdash;line 1 of file xxx.bib的提示。
+ 导出引用的网页：我的解决方法是在BibTex样式-&gt;题录-&gt;模版里新增一个网页模版，然后右键编辑区选择从模版通用复制，并在里面增加一条***Howpublished = {\url{链接}}, 这样就能使用howpublished字段导出网页链接了。不过好像这样网页地址不会换行，于是我最后还是用手动断行改了下.bib。
+ 另外提下，把png/jpg转成eps，我用的是sam2p，aur上就有。
+  
+	<a class="read-more" href="/2009/11/noteexpress-and-bibtex/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2009/11/git-modify-specified-commit/">在 Git 中修改之前提交的内容</a></h2>
+      <span class="post-date">Nov 10, 2009</span>
+      
+      <span class="post-tags">
+	
+	#<a href="https://blog.yxwang.me/tags/git">Git</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/tooling">Tooling</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/git">git</a>&nbsp;
+	
+      </span>
+      
+      
+      
+      <div class="summary">
+	其实这个问题我以前在 Stackoverflow 上回答过别人（链接），不过现在自己反而忘了，还是贴在这下次查起来方便点
+先用 git rebase bbc643cd^ --interactive 退回到要修改的commit的前一个点，这里 bbc643cd 就是要修改的 commit，执行后 git 会调用默认的编辑器显示该次 commit 到最新 commit 的所有记录，在这里我们把要修改的那一项的行首的 pick 改成 edit。
+接下来运行 git commit --amend，使用默认编辑器修改这次 commit。
+最后执行 git rebase --continue 就能提交修改后的 commit 并且返回到原来的 commit 了。
+	<a class="read-more" href="/2009/11/git-modify-specified-commit/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2009/10/only-31m-disk-space-detected/">新装硬盘空间只有31B/32MB的解决方案</a></h2>
+      <span class="post-date">Oct 23, 2009</span>
+      
+      <span class="post-tags">
+	
+	#<a href="https://blog.yxwang.me/tags/hardware">Hardware</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/tooling">Tooling</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/troubleshooting">Troubleshooting</a>&nbsp;
+	
+      </span>
+      
+      
+      
+      <div class="summary">
+	这周买了块西数的1T硬盘，用来放各种美剧/高清电影。装好进入Win7后提示检测到新硬盘，然后进入磁盘管理一看发现磁盘大小只有31兆，重启进入BIOS看到的磁盘容量是0MB。换了一台电脑问题依然存在。
+于是求助superuser，发现了这篇文章http://www.pcstats.com/articleview.cfm?articleid=1139&amp;page=12，貌似是LBA(Logical Block Addressing)相关的问题，下载了个HDD Capacity Restore Tool修复后问题解决。
+附该软件下载地址：http://hdd-tools.com/products/cr/download/crsetup.exe
+	<a class="read-more" href="/2009/10/only-31m-disk-space-detected/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2009/09/interesting-quines/">几个有趣的 Quine 变种</a></h2>
+      <span class="post-date">Sep 28, 2009</span>
+      
+      <span class="post-tags">
+	
+	#<a href="https://blog.yxwang.me/tags/algorithms">Algorithms</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/c">C</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/quine">Quine</a>&nbsp;
+	
+      </span>
+      
+      
+      
+      <div class="summary">
+	Quine是指一类能生成自己的程序，例如下面这个C程序运行后就能把自己的源码完整的打印出来：
+char*f=&quot;char*f=%c%s%c;main() {printf(f,34,f,34,10);}%c&quot;; main(){printf(f,34,f,34,10);}  这类程序的构造方法计算理论导引或者其他相关的书籍中都有涉及，这里不再赘述。这个月看到几个Quine的变种，都挺有趣的。
+首先是sigfpe构造出来的三阶Quine，这是一个只有两行的Haskell程序：
+q a b c=putStrLn $ b ++ [toEnum 10,'q','('] ++ show b ++ [','] ++ show c ++ [','] ++ show a ++ [')'] main=q &quot;q a b c=putStrLn $ b ++ [toEnum 10,'q','('] ++ show b ++ [','] ++ show c ++ [','] ++ show a ++ [')']&quot; &quot;def q(a,b,c):print b+chr(10)+'q('+repr(b)+','+repr(c)+','+repr(a)+')'&quot; &quot;def e(x) return 34.chr+x+34.chr end;def q(a,b,c) print b+10.chr+'main=q '+e(b)+' '+e(c)+' '+e(a)+' '+10.
+	<a class="read-more" href="/2009/09/interesting-quines/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2009/09/compile-php5-on-dreamhost/">Dreamhost 上编译 php5</a></h2>
+      <span class="post-date">Sep 26, 2009</span>
+      
+      <span class="post-tags">
+	
+	#<a href="https://blog.yxwang.me/tags/dreamhost">DreamHost</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/php">PHP</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/software">Software</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/tooling">Tooling</a>&nbsp;
+	
+      </span>
+      
+      
+      
+      <div class="summary">
+	Dreamhost提供的php有不少限制，昨天折腾了一个晚上终于成功地在自己的虚拟主机上编译了php5。
+Why 
+用下来，发现使用自己编译的php5有这么几个好处：
+ 可以自定义内存分配上限，默认只有32M，通过wordpress安装插件的时候经常出现内存不够的问题。
+ 上传文件大小限制也能改，默认只有2M，基本没法通过wordpress传音乐之类的比较大的文件。
+ 使用自己的php后解释执行的进程uid也是自己了，这样就避免了很多nobody用户访问/修改/增加文件所带来的问题。
+  How to compile 
+编译和安装的大部分步骤可以参考http://wiki.dreamhost.com/index.php/Installing_PHP5，这里补充一点我碰到的问题和解决方法。
+因为我这台dreamhost虚拟主机用的是x86_64，而通过下载的php5的configure文件默认查找的是/usr/lib/下面的共享库，通过&ndash;with-libdir=lib64设置查找路径后却无法找到openssl库了，于是我用了个很山寨的方法，把configure脚本里查找libmysqlclient时的路径临时改成了/usr/lib64，然后再改回/usr/lib。
+安装脚本开头定义的几个包的名字可能也要修改下，如果下载出现错误的话去上级目录看下最新的包的名字是什么就行了。另外脚本中解压.Z和.tar.gz文件用的是uncompress命令，似乎在我的这个主机上没有安装，改成tar zxf就行了。
+How to use
+最后说下编译成功后怎么使用，具体方法那个网页上也讲过了，只要把编译后的php.cgi放到/cgi-bin/下然后改下.htaccess即可。
+对于子域名，比如我这个techblog.iamzellux.com，参照网页上的说明把整个cgi-bin用符号链接的方式link到子域名的根目录下是最方便的方案，当然别忘了修改.htaccess。
+	<a class="read-more" href="/2009/09/compile-php5-on-dreamhost/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2009/08/return-oriented-rookit/">基于函数调用栈的 rootkit</a></h2>
+      <span class="post-date">Aug 12, 2009</span>
+      
+      <span class="post-tags">
+	
+	#<a href="https://blog.yxwang.me/tags/computer-system">Computer System</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/research">Research</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/return-oriented">Return-oriented</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/rootkit">Rootkit</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/security">Security</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/usenix">Usenix</a>&nbsp;
+	
+      </span>
+      
+      
+      
+      <div class="summary">
+	这篇题目为Return-Oriented Rootkits: Bypassing Kernel Code Integrity Protection Mechanisms的论文发在了今年的Usenix Security上，现在在Usenix网站上还不能下到这篇paper的pdf，可以去作者的主页上下。
+现在有不少用来防止栈溢出攻击的技术，比如操作系统保证任何一个页不能同时为可写且可读（WinXP SP2、Win 2003、Exec Shield for Linux等都采用了这个策略），这个方法实现起来比较简单，但只能防范部分形式的攻击，如果攻击者事先准备一张含有恶意代码的用户态的只读页，然后跳转到这个页，就能绕开这种保护措施了；另外也有人提出在操作系统的下面再加一层虚拟层，让它来保证上层系统没有因为各种buffer overflow而执行恶意代码（NICKLE）。
+而这里提到的return-oriented的攻击方法不同于传统的攻击机制，它所采用的攻击代码都是内核自身的代码，因此能绕过前面提到的各种保护手段。
+所谓return-oriented programming，简单的说就是把原来已经存在的代码块拼接起来，拼接的方式是通过一个预先准备好的特殊的返回栈，里面包含了各条指令结束后下一条指令的地址。
+例如现在函数A里面有这么一段指令 instruction A ret
+函数B里面有另外一段： instruction B ret
+它们在正常的运行情况下没有任何关系，但是我发现如果把A和B拼起来就能达到我想要的结果，于是我构造了一个包含有A和B的地址的栈，先通过ret指令返回到instruction A处，之后再执行ret指令时，由于栈是精心构造的，因此接下来会执行到instruction B，这样就得到我想要的结果了。只要这个ret前的指令库足够大，就能实现几乎所有的程序。
+这种攻击方式并非这篇paper的首创，最早是由Shacham提出的（http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.140.9210，http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.78.7135）
+这篇paper的一大贡献在于实现了一个自动从libc和驱动、内核等代码中找到可用的指令，并拼接成所需程序的系统，这里面包括一个扫描可利用代码、并把它们结合起来的Constructor，一套专用的语言，以及把这套语言编译成对应代码片段之和的编译器，最后还有一个计算实际代码地址的Loader。
+这套攻击机制在WinXP SP2/Sp3, Vista SP1等系统上都获得了成功，尽管查找代码并生成这个过程的overhead很大，但对于一次成功的rootkit攻击来说影响并不大。
+	<a class="read-more" href="/2009/08/return-oriented-rookit/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2009/07/xen-time-went-backwards-solution/">Xen 警告 Time went backwards 的暴力解决方法</a></h2>
+      <span class="post-date">Jul 7, 2009</span>
+      
+      <span class="post-tags">
+	
+	#<a href="https://blog.yxwang.me/tags/c">C</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/computer-system">Computer System</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/xen">Xen</a>&nbsp;
+	
+      </span>
+      
+      
+      
+      <div class="summary">
+	前几天给测试Xen用的虚拟机挂了，只能用VMware的snapshot返回到之前的镜像，然后似乎因为时间问题启动Xen的时候总是会定时打印出类似
+571 Timer ISR/0: Time went backwards: delta=-11072481 delta_cpu=298927519 shadow=196807680595 off=288495093 processed=197107247546 cpu_processed=196797247546 572 0: 196797247546 573 1: 197107247546  的信息，google了下发现是时间同步的问题，用ntp协议同步时间即可解决这个问题。另外这里再给出一个最暴力的解决方法：在linux-xen源码的arch/i386/kernel/time-xen.c文件中找到Time went backwards，把这行打印语句以及后面的循环打印删除，然后重新编译内核。x86_64体系结构也是修改这个文件。方法很暴力，也没真正解决问题，但是至少不影响我看/var/log/messages的输出了。
+	<a class="read-more" href="/2009/07/xen-time-went-backwards-solution/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2009/07/firefox-close-windows-with-last-tab/">防止 Firefox 在关闭最后一个 Tab 后退出</a></h2>
+      <span class="post-date">Jul 1, 2009</span>
+      
+      <span class="post-tags">
+	
+	#<a href="https://blog.yxwang.me/tags/firefox">Firefox</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/tooling">Tooling</a>&nbsp;
+	
+      </span>
+      
+      
+      
+      <div class="summary">
+	记得以前用Firefox 3.0.x时把Tools -&gt; Options -&gt; Tabs -&gt; Always show the tab bar勾上就行了，升级到3.5以后就没用了，搜了下Knowledge Base，最后在
+https://support.mozilla.com/tiki-view_forum_thread.php?locale=zh-CN&comments_parentId=184680&forumId=1
+看到只要将about:config页中的browser.tabs.closeWindowWithLastTab项设为false即可
+	<a class="read-more" href="/2009/07/firefox-close-windows-with-last-tab/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
+  </div>
+  <div class="pagination">
+  
+  <a class="btn previous" href="/post/page/6/">Newer</a>  
+  <a class="btn next" href="/post/page/8/">Older</a> 
+</div>
+</div>
+
+
+
+
+<div class="footer">
+  
+  <p>Powered by <a href="http://gohugo.io">Hugo</a> and <a href="https://github.com/zhe/hugo-theme-slim">Slim theme</a>.
+  
+      Follow me on <a href="https://twitter.com/zellux">Twitter</a>.
+      </p>
+  </p>
+  
+</div>
+
+                   
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+    Macros: {
+      argmax: "\\operatorname*{argmax}",
+      argmin: "\\operatorname*{argmin}"
+    }
+  },
+  jax: ["input/TeX","output/CommonHTML"]
+});
+</script>
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML">
+</script>
+
+</script>
+
+<script src="https://blog.yxwang.me/js/slim.min.aef36e671f72c9042139aae327dbe693b7ebaa67fd56f30dad4c985a91ba9294.js"></script>
+
+
+<link rel="stylesheet" href="https://blog.yxwang.me/css/solarized-light.min.5499f6bc45da0c78f070be4f720fd28b19af75306b569b77837d57c3cf819430.css" />
+<script src="/js/highlight.pack.js"></script>
+<script>
+  hljs.initHighlightingOnLoad();
+</script>
+
+</div>
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-25551121-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+<script type="text/javascript">
+    window.heap=window.heap||[],heap.load=function(e,t){window.heap.appid=e,window.heap.config=t=t||{};var r=t.forceSSL||"https:"===document.location.protocol,a=document.createElement("script");a.type="text/javascript",a.async=!0,a.src=(r?"https:":"http:")+"//cdn.heapanalytics.com/js/heap-"+e+".js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(a,n);for(var o=function(e){return function(){heap.push([e].concat(Array.prototype.slice.call(arguments,0)))}},p=["addEventProperties","addUserProperties","clearEventProperties","identify","removeEventProperty","setEventProperties","track","unsetEventProperty"],c=0;c<p.length;c++)heap[p[c]]=o(p[c])};
+      heap.load("3166778701");
+</script>
+
+
+</body>
+
+</html>
+

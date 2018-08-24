@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="线性代数学习笔记，主要参考了同济大学的《线性代数》和 《Deep Learning》 的第二章。
+行列式  行列式 (determinant) 与它的转置行列式相等。\(D^T = D\) 余子式 (minor)：在 n 阶行列式中，把 \((i, j)\) 元 \(a_{ij}\) 所在的第 \(i\) 行和第 \(j\) 列划去后留下的 \(n - 1\) 阶行列式叫做 \((i, j)\) 元 \(a_{ij}\) 的余子式，记作 \(M_{ij}\) 代数余子式 (cofactor) \(A_{ij} = (-1)^{i&#43;j}M_{ij}\) 行列式按行展开：\(D = a_{i1}A_{i1} &#43; a_{i2}A_{i2} &#43; \cdots &#43; a_{in}A_{in}\) 行列式按列展开：\(D = a_{1j}A_{1j} &#43; a_{2j}A_{2j} &#43; \cdots &#43; a_{nj}A_{nj}\) 克拉默法则 (Cramer’s rule)：如果线性方程组的系数行列式不等于零，那么方程组有唯一解 \(x_1 = \frac{D_1}{D}, x_2 = \frac{D_2}{D}, \cdots, x_n = \frac{D_n}{D}\)， 其中 \(D_j\) 是把系数行列式 D 中第 j 列的元素用方程组右端的常数项代替后得到的 n 阶行列式。  矩阵及其运算  伴随矩阵 (adjugate matrix) \[ adj(A) = \begin{bmatrix} A_{11} &amp; A_{21} &amp; \cdots &amp; A_{n1} \\ A_{12} &amp; A_{22} &amp; \cdots &amp; A_{n2} \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ A_{1n} &amp; A_{2n} &amp; \cdots &amp; A_{nn} \\ \end{bmatrix} \]  其中 \(A_{ij}\) 为代数余子式">
+    <meta name="author" content="zellux">
+
+    <title> 线性代数笔记 &middot; Aiur · Zellux 的博客 </title>
+
+    <script src="/js/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
+    <script src="/js/jquery-3.0.47.fancybox.min.js"></script>
+
+    
+    
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.52ea10a8f3a0b8f145adadb8d3761e17a42a7634869f775ef5830ed4de77d3fa.css">
+    
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+    
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    
+    <link href="" rel="alternate" type="application/rss+xml" title="Aiur · Zellux 的博客" />
+    
+<script type="application/ld+json">
+{
+    "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https://blog.yxwang.me/"
+    },
+    "articleSection" : "notes",
+    "name" : "线性代数笔记",
+    "headline" : "线性代数笔记",
+    "description" : "线性代数学习笔记，主要参考了同济大学的《线性代数》和 《Deep Learning》 的第二章。
+行列式  行列式 (determinant) 与它的转置行列式相等。\(D^T = D\) 余子式 (minor)：在 n 阶行列式中，把 \((i, j)\) 元 \(a_{ij}\) 所在的第 \(i\) 行和第 \(j\) 列划去后留下的 \(n - 1\) 阶行列式叫做 \((i, j)\) 元 \(a_{ij}\) 的余子式，记作 \(M_{ij}\) 代数余子式 (cofactor) \(A_{ij} = (-1)^{i+j}M_{ij}\) 行列式按行展开：\(D = a_{i1}A_{i1} + a_{i2}A_{i2} + \cdots + a_{in}A_{in}\) 行列式按列展开：\(D = a_{1j}A_{1j} + a_{2j}A_{2j} + \cdots + a_{nj}A_{nj}\) 克拉默法则 (Cramer’s rule)：如果线性方程组的系数行列式不等于零，那么方程组有唯一解 \(x_1 = \frac{D_1}{D}, x_2 = \frac{D_2}{D}, \cdots, x_n = \frac{D_n}{D}\)， 其中 \(D_j\) 是把系数行列式 D 中第 j 列的元素用方程组右端的常数项代替后得到的 n 阶行列式。  矩阵及其运算  伴随矩阵 (adjugate matrix) \[ adj(A) = \begin{bmatrix} A_{11} &amp; A_{21} &amp; \cdots &amp; A_{n1} \\ A_{12} &amp; A_{22} &amp; \cdots &amp; A_{n2} \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ A_{1n} &amp; A_{2n} &amp; \cdots &amp; A_{nn} \\ \end{bmatrix} \]  其中 \(A_{ij}\) 为代数余子式",
+    "inLanguage" : "en-US",
+    "author" : "zellux",
+    "creator" : "zellux",
+    "publisher": "zellux",
+    "accountablePerson" : "",
+    "copyrightHolder" : "",
+    "copyrightYear" : "0001",
+    "datePublished": "0001-01-01 00:00:00 &#43;0000 UTC",
+    "dateModified" : "0001-01-01 00:00:00 &#43;0000 UTC",
+    "url" : "https://blog.yxwang.me/notes/linear-algebra/",
+    "wordCount" : "348",
+    "keywords" : [ "Blog" ]
+}
+</script>
+
+  </head>
+
+  <body>
+    <nav class="nav">
+  <div class="nav-container">
+    <span class="site-title">
+      <a href="https://blog.yxwang.me/">Aiur · Zellux 的博客</a>
+    </span>
+    
+    <div class="nav-list">
+      
+      <span class="nav-item"><a href="/about">About</a></span>
+      
+      <span class="nav-item"><a href="/archive">Archive</a></span>
+      
+      <span class="nav-item"><a href="/notes">Notes</a></span>
+      
+    </div>
+  </div>
+</nav>
+
+    <div class="container">
+
+
+<div class="content">
+  <div class="posts">
+    <div class="post">
+      <h1 class="post-title"><a href="https://blog.yxwang.me/notes/linear-algebra/">线性代数笔记</a></h1>
+      <div class="post-content">
+        <p>线性代数学习笔记，主要参考了同济大学的<a href="https://book.douban.com/subject/2197140/">《线性代数》</a>和 <a href="https://book.douban.com/subject/26883982/">《Deep Learning》</a> 的第二章。</p>
+<h2 id="行列式">行列式</h2>
+<ul>
+<li>行列式 (determinant) 与它的转置行列式相等。<span class="math inline">\(D^T = D\)</span></li>
+<li>余子式 (minor)：在 n 阶行列式中，把 <span class="math inline">\((i, j)\)</span> 元 <span class="math inline">\(a_{ij}\)</span> 所在的第 <span class="math inline">\(i\)</span> 行和第 <span class="math inline">\(j\)</span> 列划去后留下的 <span class="math inline">\(n - 1\)</span> 阶行列式叫做 <span class="math inline">\((i, j)\)</span> 元 <span class="math inline">\(a_{ij}\)</span> 的余子式，记作 <span class="math inline">\(M_{ij}\)</span></li>
+<li>代数余子式 (cofactor) <span class="math inline">\(A_{ij} = (-1)^{i+j}M_{ij}\)</span></li>
+<li>行列式按行展开：<span class="math inline">\(D = a_{i1}A_{i1} + a_{i2}A_{i2} + \cdots + a_{in}A_{in}\)</span></li>
+<li>行列式按列展开：<span class="math inline">\(D = a_{1j}A_{1j} + a_{2j}A_{2j} + \cdots + a_{nj}A_{nj}\)</span></li>
+<li>克拉默法则 (Cramer’s rule)：如果线性方程组的系数行列式不等于零，那么方程组有唯一解 <span class="math inline">\(x_1 = \frac{D_1}{D}, x_2 = \frac{D_2}{D}, \cdots, x_n = \frac{D_n}{D}\)</span>， 其中 <span class="math inline">\(D_j\)</span> 是把系数行列式 D 中第 j 列的元素用方程组右端的常数项代替后得到的 n 阶行列式。</li>
+</ul>
+<h2 id="矩阵及其运算">矩阵及其运算</h2>
+<ul>
+<li>伴随矩阵 (adjugate matrix) <span class="math display">\[
+adj(A) = \begin{bmatrix}
+A_{11} &amp; A_{21} &amp; \cdots &amp; A_{n1} \\
+A_{12} &amp; A_{22} &amp; \cdots &amp; A_{n2} \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+A_{1n} &amp; A_{2n} &amp; \cdots &amp; A_{nn} \\
+\end{bmatrix}
+\]</span></li>
+</ul>
+<p>其中 <span class="math inline">\(A_{ij}\)</span> 为代数余子式</p>
+<ul>
+<li><span class="math inline">\(A \text{adj}(A) = \text{adj}(A) A = |A|I\)</span></li>
+<li>奇异矩阵 (singular matrix)：<span class="math inline">\(|A| = 0\)</span></li>
+<li>非奇异矩阵 (non-singular matrix)：<span class="math inline">\(|A| \neq 0\)</span></li>
+</ul>
+<h2 id="线性相关和生成子空间">线性相关和生成子空间</h2>
+<ul>
+<li>线性组合 (linear combination)：对于一个向量集 <span class="math inline">\({v^{(1)}, v^{(2)}, \cdots, v^{(n)}}\)</span>，<span class="math inline">\(\sum_i{c_iv^{(i)}}\)</span> 为它的一个线性组合。一组向量的生成子空间 (span) 是指原是向量线性组合后所能抵达的点的集合。</li>
+<li>判断 <span class="math inline">\(Ax=b\)</span> 是否有解相当于确定向量 b 是否在 A 列向量的生成子空间中。这个特殊的生成子空间被称为 A 的列空间 (column space) 或者 A 的值域 (range)。</li>
+<li>线性无关 (linear independene)：如果一组向量中的任意一个向量都不能表示称其他向量的线性组合，那么这组向量被称为线性无关。</li>
+<li>奇异矩阵 (singular matrix)：列向量线性相关的方阵。</li>
+</ul>
+<h2 id="范数">范数</h2>
+<ul>
+<li>范数 (norm) 用来衡量向量大小，<span class="math inline">\(L^p\)</span> 范数定义为 <span class="math inline">\(\Vert{x}\Vert_p=(\sum_{i}^{} {\vert{x_i}\vert^p})^{\frac{1}{p}}\)</span></li>
+<li>欧几里得范数 (Euclidean norm)：<span class="math inline">\(L^2\)</span> 范数</li>
+<li>最大范数 (max norm)：<span class="math inline">\(L^{\infty}\)</span> 范数</li>
+<li>Frobenius 范数可以用来衡量矩阵大小：<span class="math inline">\(\Vert{A}\Vert_F = \sqrt{\sum_{i,j} A_{i,j}^2}\)</span></li>
+<li>向量点积也可以用范数表示，即 <span class="math inline">\(x^Ty = \Vert{X}\Vert_2 \Vert{Y}\Vert_2 \cos{\theta}\)</span>，其中 <span class="math inline">\(\theta\)</span> 为 x 和 y 的夹角。</li>
+</ul>
+<h2 id="特殊矩阵和向量">特殊矩阵和向量</h2>
+<ul>
+<li>对焦矩阵 (diagonal matrix)：<span class="math inline">\(\forall {i \neq j}, D_{i,j}=0\)</span>，可以用 diag(v) 表示。</li>
+<li>对称矩阵 (symmetric matrix)：<span class="math inline">\(A=A^T\)</span></li>
+<li>单位向量 (unit vector)：<span class="math inline">\(\Vert{x}\Vert_2=1\)</span></li>
+<li>正交 (orthogonal)：如果 <span class="math inline">\(x^Ty = 0\)</span>，那么向量 x 和向量 y 互相正交。</li>
+<li>标准正交 (orthonormal)：在 <span class="math inline">\(ℝ^n\)</span> 中，至多有 n 个范数非零向量互相正交。如果他们互相正交且范数都为 1，则称它们为标准正交。</li>
+<li>正交矩阵 (orthogonal matrix)：行向量和列向量分别标准正交，即 <span class="math inline">\(A^TA = AA^T = I\)</span>。</li>
+</ul>
+<h2 id="特征分解">特征分解</h2>
+<ul>
+<li>推荐阅读 <a href="http://setosa.io/ev/eigenvectors-and-eigenvalues/">Eigenvectors and Eigenvalues</a></li>
+<li>特征向量 <span class="math inline">\(v\)</span> (eigenvector) 满足 <span class="math inline">\(Av = \lambda{}v\)</span>。其中 标量 <span class="math inline">\(\lambda\)</span> 为这个特征向量对应的特征值 (eigenvalue)。</li>
+<li>如果矩阵 A 有 n 个线性无关的特征向量 <span class="math inline">\(\{v^{(1)}, \cdots, v^{(n)}\}\)</span>，对应特征值 <span class="math inline">\(\{\lambda_1, \cdots, \lambda_n\}\)</span>。A 的特征分解为 <span class="math inline">\(A = V\text{diag}{(\mathbf{\lambda})}V^{-1}\)</span></li>
+<li>每个实对称矩阵可以分解成实特征向量和实特征值：<span class="math inline">\(A=Q\Lambda{}Q^T\)</span>。其中 Q 是 A 的特征向量组成的正交矩阵。</li>
+<li>正定矩阵 (positive definite)：所有特征值都是正数的矩阵。</li>
+<li>半正定矩阵 (positive semidefinite)：所有特征值都是非负数。半正定矩阵 A 满足 <span class="math inline">\(\forall x, x^TAx \geq 0\)</span></li>
+<li>类似的还有负定 (negative definite) 和半负定 (negative semidefinite)。</li>
+<li>奇异值分解 (singular value decomposition) 把矩阵 A 分解成三个矩阵的乘积 <span class="math inline">\(A=UDV^T\)</span>。推荐阅读 <a href="http://andrew.gibiansky.com/blog/mathematics/cool-linear-algebra-singular-value-decomposition/">Andrew Gibiansky 的博客</a>。</li>
+<li>Moore-Penrose 逆伪 (psedoinverse)：<span class="math inline">\(A^{+}=VD^{+}U^T\)</span>。其中 U, D, V 是矩阵 A 在 SVD 后的结果。<span class="math inline">\(x=A^{+}y\)</span> 是所有可行解中 <span class="math inline">\(\Vert{x}\Vert_2\)</span> 最小的一个。当没有解存在时，伪逆可以使 <span class="math inline">\(\Vert Ax-y \Vert_2\)</span> 最小。</li>
+</ul>
+<h2 id="迹">迹</h2>
+<ul>
+<li>迹 (trace) 定义为矩阵对焦元素之和：<span class="math inline">\(\text{Tr}(A) = \sum_i A_{i,i}\)</span></li>
+<li>迹的一些特性：
+<ul>
+<li><span class="math inline">\(\text{Tr}(A) = \text{Tr}(A^T)\)</span></li>
+<li><span class="math inline">\(\text{Tr}(ABC) = \text{Tr}(CAB) = \text{Tr}(BCA)\)</span></li>
+<li><span class="math inline">\(\text{Tr}(AB) = \text{Tr}(BA)\)</span> （如果乘法可行）</li>
+</ul></li>
+</ul>
+
+      </div>
+          <div class="cc-license">
+      本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.zh">知识共享署名-非商业性使用 3.0 版本许可协议</a>进行许可，欢迎转载，演绎，但是必须保留本文的署名 <a href="https://blog.yxwang.me/notes/linear-algebra/">zellux</a>（包含链接），且不得用于商业目的。
+    </div>
+
+    </div>
+    <div class="pagination">
+      <a class="btn previous " href="https://blog.yxwang.me/notes/"> Prev</a>  
+    </div>
+  </div>
+</div>
+
+
+<div id="disqus_thread"></div>
+<script>
+  var disqus_config = function () {
+  this.page.url = "https://blog.yxwang.me/notes/linear-algebra/";
+  
+  };
+  (function() {
+  var d = document, s = d.createElement('script');
+  s.src = '//aiur-zellux.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+
+<div class="footer">
+  
+  <p>Powered by <a href="http://gohugo.io">Hugo</a> and <a href="https://github.com/zhe/hugo-theme-slim">Slim theme</a>.
+  
+      Follow me on <a href="https://twitter.com/zellux">Twitter</a>.
+      </p>
+  </p>
+  
+</div>
+
+                   
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+    Macros: {
+      argmax: "\\operatorname*{argmax}",
+      argmin: "\\operatorname*{argmin}"
+    }
+  },
+  jax: ["input/TeX","output/CommonHTML"]
+});
+</script>
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML">
+</script>
+
+</script>
+
+<script src="https://blog.yxwang.me/js/slim.min.aef36e671f72c9042139aae327dbe693b7ebaa67fd56f30dad4c985a91ba9294.js"></script>
+
+
+<link rel="stylesheet" href="https://blog.yxwang.me/css/solarized-light.min.5499f6bc45da0c78f070be4f720fd28b19af75306b569b77837d57c3cf819430.css" />
+<script src="/js/highlight.pack.js"></script>
+<script>
+  hljs.initHighlightingOnLoad();
+</script>
+
+</div>
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-25551121-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+<script type="text/javascript">
+    window.heap=window.heap||[],heap.load=function(e,t){window.heap.appid=e,window.heap.config=t=t||{};var r=t.forceSSL||"https:"===document.location.protocol,a=document.createElement("script");a.type="text/javascript",a.async=!0,a.src=(r?"https:":"http:")+"//cdn.heapanalytics.com/js/heap-"+e+".js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(a,n);for(var o=function(e){return function(){heap.push([e].concat(Array.prototype.slice.call(arguments,0)))}},p=["addEventProperties","addUserProperties","clearEventProperties","identify","removeEventProperty","setEventProperties","track","unsetEventProperty"],c=0;c<p.length;c++)heap[p[c]]=o(p[c])};
+      heap.load("3166778701");
+</script>
+
+
+</body>
+
+</html>
+

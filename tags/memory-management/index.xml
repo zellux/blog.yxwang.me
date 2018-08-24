@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Memory Management on Aiur · Zellux 的博客</title>
+    <link>https://blog.yxwang.me/tags/memory-management/</link>
+    <description>Recent content in Memory Management on Aiur · Zellux 的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Tue, 12 May 2009 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.yxwang.me/tags/memory-management/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>ISCA 09 - Multi-Execution</title>
+      <link>https://blog.yxwang.me/2009/05/isca-09-multi-execution/</link>
+      <pubDate>Tue, 12 May 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2009/05/isca-09-multi-execution/</guid>
+      <description>Multi-Execution: Multicore Caching for Data-Similar Executions
+这篇paper针对以multi-execution这种模式运行的程序提出了一种新的cache手段。
+所谓multi-execution，指的是同时运行同一个程序的多个进程，而它们的输入数据又互不相同。这种模式在machine-learning领域比较常见，一些相对独立的learner可以以并行的方式被训练，而它们的结果可以通过一种叫做boosting的方式合并起来。给我的感觉似乎有点像mapreduce？
+然后呢，作者们发现以这种方式运行的程序进程的数据有很大一部分是相同的，在合并cache数据上可以做一下文章，节省cache的使用。
+于是这篇paper提出了一种叫做mergeable cache的架构，用于代替传统的L2 cache，L1 cache还是传统的cache架构。首先假设相同的数据的虚拟地址往往也是相同的（应该去掉了address space randomization的影响），以类似Page Coloring的策略进行物理页的分配，使得不同进程同一虚拟地址所对应的物理页都是相邻的。然后把虚拟地址的头9位作为cache tag，再为每个cache line记录一个bit vector用以表示某个processor的数据是否保存在这条cache line中。于是L2 cache hit当且仅当： 1. 虚拟地址的头9位等于cache line的tag 2. cache line中的bit vector的processor对应的位被置上
+另外为了简化cache策略，L1和L2的数据内容是互斥的，或者说一段被cache的数据要么在L1，要么在L2，不可能同时存在于两者中。这样一来L2就只有从L1淘汰出来的数据了，而L2中的数据修改分三步完成： 1. 把数据从L2中标记为不存在（对应processor的bit vector位置0） 2. 数据进入L1 3. 修改数据
+这就是这篇paper提出的cache架构的主要内容，后面的evaluation部分做的也很不错。从数据中可以看出合并的cache里面dirty cache占了比较大的比例，从而说明简单的copy-on-write策略的效果不会很好，因为copy-on-write只能合并clean cache。最后平均的speedup提升在2.5x左右，很不错。但是对于数据无关的并行程序运行，会产生一定的overhead，此时可以选择传统的L2 cache机制。</description>
+    </item>
+    
+    <item>
+      <title>高速缓冲器页着色 (Page Coloring)</title>
+      <link>https://blog.yxwang.me/2009/05/page-coloring/</link>
+      <pubDate>Mon, 11 May 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2009/05/page-coloring/</guid>
+      <description> 读 Multi-Execution (ISCA ’09) 的时候看到的名词，中文叫做高速缓冲器页着色，有点拗口，还是用英文术语好了。
+早期的处理器缓存都是映射虚拟内存的，这样带来两个问题，一是进程切换等场合下需要清空缓存，二是由于多个虚拟地址可能指向同一个物理地址，因此会出现缓存中数据别名的问题(data aliasing)。
+于是现代的处理器更多的通过物理地址进行数据缓存，这也引入了另一个问题，虚拟内存中看到的相邻的两块数据在缓存中很有可能是不相邻的，如果操作系统分配物理页时不考虑这点就会影响性能。
+举例来说，假设CPU能缓存4个物理页，缓存策略是 CS:APP 中提到的最简单的方式，即第n号缓存只用于物理页号除4余数为n的物理页(n=0,1,2,3)，比如第2号缓存对应于2,6,10,..号页面。现在用户为页面号为0的虚拟页申请空间，操作系统把第16号物理页分配给它；接下来用户又为页面号为1的虚拟页申请空间，而17-19号物理页已经用掉，此时操作系统就不应该分配20号物理页给它，因为20号物理页和16号物理页占用同一个缓存地区，假设用户程序的局部性(locality)很好的话这样的分配方式会产生比较严重的抖动(thrashing)，影响系统缓存的性能。所以操作系统应该分配21号物理页给它，而保证这种分配策略的方式就是为每个页标记不同的颜色，并使得同一时间使用的页面颜色尽可能的不同。
+参考资料  http://en.wikipedia.org/wiki/CPU_cache http://www.freebsd.org/doc/en/articles/vm-design/page-coloring-optimizations.html  </description>
+    </item>
+    
+    <item>
+      <title>Xen 学习笔记 2009-02-10</title>
+      <link>https://blog.yxwang.me/2009/02/2009-02-10-notes/</link>
+      <pubDate>Wed, 11 Feb 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2009/02/2009-02-10-notes/</guid>
+      <description>x86_64上不支持segment机制，Xen是通过页表机制来控制访问权限的，Xen及其相关数据驻留在0xffff8000 00000000 - 0xffff87ff ffffffff，也就是在原来的kernel space的低地址部分，而x86_32上驻留在最上面的。  [include/asm-x86/config.h] /* * Memory layout: * 0x0000000000000000 - 0x00007fffffffffff [128TB, 2^47 bytes, PML4:0-255] * Guest-defined use (see below for compatibility mode guests). * 0x0000800000000000 - 0xffff7fffffffffff [16EB] * Inaccessible: current arch only supports 48-bit sign-extended VAs. * 0xffff800000000000 - 0xffff803fffffffff [256GB, 2^38 bytes, PML4:256] * Read-only machine-to-phys translation table (GUEST ACCESSIBLE). * 0xffff804000000000 - 0xffff807fffffffff [256GB, 2^38 bytes, PML4:256] * Reserved for future shared info with the guest OS (GUEST ACCESSIBLE).</description>
+    </item>
+    
+  </channel>
+</rss>

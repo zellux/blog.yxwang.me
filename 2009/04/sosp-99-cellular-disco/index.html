@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="同样是今年寒假读的
+ 两年前的paper的升级版，这次是利用Disco在一个多核电脑上跑多个操作系统并虚拟成一个cluster。主要解决了两个问题，一是容错性，当硬件错误发生时如何把影响缩小到一个单元里；二是资源的管理，如何高效地在虚拟机间动态的分配物理CPU和内存。
+容错和动态资源管理在某种程度上相互矛盾的。因此在分配资源的时候，要尽可能的减少一个虚拟机使用的cell数。这里的cell是指相对独立的容错 单元，后面还提到一个node的概念，Origin 2000上每个node含两个CPU。CD还提供了两种快速的进程间通讯的primitive，RPC和message。
+关于容错，有这么个问题，Disco在操作系统和硬件之间多弄了这么一层虚拟层，某个虚拟的操作系统出问题时可以不影响到其他操作系统，可是操作系 统不也是保证了进程间的互相独立，当一个进程异常时不影响另一个进程吗？多设立一层Disco对容错有什么帮助吗？这个问题的答案在于，VMM的代码量很 小，可以看作是一个可信的系统软件层(trusted system software layer)，因为当VMM的代码行数少于五万行时，它的复杂度就和其他可信的层（如cache coherence protocol)差不多了，这个复杂度比现代操作系统的复杂度差不多要低两个等级。
+传统操作系统通常使用一个全局的run queue来管理和分配进程在多个CPU上的运行，这种实现不适合CD的容错要求，也带来了更多的contention。所以CD为每个VCPU维护了一 个run queue，同时引入了VCPU migration的机制来平衡VCPU的负载，按颗粒度分三级，intra-node intra-cell inter-cell。内存管理方面，CD实现了memory borrowing机制，使得一个cell可以暂时的从其他cell里获得内存，如果这种借用受限于容错性，就只能使用原来的paging机制了。 CPU管理 CD有两个CPU平衡策略，一个在处理器空闲时发生，另一个定期平衡VCPU的负载。空闲调度时要同时考虑gang scheduling的限制以及因转移破坏的cache/node affinity。而定期的调度则是通过一棵全局的load tree的辅助来实现的。此外还需要一个scalable gang scheduler来保证效率，CD的调度器总是选择优先度最高的gang-runnable VCPU（等待时间最多），然后通过低开销的RPC通知那些拥有(和这个VCPU同属于一个虚拟机的VCPU)的处理器，这些处理器在收到消息后，立即停 止当前正在运行的VCPU，服从同一调度策略。通过这种方式实现的调度就不需要一个全局的管理器了。
+内存管理 每个cell都维护了自己的freelist，每次接收请求时都优先分配本地node上的资源。内存借用也很直接，需要借用内存的cell向有空闲内存的cell发个RPC即可，RPC的返回结果是一个machine page的list。
+测试结果 测试中CD是作为kernel process跑在IRIX 6.4上的，也就是说VMM的下面还有一层操作系统，主要是为了利用IRIX提供的设备驱动。CD在每个CPU上跑一个线程，完全占有整个CPU，IRIX只在需要设备驱动时才被激活。
+测试比较了两个测试环境，跑在真机上的IRIX 6.4（增加了多核支持），和跑在CD上的IRIX 6.2。最后的结果显示大部分情况下（单核、8核、32核）后者和前者的差距在10%以内，最差情况下也只有20%的overhead。接下来的容错机制 的overhead同样很小，不高于2%。">
+    <meta name="author" content="zellux">
+
+    <title> SOSP 99 - Cellular Disco &middot; Aiur · Zellux 的博客 </title>
+
+    <script src="/js/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
+    <script src="/js/jquery-3.0.47.fancybox.min.js"></script>
+
+    
+    
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.52ea10a8f3a0b8f145adadb8d3761e17a42a7634869f775ef5830ed4de77d3fa.css">
+    
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+    
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    
+    <link href="" rel="alternate" type="application/rss+xml" title="Aiur · Zellux 的博客" />
+    
+<script type="application/ld+json">
+{
+    "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https://blog.yxwang.me/"
+    },
+    "articleSection" : "post",
+    "name" : "SOSP 99 - Cellular Disco",
+    "headline" : "SOSP 99 - Cellular Disco",
+    "description" : "同样是今年寒假读的
+ 两年前的paper的升级版，这次是利用Disco在一个多核电脑上跑多个操作系统并虚拟成一个cluster。主要解决了两个问题，一是容错性，当硬件错误发生时如何把影响缩小到一个单元里；二是资源的管理，如何高效地在虚拟机间动态的分配物理CPU和内存。
+容错和动态资源管理在某种程度上相互矛盾的。因此在分配资源的时候，要尽可能的减少一个虚拟机使用的cell数。这里的cell是指相对独立的容错 单元，后面还提到一个node的概念，Origin 2000上每个node含两个CPU。CD还提供了两种快速的进程间通讯的primitive，RPC和message。
+关于容错，有这么个问题，Disco在操作系统和硬件之间多弄了这么一层虚拟层，某个虚拟的操作系统出问题时可以不影响到其他操作系统，可是操作系 统不也是保证了进程间的互相独立，当一个进程异常时不影响另一个进程吗？多设立一层Disco对容错有什么帮助吗？这个问题的答案在于，VMM的代码量很 小，可以看作是一个可信的系统软件层(trusted system software layer)，因为当VMM的代码行数少于五万行时，它的复杂度就和其他可信的层（如cache coherence protocol)差不多了，这个复杂度比现代操作系统的复杂度差不多要低两个等级。
+传统操作系统通常使用一个全局的run queue来管理和分配进程在多个CPU上的运行，这种实现不适合CD的容错要求，也带来了更多的contention。所以CD为每个VCPU维护了一 个run queue，同时引入了VCPU migration的机制来平衡VCPU的负载，按颗粒度分三级，intra-node intra-cell inter-cell。内存管理方面，CD实现了memory borrowing机制，使得一个cell可以暂时的从其他cell里获得内存，如果这种借用受限于容错性，就只能使用原来的paging机制了。 CPU管理 CD有两个CPU平衡策略，一个在处理器空闲时发生，另一个定期平衡VCPU的负载。空闲调度时要同时考虑gang scheduling的限制以及因转移破坏的cache/node affinity。而定期的调度则是通过一棵全局的load tree的辅助来实现的。此外还需要一个scalable gang scheduler来保证效率，CD的调度器总是选择优先度最高的gang-runnable VCPU（等待时间最多），然后通过低开销的RPC通知那些拥有(和这个VCPU同属于一个虚拟机的VCPU)的处理器，这些处理器在收到消息后，立即停 止当前正在运行的VCPU，服从同一调度策略。通过这种方式实现的调度就不需要一个全局的管理器了。
+内存管理 每个cell都维护了自己的freelist，每次接收请求时都优先分配本地node上的资源。内存借用也很直接，需要借用内存的cell向有空闲内存的cell发个RPC即可，RPC的返回结果是一个machine page的list。
+测试结果 测试中CD是作为kernel process跑在IRIX 6.4上的，也就是说VMM的下面还有一层操作系统，主要是为了利用IRIX提供的设备驱动。CD在每个CPU上跑一个线程，完全占有整个CPU，IRIX只在需要设备驱动时才被激活。
+测试比较了两个测试环境，跑在真机上的IRIX 6.4（增加了多核支持），和跑在CD上的IRIX 6.2。最后的结果显示大部分情况下（单核、8核、32核）后者和前者的差距在10%以内，最差情况下也只有20%的overhead。接下来的容错机制 的overhead同样很小，不高于2%。",
+    "inLanguage" : "en-US",
+    "author" : "zellux",
+    "creator" : "zellux",
+    "publisher": "zellux",
+    "accountablePerson" : "",
+    "copyrightHolder" : "",
+    "copyrightYear" : "2009",
+    "datePublished": "2009-04-08 00:00:00 &#43;0000 UTC",
+    "dateModified" : "2009-04-08 00:00:00 &#43;0000 UTC",
+    "url" : "https://blog.yxwang.me/2009/04/sosp-99-cellular-disco/",
+    "wordCount" : "41",
+    "keywords" : [ "Computer System","Paper","SOSP","VMware","Virtualization","Blog" ]
+}
+</script>
+
+  </head>
+
+  <body>
+    <nav class="nav">
+  <div class="nav-container">
+    <span class="site-title">
+      <a href="https://blog.yxwang.me/">Aiur · Zellux 的博客</a>
+    </span>
+    
+    <div class="nav-list">
+      
+      <span class="nav-item"><a href="/about">About</a></span>
+      
+      <span class="nav-item"><a href="/archive">Archive</a></span>
+      
+      <span class="nav-item"><a href="/notes">Notes</a></span>
+      
+    </div>
+  </div>
+</nav>
+
+    <div class="container">
+
+
+<div class="content">
+  <div class="post">
+    <h1 class="post-title"><a href="https://blog.yxwang.me/2009/04/sosp-99-cellular-disco/">SOSP 99 - Cellular Disco</a></h1>
+    <span class="post-meta">
+  <time datetime='Wed, Apr 8, 2009' data-updated="true" itemprop="datePublished">Wed, Apr 8, 2009</time>
+  
+  <span class="post-categories">
+    •
+	<a href="https://blog.yxwang.me/categories/computer-system">Computer System</a>
+  </span>
+  
+</span>
+
+    <div class="post-content">
+      <p>同样是今年寒假读的</p>
+
+<hr>
+
+<p><a href="http://techblog.iamzellux.com/2009/04/disco-running-commodity-operating-systems-on-scalable-multiprocessors/">两年前的paper</a>的升级版，这次是利用Disco在一个多核电脑上跑多个操作系统并虚拟成一个cluster。主要解决了两个问题，一是容错性，当硬件错误发生时如何把影响缩小到一个单元里；二是资源的管理，如何高效地在虚拟机间动态的分配物理CPU和内存。</p>
+
+<p>容错和动态资源管理在某种程度上相互矛盾的。因此在分配资源的时候，要尽可能的减少一个虚拟机使用的cell数。这里的cell是指相对独立的容错 单元，后面还提到一个node的概念，Origin 2000上每个node含两个CPU。CD还提供了两种快速的进程间通讯的primitive，RPC和message。</p>
+
+<p>关于容错，有这么个问题，Disco在操作系统和硬件之间多弄了这么一层虚拟层，某个虚拟的操作系统出问题时可以不影响到其他操作系统，可是操作系 统不也是保证了进程间的互相独立，当一个进程异常时不影响另一个进程吗？多设立一层Disco对容错有什么帮助吗？这个问题的答案在于，VMM的代码量很 小，可以看作是一个可信的系统软件层(trusted system software layer)，因为当VMM的代码行数少于五万行时，它的复杂度就和其他可信的层（如cache coherence protocol)差不多了，这个复杂度比现代操作系统的复杂度差不多要低两个等级。</p>
+
+<p>传统操作系统通常使用一个全局的run queue来管理和分配进程在多个CPU上的运行，这种实现不适合CD的容错要求，也带来了更多的contention。所以CD为每个VCPU维护了一 个run queue，同时引入了VCPU migration的机制来平衡VCPU的负载，按颗粒度分三级，intra-node intra-cell inter-cell。内存管理方面，CD实现了memory borrowing机制，使得一个cell可以暂时的从其他cell里获得内存，如果这种借用受限于容错性，就只能使用原来的paging机制了。
+<h4>CPU管理</h4>
+CD有两个CPU平衡策略，一个在处理器空闲时发生，另一个定期平衡VCPU的负载。空闲调度时要同时考虑gang scheduling的限制以及因转移破坏的cache/node affinity。而定期的调度则是通过一棵全局的load tree的辅助来实现的。此外还需要一个scalable gang scheduler来保证效率，CD的调度器总是选择优先度最高的gang-runnable VCPU（等待时间最多），然后通过低开销的RPC通知那些拥有(和这个VCPU同属于一个虚拟机的VCPU)的处理器，这些处理器在收到消息后，立即停 止当前正在运行的VCPU，服从同一调度策略。通过这种方式实现的调度就不需要一个全局的管理器了。</p>
+
+<p><h4>内存管理</h4>
+每个cell都维护了自己的freelist，每次接收请求时都优先分配本地node上的资源。内存借用也很直接，需要借用内存的cell向有空闲内存的cell发个RPC即可，RPC的返回结果是一个machine page的list。</p>
+
+<p><h4>测试结果</h4>
+测试中CD是作为kernel process跑在IRIX 6.4上的，也就是说VMM的下面还有一层操作系统，主要是为了利用IRIX提供的设备驱动。CD在每个CPU上跑一个线程，完全占有整个CPU，IRIX只在需要设备驱动时才被激活。</p>
+
+<p>测试比较了两个测试环境，跑在真机上的IRIX 6.4（增加了多核支持），和跑在CD上的IRIX 6.2。最后的结果显示大部分情况下（单核、8核、32核）后者和前者的差距在10%以内，最差情况下也只有20%的overhead。接下来的容错机制 的overhead同样很小，不高于2%。</p>
+
+    </div>
+        <div class="cc-license">
+      本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.zh">知识共享署名-非商业性使用 3.0 版本许可协议</a>进行许可，欢迎转载，演绎，但是必须保留本文的署名 <a href="https://blog.yxwang.me/2009/04/sosp-99-cellular-disco/">zellux</a>（包含链接），且不得用于商业目的。
+    </div>
+
+  </div>
+  <div class="pagination">
+    <a class="btn previous " href="https://blog.yxwang.me/2009/04/disco-running-commodity-operating-systems-on-scalable-multiprocessors/"> Prev</a>  
+    <a class="btn next " href="https://blog.yxwang.me/2009/04/asplos-09-dftl/"> Next</a> 
+  </div>
+</div>
+
+
+<div id="disqus_thread"></div>
+<script>
+  var disqus_config = function () {
+  this.page.url = "https://blog.yxwang.me/2009/04/sosp-99-cellular-disco/";
+  
+  };
+  (function() {
+  var d = document, s = d.createElement('script');
+  s.src = '//aiur-zellux.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+
+<div class="footer">
+  
+  <p>Powered by <a href="http://gohugo.io">Hugo</a> and <a href="https://github.com/zhe/hugo-theme-slim">Slim theme</a>.
+  
+      Follow me on <a href="https://twitter.com/zellux">Twitter</a>.
+      </p>
+  </p>
+  
+</div>
+
+                   
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+    Macros: {
+      argmax: "\\operatorname*{argmax}",
+      argmin: "\\operatorname*{argmin}"
+    }
+  },
+  jax: ["input/TeX","output/CommonHTML"]
+});
+</script>
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML">
+</script>
+
+</script>
+
+<script src="https://blog.yxwang.me/js/slim.min.aef36e671f72c9042139aae327dbe693b7ebaa67fd56f30dad4c985a91ba9294.js"></script>
+
+
+<link rel="stylesheet" href="https://blog.yxwang.me/css/solarized-light.min.5499f6bc45da0c78f070be4f720fd28b19af75306b569b77837d57c3cf819430.css" />
+<script src="/js/highlight.pack.js"></script>
+<script>
+  hljs.initHighlightingOnLoad();
+</script>
+
+</div>
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-25551121-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+<script type="text/javascript">
+    window.heap=window.heap||[],heap.load=function(e,t){window.heap.appid=e,window.heap.config=t=t||{};var r=t.forceSSL||"https:"===document.location.protocol,a=document.createElement("script");a.type="text/javascript",a.async=!0,a.src=(r?"https:":"http:")+"//cdn.heapanalytics.com/js/heap-"+e+".js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(a,n);for(var o=function(e){return function(){heap.push([e].concat(Array.prototype.slice.call(arguments,0)))}},p=["addEventProperties","addUserProperties","clearEventProperties","identify","removeEventProperty","setEventProperties","track","unsetEventProperty"],c=0;c<p.length;c++)heap[p[c]]=o(p[c])};
+      heap.load("3166778701");
+</script>
+
+
+</body>
+
+</html>
+

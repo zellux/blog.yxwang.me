@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Eps on Aiur · Zellux 的博客</title>
+    <link>https://blog.yxwang.me/tags/eps/</link>
+    <description>Recent content in Eps on Aiur · Zellux 的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Mon, 02 Jan 2012 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.yxwang.me/tags/eps/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>转换 Visio 图片为 EPS 格式</title>
+      <link>https://blog.yxwang.me/2012/01/visio-export-to-eps/</link>
+      <pubDate>Mon, 02 Jan 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2012/01/visio-export-to-eps/</guid>
+      <description>&lt;p&gt;Windows 7 及 Visio 2010 下验证可行：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;添加本地打印机，类型选择 Generic -&amp;gt; MS Publisher Color Printer&lt;/li&gt;
+&lt;li&gt;在 Visio 中打印，选择新添加的打印机，选中 Print to file，点 Properties -&amp;gt; Advanced&lt;/li&gt;
+&lt;li&gt;Document Options -&amp;gt; PostScript Options -&amp;gt; PostScript Output Option 中，选择 Encapsulated PostScript (EPS)&lt;/li&gt;
+&lt;li&gt;保存时别忘了加后缀名 .eps&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

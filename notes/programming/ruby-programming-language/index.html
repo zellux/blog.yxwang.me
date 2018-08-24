@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="Chapter 3 Datatypes and Objects &quot;360 degrees=#{2*Math::PI} radians&quot; # &quot;360 degrees=6.28318530717959 radians&quot; $salutation = &#39;hello&#39; # Define a global variable &quot;#$salutation world&quot; # Use it in a double-quoted string &quot;My phone #: 555-1234&quot; # No escape needed &quot;Use \#{ to interpolate expressions&quot; # Escape #{ with backslash  Ruby will create a new object for each iteration. For efficiency, you should avoid using literals within loops.
+The &lt;&lt; operator appends its second operand to its first.">
+    <meta name="author" content="zellux">
+
+    <title> 《Ruby Programming Language》笔记 &middot; Aiur · Zellux 的博客 </title>
+
+    <script src="/js/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
+    <script src="/js/jquery-3.0.47.fancybox.min.js"></script>
+
+    
+    
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.52ea10a8f3a0b8f145adadb8d3761e17a42a7634869f775ef5830ed4de77d3fa.css">
+    
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+    
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    
+    <link href="" rel="alternate" type="application/rss+xml" title="Aiur · Zellux 的博客" />
+    
+<script type="application/ld+json">
+{
+    "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https://blog.yxwang.me/"
+    },
+    "articleSection" : "notes",
+    "name" : "《Ruby Programming Language》笔记",
+    "headline" : "《Ruby Programming Language》笔记",
+    "description" : "Chapter 3 Datatypes and Objects &quot;360 degrees=#{2*Math::PI} radians&quot; # &quot;360 degrees=6.28318530717959 radians&quot; $salutation = 'hello' # Define a global variable &quot;#$salutation world&quot; # Use it in a double-quoted string &quot;My phone #: 555-1234&quot; # No escape needed &quot;Use \#{ to interpolate expressions&quot; # Escape #{ with backslash  Ruby will create a new object for each iteration. For efficiency, you should avoid using literals within loops.
+The &lt;&lt; operator appends its second operand to its first.",
+    "inLanguage" : "en-US",
+    "author" : "zellux",
+    "creator" : "zellux",
+    "publisher": "zellux",
+    "accountablePerson" : "",
+    "copyrightHolder" : "",
+    "copyrightYear" : "0001",
+    "datePublished": "0001-01-01 00:00:00 &#43;0000 UTC",
+    "dateModified" : "0001-01-01 00:00:00 &#43;0000 UTC",
+    "url" : "https://blog.yxwang.me/notes/programming/ruby-programming-language/",
+    "wordCount" : "1012",
+    "keywords" : [ "Blog" ]
+}
+</script>
+
+  </head>
+
+  <body>
+    <nav class="nav">
+  <div class="nav-container">
+    <span class="site-title">
+      <a href="https://blog.yxwang.me/">Aiur · Zellux 的博客</a>
+    </span>
+    
+    <div class="nav-list">
+      
+      <span class="nav-item"><a href="/about">About</a></span>
+      
+      <span class="nav-item"><a href="/archive">Archive</a></span>
+      
+      <span class="nav-item"><a href="/notes">Notes</a></span>
+      
+    </div>
+  </div>
+</nav>
+
+    <div class="container">
+
+
+<div class="content">
+  <div class="posts">
+    <div class="post">
+      <h1 class="post-title"><a href="https://blog.yxwang.me/notes/programming/ruby-programming-language/">《Ruby Programming Language》笔记</a></h1>
+      <div class="post-content">
+        
+
+<h2 id="chapter-3-datatypes-and-objects">Chapter 3 Datatypes and Objects</h2>
+
+<pre><code class="language-ruby">&quot;360 degrees=#{2*Math::PI} radians&quot; # &quot;360 degrees=6.28318530717959 radians&quot;
+$salutation = 'hello' # Define a global variable
+&quot;#$salutation world&quot; # Use it in a double-quoted string
+&quot;My phone #: 555-1234&quot; # No escape needed
+&quot;Use \#{ to interpolate expressions&quot; # Escape #{ with backslash
+</code></pre>
+
+<p>Ruby will create a new object for each iteration. For efficiency, you should avoid using literals within loops.</p>
+
+<p>The &lt;&lt; operator appends its second operand to its first. This operator is very different from +; it alters the lefthand operand rather than creating and returning a new object.</p>
+
+<p>To alter individual characters of a string, simply use brackets on the lefthand ide of an assignment expression.</p>
+
+<p>In general, Symbol objects work more efficiently as hash keys than strings do.</p>
+
+<p>Two-dot range: the range is inclusive and the end value is part of the range</p>
+
+<p>Three-dot range: the range is exclusive and the end value is not part of the range</p>
+
+<p>You can convert a String to a Symbol using the intern or to_sym methods.</p>
+
+<p>Ruby’s convention of == and equal() is just about the opposite of Java’s.</p>
+
+<p>Any object may be frozen by calling its freeze method. A frozen object becomes immutable.</p>
+
+<h2 id="chapter-5-statements-and-control-structures">Chapter 5 Statements and Control Structures</h2>
+
+<p>The if modifier has very low precedence and binds more loosely than the assignment operator.</p>
+
+<p>The following two lines of code are different:</p>
+
+<pre><code class="language-ruby">y = x.invert if x.respond_to? :invert
+y = (x.invert if x.respond_to? :invert)
+</code></pre>
+
+<p>The inject method behaves like foldr in Haskell and reduce in Python.</p>
+
+<p>A fundamental issue is deciding which party controls the iteration, the iterator or the client that uses the iterator. When the client controls the iteration, the iterator is called an external iterator, and when the iterator controls it, the iterator is an internal iterator.</p>
+
+<p>If you want to return more than one value in a block, you can use next instead of return.</p>
+
+<p>Most Ruby programmers omit return when it is not necessary. Instead of writing <code>return x</code> as the last line of a method, they would simply write x.</p>
+
+<p>When next is used within a block, it causes the block to exit immediately, returning control to the iterator method, which may then begin a new iteration by invoking the block again.</p>
+
+<p>Compute factorial of x, or use 0 if the method raises an exception: <code>y = factorial(x) rescue 0</code></p>
+
+<p>Fibers can be thought of as independent paths of execution within a single thread of execution. Unlike threads, however, there is no scheduler to transfer control among fibers; fibers must explicitly schedule themselves with transfer.</p>
+
+<h2 id="chapter-6-methods-procs-lambdas-and-closures">Chapter 6 Methods, Procs, Lambdas, and Closures</h2>
+
+<p>An important feature of procs and lambdas is that they are closures: they retain access to the local variables that were in scope when they were defined, even when the proc or lambda is invoked from a different scope.</p>
+
+<p>Block arguments prefixed with ampersands must really be the last one. Because blocks are passed unusually in method invocations, named block arguments are different and do not interfere with array or hash parameters in which the brackets and braces have been omitted.</p>
+
+<p>When &amp; is used before a Proc object in a method invocation, it treats the Proc as if it was an ordinary block following the invocation.</p>
+
+<pre><code class="language-ruby">a, b = [1,2,3], [4,5] # Start with some data.
+summation = Proc.new {|total,x| total+x } # A Proc object for summations.
+sum = a.inject(0, &amp;summation) # =&gt; 6
+sum = b.inject(sum, &amp;summation) # =&gt; 15
+</code></pre>
+
+<p>In Ruby 1.9, the Symbol class defines a to_proc method, allowing symbols to be prefixed with &amp; and passed to iterators. When a symbol is passed like this, it is assumed to be the name of a method.</p>
+
+<pre><code class="language-ruby">words = ['and', 'but', 'car'] # An array of words
+uppercase = words.map &amp;:upcase # Convert to uppercase with String.upcase
+upper = words.map {|w| w.upcase } # This is the equivalent code with a block
+</code></pre>
+
+<p>Ruby 1.9 syntax allows lambdas to be declared with argument defaults, just as methods can be:</p>
+
+<pre><code class="language-ruby">zoom = -&gt;(x,y,factor=2) { [x*factor, y*factor] }
+</code></pre>
+
+<p>The Proc class also defines the array access operator to work the same way as call.</p>
+
+<pre><code class="language-ruby">f = Proc.new {|x,y| 1.0/(1.0/x + 1.0/y) }
+z = f[x,y]
+</code></pre>
+
+<p>Ruby 1.9 offers an additional way to invoke a Proc object; as an alternative to square brackets, you can use parentheses prefixed with a period:</p>
+
+<pre><code class="language-ruby">z = f.(x,y)
+</code></pre>
+
+<h2 id="chapter-7-classes-and-modules">Chapter 7 Classes and Modules</h2>
+
+<p>When the initialize method is invoked, self holds an instance of the Point class. But the code outside of that method is executed as part of the definition of the Point class.</p>
+
+<p>If we want the expression <code>2*p</code> to return the same result as <code>p*2</code>, we can define a coerce method.</p>
+
+<p>A protected method defined by a class C may be invoked on an object o by a method in an object p if and only if the classes of o and p are both subclasses of, or equal to, the class C.</p>
+
+<p>To invoke the private utility method defined in the previous code, you can use the send method, or you can use instance_eval to evaluate a block in the context of the object.</p>
+
+<p>Class methods can also be defined using self instead of the class name.</p>
+
+<p>Class variables have names that begin with <code>@@</code>.</p>
+
+<p>Remember that public, private, and protected apply only to methods in Ruby. Instance and class variables are encapsulated and effectively private, and constants are effectively public.</p>
+
+<p>The upshot is that, in Ruby, you should only subclass when you are familiar with the implementation of the superclass. If you only want to depend on the public API of a class and not on its implementation, then you should extend the functionality of the class by encapsulating and delegating to it, not by inheriting from it.</p>
+
+<p>Class#new, is an instance method, and the other, Class::new, is a class method.</p>
+
+<p>Class is a subclass of Module. This means that all classes are modules, but not all modules are classes. Classes can be used as namespaces, just as modules can. Classes cannot, however, be used as mixins.</p>
+
+      </div>
+          <div class="cc-license">
+      本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.zh">知识共享署名-非商业性使用 3.0 版本许可协议</a>进行许可，欢迎转载，演绎，但是必须保留本文的署名 <a href="https://blog.yxwang.me/notes/programming/ruby-programming-language/">zellux</a>（包含链接），且不得用于商业目的。
+    </div>
+
+    </div>
+    <div class="pagination">
+      <a class="btn previous " href="https://blog.yxwang.me/notes/programming/programming-scala/"> Prev</a>  
+      <a class="btn next " href="https://blog.yxwang.me/notes/languages/introduction-to-spanish/"> Next</a> 
+    </div>
+  </div>
+</div>
+
+
+<div id="disqus_thread"></div>
+<script>
+  var disqus_config = function () {
+  this.page.url = "https://blog.yxwang.me/notes/programming/ruby-programming-language/";
+  
+  };
+  (function() {
+  var d = document, s = d.createElement('script');
+  s.src = '//aiur-zellux.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+
+<div class="footer">
+  
+  <p>Powered by <a href="http://gohugo.io">Hugo</a> and <a href="https://github.com/zhe/hugo-theme-slim">Slim theme</a>.
+  
+      Follow me on <a href="https://twitter.com/zellux">Twitter</a>.
+      </p>
+  </p>
+  
+</div>
+
+                   
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+    Macros: {
+      argmax: "\\operatorname*{argmax}",
+      argmin: "\\operatorname*{argmin}"
+    }
+  },
+  jax: ["input/TeX","output/CommonHTML"]
+});
+</script>
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML">
+</script>
+
+</script>
+
+<script src="https://blog.yxwang.me/js/slim.min.aef36e671f72c9042139aae327dbe693b7ebaa67fd56f30dad4c985a91ba9294.js"></script>
+
+
+<link rel="stylesheet" href="https://blog.yxwang.me/css/solarized-light.min.5499f6bc45da0c78f070be4f720fd28b19af75306b569b77837d57c3cf819430.css" />
+<script src="/js/highlight.pack.js"></script>
+<script>
+  hljs.initHighlightingOnLoad();
+</script>
+
+</div>
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-25551121-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+<script type="text/javascript">
+    window.heap=window.heap||[],heap.load=function(e,t){window.heap.appid=e,window.heap.config=t=t||{};var r=t.forceSSL||"https:"===document.location.protocol,a=document.createElement("script");a.type="text/javascript",a.async=!0,a.src=(r?"https:":"http:")+"//cdn.heapanalytics.com/js/heap-"+e+".js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(a,n);for(var o=function(e){return function(){heap.push([e].concat(Array.prototype.slice.call(arguments,0)))}},p=["addEventProperties","addUserProperties","clearEventProperties","identify","removeEventProperty","setEventProperties","track","unsetEventProperty"],c=0;c<p.length;c++)heap[p[c]]=o(p[c])};
+      heap.load("3166778701");
+</script>
+
+
+</body>
+
+</html>
+

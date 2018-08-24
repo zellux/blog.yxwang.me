@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Aiur · Zellux 的博客</title>
+    <link>https://blog.yxwang.me/notes/</link>
+    <description>Recent content on Aiur · Zellux 的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    
+	<atom:link href="https://blog.yxwang.me/notes/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title></title>
+      <link>https://blog.yxwang.me/notes/open-course/deep-learning/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/notes/open-course/deep-learning/</guid>
+      <description> Deep Learning
+Course 1 Neural Networks and Deep Learning Logistic Regression as a Neural Network Notation
+ n features m training examples X \in R^(n*m) Y \in R^(1*m)  Binary Classification Logistic Regression Pooling Layer
+ Makes the representations smaller and more manageable Operates over each activation map independently  </description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://blog.yxwang.me/notes/open-course/self-driving/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/notes/open-course/self-driving/</guid>
+      <description> Canny Edges  High / low thresholds  Hough Transform  Find edges   </description>
+    </item>
+    
+    <item>
+      <title>Game Theory - Stanford</title>
+      <link>https://blog.yxwang.me/notes/open-course/game-theory/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/notes/open-course/game-theory/</guid>
+      <description>课程链接：https://class.coursera.org/gametheory-2012-002/lecture/index
+Week 1: Introduction and Overview  Nash Equilibrium: 已知其他参与者的行为后，每一位参与者的行为能最大化他/她的收益。
+ Best Response：\(a_i^{*} \in BR(a_{-i}) \iff \forall a_i \in A_i, u_i(a_i^{*}, a_{-i}) \geq u_i(a_i, a_{-i})\)
+ \(a = &amp;lt;a_1, ..., a_n&amp;gt;\) 是一个 pure strategy Nash equilibrium 当且仅当 \(\forall i, a_i \in BR(a_{-i})\)，注意这里用了 \(\in\)，因为 best response 可能有多个。
+ \(s_i\) strictly dominates \(s&amp;#39;_i \iff \forall s_{-i} \in S_{-i}, u_i(s_i, s_{-i}) &amp;gt; u_i(s&amp;#39;_i, s_{-i})\)
+ \(s_i\) very weakly dominates \(s&amp;#39;_i \iff \forall s_{-i} \in S_{-i}, u_i(s_i, s_{-i}) \geq u_i(s&amp;#39;_i, s_{-i})\)</description>
+    </item>
+    
+    <item>
+      <title>Git</title>
+      <link>https://blog.yxwang.me/notes/tools/git/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/notes/tools/git/</guid>
+      <description>功能 修改之前提交的内容 http://blog.yxwang.me/2009/11/git-modify-specified-commit/
+函数 将当前分支并入其他分支 [alias] merge-to = &amp;quot;!gitmergeto() { export tmp_branch=`git branch | grep &#39;* &#39; | tr -d &#39;* &#39;` &amp;amp;&amp;amp; git checkout $1 &amp;amp;&amp;amp; git merge $tmp_branch &amp;amp;&amp;amp; git checkout $tmp_branch; unset tmp_branch; }; gitmergeto&amp;quot;  使用方法：要把当前分支合并到 develop，运行 $ git merge-to develop 即可。
+（来源：http://stackoverflow.com/a/7801982/111896）
+GitHub 选择部分 commit 发起 pull request 在目的分支基础上新开一个分支，cherry-pick 需要的 commit，从这个分支发起 pull request。</description>
+    </item>
+    
+    <item>
+      <title>Merriam-Webster&#39;s Vocabulary Builder</title>
+      <link>https://blog.yxwang.me/notes/languages/vocabulary-builder/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/notes/languages/vocabulary-builder/</guid>
+      <description> 我写了一个脚本提取了 Merriam-Webster&amp;rsquo;s Vocabulary Builder 中的生词和解释，方便导入 quizlet 等学习网站。
+提取的脚本请点击此处访问。需要先把 Kindle 版本转成 EPUB 格式。
+Quizlet 上的学习卡片集 这个列表是我根据提取的数据制作的 Quizlet 卡片，会定期更新。
+ Unit 1 Unit 2 Unit 3 Unit 4 Unit 5 Unit 6 Unit 7  </description>
+    </item>
+    
+    <item>
+      <title>Robotics Estimation and Learning</title>
+      <link>https://blog.yxwang.me/notes/open-course/robotics-estimation-and-learning/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/notes/open-course/robotics-estimation-and-learning/</guid>
+      <description>卡尔曼滤波 (Kalman Filter) 这一周的视频质量很一般，slides 做得也不仔细有不少错误。最后看了一些其他网站的文章和视频才有了比较深刻的理解，本文结尾有推荐资料。
+KF 模型  以匀速运动的动力学模型为例  状态 \(x_{t+1}=A x_t + B u_t\)，\(u_t\) 为外部影响 观测结果 \(z_t = C x_t\) \(x_t\) 和 \(z_t\) 都有测量误差 状态 \(x_{t+1}\) 仅包含位置和速度：\(x_{t+1} := \begin{bmatrix}v &amp;amp; \frac{dv}{dt}\end{bmatrix}\) 动力学模型可以通过矩阵 A 描述，\(A = \begin{bmatrix}1 &amp;amp; dt \\ 0 &amp;amp; 1 \end{bmatrix}\)   基于动力学的贝叶斯模型 \[ p(x_{t+1}|x_t) = Ap(x_t) \\ p(z_t|x_t) = Cp(x_t) \]
+加入运动和观测的误差 \[ p(x_{t+1}|x_t) = Ap(x_t)+v_m \\ p(z_t|x_t) = Cp(x_t)+v_0 \]
+假设误差基于高斯分布 \[ p(x_{t+1}|x_t) = A\mathcal{N}(x_t, P_t) + \mathcal{N}(0, \Sigma_m) \\ p(z_t|x_t) = C\mathcal{N}(x_t, P_t) + \mathcal{N}(0, \Sigma_0) \]</description>
+    </item>
+    
+    <item>
+      <title>Robotics Perception</title>
+      <link>https://blog.yxwang.me/notes/open-course/robotics-perception/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/notes/open-course/robotics-perception/</guid>
+      <description>课程链接：https://www.coursera.org/learn/robotics-perception/
+Week 1 Pinhole Model Assuming image plane is in front of the lens
+ \[ y=f\dfrac{Y}{Z} \]
+Vanishing Points   Any two parallel lines have the same vanishing point The ray from C through v point is parallel to the lines An image may have more than one vanishing point  Vanishing Lines   Any set of parallel lines on the plane define a vanishing point The union of all of these vanishing points is the horizon line (also called vanishing line) Note that different planes define different vanishing lines  Point and Line Duality  Line: \(l = x \times x&amp;#39;\) Point: \(x = l \times l&amp;#39;\) Points and lines are dual in projective space: given any formula, can switch the meanings of points and lines to get another formula  Point at Infinity Line \(l = (a, b, c)^T\) intersects at \((b, -a, 0)^T\).</description>
+    </item>
+    
+    <item>
+      <title>Word Power Made Easy</title>
+      <link>https://blog.yxwang.me/notes/languages/word-power-made-easy/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/notes/languages/word-power-made-easy/</guid>
+      <description>单词列表点此下载，用于导入背单词应用。
+Personality types Session 1  egoist egotist altruist introvert extrovert ambivert misanthrope misogynist misogamist ascetic  Session 2 ego- (I)  egoist egotist (obnoxious) egocentric (intolerable) egomaniac (dangerous and slightly mad) egoism egomaniacal  alter- (other)  altruism altruistic alternate alternative alteration altercation: n. 争吵 alter ego  Session 3 depends on how you turn  introvert: intro + verto extrovert: extro + verto ambivert: ambi + verto ambidextrous: ambi + dextrous ambidexterity: ambi + dexterity dexter: adj.</description>
+    </item>
+    
+    <item>
+      <title>《Algorithms》笔记</title>
+      <link>https://blog.yxwang.me/notes/programming/algorithms-sanjoy/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/notes/programming/algorithms-sanjoy/</guid>
+      <description>1. Algorithms with numbers 设计 Hash 函数一般要考虑两个因素，一是它的随机性，即保证数据分布均匀；二是它的一致性，即对于同一份数据每次都要获得相同的结果。
+2. Divide-and-conquer algorithms 多项式乘法 最普通的多项式乘法需要将两个多项式的不同系数一一相乘，算法复杂度是 \(O(n^2)\)。而如果采用点值表示法，即用多项式在 n + 1 个不同的点上的取值来唯一的表示这个多项式的话，计算它们的乘积只需要两个多项式在 2n + 1 个点的值就可以了（乘积的最高项次数为 2n），需要的时间是线性的。所以接下来的问题是如何在点值表示法和系数形式之间高效的转换。
+首先是求值，即给出 n 个系数和 n + 1 组不同的取值，求出这些取值下的多项式的值。将奇数次幂的项的偶数次幂的项分开，则有 \(A(x) = A_e(x^2) + xA_o(x^2)\)，这里 \(A_e\) 代表偶数次幂的项，\(A_o\) 代表奇数次幂的项。同时，考虑到 \(A(x_i)\) 和 \(A(-x_i)\) 的计算： \[ \begin{align*} A(x_i) = A_e(x_{i}^{2}) + x_iA_o(x_{i}^{2}) \\ A(-x_i) = A_e(x_{i}^{2}) - x_iA_o(x_{i}^{2}) \end{align*} \]
+把计算任务减少到了项数低一半的 \(A_e\) 和 \(A_o\)，计算量减少了一半。接着通过引入复数，可以进一步二分计算 \(A_e\) 和 \(A_o\)，从而在 \(O(log n)\) 的时间内得出结果。
+3. Decompositions of graphs 强连通分量 DFS 其实并不需要从根节点开始搜素，因为当子节点先被遍历后，接下来自然会遍历它的父节点。</description>
+    </item>
+    
+    <item>
+      <title>《Metaprogramming Ruby》笔记</title>
+      <link>https://blog.yxwang.me/notes/programming/metaprogramming-ruby/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/notes/programming/metaprogramming-ruby/</guid>
+      <description>Ruby 元编程 一、Ruby 对象模型 class MyClass; end obj1 = MyClass.new  这段代码中 obj1 和 MyClass 都是引用，唯一的区别在于前者是一个变量，后者是一个常量。
+Ruby 对象由两部分组成：实例变量和指向类的引用。
+在类中包含一个模块时，Ruby 会在继承链中插入一个匿名类，这个匿名类包含了该模块所有方法：
+class A; include Math; end A.ancestors # =&amp;gt; [A, Math, Object, Kernel, BasicObject]  正因为这种机制，puts 方法才可以在一个普通类中使用。因为 Object 包含了 Kernel 模块，所以 Kernel 模块的方法会包含在每一个普通类的继承链中，其中包括了 puts 方法，当你在其他类中调用 puts 方法输出时，其实是调用了 Kernel 的 puts 方法。
+Ruby 中私有方法的限制很简单，即不能为私有方法指定一个显式的接收者（例如 abc.method 中 abc 就是显式的接收者） 。也就是说，私有方法只能只能在隐式的接收者（即 self）上调用。
+二、方法 动态定义方法  Module#define_method BasicObject#method_missing 此外 Module#const_missing 可以用来定义常量  Blank Slate 某些情况下需要覆盖类中已经存在的方法（如 jbuilder ）。使用 undef_method 可以取消类中已经存在的函数，但仍需保留 instance_eval 以及 __ 开头的方法。这种特殊的状态被称为 Blank Slate。</description>
+    </item>
+    
+    <item>
+      <title>《Programming Scala》笔记</title>
+      <link>https://blog.yxwang.me/notes/programming/programming-scala/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/notes/programming/programming-scala/</guid>
+      <description>数组取值 Scala 中可以通过 Array.apply()、Map.apply() 等方法获得这些容器中存储的值，而小括号则是 apply 方法的一个语法糖。所以 myArray(i) 等价于 myArray.apply(i)。
+tuple 取值 获取一个 tuple 中第 i 个元素的方法是 _i，例如 pair._1，注意这里编号是从 1 开始的，和 Haskell、ML 等语言一致。
+换行符 换行符通常会被当作分号处理，所以大多数情况下行尾的分号可以省略，除了以下三种情况：
+ 该行结尾处的符号无法使这一行合法中止，例如一个中缀运算符（加号），或者一个逗号； 下一行头部的符号无法开始一个新的语句； 该行被包含在小括号或者中括号中，因为这两个符号无法包含多个语句。  第三种情况也是 for 语句体遇到多个 filter 时要优先使用大括号的原因。
+静态成员 Scala 没有静态成员这一概念，类似功能的成员被转移到 singleton objects 中。这一点倒是和 Ruby 中类对象的 eigenclass 挺像的。当一个 singleton object 的名字和某个类的名字相同时，前者被称为后者的 companion object，当然反过来，后者被称为前者的 companion class。它们可以互相访问对方的私有成员。
+闭包（closure） (x: Int) =&amp;gt; x + more 中的 more 是一个 free variable，因为这一声明没有给它任何定义，而 x 则是 bound variable，它被赋予了函数参数的意义。
+一个函数不包含 free variable 的函数被称为 closed term，这里 term 是指一段代码。而包含 free variable 的函数被称为 open term。对于 open term，程序运行时需要从环境中把对象绑到它们的 free variable 上，绑定后得到的结果就是闭包。也就是说，闭包是闭合 open term 的结果。</description>
+    </item>
+    
+    <item>
+      <title>《Ruby Programming Language》笔记</title>
+      <link>https://blog.yxwang.me/notes/programming/ruby-programming-language/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/notes/programming/ruby-programming-language/</guid>
+      <description>Chapter 3 Datatypes and Objects &amp;quot;360 degrees=#{2*Math::PI} radians&amp;quot; # &amp;quot;360 degrees=6.28318530717959 radians&amp;quot; $salutation = &#39;hello&#39; # Define a global variable &amp;quot;#$salutation world&amp;quot; # Use it in a double-quoted string &amp;quot;My phone #: 555-1234&amp;quot; # No escape needed &amp;quot;Use \#{ to interpolate expressions&amp;quot; # Escape #{ with backslash  Ruby will create a new object for each iteration. For efficiency, you should avoid using literals within loops.
+The &amp;lt;&amp;lt; operator appends its second operand to its first.</description>
+    </item>
+    
+    <item>
+      <title>沪江课程——西班牙语零基础入门</title>
+      <link>https://blog.yxwang.me/notes/languages/introduction-to-spanish/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/notes/languages/introduction-to-spanish/</guid>
+      <description>课程链接 http://class.hujiang.com/136462/
+Lección 1 单词和发音  abuelo 爷爷（外公） abuela 奶奶（外婆） amigo 男性朋友 amiga 女性朋友 español 西班牙语 estudiante 学生 idea 主意 inglés 英语 inteligente 聪明的 oficina 办公室 ocho 八 uno, na 数字一 usted 您 universidad 大学  语法  名词阴阳性（abuelo/abuela） 重音符号 é á  对话 {% conversation %} ¡Hola, Ana! ¡Hola, Ema! ¿Cómo estás? ¡Muy bien, gracias! {% endconversation %}
+Lección 2 单词和发音  d 在停顿后的词首或者词内和词组内的 n/l 后面时发 [d] 音，而在其他情况下发 [ð] 音。 día 天 domingo 星期天 nada 什么都没有 todo 所有的 edad 年龄 usted 您 sed 渴 té 茶 tú 你 taxi Asia 亚洲 estudiante 学生 novia 女朋友，新娘 pie 脚 siete 数字七 miedo 害怕 bueno 好的，优质的 luego 立即，然后 escuela 学校  对话  Buenos días.</description>
+    </item>
+    
+    <item>
+      <title>笔记</title>
+      <link>https://blog.yxwang.me/notes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/notes/</guid>
+      <description> 理论  《Algorithms》by Sanjoy Dasgupta 线性代数笔记  Ruby  《Ruby Programming Language》 《Metaprogramming in Ruby》  语言  《Word Power Made Easy》 《Merriam-Webster&amp;rsquo;s Vocabulary Builder》  公开课  Game Theory Robotics: Estimation and Learning  </description>
+    </item>
+    
+    <item>
+      <title>线性代数笔记</title>
+      <link>https://blog.yxwang.me/notes/linear-algebra/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/notes/linear-algebra/</guid>
+      <description>线性代数学习笔记，主要参考了同济大学的《线性代数》和 《Deep Learning》 的第二章。
+行列式  行列式 (determinant) 与它的转置行列式相等。\(D^T = D\) 余子式 (minor)：在 n 阶行列式中，把 \((i, j)\) 元 \(a_{ij}\) 所在的第 \(i\) 行和第 \(j\) 列划去后留下的 \(n - 1\) 阶行列式叫做 \((i, j)\) 元 \(a_{ij}\) 的余子式，记作 \(M_{ij}\) 代数余子式 (cofactor) \(A_{ij} = (-1)^{i+j}M_{ij}\) 行列式按行展开：\(D = a_{i1}A_{i1} + a_{i2}A_{i2} + \cdots + a_{in}A_{in}\) 行列式按列展开：\(D = a_{1j}A_{1j} + a_{2j}A_{2j} + \cdots + a_{nj}A_{nj}\) 克拉默法则 (Cramer’s rule)：如果线性方程组的系数行列式不等于零，那么方程组有唯一解 \(x_1 = \frac{D_1}{D}, x_2 = \frac{D_2}{D}, \cdots, x_n = \frac{D_n}{D}\)， 其中 \(D_j\) 是把系数行列式 D 中第 j 列的元素用方程组右端的常数项代替后得到的 n 阶行列式。  矩阵及其运算  伴随矩阵 (adjugate matrix) \[ adj(A) = \begin{bmatrix} A_{11} &amp;amp; A_{21} &amp;amp; \cdots &amp;amp; A_{n1} \\ A_{12} &amp;amp; A_{22} &amp;amp; \cdots &amp;amp; A_{n2} \\ \vdots &amp;amp; \vdots &amp;amp; \ddots &amp;amp; \vdots \\ A_{1n} &amp;amp; A_{2n} &amp;amp; \cdots &amp;amp; A_{nn} \\ \end{bmatrix} \]  其中 \(A_{ij}\) 为代数余子式</description>
+    </item>
+    
+  </channel>
+</rss>

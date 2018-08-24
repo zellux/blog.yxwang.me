@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Pages on Aiur · Zellux 的博客</title>
+    <link>https://blog.yxwang.me/pages/</link>
+    <description>Recent content in Pages on Aiur · Zellux 的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    
+	<atom:link href="https://blog.yxwang.me/pages/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>About Me</title>
+      <link>https://blog.yxwang.me/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/about/</guid>
+      <description> 我的名字是王远轩，Zellux 是我常用的英文名。目前居住在湾区，从事无人车视觉系统的研发，平时对智能家居、星际争霸有浓厚的兴趣。
+我的简历在可以在这里下载，如果你对制作这样的简历有兴趣，可以参考它的源代码。
+链接  LinkedIn GitHub Instagram Stack Overflow Twitter  </description>
+    </item>
+    
+  </channel>
+</rss>

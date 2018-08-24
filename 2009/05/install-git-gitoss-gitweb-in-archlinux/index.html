@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="参考文章：
+[1] http://hokietux.net/blog/?p=58 [2] http://scie.nti.st/2007/11/14/hosting-git-repositories-the-easy-and-secure-way [3] http://www.nkuttler.de/2009/04/06/git-clone-ssh-could-not-resolve-hostname/
+ git  很简单，直接用pacman安装即可 sudo pacman -S git
+ gitosis  gitosis是一个方便管理git仓库的工具，安装方法：
+1) 从yaourt或者aur下载安装gitosis-git包 http://aur.archlinux.org/packages.php?ID=23419
+2) 新建git用户 sudo useradd &ndash;system &ndash;shell /bin/sh &ndash;comment &lsquo;git version control&rsquo;&ndash;user-group &ndash;home-dir /home/git/ git
+3) 将开发用户的rsa公钥导入gitosis，（没有公钥的话请先运行ssh-keygen -t rsa生成） sudo -H -u git gitosis-init &lt; ~/.ssh/id_rsa.pub
+4) 如果以上步骤没有问题，那么运行 git clone ssh://git@hostname/gitosis-admin.git 后应该就能看到gitosis-admin.git这个目录了
+5) 新建项目、添加用户等操作参见[2]，这里不再赘述
+ gitweb  事实上ArchLinux中安装的git包自带了gitweb，可以用which gitweb搜到，一般默认在/usr/share/gitweb。下面假设我的http根目录为/home/httpd
+1) 将/usr/share/gitweb下的文件复制到/home/httpd/cgi-bin（其实似乎只要gitweb.cgi就够了）  sudo cp -R /usr/share/gitweb /home/httpd/cgi-bin/ 
+2) /usr/share/gitweb下的.">
+    <meta name="author" content="zellux">
+
+    <title> ArchLinux 下安装 git, gitosis, gitweb 服务 &middot; Aiur · Zellux 的博客 </title>
+
+    <script src="/js/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
+    <script src="/js/jquery-3.0.47.fancybox.min.js"></script>
+
+    
+    
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.52ea10a8f3a0b8f145adadb8d3761e17a42a7634869f775ef5830ed4de77d3fa.css">
+    
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+    
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    
+    <link href="" rel="alternate" type="application/rss+xml" title="Aiur · Zellux 的博客" />
+    
+<script type="application/ld+json">
+{
+    "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https://blog.yxwang.me/"
+    },
+    "articleSection" : "post",
+    "name" : "ArchLinux 下安装 git, gitosis, gitweb 服务",
+    "headline" : "ArchLinux 下安装 git, gitosis, gitweb 服务",
+    "description" : "参考文章：
+[1] http://hokietux.net/blog/?p=58 [2] http://scie.nti.st/2007/11/14/hosting-git-repositories-the-easy-and-secure-way [3] http://www.nkuttler.de/2009/04/06/git-clone-ssh-could-not-resolve-hostname/
+ git  很简单，直接用pacman安装即可 sudo pacman -S git
+ gitosis  gitosis是一个方便管理git仓库的工具，安装方法：
+1) 从yaourt或者aur下载安装gitosis-git包 http://aur.archlinux.org/packages.php?ID=23419
+2) 新建git用户 sudo useradd &ndash;system &ndash;shell /bin/sh &ndash;comment &lsquo;git version control&rsquo;&ndash;user-group &ndash;home-dir /home/git/ git
+3) 将开发用户的rsa公钥导入gitosis，（没有公钥的话请先运行ssh-keygen -t rsa生成） sudo -H -u git gitosis-init &lt; ~/.ssh/id_rsa.pub
+4) 如果以上步骤没有问题，那么运行 git clone ssh://git@hostname/gitosis-admin.git 后应该就能看到gitosis-admin.git这个目录了
+5) 新建项目、添加用户等操作参见[2]，这里不再赘述
+ gitweb  事实上ArchLinux中安装的git包自带了gitweb，可以用which gitweb搜到，一般默认在/usr/share/gitweb。下面假设我的http根目录为/home/httpd
+1) 将/usr/share/gitweb下的文件复制到/home/httpd/cgi-bin（其实似乎只要gitweb.cgi就够了）  sudo cp -R /usr/share/gitweb /home/httpd/cgi-bin/ 
+2) /usr/share/gitweb下的.",
+    "inLanguage" : "en-US",
+    "author" : "zellux",
+    "creator" : "zellux",
+    "publisher": "zellux",
+    "accountablePerson" : "",
+    "copyrightHolder" : "",
+    "copyrightYear" : "2009",
+    "datePublished": "2009-05-26 00:00:00 &#43;0000 UTC",
+    "dateModified" : "2009-05-26 00:00:00 &#43;0000 UTC",
+    "url" : "https://blog.yxwang.me/2009/05/install-git-gitoss-gitweb-in-archlinux/",
+    "wordCount" : "159",
+    "keywords" : [ "ArchLinux","Git","Server","Tooling","git","Blog" ]
+}
+</script>
+
+  </head>
+
+  <body>
+    <nav class="nav">
+  <div class="nav-container">
+    <span class="site-title">
+      <a href="https://blog.yxwang.me/">Aiur · Zellux 的博客</a>
+    </span>
+    
+    <div class="nav-list">
+      
+      <span class="nav-item"><a href="/about">About</a></span>
+      
+      <span class="nav-item"><a href="/archive">Archive</a></span>
+      
+      <span class="nav-item"><a href="/notes">Notes</a></span>
+      
+    </div>
+  </div>
+</nav>
+
+    <div class="container">
+
+
+<div class="content">
+  <div class="post">
+    <h1 class="post-title"><a href="https://blog.yxwang.me/2009/05/install-git-gitoss-gitweb-in-archlinux/">ArchLinux 下安装 git, gitosis, gitweb 服务</a></h1>
+    <span class="post-meta">
+  <time datetime='Tue, May 26, 2009' data-updated="true" itemprop="datePublished">Tue, May 26, 2009</time>
+  
+  <span class="post-categories">
+    •
+	<a href="https://blog.yxwang.me/categories/tooling">Tooling</a>
+  </span>
+  
+</span>
+
+    <div class="post-content">
+      <p>参考文章：</p>
+
+<p>[1] <a href="http://hokietux.net/blog/?p=58" target="_blank"><a href="http://hokietux.net/blog/?p=58">http://hokietux.net/blog/?p=58</a></a>
+[2] <a href="http://scie.nti.st/2007/11/14/hosting-git-repositories-the-easy-and-secure-way" target="_blank"><a href="http://scie.nti.st/2007/11/14/hosting-git-repositories-the-easy-and-secure-way">http://scie.nti.st/2007/11/14/hosting-git-repositories-the-easy-and-secure-way</a></a>
+[3] <a href="http://www.nkuttler.de/2009/04/06/git-clone-ssh-could-not-resolve-hostname/" target="_blank"><a href="http://www.nkuttler.de/2009/04/06/git-clone-ssh-could-not-resolve-hostname/">http://www.nkuttler.de/2009/04/06/git-clone-ssh-could-not-resolve-hostname/</a></a></p>
+
+<ol>
+<li>git</li>
+</ol>
+
+<p>很简单，直接用pacman安装即可
+sudo pacman -S git</p>
+
+<ol>
+<li>gitosis</li>
+</ol>
+
+<p>gitosis是一个方便管理git仓库的工具，安装方法：</p>
+
+<p>1) 从yaourt或者aur下载安装gitosis-git包 <a href="http://aur.archlinux.org/packages.php?ID=23419">http://aur.archlinux.org/packages.php?ID=23419</a></p>
+
+<p>2) 新建git用户
+<u>sudo useradd &ndash;system &ndash;shell /bin/sh &ndash;comment &lsquo;git version control&rsquo;&ndash;user-group &ndash;home-dir /home/git/ git</u></p>
+
+<p>3) 将开发用户的rsa公钥导入gitosis，（没有公钥的话请先运行<u>ssh-keygen -t rsa</u>生成）
+<u>sudo -H -u git gitosis-init &lt; ~/.ssh/id_rsa.pub</u></p>
+
+<p>4) 如果以上步骤没有问题，那么运行<u>
+git clone ssh://git@hostname/gitosis-admin.git</u>
+后应该就能看到gitosis-admin.git这个目录了</p>
+
+<p>5) 新建项目、添加用户等操作参见[2]，这里不再赘述</p>
+
+<ol>
+<li>gitweb</li>
+</ol>
+
+<p>事实上ArchLinux中安装的git包自带了gitweb，可以用which gitweb搜到，一般默认在/usr/share/gitweb。下面假设我的http根目录为/home/httpd</p>
+
+<p>1) 将/usr/share/gitweb下的文件复制到/home/httpd/cgi-bin（其实似乎只要gitweb.cgi就够了） <u>
+sudo cp -R /usr/share/gitweb /home/httpd/cgi-bin/
+</u></p>
+
+<p>2) /usr/share/gitweb下的.css和.png复制到/home/httpd/html/git/</p>
+
+<p>3) 修改或创建/etc/gitweb.conf，具体配置如下</p>
+
+<pre><code class="language-text"># git命令的地址
+$GIT = &quot;/usr/bin/git&quot;;
+
+# 项目仓库地址
+$projectroot = &quot;/home/git/repositories&quot;;
+
+# 网页显示相关的文件，我把它们都放在了/home/httpd/html/git/下
+$stylesheet = &quot;/git/gitweb.css&quot;;
+$logo = &quot;/git/git-logo.png&quot;;
+$favicon = &quot;/git/git-favicon.png&quot;;
+
+# 首页显示的站点名
+$site_name = &quot;ZelluX's Git Trees&quot;;
+
+# 项目信息中显示的地址，
+@git_base_url_list = (&quot;ssh://git\@hostname&quot;);
+
+# 网页中项目说明的显示长度
+$projects_list_description_width = 50;
+
+# 发布的项目的标记。例如/home/git/repositories/hello/git-daemon-export-ok存在，
+# 那么hello这个项目就会显示在项目列表上。
+# 但是似乎每次pull或者push操作都会导致git把这个它认为多余的文件删掉，不知道有没有其他的解决方案。
+# 把这行注释掉就允许所有的项目显示在网页上。
+$export_ok = &quot;git-daemon-export-ok&quot;;
+
+$feature{'pathinfo'}{'default'} = [1];
+
+$feature{'blame'}{'default'} = [1];
+$feature{'blame'}{'override'} = [1];
+
+$feature{'pickaxe'}{'default'} = [1];
+$feature{'pickaxe'}{'override'} = [1];
+
+$feature{'snapshot'}{'default'} = [1];
+$feature{'snapshot'}{'override'} = [1];
+
+$feature{'search'}{'default'} = [1];
+
+$feature{'grep'}{'default'} = [1];
+$feature{'grep'}{'override'} = [1];
+</code></pre>
+
+<p>4) 在apache的配置中增加以下内容 /etc/httpd/conf/httpd.conf，这里我没有用VirtualHost机制，只加了行URL重写规则，VirtualHost的配置方法参见[1]</p>
+
+<pre><code class="language-text">
+RewriteEngine on
+RewriteRule ^/gitweb/(.*) /cgi-bin/gitweb.cgi/$1 [L,PT]
+</code></pre>
+
+<p>5) 重启apache后应该就能访问 <a href="http://hostname/gitweb/">http://hostname/gitweb/</a> 了，如果提示Project not found，请确认apache能访问git的仓库目录，并且相应的项目目录下有git-daemon-export-ok这个文件。</p>
+
+    </div>
+        <div class="cc-license">
+      本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.zh">知识共享署名-非商业性使用 3.0 版本许可协议</a>进行许可，欢迎转载，演绎，但是必须保留本文的署名 <a href="https://blog.yxwang.me/2009/05/install-git-gitoss-gitweb-in-archlinux/">zellux</a>（包含链接），且不得用于商业目的。
+    </div>
+
+  </div>
+  <div class="pagination">
+    <a class="btn previous " href="https://blog.yxwang.me/2009/05/debug-xen-with-vmware-serial-port/"> Prev</a>  
+    <a class="btn next " href="https://blog.yxwang.me/2009/05/isca-09-multi-execution/"> Next</a> 
+  </div>
+</div>
+
+
+<div id="disqus_thread"></div>
+<script>
+  var disqus_config = function () {
+  this.page.url = "https://blog.yxwang.me/2009/05/install-git-gitoss-gitweb-in-archlinux/";
+  
+  };
+  (function() {
+  var d = document, s = d.createElement('script');
+  s.src = '//aiur-zellux.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+
+<div class="footer">
+  
+  <p>Powered by <a href="http://gohugo.io">Hugo</a> and <a href="https://github.com/zhe/hugo-theme-slim">Slim theme</a>.
+  
+      Follow me on <a href="https://twitter.com/zellux">Twitter</a>.
+      </p>
+  </p>
+  
+</div>
+
+                   
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+    Macros: {
+      argmax: "\\operatorname*{argmax}",
+      argmin: "\\operatorname*{argmin}"
+    }
+  },
+  jax: ["input/TeX","output/CommonHTML"]
+});
+</script>
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML">
+</script>
+
+</script>
+
+<script src="https://blog.yxwang.me/js/slim.min.aef36e671f72c9042139aae327dbe693b7ebaa67fd56f30dad4c985a91ba9294.js"></script>
+
+
+<link rel="stylesheet" href="https://blog.yxwang.me/css/solarized-light.min.5499f6bc45da0c78f070be4f720fd28b19af75306b569b77837d57c3cf819430.css" />
+<script src="/js/highlight.pack.js"></script>
+<script>
+  hljs.initHighlightingOnLoad();
+</script>
+
+</div>
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-25551121-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+<script type="text/javascript">
+    window.heap=window.heap||[],heap.load=function(e,t){window.heap.appid=e,window.heap.config=t=t||{};var r=t.forceSSL||"https:"===document.location.protocol,a=document.createElement("script");a.type="text/javascript",a.async=!0,a.src=(r?"https:":"http:")+"//cdn.heapanalytics.com/js/heap-"+e+".js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(a,n);for(var o=function(e){return function(){heap.push([e].concat(Array.prototype.slice.call(arguments,0)))}},p=["addEventProperties","addUserProperties","clearEventProperties","identify","removeEventProperty","setEventProperties","track","unsetEventProperty"],c=0;c<p.length;c++)heap[p[c]]=o(p[c])};
+      heap.load("3166778701");
+</script>
+
+
+</body>
+
+</html>
+

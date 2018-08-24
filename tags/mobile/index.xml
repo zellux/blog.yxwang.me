@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Mobile on Aiur · Zellux 的博客</title>
+    <link>https://blog.yxwang.me/tags/mobile/</link>
+    <description>Recent content in Mobile on Aiur · Zellux 的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sat, 21 Jul 2012 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.yxwang.me/tags/mobile/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Android 中点击事件的判断</title>
+      <link>https://blog.yxwang.me/2012/07/android-tap-timetout/</link>
+      <pubDate>Sat, 21 Jul 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2012/07/android-tap-timetout/</guid>
+      <description>&lt;p&gt;最近实验室做的一个东西会向 Android 应用快速注入一系列触屏事件，模拟用户的点击。但是我们发现当按下和弹起的 MotionEvent 之间时间间隔过小（例如小于 100ms）时，会导致该事件被忽略。看了代码后发现 Android 中按下和弹起之间时间间隔要在 115ms 以上才会被认为是一个点击事件。这里结合 Android 的源码分析一下点击事件的产生过程。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>存储是移动应用性能的瓶颈？</title>
+      <link>https://blog.yxwang.me/2012/06/revisiting-storage-for-smartphones/</link>
+      <pubDate>Mon, 11 Jun 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2012/06/revisiting-storage-for-smartphones/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://www.usenix.org/comment/260&#34;&gt;Revisiting Storage for Smartphones&lt;/a&gt; 是今年 FAST 会议上的最佳论文，这篇论文提出了一个违背直觉的观点，很有意思。这里简单介绍一下这篇论文的内容，有兴趣的朋友可以直接访问前面的链接下载原文或是观看现场录像。&lt;/p&gt;
+
+&lt;a data-fancybox=&#34;gallery&#34;  data-caption=&#34;移动存储性能&#34; href=/images/2012-06/mobile-flash-throughtput.png &gt;&lt;img src=/images/2012-06/mobile-flash-throughtput.png  /&gt;&lt;/a&gt;
+
+
+&lt;p&gt;传统的观点认为，移动应用性能的主要瓶颈在网络和 CPU，而闪存的读写速率明显高于网络传输速度，不会成为性能的瓶颈。然而，根据上图作者给出的关于移动存储性能的图例（纵坐标单位为 Mbps，本文图片均来自演讲 slides 和原论文），我们可以看到，虽然移动存储顺序读写的性能明显高于 wifi 和 3G，但是随机写的性能却比它们差很多，因此移动存储成为应用性能瓶颈是完全有可能的。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

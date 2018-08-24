@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Git on Aiur · Zellux 的博客</title>
+    <link>https://blog.yxwang.me/tags/git/</link>
+    <description>Recent content in Git on Aiur · Zellux 的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Wed, 28 Mar 2012 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.yxwang.me/tags/git/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>用 Git 管理命令行配置</title>
+      <link>https://blog.yxwang.me/2012/03/managing-dotfiles-with-git/</link>
+      <pubDate>Wed, 28 Mar 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2012/03/managing-dotfiles-with-git/</guid>
+      <description>&lt;p&gt;以前部署新机器时都要把一堆配置文件 scp 过去，今天折腾了下用 Git 统一管理这些配置文件。&lt;/p&gt;
+
+&lt;p&gt;做起来很简单，创建一个 dotfiles 目录，把所有要同步的配置文件都放到这个目录下，并重命名去掉文件名开头的点，以免被 Git 忽略。写了一个脚本链接这些配置文件到 HOME 目录：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;#!/usr/bin/env ruby
+
+safe_mode = ARGV.include? &#39;--safe&#39;
+
+files = %w(zshrc tmux.conf gitconfig vimrc emacs gitignore_global LS_COLORS)
+files.each do |file|
+  unless safe_mode and File.exists?(&amp;quot;#{ENV[&#39;HOME&#39;]}/.#{file}&amp;quot;)
+    %x(ln -s -i -v $PWD/#{file} ~/.#{file})
+    puts &amp;quot;.#{file} linked&amp;quot; if safe_mode
+  end
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>利用 HTTPS 代理访问 GitHub</title>
+      <link>https://blog.yxwang.me/2010/05/git-through-https-proxy/</link>
+      <pubDate>Fri, 14 May 2010 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2010/05/git-through-https-proxy/</guid>
+      <description>网上找了不少设置方法，终于翻出来一个可行的，和大家分享下。
+1. 安装 corkscrew ArchLinux 和 Ubuntu 的源里就有，也可以从 http://www.agroman.net/corkscrew/ 下载源码编译一个。
+2. 修改 ~/.ssh/config Host gitproxy User git Hostname ssh.github.com Port 443 ProxyCommand corkscrew proxy.example.com 3128 %h %p IdentityFile /home/username/.ssh/id_rsa  修改其中的 proxy.example.com 和 3128 为代理 IP 和端口，如果代理需要帐号密码，就在 ProxyCommand 这一行的最后加上密码文件，内容为*用户名:密码*。
+参数 IdentitiFile 指定相应帐号的私钥文件地址。
+另外 @cyfdecyf 同学指出只要把这里的 Host 改成 github.com，就可以直接用 git@github.com:user/repository 访问 GitHub 了。
+3. 使用 git@gitproxy 访问 GitHub 例如要把 foo/bar.git 拖下来，执行 git clone git@gitproxy:foo/bar.git 即可。
+原文地址：http://www.wetware.co.nz/blog/2010/03/cant-access-github-behind-proxy-or-firewall/
+更新： 由于 GitHub 现在支持 HTTPS 协议了，所以更简单的方法是使用 GitHub 提供的 HTTPS 地址，然后用 git config --add http.</description>
+    </item>
+    
+    <item>
+      <title>优化 gitk 的字体显示</title>
+      <link>https://blog.yxwang.me/2010/02/gitk-font/</link>
+      <pubDate>Sun, 14 Feb 2010 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2010/02/gitk-font/</guid>
+      <description>gitk是用Tcl/Tk写的工具，默认使用Tk 8.4，不支持抗锯齿，因此字体显示很难看。好在Tk 8.5支持了部分抗锯齿字体，修改gitk使用Tk 8.5后显示效果会好一点。
+以Ubuntu为例，安装tk8.5包后，编辑/usr/bin/gitk文件，把开头调用wish的那行
+exec /usr/bin/wish &amp;quot;$0&amp;quot; -- &amp;quot;$@&amp;quot;  改成
+exec /usr/bin/wish8.5 &amp;quot;$0&amp;quot; -- &amp;quot;$@&amp;quot;  这样就能在gitk中开启抗锯齿了，虽然效果还不是很好。另外qgit也是一个不错的选择。
+参考链接：http://navarra.ca/?p=44</description>
+    </item>
+    
+    <item>
+      <title>优化 gitk 的字体显示</title>
+      <link>https://blog.yxwang.me/2010/02/gitk-font/</link>
+      <pubDate>Sun, 14 Feb 2010 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2010/02/gitk-font/</guid>
+      <description>gitk是用Tcl/Tk写的工具，默认使用Tk 8.4，不支持抗锯齿，因此字体显示很难看。好在Tk 8.5支持了部分抗锯齿字体，修改gitk使用Tk 8.5后显示效果会好一点。
+以Ubuntu为例，安装tk8.5包后，编辑/usr/bin/gitk文件，把开头调用wish的那行
+exec /usr/bin/wish &amp;quot;$0&amp;quot; -- &amp;quot;$@&amp;quot;  改成
+exec /usr/bin/wish8.5 &amp;quot;$0&amp;quot; -- &amp;quot;$@&amp;quot;  这样就能在gitk中开启抗锯齿了，虽然效果还不是很好。另外qgit也是一个不错的选择。
+参考链接：http://navarra.ca/?p=44</description>
+    </item>
+    
+    <item>
+      <title>Git 命令行自动补全</title>
+      <link>https://blog.yxwang.me/2010/01/git-completion/</link>
+      <pubDate>Mon, 25 Jan 2010 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2010/01/git-completion/</guid>
+      <description>在Pro Git上看到的技巧，git的源代码包里的contrib/completion目录下有个git-completion.bash，把这个文件保存到~/.git-completion.bash，然后在.bashrc中加入一行
+source ~/.git-completion.bash  这样就能在bash下用tab自动补全git命令、branch等内容了。另外Debian/Ubuntu里有个包就叫git-completion，这个包安装完成后会自动把这个补全脚本放到/etc/bash_completion.d/下，由bash-compleletion载入执行。</description>
+    </item>
+    
+    <item>
+      <title>Git 命令行自动补全</title>
+      <link>https://blog.yxwang.me/2010/01/git-completion/</link>
+      <pubDate>Mon, 25 Jan 2010 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2010/01/git-completion/</guid>
+      <description>在Pro Git上看到的技巧，git的源代码包里的contrib/completion目录下有个git-completion.bash，把这个文件保存到~/.git-completion.bash，然后在.bashrc中加入一行
+source ~/.git-completion.bash  这样就能在bash下用tab自动补全git命令、branch等内容了。另外Debian/Ubuntu里有个包就叫git-completion，这个包安装完成后会自动把这个补全脚本放到/etc/bash_completion.d/下，由bash-compleletion载入执行。</description>
+    </item>
+    
+    <item>
+      <title>在 Git 中修改之前提交的内容</title>
+      <link>https://blog.yxwang.me/2009/11/git-modify-specified-commit/</link>
+      <pubDate>Tue, 10 Nov 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2009/11/git-modify-specified-commit/</guid>
+      <description>其实这个问题我以前在 Stackoverflow 上回答过别人（链接），不过现在自己反而忘了，还是贴在这下次查起来方便点
+先用 git rebase bbc643cd^ --interactive 退回到要修改的commit的前一个点，这里 bbc643cd 就是要修改的 commit，执行后 git 会调用默认的编辑器显示该次 commit 到最新 commit 的所有记录，在这里我们把要修改的那一项的行首的 pick 改成 edit。
+接下来运行 git commit --amend，使用默认编辑器修改这次 commit。
+最后执行 git rebase --continue 就能提交修改后的 commit 并且返回到原来的 commit 了。</description>
+    </item>
+    
+    <item>
+      <title>在 Git 中修改之前提交的内容</title>
+      <link>https://blog.yxwang.me/2009/11/git-modify-specified-commit/</link>
+      <pubDate>Tue, 10 Nov 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2009/11/git-modify-specified-commit/</guid>
+      <description>其实这个问题我以前在 Stackoverflow 上回答过别人（链接），不过现在自己反而忘了，还是贴在这下次查起来方便点
+先用 git rebase bbc643cd^ --interactive 退回到要修改的commit的前一个点，这里 bbc643cd 就是要修改的 commit，执行后 git 会调用默认的编辑器显示该次 commit 到最新 commit 的所有记录，在这里我们把要修改的那一项的行首的 pick 改成 edit。
+接下来运行 git commit --amend，使用默认编辑器修改这次 commit。
+最后执行 git rebase --continue 就能提交修改后的 commit 并且返回到原来的 commit 了。</description>
+    </item>
+    
+    <item>
+      <title>ArchLinux 下安装 git, gitosis, gitweb 服务</title>
+      <link>https://blog.yxwang.me/2009/05/install-git-gitoss-gitweb-in-archlinux/</link>
+      <pubDate>Tue, 26 May 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2009/05/install-git-gitoss-gitweb-in-archlinux/</guid>
+      <description>参考文章：
+[1] http://hokietux.net/blog/?p=58 [2] http://scie.nti.st/2007/11/14/hosting-git-repositories-the-easy-and-secure-way [3] http://www.nkuttler.de/2009/04/06/git-clone-ssh-could-not-resolve-hostname/
+ git  很简单，直接用pacman安装即可 sudo pacman -S git
+ gitosis  gitosis是一个方便管理git仓库的工具，安装方法：
+1) 从yaourt或者aur下载安装gitosis-git包 http://aur.archlinux.org/packages.php?ID=23419
+2) 新建git用户 sudo useradd &amp;ndash;system &amp;ndash;shell /bin/sh &amp;ndash;comment &amp;lsquo;git version control&amp;rsquo;&amp;ndash;user-group &amp;ndash;home-dir /home/git/ git
+3) 将开发用户的rsa公钥导入gitosis，（没有公钥的话请先运行ssh-keygen -t rsa生成） sudo -H -u git gitosis-init &amp;lt; ~/.ssh/id_rsa.pub
+4) 如果以上步骤没有问题，那么运行 git clone ssh://git@hostname/gitosis-admin.git 后应该就能看到gitosis-admin.git这个目录了
+5) 新建项目、添加用户等操作参见[2]，这里不再赘述
+ gitweb  事实上ArchLinux中安装的git包自带了gitweb，可以用which gitweb搜到，一般默认在/usr/share/gitweb。下面假设我的http根目录为/home/httpd
+1) 将/usr/share/gitweb下的文件复制到/home/httpd/cgi-bin（其实似乎只要gitweb.cgi就够了）  sudo cp -R /usr/share/gitweb /home/httpd/cgi-bin/ 
+2) /usr/share/gitweb下的.</description>
+    </item>
+    
+    <item>
+      <title>ArchLinux 下安装 git, gitosis, gitweb 服务</title>
+      <link>https://blog.yxwang.me/2009/05/install-git-gitoss-gitweb-in-archlinux/</link>
+      <pubDate>Tue, 26 May 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2009/05/install-git-gitoss-gitweb-in-archlinux/</guid>
+      <description>参考文章：
+[1] http://hokietux.net/blog/?p=58 [2] http://scie.nti.st/2007/11/14/hosting-git-repositories-the-easy-and-secure-way [3] http://www.nkuttler.de/2009/04/06/git-clone-ssh-could-not-resolve-hostname/
+ git  很简单，直接用pacman安装即可 sudo pacman -S git
+ gitosis  gitosis是一个方便管理git仓库的工具，安装方法：
+1) 从yaourt或者aur下载安装gitosis-git包 http://aur.archlinux.org/packages.php?ID=23419
+2) 新建git用户 sudo useradd &amp;ndash;system &amp;ndash;shell /bin/sh &amp;ndash;comment &amp;lsquo;git version control&amp;rsquo;&amp;ndash;user-group &amp;ndash;home-dir /home/git/ git
+3) 将开发用户的rsa公钥导入gitosis，（没有公钥的话请先运行ssh-keygen -t rsa生成） sudo -H -u git gitosis-init &amp;lt; ~/.ssh/id_rsa.pub
+4) 如果以上步骤没有问题，那么运行 git clone ssh://git@hostname/gitosis-admin.git 后应该就能看到gitosis-admin.git这个目录了
+5) 新建项目、添加用户等操作参见[2]，这里不再赘述
+ gitweb  事实上ArchLinux中安装的git包自带了gitweb，可以用which gitweb搜到，一般默认在/usr/share/gitweb。下面假设我的http根目录为/home/httpd
+1) 将/usr/share/gitweb下的文件复制到/home/httpd/cgi-bin（其实似乎只要gitweb.cgi就够了）  sudo cp -R /usr/share/gitweb /home/httpd/cgi-bin/ 
+2) /usr/share/gitweb下的.</description>
+    </item>
+    
+  </channel>
+</rss>

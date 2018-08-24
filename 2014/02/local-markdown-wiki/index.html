@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="最近一直用 iA Writer 做笔记，用不同的文件保存不同的主题，由于 iA Writer 并没有很好的管理和浏览功能，于是就想做个 Web 工具方便浏览和管理。
+
+markdown-wiki 是我用 Sinatra 做的一个简单的预览工具，它可以把某个目录下的 Markdown 文件以 Wiki 的形式呈现出来。界面上借用了 Ghost 的 CSS，可以在 http://markdown-wiki-demo.herokuapp.com/ 预览（因为是非本地的内容，上方的 Edit 按钮没有作用）。
+
+Markdown 语法方面，由于用了 redcarpet 所以有不少语法扩展，包括代码块、删除线、下划线、上标等，另外包含了 Wiki 内部链接支持。
+
+">
+    <meta name="author" content="zellux">
+
+    <title> 本地 Markdown 预览工具 &middot; Aiur · Zellux 的博客 </title>
+
+    <script src="/js/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
+    <script src="/js/jquery-3.0.47.fancybox.min.js"></script>
+
+    
+    
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.52ea10a8f3a0b8f145adadb8d3761e17a42a7634869f775ef5830ed4de77d3fa.css">
+    
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+    
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    
+    <link href="" rel="alternate" type="application/rss+xml" title="Aiur · Zellux 的博客" />
+    
+<script type="application/ld+json">
+{
+    "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https://blog.yxwang.me/"
+    },
+    "articleSection" : "post",
+    "name" : "本地 Markdown 预览工具",
+    "headline" : "本地 Markdown 预览工具",
+    "description" : "<p>最近一直用 <a href="http://www.iawriter.com/mac/">iA Writer</a> 做笔记，用不同的文件保存不同的主题，由于 iA Writer 并没有很好的管理和浏览功能，于是就想做个 Web 工具方便浏览和管理。</p>
+
+<p><a href="https://github.com/zellux/markdown-wiki">markdown-wiki</a> 是我用 Sinatra 做的一个简单的预览工具，它可以把某个目录下的 Markdown 文件以 Wiki 的形式呈现出来。界面上借用了 <a href="http://ghost.io/">Ghost</a> 的 CSS，可以在 <a href="http://markdown-wiki-demo.herokuapp.com/">http://markdown-wiki-demo.herokuapp.com/</a> 预览（因为是非本地的内容，上方的 Edit 按钮没有作用）。</p>
+
+<p>Markdown 语法方面，由于用了 <a href="https://github.com/vmg/redcarpet">redcarpet</a> 所以有不少语法扩展，包括代码块、删除线、下划线、上标等，另外包含了 Wiki 内部链接支持。</p>
+
+<p></p>",
+    "inLanguage" : "en-US",
+    "author" : "zellux",
+    "creator" : "zellux",
+    "publisher": "zellux",
+    "accountablePerson" : "",
+    "copyrightHolder" : "",
+    "copyrightYear" : "2014",
+    "datePublished": "2014-02-13 00:00:00 &#43;0000 UTC",
+    "dateModified" : "2014-02-13 00:00:00 &#43;0000 UTC",
+    "url" : "https://blog.yxwang.me/2014/02/local-markdown-wiki/",
+    "wordCount" : "103",
+    "keywords" : [ "Tooling","Blog" ]
+}
+</script>
+
+  </head>
+
+  <body>
+    <nav class="nav">
+  <div class="nav-container">
+    <span class="site-title">
+      <a href="https://blog.yxwang.me/">Aiur · Zellux 的博客</a>
+    </span>
+    
+    <div class="nav-list">
+      
+      <span class="nav-item"><a href="/about">About</a></span>
+      
+      <span class="nav-item"><a href="/archive">Archive</a></span>
+      
+      <span class="nav-item"><a href="/notes">Notes</a></span>
+      
+    </div>
+  </div>
+</nav>
+
+    <div class="container">
+
+
+<div class="content">
+  <div class="post">
+    <h1 class="post-title"><a href="https://blog.yxwang.me/2014/02/local-markdown-wiki/">本地 Markdown 预览工具</a></h1>
+    <span class="post-meta">
+  <time datetime='Thu, Feb 13, 2014' data-updated="true" itemprop="datePublished">Thu, Feb 13, 2014</time>
+  
+  <span class="post-categories">
+    •
+	<a href="https://blog.yxwang.me/categories/tooling">Tooling</a>
+  </span>
+  
+</span>
+
+    <div class="post-content">
+      <p>最近一直用 <a href="http://www.iawriter.com/mac/">iA Writer</a> 做笔记，用不同的文件保存不同的主题，由于 iA Writer 并没有很好的管理和浏览功能，于是就想做个 Web 工具方便浏览和管理。</p>
+
+<p><a href="https://github.com/zellux/markdown-wiki">markdown-wiki</a> 是我用 Sinatra 做的一个简单的预览工具，它可以把某个目录下的 Markdown 文件以 Wiki 的形式呈现出来。界面上借用了 <a href="http://ghost.io/">Ghost</a> 的 CSS，可以在 <a href="http://markdown-wiki-demo.herokuapp.com/">http://markdown-wiki-demo.herokuapp.com/</a> 预览（因为是非本地的内容，上方的 Edit 按钮没有作用）。</p>
+
+<p>Markdown 语法方面，由于用了 <a href="https://github.com/vmg/redcarpet">redcarpet</a> 所以有不少语法扩展，包括代码块、删除线、下划线、上标等，另外包含了 Wiki 内部链接支持。</p>
+
+<p></p>
+
+<h2 id="安装说明">安装说明</h2>
+
+<ol>
+<li>下载源代码</li>
+<li>安装 Ruby 和 <a href="http://bundler.io/">bundle</a></li>
+<li>在项目目录下运行 <code>bundle install</code></li>
+<li>将 app.rb 中的 WIKI_ROOT 改成 Markdown 文档所在的目录</li>
+<li>运行 mac/webeditor opener.app</li>
+</ol>
+
+<p>安装后在项目目录下运行 <code>rackup</code>（如果要限制只能本地访问可以运行 <code>rackup -o localhost</code>），并访问 <a href="http://localhost:9292">http://localhost:9292</a> 即可。</p>
+
+<h2 id="本地编辑器-目前只支持-mac-系统">本地编辑器（目前只支持 Mac 系统）</h2>
+
+<p>在网页上打开本地编辑器的功能是通过 URL Scheme 实现的，mac/webeditor opener.app 会将 wikieditor:// 注册给一个 AppleScript，后者负责运行 iA Writer 并打开相应的文件。mac/ 下已经包含了预先打包好的 app 文件，如果你需要修改 AppleScript，可以打开 mac/webeditor opener.scpt，编辑完成后点击 File -&gt; Export，在 File Format 中选择 Application，并将 mac/Info.plist 放到新生成的应用包中。</p>
+
+<p>如果在打开 iA Writer 时提示权限问题，请先在 iA Writer 中手动打开一次需要编辑的文件，之后就能顺利编辑这个目录下的所有文件了。</p>
+
+<h2 id="其他功能">其他功能</h2>
+
+<p>目前功能比较简单，有几个接下来考虑加入的功能：</p>
+
+<ul>
+<li>文本搜索</li>
+<li>目录支持</li>
+<li>其他编辑器的支持</li>
+</ul>
+
+<p>源代码在 <a href="https://github.com/zellux/markdown-wiki">GitHub</a> 上，欢迎提供建议和 Pull Request。</p>
+    </div>
+        <div class="cc-license">
+      本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.zh">知识共享署名-非商业性使用 3.0 版本许可协议</a>进行许可，欢迎转载，演绎，但是必须保留本文的署名 <a href="https://blog.yxwang.me/2014/02/local-markdown-wiki/">zellux</a>（包含链接），且不得用于商业目的。
+    </div>
+
+  </div>
+  <div class="pagination">
+    <a class="btn previous " href="https://blog.yxwang.me/2017/03/remodel-smart-home/"> Prev</a>  
+    <a class="btn next " href="https://blog.yxwang.me/2013/08/adjusting-mac-volume-with-pc-keyboard/"> Next</a> 
+  </div>
+</div>
+
+
+<div id="disqus_thread"></div>
+<script>
+  var disqus_config = function () {
+  this.page.url = "https://blog.yxwang.me/2014/02/local-markdown-wiki/";
+  
+  };
+  (function() {
+  var d = document, s = d.createElement('script');
+  s.src = '//aiur-zellux.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+
+<div class="footer">
+  
+  <p>Powered by <a href="http://gohugo.io">Hugo</a> and <a href="https://github.com/zhe/hugo-theme-slim">Slim theme</a>.
+  
+      Follow me on <a href="https://twitter.com/zellux">Twitter</a>.
+      </p>
+  </p>
+  
+</div>
+
+                   
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+    Macros: {
+      argmax: "\\operatorname*{argmax}",
+      argmin: "\\operatorname*{argmin}"
+    }
+  },
+  jax: ["input/TeX","output/CommonHTML"]
+});
+</script>
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML">
+</script>
+
+</script>
+
+<script src="https://blog.yxwang.me/js/slim.min.aef36e671f72c9042139aae327dbe693b7ebaa67fd56f30dad4c985a91ba9294.js"></script>
+
+
+<link rel="stylesheet" href="https://blog.yxwang.me/css/solarized-light.min.5499f6bc45da0c78f070be4f720fd28b19af75306b569b77837d57c3cf819430.css" />
+<script src="/js/highlight.pack.js"></script>
+<script>
+  hljs.initHighlightingOnLoad();
+</script>
+
+</div>
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-25551121-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+<script type="text/javascript">
+    window.heap=window.heap||[],heap.load=function(e,t){window.heap.appid=e,window.heap.config=t=t||{};var r=t.forceSSL||"https:"===document.location.protocol,a=document.createElement("script");a.type="text/javascript",a.async=!0,a.src=(r?"https:":"http:")+"//cdn.heapanalytics.com/js/heap-"+e+".js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(a,n);for(var o=function(e){return function(){heap.push([e].concat(Array.prototype.slice.call(arguments,0)))}},p=["addEventProperties","addUserProperties","clearEventProperties","identify","removeEventProperty","setEventProperties","track","unsetEventProperty"],c=0;c<p.length;c++)heap[p[c]]=o(p[c])};
+      heap.load("3166778701");
+</script>
+
+
+</body>
+
+</html>
+

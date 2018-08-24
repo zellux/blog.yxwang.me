@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="zellux">
+
+    <title> Posts &middot; Aiur · Zellux 的博客 </title>
+
+    <script src="/js/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
+    <script src="/js/jquery-3.0.47.fancybox.min.js"></script>
+
+    
+    
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.52ea10a8f3a0b8f145adadb8d3761e17a42a7634869f775ef5830ed4de77d3fa.css">
+    
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+    
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    
+    <link href="https://blog.yxwang.me/post/index.xml" rel="alternate" type="application/rss+xml" title="Aiur · Zellux 的博客" />
+    
+<script type="application/ld+json">
+{
+    "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https://blog.yxwang.me/"
+    },
+    "articleSection" : "post",
+    "name" : "Posts",
+    "headline" : "Posts",
+    "description" : "",
+    "inLanguage" : "en-US",
+    "author" : "zellux",
+    "creator" : "zellux",
+    "publisher": "zellux",
+    "accountablePerson" : "",
+    "copyrightHolder" : "",
+    "copyrightYear" : "2009",
+    "datePublished": "2009-05-04 00:00:00 &#43;0000 UTC",
+    "dateModified" : "2009-05-04 00:00:00 &#43;0000 UTC",
+    "url" : "https://blog.yxwang.me/post/",
+    "wordCount" : "0",
+    "keywords" : [ "Blog" ]
+}
+</script>
+
+  </head>
+
+  <body>
+    <nav class="nav">
+  <div class="nav-container">
+    <span class="site-title">
+      <a href="https://blog.yxwang.me/">Aiur · Zellux 的博客</a>
+    </span>
+    
+    <div class="nav-list">
+      
+      <span class="nav-item"><a href="/about">About</a></span>
+      
+      <span class="nav-item"><a href="/archive">Archive</a></span>
+      
+      <span class="nav-item"><a href="/notes">Notes</a></span>
+      
+    </div>
+  </div>
+</nav>
+
+    <div class="container">
+
+
+<div class="content">
+  <div class="posts">
+     
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2009/05/caps-lock-to-ctrl/">给你的小指减负：将 Caps Lock 键映射成 Ctrl</a></h2>
+      <span class="post-date">May 4, 2009</span>
+      
+      <span class="post-tags">
+	
+	#<a href="https://blog.yxwang.me/tags/emacs">Emacs</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/tooling">Tooling</a>&nbsp;
+	
+      </span>
+      
+      
+      
+      <div class="summary">
+	长时间使用Emacs经常会觉得小指疼痛，一个月前我把自己用的三台电脑（两台winxp，一台archlinux）的Caps Lock键的功能都改成了和左Ctrl一样，这样小指按起来就舒服多了，另外由于平时不需要用到Caps Lock键所以也不需要找个组合键来代替它了。
+Windows下有个很方便的改键工具 remapkey，xp安装盘自带。
+Mac OS X系统中改键也很方便，10.4以上版本的OSX中可以直接在Keyboard Preference里找到修改键位映射的选项。
+Linux下的改键我知道两种方法，一种是修改xorg.conf文件，把里面的键盘设备设置改成
+Section &quot;InputDevice&quot; Identifier &quot;Generic Keyboard&quot; Driver &quot;kbd&quot; Option &quot;CoreKeyboard&quot; Option &quot;XkbRules&quot; &quot;xorg&quot; Option &quot;XkbModel&quot; &quot;pc104&quot; Option &quot;XkbLayout&quot; &quot;us&quot; Option &quot;XkbOptions&quot; &quot;ctrl:swapcaps&quot; EndSection  另一种是使用xmodmap这个工具，具体可以参见这篇文章 Changing your caps lock into Ctrl in X，这里简单介绍下
+修改前记得先备份当前的键位映射，xmodmap -pke &gt; xmodmap.backup
+接下来运行
+xmodmap -e 'keycode 66 = Control_L' xmodmap -e 'clear Lock' xmodmap -e 'add Control = Control_L'  这样就修改了Caps Lock的键位映射而不需要重启x，如果要在每次启动时自动修改Caps Lock键的映射，可以新建/修改一个.Xmodmap或者.xmodmap的文件，在里面加入
+keycode 66 = Control_L clear Lock add Control = Control_L    
+	<a class="read-more" href="/2009/05/caps-lock-to-ctrl/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2009/04/using-mouse-in-emacs-within-terminal/">终端下如何在 Emacs 中使用鼠标</a></h2>
+      <span class="post-date">Apr 29, 2009</span>
+      
+      <span class="post-tags">
+	
+	#<a href="https://blog.yxwang.me/tags/emacs">Emacs</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/tooling">Tooling</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/terminal">terminal</a>&nbsp;
+	
+      </span>
+      
+      
+      
+      <div class="summary">
+	http://linux.about.com/od/emacs_doc/a/emacsdoc567.htm
+M-x xterm-mouse-mode 开启鼠标支持，操作的时候按住shift能恢复到之前的xterm鼠标模式
+M-x mouse-wheel-mode 开启滚轮支持
+一些相关的参数： mouse-drag-copy-region 选中后自动复制 mouse-wheel-scroll-amount 每次滚动的行数 mouse-wheel-follow-mouse 滚动位置 mouse-wheel-progressive-speed 滚动速度
+	<a class="read-more" href="/2009/04/using-mouse-in-emacs-within-terminal/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2009/04/ppopp-08-fastforward/">PPoPP 08 - FastForward</a></h2>
+      <span class="post-date">Apr 20, 2009</span>
+      
+      <span class="post-tags">
+	
+	#<a href="https://blog.yxwang.me/tags/computer-system">Computer System</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/concurrency">Concurrency</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/data-structure">Data Structure</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/ppopp">PPoPP</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/paper">Paper</a>&nbsp;
+	
+      </span>
+      
+      
+      
+      <div class="summary">
+	FastForward for Efficient Pipeline Parallelism http://systems.cs.colorado.edu/~moseleyt/publications/giacomoni-2008-ppopp-ff.pdf
+这篇paper介绍了一种针对多核访问优化的队列， 主要的特点： 1. Lock-free 2. Single-producer/single-consumer 3. Cache-optimized
+经典的Lamport的lock-free的队列实现可以用下面的伪代码来表述（同样只适用于单一生产者/单一消费者的情形）：
+enqueue_nonblock(data) { if (NEXT(head) == tail) { return EWOULDBLOCK; } buffer[head] = data; head = NEXT(head); return 0; } dequeue_nonblock(data) { (head == tail) { return EWOULDBLOCK; } data = buffer[tail]; tail = NEXT(tail); return 0; }  这种实现尽管做到了lock-free，但是存在几个问题，首先是它只适用于sequential consistency内存模型，在relaxed consistency的内存模型里可能会出现类似于Double-Checked Lock(http://techblog.zellux.czm.cn/?p=30)的问题，当然这个问题可以通过插fence指令来解决；第二个问题是这篇paper着重解决的，就是enqueue和dequeue这两个操作都用到了tail和head这两个全局变量，导致多核在读取/修改这两个变量时的为了保证cache coherency会频繁的进行cache的更新，从而导致cache line threading，降低了效率。
+接下来看FastForward的实现：
+enqueue_nonblock(data) { if (NULL != buffer[head]) { return EWOULDBLOCK; } buffer[head] = data; head = NEXT(head); return 0; } dequeue_nonblock(data) { data = buffer[tail]; if (NULL == data) { return EWOULDBLOCK; } buffer[tail] = NULL; tail = NEXT(tail); return 0; }  这个版本的队列实现粗看和Lamport的那个区别很小，而实际上这里解决了一个重要的问题：解除了head和tail的共享问题。dequeue操作只需要关心tail，enqueue操作只关心head，这样两个变量就变成CPU本地的资源了，不需要做任何同步。当然这个实现同样局限于sequential consistency，不过加fence保证顺序的overhead不大。最后测试中这个版本的单次操作比Lamport的快3.
+	<a class="read-more" href="/2009/04/ppopp-08-fastforward/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2009/04/tuple-pronunciation/">关于 tuple 的读音</a></h2>
+      <span class="post-date">Apr 10, 2009</span>
+      
+      <span class="post-tags">
+	
+	#<a href="https://blog.yxwang.me/tags/joke">Joke</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/programming">Programming</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/programming-languages">Programming Languages</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/python">Python</a>&nbsp;
+	
+      </span>
+      
+      
+      
+      <div class="summary">
+	水木上有个帖子讨论tuple这个词该怎么读，于是有人翻出来这个三年前的新闻组邮件
+http://coding.derkeiler.com/Archive/Python/comp.lang.python/2006-02/msg01915.html I used to pronounce it toople. But the people that taught me Python found it both comical and confusing. At first they thought I meant a 2 element tuple. So they wondered if a 3 element tuple was a threeple, etc. After much harrassing, I changed my wayward ways and pronounced it tuhple to fit in with the cool Python guys. ;-)
+Then we went to hear Guido speak about Python 2.
+	<a class="read-more" href="/2009/04/tuple-pronunciation/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2009/04/cgo-09-multi-race/">CGO 09 一篇关于 DCL 检测的论文</a></h2>
+      <span class="post-date">Apr 9, 2009</span>
+      
+      <span class="post-tags">
+	
+	#<a href="https://blog.yxwang.me/tags/cgo">CGO</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/computer-system">Computer System</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/concurrency">Concurrency</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/dcl">DCL</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/paper">Paper</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/research">Research</a>&nbsp;
+	
+      </span>
+      
+      
+      
+      <div class="summary">
+	Double-Checked Lock是一个常见的由于程序员把内存模型默认为sequential momery consistency导致的问题，具体见我去年写的一篇博文http://techblog.iamzellux.com/2008/07/singleton-pattern-and-double-checked-lock/
+虽然Java 5解决了这个问题，但是C++等语言中这个问题依然存在，依然有很多因为程序员假设sequential consistency而编译器做了错误的指令调度后导致的bug，见http://www.newsmth.net/bbscon.php?bid=335&amp;id=250203
+CGO 09的这篇paper Detecting and Eliminating Potential Violations of Sequential Consistency for Concurrent C/C++ Programs针对这个问题进行了深入研究，通过加fence指令的方法解决了因编译器的指令调度造成的违背程序员原义的问题，可以在http://ppi.fudan.edu.cn/yuelu_duan下载到。没有认真读过，俺在这里就不误人子弟了 O.O
+	<a class="read-more" href="/2009/04/cgo-09-multi-race/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2009/04/disco-running-commodity-operating-systems-on-scalable-multiprocessors/">SOSP 97 - Disco</a></h2>
+      <span class="post-date">Apr 8, 2009</span>
+      
+      <span class="post-tags">
+	
+	#<a href="https://blog.yxwang.me/tags/computer-system">Computer System</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/paper">Paper</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/research">Research</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/sosp">SOSP</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/vmware">VMware</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/virtualization">Virtualization</a>&nbsp;
+	
+      </span>
+      
+      
+      
+      <div class="summary">
+	趁还在编译内核的时候把以前写过的东西都转过来，今年寒假读的 (SOSP &lsquo;97)
+Disco: running commodity operating systems on scalable multiprocessors 很早的一篇paper，发表的第二年Rosenblum就创办了VMWare。这篇paper介绍了一个跑在 FLASH机器上的虚拟机Disco，FLASH的架构是实验性质的cache coherent non-uniform memory architechure(ccNUMA)。
+传统的VMM在实现上主要有三个问题
+ overhead，例如特权指令需要由VMM模拟 资源管理，缺乏对资源配置的细粒度的了解，导致资源分布不均（如调度一个没有价值的计算任务） 通讯和共享，不同虚拟机是不是应该简单的看成是享有相同硬件资源的完全独立的操作系统？  实现细节 1. 虚拟CPU Disco虚拟CPU时是把指令放到物理CPU上直接执行的。当调度到某个虚拟CPU时，Disco就把物理机的寄存器设置为虚拟机的寄存器并跳转到相应的PC。
+直接执行的好处在于大多数操作能获得和在真机上跑一样的效率，而难点在于处理不能直接放到真机上运行的指令，如修改tlb，访问物理内存等。
+Disco为每个虚拟CPU记录了一个类似于传统操作系统中process table entry的数据结构。为了模拟特权指令，Disco还在这个数据结构中维持了虚拟CPU的特权寄存器和tlb的内容。
+在MIPS处理器上，Disco运行在kernel mode掌握着对硬件的完全控制；控制器交给虚拟机的操作系统时，Disco把CPU置为supervisor mode；当进入user mode时取消。Supervisor模式允许操作系统访问受保护的内存区域(supervisor segment)，但仍不能执行特权指令，也不能访问物理内存。诸如page fault的trap发生时，vmm会捕获到这个异常，修改相应的特权寄存器并跳转到虚拟机的trap vector。
+2.虚拟内存 Disco增加了一层物理地址到机器地址的转换。虚拟机使用从0开始的物理地址，大小和为虚拟机的内存相等，Disco把这些物理地址映射到了 FLASH的40位机器地址上。这种映射的实现借助于MIPS处理器的software-reloaded TLB，当操作系统尝试在TLB中插入一个virtual-to-physical的映射时，Disco会把这里的physical address改成对应的machine address，这样之后通过这条TLB记录的地址访问就不需要再经过VMM的处理了，没有额外的overhead。
+为了方便计算TLB地址，Disco为每个虚拟机记录了一个pmap数据结构，每个pmap结构对应着虚拟机的一个物理页。pmap包含了一个指向 机器内存的引用，以及指向虚拟地址的映射（虚拟地址可能有多个，原文中用了复数形式），这主要用于页面被VMM回收时TLB的重置。另外MIPS处理器为 每个TLB记录标记了一个地址空间标识符（ASID, address space identifier），用来防止context switch时不必要的TLB刷新。Disco为了简单化处理，就在物理CPU被调度为另一个虚拟CPU时刷新TLB，这样ASID就能直接使用虚拟机提 供的了。
+这样的处理带来了性能问题，由于TLB在虚拟CPU切换时会被刷新，带来了额外的TLB miss，而TLB miss由于需要被模拟，它的代价很大。为了减少这种性能影响，Disco维持了一个virtual-to-machine的二级软TLB，TLB miss发生的时候首先查看软TLB有没有相关的记录，如果找不到再交给虚拟机上的操作系统去处理。这种处理的影响就是虚拟机所看到的TLB会比实际 CPU的TLB大很多。
+3. NUMA 内存管理 不怎么熟悉NUMA，这部分先粗读了，大致思想是通过动态的页面转移和复制维持locality，从而避免remote cache miss。
+4. 虚拟IO设备 增加特殊的设备驱动是最清晰的实现方法，每个Disco设备都定义了一个monitor call，供设备驱动传参调用。对于支持DMA操作的设备，Disco也需要截获这些DMA请求并转换为相应的machine address。对于仅有一个虚拟机访问的设备，Disco只要保证访问的排外性并翻译DMA请求即可，而不需要虚拟IO资源。截获所有DMA操作的一个 好处是Disco可以在虚拟机间共享磁盘和内存资源。
+	<a class="read-more" href="/2009/04/disco-running-commodity-operating-systems-on-scalable-multiprocessors/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2009/04/sosp-99-cellular-disco/">SOSP 99 - Cellular Disco</a></h2>
+      <span class="post-date">Apr 8, 2009</span>
+      
+      <span class="post-tags">
+	
+	#<a href="https://blog.yxwang.me/tags/computer-system">Computer System</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/paper">Paper</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/sosp">SOSP</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/vmware">VMware</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/virtualization">Virtualization</a>&nbsp;
+	
+      </span>
+      
+      
+      
+      <div class="summary">
+	同样是今年寒假读的
+ 两年前的paper的升级版，这次是利用Disco在一个多核电脑上跑多个操作系统并虚拟成一个cluster。主要解决了两个问题，一是容错性，当硬件错误发生时如何把影响缩小到一个单元里；二是资源的管理，如何高效地在虚拟机间动态的分配物理CPU和内存。
+容错和动态资源管理在某种程度上相互矛盾的。因此在分配资源的时候，要尽可能的减少一个虚拟机使用的cell数。这里的cell是指相对独立的容错 单元，后面还提到一个node的概念，Origin 2000上每个node含两个CPU。CD还提供了两种快速的进程间通讯的primitive，RPC和message。
+关于容错，有这么个问题，Disco在操作系统和硬件之间多弄了这么一层虚拟层，某个虚拟的操作系统出问题时可以不影响到其他操作系统，可是操作系 统不也是保证了进程间的互相独立，当一个进程异常时不影响另一个进程吗？多设立一层Disco对容错有什么帮助吗？这个问题的答案在于，VMM的代码量很 小，可以看作是一个可信的系统软件层(trusted system software layer)，因为当VMM的代码行数少于五万行时，它的复杂度就和其他可信的层（如cache coherence protocol)差不多了，这个复杂度比现代操作系统的复杂度差不多要低两个等级。
+传统操作系统通常使用一个全局的run queue来管理和分配进程在多个CPU上的运行，这种实现不适合CD的容错要求，也带来了更多的contention。所以CD为每个VCPU维护了一 个run queue，同时引入了VCPU migration的机制来平衡VCPU的负载，按颗粒度分三级，intra-node intra-cell inter-cell。内存管理方面，CD实现了memory borrowing机制，使得一个cell可以暂时的从其他cell里获得内存，如果这种借用受限于容错性，就只能使用原来的paging机制了。 CPU管理 CD有两个CPU平衡策略，一个在处理器空闲时发生，另一个定期平衡VCPU的负载。空闲调度时要同时考虑gang scheduling的限制以及因转移破坏的cache/node affinity。而定期的调度则是通过一棵全局的load tree的辅助来实现的。此外还需要一个scalable gang scheduler来保证效率，CD的调度器总是选择优先度最高的gang-runnable VCPU（等待时间最多），然后通过低开销的RPC通知那些拥有(和这个VCPU同属于一个虚拟机的VCPU)的处理器，这些处理器在收到消息后，立即停 止当前正在运行的VCPU，服从同一调度策略。通过这种方式实现的调度就不需要一个全局的管理器了。
+内存管理 每个cell都维护了自己的freelist，每次接收请求时都优先分配本地node上的资源。内存借用也很直接，需要借用内存的cell向有空闲内存的cell发个RPC即可，RPC的返回结果是一个machine page的list。
+测试结果 测试中CD是作为kernel process跑在IRIX 6.4上的，也就是说VMM的下面还有一层操作系统，主要是为了利用IRIX提供的设备驱动。CD在每个CPU上跑一个线程，完全占有整个CPU，IRIX只在需要设备驱动时才被激活。
+测试比较了两个测试环境，跑在真机上的IRIX 6.4（增加了多核支持），和跑在CD上的IRIX 6.2。最后的结果显示大部分情况下（单核、8核、32核）后者和前者的差距在10%以内，最差情况下也只有20%的overhead。接下来的容错机制 的overhead同样很小，不高于2%。
+	<a class="read-more" href="/2009/04/sosp-99-cellular-disco/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2009/04/asplos-09-dftl/">ASPLOS 09 - DFTL</a></h2>
+      <span class="post-date">Apr 7, 2009</span>
+      
+      <span class="post-tags">
+	
+	#<a href="https://blog.yxwang.me/tags/asplos">ASPLOS</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/computer-system">Computer System</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/flash-disk">Flash Disk</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/paper">Paper</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/research">Research</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/storage">Storage</a>&nbsp;
+	
+      </span>
+      
+      
+      
+      <div class="summary">
+	Paper标题是DFTL: A Flash Translation Layer Employing Demand-based Selective Caching of Page-level Address Mappings，PSU发表在ASPLOS 09上。这篇paper对我来说更像是篇flash存储的科普文。
+flash存储单元分block和page，每个block有32/64个page，一个page有512/2048K大小。flash的一个缺点在于改写数据时只能先把要改写的block清空，然后再写，由于block的颗粒度比较大，这就带来了比较严重的性能问题。所以现在的flash都在驱动层维护了一张对文件系统透明的logical-to-physical address的映射表(Flash Translation Layer)，这样改写时只要先写在预先清空的page上，再把映射表的对应项的物理地址改成新的page的地址，然后把原来要改的页置为invalid，等gc去清空即可。
+如果为每个page都在内存中维护一份映射关系，会占用比较大的内存空间。以往的ftl的实现试图在page-level和block-level的映射中找平衡，但效果都不甚理想，尤其在随机写比较频繁时会产生比较严重的gc负荷，从而影响写操作的反应速度（因为预先清空的页面不足时需要先做gc）。这篇paper提出的DFTL可以比较好的减少gc的负荷，同时近需要很小的内存空间，前提是程序访问flash的locality很好。
+感觉DFTL的大致思想仿照了二级页表和TLB：flash上的一些page保存了page-level的映射，分散在整个flash中，在内存里面有一个block-level的映射表，记录了每个page-level映射表在flash中的地址。内存中的映射表相当于二级页表中的page directory，指向了flash上的page-level映射表（page table），另外内存中还有一个全局的page-level的映射表用于记录最近访问到的page的logical-to-physical映射，类似于TLB。这样如果程序locality很好的情况下大多数情况下只要查询这张表就行了。
+	<a class="read-more" href="/2009/04/asplos-09-dftl/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2009/04/xen-test-script/">Xen DomainU 自动测试脚本</a></h2>
+      <span class="post-date">Apr 7, 2009</span>
+      
+      <span class="post-tags">
+	
+	#<a href="https://blog.yxwang.me/tags/cerberus">Cerberus</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/computer-system">Computer System</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/python">Python</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/xen">Xen</a>&nbsp;
+	
+      </span>
+      
+      
+      
+      <div class="summary">
+	写完代码测试时重复的最多的步骤就是
+ 编译，复制vmlinuz和xen.gz 重启VMware虚拟机 启动domainU xm create domU.conf 4. 开一个screen窗口attach到domainU的console xm console #domid 5. 在domainU中运行测试程序  于是写了个自动执行3 4 5的脚步，主要用到了熊熊推荐的pexpect，这东东很赞啊
+为了提高用户体验，读取domainU的启动信息时我采用的方法是读一行输出一行，读到结尾登陆字符时通过超时设置退出循环，这样可能效率比较低，不过测试脚本也不care这个了
+实际使用时碰到了另一个问题，domainU执行完自动命令后命令行会出现很严重的对齐问题，最后发现登陆后运行一次reset就可以了。
+脚本如下
+#!/usr/bin/python # Automatic test script for Xen DomainU # Author: zellux import pexpect, os conf = { 'login_name' : 'm2-vm2', 'domainU_name' : 'R900-DomU0', 'domainU_conf' : '/home/wyx/domU1', 'domainU_id' : '2', 'domainU_user' : 'wyx', 'domainU_passwd' : 'wyx', } # Command to be executed after domainU starts cmd = &quot;&quot;&quot; cd m2 cd reg_test .
+	<a class="read-more" href="/2009/04/xen-test-script/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2009/04/end-to-end-argument-in-system-design/">End-to-End Argument In System Design</a></h2>
+      <span class="post-date">Apr 6, 2009</span>
+      
+      <span class="post-tags">
+	
+	#<a href="https://blog.yxwang.me/tags/architecture">Architecture</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/computer-system">Computer System</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/paper">Paper</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/tocs">TOCS</a>&nbsp;
+	
+      </span>
+      
+      
+      
+      <div class="summary">
+	MIT出品，发在1984年的TOCS上，很值得细细品味的一篇paper，可惜做presentation时由于是第一次在组会上讲，效果很差。
+这篇paper的核心思想就是，在设计一个系统各个层次的功能时，如果把某个功能放到某一层时无法保证功能的完全可靠，那就干脆不要做，除非是为了性能等其他因素考虑。
+这里举了一个文件传输的例子，假设要把电脑A的资料通过网络传输给电脑B，而其中文件系统、传输程序、网络等各个子系统都有可能出现问题，那么如果保证传输的可靠，即B能完整不出错的得到A的数据并保存呢？
+如果把验证做在子系统，比如网络数据包校验，文件系统里也为每个文件加checksum，读出来的时候验证下，从而避免磁盘出错的可能。但是这些常见的措施只能保证部分环节的正确性，降低出错的可能，并不能从根本上保证数据传输的可靠性。举个例子来说，这里如果文件传输程序出了bug，网络和文件系统里面的检查即使通过了，最后的结果还是错误的。
+针对这个问题的End-to-End的解决方案很简单，就是在电脑A上保留一份该文件的checksum，电脑B接收并保存后再算一次checksum，相等就说明传输成功了（当然这里要钻牛角尖的话也可以说还是有可能出问题的，但是这个概率已经小到可以完全忽视的地步了，在这里我们假设checksum符合就说明这个环节没有问题）。而这种保障措施不需要任何子系统的参与，也就是End-to-End的。
+那么当一个子系统对要做的事情并不完全了解的时候（比如这里的网络传输层只能保证对方接受到的数据包的正确性，却不知道文件有没有损坏），是不是就没必要在子系统实现这个功能了呢？从正确性是来说是，但是考虑到其他方面，在子系统作检查还有另外两个好处：
+一是大大的降低了出错的概率，准确的说是出错的概率呈指数级降低，这在并不需要一种完美的保障措施的场合下还是很有用的；
+二是提高了性能，如果只用End-to-End的检验的话，有可能传输中丢了个包要等整个文件传输完毕做checksum的时候才会发现；而如果中间在网络传输层加个丢包检验的话就可以及早的发现错误并恢复了。这个问题在网络不可靠，或者文件很大的情况下尤为突出，仅仅是End-to-End的保证会使传输时间的期望值随着文件大小的增加呈指数级上升。
+上网络课的时候有一次老师的问题就是既然OSI七层协议的上层（如transport层）已经做了校验措施，为什么下层（如data-link层）还会有“多余”的error detection呢？当时我想到的一个答案就是为了性能考虑，因为那会儿正好在读这篇paper ;-)
+但是并不是说把功能放到子系统里就一定能提高性能了。如果子系统里面塞满了各种并不是上层都必需的检验机制，整个系统的性能势必会受到影响。所以这个trade-off值得深思熟虑。Exokernel的论文就提出了传统的操作系统中存在的这样一个问题，底层内核过于冗余，影响了应用程序性能，也隐藏了一些对部分应用程序比较重要的信息（比如给数据库提供磁盘原生数据访问的API可以获得更优的性能，另外应用程序也应当能控制自己发生缺页错误时候的行为）。
+这里的“End”在不同的环境下会对应不同的模块。比如在网上聊天这个通信过程中，没有必要在底层做很多校验来保证数据包的完整性，这时候及时性更重要，当数据包丢失或者数据出错时，会有一个更常用的End-to-End的解决方案：没听清的那一方通过语音要求重述就行了，“我听不清，能再说一遍刚才的话吗？”，而此时的End自然是谈话双方。如果换一种情形，在语音留言系统中，就需要保证传输的正确性了，因为这时候数据的及时性变得很次要，而留言系统的特点要求用End-to-End的验证加上底层的措施来保证一方的语音信息尽可能忠实的保存到另一方的留言系统中。
+修改于 2010.2.16
+	<a class="read-more" href="/2009/04/end-to-end-argument-in-system-design/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
+  </div>
+  <div class="pagination">
+  
+  <a class="btn previous" href="/post/page/8/">Newer</a>  
+  <a class="btn next" href="/post/page/10/">Older</a> 
+</div>
+</div>
+
+
+
+
+<div class="footer">
+  
+  <p>Powered by <a href="http://gohugo.io">Hugo</a> and <a href="https://github.com/zhe/hugo-theme-slim">Slim theme</a>.
+  
+      Follow me on <a href="https://twitter.com/zellux">Twitter</a>.
+      </p>
+  </p>
+  
+</div>
+
+                   
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+    Macros: {
+      argmax: "\\operatorname*{argmax}",
+      argmin: "\\operatorname*{argmin}"
+    }
+  },
+  jax: ["input/TeX","output/CommonHTML"]
+});
+</script>
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML">
+</script>
+
+</script>
+
+<script src="https://blog.yxwang.me/js/slim.min.aef36e671f72c9042139aae327dbe693b7ebaa67fd56f30dad4c985a91ba9294.js"></script>
+
+
+<link rel="stylesheet" href="https://blog.yxwang.me/css/solarized-light.min.5499f6bc45da0c78f070be4f720fd28b19af75306b569b77837d57c3cf819430.css" />
+<script src="/js/highlight.pack.js"></script>
+<script>
+  hljs.initHighlightingOnLoad();
+</script>
+
+</div>
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-25551121-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+<script type="text/javascript">
+    window.heap=window.heap||[],heap.load=function(e,t){window.heap.appid=e,window.heap.config=t=t||{};var r=t.forceSSL||"https:"===document.location.protocol,a=document.createElement("script");a.type="text/javascript",a.async=!0,a.src=(r?"https:":"http:")+"//cdn.heapanalytics.com/js/heap-"+e+".js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(a,n);for(var o=function(e){return function(){heap.push([e].concat(Array.prototype.slice.call(arguments,0)))}},p=["addEventProperties","addUserProperties","clearEventProperties","identify","removeEventProperty","setEventProperties","track","unsetEventProperty"],c=0;c<p.length;c++)heap[p[c]]=o(p[c])};
+      heap.load("3166778701");
+</script>
+
+
+</body>
+
+</html>
+

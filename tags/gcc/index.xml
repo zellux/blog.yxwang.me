@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Gcc on Aiur · Zellux 的博客</title>
+    <link>https://blog.yxwang.me/tags/gcc/</link>
+    <description>Recent content in Gcc on Aiur · Zellux 的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Wed, 25 Aug 2010 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.yxwang.me/tags/gcc/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>gcc 内联汇编中 %c 的用法</title>
+      <link>https://blog.yxwang.me/2010/08/gcc-operand-substitution/</link>
+      <pubDate>Wed, 25 Aug 2010 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2010/08/gcc-operand-substitution/</guid>
+      <description>这几天看KVM代码的时候看到里面有个内联汇编的语法很陌生（下面的代码截取了部分内联汇编片段）：
+asm ( &amp;quot;mov %c[rax](%3), %%rax \n\t&amp;quot; &amp;quot;mov %c[rbx](%3), %%rbx \n\t&amp;quot; &amp;quot;mov %c[rdx](%3), %%rdx \n\t&amp;quot; &amp;quot;mov %c[rsi](%3), %%rsi \n\t&amp;quot; &amp;quot;mov %c[rdi](%3), %%rdi \n\t&amp;quot; : &amp;quot;=q&amp;quot; (fail) : &amp;quot;r&amp;quot;(vcpu-&amp;gt;launched), &amp;quot;d&amp;quot;((unsigned long)HOST_RSP), &amp;quot;c&amp;quot;(vcpu), [rax]&amp;quot;i&amp;quot;(offsetof(struct kvm_vcpu, regs[VCPU_REGS_RAX])), [rbx]&amp;quot;i&amp;quot;(offsetof(struct kvm_vcpu, regs[VCPU_REGS_RBX])), [rcx]&amp;quot;i&amp;quot;(offsetof(struct kvm_vcpu, regs[VCPU_REGS_RCX])) : &amp;quot;cc&amp;quot;, &amp;quot;memory&amp;quot; );  stackoverflow上问了下才知道这是gcc的operand substitution语法，%c后面跟上常量名，就能在内联汇编中使用这个常量了。
+以这段代码为例，vcpu是struct kvm_vcpu类型，[rax]&amp;ldquo;i&amp;rdquo;(offsetof(struct kvm_vcpu, regs[VCPU_REGS_RAX])这句话把vcpu-&amp;gt;regs[VCPU_REGS_RAX]相对于vcpu的偏移赋值给了rax这一常量。接下来回到第一行mov %crax, %%eax，%c[rax]等于前面得到的偏移量，加上vcpu并取值后就是vcpu-&amp;gt;regs[VCPU_REGS_RAX]中保存的值了，这个指令会把这个值保存在%rax寄存器中，从而完成了vcpu的rax寄存器恢复工作。</description>
+    </item>
+    
+    <item>
+      <title>gcc 内联汇编中 %c 的用法</title>
+      <link>https://blog.yxwang.me/2010/08/gcc-operand-substitution/</link>
+      <pubDate>Wed, 25 Aug 2010 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2010/08/gcc-operand-substitution/</guid>
+      <description>这几天看KVM代码的时候看到里面有个内联汇编的语法很陌生（下面的代码截取了部分内联汇编片段）：
+asm ( &amp;quot;mov %c[rax](%3), %%rax \n\t&amp;quot; &amp;quot;mov %c[rbx](%3), %%rbx \n\t&amp;quot; &amp;quot;mov %c[rdx](%3), %%rdx \n\t&amp;quot; &amp;quot;mov %c[rsi](%3), %%rsi \n\t&amp;quot; &amp;quot;mov %c[rdi](%3), %%rdi \n\t&amp;quot; : &amp;quot;=q&amp;quot; (fail) : &amp;quot;r&amp;quot;(vcpu-&amp;gt;launched), &amp;quot;d&amp;quot;((unsigned long)HOST_RSP), &amp;quot;c&amp;quot;(vcpu), [rax]&amp;quot;i&amp;quot;(offsetof(struct kvm_vcpu, regs[VCPU_REGS_RAX])), [rbx]&amp;quot;i&amp;quot;(offsetof(struct kvm_vcpu, regs[VCPU_REGS_RBX])), [rcx]&amp;quot;i&amp;quot;(offsetof(struct kvm_vcpu, regs[VCPU_REGS_RCX])) : &amp;quot;cc&amp;quot;, &amp;quot;memory&amp;quot; );  stackoverflow上问了下才知道这是gcc的operand substitution语法，%c后面跟上常量名，就能在内联汇编中使用这个常量了。
+以这段代码为例，vcpu是struct kvm_vcpu类型，[rax]&amp;ldquo;i&amp;rdquo;(offsetof(struct kvm_vcpu, regs[VCPU_REGS_RAX])这句话把vcpu-&amp;gt;regs[VCPU_REGS_RAX]相对于vcpu的偏移赋值给了rax这一常量。接下来回到第一行mov %crax, %%eax，%c[rax]等于前面得到的偏移量，加上vcpu并取值后就是vcpu-&amp;gt;regs[VCPU_REGS_RAX]中保存的值了，这个指令会把这个值保存在%rax寄存器中，从而完成了vcpu的rax寄存器恢复工作。</description>
+    </item>
+    
+    <item>
+      <title>gcc 中设置特定代码块的优化级别</title>
+      <link>https://blog.yxwang.me/2010/02/code-specific-optimizations-in-gcc/</link>
+      <pubDate>Mon, 08 Feb 2010 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2010/02/code-specific-optimizations-in-gcc/</guid>
+      <description>今天碰到一个gcc优化相关的问题，为了让一个页变成脏页（页表中dirty位被置上），需要执行下面这段代码：
+uint32_t *page; // ... page[0] = page[0];  最后一行代码很有可能被gcc优化掉，因为这段代码看起来没有任何实际的作用。那么如何防止gcc对这段代码做优化呢？
+设置gcc编译时优化级别为-O0肯定是不合适的，这样对程序性能影响会比较大。stackoverflow上的Dietrich Epp给出了一个强制类型转换的方案：
+((unsigned char volatile *)page)[0] = page[0];  通过volatile关键字禁止gcc的优化，和我之前采用的方法类似。
+Plow同学给出了另一个利用gcc 4.4特性的方法：
+#pragma GCC push_options #pragma GCC optimize (&amp;quot;O0&amp;quot;) your code #pragma GCC pop_options  这里用到了gcc 4.4的特性Function Specific Option Pragmas，在特定代码前保存当前的编译选项，然后对特定的代码使用O0优化级别，最后再恢复之前保存的编译选项。
+俺觉得这个特性有些场合下挺好用的，在这里分享下，虽然因为编译器版本问题最后我还是用了前面一种方法。</description>
+    </item>
+    
+    <item>
+      <title>gcc 中设置特定代码块的优化级别</title>
+      <link>https://blog.yxwang.me/2010/02/code-specific-optimizations-in-gcc/</link>
+      <pubDate>Mon, 08 Feb 2010 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2010/02/code-specific-optimizations-in-gcc/</guid>
+      <description>今天碰到一个gcc优化相关的问题，为了让一个页变成脏页（页表中dirty位被置上），需要执行下面这段代码：
+uint32_t *page; // ... page[0] = page[0];  最后一行代码很有可能被gcc优化掉，因为这段代码看起来没有任何实际的作用。那么如何防止gcc对这段代码做优化呢？
+设置gcc编译时优化级别为-O0肯定是不合适的，这样对程序性能影响会比较大。stackoverflow上的Dietrich Epp给出了一个强制类型转换的方案：
+((unsigned char volatile *)page)[0] = page[0];  通过volatile关键字禁止gcc的优化，和我之前采用的方法类似。
+Plow同学给出了另一个利用gcc 4.4特性的方法：
+#pragma GCC push_options #pragma GCC optimize (&amp;quot;O0&amp;quot;) your code #pragma GCC pop_options  这里用到了gcc 4.4的特性Function Specific Option Pragmas，在特定代码前保存当前的编译选项，然后对特定的代码使用O0优化级别，最后再恢复之前保存的编译选项。
+俺觉得这个特性有些场合下挺好用的，在这里分享下，虽然因为编译器版本问题最后我还是用了前面一种方法。</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Kernel on Aiur · Zellux 的博客</title>
+    <link>https://blog.yxwang.me/tags/kernel/</link>
+    <description>Recent content in Kernel on Aiur · Zellux 的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Tue, 09 Feb 2010 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.yxwang.me/tags/kernel/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Linear Page Table: 更方便地访问页表</title>
+      <link>https://blog.yxwang.me/2010/02/linear-page-table/</link>
+      <pubDate>Tue, 09 Feb 2010 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2010/02/linear-page-table/</guid>
+      <description>Linear page table 又叫 virtual page table，是一种方便虚拟机监控器 (VMM) / 操作系统 (OS) / 应用程序访问页表的技巧。Xen、64 位 Linux 内核、JOS 操作系统中都用到了这个设计。这里以 x86_32 系统为例，简单介绍一下它的实现和使用，如有错误敬请指出。
+一般情况下，如果 OS 需要访问某个页表，需要将它映射到自己的虚拟空间中，然后再访问。这样带来两个问题，一是访问比较繁琐，需要临时的页映射；二是对于 exo-kernel 这种 fork 等行为都是在用户态程序实现的系统，可能会增加一下安全上的问题。因为用户程序在 fork 的时候需要访问自己的页表，而这时候除非操作系统提供另一些权限控制更精确的系统调用，否则就很难让不可信的应用程序访问自己的页表且不做有害的改动。
+Linear page table 很好的解决了这两个问题。它的实现很简单，只需要在页目录中增加一项 VPT (virtual page table entry)，和一般的页目录项不同的是，这个 VPT 指向的是页目录本身。
+这样带来了什么好处呢？借用一下 MIT 6.828 课件上的图片来更好的说明这个问题：
+增加了 VPT 后，通常的物理地址 -&amp;gt; 虚拟地址的转换还是没变。和之前唯一的不同在于虚拟地址的页目录索引号 (PDX) 为之前设置的 VPT 的时候。
+举个例子来说，假如现在要访问的虚拟地址是 (VPT &amp;lt;&amp;lt; 22) | (VPT &amp;lt;&amp;lt; 12)，即这里的 PDX 和 PTX 都等于 VPT 的时候，整个转换过程是怎么样的呢（假设 TLB miss 的情况）？首先根据 CR3 中的物理地址，硬件开始查找页目录中的第 VPT 项，然后根据这一项中的物理地址，找到了下一级「页表」。注意这时候硬件以为自己得到的页表地址，实际上访问的还是页目录本身。同样，在这个「页表」中找到第 VPT 项指出去的最终页，得到了最终页的物理地址。因为 PTX 还是等于 VPT，所以最后得到的物理地址还是页目录的。</description>
+    </item>
+    
+    <item>
+      <title>VMware上能跑起来的Linux Kernel配置</title>
+      <link>https://blog.yxwang.me/2009/04/vmware-linux-kernel-config/</link>
+      <pubDate>Fri, 03 Apr 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2009/04/vmware-linux-kernel-config/</guid>
+      <description>在默认的基础上，把这几个都改成built-in (*)，通过Xen启动时就不需要额外加载initrd了
+2010.1.19更新：支持网络
+Device Drivers SCSI device support ---&amp;gt; &amp;lt;*&amp;gt; SCSI disk support &amp;lt;*&amp;gt; SCSI generic support SCSI low-level drivers ---&amp;gt; [*] LSI Logic New Generation RAID Device Drivers &amp;lt;*&amp;gt; Serial ATA (SATA) support &amp;lt;*&amp;gt; Intel PIIX/ICH SATA support Fusion MPT device support ---&amp;gt; &amp;lt;*&amp;gt; Fusion MPT ScsiHost drivers for SPI &amp;lt;*&amp;gt; Fusion MPT ScsiHost drivers for FC &amp;lt;*&amp;gt; Fusion MPT ScsiHost drivers for SAS (128) Maximum number of scatter gather entries (16 - 128) &amp;lt;*&amp;gt; Fusion MPT misc device (ioctl) driver &amp;lt;*&amp;gt; Fusion MPT LAN driver Network device support ---&amp;gt; Ethernet (10 or 100Mbit) ---&amp;gt; [*] EISA, VLB, PCI and on board controllers &amp;lt;*&amp;gt; AMD PCnet32 PCI support  </description>
+    </item>
+    
+  </channel>
+</rss>

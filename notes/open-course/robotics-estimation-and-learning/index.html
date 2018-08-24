@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="卡尔曼滤波 (Kalman Filter) 这一周的视频质量很一般，slides 做得也不仔细有不少错误。最后看了一些其他网站的文章和视频才有了比较深刻的理解，本文结尾有推荐资料。
+KF 模型  以匀速运动的动力学模型为例  状态 \(x_{t&#43;1}=A x_t &#43; B u_t\)，\(u_t\) 为外部影响 观测结果 \(z_t = C x_t\) \(x_t\) 和 \(z_t\) 都有测量误差 状态 \(x_{t&#43;1}\) 仅包含位置和速度：\(x_{t&#43;1} := \begin{bmatrix}v &amp; \frac{dv}{dt}\end{bmatrix}\) 动力学模型可以通过矩阵 A 描述，\(A = \begin{bmatrix}1 &amp; dt \\ 0 &amp; 1 \end{bmatrix}\)   基于动力学的贝叶斯模型 \[ p(x_{t&#43;1}|x_t) = Ap(x_t) \\ p(z_t|x_t) = Cp(x_t) \]
+加入运动和观测的误差 \[ p(x_{t&#43;1}|x_t) = Ap(x_t)&#43;v_m \\ p(z_t|x_t) = Cp(x_t)&#43;v_0 \]
+假设误差基于高斯分布 \[ p(x_{t&#43;1}|x_t) = A\mathcal{N}(x_t, P_t) &#43; \mathcal{N}(0, \Sigma_m) \\ p(z_t|x_t) = C\mathcal{N}(x_t, P_t) &#43; \mathcal{N}(0, \Sigma_0) \]">
+    <meta name="author" content="zellux">
+
+    <title> Robotics Estimation and Learning &middot; Aiur · Zellux 的博客 </title>
+
+    <script src="/js/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
+    <script src="/js/jquery-3.0.47.fancybox.min.js"></script>
+
+    
+    
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.52ea10a8f3a0b8f145adadb8d3761e17a42a7634869f775ef5830ed4de77d3fa.css">
+    
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+    
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    
+    <link href="" rel="alternate" type="application/rss+xml" title="Aiur · Zellux 的博客" />
+    
+<script type="application/ld+json">
+{
+    "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https://blog.yxwang.me/"
+    },
+    "articleSection" : "notes",
+    "name" : "Robotics Estimation and Learning",
+    "headline" : "Robotics Estimation and Learning",
+    "description" : "卡尔曼滤波 (Kalman Filter) 这一周的视频质量很一般，slides 做得也不仔细有不少错误。最后看了一些其他网站的文章和视频才有了比较深刻的理解，本文结尾有推荐资料。
+KF 模型  以匀速运动的动力学模型为例  状态 \(x_{t+1}=A x_t + B u_t\)，\(u_t\) 为外部影响 观测结果 \(z_t = C x_t\) \(x_t\) 和 \(z_t\) 都有测量误差 状态 \(x_{t+1}\) 仅包含位置和速度：\(x_{t+1} := \begin{bmatrix}v &amp; \frac{dv}{dt}\end{bmatrix}\) 动力学模型可以通过矩阵 A 描述，\(A = \begin{bmatrix}1 &amp; dt \\ 0 &amp; 1 \end{bmatrix}\)   基于动力学的贝叶斯模型 \[ p(x_{t+1}|x_t) = Ap(x_t) \\ p(z_t|x_t) = Cp(x_t) \]
+加入运动和观测的误差 \[ p(x_{t+1}|x_t) = Ap(x_t)+v_m \\ p(z_t|x_t) = Cp(x_t)+v_0 \]
+假设误差基于高斯分布 \[ p(x_{t+1}|x_t) = A\mathcal{N}(x_t, P_t) + \mathcal{N}(0, \Sigma_m) \\ p(z_t|x_t) = C\mathcal{N}(x_t, P_t) + \mathcal{N}(0, \Sigma_0) \]",
+    "inLanguage" : "en-US",
+    "author" : "zellux",
+    "creator" : "zellux",
+    "publisher": "zellux",
+    "accountablePerson" : "",
+    "copyrightHolder" : "",
+    "copyrightYear" : "0001",
+    "datePublished": "0001-01-01 00:00:00 &#43;0000 UTC",
+    "dateModified" : "0001-01-01 00:00:00 &#43;0000 UTC",
+    "url" : "https://blog.yxwang.me/notes/open-course/robotics-estimation-and-learning/",
+    "wordCount" : "299",
+    "keywords" : [ "Blog" ]
+}
+</script>
+
+  </head>
+
+  <body>
+    <nav class="nav">
+  <div class="nav-container">
+    <span class="site-title">
+      <a href="https://blog.yxwang.me/">Aiur · Zellux 的博客</a>
+    </span>
+    
+    <div class="nav-list">
+      
+      <span class="nav-item"><a href="/about">About</a></span>
+      
+      <span class="nav-item"><a href="/archive">Archive</a></span>
+      
+      <span class="nav-item"><a href="/notes">Notes</a></span>
+      
+    </div>
+  </div>
+</nav>
+
+    <div class="container">
+
+
+<div class="content">
+  <div class="posts">
+    <div class="post">
+      <h1 class="post-title"><a href="https://blog.yxwang.me/notes/open-course/robotics-estimation-and-learning/">Robotics Estimation and Learning</a></h1>
+      <div class="post-content">
+        <h2 id="卡尔曼滤波-kalman-filter">卡尔曼滤波 (Kalman Filter)</h2>
+<p>这一周的视频质量很一般，slides 做得也不仔细有不少错误。最后看了一些其他网站的文章和视频才有了比较深刻的理解，本文结尾有推荐资料。</p>
+<h3 id="kf-模型">KF 模型</h3>
+<ul>
+<li>以匀速运动的动力学模型为例
+<ul>
+<li>状态 <span class="math inline">\(x_{t+1}=A x_t + B u_t\)</span>，<span class="math inline">\(u_t\)</span> 为外部影响</li>
+<li>观测结果 <span class="math inline">\(z_t = C x_t\)</span></li>
+<li><span class="math inline">\(x_t\)</span> 和 <span class="math inline">\(z_t\)</span> 都有测量误差</li>
+<li>状态 <span class="math inline">\(x_{t+1}\)</span> 仅包含位置和速度：<span class="math inline">\(x_{t+1} := \begin{bmatrix}v &amp; \frac{dv}{dt}\end{bmatrix}\)</span></li>
+<li>动力学模型可以通过矩阵 A 描述，<span class="math inline">\(A = \begin{bmatrix}1 &amp; dt \\ 0 &amp; 1 \end{bmatrix}\)</span></li>
+</ul></li>
+</ul>
+<p>基于动力学的贝叶斯模型 <span class="math display">\[
+p(x_{t+1}|x_t) = Ap(x_t) \\
+p(z_t|x_t) = Cp(x_t)
+\]</span></p>
+<p>加入运动和观测的误差 <span class="math display">\[
+p(x_{t+1}|x_t) = Ap(x_t)+v_m \\
+p(z_t|x_t) = Cp(x_t)+v_0
+\]</span></p>
+<p>假设误差基于高斯分布 <span class="math display">\[
+p(x_{t+1}|x_t) = A\mathcal{N}(x_t, P_t) + \mathcal{N}(0, \Sigma_m) \\
+p(z_t|x_t) = C\mathcal{N}(x_t, P_t) + \mathcal{N}(0, \Sigma_0)
+\]</span></p>
+<p>把线性变换 A 和 C 代入正态分布 <span class="math display">\[
+p(x_{t+1}|x_t) = \mathcal{N}(Ax_t, A P_t A^T) + \mathcal{N}(0, \Sigma_m) \\
+p(z_t|x_t) = \mathcal{N}(Cx_t, C P_t C^T) + \mathcal{N}(0, \Sigma_0)
+\]</span></p>
+<p>线性加和 <span class="math display">\[
+p(x_{t+1}|x_t) = \mathcal{N}(Ax_t, A P_t A^T+ \Sigma_m) \\
+p(z_t|x_t) = \mathcal{N}(Cx_t, C P_t C^T + \Sigma_0)
+\]</span></p>
+<h3 id="最大后验概率估计卡尔曼滤波">最大后验概率估计卡尔曼滤波</h3>
+<p>最大后验概率估计的目的在于最大化 <span class="math inline">\(p(x_t | z_t, x_{t-1})\)</span>，即 <span class="math inline">\(\hat{x_t} = \argmax_{x_t} p(x_t | z_t, x_{t-1})\)</span></p>
+<p>由贝叶斯公式 <span class="math display">\[
+p(x_t | z_t, x_{t-1}) = \frac{p(z_t | x_t, x_{t-1}) p(x_t | x_{t-1})}{P
+(z_t)}
+\]</span> 代入正态分布得 <span class="math display">\[
+\hat{x_t} = \argmax_{x_t}  \mathcal{N}(Cx_t, C P_t C^T + \Sigma_0) \mathcal{N}(Ax_t, A P_t A^T+ \Sigma_m)
+\]</span> 求导可解得（具体过程参考 slides） <span class="math display">\[
+\begin{align}
+\hat{x_t} &amp;= A x_{t-1} + K(z_t  - C A x_{t-1}) \\
+\hat{P_t} &amp;= P - KCP \\
+K &amp;= P C^T R^{-1} - K C P C^T R^{-1} \\
+P &amp;= A P_{t-1} A^T + \Sigma_m \\
+R &amp;= \Sigma_0
+\end{align}
+\]</span></p>
+<p>这里 K 就是 Kalman gain。</p>
+<h3 id="扩展卡尔曼滤波-extended-kalman-filter">扩展卡尔曼滤波 (Extended Kalman Filter)</h3>
+<p>KF 的局限之一在于假设了线性模型，EKF 去掉了线性模型的限制，接受任何 <span class="math display">\[
+x_{t+1} = A x_t + B u_t =&gt; x_{t+1} = f(x_t, u_t) \\
+  z_t = C x_t =&gt; z_t = h(x_t)
+\]</span></p>
+<p>无迹卡尔曼滤波 (Unscented Kalman Filter)</p>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li>Kalman Filter 视频推荐：<a href="https://youtu.be/CaCcOwJPytQ" class="uri">https://youtu.be/CaCcOwJPytQ</a> 比较长，一共有 55 集，但是讲得很细致</li>
+<li><a href="http://www.bzarg.com/p/how-a-kalman-filter-works-in-pictures/">How a Kalman filter works, in pictures</a> 各个变量用不同颜色标记，配合插图方便理解</li>
+<li><a href="https://www.jianshu.com/p/2768642e3abf">Kalman Filter 学习笔记</a> 上文的中文版</li>
+<li><a href="http://explained.ai/matrix-calculus/index.html">The Matrix Calculus You Need For Deep Learning</a> 矩阵微积分入门，如果想要推一遍 Kalman gain 的计算过程会用到这部分知识</li>
+<li><a href="http://home.wlu.edu/~levys/kalman_tutorial/">The Extended Kalman Filter: An Interactive Tutorial for Non-Experts</a> EKF 的介绍网站，只要求高中数学基础</li>
+<li></li>
+</ul>
+
+      </div>
+          <div class="cc-license">
+      本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.zh">知识共享署名-非商业性使用 3.0 版本许可协议</a>进行许可，欢迎转载，演绎，但是必须保留本文的署名 <a href="https://blog.yxwang.me/notes/open-course/robotics-estimation-and-learning/">zellux</a>（包含链接），且不得用于商业目的。
+    </div>
+
+    </div>
+    <div class="pagination">
+      <a class="btn previous " href="https://blog.yxwang.me/notes/languages/vocabulary-builder/"> Prev</a>  
+      <a class="btn next " href="https://blog.yxwang.me/notes/open-course/robotics-perception/"> Next</a> 
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="footer">
+  
+  <p>Powered by <a href="http://gohugo.io">Hugo</a> and <a href="https://github.com/zhe/hugo-theme-slim">Slim theme</a>.
+  
+      Follow me on <a href="https://twitter.com/zellux">Twitter</a>.
+      </p>
+  </p>
+  
+</div>
+
+                   
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+    Macros: {
+      argmax: "\\operatorname*{argmax}",
+      argmin: "\\operatorname*{argmin}"
+    }
+  },
+  jax: ["input/TeX","output/CommonHTML"]
+});
+</script>
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML">
+</script>
+
+</script>
+
+<script src="https://blog.yxwang.me/js/slim.min.aef36e671f72c9042139aae327dbe693b7ebaa67fd56f30dad4c985a91ba9294.js"></script>
+
+
+<link rel="stylesheet" href="https://blog.yxwang.me/css/solarized-light.min.5499f6bc45da0c78f070be4f720fd28b19af75306b569b77837d57c3cf819430.css" />
+<script src="/js/highlight.pack.js"></script>
+<script>
+  hljs.initHighlightingOnLoad();
+</script>
+
+</div>
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-25551121-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+<script type="text/javascript">
+    window.heap=window.heap||[],heap.load=function(e,t){window.heap.appid=e,window.heap.config=t=t||{};var r=t.forceSSL||"https:"===document.location.protocol,a=document.createElement("script");a.type="text/javascript",a.async=!0,a.src=(r?"https:":"http:")+"//cdn.heapanalytics.com/js/heap-"+e+".js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(a,n);for(var o=function(e){return function(){heap.push([e].concat(Array.prototype.slice.call(arguments,0)))}},p=["addEventProperties","addUserProperties","clearEventProperties","identify","removeEventProperty","setEventProperties","track","unsetEventProperty"],c=0;c<p.length;c++)heap[p[c]]=o(p[c])};
+      heap.load("3166778701");
+</script>
+
+
+</body>
+
+</html>
+

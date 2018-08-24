@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Formal Language on Aiur · Zellux 的博客</title>
+    <link>https://blog.yxwang.me/tags/formal-language/</link>
+    <description>Recent content in Formal Language on Aiur · Zellux 的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Tue, 11 Nov 2008 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.yxwang.me/tags/formal-language/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Godel, Escher, Bach [2]</title>
+      <link>https://blog.yxwang.me/2008/11/godel-escher-bach-2/</link>
+      <pubDate>Tue, 11 Nov 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2008/11/godel-escher-bach-2/</guid>
+      <description> 素数判定的形式化系统，精彩！ 合数的判定系统比较容易构造，素数的判定当然不能简单的通过“不是合数”来解决。 首先构造一个不整除的概念(DND) 公理模式：xyDNDx，其中x和y是短横组成的符号串。（a&amp;gt;b，a自然不整除b） 生成规则：如果xDNDy是个定理，那么xDNDxy也是个定理。 接下来定义一个描述z在2到x的范围内没有因子的语言，zDFx (Divisor-Free) 规则1：如果&amp;ndash;DNDz是个定理，那么zDF&amp;ndash;也是个定理。 规则2：如果zDFx与x-DNDz都是定理，那么zDFx-也是个定理。 好了，到这里已经能检查一个数是否在给定范围内找出因子了，定义素数(Pz)就变得很简单。 规则：若z-DFz是个定理，那么Pz-是个定理。 再处理一个特例，为2制定一条公理 公理：P- -  </description>
+    </item>
+    
+  </channel>
+</rss>

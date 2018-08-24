@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="对象属性 ActiveRecord 对象在数据库中的属性并不是以实体变量的方式保存的，如果要为一个属性设置默认值的话，
+class Item &lt; ActiveRecord::Base def category @category || &#39;n/a&#39; end end  这样的实现是不可行的。读取和修改这些属性时应该使用 read_attribute 和 write_attribute：
+class Item &lt; ActiveRecord::Base def category read_attribute(:category) || &#39;n/a&#39; end end  Hash 和相等性 ActiveRecord 的 hash 值是根据主键的值计算出来的，这就意味着未保存对象的 hash 值是不可靠的。同样两个 model 对象的相等比较（即==操作符）也是基于主键的，所以两个 model 对象即使它们的其他属性不一样，仍有可能被当作相等。
+查找 find_by_attribute 方法后面加个 ! 号，即使用 find_by_attribute!，就能在找不到对象的时候触发一个 RecordNotFound 异常，而不是返回 nil。
+find_or_initialize_by 和 find_or_create_by 也是两个好用的方法，它们在找不到对象时分别使用 new 和 create 新建一个，并用查找的属性初始化新建的对象。
+手写 SQL 不得不手写 SQL 同时又要防止注入攻击的一个比较简洁的写法是
+Order.where(&quot;name = :name and pay_type = :pay_type&quot;, params[:order])  回调函数 出于性能考虑，after_find 和 after_initialize 只能通过函数声明的方式定义，即不能用类似 before_validation :normalize_fields 这样的形式。">
+    <meta name="author" content="zellux">
+
+    <title> ActiveRecord 的一些细节 &middot; Aiur · Zellux 的博客 </title>
+
+    <script src="/js/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
+    <script src="/js/jquery-3.0.47.fancybox.min.js"></script>
+
+    
+    
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.52ea10a8f3a0b8f145adadb8d3761e17a42a7634869f775ef5830ed4de77d3fa.css">
+    
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+    
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    
+    <link href="" rel="alternate" type="application/rss+xml" title="Aiur · Zellux 的博客" />
+    
+<script type="application/ld+json">
+{
+    "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https://blog.yxwang.me/"
+    },
+    "articleSection" : "post",
+    "name" : "ActiveRecord 的一些细节",
+    "headline" : "ActiveRecord 的一些细节",
+    "description" : "对象属性 ActiveRecord 对象在数据库中的属性并不是以实体变量的方式保存的，如果要为一个属性设置默认值的话，
+class Item &lt; ActiveRecord::Base def category @category || 'n/a' end end  这样的实现是不可行的。读取和修改这些属性时应该使用 read_attribute 和 write_attribute：
+class Item &lt; ActiveRecord::Base def category read_attribute(:category) || 'n/a' end end  Hash 和相等性 ActiveRecord 的 hash 值是根据主键的值计算出来的，这就意味着未保存对象的 hash 值是不可靠的。同样两个 model 对象的相等比较（即==操作符）也是基于主键的，所以两个 model 对象即使它们的其他属性不一样，仍有可能被当作相等。
+查找 find_by_attribute 方法后面加个 ! 号，即使用 find_by_attribute!，就能在找不到对象的时候触发一个 RecordNotFound 异常，而不是返回 nil。
+find_or_initialize_by 和 find_or_create_by 也是两个好用的方法，它们在找不到对象时分别使用 new 和 create 新建一个，并用查找的属性初始化新建的对象。
+手写 SQL 不得不手写 SQL 同时又要防止注入攻击的一个比较简洁的写法是
+Order.where(&quot;name = :name and pay_type = :pay_type&quot;, params[:order])  回调函数 出于性能考虑，after_find 和 after_initialize 只能通过函数声明的方式定义，即不能用类似 before_validation :normalize_fields 这样的形式。",
+    "inLanguage" : "en-US",
+    "author" : "zellux",
+    "creator" : "zellux",
+    "publisher": "zellux",
+    "accountablePerson" : "",
+    "copyrightHolder" : "",
+    "copyrightYear" : "2011",
+    "datePublished": "2011-11-24 00:00:00 &#43;0000 UTC",
+    "dateModified" : "2011-11-24 00:00:00 &#43;0000 UTC",
+    "url" : "https://blog.yxwang.me/2011/11/notes-on-active-record/",
+    "wordCount" : "88",
+    "keywords" : [ "Programming","Ruby on Rails","Web Development","Blog" ]
+}
+</script>
+
+  </head>
+
+  <body>
+    <nav class="nav">
+  <div class="nav-container">
+    <span class="site-title">
+      <a href="https://blog.yxwang.me/">Aiur · Zellux 的博客</a>
+    </span>
+    
+    <div class="nav-list">
+      
+      <span class="nav-item"><a href="/about">About</a></span>
+      
+      <span class="nav-item"><a href="/archive">Archive</a></span>
+      
+      <span class="nav-item"><a href="/notes">Notes</a></span>
+      
+    </div>
+  </div>
+</nav>
+
+    <div class="container">
+
+
+<div class="content">
+  <div class="post">
+    <h1 class="post-title"><a href="https://blog.yxwang.me/2011/11/notes-on-active-record/">ActiveRecord 的一些细节</a></h1>
+    <span class="post-meta">
+  <time datetime='Thu, Nov 24, 2011' data-updated="true" itemprop="datePublished">Thu, Nov 24, 2011</time>
+  
+  <span class="post-categories">
+    •
+	<a href="https://blog.yxwang.me/categories/programming">Programming</a>
+  </span>
+  
+</span>
+
+    <div class="post-content">
+      
+
+<h3 id="对象属性">对象属性</h3>
+
+<p>ActiveRecord 对象在数据库中的属性并不是以实体变量的方式保存的，如果要为一个属性设置默认值的话，</p>
+
+<pre><code class="language-ruby">class Item &lt; ActiveRecord::Base
+  def category
+    @category || 'n/a'
+  end
+end
+</code></pre>
+
+<p>这样的实现是不可行的。读取和修改这些属性时应该使用 read_attribute 和 write_attribute：</p>
+
+<pre><code class="language-ruby">class Item &lt; ActiveRecord::Base
+  def category
+    read_attribute(:category) || 'n/a'
+  end
+end
+</code></pre>
+
+<h3 id="hash-和相等性">Hash 和相等性</h3>
+
+<p>ActiveRecord 的 hash 值是根据主键的值计算出来的，这就意味着未保存对象的 hash 值是不可靠的。同样两个 model 对象的相等比较（即==操作符）也是基于主键的，所以两个 model 对象即使它们的其他属性不一样，仍有可能被当作相等。</p>
+
+<h3 id="查找">查找</h3>
+
+<p>find_by_attribute 方法后面加个 ! 号，即使用 find_by_attribute!，就能在找不到对象的时候触发一个 RecordNotFound 异常，而不是返回 nil。</p>
+
+<p>find_or_initialize_by 和 find_or_create_by 也是两个好用的方法，它们在找不到对象时分别使用 new 和 create 新建一个，并用查找的属性初始化新建的对象。</p>
+
+<h3 id="手写-sql">手写 SQL</h3>
+
+<p>不得不手写 SQL 同时又要防止注入攻击的一个比较简洁的写法是</p>
+
+<pre><code class="language-ruby">    Order.where(&quot;name = :name and pay_type = :pay_type&quot;, params[:order])
+</code></pre>
+
+<h3 id="回调函数">回调函数</h3>
+
+<p>出于性能考虑，after_find 和 after_initialize 只能通过函数声明的方式定义，即不能用类似 <code>before_validation :normalize_fields</code> 这样的形式。</p>
+
+<p>参考</p>
+
+<ul>
+<li><a href="http://www.amazon.com/Rails-Way-Addison-Wesley-Professional-Ruby/dp/0321601661/ref=sr_1_1?ie=UTF8&amp;qid=1322123636&amp;sr=8-1">Rails 3 Way</a></li>
+<li><a href="http://www.amazon.com/Agile-Development-Rails-Pragmatic-Programmers/dp/1934356549/ref=sr_1_1?ie=UTF8&amp;qid=1322123646&amp;sr=8-1">Agile Web Development with Rails</a></li>
+</ul>
+
+    </div>
+        <div class="cc-license">
+      本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.zh">知识共享署名-非商业性使用 3.0 版本许可协议</a>进行许可，欢迎转载，演绎，但是必须保留本文的署名 <a href="https://blog.yxwang.me/2011/11/notes-on-active-record/">zellux</a>（包含链接），且不得用于商业目的。
+    </div>
+
+  </div>
+  <div class="pagination">
+    <a class="btn previous " href="https://blog.yxwang.me/2011/11/migrated-to-octopress/"> Prev</a>  
+    <a class="btn next " href="https://blog.yxwang.me/2011/11/methods-in-restful-applications/"> Next</a> 
+  </div>
+</div>
+
+
+<div id="disqus_thread"></div>
+<script>
+  var disqus_config = function () {
+  this.page.url = "https://blog.yxwang.me/2011/11/notes-on-active-record/";
+  
+  };
+  (function() {
+  var d = document, s = d.createElement('script');
+  s.src = '//aiur-zellux.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+
+<div class="footer">
+  
+  <p>Powered by <a href="http://gohugo.io">Hugo</a> and <a href="https://github.com/zhe/hugo-theme-slim">Slim theme</a>.
+  
+      Follow me on <a href="https://twitter.com/zellux">Twitter</a>.
+      </p>
+  </p>
+  
+</div>
+
+                   
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+    Macros: {
+      argmax: "\\operatorname*{argmax}",
+      argmin: "\\operatorname*{argmin}"
+    }
+  },
+  jax: ["input/TeX","output/CommonHTML"]
+});
+</script>
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML">
+</script>
+
+</script>
+
+<script src="https://blog.yxwang.me/js/slim.min.aef36e671f72c9042139aae327dbe693b7ebaa67fd56f30dad4c985a91ba9294.js"></script>
+
+
+<link rel="stylesheet" href="https://blog.yxwang.me/css/solarized-light.min.5499f6bc45da0c78f070be4f720fd28b19af75306b569b77837d57c3cf819430.css" />
+<script src="/js/highlight.pack.js"></script>
+<script>
+  hljs.initHighlightingOnLoad();
+</script>
+
+</div>
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-25551121-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+<script type="text/javascript">
+    window.heap=window.heap||[],heap.load=function(e,t){window.heap.appid=e,window.heap.config=t=t||{};var r=t.forceSSL||"https:"===document.location.protocol,a=document.createElement("script");a.type="text/javascript",a.async=!0,a.src=(r?"https:":"http:")+"//cdn.heapanalytics.com/js/heap-"+e+".js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(a,n);for(var o=function(e){return function(){heap.push([e].concat(Array.prototype.slice.call(arguments,0)))}},p=["addEventProperties","addUserProperties","clearEventProperties","identify","removeEventProperty","setEventProperties","track","unsetEventProperty"],c=0;c<p.length;c++)heap[p[c]]=o(p[c])};
+      heap.load("3166778701");
+</script>
+
+
+</body>
+
+</html>
+

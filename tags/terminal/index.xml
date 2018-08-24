@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Terminal on Aiur · Zellux 的博客</title>
+    <link>https://blog.yxwang.me/tags/terminal/</link>
+    <description>Recent content in Terminal on Aiur · Zellux 的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Wed, 29 Apr 2009 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.yxwang.me/tags/terminal/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>终端下如何在 Emacs 中使用鼠标</title>
+      <link>https://blog.yxwang.me/2009/04/using-mouse-in-emacs-within-terminal/</link>
+      <pubDate>Wed, 29 Apr 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2009/04/using-mouse-in-emacs-within-terminal/</guid>
+      <description>http://linux.about.com/od/emacs_doc/a/emacsdoc567.htm
+M-x xterm-mouse-mode 开启鼠标支持，操作的时候按住shift能恢复到之前的xterm鼠标模式
+M-x mouse-wheel-mode 开启滚轮支持
+一些相关的参数： mouse-drag-copy-region 选中后自动复制 mouse-wheel-scroll-amount 每次滚动的行数 mouse-wheel-follow-mouse 滚动位置 mouse-wheel-progressive-speed 滚动速度</description>
+    </item>
+    
+    <item>
+      <title>PieTTY 中按 Ctrl&#43;S 导致挂起的问题解决</title>
+      <link>https://blog.yxwang.me/2009/01/terminal-ctrl-s/</link>
+      <pubDate>Thu, 08 Jan 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2009/01/terminal-ctrl-s/</guid>
+      <description>以前碰到这个问题都得先重启PieTTY然后用screen -x恢复到原来的工作界面，今天不知怎么的emacs里C-x C-s按了就挂起，只能google。
+传说中，早期的终端会遇到显示字符的速度慢于接收字符的速度，为了解决这个问题，C-s用于先挂起当前终端，在数据传输之后用C-q恢复显示。所以最简单的解决方法就是在挂起后按C-q。
+不过我的WinXP中C-q已经和快速启动工具（寝室里是Turbo Launcher，实验室的是Launchy）绑定了，也懒得为了这么个问题改操作习惯，于是再次google，终于找到一个一劳永逸的方法，以bash为例，在~/.bashrc中加入一行
+stty -ixoff -ixon
+即可。另外这样设置后似乎恢复了C-s在bash中正向增量查找的功能。恩。</description>
+    </item>
+    
+  </channel>
+</rss>

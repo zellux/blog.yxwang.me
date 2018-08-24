@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Debugging on Aiur · Zellux 的博客</title>
+    <link>https://blog.yxwang.me/tags/debugging/</link>
+    <description>Recent content in Debugging on Aiur · Zellux 的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Wed, 27 May 2009 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.yxwang.me/tags/debugging/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>利用 VMware 的虚拟串口调试 Xen</title>
+      <link>https://blog.yxwang.me/2009/05/debug-xen-with-vmware-serial-port/</link>
+      <pubDate>Wed, 27 May 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2009/05/debug-xen-with-vmware-serial-port/</guid>
+      <description>VMware支持虚拟串口设备，对于调试内核或者虚拟机的帮助很大，具体设置如下（VMware Server 2, Xen 3.3）：
+ VMware中为虚拟机增加串口设备 Add Hardware-&amp;gt;Serial Port，然后在设置中将Connection模式设为File，指定相应的文件路径(如[standard] debian-xen/serial-port.log)
+ 修改虚拟机的grub启动参数，以我的/boot/menu/lst为例
+  title Xen 3.3.0 / Debian GNU/Linux, kernel 2.6.18.8-xen root (hd0,0) kernel /boot/xen-3.3.0.gz com1=115200,8n1 loglvl=all guest_loglvl=all console_to_ring console=com1,vga sync_console module /boot/vmlinuz-2.6.18.8-xen root=/dev/sda1 ro console=tty0 savedefault   重启虚拟机，即可在之前指定的文件中(Host机上的/opt/vmware/Virtual Machines/debian-xen/serial-port.log)中看到虚拟机的输出信息了。  </description>
+    </item>
+    
+    <item>
+      <title>OS Lab 4 Debugging Notes</title>
+      <link>https://blog.yxwang.me/2008/08/bugs-related-to-my-fork/</link>
+      <pubDate>Fri, 22 Aug 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2008/08/bugs-related-to-my-fork/</guid>
+      <description> 系统调用 fork() 用Simics跟踪一条条汇编分析页表映射、寄存器值还真是体力活啊。。
+ 实现 Copy On Write 时，如果某一个用户态页面有多个进程共享，其中一个进程修改该页面时需要创建一个新的页面。一开始偶忘了把原来页面的内容复制到新的页面了 =_= 另外由于新的页面要代替老的页面，或者说它们的物理地址不同，但虚拟地址相同，我的方法是在内核态开辟一个大小为一个页面的空间作为中转。
+ do_fork函数中，子进程复制父进程的页表的同时会把父进程页表项置为不可写，注意最后要flush tlb。因为一开始没有flush tlb，导致最后用户态fork返回以后读取的信息来自于tlb，直接改写了共享页面中fork的返回地址，导致切换到子进程时fork的返回地址丢失。这个bug让我郁闷了两三个小时。。
+ 使用两次fork时，第二次fork返回的pid会被改掉。查了下发现为用户空间分配物理页面的代码里居然在分配好以后没有把对应的struct置为已使用，结果导致第二个子进程COW创建新页面时得到了原来的父进程页面，改写了父进程页面内容。
+  系统调用 exec()  清空页表的用户空间映射的函数一开始写得yts，bug到处都是，比如free的时候没使用指向内存块首地址的指针，记录内存地址的变量没有累加。 exec传递给内核态的两个参数必须先在内核态保存一个副本，否则清空用户态页表后就无法得到这两个参数信息了。 分配给用户态的页面必须先清零，一方面考虑到安全性，另一方面不清零会隐藏一些潜在的bug。一开始我没有在内核执行exec的时候完整的复制所有的参数，而是直接指向了原进程的内存空间，由于清空页表后再次申请新页表时得到了原来的页面，结果正好原来那个保存参数的页面和新进程的该页面重合了 =_= 于是浪费了不少时间在这个bug上  </description>
+    </item>
+    
+  </channel>
+</rss>

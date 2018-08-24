@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="趁还在编译内核的时候把以前写过的东西都转过来，今年寒假读的 (SOSP &lsquo;97)
+Disco: running commodity operating systems on scalable multiprocessors 很早的一篇paper，发表的第二年Rosenblum就创办了VMWare。这篇paper介绍了一个跑在 FLASH机器上的虚拟机Disco，FLASH的架构是实验性质的cache coherent non-uniform memory architechure(ccNUMA)。
+传统的VMM在实现上主要有三个问题
+ overhead，例如特权指令需要由VMM模拟 资源管理，缺乏对资源配置的细粒度的了解，导致资源分布不均（如调度一个没有价值的计算任务） 通讯和共享，不同虚拟机是不是应该简单的看成是享有相同硬件资源的完全独立的操作系统？  实现细节 1. 虚拟CPU Disco虚拟CPU时是把指令放到物理CPU上直接执行的。当调度到某个虚拟CPU时，Disco就把物理机的寄存器设置为虚拟机的寄存器并跳转到相应的PC。
+直接执行的好处在于大多数操作能获得和在真机上跑一样的效率，而难点在于处理不能直接放到真机上运行的指令，如修改tlb，访问物理内存等。
+Disco为每个虚拟CPU记录了一个类似于传统操作系统中process table entry的数据结构。为了模拟特权指令，Disco还在这个数据结构中维持了虚拟CPU的特权寄存器和tlb的内容。
+在MIPS处理器上，Disco运行在kernel mode掌握着对硬件的完全控制；控制器交给虚拟机的操作系统时，Disco把CPU置为supervisor mode；当进入user mode时取消。Supervisor模式允许操作系统访问受保护的内存区域(supervisor segment)，但仍不能执行特权指令，也不能访问物理内存。诸如page fault的trap发生时，vmm会捕获到这个异常，修改相应的特权寄存器并跳转到虚拟机的trap vector。
+2.虚拟内存 Disco增加了一层物理地址到机器地址的转换。虚拟机使用从0开始的物理地址，大小和为虚拟机的内存相等，Disco把这些物理地址映射到了 FLASH的40位机器地址上。这种映射的实现借助于MIPS处理器的software-reloaded TLB，当操作系统尝试在TLB中插入一个virtual-to-physical的映射时，Disco会把这里的physical address改成对应的machine address，这样之后通过这条TLB记录的地址访问就不需要再经过VMM的处理了，没有额外的overhead。
+为了方便计算TLB地址，Disco为每个虚拟机记录了一个pmap数据结构，每个pmap结构对应着虚拟机的一个物理页。pmap包含了一个指向 机器内存的引用，以及指向虚拟地址的映射（虚拟地址可能有多个，原文中用了复数形式），这主要用于页面被VMM回收时TLB的重置。另外MIPS处理器为 每个TLB记录标记了一个地址空间标识符（ASID, address space identifier），用来防止context switch时不必要的TLB刷新。Disco为了简单化处理，就在物理CPU被调度为另一个虚拟CPU时刷新TLB，这样ASID就能直接使用虚拟机提 供的了。
+这样的处理带来了性能问题，由于TLB在虚拟CPU切换时会被刷新，带来了额外的TLB miss，而TLB miss由于需要被模拟，它的代价很大。为了减少这种性能影响，Disco维持了一个virtual-to-machine的二级软TLB，TLB miss发生的时候首先查看软TLB有没有相关的记录，如果找不到再交给虚拟机上的操作系统去处理。这种处理的影响就是虚拟机所看到的TLB会比实际 CPU的TLB大很多。
+3. NUMA 内存管理 不怎么熟悉NUMA，这部分先粗读了，大致思想是通过动态的页面转移和复制维持locality，从而避免remote cache miss。
+4. 虚拟IO设备 增加特殊的设备驱动是最清晰的实现方法，每个Disco设备都定义了一个monitor call，供设备驱动传参调用。对于支持DMA操作的设备，Disco也需要截获这些DMA请求并转换为相应的machine address。对于仅有一个虚拟机访问的设备，Disco只要保证访问的排外性并翻译DMA请求即可，而不需要虚拟IO资源。截获所有DMA操作的一个 好处是Disco可以在虚拟机间共享磁盘和内存资源。">
+    <meta name="author" content="zellux">
+
+    <title> SOSP 97 - Disco &middot; Aiur · Zellux 的博客 </title>
+
+    <script src="/js/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
+    <script src="/js/jquery-3.0.47.fancybox.min.js"></script>
+
+    
+    
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.52ea10a8f3a0b8f145adadb8d3761e17a42a7634869f775ef5830ed4de77d3fa.css">
+    
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+    
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    
+    <link href="" rel="alternate" type="application/rss+xml" title="Aiur · Zellux 的博客" />
+    
+<script type="application/ld+json">
+{
+    "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https://blog.yxwang.me/"
+    },
+    "articleSection" : "post",
+    "name" : "SOSP 97 - Disco",
+    "headline" : "SOSP 97 - Disco",
+    "description" : "趁还在编译内核的时候把以前写过的东西都转过来，今年寒假读的 (SOSP &lsquo;97)
+Disco: running commodity operating systems on scalable multiprocessors 很早的一篇paper，发表的第二年Rosenblum就创办了VMWare。这篇paper介绍了一个跑在 FLASH机器上的虚拟机Disco，FLASH的架构是实验性质的cache coherent non-uniform memory architechure(ccNUMA)。
+传统的VMM在实现上主要有三个问题
+ overhead，例如特权指令需要由VMM模拟 资源管理，缺乏对资源配置的细粒度的了解，导致资源分布不均（如调度一个没有价值的计算任务） 通讯和共享，不同虚拟机是不是应该简单的看成是享有相同硬件资源的完全独立的操作系统？  实现细节 1. 虚拟CPU Disco虚拟CPU时是把指令放到物理CPU上直接执行的。当调度到某个虚拟CPU时，Disco就把物理机的寄存器设置为虚拟机的寄存器并跳转到相应的PC。
+直接执行的好处在于大多数操作能获得和在真机上跑一样的效率，而难点在于处理不能直接放到真机上运行的指令，如修改tlb，访问物理内存等。
+Disco为每个虚拟CPU记录了一个类似于传统操作系统中process table entry的数据结构。为了模拟特权指令，Disco还在这个数据结构中维持了虚拟CPU的特权寄存器和tlb的内容。
+在MIPS处理器上，Disco运行在kernel mode掌握着对硬件的完全控制；控制器交给虚拟机的操作系统时，Disco把CPU置为supervisor mode；当进入user mode时取消。Supervisor模式允许操作系统访问受保护的内存区域(supervisor segment)，但仍不能执行特权指令，也不能访问物理内存。诸如page fault的trap发生时，vmm会捕获到这个异常，修改相应的特权寄存器并跳转到虚拟机的trap vector。
+2.虚拟内存 Disco增加了一层物理地址到机器地址的转换。虚拟机使用从0开始的物理地址，大小和为虚拟机的内存相等，Disco把这些物理地址映射到了 FLASH的40位机器地址上。这种映射的实现借助于MIPS处理器的software-reloaded TLB，当操作系统尝试在TLB中插入一个virtual-to-physical的映射时，Disco会把这里的physical address改成对应的machine address，这样之后通过这条TLB记录的地址访问就不需要再经过VMM的处理了，没有额外的overhead。
+为了方便计算TLB地址，Disco为每个虚拟机记录了一个pmap数据结构，每个pmap结构对应着虚拟机的一个物理页。pmap包含了一个指向 机器内存的引用，以及指向虚拟地址的映射（虚拟地址可能有多个，原文中用了复数形式），这主要用于页面被VMM回收时TLB的重置。另外MIPS处理器为 每个TLB记录标记了一个地址空间标识符（ASID, address space identifier），用来防止context switch时不必要的TLB刷新。Disco为了简单化处理，就在物理CPU被调度为另一个虚拟CPU时刷新TLB，这样ASID就能直接使用虚拟机提 供的了。
+这样的处理带来了性能问题，由于TLB在虚拟CPU切换时会被刷新，带来了额外的TLB miss，而TLB miss由于需要被模拟，它的代价很大。为了减少这种性能影响，Disco维持了一个virtual-to-machine的二级软TLB，TLB miss发生的时候首先查看软TLB有没有相关的记录，如果找不到再交给虚拟机上的操作系统去处理。这种处理的影响就是虚拟机所看到的TLB会比实际 CPU的TLB大很多。
+3. NUMA 内存管理 不怎么熟悉NUMA，这部分先粗读了，大致思想是通过动态的页面转移和复制维持locality，从而避免remote cache miss。
+4. 虚拟IO设备 增加特殊的设备驱动是最清晰的实现方法，每个Disco设备都定义了一个monitor call，供设备驱动传参调用。对于支持DMA操作的设备，Disco也需要截获这些DMA请求并转换为相应的machine address。对于仅有一个虚拟机访问的设备，Disco只要保证访问的排外性并翻译DMA请求即可，而不需要虚拟IO资源。截获所有DMA操作的一个 好处是Disco可以在虚拟机间共享磁盘和内存资源。",
+    "inLanguage" : "en-US",
+    "author" : "zellux",
+    "creator" : "zellux",
+    "publisher": "zellux",
+    "accountablePerson" : "",
+    "copyrightHolder" : "",
+    "copyrightYear" : "2009",
+    "datePublished": "2009-04-08 00:00:00 &#43;0000 UTC",
+    "dateModified" : "2009-04-08 00:00:00 &#43;0000 UTC",
+    "url" : "https://blog.yxwang.me/2009/04/disco-running-commodity-operating-systems-on-scalable-multiprocessors/",
+    "wordCount" : "94",
+    "keywords" : [ "Computer System","Paper","Research","SOSP","VMware","Virtualization","Blog" ]
+}
+</script>
+
+  </head>
+
+  <body>
+    <nav class="nav">
+  <div class="nav-container">
+    <span class="site-title">
+      <a href="https://blog.yxwang.me/">Aiur · Zellux 的博客</a>
+    </span>
+    
+    <div class="nav-list">
+      
+      <span class="nav-item"><a href="/about">About</a></span>
+      
+      <span class="nav-item"><a href="/archive">Archive</a></span>
+      
+      <span class="nav-item"><a href="/notes">Notes</a></span>
+      
+    </div>
+  </div>
+</nav>
+
+    <div class="container">
+
+
+<div class="content">
+  <div class="post">
+    <h1 class="post-title"><a href="https://blog.yxwang.me/2009/04/disco-running-commodity-operating-systems-on-scalable-multiprocessors/">SOSP 97 - Disco</a></h1>
+    <span class="post-meta">
+  <time datetime='Wed, Apr 8, 2009' data-updated="true" itemprop="datePublished">Wed, Apr 8, 2009</time>
+  
+  <span class="post-categories">
+    •
+	<a href="https://blog.yxwang.me/categories/computer-system">Computer System</a>
+  </span>
+  
+</span>
+
+    <div class="post-content">
+      
+
+<p>趁还在编译内核的时候把以前写过的东西都转过来，今年寒假读的 (SOSP &lsquo;97)</p>
+
+<h2 id="disco-running-commodity-operating-systems-on-scalable-multiprocessors">Disco: running commodity operating systems on scalable multiprocessors</h2>
+
+<p>很早的一篇paper，发表的第二年Rosenblum就创办了VMWare。这篇paper介绍了一个跑在 FLASH机器上的虚拟机Disco，FLASH的架构是实验性质的cache coherent non-uniform memory architechure(ccNUMA)。</p>
+
+<p>传统的VMM在实现上主要有三个问题</p>
+
+<ol>
+<li>overhead，例如特权指令需要由VMM模拟</li>
+<li>资源管理，缺乏对资源配置的细粒度的了解，导致资源分布不均（如调度一个没有价值的计算任务）</li>
+<li>通讯和共享，不同虚拟机是不是应该简单的看成是享有相同硬件资源的完全独立的操作系统？</li>
+</ol>
+
+<h2 id="实现细节">实现细节</h2>
+
+<h3 id="1-虚拟cpu">1. 虚拟CPU</h3>
+
+<p>Disco虚拟CPU时是把指令放到物理CPU上直接执行的。当调度到某个虚拟CPU时，Disco就把物理机的寄存器设置为虚拟机的寄存器并跳转到相应的PC。</p>
+
+<p>直接执行的好处在于大多数操作能获得和在真机上跑一样的效率，而难点在于处理不能直接放到真机上运行的指令，如修改tlb，访问物理内存等。</p>
+
+<p>Disco为每个虚拟CPU记录了一个类似于传统操作系统中process table entry的数据结构。为了模拟特权指令，Disco还在这个数据结构中维持了虚拟CPU的特权寄存器和tlb的内容。</p>
+
+<p>在MIPS处理器上，Disco运行在kernel mode掌握着对硬件的完全控制；控制器交给虚拟机的操作系统时，Disco把CPU置为supervisor mode；当进入user mode时取消。Supervisor模式允许操作系统访问受保护的内存区域(supervisor segment)，但仍不能执行特权指令，也不能访问物理内存。诸如page fault的trap发生时，vmm会捕获到这个异常，修改相应的特权寄存器并跳转到虚拟机的trap vector。</p>
+
+<h3 id="2-虚拟内存">2.虚拟内存</h3>
+
+<p>Disco增加了一层物理地址到机器地址的转换。虚拟机使用从0开始的物理地址，大小和为虚拟机的内存相等，Disco把这些物理地址映射到了 FLASH的40位机器地址上。这种映射的实现借助于MIPS处理器的software-reloaded TLB，当操作系统尝试在TLB中插入一个virtual-to-physical的映射时，Disco会把这里的physical address改成对应的machine address，这样之后通过这条TLB记录的地址访问就不需要再经过VMM的处理了，没有额外的overhead。</p>
+
+<p>为了方便计算TLB地址，Disco为每个虚拟机记录了一个pmap数据结构，每个pmap结构对应着虚拟机的一个物理页。pmap包含了一个指向 机器内存的引用，以及指向虚拟地址的映射（虚拟地址可能有多个，原文中用了复数形式），这主要用于页面被VMM回收时TLB的重置。另外MIPS处理器为 每个TLB记录标记了一个地址空间标识符（ASID, address space identifier），用来防止context switch时不必要的TLB刷新。Disco为了简单化处理，就在物理CPU被调度为另一个虚拟CPU时刷新TLB，这样ASID就能直接使用虚拟机提 供的了。</p>
+
+<p>这样的处理带来了性能问题，由于TLB在虚拟CPU切换时会被刷新，带来了额外的TLB miss，而TLB miss由于需要被模拟，它的代价很大。为了减少这种性能影响，Disco维持了一个virtual-to-machine的二级软TLB，TLB miss发生的时候首先查看软TLB有没有相关的记录，如果找不到再交给虚拟机上的操作系统去处理。这种处理的影响就是虚拟机所看到的TLB会比实际 CPU的TLB大很多。</p>
+
+<h3 id="3-numa-内存管理">3. NUMA 内存管理</h3>
+
+<p>不怎么熟悉NUMA，这部分先粗读了，大致思想是通过动态的页面转移和复制维持locality，从而避免remote cache miss。</p>
+
+<h3 id="4-虚拟io设备">4. 虚拟IO设备</h3>
+
+<p>增加特殊的设备驱动是最清晰的实现方法，每个Disco设备都定义了一个monitor call，供设备驱动传参调用。对于支持DMA操作的设备，Disco也需要截获这些DMA请求并转换为相应的machine address。对于仅有一个虚拟机访问的设备，Disco只要保证访问的排外性并翻译DMA请求即可，而不需要虚拟IO资源。截获所有DMA操作的一个 好处是Disco可以在虚拟机间共享磁盘和内存资源。</p>
+
+<h3 id="5-copy-on-write-disks">5. Copy-on-write disks</h3>
+
+<p>DMA请求被截获时，如果请求的磁盘块已经在内存里了，就不需要再访问磁盘。如果请求的大小正好是虚拟机页面大小的整数倍，直接把对应的物理页映射 到虚拟机里就行，另外考虑到以后可能会修改这部分内存，需要将那些页面设为read-only，从而实现copy-on-write，同时这些处理对虚拟 机完全透明的。</p>
+
+<p>磁盘被写入时，分两种情况处理：对于持久性的磁盘，如包含用户文件的，同一时间Disco只允许一个虚拟机挂载这个磁盘，其他虚拟机可以通过NFS 等分布式文件系统协议访问它；而对于非持久的磁盘，如根磁盘，使用copy-on-write的策略，即在写操作发生时记录下被修改的扇区，而copy- on-write的磁盘自身不会被修改。</p>
+
+<h3 id="6-虚拟网络接口">6. 虚拟网络接口</h3>
+
+<p>虚拟机间通过NFS共享文件时，不做特殊处理的话，客户端和服务器端会各有一份buffer cache保存共享的数据。因此copy-on-write的策略同样被用在了网络实现上，虚拟机间的信息传送是通过在发送方和接收方上映射同一个只读页来完成的。</p>
+
+<h2 id="splashos-a-specialized-operating-system">SPLASHOS: A Specialized Operating System</h2>
+
+<p>SPLASHOS是一个特制的跑在Disco上的library os，包括了线程创建、同步操作、libc函数和一个用于文件IO的NFS客户端栈，应用程序和这个library os链接后就能直接跑在Disco上，配合跑多个这样的操作系统的话就能利用起整个机器的资源。另外这种操作系统也不需要自己处理page fault等异常了，直接交给虚拟机就行。</p>
+
+<h3 id="测试结果">测试结果</h3>
+
+<p>整个测试是跑在SimOS这个模拟器上的，模拟的配置是一个特点类似于FLASH的large-scale multiprocessor。测试的workload是四个比较具有代表性的，并行编译(pmake)，verilog模拟，raytrace和 sybase关系数据库。
+测试的结果，跑单个workload的时间比不用Disco慢3%到16%</p>
+
+    </div>
+        <div class="cc-license">
+      本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.zh">知识共享署名-非商业性使用 3.0 版本许可协议</a>进行许可，欢迎转载，演绎，但是必须保留本文的署名 <a href="https://blog.yxwang.me/2009/04/disco-running-commodity-operating-systems-on-scalable-multiprocessors/">zellux</a>（包含链接），且不得用于商业目的。
+    </div>
+
+  </div>
+  <div class="pagination">
+    <a class="btn previous " href="https://blog.yxwang.me/2009/04/cgo-09-multi-race/"> Prev</a>  
+    <a class="btn next " href="https://blog.yxwang.me/2009/04/sosp-99-cellular-disco/"> Next</a> 
+  </div>
+</div>
+
+
+<div id="disqus_thread"></div>
+<script>
+  var disqus_config = function () {
+  this.page.url = "https://blog.yxwang.me/2009/04/disco-running-commodity-operating-systems-on-scalable-multiprocessors/";
+  
+  };
+  (function() {
+  var d = document, s = d.createElement('script');
+  s.src = '//aiur-zellux.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+
+<div class="footer">
+  
+  <p>Powered by <a href="http://gohugo.io">Hugo</a> and <a href="https://github.com/zhe/hugo-theme-slim">Slim theme</a>.
+  
+      Follow me on <a href="https://twitter.com/zellux">Twitter</a>.
+      </p>
+  </p>
+  
+</div>
+
+                   
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+    Macros: {
+      argmax: "\\operatorname*{argmax}",
+      argmin: "\\operatorname*{argmin}"
+    }
+  },
+  jax: ["input/TeX","output/CommonHTML"]
+});
+</script>
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML">
+</script>
+
+</script>
+
+<script src="https://blog.yxwang.me/js/slim.min.aef36e671f72c9042139aae327dbe693b7ebaa67fd56f30dad4c985a91ba9294.js"></script>
+
+
+<link rel="stylesheet" href="https://blog.yxwang.me/css/solarized-light.min.5499f6bc45da0c78f070be4f720fd28b19af75306b569b77837d57c3cf819430.css" />
+<script src="/js/highlight.pack.js"></script>
+<script>
+  hljs.initHighlightingOnLoad();
+</script>
+
+</div>
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-25551121-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+<script type="text/javascript">
+    window.heap=window.heap||[],heap.load=function(e,t){window.heap.appid=e,window.heap.config=t=t||{};var r=t.forceSSL||"https:"===document.location.protocol,a=document.createElement("script");a.type="text/javascript",a.async=!0,a.src=(r?"https:":"http:")+"//cdn.heapanalytics.com/js/heap-"+e+".js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(a,n);for(var o=function(e){return function(){heap.push([e].concat(Array.prototype.slice.call(arguments,0)))}},p=["addEventProperties","addUserProperties","clearEventProperties","identify","removeEventProperty","setEventProperties","track","unsetEventProperty"],c=0;c<p.length;c++)heap[p[c]]=o(p[c])};
+      heap.load("3166778701");
+</script>
+
+
+</body>
+
+</html>
+

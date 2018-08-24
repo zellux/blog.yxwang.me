@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="这一周主要讲卡尔曼滤波 (Kalman Filter)，视频讲得比较简略，slides 做得里也有不少错误。最后看了一些其他网站的文章和视频才有了比较深刻的理解。参考资料推荐在本文结尾。
+">
+    <meta name="author" content="zellux">
+
+    <title> SLAM 笔记 2：卡尔曼滤波 &middot; Aiur · Zellux 的博客 </title>
+
+    <script src="/js/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
+    <script src="/js/jquery-3.0.47.fancybox.min.js"></script>
+
+    
+    
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.52ea10a8f3a0b8f145adadb8d3761e17a42a7634869f775ef5830ed4de77d3fa.css">
+    
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+    
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    
+    <link href="" rel="alternate" type="application/rss+xml" title="Aiur · Zellux 的博客" />
+    
+<script type="application/ld+json">
+{
+    "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https://blog.yxwang.me/"
+    },
+    "articleSection" : "post",
+    "name" : "SLAM 笔记 2：卡尔曼滤波",
+    "headline" : "SLAM 笔记 2：卡尔曼滤波",
+    "description" : "<p>这一周主要讲卡尔曼滤波 (Kalman Filter)，视频讲得比较简略，slides 做得里也有不少错误。最后看了一些其他网站的文章和视频才有了比较深刻的理解。参考资料推荐在本文结尾。</p>
+<p></p>",
+    "inLanguage" : "en-US",
+    "author" : "zellux",
+    "creator" : "zellux",
+    "publisher": "zellux",
+    "accountablePerson" : "",
+    "copyrightHolder" : "",
+    "copyrightYear" : "2018",
+    "datePublished": "2018-07-25 07:57:26 &#43;0000 UTC",
+    "dateModified" : "2018-07-25 07:57:26 &#43;0000 UTC",
+    "url" : "https://blog.yxwang.me/2018/07/robotics-slam-week2/",
+    "wordCount" : "669",
+    "keywords" : [ "Robotics","Courses","Notes","Blog" ]
+}
+</script>
+
+  </head>
+
+  <body>
+    <nav class="nav">
+  <div class="nav-container">
+    <span class="site-title">
+      <a href="https://blog.yxwang.me/">Aiur · Zellux 的博客</a>
+    </span>
+    
+    <div class="nav-list">
+      
+      <span class="nav-item"><a href="/about">About</a></span>
+      
+      <span class="nav-item"><a href="/archive">Archive</a></span>
+      
+      <span class="nav-item"><a href="/notes">Notes</a></span>
+      
+    </div>
+  </div>
+</nav>
+
+    <div class="container">
+
+
+<div class="content">
+  <div class="post">
+    <h1 class="post-title"><a href="https://blog.yxwang.me/2018/07/robotics-slam-week2/">SLAM 笔记 2：卡尔曼滤波</a></h1>
+    <span class="post-meta">
+  <time datetime='Wed, Jul 25, 2018' data-updated="true" itemprop="datePublished">Wed, Jul 25, 2018</time>
+  
+  <span class="post-categories">
+    •
+	<a href="https://blog.yxwang.me/categories/robotics">Robotics</a>
+  </span>
+  
+</span>
+
+    <div class="post-content">
+      <p>这一周主要讲卡尔曼滤波 (Kalman Filter)，视频讲得比较简略，slides 做得里也有不少错误。最后看了一些其他网站的文章和视频才有了比较深刻的理解。参考资料推荐在本文结尾。</p>
+<p></p>
+<h2 id="卡尔曼滤波-kf">卡尔曼滤波 KF</h2>
+<p>卡尔曼滤波可以从一系列包含噪音的观测数据中，估计出每个时间点系统的状态。KF 有几个基本假设：</p>
+<ol type="1">
+<li>当前状态只和前一状态有关，且和前一状态线性相关，即 <span class="math inline">\(x_{t+1}=A_t x_{t} + B_t u_t + \epsilon_t\)</span>，这里 <span class="math inline">\(x_t\)</span> 是状态向量，<span class="math inline">\(u_t\)</span> 为控制向量，<span class="math inline">\(\epsilon_t\)</span> 是均值为 0 的高斯分布噪音。</li>
+<li>测量结果和状态线性相关：<span class="math inline">\(z_t = C_t x_t + \delta_t\)</span>。这里 <span class="math inline">\(z_t\)</span> 是测量结果的向量，<span class="math inline">\(\delta_t\)</span> 表示测量噪音。</li>
+<li>最初状态也呈正态分布。</li>
+</ol>
+<p>基于高斯分布的假设，我们可以用贝叶斯模型描述状态 <span class="math display">\[
+p(x_{t+1}|x_t) = Ap(x_t) \\
+p(z_t|x_t) = Cp(x_t)
+\]</span></p>
+<p>加入运动和观测误差导致的不确定性 <span class="math inline">\(v_m\)</span> 和 <span class="math inline">\(v_0\)</span> <span class="math display">\[
+p(x_{t+1}|x_t) = Ap(x_t)+v_m \\
+p(z_t|x_t) = Cp(x_t)+v_0
+\]</span></p>
+<p>假设误差基于高斯分布 <span class="math display">\[
+p(x_{t+1}|x_t) = A\mathcal{N}(x_t, P_t) + \mathcal{N}(0, \Sigma_m) \\
+p(z_t|x_t) = C\mathcal{N}(x_t, P_t) + \mathcal{N}(0, \Sigma_0)
+\]</span></p>
+<p>把线性变换 A 和 C 代入正态分布 <span class="math display">\[
+p(x_{t+1}|x_t) = \mathcal{N}(Ax_t, A P_t A^T) + \mathcal{N}(0, \Sigma_m) \\
+p(z_t|x_t) = \mathcal{N}(Cx_t, C P_t C^T) + \mathcal{N}(0, \Sigma_0)
+\]</span></p>
+<p>线性加和 <span class="math display">\[
+p(x_{t+1}|x_t) = \mathcal{N}(Ax_t, A P_t A^T+ \Sigma_m) \\
+p(z_t|x_t) = \mathcal{N}(Cx_t, C P_t C^T + \Sigma_0)
+\]</span></p>
+<p>接下来讲如何估计这两个高斯分布的参数。</p>
+<h3 id="最大后验概率估计卡尔曼滤波">最大后验概率估计卡尔曼滤波</h3>
+<p>最大后验概率估计的目的在于最大化后验概率 <span class="math inline">\(p(x_t | z_t)\)</span>，即在对 <span class="math inline">\(x_t\)</span> 有一个预测（先验），同时获得了观测结果 <span class="math inline">\(z_t\)</span> 之后修正 <span class="math inline">\(x_t\)</span> 的值，用符号表示有 <span class="math inline">\(\hat{x_t} = \argmax_{x_t} p(x_t | z_t)\)</span></p>
+<p>由贝叶斯公式 <span class="math display">\[
+p(x_t | z_t) = \frac{p(z_t | x_t) p(x_t)}{P
+(z_t)}
+\]</span> 代入正态分布得 <span class="math display">\[
+\hat{x_t} = \argmax_{x_t}  \mathcal{N}(Cx_t, \Sigma_0) \mathcal{N}(Ax_t, A P_t A^T+ \Sigma_m)
+\]</span> 令 <span class="math display">\[
+\begin{align}
+P &amp;= A P_{t-1} A^T + \Sigma_m \\
+R &amp;= \Sigma_0
+\end{align}
+\]</span> 代入多元高斯分布（参考<a href="/2018/07/robotics-slam-week1/">第一周笔记</a>）把两个分布合并后求导，或者利用<a href="http://fourier.eng.hmc.edu/e161/lectures/gaussianprocess/node7.html">边界条件概率公式</a>，可解得 <span class="math display">\[
+\begin{align}
+\hat{x_t} &amp;= (P^{-1} + C^T R^{-1}C)^{-1} (C^T R^{-1} Z_t + P^{-1} A x_{t-1}) \\
+\hat{P_t} &amp;= (P^{-1} + C^T R^{-1}C)^{-1}
+\end{align}
+\]</span></p>
+<p>接下来根据 <a href="https://en.wikipedia.org/wiki/Woodbury_matrix_identity">Woodbury 矩阵求逆式 (Woodbury Matrix Identity)</a>，可以得到 <span class="math display">\[
+\hat{P_t} = P - P C^T (R^{-1} + C P C^T)^{-1} C P
+\]</span> 令 <span class="math inline">\(K = P C^T (R + C P C^T)^{-1}\)</span>，有 <span class="math inline">\(\hat{P_t} = P - KCP\)</span>，<span class="math inline">\(\hat{x_t}\)</span> 简化过程如下 <span class="math display">\[
+\begin{align}
+\hat{x_t}
+&amp;= (P^{-1} + C^T R^{-1}C)^{-1} (C^T R^{-1} z_t + P^{-1} A x_{t-1}) \\
+&amp;= (P - KCP) (C^T R^{-1} z_t + P^{-1} A x_{t-1}) \\
+&amp;= A x_{t-1} + P C^T R^{-1} z_t - K C A x_{t-1} - KCP C^T R^{-1} z_t \\
+&amp;= A x_{t-1} - K C A x_{t-1} + (P C^T R^{-1} - KCP C^T R^{-1}) z_t \\
+&amp;= A x_{t-1} - K C A x_{t-1} + K z_t
+\end{align}
+\]</span></p>
+<p>这里 K 就是卡尔曼增益 (Kalman gain)。</p>
+<h2 id="扩展卡尔曼滤波-extended-kalman-filter">扩展卡尔曼滤波 (Extended Kalman Filter)</h2>
+<p>KF 的局限之一在于假设了线性模型，EKF 去掉了线性模型的限制，可以处理更一般的状态变化函数 <span class="math display">\[
+\begin{align}
+x_{t+1} = A x_t + B u_t &amp;=&gt; x_{t+1} = f(x_t, u_k) \\
+  z_t = C x_t &amp;=&gt; z_t = h(x_t)
+\end{align}
+\]</span></p>
+<p>于是协方差的预测变成了 <span class="math display">\[
+p(x_{t+1}|x_t) = \mathcal{N}(f(x_t), \frac{\partial{f}}{\partial{x}} P_t \frac{\partial{f^T}}{\partial{x}} + \Sigma_m)
+\]</span> 卡尔曼增益为 <span class="math display">\[
+K = P \frac{\partial{h^T}}{\partial{x}} (\frac{\partial{h}}{\partial{x}} P_t \frac{\partial{h^T}}{\partial{x}})^{-1}
+\]</span> 更新方程为 <span class="math display">\[
+\begin{align}
+\hat{x_t} &amp;= f(x_{t-1}) + K(z_t - h(f(x_t))) \\
+\hat{P_t} &amp;= P - K \frac{\partial{h}}{\partial{x}} P
+\end{align}
+\]</span></p>
+<h2 id="无迹卡尔曼滤波-unscented-kalman-filter">无迹卡尔曼滤波 (Unscented Kalman Filter)</h2>
+<p>EKF 的局限之一在于只是对非线性的变换做了近似，用泰勒级数展开后取一阶项，容易产生导致较大的误差。UKF 采用了确定性的取样方法来近似高斯分布，这个取样方法又被称为无迹变换 (Unscented Transformation)。</p>
+<figure>
+<img src="/images/2018-07/ukf-mapping.png" alt="UKF 取样" /><figcaption>UKF 取样</figcaption>
+</figure>
+<h3 id="unscented-transformation">Unscented Transformation</h3>
+<p>UT 可以用来计算非线形变换后随机变量的分布情况。考虑 L 维随机变量 <strong>x</strong> 和非线性的函数 <span class="math inline">\(\pmb{y} = f(\pmb{x})​\)</span>，假设 <strong>x</strong> 的均值为 <span class="math inline">\(\bar{\pmb{x}}​\)</span>，协方差矩阵 <span class="math inline">\(P_x​\)</span>。为了计算 <span class="math inline">\(\pmb{y}​\)</span> 的分布情况，我们根据下面三个式子创造一个维数为 2L + 1 的 sigma 矩阵 <span class="math inline">\(\pmb{\mathcal{X}}​\)</span>： <span class="math display">\[
+\begin{align}
+\mathcal{X}_0 &amp;= \bar{\pmb{x}} \\
+\mathcal{X}_i &amp;= \bar{\pmb{x}} + (\sqrt{(L + \lambda)\pmb{P}_x})_i &amp;&amp; i = 1, \dots, L \\
+\mathcal{X}_i &amp;= \bar{\pmb{x}} + (\sqrt{(L + \lambda)\pmb{P}_x})_{i - L} &amp;&amp; i = L + 1, \dots, 2L
+\end{align}
+\]</span> 这里 <span class="math inline">\(\lambda = \alpha^2(L + \kappa) - L\)</span> 为调节参数，<span class="math inline">\(\alpha\)</span> 决定采样点围绕均值的扩散程度等参数。下标 i 表示矩阵的第 i 列。这里的 <span class="math inline">\(\mathcal{X}_i\)</span> 也被称为 sigma 向量，通过非线性函数后转变到同一个矩阵中： <span class="math display">\[
+\mathcal{Y}_i = f(\mathcal{X}_i)
+\]</span></p>
+<p><span class="math inline">\(\pmb{y}\)</span> 的均值和协方差就可以通过对 <span class="math inline">\(\mathcal{Y}\)</span> 矩阵列的加权求和获得了 <span class="math display">\[
+\begin{align}
+\pmb{y} &amp;\approx \sum_{i=0}^{2L} W_i^{(m)} \mathcal{Y}_i \\
+\pmb{P}_y &amp;\approx \sum_{i=0}^{2L} W_i^{(c)} \{\mathcal{Y}_i - \bar{\pmb{y}}\}\{\mathcal{Y}_i - \bar{\pmb{y}}\}^T
+\end{align}
+\]</span> 其中权值 <span class="math inline">\(W_i\)</span> 的定义为 <span class="math display">\[
+\begin{align}
+W_0^{(m)} &amp;= \lambda / (L + \lambda) \\
+W_0^{(c)} &amp;= \lambda / (L + \lambda) + (1 - \alpha^2 + \beta) \\
+W_0^{(c)} &amp;= W_0^{(m)} = 1 / \{ 2(L + \lambda) \} &amp; i = 1, \dots, 2L.
+\end{align}
+\]</span> 下图很好地解释了上述几个式子的变换过程</p>
+<figure>
+<img src="/images/2018-07/ukf-sigma-matrix.png" alt="UT 的图形解释" /><figcaption>UT 的图形解释</figcaption>
+</figure>
+<h3 id="unscented-kalman-filter">Unscented Kalman Filter</h3>
+<p>接下来回到 UKF。介绍了 UT 之后 UKF 就容易多了。首先构造一个包含初始状态和噪音的矩阵 <span class="math inline">\(\pmb{x}_k^{\alpha} = [\pmb{x}_k^T \pmb{v}_k^T \pmb{n}_k^T ]^T\)</span>，这里三个向量分别为状态向量、控制向量和噪音向量。接下来对这个矩阵应用无迹变换获得 sigma 矩阵 <span class="math inline">\(\mathcal{X}_k^{\alpha}\)</span>，之后就回到了普通 KF 过程。具体的状态转移公式可以参考本文结尾参考资料《Kalman Filtering and Neural Networks》一书中的章节。</p>
+<h2 id="作业">作业</h2>
+<p>这周的作业是用卡尔曼滤波预测一个小球运动 10 帧之后的位置。理解了卡尔曼滤波后做起来不难，定义好动力学矩阵 A 和测量矩阵 C，接着根据上面的公式计算卡尔曼增益 K、新状态的均值和协方差矩阵，再通过新状态的位置和速度计算 10 帧之后的位置就好。</p>
+<p>调参方面有一些小技巧，一开始测试的时候可以先给 <span class="math inline">\(\Sigma_m\)</span> 设一个很大的值，同时给 <span class="math inline">\(\Sigma_0\)</span> 设一个很小的值，这样每次算出来的位置都应该是测量出来的位置，否则代码里可能有 bug。接下来就可以根据生成的预测图来调整 <span class="math inline">\(\Sigma_m\)</span>，肉眼估一下坐标的误差范围（注意到 y 的变化速度比 x 的慢很多），然后根据坐标误差算一下速度误差。测量误差根据文档可以给一个 0.01 - 0.1 的参数。</p>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><a href="http://www.bzarg.com/p/how-a-kalman-filter-works-in-pictures/">How a Kalman filter works, in pictures</a>：这篇是最推荐的，作者还用不同颜色标记各个变量，看起来一目了然。</li>
+<li><a href="https://www.jianshu.com/p/2768642e3abf">Kalman Filter 学习笔记</a>：上文的中文版。</li>
+<li>《Probabilistic Robotics》一书第三章，pdf 版可以在<a href="https://docs.ufpr.br/~danielsantos/ProbabilisticRobotics.pdf">这里</a>下到。</li>
+<li>Michel van Biezen 的 Kalman Filter 视频：<a href="https://youtu.be/CaCcOwJPytQ" class="uri">https://youtu.be/CaCcOwJPytQ</a> 比较长，一共有 55 集，但是讲得很细致。</li>
+<li><a href="http://home.wlu.edu/~levys/kalman_tutorial/">The Extended Kalman Filter: An Interactive Tutorial for Non-Experts</a>：EKF 的介绍网站，只要求高中数学基础。</li>
+<li><a href="https://www.seas.harvard.edu/courses/cs281/papers/unscented.pdf">The Unscented Kalman Filter for Nonlinear Estimation</a>: UKF 论文。</li>
+<li><a href="https://www.pdx.edu/biomedical-signal-processing-lab/sites/www.pdx.edu.biomedical-signal-processing-lab/files/ukf.wan_.chapt7_.pdf">《Kalman Filtering and Neural Networks》第七章</a>：EKF 和 UKF 的详细介绍。</li>
+</ul>
+<h2 id="全课程的笔记链接">全课程的笔记链接</h2>
+<ul>
+<li><a href="/2018/07/robotics-slam-week1/">第一周笔记：高斯分布</a></li>
+<li>第二周笔记：卡尔曼滤波</li>
+<li><a href="/2018/08/robotics-slam-week3/">第三周笔记：地图</a></li>
+<li><a href="/2018/08/robotics-slam-week4/">第四周笔记：定位</a></li>
+</ul>
+    </div>
+        <div class="cc-license">
+      本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.zh">知识共享署名-非商业性使用 3.0 版本许可协议</a>进行许可，欢迎转载，演绎，但是必须保留本文的署名 <a href="https://blog.yxwang.me/2018/07/robotics-slam-week2/">zellux</a>（包含链接），且不得用于商业目的。
+    </div>
+
+  </div>
+  <div class="pagination">
+    <a class="btn previous " href="https://blog.yxwang.me/2018/08/robotics-slam-week3/"> Prev</a>  
+    <a class="btn next " href="https://blog.yxwang.me/2018/07/robotics-slam-week1/"> Next</a> 
+  </div>
+</div>
+
+
+<div id="disqus_thread"></div>
+<script>
+  var disqus_config = function () {
+  this.page.url = "https://blog.yxwang.me/2018/07/robotics-slam-week2/";
+  
+  };
+  (function() {
+  var d = document, s = d.createElement('script');
+  s.src = '//aiur-zellux.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+
+<div class="footer">
+  
+  <p>Powered by <a href="http://gohugo.io">Hugo</a> and <a href="https://github.com/zhe/hugo-theme-slim">Slim theme</a>.
+  
+      Follow me on <a href="https://twitter.com/zellux">Twitter</a>.
+      </p>
+  </p>
+  
+</div>
+
+                   
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+    Macros: {
+      argmax: "\\operatorname*{argmax}",
+      argmin: "\\operatorname*{argmin}"
+    }
+  },
+  jax: ["input/TeX","output/CommonHTML"]
+});
+</script>
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML">
+</script>
+
+</script>
+
+<script src="https://blog.yxwang.me/js/slim.min.aef36e671f72c9042139aae327dbe693b7ebaa67fd56f30dad4c985a91ba9294.js"></script>
+
+
+<link rel="stylesheet" href="https://blog.yxwang.me/css/solarized-light.min.5499f6bc45da0c78f070be4f720fd28b19af75306b569b77837d57c3cf819430.css" />
+<script src="/js/highlight.pack.js"></script>
+<script>
+  hljs.initHighlightingOnLoad();
+</script>
+
+</div>
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-25551121-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+<script type="text/javascript">
+    window.heap=window.heap||[],heap.load=function(e,t){window.heap.appid=e,window.heap.config=t=t||{};var r=t.forceSSL||"https:"===document.location.protocol,a=document.createElement("script");a.type="text/javascript",a.async=!0,a.src=(r?"https:":"http:")+"//cdn.heapanalytics.com/js/heap-"+e+".js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(a,n);for(var o=function(e){return function(){heap.push([e].concat(Array.prototype.slice.call(arguments,0)))}},p=["addEventProperties","addUserProperties","clearEventProperties","identify","removeEventProperty","setEventProperties","track","unsetEventProperty"],c=0;c<p.length;c++)heap[p[c]]=o(p[c])};
+      heap.load("3166778701");
+</script>
+
+
+</body>
+
+</html>
+

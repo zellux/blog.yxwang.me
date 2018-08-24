@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Computer Languages on Aiur · Zellux 的博客</title>
+    <link>https://blog.yxwang.me/tags/computer-languages/</link>
+    <description>Recent content in Computer Languages on Aiur · Zellux 的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Wed, 25 Aug 2010 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.yxwang.me/tags/computer-languages/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>gcc 内联汇编中 %c 的用法</title>
+      <link>https://blog.yxwang.me/2010/08/gcc-operand-substitution/</link>
+      <pubDate>Wed, 25 Aug 2010 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2010/08/gcc-operand-substitution/</guid>
+      <description>这几天看KVM代码的时候看到里面有个内联汇编的语法很陌生（下面的代码截取了部分内联汇编片段）：
+asm ( &amp;quot;mov %c[rax](%3), %%rax \n\t&amp;quot; &amp;quot;mov %c[rbx](%3), %%rbx \n\t&amp;quot; &amp;quot;mov %c[rdx](%3), %%rdx \n\t&amp;quot; &amp;quot;mov %c[rsi](%3), %%rsi \n\t&amp;quot; &amp;quot;mov %c[rdi](%3), %%rdi \n\t&amp;quot; : &amp;quot;=q&amp;quot; (fail) : &amp;quot;r&amp;quot;(vcpu-&amp;gt;launched), &amp;quot;d&amp;quot;((unsigned long)HOST_RSP), &amp;quot;c&amp;quot;(vcpu), [rax]&amp;quot;i&amp;quot;(offsetof(struct kvm_vcpu, regs[VCPU_REGS_RAX])), [rbx]&amp;quot;i&amp;quot;(offsetof(struct kvm_vcpu, regs[VCPU_REGS_RBX])), [rcx]&amp;quot;i&amp;quot;(offsetof(struct kvm_vcpu, regs[VCPU_REGS_RCX])) : &amp;quot;cc&amp;quot;, &amp;quot;memory&amp;quot; );  stackoverflow上问了下才知道这是gcc的operand substitution语法，%c后面跟上常量名，就能在内联汇编中使用这个常量了。
+以这段代码为例，vcpu是struct kvm_vcpu类型，[rax]&amp;ldquo;i&amp;rdquo;(offsetof(struct kvm_vcpu, regs[VCPU_REGS_RAX])这句话把vcpu-&amp;gt;regs[VCPU_REGS_RAX]相对于vcpu的偏移赋值给了rax这一常量。接下来回到第一行mov %crax, %%eax，%c[rax]等于前面得到的偏移量，加上vcpu并取值后就是vcpu-&amp;gt;regs[VCPU_REGS_RAX]中保存的值了，这个指令会把这个值保存在%rax寄存器中，从而完成了vcpu的rax寄存器恢复工作。</description>
+    </item>
+    
+  </channel>
+</rss>

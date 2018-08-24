@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="重定向：
+主要用到open, close, read和write这几个函数，关于它们的使用方法可以使用 man 2 &lt;函数名&gt; 查看。
+这里简单介绍下： Linux内核为每个进程维护了一张已打开的文件的表格，用File Descriptor（整型，以下简写成fd）可以访问到这些文件。所以很容易理解tsh.c中的函数listjobs为什么需要一个output_fd的整型参数，注意它的后面有这么一行： if (writer(output_fd, buf, strlen(buf)) &lt; 0) …
+这一行就把前面构造好的buf字符串（包括当前进程的信息）输出到这个output_fd对应的文件中了。
+每个进程的值为0, 1, 2的fd都指向相同的文件，0对应标准输入（通常是键盘输入），1对应标准输出（通常为屏幕），2对应标准错误输出。
+可以看到在main方法的开头，有这么一句 dup2(1, 2);
+dup2的作用是把参数二指向的文件改成和参数一一样（如果之前打开了文件，则先关闭），这句话的作用就是把原来要输出到标准错误端(stderr)的内容 输出到标准输出端(stdout)，便于调试。
+理解了fd和dup2的作用后，重定向也就很容易实现了，一种最简单的方法就是先用open函数打开输出文件并得到对应的fd，然后用dup2把标准输出/输入端的指向改成文件的fd。
+另外注意用open创建输出重定向的文件的时候要加上S_IRUSR和S_IWUSR选项，否则创建后的文件没有读写权限。（不过好像这个lab的测试数据比较厚道，会事先touch一下，不加这两个选项应该也能通过测试）
+一些文档中未定义的行为： argv 假如我输入的命令是/bin/ls -l &gt; ls.txt，对应的argv应该包括哪些内容呢？ 一般的情况argv的内容应该是[&lsquo;/bin/ls&rsquo;, &lsquo;-l&rsquo;]，后面的重定向符是不包括的不过在这个lab中似乎没有这个限制，不去掉重定向和管道部分应该还是能通过测试的。
+Job ID的分配 如果现在1, 2, 4号子任务在后台运行，再新增一个进程的话应该给它分配多少呢？ 这个问题不需要处理，只要所有的jobs队列操作统一使用tsh.c中给出的几个函数就行。
+其他： 关于信号的转发、后台前台的转换等内容，文档和书上都说得很清楚了，这里不再赘述。
+P.S. 多进程程序的调试大家之前应该接触的比较少，其实这个lab大致的代码不难写，难点在于细节上的debug比较困难，调试过程对第八章的理解很有帮助。">
+    <meta name="author" content="zellux">
+
+    <title> ICS Lab 6 &middot; Aiur · Zellux 的博客 </title>
+
+    <script src="/js/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
+    <script src="/js/jquery-3.0.47.fancybox.min.js"></script>
+
+    
+    
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.52ea10a8f3a0b8f145adadb8d3761e17a42a7634869f775ef5830ed4de77d3fa.css">
+    
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+    
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    
+    <link href="" rel="alternate" type="application/rss+xml" title="Aiur · Zellux 的博客" />
+    
+<script type="application/ld+json">
+{
+    "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https://blog.yxwang.me/"
+    },
+    "articleSection" : "post",
+    "name" : "ICS Lab 6",
+    "headline" : "ICS Lab 6",
+    "description" : "重定向：
+主要用到open, close, read和write这几个函数，关于它们的使用方法可以使用 man 2 &lt;函数名&gt; 查看。
+这里简单介绍下： Linux内核为每个进程维护了一张已打开的文件的表格，用File Descriptor（整型，以下简写成fd）可以访问到这些文件。所以很容易理解tsh.c中的函数listjobs为什么需要一个output_fd的整型参数，注意它的后面有这么一行： if (writer(output_fd, buf, strlen(buf)) &lt; 0) …
+这一行就把前面构造好的buf字符串（包括当前进程的信息）输出到这个output_fd对应的文件中了。
+每个进程的值为0, 1, 2的fd都指向相同的文件，0对应标准输入（通常是键盘输入），1对应标准输出（通常为屏幕），2对应标准错误输出。
+可以看到在main方法的开头，有这么一句 dup2(1, 2);
+dup2的作用是把参数二指向的文件改成和参数一一样（如果之前打开了文件，则先关闭），这句话的作用就是把原来要输出到标准错误端(stderr)的内容 输出到标准输出端(stdout)，便于调试。
+理解了fd和dup2的作用后，重定向也就很容易实现了，一种最简单的方法就是先用open函数打开输出文件并得到对应的fd，然后用dup2把标准输出/输入端的指向改成文件的fd。
+另外注意用open创建输出重定向的文件的时候要加上S_IRUSR和S_IWUSR选项，否则创建后的文件没有读写权限。（不过好像这个lab的测试数据比较厚道，会事先touch一下，不加这两个选项应该也能通过测试）
+一些文档中未定义的行为： argv 假如我输入的命令是/bin/ls -l &gt; ls.txt，对应的argv应该包括哪些内容呢？ 一般的情况argv的内容应该是[&lsquo;/bin/ls&rsquo;, &lsquo;-l&rsquo;]，后面的重定向符是不包括的不过在这个lab中似乎没有这个限制，不去掉重定向和管道部分应该还是能通过测试的。
+Job ID的分配 如果现在1, 2, 4号子任务在后台运行，再新增一个进程的话应该给它分配多少呢？ 这个问题不需要处理，只要所有的jobs队列操作统一使用tsh.c中给出的几个函数就行。
+其他： 关于信号的转发、后台前台的转换等内容，文档和书上都说得很清楚了，这里不再赘述。
+P.S. 多进程程序的调试大家之前应该接触的比较少，其实这个lab大致的代码不难写，难点在于细节上的debug比较困难，调试过程对第八章的理解很有帮助。",
+    "inLanguage" : "en-US",
+    "author" : "zellux",
+    "creator" : "zellux",
+    "publisher": "zellux",
+    "accountablePerson" : "",
+    "copyrightHolder" : "",
+    "copyrightYear" : "2008",
+    "datePublished": "2008-05-27 00:00:00 &#43;0000 UTC",
+    "dateModified" : "2008-05-27 00:00:00 &#43;0000 UTC",
+    "url" : "https://blog.yxwang.me/2008/05/ics-lab-6/",
+    "wordCount" : "47",
+    "keywords" : [ "Courses","ICS","Lab","Blog" ]
+}
+</script>
+
+  </head>
+
+  <body>
+    <nav class="nav">
+  <div class="nav-container">
+    <span class="site-title">
+      <a href="https://blog.yxwang.me/">Aiur · Zellux 的博客</a>
+    </span>
+    
+    <div class="nav-list">
+      
+      <span class="nav-item"><a href="/about">About</a></span>
+      
+      <span class="nav-item"><a href="/archive">Archive</a></span>
+      
+      <span class="nav-item"><a href="/notes">Notes</a></span>
+      
+    </div>
+  </div>
+</nav>
+
+    <div class="container">
+
+
+<div class="content">
+  <div class="post">
+    <h1 class="post-title"><a href="https://blog.yxwang.me/2008/05/ics-lab-6/">ICS Lab 6</a></h1>
+    <span class="post-meta">
+  <time datetime='Tue, May 27, 2008' data-updated="true" itemprop="datePublished">Tue, May 27, 2008</time>
+  
+  <span class="post-categories">
+    •
+	<a href="https://blog.yxwang.me/categories/courses">Courses</a>
+  </span>
+  
+</span>
+
+    <div class="post-content">
+      <p>重定向：</p>
+
+<p>主要用到open, close, read和write这几个函数，关于它们的使用方法可以使用
+man 2 &lt;函数名&gt;
+查看。</p>
+
+<p>这里简单介绍下：
+Linux内核为每个进程维护了一张已打开的文件的表格，用File Descriptor（整型，以下简写成fd）可以访问到这些文件。所以很容易理解tsh.c中的函数listjobs为什么需要一个output_fd的整型参数，注意它的后面有这么一行：
+if (writer(output_fd, buf, strlen(buf)) &lt; 0) …</p>
+
+<p>这一行就把前面构造好的buf字符串（包括当前进程的信息）输出到这个output_fd对应的文件中了。</p>
+
+<p>每个进程的值为0, 1, 2的fd都指向相同的文件，0对应标准输入（通常是键盘输入），1对应标准输出（通常为屏幕），2对应标准错误输出。</p>
+
+<p>可以看到在main方法的开头，有这么一句
+dup2(1, 2);</p>
+
+<p>dup2的作用是把参数二指向的文件改成和参数一一样（如果之前打开了文件，则先关闭），这句话的作用就是把原来要输出到标准错误端(stderr)的内容
+输出到标准输出端(stdout)，便于调试。</p>
+
+<p>理解了fd和dup2的作用后，重定向也就很容易实现了，一种最简单的方法就是先用open函数打开输出文件并得到对应的fd，然后用dup2把标准输出/输入端的指向改成文件的fd。</p>
+
+<p>另外注意用open创建输出重定向的文件的时候要加上S_IRUSR和S_IWUSR选项，否则创建后的文件没有读写权限。（不过好像这个lab的测试数据比较厚道，会事先touch一下，不加这两个选项应该也能通过测试）</p>
+
+<p>一些文档中未定义的行为：
+argv
+假如我输入的命令是/bin/ls -l &gt; ls.txt，对应的argv应该包括哪些内容呢？
+一般的情况argv的内容应该是[&lsquo;/bin/ls&rsquo;, &lsquo;-l&rsquo;]，后面的重定向符是不包括的不过在这个lab中似乎没有这个限制，不去掉重定向和管道部分应该还是能通过测试的。</p>
+
+<p>Job ID的分配
+如果现在1, 2, 4号子任务在后台运行，再新增一个进程的话应该给它分配多少呢？
+这个问题不需要处理，只要所有的jobs队列操作统一使用tsh.c中给出的几个函数就行。</p>
+
+<p>其他：
+关于信号的转发、后台前台的转换等内容，文档和书上都说得很清楚了，这里不再赘述。</p>
+
+<p>P.S. 多进程程序的调试大家之前应该接触的比较少，其实这个lab大致的代码不难写，难点在于细节上的debug比较困难，调试过程对第八章的理解很有帮助。</p>
+
+    </div>
+        <div class="cc-license">
+      本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.zh">知识共享署名-非商业性使用 3.0 版本许可协议</a>进行许可，欢迎转载，演绎，但是必须保留本文的署名 <a href="https://blog.yxwang.me/2008/05/ics-lab-6/">zellux</a>（包含链接），且不得用于商业目的。
+    </div>
+
+  </div>
+  <div class="pagination">
+    <a class="btn previous " href="https://blog.yxwang.me/2008/05/application-level-isolation-and-recovery-with-solitude/"> Prev</a>  
+    <a class="btn next " href="https://blog.yxwang.me/2008/05/subvirt-implementing-malware-with-virtual-machines/"> Next</a> 
+  </div>
+</div>
+
+
+<div id="disqus_thread"></div>
+<script>
+  var disqus_config = function () {
+  this.page.url = "https://blog.yxwang.me/2008/05/ics-lab-6/";
+  
+  };
+  (function() {
+  var d = document, s = d.createElement('script');
+  s.src = '//aiur-zellux.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+
+<div class="footer">
+  
+  <p>Powered by <a href="http://gohugo.io">Hugo</a> and <a href="https://github.com/zhe/hugo-theme-slim">Slim theme</a>.
+  
+      Follow me on <a href="https://twitter.com/zellux">Twitter</a>.
+      </p>
+  </p>
+  
+</div>
+
+                   
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+    Macros: {
+      argmax: "\\operatorname*{argmax}",
+      argmin: "\\operatorname*{argmin}"
+    }
+  },
+  jax: ["input/TeX","output/CommonHTML"]
+});
+</script>
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML">
+</script>
+
+</script>
+
+<script src="https://blog.yxwang.me/js/slim.min.aef36e671f72c9042139aae327dbe693b7ebaa67fd56f30dad4c985a91ba9294.js"></script>
+
+
+<link rel="stylesheet" href="https://blog.yxwang.me/css/solarized-light.min.5499f6bc45da0c78f070be4f720fd28b19af75306b569b77837d57c3cf819430.css" />
+<script src="/js/highlight.pack.js"></script>
+<script>
+  hljs.initHighlightingOnLoad();
+</script>
+
+</div>
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-25551121-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+<script type="text/javascript">
+    window.heap=window.heap||[],heap.load=function(e,t){window.heap.appid=e,window.heap.config=t=t||{};var r=t.forceSSL||"https:"===document.location.protocol,a=document.createElement("script");a.type="text/javascript",a.async=!0,a.src=(r?"https:":"http:")+"//cdn.heapanalytics.com/js/heap-"+e+".js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(a,n);for(var o=function(e){return function(){heap.push([e].concat(Array.prototype.slice.call(arguments,0)))}},p=["addEventProperties","addUserProperties","clearEventProperties","identify","removeEventProperty","setEventProperties","track","unsetEventProperty"],c=0;c<p.length;c++)heap[p[c]]=o(p[c])};
+      heap.load("3166778701");
+</script>
+
+
+</body>
+
+</html>
+

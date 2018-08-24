@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Rest on Aiur · Zellux 的博客</title>
+    <link>https://blog.yxwang.me/tags/rest/</link>
+    <description>Recent content in Rest on Aiur · Zellux 的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sun, 20 Nov 2011 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.yxwang.me/tags/rest/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>REST 服务的方法</title>
+      <link>https://blog.yxwang.me/2011/11/methods-in-restful-applications/</link>
+      <pubDate>Sun, 20 Nov 2011 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2011/11/methods-in-restful-applications/</guid>
+      <description>HEAD 方法和 GET 方法比较像，但是它不返回对象的实际表示，只返回一个 HTTP 头。HEAD 可以用来查看对象修改时间、大小等信息，Amazon S3 的客户端就用它来读取文件元信息。
+用 PUT 和 POST 创建对象时的一个区别在于，使用前者时客户端知道被创建对象的 URL（例如 /items/3），而后者则不需要客户端了解（例如 /items/new）。
+OPTIONS 用来查看客户端对某个资源有那些可用的操作。
+正确的设计应当保证：
+ GET 和 HEAD 是安全的，即不会修改任何对象状态。多次调用它们的结果应当和只调用一次甚至不调用一样。 GET、HEAD、PUT 和 DELETE 方法是幂等（idempotent）的。多次调用它们的结果应当和只调用一次一样。  这两点保证了在一个不可靠的网络中，客户端仍能进行有效的操作。
+参考：Restful Web Services</description>
+    </item>
+    
+  </channel>
+</rss>

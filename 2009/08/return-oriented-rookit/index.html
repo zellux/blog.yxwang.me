@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="这篇题目为Return-Oriented Rootkits: Bypassing Kernel Code Integrity Protection Mechanisms的论文发在了今年的Usenix Security上，现在在Usenix网站上还不能下到这篇paper的pdf，可以去作者的主页上下。
+现在有不少用来防止栈溢出攻击的技术，比如操作系统保证任何一个页不能同时为可写且可读（WinXP SP2、Win 2003、Exec Shield for Linux等都采用了这个策略），这个方法实现起来比较简单，但只能防范部分形式的攻击，如果攻击者事先准备一张含有恶意代码的用户态的只读页，然后跳转到这个页，就能绕开这种保护措施了；另外也有人提出在操作系统的下面再加一层虚拟层，让它来保证上层系统没有因为各种buffer overflow而执行恶意代码（NICKLE）。
+而这里提到的return-oriented的攻击方法不同于传统的攻击机制，它所采用的攻击代码都是内核自身的代码，因此能绕过前面提到的各种保护手段。
+所谓return-oriented programming，简单的说就是把原来已经存在的代码块拼接起来，拼接的方式是通过一个预先准备好的特殊的返回栈，里面包含了各条指令结束后下一条指令的地址。
+例如现在函数A里面有这么一段指令 instruction A ret
+函数B里面有另外一段： instruction B ret
+它们在正常的运行情况下没有任何关系，但是我发现如果把A和B拼起来就能达到我想要的结果，于是我构造了一个包含有A和B的地址的栈，先通过ret指令返回到instruction A处，之后再执行ret指令时，由于栈是精心构造的，因此接下来会执行到instruction B，这样就得到我想要的结果了。只要这个ret前的指令库足够大，就能实现几乎所有的程序。
+这种攻击方式并非这篇paper的首创，最早是由Shacham提出的（http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.140.9210，http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.78.7135）
+这篇paper的一大贡献在于实现了一个自动从libc和驱动、内核等代码中找到可用的指令，并拼接成所需程序的系统，这里面包括一个扫描可利用代码、并把它们结合起来的Constructor，一套专用的语言，以及把这套语言编译成对应代码片段之和的编译器，最后还有一个计算实际代码地址的Loader。
+这套攻击机制在WinXP SP2/Sp3, Vista SP1等系统上都获得了成功，尽管查找代码并生成这个过程的overhead很大，但对于一次成功的rootkit攻击来说影响并不大。">
+    <meta name="author" content="zellux">
+
+    <title> 基于函数调用栈的 rootkit &middot; Aiur · Zellux 的博客 </title>
+
+    <script src="/js/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
+    <script src="/js/jquery-3.0.47.fancybox.min.js"></script>
+
+    
+    
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.52ea10a8f3a0b8f145adadb8d3761e17a42a7634869f775ef5830ed4de77d3fa.css">
+    
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+    
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    
+    <link href="" rel="alternate" type="application/rss+xml" title="Aiur · Zellux 的博客" />
+    
+<script type="application/ld+json">
+{
+    "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https://blog.yxwang.me/"
+    },
+    "articleSection" : "post",
+    "name" : "基于函数调用栈的 rootkit",
+    "headline" : "基于函数调用栈的 rootkit",
+    "description" : "这篇题目为Return-Oriented Rootkits: Bypassing Kernel Code Integrity Protection Mechanisms的论文发在了今年的Usenix Security上，现在在Usenix网站上还不能下到这篇paper的pdf，可以去作者的主页上下。
+现在有不少用来防止栈溢出攻击的技术，比如操作系统保证任何一个页不能同时为可写且可读（WinXP SP2、Win 2003、Exec Shield for Linux等都采用了这个策略），这个方法实现起来比较简单，但只能防范部分形式的攻击，如果攻击者事先准备一张含有恶意代码的用户态的只读页，然后跳转到这个页，就能绕开这种保护措施了；另外也有人提出在操作系统的下面再加一层虚拟层，让它来保证上层系统没有因为各种buffer overflow而执行恶意代码（NICKLE）。
+而这里提到的return-oriented的攻击方法不同于传统的攻击机制，它所采用的攻击代码都是内核自身的代码，因此能绕过前面提到的各种保护手段。
+所谓return-oriented programming，简单的说就是把原来已经存在的代码块拼接起来，拼接的方式是通过一个预先准备好的特殊的返回栈，里面包含了各条指令结束后下一条指令的地址。
+例如现在函数A里面有这么一段指令 instruction A ret
+函数B里面有另外一段： instruction B ret
+它们在正常的运行情况下没有任何关系，但是我发现如果把A和B拼起来就能达到我想要的结果，于是我构造了一个包含有A和B的地址的栈，先通过ret指令返回到instruction A处，之后再执行ret指令时，由于栈是精心构造的，因此接下来会执行到instruction B，这样就得到我想要的结果了。只要这个ret前的指令库足够大，就能实现几乎所有的程序。
+这种攻击方式并非这篇paper的首创，最早是由Shacham提出的（http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.140.9210，http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.78.7135）
+这篇paper的一大贡献在于实现了一个自动从libc和驱动、内核等代码中找到可用的指令，并拼接成所需程序的系统，这里面包括一个扫描可利用代码、并把它们结合起来的Constructor，一套专用的语言，以及把这套语言编译成对应代码片段之和的编译器，最后还有一个计算实际代码地址的Loader。
+这套攻击机制在WinXP SP2/Sp3, Vista SP1等系统上都获得了成功，尽管查找代码并生成这个过程的overhead很大，但对于一次成功的rootkit攻击来说影响并不大。",
+    "inLanguage" : "en-US",
+    "author" : "zellux",
+    "creator" : "zellux",
+    "publisher": "zellux",
+    "accountablePerson" : "",
+    "copyrightHolder" : "",
+    "copyrightYear" : "2009",
+    "datePublished": "2009-08-12 00:00:00 &#43;0000 UTC",
+    "dateModified" : "2009-08-12 00:00:00 &#43;0000 UTC",
+    "url" : "https://blog.yxwang.me/2009/08/return-oriented-rookit/",
+    "wordCount" : "36",
+    "keywords" : [ "Computer System","Research","Return-oriented","Rootkit","Security","Usenix","Blog" ]
+}
+</script>
+
+  </head>
+
+  <body>
+    <nav class="nav">
+  <div class="nav-container">
+    <span class="site-title">
+      <a href="https://blog.yxwang.me/">Aiur · Zellux 的博客</a>
+    </span>
+    
+    <div class="nav-list">
+      
+      <span class="nav-item"><a href="/about">About</a></span>
+      
+      <span class="nav-item"><a href="/archive">Archive</a></span>
+      
+      <span class="nav-item"><a href="/notes">Notes</a></span>
+      
+    </div>
+  </div>
+</nav>
+
+    <div class="container">
+
+
+<div class="content">
+  <div class="post">
+    <h1 class="post-title"><a href="https://blog.yxwang.me/2009/08/return-oriented-rookit/">基于函数调用栈的 rootkit</a></h1>
+    <span class="post-meta">
+  <time datetime='Wed, Aug 12, 2009' data-updated="true" itemprop="datePublished">Wed, Aug 12, 2009</time>
+  
+  <span class="post-categories">
+    •
+	<a href="https://blog.yxwang.me/categories/computer-system">Computer System</a>
+  </span>
+  
+</span>
+
+    <div class="post-content">
+      <p>这篇题目为Return-Oriented Rootkits: Bypassing Kernel Code Integrity Protection Mechanisms的论文发在了今年的<a href="http://usenix.org/events/sec09/" target="_blank">Usenix Security</a>上，现在在Usenix网站上还不能下到这篇paper的pdf，可以去<a href="http://honeyblog.org/archives/30-Bypassing-Kernel-Code-Integrity-Protection-Mechanisms.html" target="_blank"><strong>作者的主页</strong></a>上下。</p>
+
+<p>现在有不少用来防止栈溢出攻击的技术，比如操作系统保证任何一个页不能同时为可写且可读（WinXP SP2、Win 2003、Exec Shield for Linux等都采用了这个策略），这个方法实现起来比较简单，但只能防范部分形式的攻击，如果攻击者事先准备一张含有恶意代码的用户态的只读页，然后跳转到这个页，就能绕开这种保护措施了；另外也有人提出在操作系统的下面再加一层虚拟层，让它来保证上层系统没有因为各种buffer overflow而执行恶意代码（NICKLE）。</p>
+
+<p>而这里提到的return-oriented的攻击方法不同于传统的攻击机制，它所采用的攻击代码都是内核自身的代码，因此能绕过前面提到的各种保护手段。</p>
+
+<p>所谓<a href="http://cseweb.ucsd.edu/~hovav/talks/blackhat08.html" target="_blank">return-oriented programming</a>，简单的说就是把原来已经存在的代码块拼接起来，拼接的方式是通过一个预先准备好的特殊的返回栈，里面包含了各条指令结束后下一条指令的地址。</p>
+
+<p>例如现在函数A里面有这么一段指令
+instruction A
+ret</p>
+
+<p>函数B里面有另外一段：
+instruction B
+ret</p>
+
+<p>它们在正常的运行情况下没有任何关系，但是我发现如果把A和B拼起来就能达到我想要的结果，于是我构造了一个包含有A和B的地址的栈，先通过ret指令返回到instruction A处，之后再执行ret指令时，由于栈是精心构造的，因此接下来会执行到instruction B，这样就得到我想要的结果了。只要这个ret前的指令库足够大，就能实现几乎所有的程序。</p>
+
+<p>这种攻击方式并非这篇paper的首创，最早是由Shacham提出的（<a href="http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.140.9210，http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.78.7135）">http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.140.9210，http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.78.7135）</a></p>
+
+<p>这篇paper的一大贡献在于实现了一个自动从libc和驱动、内核等代码中找到可用的指令，并拼接成所需程序的系统，这里面包括一个扫描可利用代码、并把它们结合起来的Constructor，一套专用的语言，以及把这套语言编译成对应代码片段之和的编译器，最后还有一个计算实际代码地址的Loader。</p>
+
+<p>这套攻击机制在WinXP SP2/Sp3, Vista SP1等系统上都获得了成功，尽管查找代码并生成这个过程的overhead很大，但对于一次成功的rootkit攻击来说影响并不大。</p>
+
+    </div>
+        <div class="cc-license">
+      本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.zh">知识共享署名-非商业性使用 3.0 版本许可协议</a>进行许可，欢迎转载，演绎，但是必须保留本文的署名 <a href="https://blog.yxwang.me/2009/08/return-oriented-rookit/">zellux</a>（包含链接），且不得用于商业目的。
+    </div>
+
+  </div>
+  <div class="pagination">
+    <a class="btn previous " href="https://blog.yxwang.me/2009/09/compile-php5-on-dreamhost/"> Prev</a>  
+    <a class="btn next " href="https://blog.yxwang.me/2009/07/xen-time-went-backwards-solution/"> Next</a> 
+  </div>
+</div>
+
+
+<div id="disqus_thread"></div>
+<script>
+  var disqus_config = function () {
+  this.page.url = "https://blog.yxwang.me/2009/08/return-oriented-rookit/";
+  
+  };
+  (function() {
+  var d = document, s = d.createElement('script');
+  s.src = '//aiur-zellux.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+
+<div class="footer">
+  
+  <p>Powered by <a href="http://gohugo.io">Hugo</a> and <a href="https://github.com/zhe/hugo-theme-slim">Slim theme</a>.
+  
+      Follow me on <a href="https://twitter.com/zellux">Twitter</a>.
+      </p>
+  </p>
+  
+</div>
+
+                   
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+    Macros: {
+      argmax: "\\operatorname*{argmax}",
+      argmin: "\\operatorname*{argmin}"
+    }
+  },
+  jax: ["input/TeX","output/CommonHTML"]
+});
+</script>
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML">
+</script>
+
+</script>
+
+<script src="https://blog.yxwang.me/js/slim.min.aef36e671f72c9042139aae327dbe693b7ebaa67fd56f30dad4c985a91ba9294.js"></script>
+
+
+<link rel="stylesheet" href="https://blog.yxwang.me/css/solarized-light.min.5499f6bc45da0c78f070be4f720fd28b19af75306b569b77837d57c3cf819430.css" />
+<script src="/js/highlight.pack.js"></script>
+<script>
+  hljs.initHighlightingOnLoad();
+</script>
+
+</div>
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-25551121-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+<script type="text/javascript">
+    window.heap=window.heap||[],heap.load=function(e,t){window.heap.appid=e,window.heap.config=t=t||{};var r=t.forceSSL||"https:"===document.location.protocol,a=document.createElement("script");a.type="text/javascript",a.async=!0,a.src=(r?"https:":"http:")+"//cdn.heapanalytics.com/js/heap-"+e+".js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(a,n);for(var o=function(e){return function(){heap.push([e].concat(Array.prototype.slice.call(arguments,0)))}},p=["addEventProperties","addUserProperties","clearEventProperties","identify","removeEventProperty","setEventProperties","track","unsetEventProperty"],c=0;c<p.length;c++)heap[p[c]]=o(p[c])};
+      heap.load("3166778701");
+</script>
+
+
+</body>
+
+</html>
+

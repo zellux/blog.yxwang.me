@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Meta on Aiur · Zellux 的博客</title>
+    <link>https://blog.yxwang.me/tags/meta/</link>
+    <description>Recent content in Meta on Aiur · Zellux 的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Mon, 31 Dec 2012 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.yxwang.me/tags/meta/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>为 Octopress 添加多个 Atom 地址</title>
+      <link>https://blog.yxwang.me/2012/12/multiple-feeds-in-octopress/</link>
+      <pubDate>Mon, 31 Dec 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2012/12/multiple-feeds-in-octopress/</guid>
+      <description>&lt;p&gt;博客最早用的是 wordpress，首页上提供的 Atom 源是 /feed/。迁移到 Octopress 后，Atom 源地址变成了 /atom.xml。在 Google Reader 里看到订阅 /feed/ 的读者还是有不少的，用默认的地址这些读者就收不到博客更新了。&lt;/p&gt;
+
+&lt;p&gt;一个方法是改服务器的配置文件，以我之前使用的 nginx 为例，在相应站点的配置中增加一项 /feed/，把所有对它的访问重定向到 /atom.xml 即可：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;location = /feed/ {
+    rewrite ^(.*)$ http://blog.yxwang.me/atom.xml;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>转用 octopress 了</title>
+      <link>https://blog.yxwang.me/2011/11/migrated-to-octopress/</link>
+      <pubDate>Tue, 29 Nov 2011 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2011/11/migrated-to-octopress/</guid>
+      <description>jekyll 是一个静态博客生成工具，可配置性很强。但是它的配置对于初学者不是很友好，没有现成的模版，需要自己从头搭一个。octopress 大大简化了这一配置过程，在 jekyll 的基础上提供了一个默认主题，以及一些常用的插件。
+Why 在 github 上捣鼓了一阵子 octopress 后，决定把原来的 wordpress 博客的数据转移到这个 octopress 博客上了。相对于 wordpress，octopress 的优点在于：
+ 支持 Markdown 语法。Markdown 是 github、stackoverflow 上的默认标记语言，写笔记我也一直用这个。Mac 平台上有不少好用的 Markdown 编辑器，例如收费的 Byword，免费的 Mou，这些工具都增加了写日志时的愉悦感。
+ 静态。对主页空间没有要求，甚至放到 github pages 上都可以。静态页面如果要加评论，可以考虑 disqus 等第三方 JS 工具。
+ 对内嵌代码支持很好。内置了 pygments ，这里有一份支持语言的列表。值得一提的是 octopress 还支持内嵌 Gist。
+ 日志文件都在本地，而且是纯文本，管理很方便（可以用 git），也不用担心租用的服务器数据丢失等问题。
+ rake new_post; rake gen_deploy 这样写博客很过瘾 :)
+  How 关于 wordpress 到 octopress 的数据转移，本文结尾的两篇参考文章已经说得很详细了，这里再补充几点：
+ 编码：jekyll 的 wordpressdotcom.rb 用了 yaml 库生成博客文章的 meta 信息，碰到中文标题会出现乱码，换用 ya2yaml 后问题解决。</description>
+    </item>
+    
+  </channel>
+</rss>

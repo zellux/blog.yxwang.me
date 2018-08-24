@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Live Updating on Aiur · Zellux 的博客</title>
+    <link>https://blog.yxwang.me/tags/live-updating/</link>
+    <description>Recent content in Live Updating on Aiur · Zellux 的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Thu, 16 Oct 2008 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.yxwang.me/tags/live-updating/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Live Code Update in Erlang</title>
+      <link>https://blog.yxwang.me/2008/10/live-code-update-in-erlang/</link>
+      <pubDate>Thu, 16 Oct 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2008/10/live-code-update-in-erlang/</guid>
+      <description>http://bc.tech.coop/blog/070713.html
+Joe Armstrong的原话 Live code upgrading is one of the things Erlang was designed for.
+一个最简单的例子
+loop(Fun, State) receive {From, {rpc, Tag, Q}} -&amp;gt; {Reply, State1} = Fun(Q, State), From ! {Tag, Reply}, loop(Fun, State1); {code_upgrade, Fun1} -&amp;gt; loop(Fun1, State) end.  使用时只要发送一个{code_update, Fun1}消息即可 在实际的项目中，live code update需要在一个进程的稳定状态中进行。好在有Erlang天生的分布式特性，结点i进行更新时其他结点可以接管这个结点的任务，直到结点i更新成功，再进行下一个结点的更新。这个形式和结点的crash处理有点类似。于是Erlang中live updating的实际难点在于 1. How to suspend the system and put it into a stable state 2. How to replicate the stable state 3. How to restart from a stable state 4.</description>
+    </item>
+    
+  </channel>
+</rss>

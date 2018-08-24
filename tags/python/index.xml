@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Python on Aiur · Zellux 的博客</title>
+    <link>https://blog.yxwang.me/tags/python/</link>
+    <description>Recent content in Python on Aiur · Zellux 的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Wed, 02 Mar 2011 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.yxwang.me/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>利用 netgrowl 向 Windows / Mac OS X 发送消息</title>
+      <link>https://blog.yxwang.me/2011/03/send-notifications-with-netgrowl/</link>
+      <pubDate>Wed, 02 Mar 2011 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2011/03/send-notifications-with-netgrowl/</guid>
+      <description>我平时用的系统是 Windows 7 和 Mac OS X，实验室项目一般都是 ssh 远登到 Ubuntu 和 Linux 上开发的。有时碰到内核和虚拟机等项目编译比较耗时，编译开始后要时不时的看一下编译任务是否完成，或者有没有中途出错，这时候如果有个通知系统就比较方便了。
+Google 了一把找到了 netgrowl 这个好东东，它是一个开源的 Python 模块，实现了 Growl 协议，可以向 Mac 或 Windows 上的 Growl 服务发送通知。使用也非常方便，先用 GrowlRegistrationPacket 函数注册一个应用，接着就可以用 GrowlNotificationPacket 发送通知了：
+notify.py
+#!/usr/bin/python from netgrowl import * import sys title = &amp;quot;Notification from Ubuntu&amp;quot; desc = &amp;quot;&amp;quot; if len(sys.argv) &amp;gt; 2: title = sys.argv[1] desc = sys.argv[2] addr = (&amp;quot;10.131.251.101&amp;quot;, GROWL_UDP_PORT) s = socket(AF_INET,SOCK_DGRAM) p = GrowlRegistrationPacket(application=&amp;quot;Ubuntu&amp;quot;, password=&amp;quot;i&amp;quot;) p.addNotification(&amp;quot;Ubuntu Notifications&amp;quot;, enabled=True) s.</description>
+    </item>
+    
+    <item>
+      <title>软件修改 Caps Lock 状态</title>
+      <link>https://blog.yxwang.me/2010/10/change-caps-lock-state-by-software/</link>
+      <pubDate>Tue, 19 Oct 2010 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2010/10/change-caps-lock-state-by-software/</guid>
+      <description>我经常使用的几台电脑中的Caps Lock 键都被我改成了 Ctrl 键，这样修改以后用起 Emacs 来就顺手多了。
+最近在 Windows 上用 VMware Remote Control 远登虚拟机调试内核的时候，问题就出来了：可能是这个浏览器插件的 bug，有时键盘的 Caps Lock 会被莫名打开。然后我的这个键盘键位又比较少，不想再让 Caps Lock 键替换另一个用得更少的按键了，于是想到了软件关闭的方法。
+搜了下 Stackoverflow 找到个很好用的 Python 库SendKeys，只要两行代码就能在 Windows 下模拟 Caps Lock 按键了：
+import SendKeys SendKeys.SendKeys(&amp;quot;{CAPSLOCK}&amp;quot;)  另外在 Linux 要模拟按键，可以直接访问 /dev/console：
+import fcntl import os KDSETLED = 0x4B32 console_fd = os.open(&#39;/dev/console&#39;, os.O_NOCTTY) # Turn on caps lock fcntl.ioctl(console_fd, KDSETLED, 0x04) # Turn off caps lock fcntl.ioctl(console_fd, KDSETLED, 0)  原问题地址</description>
+    </item>
+    
+    <item>
+      <title>关于 tuple 的读音</title>
+      <link>https://blog.yxwang.me/2009/04/tuple-pronunciation/</link>
+      <pubDate>Fri, 10 Apr 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2009/04/tuple-pronunciation/</guid>
+      <description>水木上有个帖子讨论tuple这个词该怎么读，于是有人翻出来这个三年前的新闻组邮件
+http://coding.derkeiler.com/Archive/Python/comp.lang.python/2006-02/msg01915.html I used to pronounce it toople. But the people that taught me Python found it both comical and confusing. At first they thought I meant a 2 element tuple. So they wondered if a 3 element tuple was a threeple, etc. After much harrassing, I changed my wayward ways and pronounced it tuhple to fit in with the cool Python guys. ;-)
+Then we went to hear Guido speak about Python 2.</description>
+    </item>
+    
+    <item>
+      <title>Xen DomainU 自动测试脚本</title>
+      <link>https://blog.yxwang.me/2009/04/xen-test-script/</link>
+      <pubDate>Tue, 07 Apr 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2009/04/xen-test-script/</guid>
+      <description>写完代码测试时重复的最多的步骤就是
+ 编译，复制vmlinuz和xen.gz 重启VMware虚拟机 启动domainU xm create domU.conf 4. 开一个screen窗口attach到domainU的console xm console #domid 5. 在domainU中运行测试程序  于是写了个自动执行3 4 5的脚步，主要用到了熊熊推荐的pexpect，这东东很赞啊
+为了提高用户体验，读取domainU的启动信息时我采用的方法是读一行输出一行，读到结尾登陆字符时通过超时设置退出循环，这样可能效率比较低，不过测试脚本也不care这个了
+实际使用时碰到了另一个问题，domainU执行完自动命令后命令行会出现很严重的对齐问题，最后发现登陆后运行一次reset就可以了。
+脚本如下
+#!/usr/bin/python # Automatic test script for Xen DomainU # Author: zellux import pexpect, os conf = { &#39;login_name&#39; : &#39;m2-vm2&#39;, &#39;domainU_name&#39; : &#39;R900-DomU0&#39;, &#39;domainU_conf&#39; : &#39;/home/wyx/domU1&#39;, &#39;domainU_id&#39; : &#39;2&#39;, &#39;domainU_user&#39; : &#39;wyx&#39;, &#39;domainU_passwd&#39; : &#39;wyx&#39;, } # Command to be executed after domainU starts cmd = &amp;quot;&amp;quot;&amp;quot; cd m2 cd reg_test .</description>
+    </item>
+    
+    <item>
+      <title>Daily Notes on Python[11.17-11.23]</title>
+      <link>https://blog.yxwang.me/2008/11/daily-notes-on-python1117-1123/</link>
+      <pubDate>Mon, 17 Nov 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2008/11/daily-notes-on-python1117-1123/</guid>
+      <description>模块动态加载机制
+ Advanced Python（某一期Google TechTalks的话题）上提到import指令本质是个语法糖，import sys等价于sys = import(&amp;ldquo;sys&amp;rdquo;)。解析import sys的bytecode可以看到四个指令（参数略）： LOAD_CONST LOAD_CONST IMPORT_NAME STORE_NAME  IMPORT_NAME把sys模块导入并保存到栈上，STORE_NAME把这个指针当作普通对象保存在sys这个变量中。
+2. IMPORT_NAME指令行为分析 将参数打包并用PyEval_CallObject()这个统一调用接口运行import方法，bltinmodule.c中的builtinimport函数包装了这个功能。help(import)显示的import方法的参数列表 import(&amp;hellip;) import(name, globals={}, locals={}, fromlist=[], level=-1) -&amp;gt; module
+对应于builtinimport中调用的另一层函数封装
+PyObject * PyImport_ImportModuleLevel(char *name, PyObject *globals, PyObject *locals, PyObject *fromlist, int level)  这个函数调用了真正干活的函数，import.c中的
+static PyObject * import_module_level(char *name, PyObject *globals, PyObject *locals, PyObject *fromlist, int level)  3. import_module_level函数 首先调用get_parent()得到import发生时的package对象，接下来多次调用load_next依次得到各级的包名，跟踪了下import xml.dom.minidom的行为，发现name的值依次是&amp;rdquo;dom.minidom&amp;rdquo;, &amp;ldquo;minidom&amp;rdquo;。最后根据import的形式是from &amp;hellip; import &amp;hellip;还是import &amp;hellip;返回不同的处理结果。
+4. import_submodule函数 load_next函数中调用这个函数进行模块的查找和载入。主要分三步：find_module, load_module, add_submodule。
+5. from &amp;hellip; import &amp;hellip; ensure_fromlist处理了这个情况。另外对于from &amp;hellip; import *的情况，会从module文件中读入一个all对象，从中知道module公开的符号信息。</description>
+    </item>
+    
+    <item>
+      <title>Why explicit self has to stay</title>
+      <link>https://blog.yxwang.me/2008/10/why-explicit-self-has-to-stay/</link>
+      <pubDate>Mon, 27 Oct 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2008/10/why-explicit-self-has-to-stay/</guid>
+      <description>Bruce Eckel的一篇日志建议把self从方法的参数列表中移除，并把它作为一个关键字使用。 http://www.artima.com/weblogs/viewpost.jsp?thread=239003
+Guido的这篇日志说明了self作为参数是必不可少的。 http://neopythonic.blogspot.com/2008/10/why-explicit-self-has-to-stay.html
+第一个原因是保证foo.meth(arg)和C.meth(foo, arg)这两种方法调用的等价（foo是C的一个实例)，关于后者可以参见Python Reference Manual 3.4.2.3。这个原因理论上的意义比较大。
+第二个原因在于通过self参数我们可以动态修改一个类的行为：
+# Define an empty class: class C: pass # Define a global function: def meth(myself, arg): myself.val = arg return myself.val # Poke the method into the class: C.meth = meth  这样类C就新增了一个meth方法，并且所有C的实例都可以通过c.meth(newval)调用这个方法。
+前面两个原因或许都可以通过一些workaround使得不使用self参数时实现同样的效果，但是在存在decorator的代码中Bruce的方法存在致命的缺陷。(关于decorator的介绍可以参见http://www.python.org/dev/peps/pep-0318/)
+根据修饰对象，decorator分两种，类方法和静态方法。两者在语法上没有什么区别，但前者需要self参数，后者不需要。而Python在实现上也没有对这两种方法加以区分。Bruce日志评论中有一些试图解决decorator问题的方法，但这些方法都需要修改大量底层的实现。
+最后提到了另一种语法糖实现，新增一个名为classmethod的decorator，为每个方法加上一个self参数，当然这种实现也没必要把self作为关键字使用了。不过我觉得这么做还不如每次写类方法时手工加个self =_=</description>
+    </item>
+    
+    <item>
+      <title>Python函数属性</title>
+      <link>https://blog.yxwang.me/2008/10/python-function/</link>
+      <pubDate>Fri, 24 Oct 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2008/10/python-function/</guid>
+      <description>定义一个简单的Python函数 def f(x, y = 10, z = 16): print z dir(f)可以看到函数的几个主要属性 &amp;lsquo;func_closure&amp;rsquo;, &amp;lsquo;func_code&amp;rsquo;, &amp;lsquo;func_defaults&amp;rsquo;, &amp;lsquo;func_dict&amp;rsquo;, &amp;lsquo;func_doc&amp;rsquo;, &amp;lsquo;func_globals&amp;rsquo;, &amp;lsquo;func_name&amp;rsquo;。在funcobject.c中对PyFunction_Type的定义中可以看到这些属性的来源：
+static PyMemberDef func_memberlist[] = { {&amp;quot;func_closure&amp;quot;, T_OBJECT, OFF(func_closure), RESTRICTED|READONLY}, {&amp;quot;func_doc&amp;quot;, T_OBJECT, OFF(func_doc), WRITE_RESTRICTED}, {&amp;quot;__doc__&amp;quot;, T_OBJECT, OFF(func_doc), WRITE_RESTRICTED}, {&amp;quot;func_globals&amp;quot;, T_OBJECT, OFF(func_globals), RESTRICTED|READONLY}, {&amp;quot;__module__&amp;quot;, T_OBJECT, OFF(func_module), WRITE_RESTRICTED}, {NULL} /* Sentinel */ };  static PyGetSetDef func_getsetlist[] = { {&amp;quot;func_code&amp;quot;, (getter)func_get_code, (setter)func_set_code}, {&amp;quot;func_defaults&amp;quot;, (getter)func_get_defaults, (setter)func_set_defaults}, {&amp;quot;func_dict&amp;quot;, (getter)func_get_dict, (setter)func_set_dict}, {&amp;quot;__dict__&amp;quot;, (getter)func_get_dict, (setter)func_set_dict}, {&amp;quot;func_name&amp;quot;, (getter)func_get_name, (setter)func_set_name}, {&amp;quot;__name__&amp;quot;, (getter)func_get_name, (setter)func_set_name}, {NULL} /* Sentinel */ };  f.</description>
+    </item>
+    
+    <item>
+      <title>Python中inner function的binding处理</title>
+      <link>https://blog.yxwang.me/2008/10/python-inner-function-binding/</link>
+      <pubDate>Fri, 17 Oct 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2008/10/python-inner-function-binding/</guid>
+      <description>BBS上的一个帖子，问题是
+def a(): def b(): x += 1 x = 1 print &amp;quot;a: &amp;quot;, x b() print &amp;quot;b: &amp;quot;, x def c(): def d(): x[0] = [4] x = [3] print &amp;quot;c: &amp;quot;, x[0] d() print &amp;quot;d: &amp;quot;, x[0]  运行a()会报UnboundLocalError: local variable &amp;lsquo;x&amp;rsquo; referenced before assignment 但是运行c()会正确地显示3和4。
+原因在于原因在于CPython实现closure的方式和常见的functional language不同，采用了flat closures实现。
+&amp;ldquo;If a name is bound anywhere within a code block, all uses of the name within the block are treated as references to the current block.</description>
+    </item>
+    
+  </channel>
+</rss>

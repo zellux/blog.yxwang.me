@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="简单来说就是给定一个未初始化的巨大的数组，然后通过它实现一个字典。所谓未初始化是指一开始里面元素的值都是随机的，巨大是指可以假设数组长度范围很大，对这个数组做初始化工作（例如清零）的代价自然也是很大。现在的问题是，利用这个数组设计出来的字典，要求初始化、查找、插入、删除操作都能在O(1)时间内完成。
+Intructor&rsquo;s Manual 上的解答设计了一个很巧妙的验证策略。假设T为那个巨大的数组，S为辅助栈，那么对于一个键k，如果k存在于这个字典中，则T[k]保存的是 k在S中的位置j，而S[j]则保存了k值。即1 ≤ T[k] ≤ top[S], S[ T[k] ] = k, T [ S[j] ] = j，我们称这个条件为“验证环”。这个设计的关键在于T和S能够互相验证，从而排除了未初始化位置上随机值的干扰。
+还有一个问题就是，键k对应的值v应该怎么保存呢？其实只要维护另外一个和T或者S平行的数组就行了，既然S的元素个数远小于T，选择和S平行即可。
+根据这个验证策略，我们就能设计出词典的基本操作了： 初始化：建立一个大小为0的栈 查找：给定键k，检查 1 ≤ T [k] ≤ top[S] &amp;&amp; S[ T[k] ] = k，如果满足则返回对应值，否则返回NULL 插入：如果键已经存在则直接替换；否则将新的键值入栈，并且维护T[k] ← top[S] 删除：要确保两件事，一是验证环要被破坏，二是栈S的空洞要被填补。通过把栈顶的元素移动到要删除的元素位置，我们能同时确保这两点：
+S[ T[k] ] ← S[ top[S] ] S[ T[k] ] ← S [ top[S] ] T[ S[ T[k] ] ] ← T [k] T[k] ← 0 top[S] ← top[S] − 1  所有操作都能在O(1)时间内完成">
+    <meta name="author" content="zellux">
+
+    <title> CLRS Problem 11.1-4 &middot; Aiur · Zellux 的博客 </title>
+
+    <script src="/js/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
+    <script src="/js/jquery-3.0.47.fancybox.min.js"></script>
+
+    
+    
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.52ea10a8f3a0b8f145adadb8d3761e17a42a7634869f775ef5830ed4de77d3fa.css">
+    
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+    
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    
+    <link href="" rel="alternate" type="application/rss+xml" title="Aiur · Zellux 的博客" />
+    
+<script type="application/ld+json">
+{
+    "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https://blog.yxwang.me/"
+    },
+    "articleSection" : "post",
+    "name" : "CLRS Problem 11.1-4",
+    "headline" : "CLRS Problem 11.1-4",
+    "description" : "简单来说就是给定一个未初始化的巨大的数组，然后通过它实现一个字典。所谓未初始化是指一开始里面元素的值都是随机的，巨大是指可以假设数组长度范围很大，对这个数组做初始化工作（例如清零）的代价自然也是很大。现在的问题是，利用这个数组设计出来的字典，要求初始化、查找、插入、删除操作都能在O(1)时间内完成。
+Intructor&rsquo;s Manual 上的解答设计了一个很巧妙的验证策略。假设T为那个巨大的数组，S为辅助栈，那么对于一个键k，如果k存在于这个字典中，则T[k]保存的是 k在S中的位置j，而S[j]则保存了k值。即1 ≤ T[k] ≤ top[S], S[ T[k] ] = k, T [ S[j] ] = j，我们称这个条件为“验证环”。这个设计的关键在于T和S能够互相验证，从而排除了未初始化位置上随机值的干扰。
+还有一个问题就是，键k对应的值v应该怎么保存呢？其实只要维护另外一个和T或者S平行的数组就行了，既然S的元素个数远小于T，选择和S平行即可。
+根据这个验证策略，我们就能设计出词典的基本操作了： 初始化：建立一个大小为0的栈 查找：给定键k，检查 1 ≤ T [k] ≤ top[S] &amp;&amp; S[ T[k] ] = k，如果满足则返回对应值，否则返回NULL 插入：如果键已经存在则直接替换；否则将新的键值入栈，并且维护T[k] ← top[S] 删除：要确保两件事，一是验证环要被破坏，二是栈S的空洞要被填补。通过把栈顶的元素移动到要删除的元素位置，我们能同时确保这两点：
+S[ T[k] ] ← S[ top[S] ] S[ T[k] ] ← S [ top[S] ] T[ S[ T[k] ] ] ← T [k] T[k] ← 0 top[S] ← top[S] − 1  所有操作都能在O(1)时间内完成",
+    "inLanguage" : "en-US",
+    "author" : "zellux",
+    "creator" : "zellux",
+    "publisher": "zellux",
+    "accountablePerson" : "",
+    "copyrightHolder" : "",
+    "copyrightYear" : "2010",
+    "datePublished": "2010-02-04 00:00:00 &#43;0000 UTC",
+    "dateModified" : "2010-02-04 00:00:00 &#43;0000 UTC",
+    "url" : "https://blog.yxwang.me/2010/02/clrs-problem-111-4/",
+    "wordCount" : "179",
+    "keywords" : [ "Algorithms","CLRS","Blog" ]
+}
+</script>
+
+  </head>
+
+  <body>
+    <nav class="nav">
+  <div class="nav-container">
+    <span class="site-title">
+      <a href="https://blog.yxwang.me/">Aiur · Zellux 的博客</a>
+    </span>
+    
+    <div class="nav-list">
+      
+      <span class="nav-item"><a href="/about">About</a></span>
+      
+      <span class="nav-item"><a href="/archive">Archive</a></span>
+      
+      <span class="nav-item"><a href="/notes">Notes</a></span>
+      
+    </div>
+  </div>
+</nav>
+
+    <div class="container">
+
+
+<div class="content">
+  <div class="post">
+    <h1 class="post-title"><a href="https://blog.yxwang.me/2010/02/clrs-problem-111-4/">CLRS Problem 11.1-4</a></h1>
+    <span class="post-meta">
+  <time datetime='Thu, Feb 4, 2010' data-updated="true" itemprop="datePublished">Thu, Feb 4, 2010</time>
+  
+  <span class="post-categories">
+    •
+	<a href="https://blog.yxwang.me/categories/algorithms">Algorithms</a>
+  </span>
+  
+</span>
+
+    <div class="post-content">
+      <p>简单来说就是给定一个<strong>未初始化的巨大的</strong>数组，然后通过它实现一个字典。所谓未初始化是指一开始里面元素的值都是随机的，巨大是指可以假设数组长度范围很大，对这个数组做初始化工作（例如清零）的代价自然也是很大。现在的问题是，利用这个数组设计出来的字典，要求初始化、查找、插入、删除操作都能在O(1)时间内完成。</p>
+
+<p>Intructor&rsquo;s Manual 上的解答设计了一个很巧妙的验证策略。假设T为那个巨大的数组，S为辅助栈，那么对于一个键k，如果k存在于这个字典中，则T[k]保存的是 k在S中的位置j，而S[j]则保存了k值。即1 ≤ T[k] ≤ top[S], S[ T[k] ] = k, T [ S[j] ] = j，我们称这个条件为“<strong>验证环</strong>”。这个设计的关键在于T和S能够互相验证，从而排除了未初始化位置上随机值的干扰。</p>
+
+<p>还有一个问题就是，键k对应的值v应该怎么保存呢？其实只要维护另外一个和T或者S平行的数组就行了，既然S的元素个数远小于T，选择和S平行即可。</p>
+
+<p>根据这个验证策略，我们就能设计出词典的基本操作了：
+初始化：建立一个大小为0的栈
+查找：给定键k，检查 1 ≤ T [k] ≤ top[S] &amp;&amp; S[ T[k] ] = k，如果满足则返回对应值，否则返回NULL
+插入：如果键已经存在则直接替换；否则将新的键值入栈，并且维护T[k] ← top[S]
+删除：要确保两件事，一是验证环要被破坏，二是栈S的空洞要被填补。通过把栈顶的元素移动到要删除的元素位置，我们能同时确保这两点：</p>
+
+<pre><code class="language-text">S[ T[k] ] ← S[ top[S] ]
+S[ T[k] ] ← S [ top[S] ]
+T[ S[ T[k] ] ] ← T [k]
+T[k] ← 0
+top[S] ← top[S] − 1
+</code></pre>
+
+<p>所有操作都能在O(1)时间内完成</p>
+
+<p>原题：We wish to implement a dictionary by using direct addressing on a huge array. At the start, the array entries may contain garbage, and initializing the entire array is impractical because of its size. Describe a scheme for implementing a direct-address dictionary on a huge array. Each stored object should use O(1) space; the operations SEARCH, INSERT, and DELETE should take O(1) time each; and the initialization of the data structure should take O(1) time. (Hint: Use an additional stack, whose size is the number of keys actually stored in the dictionary, to help determine whether a given entry in the huge array is valid or not.)</p>
+
+    </div>
+        <div class="cc-license">
+      本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.zh">知识共享署名-非商业性使用 3.0 版本许可协议</a>进行许可，欢迎转载，演绎，但是必须保留本文的署名 <a href="https://blog.yxwang.me/2010/02/clrs-problem-111-4/">zellux</a>（包含链接），且不得用于商业目的。
+    </div>
+
+  </div>
+  <div class="pagination">
+    <a class="btn previous " href="https://blog.yxwang.me/2010/02/bind-cscope-to-ecb/"> Prev</a>  
+    <a class="btn next " href="https://blog.yxwang.me/2010/02/configuring-semantic/"> Next</a> 
+  </div>
+</div>
+
+
+<div id="disqus_thread"></div>
+<script>
+  var disqus_config = function () {
+  this.page.url = "https://blog.yxwang.me/2010/02/clrs-problem-111-4/";
+  
+  };
+  (function() {
+  var d = document, s = d.createElement('script');
+  s.src = '//aiur-zellux.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+
+<div class="footer">
+  
+  <p>Powered by <a href="http://gohugo.io">Hugo</a> and <a href="https://github.com/zhe/hugo-theme-slim">Slim theme</a>.
+  
+      Follow me on <a href="https://twitter.com/zellux">Twitter</a>.
+      </p>
+  </p>
+  
+</div>
+
+                   
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+    Macros: {
+      argmax: "\\operatorname*{argmax}",
+      argmin: "\\operatorname*{argmin}"
+    }
+  },
+  jax: ["input/TeX","output/CommonHTML"]
+});
+</script>
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML">
+</script>
+
+</script>
+
+<script src="https://blog.yxwang.me/js/slim.min.aef36e671f72c9042139aae327dbe693b7ebaa67fd56f30dad4c985a91ba9294.js"></script>
+
+
+<link rel="stylesheet" href="https://blog.yxwang.me/css/solarized-light.min.5499f6bc45da0c78f070be4f720fd28b19af75306b569b77837d57c3cf819430.css" />
+<script src="/js/highlight.pack.js"></script>
+<script>
+  hljs.initHighlightingOnLoad();
+</script>
+
+</div>
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-25551121-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+<script type="text/javascript">
+    window.heap=window.heap||[],heap.load=function(e,t){window.heap.appid=e,window.heap.config=t=t||{};var r=t.forceSSL||"https:"===document.location.protocol,a=document.createElement("script");a.type="text/javascript",a.async=!0,a.src=(r?"https:":"http:")+"//cdn.heapanalytics.com/js/heap-"+e+".js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(a,n);for(var o=function(e){return function(){heap.push([e].concat(Array.prototype.slice.call(arguments,0)))}},p=["addEventProperties","addUserProperties","clearEventProperties","identify","removeEventProperty","setEventProperties","track","unsetEventProperty"],c=0;c<p.length;c++)heap[p[c]]=o(p[c])};
+      heap.load("3166778701");
+</script>
+
+
+</body>
+
+</html>
+

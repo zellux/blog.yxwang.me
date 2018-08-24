@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Storage on Aiur · Zellux 的博客</title>
+    <link>https://blog.yxwang.me/tags/storage/</link>
+    <description>Recent content in Storage on Aiur · Zellux 的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Mon, 11 Jun 2012 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.yxwang.me/tags/storage/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>存储是移动应用性能的瓶颈？</title>
+      <link>https://blog.yxwang.me/2012/06/revisiting-storage-for-smartphones/</link>
+      <pubDate>Mon, 11 Jun 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2012/06/revisiting-storage-for-smartphones/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://www.usenix.org/comment/260&#34;&gt;Revisiting Storage for Smartphones&lt;/a&gt; 是今年 FAST 会议上的最佳论文，这篇论文提出了一个违背直觉的观点，很有意思。这里简单介绍一下这篇论文的内容，有兴趣的朋友可以直接访问前面的链接下载原文或是观看现场录像。&lt;/p&gt;
+
+&lt;a data-fancybox=&#34;gallery&#34;  data-caption=&#34;移动存储性能&#34; href=/images/2012-06/mobile-flash-throughtput.png &gt;&lt;img src=/images/2012-06/mobile-flash-throughtput.png  /&gt;&lt;/a&gt;
+
+
+&lt;p&gt;传统的观点认为，移动应用性能的主要瓶颈在网络和 CPU，而闪存的读写速率明显高于网络传输速度，不会成为性能的瓶颈。然而，根据上图作者给出的关于移动存储性能的图例（纵坐标单位为 Mbps，本文图片均来自演讲 slides 和原论文），我们可以看到，虽然移动存储顺序读写的性能明显高于 wifi 和 3G，但是随机写的性能却比它们差很多，因此移动存储成为应用性能瓶颈是完全有可能的。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>ASPLOS 09 - DFTL</title>
+      <link>https://blog.yxwang.me/2009/04/asplos-09-dftl/</link>
+      <pubDate>Tue, 07 Apr 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2009/04/asplos-09-dftl/</guid>
+      <description>Paper标题是DFTL: A Flash Translation Layer Employing Demand-based Selective Caching of Page-level Address Mappings，PSU发表在ASPLOS 09上。这篇paper对我来说更像是篇flash存储的科普文。
+flash存储单元分block和page，每个block有32/64个page，一个page有512/2048K大小。flash的一个缺点在于改写数据时只能先把要改写的block清空，然后再写，由于block的颗粒度比较大，这就带来了比较严重的性能问题。所以现在的flash都在驱动层维护了一张对文件系统透明的logical-to-physical address的映射表(Flash Translation Layer)，这样改写时只要先写在预先清空的page上，再把映射表的对应项的物理地址改成新的page的地址，然后把原来要改的页置为invalid，等gc去清空即可。
+如果为每个page都在内存中维护一份映射关系，会占用比较大的内存空间。以往的ftl的实现试图在page-level和block-level的映射中找平衡，但效果都不甚理想，尤其在随机写比较频繁时会产生比较严重的gc负荷，从而影响写操作的反应速度（因为预先清空的页面不足时需要先做gc）。这篇paper提出的DFTL可以比较好的减少gc的负荷，同时近需要很小的内存空间，前提是程序访问flash的locality很好。
+感觉DFTL的大致思想仿照了二级页表和TLB：flash上的一些page保存了page-level的映射，分散在整个flash中，在内存里面有一个block-level的映射表，记录了每个page-level映射表在flash中的地址。内存中的映射表相当于二级页表中的page directory，指向了flash上的page-level映射表（page table），另外内存中还有一个全局的page-level的映射表用于记录最近访问到的page的logical-to-physical映射，类似于TLB。这样如果程序locality很好的情况下大多数情况下只要查询这张表就行了。</description>
+    </item>
+    
+  </channel>
+</rss>

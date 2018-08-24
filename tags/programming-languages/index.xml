@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Programming Languages on Aiur · Zellux 的博客</title>
+    <link>https://blog.yxwang.me/tags/programming-languages/</link>
+    <description>Recent content in Programming Languages on Aiur · Zellux 的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Wed, 24 Feb 2010 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.yxwang.me/tags/programming-languages/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>SICP 里提到的画图语言</title>
+      <link>https://blog.yxwang.me/2010/02/the-sicp-picture-language/</link>
+      <pubDate>Wed, 24 Feb 2010 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2010/02/the-sicp-picture-language/</guid>
+      <description>SICP第二章里提到了一种用来画图的Lisp方言，用来演示数据抽象和闭包的表达能力（见http://mitpress.mit.edu/sicp/full-text/book/book-Z-H-15.html#%_sec_2.2.4）。
+最近尝试了下，发现soegaard同学已经在PLT Scheme中实现了一个类似的库，可以很方便的在DrScheme上使用。
+sicp.plt包使用很简单，在Language-&amp;gt;Choose Language中选择Module，然后在需要用到这个包的时候用
+(require (planet soegaard/sicp:2:1/sicp))  声明即可。第一次运行时DrScheme会自动下载这个包并安装，如果网络有限制可以先从http://planet.plt-scheme.org/display.ss?package=sicp.plt&amp;owner=soegaard下载然后在DrScheme中选择本地包安装。
+另外SICP上使用的两个painter（wave和rogers）没有在这个包里提供，取而代之是diagonal-shading和einstein。
+下面这个程序显示了一个简单的分形图像：
+#lang scheme (require (planet &amp;quot;sicp.ss&amp;quot; (&amp;quot;soegaard&amp;quot; &amp;quot;sicp.plt&amp;quot; 2 1))) (define (right-split painter n) (if (= n 0) painter (let ((smaller (right-split painter (- n 1)))) (beside painter (below smaller smaller))))) (define (up-split painter n) (if (= n 0) painter (let ((smaller (up-split painter (- n 1)))) (below painter (beside smaller smaller))))) (define (corner-split painter n) (if (= n 0) painter (let ((up (up-split painter (- n 1))) (right (right-split painter (- n 1)))) (let ((top-left (beside up up)) (bottom-right (below right right)) (corner (corner-split painter (- n 1)))) (beside (below painter top-left) (below bottom-right corner)))))) (paint (corner-split diagonal-shading 4))  程序输出：</description>
+    </item>
+    
+    <item>
+      <title>关于 tuple 的读音</title>
+      <link>https://blog.yxwang.me/2009/04/tuple-pronunciation/</link>
+      <pubDate>Fri, 10 Apr 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2009/04/tuple-pronunciation/</guid>
+      <description>水木上有个帖子讨论tuple这个词该怎么读，于是有人翻出来这个三年前的新闻组邮件
+http://coding.derkeiler.com/Archive/Python/comp.lang.python/2006-02/msg01915.html I used to pronounce it toople. But the people that taught me Python found it both comical and confusing. At first they thought I meant a 2 element tuple. So they wondered if a 3 element tuple was a threeple, etc. After much harrassing, I changed my wayward ways and pronounced it tuhple to fit in with the cool Python guys. ;-)
+Then we went to hear Guido speak about Python 2.</description>
+    </item>
+    
+    <item>
+      <title>Daily Notes on Python[11.17-11.23]</title>
+      <link>https://blog.yxwang.me/2008/11/daily-notes-on-python1117-1123/</link>
+      <pubDate>Mon, 17 Nov 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2008/11/daily-notes-on-python1117-1123/</guid>
+      <description>模块动态加载机制
+ Advanced Python（某一期Google TechTalks的话题）上提到import指令本质是个语法糖，import sys等价于sys = import(&amp;ldquo;sys&amp;rdquo;)。解析import sys的bytecode可以看到四个指令（参数略）： LOAD_CONST LOAD_CONST IMPORT_NAME STORE_NAME  IMPORT_NAME把sys模块导入并保存到栈上，STORE_NAME把这个指针当作普通对象保存在sys这个变量中。
+2. IMPORT_NAME指令行为分析 将参数打包并用PyEval_CallObject()这个统一调用接口运行import方法，bltinmodule.c中的builtinimport函数包装了这个功能。help(import)显示的import方法的参数列表 import(&amp;hellip;) import(name, globals={}, locals={}, fromlist=[], level=-1) -&amp;gt; module
+对应于builtinimport中调用的另一层函数封装
+PyObject * PyImport_ImportModuleLevel(char *name, PyObject *globals, PyObject *locals, PyObject *fromlist, int level)  这个函数调用了真正干活的函数，import.c中的
+static PyObject * import_module_level(char *name, PyObject *globals, PyObject *locals, PyObject *fromlist, int level)  3. import_module_level函数 首先调用get_parent()得到import发生时的package对象，接下来多次调用load_next依次得到各级的包名，跟踪了下import xml.dom.minidom的行为，发现name的值依次是&amp;rdquo;dom.minidom&amp;rdquo;, &amp;ldquo;minidom&amp;rdquo;。最后根据import的形式是from &amp;hellip; import &amp;hellip;还是import &amp;hellip;返回不同的处理结果。
+4. import_submodule函数 load_next函数中调用这个函数进行模块的查找和载入。主要分三步：find_module, load_module, add_submodule。
+5. from &amp;hellip; import &amp;hellip; ensure_fromlist处理了这个情况。另外对于from &amp;hellip; import *的情况，会从module文件中读入一个all对象，从中知道module公开的符号信息。</description>
+    </item>
+    
+    <item>
+      <title>Why explicit self has to stay</title>
+      <link>https://blog.yxwang.me/2008/10/why-explicit-self-has-to-stay/</link>
+      <pubDate>Mon, 27 Oct 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2008/10/why-explicit-self-has-to-stay/</guid>
+      <description>Bruce Eckel的一篇日志建议把self从方法的参数列表中移除，并把它作为一个关键字使用。 http://www.artima.com/weblogs/viewpost.jsp?thread=239003
+Guido的这篇日志说明了self作为参数是必不可少的。 http://neopythonic.blogspot.com/2008/10/why-explicit-self-has-to-stay.html
+第一个原因是保证foo.meth(arg)和C.meth(foo, arg)这两种方法调用的等价（foo是C的一个实例)，关于后者可以参见Python Reference Manual 3.4.2.3。这个原因理论上的意义比较大。
+第二个原因在于通过self参数我们可以动态修改一个类的行为：
+# Define an empty class: class C: pass # Define a global function: def meth(myself, arg): myself.val = arg return myself.val # Poke the method into the class: C.meth = meth  这样类C就新增了一个meth方法，并且所有C的实例都可以通过c.meth(newval)调用这个方法。
+前面两个原因或许都可以通过一些workaround使得不使用self参数时实现同样的效果，但是在存在decorator的代码中Bruce的方法存在致命的缺陷。(关于decorator的介绍可以参见http://www.python.org/dev/peps/pep-0318/)
+根据修饰对象，decorator分两种，类方法和静态方法。两者在语法上没有什么区别，但前者需要self参数，后者不需要。而Python在实现上也没有对这两种方法加以区分。Bruce日志评论中有一些试图解决decorator问题的方法，但这些方法都需要修改大量底层的实现。
+最后提到了另一种语法糖实现，新增一个名为classmethod的decorator，为每个方法加上一个self参数，当然这种实现也没必要把self作为关键字使用了。不过我觉得这么做还不如每次写类方法时手工加个self =_=</description>
+    </item>
+    
+    <item>
+      <title>Python函数属性</title>
+      <link>https://blog.yxwang.me/2008/10/python-function/</link>
+      <pubDate>Fri, 24 Oct 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2008/10/python-function/</guid>
+      <description>定义一个简单的Python函数 def f(x, y = 10, z = 16): print z dir(f)可以看到函数的几个主要属性 &amp;lsquo;func_closure&amp;rsquo;, &amp;lsquo;func_code&amp;rsquo;, &amp;lsquo;func_defaults&amp;rsquo;, &amp;lsquo;func_dict&amp;rsquo;, &amp;lsquo;func_doc&amp;rsquo;, &amp;lsquo;func_globals&amp;rsquo;, &amp;lsquo;func_name&amp;rsquo;。在funcobject.c中对PyFunction_Type的定义中可以看到这些属性的来源：
+static PyMemberDef func_memberlist[] = { {&amp;quot;func_closure&amp;quot;, T_OBJECT, OFF(func_closure), RESTRICTED|READONLY}, {&amp;quot;func_doc&amp;quot;, T_OBJECT, OFF(func_doc), WRITE_RESTRICTED}, {&amp;quot;__doc__&amp;quot;, T_OBJECT, OFF(func_doc), WRITE_RESTRICTED}, {&amp;quot;func_globals&amp;quot;, T_OBJECT, OFF(func_globals), RESTRICTED|READONLY}, {&amp;quot;__module__&amp;quot;, T_OBJECT, OFF(func_module), WRITE_RESTRICTED}, {NULL} /* Sentinel */ };  static PyGetSetDef func_getsetlist[] = { {&amp;quot;func_code&amp;quot;, (getter)func_get_code, (setter)func_set_code}, {&amp;quot;func_defaults&amp;quot;, (getter)func_get_defaults, (setter)func_set_defaults}, {&amp;quot;func_dict&amp;quot;, (getter)func_get_dict, (setter)func_set_dict}, {&amp;quot;__dict__&amp;quot;, (getter)func_get_dict, (setter)func_set_dict}, {&amp;quot;func_name&amp;quot;, (getter)func_get_name, (setter)func_set_name}, {&amp;quot;__name__&amp;quot;, (getter)func_get_name, (setter)func_set_name}, {NULL} /* Sentinel */ };  f.</description>
+    </item>
+    
+    <item>
+      <title>Python中inner function的binding处理</title>
+      <link>https://blog.yxwang.me/2008/10/python-inner-function-binding/</link>
+      <pubDate>Fri, 17 Oct 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2008/10/python-inner-function-binding/</guid>
+      <description>BBS上的一个帖子，问题是
+def a(): def b(): x += 1 x = 1 print &amp;quot;a: &amp;quot;, x b() print &amp;quot;b: &amp;quot;, x def c(): def d(): x[0] = [4] x = [3] print &amp;quot;c: &amp;quot;, x[0] d() print &amp;quot;d: &amp;quot;, x[0]  运行a()会报UnboundLocalError: local variable &amp;lsquo;x&amp;rsquo; referenced before assignment 但是运行c()会正确地显示3和4。
+原因在于原因在于CPython实现closure的方式和常见的functional language不同，采用了flat closures实现。
+&amp;ldquo;If a name is bound anywhere within a code block, all uses of the name within the block are treated as references to the current block.</description>
+    </item>
+    
+    <item>
+      <title>Live Code Update in Erlang</title>
+      <link>https://blog.yxwang.me/2008/10/live-code-update-in-erlang/</link>
+      <pubDate>Thu, 16 Oct 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2008/10/live-code-update-in-erlang/</guid>
+      <description>http://bc.tech.coop/blog/070713.html
+Joe Armstrong的原话 Live code upgrading is one of the things Erlang was designed for.
+一个最简单的例子
+loop(Fun, State) receive {From, {rpc, Tag, Q}} -&amp;gt; {Reply, State1} = Fun(Q, State), From ! {Tag, Reply}, loop(Fun, State1); {code_upgrade, Fun1} -&amp;gt; loop(Fun1, State) end.  使用时只要发送一个{code_update, Fun1}消息即可 在实际的项目中，live code update需要在一个进程的稳定状态中进行。好在有Erlang天生的分布式特性，结点i进行更新时其他结点可以接管这个结点的任务，直到结点i更新成功，再进行下一个结点的更新。这个形式和结点的crash处理有点类似。于是Erlang中live updating的实际难点在于 1. How to suspend the system and put it into a stable state 2. How to replicate the stable state 3. How to restart from a stable state 4.</description>
+    </item>
+    
+    <item>
+      <title>Singleton 模式与双检测锁定(DCL)</title>
+      <link>https://blog.yxwang.me/2008/07/singleton-pattern-and-double-checked-lock/</link>
+      <pubDate>Fri, 04 Jul 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2008/07/singleton-pattern-and-double-checked-lock/</guid>
+      <description>看 OOP 教材时，书里提到了一个双检测锁定（Double-Checked Lock, DCL）的问题，但是没有更多介绍，只是说这是一个和底层内存机制有关的漏洞。查阅了下相关资料，对这个问题大致有了点了解。
+从头开始说吧。
+在多线程的情况下Singleton模式会遇到不少问题，一个简单的例子
+class Singleton { private static Singleton instance = null; public static Singleton instance() { if (instance == null) { instance = new Singleton(); } return instance; } }  假设这样一个场景，有两个线程调用 Singleton.instance()，首先线程一判断 instance 是否等于 null，判断完后一瞬间虚拟机把线程二调度为运行线程，线程二再次判断 instance 是否为 null，然后创建一个Singleton 实例，线程二的时间片用完后，线程一被唤醒，接下来它依然会创建一个新的 Singleton 实例，导致两次调用范围的对象不同。
+最简单的方法自然是在类被载入时就初始化这个对象：
+private static Singleton instance = new Singleton();  JLS (Java Language Specification) 中规定了一个类只会被初始化一次，所以这样做肯定是没问题的。
+但是如果要实现延迟初始化（Lazy initialization），比如这个实例初始化时的参数要在运行期才能确定，应该怎么做呢？
+依然有最简单的方法：使用 synchronized 关键字修饰初始化方法：
+public synchronized static Singleton instance() { if (instance == null) { instance = new Singleton(); } return instance; }  然而引入 synchronized 关键字后，产生了一个性能问题：多个线程同时访问这个方法时，会因为同步原语而导致每次只有一个线程执行这段代码，影响程序性能。而事实上初始化完毕后只需要简单的返回 instance 的引用就行了。</description>
+    </item>
+    
+  </channel>
+</rss>

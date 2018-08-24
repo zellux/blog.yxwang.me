@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Cedet on Aiur · Zellux 的博客</title>
+    <link>https://blog.yxwang.me/tags/cedet/</link>
+    <description>Recent content in Cedet on Aiur · Zellux 的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Wed, 03 Feb 2010 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.yxwang.me/tags/cedet/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>为特定的项目配置 semantic</title>
+      <link>https://blog.yxwang.me/2010/02/configuring-semantic/</link>
+      <pubDate>Wed, 03 Feb 2010 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2010/02/configuring-semantic/</guid>
+      <description>semantic是cedet的组件之一，它可以对程序做语义分析，结合company等其他插件，可以实现自动补全菜单等功能。
+之前用semantic+company写MIT 6.828的lab时几乎不需要什么特殊的设置就能直接用，这次拿来改Xen的代码的时候却出现了semantic无法找到符号定义的问题，究其原因在于MIT 6.828的目录结构相对简单，头文件都在inc/目录下，而Xen的头文件在多个目录下，而且做预处理时还要加上Makefile里定义的一些预定义宏。今天参考了Alex Ott的这篇文章终于成功地让semantic支持Xen的代码分析了：
+
+这里分享一下和项目相关的一些设置，semantic安装等问题请参考网上的其他文章。也可以参考我的配置文件http://code.google.com/p/zellux-emacs-conf/source/browse/my-cc-mode.el，cscope ecb semantic和company等配置都在这个文件里了，不过有点混乱。
+;; Danimoth-specified configurations (add-to-list &#39;semanticdb-project-roots &amp;quot;~/danimoth/xen&amp;quot;) (setq semanticdb-project-roots (list (expand-file-name &amp;quot;/&amp;quot;))) (setq danimoth-base-dir &amp;quot;/home/wyx/danimoth&amp;quot;) (add-to-list &#39;auto-mode-alist (cons danimoth-base-dir &#39;c++-mode)) (add-to-list &#39;auto-mode-alist (cons danimoth-base-dir &#39;c-mode)) (add-to-list &#39;semantic-lex-c-preprocessor-symbol-file (concat danimoth-base-dir &amp;quot;/xen/include/config.h&amp;quot;)) (add-to-list &#39;semantic-lex-c-preprocessor-symbol-file (concat danimoth-base-dir &amp;quot;/xen/include/asm-x86/config.h&amp;quot;)) (ede-cpp-root-project &amp;quot;Danimoth&amp;quot; :name &amp;quot;Danimoth&amp;quot; ;; Any file at root directory of the project :file &amp;quot;~/danimoth/xen/Makefile&amp;quot; ;; Relative to the project&#39;s root directory :include-path &#39;(&amp;quot;/&amp;quot; &amp;quot;/include/asm-x86&amp;quot; &amp;quot;/include/xen&amp;quot; &amp;quot;/include/public&amp;quot; &amp;quot;/include/acpi&amp;quot; &amp;quot;/arch/x86/cpu/&amp;quot; ) ;; Pre-definds macro for preprocessing :spp-table &#39;((&amp;quot;__XEN__&amp;quot; .</description>
+    </item>
+    
+  </channel>
+</rss>

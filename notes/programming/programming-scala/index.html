@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="数组取值 Scala 中可以通过 Array.apply()、Map.apply() 等方法获得这些容器中存储的值，而小括号则是 apply 方法的一个语法糖。所以 myArray(i) 等价于 myArray.apply(i)。
+tuple 取值 获取一个 tuple 中第 i 个元素的方法是 _i，例如 pair._1，注意这里编号是从 1 开始的，和 Haskell、ML 等语言一致。
+换行符 换行符通常会被当作分号处理，所以大多数情况下行尾的分号可以省略，除了以下三种情况：
+ 该行结尾处的符号无法使这一行合法中止，例如一个中缀运算符（加号），或者一个逗号； 下一行头部的符号无法开始一个新的语句； 该行被包含在小括号或者中括号中，因为这两个符号无法包含多个语句。  第三种情况也是 for 语句体遇到多个 filter 时要优先使用大括号的原因。
+静态成员 Scala 没有静态成员这一概念，类似功能的成员被转移到 singleton objects 中。这一点倒是和 Ruby 中类对象的 eigenclass 挺像的。当一个 singleton object 的名字和某个类的名字相同时，前者被称为后者的 companion object，当然反过来，后者被称为前者的 companion class。它们可以互相访问对方的私有成员。
+闭包（closure） (x: Int) =&gt; x &#43; more 中的 more 是一个 free variable，因为这一声明没有给它任何定义，而 x 则是 bound variable，它被赋予了函数参数的意义。
+一个函数不包含 free variable 的函数被称为 closed term，这里 term 是指一段代码。而包含 free variable 的函数被称为 open term。对于 open term，程序运行时需要从环境中把对象绑到它们的 free variable 上，绑定后得到的结果就是闭包。也就是说，闭包是闭合 open term 的结果。">
+    <meta name="author" content="zellux">
+
+    <title> 《Programming Scala》笔记 &middot; Aiur · Zellux 的博客 </title>
+
+    <script src="/js/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
+    <script src="/js/jquery-3.0.47.fancybox.min.js"></script>
+
+    
+    
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.52ea10a8f3a0b8f145adadb8d3761e17a42a7634869f775ef5830ed4de77d3fa.css">
+    
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+    
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    
+    <link href="" rel="alternate" type="application/rss+xml" title="Aiur · Zellux 的博客" />
+    
+<script type="application/ld+json">
+{
+    "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https://blog.yxwang.me/"
+    },
+    "articleSection" : "notes",
+    "name" : "《Programming Scala》笔记",
+    "headline" : "《Programming Scala》笔记",
+    "description" : "数组取值 Scala 中可以通过 Array.apply()、Map.apply() 等方法获得这些容器中存储的值，而小括号则是 apply 方法的一个语法糖。所以 myArray(i) 等价于 myArray.apply(i)。
+tuple 取值 获取一个 tuple 中第 i 个元素的方法是 _i，例如 pair._1，注意这里编号是从 1 开始的，和 Haskell、ML 等语言一致。
+换行符 换行符通常会被当作分号处理，所以大多数情况下行尾的分号可以省略，除了以下三种情况：
+ 该行结尾处的符号无法使这一行合法中止，例如一个中缀运算符（加号），或者一个逗号； 下一行头部的符号无法开始一个新的语句； 该行被包含在小括号或者中括号中，因为这两个符号无法包含多个语句。  第三种情况也是 for 语句体遇到多个 filter 时要优先使用大括号的原因。
+静态成员 Scala 没有静态成员这一概念，类似功能的成员被转移到 singleton objects 中。这一点倒是和 Ruby 中类对象的 eigenclass 挺像的。当一个 singleton object 的名字和某个类的名字相同时，前者被称为后者的 companion object，当然反过来，后者被称为前者的 companion class。它们可以互相访问对方的私有成员。
+闭包（closure） (x: Int) =&gt; x + more 中的 more 是一个 free variable，因为这一声明没有给它任何定义，而 x 则是 bound variable，它被赋予了函数参数的意义。
+一个函数不包含 free variable 的函数被称为 closed term，这里 term 是指一段代码。而包含 free variable 的函数被称为 open term。对于 open term，程序运行时需要从环境中把对象绑到它们的 free variable 上，绑定后得到的结果就是闭包。也就是说，闭包是闭合 open term 的结果。",
+    "inLanguage" : "en-US",
+    "author" : "zellux",
+    "creator" : "zellux",
+    "publisher": "zellux",
+    "accountablePerson" : "",
+    "copyrightHolder" : "",
+    "copyrightYear" : "0001",
+    "datePublished": "0001-01-01 00:00:00 &#43;0000 UTC",
+    "dateModified" : "0001-01-01 00:00:00 &#43;0000 UTC",
+    "url" : "https://blog.yxwang.me/notes/programming/programming-scala/",
+    "wordCount" : "221",
+    "keywords" : [ "Blog" ]
+}
+</script>
+
+  </head>
+
+  <body>
+    <nav class="nav">
+  <div class="nav-container">
+    <span class="site-title">
+      <a href="https://blog.yxwang.me/">Aiur · Zellux 的博客</a>
+    </span>
+    
+    <div class="nav-list">
+      
+      <span class="nav-item"><a href="/about">About</a></span>
+      
+      <span class="nav-item"><a href="/archive">Archive</a></span>
+      
+      <span class="nav-item"><a href="/notes">Notes</a></span>
+      
+    </div>
+  </div>
+</nav>
+
+    <div class="container">
+
+
+<div class="content">
+  <div class="post">
+    <h1 class="post-title"><a href="https://blog.yxwang.me/notes/programming/programming-scala/">《Programming Scala》笔记</a></h1>
+    <span class="post-meta">
+  <time datetime='Mon, Jan 1, 0001' data-updated="true" itemprop="datePublished">Mon, Jan 1, 0001</time>
+  
+</span>
+
+    <div class="post-content">
+      
+
+<h3 id="数组取值">数组取值</h3>
+
+<p>Scala 中可以通过 Array.apply()、Map.apply() 等方法获得这些容器中存储的值，而小括号则是 apply 方法的一个语法糖。所以 <code>myArray(i)</code> 等价于 <code>myArray.apply(i)</code>。</p>
+
+<h3 id="tuple-取值">tuple 取值</h3>
+
+<p>获取一个 tuple 中第 i 个元素的方法是 <code>_i</code>，例如 <code>pair._1</code>，注意这里编号是从 1 开始的，和 Haskell、ML 等语言一致。</p>
+
+<h3 id="换行符">换行符</h3>
+
+<p>换行符通常会被当作分号处理，所以大多数情况下行尾的分号可以省略，除了以下三种情况：</p>
+
+<ol>
+<li>该行结尾处的符号无法使这一行合法中止，例如一个中缀运算符（加号），或者一个逗号；</li>
+<li>下一行头部的符号无法开始一个新的语句；</li>
+<li>该行被包含在小括号或者中括号中，因为这两个符号无法包含多个语句。</li>
+</ol>
+
+<p>第三种情况也是 for 语句体遇到多个 filter 时要优先使用大括号的原因。</p>
+
+<h3 id="静态成员">静态成员</h3>
+
+<p>Scala 没有静态成员这一概念，类似功能的成员被转移到 singleton objects 中。这一点倒是和 Ruby 中类对象的 eigenclass 挺像的。当一个 singleton object 的名字和某个类的名字相同时，前者被称为后者的 companion object，当然反过来，后者被称为前者的 companion class。它们可以互相访问对方的私有成员。</p>
+
+<h3 id="闭包-closure">闭包（closure）</h3>
+
+<p><code>(x: Int) =&gt; x + more</code> 中的 more 是一个 free variable，因为这一声明没有给它任何定义，而 x 则是 bound variable，它被赋予了函数参数的意义。</p>
+
+<p>一个函数不包含 free variable 的函数被称为 closed term，这里 term 是指一段代码。而包含 free variable 的函数被称为 open term。对于 open term，程序运行时需要从环境中把对象绑到它们的 free variable 上，绑定后得到的结果就是闭包。也就是说，闭包是闭合 open term 的结果。</p>
+
+<p>Scala 的闭包绑定的是变量本身，而不是它们的值。因此变量的值变化时，闭包的行为也会发生相应的变化。</p>
+
+<h3 id="括号互用">括号互用</h3>
+
+<p>当函数只有一个参数时，传参用的小括号可以用大括号代替。这一特性配合 currying 可以比较优雅的实现一些 DSL。</p>
+
+<h3 id="currying">Currying</h3>
+
+<p>Scala 的 currying 其实就是个语法糖。</p>
+
+<pre><code class="language-scala">def withPrintWriter(file: File)(op: PrintWriter =&gt; Unit) ...
+</code></pre>
+
+<p>等价于</p>
+
+<pre><code class="language-scala">def withPrintWriter(file: File) = (op: PrintWriter =&gt; Unit) =&gt; ...
+</code></pre>
+
+<h3 id="命名空间">命名空间</h3>
+
+<p>Scala 有两类命名空间：</p>
+
+<ul>
+<li>值（字段、方法、包和 singleton object）</li>
+<li>类型（类型和 trait）</li>
+</ul>
+
+<p>这里字段和方法在同一个命名空间中，因此它们直接可以互相覆盖。</p>
+
+<h3 id="覆盖-override">覆盖（Override）</h3>
+
+<p>Scala 要求在覆盖一个 concrete class 的成员时<strong>必须</strong>加上 override 修饰符。如果是覆盖一个 abstract class 的成员，override 修饰符是可省的。</p>
+
+<h3 id="trait">trait</h3>
+
+<p>不同于 class，trait 的 super 对象是动态绑定的。</p>
+
+<p>调用多个 trait 里都包含的函数时，最右边的 trait 的方法最先被调用。</p>
+
+<h3 id="模式匹配-pattern-matching">模式匹配（Pattern Matching）</h3>
+
+<p>Scala 编译器在做模式匹配时，如果其中的变量以小写字母开头，则会被当成一个新的变量，例如</p>
+
+<pre><code class="language-scala">val x = 10
+5 match {
+    case x =&gt; println('matched')
+}
+</code></pre>
+
+<p>这里的 <code>case x</code> 会匹配所有的情况，因为 <code>x</code> 被当成了一个新的变量，如果要使用 <code>x</code> 本身的值，需要把它引起来：</p>
+
+<pre><code class="language-scala">val x = 10
+5 match {
+    case `x` =&gt; println('matched')
+}
+</code></pre>
+
+<h3 id="type-erasure-的限制">Type Erasure 的限制</h3>
+
+<p>受限于 JVM 的 type erasure 特性，pattern match 无法检查容器存储的对象的类型：</p>
+
+<pre><code class="language-scala">def isIntIntMap(x: Any) = x match {
+  case m: Map[Int, Int] =&gt; true
+  case _ =&gt; false
+}
+
+isIntIntMap(Map(&quot;abc&quot; -&gt; &quot;abc&quot;)) # true
+</code></pre>
+
+<p>当然，数组是例外。</p>
+
+<p>（未完）</p>
+
+    </div>
+        <div class="cc-license">
+      本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.zh">知识共享署名-非商业性使用 3.0 版本许可协议</a>进行许可，欢迎转载，演绎，但是必须保留本文的署名 <a href="https://blog.yxwang.me/notes/programming/programming-scala/">zellux</a>（包含链接），且不得用于商业目的。
+    </div>
+
+  </div>
+  <div class="pagination">
+    <a class="btn previous " href="https://blog.yxwang.me/notes/programming/metaprogramming-ruby/"> Prev</a>  
+    <a class="btn next " href="https://blog.yxwang.me/notes/programming/ruby-programming-language/"> Next</a> 
+  </div>
+</div>
+
+
+<div id="disqus_thread"></div>
+<script>
+  var disqus_config = function () {
+  this.page.url = "https://blog.yxwang.me/notes/programming/programming-scala/";
+  
+  };
+  (function() {
+  var d = document, s = d.createElement('script');
+  s.src = '//aiur-zellux.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+
+<div class="footer">
+  
+  <p>Powered by <a href="http://gohugo.io">Hugo</a> and <a href="https://github.com/zhe/hugo-theme-slim">Slim theme</a>.
+  
+      Follow me on <a href="https://twitter.com/zellux">Twitter</a>.
+      </p>
+  </p>
+  
+</div>
+
+                   
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+    Macros: {
+      argmax: "\\operatorname*{argmax}",
+      argmin: "\\operatorname*{argmin}"
+    }
+  },
+  jax: ["input/TeX","output/CommonHTML"]
+});
+</script>
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML">
+</script>
+
+</script>
+
+<script src="https://blog.yxwang.me/js/slim.min.aef36e671f72c9042139aae327dbe693b7ebaa67fd56f30dad4c985a91ba9294.js"></script>
+
+
+<link rel="stylesheet" href="https://blog.yxwang.me/css/solarized-light.min.5499f6bc45da0c78f070be4f720fd28b19af75306b569b77837d57c3cf819430.css" />
+<script src="/js/highlight.pack.js"></script>
+<script>
+  hljs.initHighlightingOnLoad();
+</script>
+
+</div>
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-25551121-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+<script type="text/javascript">
+    window.heap=window.heap||[],heap.load=function(e,t){window.heap.appid=e,window.heap.config=t=t||{};var r=t.forceSSL||"https:"===document.location.protocol,a=document.createElement("script");a.type="text/javascript",a.async=!0,a.src=(r?"https:":"http:")+"//cdn.heapanalytics.com/js/heap-"+e+".js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(a,n);for(var o=function(e){return function(){heap.push([e].concat(Array.prototype.slice.call(arguments,0)))}},p=["addEventProperties","addUserProperties","clearEventProperties","identify","removeEventProperty","setEventProperties","track","unsetEventProperty"],c=0;c<p.length;c++)heap[p[c]]=o(p[c])};
+      heap.load("3166778701");
+</script>
+
+
+</body>
+
+</html>
+

@@ -1,0 +1,2121 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Aiur · Zellux 的博客</title>
+    <link>https://blog.yxwang.me/</link>
+    <description>Recent content on Aiur · Zellux 的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Tue, 07 Aug 2018 00:56:13 -0700</lastBuildDate>
+    
+	<atom:link href="https://blog.yxwang.me/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>SLAM 笔记 4：定位</title>
+      <link>https://blog.yxwang.me/2018/08/robotics-slam-week4/</link>
+      <pubDate>Tue, 07 Aug 2018 00:56:13 -0700</pubDate>
+      
+      <guid>https://blog.yxwang.me/2018/08/robotics-slam-week4/</guid>
+      <description>&lt;p&gt;最后一周讲定位 (localization)，也就是 SLAM 里面的 L。主要包括粒子滤波和迭代最近点。&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>SLAM 笔记 3：地图</title>
+      <link>https://blog.yxwang.me/2018/08/robotics-slam-week3/</link>
+      <pubDate>Wed, 01 Aug 2018 00:07:22 -0700</pubDate>
+      
+      <guid>https://blog.yxwang.me/2018/08/robotics-slam-week3/</guid>
+      <description>&lt;p&gt;这一周的内容和地图有关，最后的作业就是通过传感器的数据创建一个地图。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>SLAM 笔记 2：卡尔曼滤波</title>
+      <link>https://blog.yxwang.me/2018/07/robotics-slam-week2/</link>
+      <pubDate>Wed, 25 Jul 2018 07:57:26 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2018/07/robotics-slam-week2/</guid>
+      <description>&lt;p&gt;这一周主要讲卡尔曼滤波 (Kalman Filter)，视频讲得比较简略，slides 做得里也有不少错误。最后看了一些其他网站的文章和视频才有了比较深刻的理解。参考资料推荐在本文结尾。&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>SLAM 笔记 1：高斯分布</title>
+      <link>https://blog.yxwang.me/2018/07/robotics-slam-week1/</link>
+      <pubDate>Mon, 23 Jul 2018 00:18:32 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2018/07/robotics-slam-week1/</guid>
+      <description>&lt;p&gt;最近宾大在 Coursera 上开了一个&lt;a href=&#34;https://www.coursera.org/specializations/robotics&#34;&gt;机器人系列课程&lt;/a&gt;，包含了视觉、运动规划、机械设计等课题。我对 &lt;a href=&#34;https://en.wikipedia.org/wiki/Simultaneous_localization_and_mapping&#34;&gt;SLAM&lt;/a&gt; 很感兴趣，于是就选了 Robotics Estimation and Learning 这门课，课程主页是&lt;a href=&#34;https://www.coursera.org/learn/robotics-learning/&#34; class=&#34;uri&#34;&gt;https://www.coursera.org/learn/robotics-learning/&lt;/a&gt;。第一周的内容是高斯分布。&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Sous Vide 低温慢煮龙虾</title>
+      <link>https://blog.yxwang.me/2018/07/sous-vide-lobster/</link>
+      <pubDate>Sat, 21 Jul 2018 15:14:53 -0700</pubDate>
+      
+      <guid>https://blog.yxwang.me/2018/07/sous-vide-lobster/</guid>
+      <description>&lt;p&gt;Prime Day 的时候入了一套 Sous Vide （真空低温烹饪，读作 soo veed）装备，周末在家尝试了龙虾，味道很不错。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>线性代数笔记</title>
+      <link>https://blog.yxwang.me/2018/07/linear-algebra-notes/</link>
+      <pubDate>Sat, 14 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2018/07/linear-algebra-notes/</guid>
+      <description>最近抽空把线性代数重新过了一遍，整理了一份概念笔记，希望对别人也有用。主要参考了同济大学的《线性代数》和 《Deep Learning》 的第二章。
+行列式  行列式 (determinant) 与它的转置行列式相等。\(D^T = D\) 余子式 (minor)：在 n 阶行列式中，把 \((i, j)\) 元 \(a_{ij}\) 所在的第 \(i\) 行和第 \(j\) 列划去后留下的 \(n - 1\) 阶行列式叫做 \((i, j)\) 元 \(a_{ij}\) 的余子式，记作 \(M_{ij}\) 代数余子式 (cofactor) \(A_{ij} = (-1)^{i+j}M_{ij}\) 行列式按行展开：\(D = a_{i1}A_{i1} + a_{i2}A_{i2} + \cdots + a_{in}A_{in}\) 行列式按列展开：\(D = a_{1j}A_{1j} + a_{2j}A_{2j} + \cdots + a_{nj}A_{nj}\) 克拉默法则 (Cramer’s rule)：如果线性方程组的系数行列式不等于零，那么方程组有唯一解 \(x_1 = \frac{D_1}{D}, x_2 = \frac{D_2}{D}, \cdots, x_n = \frac{D_n}{D}\)， 其中 \(D_j\) 是把系数行列式 D 中第 j 列的元素用方程组右端的常数项代替后得到的 n 阶行列式。  矩阵及其运算  伴随矩阵 (adjugate matrix) \[ adj(A) = \begin{bmatrix} A_{11} &amp;amp; A_{21} &amp;amp; \cdots &amp;amp; A_{n1} \\ A_{12} &amp;amp; A_{22} &amp;amp; \cdots &amp;amp; A_{n2} \\ \vdots &amp;amp; \vdots &amp;amp; \ddots &amp;amp; \vdots \\ A_{1n} &amp;amp; A_{2n} &amp;amp; \cdots &amp;amp; A_{nn} \\ \end{bmatrix} \]  其中 \(A_{ij}\) 为代数余子式</description>
+    </item>
+    
+    <item>
+      <title>智能家居之实践篇</title>
+      <link>https://blog.yxwang.me/2017/10/smart-home-2/</link>
+      <pubDate>Sun, 15 Oct 2017 00:09:39 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2017/10/smart-home-2/</guid>
+      <description>&lt;p&gt;装修了半年多，两个月前正式入住，可以开始好好折腾智能家居了。现在用的一些方案和之前写的&lt;a href=&#34;http://blog.yxwang.me/2017/03/remodel-smart-home/&#34;&gt;智能家居之计划篇&lt;/a&gt;差了不少，于是有了这篇博客聊聊现在的设计。这里直入主题，之前的计划篇里有更多的背景介绍。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>智能家居之计划篇</title>
+      <link>https://blog.yxwang.me/2017/03/remodel-smart-home/</link>
+      <pubDate>Tue, 21 Mar 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2017/03/remodel-smart-home/</guid>
+      <description>&lt;p&gt;二月中旬开始装修房子，做了不少智能家居的研究，分享一下。坐标湾区，项目目前还在计划和购买阶段，欢迎拍砖，欢迎种草。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>本地 Markdown 预览工具</title>
+      <link>https://blog.yxwang.me/2014/02/local-markdown-wiki/</link>
+      <pubDate>Thu, 13 Feb 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2014/02/local-markdown-wiki/</guid>
+      <description>&lt;p&gt;最近一直用 &lt;a href=&#34;http://www.iawriter.com/mac/&#34;&gt;iA Writer&lt;/a&gt; 做笔记，用不同的文件保存不同的主题，由于 iA Writer 并没有很好的管理和浏览功能，于是就想做个 Web 工具方便浏览和管理。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/zellux/markdown-wiki&#34;&gt;markdown-wiki&lt;/a&gt; 是我用 Sinatra 做的一个简单的预览工具，它可以把某个目录下的 Markdown 文件以 Wiki 的形式呈现出来。界面上借用了 &lt;a href=&#34;http://ghost.io/&#34;&gt;Ghost&lt;/a&gt; 的 CSS，可以在 &lt;a href=&#34;http://markdown-wiki-demo.herokuapp.com/&#34;&gt;http://markdown-wiki-demo.herokuapp.com/&lt;/a&gt; 预览（因为是非本地的内容，上方的 Edit 按钮没有作用）。&lt;/p&gt;
+
+&lt;p&gt;Markdown 语法方面，由于用了 &lt;a href=&#34;https://github.com/vmg/redcarpet&#34;&gt;redcarpet&lt;/a&gt; 所以有不少语法扩展，包括代码块、删除线、下划线、上标等，另外包含了 Wiki 内部链接支持。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>用外接 PC 键盘控制 Mac 音量</title>
+      <link>https://blog.yxwang.me/2013/08/adjusting-mac-volume-with-pc-keyboard/</link>
+      <pubDate>Wed, 21 Aug 2013 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2013/08/adjusting-mac-volume-with-pc-keyboard/</guid>
+      <description>&lt;p&gt;写了个 &lt;a href=&#34;https://github.com/zellux/adjust-volume&#34;&gt;Alfred 插件&lt;/a&gt;，用于外接 PC 键盘控制 Mac 的系统音量。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>马尔代夫 Dusit 岛</title>
+      <link>https://blog.yxwang.me/2013/07/dusit-thani-maldives/</link>
+      <pubDate>Sun, 14 Jul 2013 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2013/07/dusit-thani-maldives/</guid>
+      <description>&lt;a data-fancybox=&#34;gallery&#34;  href=/images/2013-07/maldives-tree.jpg &gt;&lt;img src=/images/2013-07/maldives-tree.jpg  width=&#34;560&#34; /&gt;&lt;/a&gt;
+
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Kindle 推送知乎日报</title>
+      <link>https://blog.yxwang.me/2013/06/zhihu-daily-for-kindle/</link>
+      <pubDate>Mon, 24 Jun 2013 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2013/06/zhihu-daily-for-kindle/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;http://daily.zhihu.com/&#34;&gt;知乎日报&lt;/a&gt;每天都会更新有意思的问答。我比较习惯用 Kindle 看这样的文章，就写了一个 calibre 的&lt;a href=&#34;https://gist.github.com/zellux/5844688&#34;&gt;插件&lt;/a&gt;抓取每天的内容。&lt;/p&gt;
+
+&lt;p&gt;&lt;a data-fancybox=&#34;gallery&#34;  href=/images/2013-06/zhihu-kindle-1.jpg &gt;&lt;img src=/images/2013-06/zhihu-kindle-1.jpg  width=&#34;300&#34; /&gt;&lt;/a&gt;
+
+&lt;a data-fancybox=&#34;gallery&#34;  href=/images/2013-06/zhihu-kindle-2.jpg &gt;&lt;img src=/images/2013-06/zhihu-kindle-2.jpg  width=&#34;300&#34; /&gt;&lt;/a&gt;
+&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Ruby 命令行中快速查看函数源码</title>
+      <link>https://blog.yxwang.me/2013/02/view-ruby-source-in-shell/</link>
+      <pubDate>Thu, 14 Feb 2013 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2013/02/view-ruby-source-in-shell/</guid>
+      <description>&lt;p&gt;如果要查看 ActiveRecord 的 update_attribute 函数的源代码，一个比较常见的方法是直接在 Rails 源码中搜索 &lt;code&gt;def update_attribute&lt;/code&gt;。博客 &lt;a href=&#34;http://pragmaticstudio.com/blog&#34;&gt;The Pragmatic Studio&lt;/a&gt; 介绍了一个更方便的技巧，在 Ruby 命令行中就能启动编辑器直接访问。&lt;/p&gt;
+
+&lt;p&gt;通过 &lt;a href=&#34;http://rdoc.info/stdlib/core/Object:method&#34;&gt;Object#method&lt;/a&gt; 方法可以获得 update_attribute 方法的对象，而 &lt;a href=&#34;http://rdoc.info/stdlib/core/Method:source_location&#34;&gt;Method#source_location&lt;/a&gt; 则返回这个方法定义的文件和位置。有了这个信息后，就能启动编辑器查看源代码了：&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>清除 zsh steeef 主题的未追踪标记</title>
+      <link>https://blog.yxwang.me/2013/01/cleaning-zsh-vcs-status/</link>
+      <pubDate>Thu, 24 Jan 2013 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2013/01/cleaning-zsh-vcs-status/</guid>
+      <description>&lt;p&gt;我用的 zsh 提示符是 &lt;a href=&#34;https://github.com/robbyrussell/oh-my-zsh/&#34;&gt;oh-my-zsh&lt;/a&gt; 自带的 &lt;a href=&#34;https://github.com/robbyrussell/oh-my-zsh/blob/master/themes/steeef.zsh-theme&#34;&gt;steeef&lt;/a&gt;。最近发现用这个主题时，有些 Rails 项目即使把所有改动都提交后，还是会有红色标记表示存在未追踪文件：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://blog.yxwang.me/images/2013-01/zsh-untracked-mark.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;使用 &lt;code&gt;git status&lt;/code&gt; 和 &lt;code&gt;git diff&lt;/code&gt;，都看不到任何未提交的改动。一开始我以为是 zsh 或者 git 的 bug，把它们的版本都更新到最新版后还是有这个问题。于是看 steeef 主题的源码，发现了红色标记的判断依据：&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>为 Emacs cscope 加入 Java 支持</title>
+      <link>https://blog.yxwang.me/2013/01/java-and-aidl-support-in-emacs-cscope/</link>
+      <pubDate>Wed, 09 Jan 2013 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2013/01/java-and-aidl-support-in-emacs-cscope/</guid>
+      <description>&lt;p&gt;Emacs 的 xcscope 插件默认不会扫描 Java 文件，另外 Android 源码里有不少 &lt;a href=&#34;http://developer.android.com/guide/components/aidl.html&#34;&gt;.aidl&lt;/a&gt; 的文件，默认也不包含在 xcscope 的扫描范围里。解决这个问题的一个方法是在项目根目录下手动创建 cscope 索引：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ find . -name &amp;quot;*.java&amp;quot; -or -name &amp;quot;*.aidl&amp;quot; -or -name &amp;quot;*.cpp&amp;quot; &amp;gt; cscope.files
+
+$ cscope -b
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Rails 中关于 respond_to 不同格式的顺序</title>
+      <link>https://blog.yxwang.me/2013/01/order-of-formats-in-response-to-does-matter/</link>
+      <pubDate>Fri, 04 Jan 2013 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2013/01/order-of-formats-in-response-to-does-matter/</guid>
+      <description>&lt;p&gt;以前没注意过 Rails controller 中 respond_to 的格式顺序，后来碰到了一个诡异的 bug，才发现这里的顺序对程序行为是有影响的。bug 的现象是用某个应用商店桌面端浏览网站时，会出现返回 JSON 而不是网页的情况。由于当时报告错误的用户给出的 bug 描述是「点击链接后出现乱码」，导致 debug 一开始没找对方向，废了不少功夫才解决这个问题。&lt;/p&gt;
+
+&lt;p&gt;问题就出在不同格式的声明先后上，有问题的代码是：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;respond_to do |format|
+  format.json { render json: @items }
+  format.html
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>为 Octopress 添加多个 Atom 地址</title>
+      <link>https://blog.yxwang.me/2012/12/multiple-feeds-in-octopress/</link>
+      <pubDate>Mon, 31 Dec 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2012/12/multiple-feeds-in-octopress/</guid>
+      <description>&lt;p&gt;博客最早用的是 wordpress，首页上提供的 Atom 源是 /feed/。迁移到 Octopress 后，Atom 源地址变成了 /atom.xml。在 Google Reader 里看到订阅 /feed/ 的读者还是有不少的，用默认的地址这些读者就收不到博客更新了。&lt;/p&gt;
+
+&lt;p&gt;一个方法是改服务器的配置文件，以我之前使用的 nginx 为例，在相应站点的配置中增加一项 /feed/，把所有对它的访问重定向到 /atom.xml 即可：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;location = /feed/ {
+    rewrite ^(.*)$ http://blog.yxwang.me/atom.xml;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>北美求职记（三）：Hulu &amp; Twitter</title>
+      <link>https://blog.yxwang.me/2012/12/job-hunting-in-usa-3/</link>
+      <pubDate>Wed, 26 Dec 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2012/12/job-hunting-in-usa-3/</guid>
+      <description>&lt;h4 id=&#34;北美求职记系列文章&#34;&gt;北美求职记系列文章&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.yxwang.me/2012/12/job-hunting-in-usa-1/&#34;&gt;北美求职记（一）：Microsoft&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.yxwang.me/2012/12/job-hunting-in-usa-2/&#34;&gt;北美求职记（二）：Google &amp;amp; Facebook&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;北美求职记（三）：Hulu &amp;amp; Twitter&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;hulu&#34;&gt;Hulu&lt;/h2&gt;
+
+&lt;p&gt;Hulu 是这几个公司里唯一一个我没有找人内推而拿到面试机会的，也是面试体验最好的一个公司。Hulu 和 Twitter、Zynga、Foursquare 等公司一样，用了 &lt;a href=&#34;https://hire.jobvite.com/&#34;&gt;jobvite&lt;/a&gt; 接受和追踪职位申请。因为是申请的第一家公司，我在申请 Hulu 时的 cover letter 写得很详细，针对职位需求上的每一条都写了我的相关工作经验，这也许是最后能拿到面试机会的原因吧。其他公司的 cover letter 都写得很简单，短短两段就结束了。&lt;/p&gt;
+
+&lt;p&gt;Hulu 的第一轮电面和其他公司的有些不同。45 分钟里要做四个题。面试官提前十分钟发了一封邮件给我，上面有两段代码。第一段代码是一个检查两个字符串是否是 &lt;a href=&#34;http://en.wikipedia.org/wiki/Anagram&#34;&gt;anagram&lt;/a&gt; 的程序，写得很绕而且性能很差。面试官先问我这段代码的用途，然后问有什么方法优化，并要求我把代码写在 titanpad 上。接着他问了我第二段代码是做什么的。第二段代码也写得有点复杂，不过可以看出是一个检查有向图里面是否存在环的程序。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>北美求职记（二）：Google &amp; Facebook</title>
+      <link>https://blog.yxwang.me/2012/12/job-hunting-in-usa-2/</link>
+      <pubDate>Tue, 25 Dec 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2012/12/job-hunting-in-usa-2/</guid>
+      <description>&lt;h4 id=&#34;北美求职记系列文章&#34;&gt;北美求职记系列文章&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.yxwang.me/2012/12/job-hunting-in-usa-1/&#34;&gt;北美求职记（一）：Microsoft&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;北美求职记（二）：Google &amp;amp; Facebook&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.yxwang.me/2012/12/job-hunting-in-usa-3/&#34;&gt;北美求职记（三）：Hulu &amp;amp; Twitter&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;google&#34;&gt;Google&lt;/h2&gt;
+
+&lt;p&gt;Google 面试也是托学长推荐了。HR 说我的简历看起来很不错，先给我安排了两轮电面。&lt;/p&gt;
+
+&lt;p&gt;电面都和 coding 有关，面试官会给你一个 Google Docs 链接，在电话里描述题目后要求你在 Google Docs 上写程序。题目的难度不高，两轮一共四题，都是对基本数据结构的操作，例如给在一个未排序的数组中去掉重复的数字，还有把一个有序数组转成一个平衡二叉搜索树，在一个已排序但有重复数字的数组中查找元素等。&lt;/p&gt;
+
+&lt;p&gt;第一轮电面聊天的时候还发现第一轮的面试官是在 ITA Software 做的。正好前几天用他们的产品 &lt;a href=&#34;http://matrix.itasoftware.com/&#34;&gt;Matrix Airfare Search&lt;/a&gt; 订到了低价的去土耳其的机票，过了一星期神奇的在面试的时候碰到了这个团队的工程师。当时一下子就兴奋起来，聊了不少和 Matrix 的有关的话题。这位面试官听说中国的机票也能用他们的平台查询，还挺吃惊的。他还提到他们原本想把计算任务放到 Google 内部的计算框架上，但是由于和合作方的合同的限制，没法把一些商业数据放到 Google 的平台里，只能继续用原有的计算引擎。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>北美求职记（一）：Microsoft</title>
+      <link>https://blog.yxwang.me/2012/12/job-hunting-in-usa-1/</link>
+      <pubDate>Mon, 24 Dec 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2012/12/job-hunting-in-usa-1/</guid>
+      <description>&lt;h4 id=&#34;北美求职记系列文章&#34;&gt;北美求职记系列文章&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;北美求职记（一）：Microsoft&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.yxwang.me/2012/12/job-hunting-in-usa-2/&#34;&gt;北美求职记（二）：Google &amp;amp; Facebook&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.yxwang.me/2012/12/job-hunting-in-usa-3/&#34;&gt;北美求职记（三）：Hulu &amp;amp; Twitter&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;最近签掉了 offer，找工作的事情算是告一段落。在这里写一点面试体验和心得，希望对有兴趣去北美工作的朋友有所帮助。&lt;/p&gt;
+
+&lt;p&gt;先简单介绍下自己，国内硕士在读，明年毕业，没有牛 paper，也没参加过 ACM-ICPC 竞赛。在实验室做过内核、虚拟机和 Android 底层相关的研究工作，接过一些网页和移动开发的外包，2011 年开始在&lt;a href=&#34;http://tangcha.tc/&#34;&gt;字节社&lt;/a&gt;兼职负责后台开发。另外也经常上 &lt;a href=&#34;http://stackoverflow.com/users/111896/zellux&#34;&gt;Stackoverflow&lt;/a&gt; 和 &lt;a href=&#34;http://github.com/zellux&#34;&gt;GitHub&lt;/a&gt;。&lt;/p&gt;
+
+&lt;p&gt;这次决定直接申请美国的职位后，由于心里没底，不知道国外公司招聘的难度，所以一开始投了很多公司。几个大公司都找人内推或者直接投了，小公司也投了不少，比如 Foursquare、Path、Pinterest 和 Square 等都试了。当时甚至在手机上找了一圈应用，把可能涉及后端开发的应用都投了一遍。不过大多数公司都没给我安排面试，最后 Microsoft、Google、Facebook、Twitter 和 Hulu 这五家公司愿意给我面试机会。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Impossible is Nothing</title>
+      <link>https://blog.yxwang.me/2012/12/impossible-is-nothing/</link>
+      <pubDate>Sun, 09 Dec 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2012/12/impossible-is-nothing/</guid>
+      <description>&lt;p&gt;虽然这一年还没结束，还是想为这一年写点什么。&lt;/p&gt;
+
+&lt;p&gt;一月到四月还是一如既往的波澜不惊的生活着。因为在一个创业公司兼职，做的事情比一年前有意思一些，但基本上还是实验室寝室两点一线，周末和 tt 出去逛逛。四月初去了一次杭州。&lt;/p&gt;
+
+&lt;p&gt;过年的时候和 tt 商量一起去台湾玩，但那时候去台湾还只是个完全没有谱的事情。三月底 tt 看到一个台湾自由行的优惠活动，四天内截止，两个人就这样一冲动报了去台湾的团购。四月准备好了各种手续，准备五月中旬出发。但是老实说，甚至在出发前的那一天，我都没觉得这件事情是彻底定下来了，或者说，总觉得去台湾玩这样一件事还是离自己遥远了点。也许是宅生活惯了，一下子这样进行一个离开大陆的持续 10 天的旅游让自己觉得太遥远了。去台湾我还是第一次坐飞机。&lt;/p&gt;
+
+&lt;p&gt;但是当下了飞机，双脚踏在松山机场的时候，我才意识到这一次台湾之旅真的成行了。&lt;/p&gt;
+
+&lt;p&gt;台湾这次旅游其实对我心理上的积极意义很大，不知道怎么描述，大致就是一件事原以为离自己很远的事情从慢慢部署准备到突然意识到已经成功了的感觉。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>台湾旅游 tips</title>
+      <link>https://blog.yxwang.me/2012/10/travel-in-taiwan/</link>
+      <pubDate>Sun, 21 Oct 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2012/10/travel-in-taiwan/</guid>
+      <description>&lt;p&gt;顺带把几个月前写的台湾旅游 tips 也放到这个博客来。&lt;/p&gt;
+
+&lt;h2 id=&#34;机票&#34;&gt;机票&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;我们订的是去哪儿上的团购，每人 2799 元，包括往返机票、入台证和一张台北捷运卡。团购是中旅台湾部负责的，中旅的态度很不错，提供了不少台湾旅游相关的信息。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;大通证-入台证&#34;&gt;大通证、入台证&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;办证需要的具体证件网上能搜到很多，这里就不细讲了。办理入台证需要的证件可以直接问旅行社，不同旅行社的要求可能会有细小的差异，比如在存款证明时间上。&lt;/li&gt;
+&lt;li&gt;微博上的 &lt;a href=&#34;http://e.weibo.com/go2tw&#34;&gt;@台湾自由行&lt;/a&gt; 前一阵子推荐几家大陆的低价入台证办理点，应该比较靠谱，可以参考下。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>土耳其旅游 tips</title>
+      <link>https://blog.yxwang.me/2012/10/travel-in-turkey/</link>
+      <pubDate>Wed, 17 Oct 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2012/10/travel-in-turkey/</guid>
+      <description>&lt;p&gt;刚从土耳其呆了两星期回来，我们的行程是 Istanbul（一天一晚），过夜大巴到 Göreme（三天两晚），过夜大巴到 Fethiye（三天两晚），过夜大巴到 Bursa（一天一晚），下午的轮船回 Istanbul（四天三晚）。趁着记忆还新鲜，写一点土耳其旅游相关的 tips。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Twitter Snowflake</title>
+      <link>https://blog.yxwang.me/2012/08/twitter-snowflake/</link>
+      <pubDate>Thu, 09 Aug 2012 17:37:12 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2012/08/twitter-snowflake/</guid>
+      <description>&lt;p&gt;这是一篇两年前 Twitter 开发团队写的文章，今天挖出来研究了一下。原文地址 &lt;a href=&#34;http://engineering.twitter.com/2010/06/announcing-snowflake.html&#34;&gt;http://engineering.twitter.com/2010/06/announcing-snowflake.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Twitter 早期用 MySQL 存储数据，随着用户的增长，单一的 MySQL 实例没法承受海量的数据，开发团队就开始用 &lt;a href=&#34;http://cassandra.apache.org/&#34;&gt;Cassandra&lt;/a&gt; 和 sharded MySQL 替代原有的系统。然而和 MySQL 不同的是，Cassandra 没有内置为每一条数据生成唯一 ID 的功能，因为在一个分布式环境下，很难有完美的 ID 生成方案。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>恢复 Things Cloud 的同步功能</title>
+      <link>https://blog.yxwang.me/2012/08/fix-things-cloud/</link>
+      <pubDate>Thu, 02 Aug 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2012/08/fix-things-cloud/</guid>
+      <description>Things Cloud for iOS 的同步功能出来后一直不能正常使用，必须得先翻墙才行。用代理截了下请求后发现 Things Cloud 用的同步服务器是 multithreaded.thingscloud.appspot.com，难怪一直没法访问。
+好在 Things Cloud 同步走的是 HTTPS 协议，所以恢复方法也很简单，换用一个没有被污染的 DNS 服务器就好。对于越狱了的机器，也可以直接修改 iOS 上的 /etc/hosts 文件，在里面添加下面两行地址。
+203.208.46.161 multithreaded.thingscloud.appspot.com 203.208.46.161 thingscloud.appspot.com  </description>
+    </item>
+    
+    <item>
+      <title>Android 中点击事件的判断</title>
+      <link>https://blog.yxwang.me/2012/07/android-tap-timetout/</link>
+      <pubDate>Sat, 21 Jul 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2012/07/android-tap-timetout/</guid>
+      <description>&lt;p&gt;最近实验室做的一个东西会向 Android 应用快速注入一系列触屏事件，模拟用户的点击。但是我们发现当按下和弹起的 MotionEvent 之间时间间隔过小（例如小于 100ms）时，会导致该事件被忽略。看了代码后发现 Android 中按下和弹起之间时间间隔要在 115ms 以上才会被认为是一个点击事件。这里结合 Android 的源码分析一下点击事件的产生过程。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Scala 中的协变和逆变</title>
+      <link>https://blog.yxwang.me/2012/06/variances-in-scala/</link>
+      <pubDate>Sat, 30 Jun 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2012/06/variances-in-scala/</guid>
+      <description>&lt;h2 id=&#34;java-数组&#34;&gt;Java 数组&lt;/h2&gt;
+
+&lt;p&gt;先来看一个 Java 中的例子，Java 中的数组是协变的。也就是说，一个 String 数组(String[])是可以被当成 Object 数组(Object[])处理的：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;String[] a1 = { &amp;quot;abc&amp;quot; };
+Object[] a2 = a1;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这种协变虽然在读取数组内容时不会有问题（a1 数组中的 String 元素可以被当成 Object 使用），但是修改数组内容时就会出现无法在编译期检测出来的错误了：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;a2[0] = new Integer(17)
+String s  = a1[0]  // java.lang.ArrayStoreException
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>存储是移动应用性能的瓶颈？</title>
+      <link>https://blog.yxwang.me/2012/06/revisiting-storage-for-smartphones/</link>
+      <pubDate>Mon, 11 Jun 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2012/06/revisiting-storage-for-smartphones/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://www.usenix.org/comment/260&#34;&gt;Revisiting Storage for Smartphones&lt;/a&gt; 是今年 FAST 会议上的最佳论文，这篇论文提出了一个违背直觉的观点，很有意思。这里简单介绍一下这篇论文的内容，有兴趣的朋友可以直接访问前面的链接下载原文或是观看现场录像。&lt;/p&gt;
+
+&lt;a data-fancybox=&#34;gallery&#34;  data-caption=&#34;移动存储性能&#34; href=/images/2012-06/mobile-flash-throughtput.png &gt;&lt;img src=/images/2012-06/mobile-flash-throughtput.png  /&gt;&lt;/a&gt;
+
+
+&lt;p&gt;传统的观点认为，移动应用性能的主要瓶颈在网络和 CPU，而闪存的读写速率明显高于网络传输速度，不会成为性能的瓶颈。然而，根据上图作者给出的关于移动存储性能的图例（纵坐标单位为 Mbps，本文图片均来自演讲 slides 和原论文），我们可以看到，虽然移动存储顺序读写的性能明显高于 wifi 和 3G，但是随机写的性能却比它们差很多，因此移动存储成为应用性能瓶颈是完全有可能的。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>用 Git 管理命令行配置</title>
+      <link>https://blog.yxwang.me/2012/03/managing-dotfiles-with-git/</link>
+      <pubDate>Wed, 28 Mar 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2012/03/managing-dotfiles-with-git/</guid>
+      <description>&lt;p&gt;以前部署新机器时都要把一堆配置文件 scp 过去，今天折腾了下用 Git 统一管理这些配置文件。&lt;/p&gt;
+
+&lt;p&gt;做起来很简单，创建一个 dotfiles 目录，把所有要同步的配置文件都放到这个目录下，并重命名去掉文件名开头的点，以免被 Git 忽略。写了一个脚本链接这些配置文件到 HOME 目录：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;#!/usr/bin/env ruby
+
+safe_mode = ARGV.include? &#39;--safe&#39;
+
+files = %w(zshrc tmux.conf gitconfig vimrc emacs gitignore_global LS_COLORS)
+files.each do |file|
+  unless safe_mode and File.exists?(&amp;quot;#{ENV[&#39;HOME&#39;]}/.#{file}&amp;quot;)
+    %x(ln -s -i -v $PWD/#{file} ~/.#{file})
+    puts &amp;quot;.#{file} linked&amp;quot; if safe_mode
+  end
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>利用 ETag 优化 Rails 应用</title>
+      <link>https://blog.yxwang.me/2012/02/etags-in-rails/</link>
+      <pubDate>Sat, 18 Feb 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2012/02/etags-in-rails/</guid>
+      <description>&lt;p&gt;ETag 是 HTTP 协议的一部分，可以用来检测客户端的缓存是否仍然有效。不少网站都实现了对 ETag 的支持，在 HTTP 响应头中加入当前传送内容的 ETag。以 heroku.com 为例：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ curl -I www.heroku.com
+HTTP/1.1 200 OK
+Server: nginx
+Date: Fri, 17 Feb 2012 17:36:44 GMT
+Content-Type: text/html; charset=utf-8
+Connection: keep-alive
+Etag: &amp;quot;f74bb78aa48d36e6a0b2072a131b20b9&amp;quot;
+Cache-Control: public, max-age=300
+Content-Length: 15481
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>转换 Visio 图片为 EPS 格式</title>
+      <link>https://blog.yxwang.me/2012/01/visio-export-to-eps/</link>
+      <pubDate>Mon, 02 Jan 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2012/01/visio-export-to-eps/</guid>
+      <description>&lt;p&gt;Windows 7 及 Visio 2010 下验证可行：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;添加本地打印机，类型选择 Generic -&amp;gt; MS Publisher Color Printer&lt;/li&gt;
+&lt;li&gt;在 Visio 中打印，选择新添加的打印机，选中 Print to file，点 Properties -&amp;gt; Advanced&lt;/li&gt;
+&lt;li&gt;Document Options -&amp;gt; PostScript Options -&amp;gt; PostScript Output Option 中，选择 Encapsulated PostScript (EPS)&lt;/li&gt;
+&lt;li&gt;保存时别忘了加后缀名 .eps&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>一些 ZvT 的心得</title>
+      <link>https://blog.yxwang.me/2011/12/zvt-notes/</link>
+      <pubDate>Mon, 05 Dec 2011 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2011/12/zvt-notes/</guid>
+      <description>&lt;p&gt;一直在国服大师组混，最让我头疼，同时研究的也最多得对战就是 ZvT 了。这里写一点自己关于 ZvT 的心得，欢迎探讨。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>转用 octopress 了</title>
+      <link>https://blog.yxwang.me/2011/11/migrated-to-octopress/</link>
+      <pubDate>Tue, 29 Nov 2011 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2011/11/migrated-to-octopress/</guid>
+      <description>jekyll 是一个静态博客生成工具，可配置性很强。但是它的配置对于初学者不是很友好，没有现成的模版，需要自己从头搭一个。octopress 大大简化了这一配置过程，在 jekyll 的基础上提供了一个默认主题，以及一些常用的插件。
+Why 在 github 上捣鼓了一阵子 octopress 后，决定把原来的 wordpress 博客的数据转移到这个 octopress 博客上了。相对于 wordpress，octopress 的优点在于：
+ 支持 Markdown 语法。Markdown 是 github、stackoverflow 上的默认标记语言，写笔记我也一直用这个。Mac 平台上有不少好用的 Markdown 编辑器，例如收费的 Byword，免费的 Mou，这些工具都增加了写日志时的愉悦感。
+ 静态。对主页空间没有要求，甚至放到 github pages 上都可以。静态页面如果要加评论，可以考虑 disqus 等第三方 JS 工具。
+ 对内嵌代码支持很好。内置了 pygments ，这里有一份支持语言的列表。值得一提的是 octopress 还支持内嵌 Gist。
+ 日志文件都在本地，而且是纯文本，管理很方便（可以用 git），也不用担心租用的服务器数据丢失等问题。
+ rake new_post; rake gen_deploy 这样写博客很过瘾 :)
+  How 关于 wordpress 到 octopress 的数据转移，本文结尾的两篇参考文章已经说得很详细了，这里再补充几点：
+ 编码：jekyll 的 wordpressdotcom.rb 用了 yaml 库生成博客文章的 meta 信息，碰到中文标题会出现乱码，换用 ya2yaml 后问题解决。</description>
+    </item>
+    
+    <item>
+      <title>ActiveRecord 的一些细节</title>
+      <link>https://blog.yxwang.me/2011/11/notes-on-active-record/</link>
+      <pubDate>Thu, 24 Nov 2011 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2011/11/notes-on-active-record/</guid>
+      <description>对象属性 ActiveRecord 对象在数据库中的属性并不是以实体变量的方式保存的，如果要为一个属性设置默认值的话，
+class Item &amp;lt; ActiveRecord::Base def category @category || &#39;n/a&#39; end end  这样的实现是不可行的。读取和修改这些属性时应该使用 read_attribute 和 write_attribute：
+class Item &amp;lt; ActiveRecord::Base def category read_attribute(:category) || &#39;n/a&#39; end end  Hash 和相等性 ActiveRecord 的 hash 值是根据主键的值计算出来的，这就意味着未保存对象的 hash 值是不可靠的。同样两个 model 对象的相等比较（即==操作符）也是基于主键的，所以两个 model 对象即使它们的其他属性不一样，仍有可能被当作相等。
+查找 find_by_attribute 方法后面加个 ! 号，即使用 find_by_attribute!，就能在找不到对象的时候触发一个 RecordNotFound 异常，而不是返回 nil。
+find_or_initialize_by 和 find_or_create_by 也是两个好用的方法，它们在找不到对象时分别使用 new 和 create 新建一个，并用查找的属性初始化新建的对象。
+手写 SQL 不得不手写 SQL 同时又要防止注入攻击的一个比较简洁的写法是
+Order.where(&amp;quot;name = :name and pay_type = :pay_type&amp;quot;, params[:order])  回调函数 出于性能考虑，after_find 和 after_initialize 只能通过函数声明的方式定义，即不能用类似 before_validation :normalize_fields 这样的形式。</description>
+    </item>
+    
+    <item>
+      <title>REST 服务的方法</title>
+      <link>https://blog.yxwang.me/2011/11/methods-in-restful-applications/</link>
+      <pubDate>Sun, 20 Nov 2011 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2011/11/methods-in-restful-applications/</guid>
+      <description>HEAD 方法和 GET 方法比较像，但是它不返回对象的实际表示，只返回一个 HTTP 头。HEAD 可以用来查看对象修改时间、大小等信息，Amazon S3 的客户端就用它来读取文件元信息。
+用 PUT 和 POST 创建对象时的一个区别在于，使用前者时客户端知道被创建对象的 URL（例如 /items/3），而后者则不需要客户端了解（例如 /items/new）。
+OPTIONS 用来查看客户端对某个资源有那些可用的操作。
+正确的设计应当保证：
+ GET 和 HEAD 是安全的，即不会修改任何对象状态。多次调用它们的结果应当和只调用一次甚至不调用一样。 GET、HEAD、PUT 和 DELETE 方法是幂等（idempotent）的。多次调用它们的结果应当和只调用一次一样。  这两点保证了在一个不可靠的网络中，客户端仍能进行有效的操作。
+参考：Restful Web Services</description>
+    </item>
+    
+    <item>
+      <title>Rails 中 render 方法的可选参数</title>
+      <link>https://blog.yxwang.me/2011/11/options-for-render/</link>
+      <pubDate>Sun, 20 Nov 2011 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2011/11/options-for-render/</guid>
+      <description>:content_type 设置返回内容的 MIME 类型
+render :file =&amp;gt; filename, :content_type =&amp;gt; &#39;application/rss&#39;  :layout 指定 layout
+:status 指定返回的 HTTP 代码
+:location 指定 HTTP 头中的 Location 字段
+Rails 生成的 controller 代码中，create.json 方法在生成对象后会将 Location 设置为新生成对象的 json 地址：
+respond_to do |format| if @item.save format.html { redirect_to @item, notice: &#39;Item was successfully created.&#39; } format.json { render json: @item, status: :created, location: @item } else format.html { render action: &amp;quot;new&amp;quot; } format.json { render json: @item.</description>
+    </item>
+    
+    <item>
+      <title>rspec 跳过指定测试</title>
+      <link>https://blog.yxwang.me/2011/11/skip-specs-by-tags/</link>
+      <pubDate>Sun, 20 Nov 2011 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2011/11/skip-specs-by-tags/</guid>
+      <description>有些测试比较耗时间，而且很少被修改，如果能在测试的时候跳过它们就能让 spec 快不少。
+跳过测试的方法很简单，spec 的 describe 方法可以给对应的测试加上标签，例如
+describe SalesController, :slow =&amp;gt; true do # specs end  接下来只要在 spec/spec_helper.rb 中声明跳过这个标签即可：
+RSpec.configure do |config| config.filter_run_excluding :slow =&amp;gt; true end  与 filter_run_excluding 相反的是 filter_run，指定会被运行的标签，不包含在这个列表中的测试将被忽略。
+参考：http://www.dixis.com/?p=283</description>
+    </item>
+    
+    <item>
+      <title>一个简单有效的 hash 算法</title>
+      <link>https://blog.yxwang.me/2011/09/recipe-for-hashing/</link>
+      <pubDate>Sat, 17 Sep 2011 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2011/09/recipe-for-hashing/</guid>
+      <description>最近要给某个类写一个 hash 方法，这个类包括一些整型和字符串属性，需要把它们都放到 hash 中。担心自己想出来的 hash 算法会造成比较严重的冲突，网上搜了一下，发现 Effective Java 中已经介绍过一种简单有效的算法了：  将任一非零常数赋值给 result 找到该类中所有需要包含在 hash 中的属性，并根据它们的类型进行计算 c  对于布尔类型，将它们转换为 0/1 对于 byte, char, short, 和 int 类型，将它们转换为 int 对于长整型 long，计算高位和低位的异或结果 (int) (f ^ (f &amp;gt;&amp;gt;&amp;gt; 32)) 对于 float 类型，采用它的二进制表示，在 Java 中为 Float.floatToIntBits，Ruby 中我估计用 Float.hash 也可以 对于 double 类型，调用 Double.doubleToIntBits 后再次用前面的方法处理得到的 long 类型 对于数组，利用方法 3 合并计算结果 对于其它的对象，递归调用该对象的 hash 方法  将计算结果合并到 result 变量：result = 37 * result + c 返回 result  另外这个博客的域名已经改成了 blog.</description>
+    </item>
+    
+    <item>
+      <title>让 Emacs 支持 Lion 的全屏模式</title>
+      <link>https://blog.yxwang.me/2011/07/full-screen-emacs-in-lion/</link>
+      <pubDate>Thu, 28 Jul 2011 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2011/07/full-screen-emacs-in-lion/</guid>
+      <description>前几天给我的 MacBook Pro 装上了 Lion，不过原来的 Emacs 并不支持在 Lion 下全屏运行。github 上搜了下发现已经有让 Emacs 支持全屏模式的补丁了，Homebrew 中这个补丁也已经被吸收。
+直接用 brew install emacs &amp;ndash;cocoa &amp;ndash;srgb 似乎会碰到编译错误：
+Finding pointers to doc strings... Finding pointers to doc strings...done Dumping under the name emacs unexec: cannot write section __data --- List of All Regions --- address size prot maxp --- List of Regions to be Dumped --- address size prot maxp --- Header Information --- Magic = 0xfeedfacf CPUType = 16777223 CPUSubType = -2147483645 FileType = 0x2 NCmds = 20 SizeOfCmds = 3464 Flags = 0x00200085 Highest address of load commands in input file: 0x5dd000 Lowest offset of all sections in __TEXT segment: 0x22f0 --- List of Load Commands in Input File ---  github issues 上已经有人报告这个问题了，解决方法也很简单，运行 brew edit emacs 打开 emacs 的安装脚本，在 def install 的后面加上两行：</description>
+    </item>
+    
+    <item>
+      <title>利用 netgrowl 向 Windows / Mac OS X 发送消息</title>
+      <link>https://blog.yxwang.me/2011/03/send-notifications-with-netgrowl/</link>
+      <pubDate>Wed, 02 Mar 2011 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2011/03/send-notifications-with-netgrowl/</guid>
+      <description>我平时用的系统是 Windows 7 和 Mac OS X，实验室项目一般都是 ssh 远登到 Ubuntu 和 Linux 上开发的。有时碰到内核和虚拟机等项目编译比较耗时，编译开始后要时不时的看一下编译任务是否完成，或者有没有中途出错，这时候如果有个通知系统就比较方便了。
+Google 了一把找到了 netgrowl 这个好东东，它是一个开源的 Python 模块，实现了 Growl 协议，可以向 Mac 或 Windows 上的 Growl 服务发送通知。使用也非常方便，先用 GrowlRegistrationPacket 函数注册一个应用，接着就可以用 GrowlNotificationPacket 发送通知了：
+notify.py
+#!/usr/bin/python from netgrowl import * import sys title = &amp;quot;Notification from Ubuntu&amp;quot; desc = &amp;quot;&amp;quot; if len(sys.argv) &amp;gt; 2: title = sys.argv[1] desc = sys.argv[2] addr = (&amp;quot;10.131.251.101&amp;quot;, GROWL_UDP_PORT) s = socket(AF_INET,SOCK_DGRAM) p = GrowlRegistrationPacket(application=&amp;quot;Ubuntu&amp;quot;, password=&amp;quot;i&amp;quot;) p.addNotification(&amp;quot;Ubuntu Notifications&amp;quot;, enabled=True) s.</description>
+    </item>
+    
+    <item>
+      <title>良性代码，恶意利用：浅谈 Return-Oriented 攻击（二）</title>
+      <link>https://blog.yxwang.me/2011/01/return-oriented-intro-2/</link>
+      <pubDate>Sun, 16 Jan 2011 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2011/01/return-oriented-intro-2/</guid>
+      <description>在上一篇文章中我们介绍了 return-oriented 这种攻击手段，它的强大之处在于攻击者不需要插入恶意代码，通过构造特殊的函数返回栈利用程序中原有的代码即可达到攻击者的目地。
+北卡州立大学的学者们提出了一种防止 return-oriented 攻击的思路，思路很简单，一句话概括，就是去掉代码里所有的 ret 指令！
+思路很简单，真正做起来还是很复杂的。x86 中的 ret 指令只有一个字节，即 0xc3。要去掉所有的 0xc3，不仅要修改原来代码中的 ret 指令，还要移除其他指令片段中的 0xc3（例如 movl $0xc3, %rax）。接下来我们来看看 EuroSys 10 上的这篇文章是怎么解决这些问题的。
+首先是原来就作为 ret 指令用的 0xc3 代码。注意 return-oriented 之所以成功一大原因就是 ret 指令在返回时不会检查栈上的返回地址是否正确。要保证这一点，需要引入一个间接跳转层。传统的调用过程是调用者把返回地址压入栈上，然后被调用函数返回时从栈上得到返回地址并返回。现在我们加入一个新的跳转表，这张表里记录了所有的返回地址，而且它不在栈上，因此不能被攻击者修改。当调用者调用函数时，把返回地址在表中的序号压入栈上；函数返回时，从栈上读出地址序号，再查表得到实际地址，然后返回。通过引入这样一层额外的地址转换机制，攻击者就不能通过修改栈上返回地址让函数返回到任意地址了。
+接下来我们要解决其他指令引入的 0xc3，这里面也分几类情况。首先是由于寄存器分配引起的。例如 movl %rax, %rbx 对应的机器码是 48 89 c3，这边就有个 0xc3。对于这一类代码，只需要在编译器做寄存器分配时把有可能产生 0xc3 的情况排除掉即可。
+另一类是代码中直接使用了 0xc3 作为直接数。这种情况需要对代码进行适当的修补，以 cmp $0xc3, %ecx 为例，0xc3 这个直接数可以通过 0xc4 - 1 得到，于是这条指令可以被修改为：
+mov $0xc4, %reg dec %reg cmp %reg, %ecx  到这里所有包含 0xc3 的代码都已经被修改成具有同等功能的不包含 0xc3 的版本了，也就彻底杜绝了 ret 指令被用来做 return-oriented 攻击的可能。对具体实现细节有兴趣的同学可以读一下这篇论文，作者借助 LLVM 生成了一个没有 0xc3 的 FreeBSD 内核。</description>
+    </item>
+    
+    <item>
+      <title>良性代码，恶意利用：浅谈 Return-Oriented 攻击（一）</title>
+      <link>https://blog.yxwang.me/2010/11/return-oriented-intro-1/</link>
+      <pubDate>Fri, 19 Nov 2010 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2010/11/return-oriented-intro-1/</guid>
+      <description>众多的安全漏洞中，栈溢出（stack-based buffer overflows）算是非常常见的了。一方面因为程序员的疏忽，使用了 strcpy、sprintf 等不安全的函数，增加了栈溢出漏洞的可能。另一方面，因为栈上保存了函数的返回地址等信息，因此如果攻击者能任意覆盖栈上的数据，通常情况下就意味着他能修改程序的执行流程，从而造成更大的破坏。
+对于栈溢出漏洞，传统的攻击方式是嵌入攻击代码，然后修改栈上的返回地址，使它指向攻击代码段，从而执行攻击者指定的代码。本科时候上过一门计算机系统基础，其中的某一个lab就要求学生做这么一件事。
+现在的安全技术已经能比较好的防范传统的栈溢出攻击了。常见的技术有这么几种：
+随机空间，前面提到攻击者需要修改栈上返回地址，使它指向注入的代码起始地址。但如果用户栈的起始地址是随机分布的，甚至每次新建一个栈帧时的地址都有一定程度的随机波动，要获得准确的返回地址就很困难了。这个技术大大增加了代码嵌入攻击的难度，但是却没用从理论上杜绝成功的可能性。攻击者可以使用大量的空指令（nop），并在可以修改的区域重复添加攻击代码，以此增加攻击成功的几率。
+W ^ X，把所有的可读可写页标记为不可执行，也就是说攻击者无法添加或修改可执行代码，这样包含了嵌入代码的页面就无法被攻击者调用执行了。Windows 的 DEP、 Linux 的 PaX 都利用了这一项技术。
+此外还有一些诸如 StackGuard 等栈保护手段，不过由于它们对性能影响很大，实际中使用并不广泛。
+这些手段使得在受保护的进程中利用栈溢出嵌入恶意代码并执行变得几乎不可能，然而这并不意味着栈溢出漏洞没有利用的价值了。聪明的黑客们想到了另外一种自定义程序行为的途径：利用程序或者动态库中原有的代码。这些代码虽然本身是良性的，但适当利用的话，同样可以产生恶意的效果。
+最简单的手段就是著名的 return-to-libc 攻击。libc 中有一些函数可以用于执行其他的进程，例如 execve 和 system。这些函数很容易被攻击者利用，只要找到一个栈溢出漏洞，并适当的构造函数调用参数，并使栈上返回地址指向这些函数的起始地址，攻击者就能以这个程序的权限执行任意其他程序了！注意这里所有执行的代码都是合法的，所以前面提到的W^X技术对此就无能为力了。
+return-to-libc 这种攻击方式也有一个局限，就是需要代码库中有 system 这样符合要求的函数，如果对于内核代码，或是检查调用来源的库，return-to-libc 就不那么给力了。于是另一种理论上更强大、也更难构造的攻击方式浮出水面，也就是标题的 return-oriented 攻击。
+关于 return-oriented 攻击，我之前的一篇博文已经介绍过这个概念了，这里再解释一下。
+一般程序中都包含着大量的返回指令（ret），它们通常位于一个函数的结尾，或是中途返回的地方。而这些返回指令之前的一两条指令，成为了 return-oriented 攻击指令的来源。攻击者要做的就是把这些零零碎碎的指令拼接起来，拼成一段恶意的代码。这里的难点有两个地方，一是怎么找到符合要求的代码片段，二是找到之后怎么拼接。
+先来看第一个问题，可用的代码片段虽然多，但是都是固定的。这就意味着原来的一条指令现在可能需要多条指令执行后得到相同的效果了。举例来说，要把一个寄存器赋值为 4 的话，可能没有现成的直接赋值的代码片段，需要一条赋值为 1 的指令，和三条寄存器加 1 的指令拼凑而成。这样通过拼凑，受限的指令可以完成一些基本的操作，再由这些基本的操作，组成一段有实际意义的攻击代码。这里涉及到不少编译相关的知识，具体细节就不赘述了。
+关于第二个问题，因为前面找到的代码片段都是以 ret 指令结尾的，所以只要把栈上的返回地址改成片段1的起始地址，代码片段1执行之后就会通过 ret 指令返回，此时读取的返回地址还是在被攻击的栈上，所以攻击者只要把对应位置的值改成代码片段2的起始地址，就能紧接着执行代码片段2了，如此循环，只要栈够大，就可以把攻击片段跑完。
+对于 Linux 内核、glibc 这些庞大的程序来说，ret 指令前面一两条指令组成的代码库非常巨大，基本上可以达到图灵完备的要求了，也就是说，只要栈够大，任何程序都能由这些代码片段表达出来。另外这里为什么强调“一两条指令”呢？当然四五条甚至十几条指令的复用也是可以的，只是这样会大大增加搜索空间，要通过这些可能的代码片段生成一个程序需要太多的时间了。
+那么如何防范 return-oriented 攻击呢？之后的博文里，我会介绍一些和它相关的国外研究。</description>
+    </item>
+    
+    <item>
+      <title>软件修改 Caps Lock 状态</title>
+      <link>https://blog.yxwang.me/2010/10/change-caps-lock-state-by-software/</link>
+      <pubDate>Tue, 19 Oct 2010 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2010/10/change-caps-lock-state-by-software/</guid>
+      <description>我经常使用的几台电脑中的Caps Lock 键都被我改成了 Ctrl 键，这样修改以后用起 Emacs 来就顺手多了。
+最近在 Windows 上用 VMware Remote Control 远登虚拟机调试内核的时候，问题就出来了：可能是这个浏览器插件的 bug，有时键盘的 Caps Lock 会被莫名打开。然后我的这个键盘键位又比较少，不想再让 Caps Lock 键替换另一个用得更少的按键了，于是想到了软件关闭的方法。
+搜了下 Stackoverflow 找到个很好用的 Python 库SendKeys，只要两行代码就能在 Windows 下模拟 Caps Lock 按键了：
+import SendKeys SendKeys.SendKeys(&amp;quot;{CAPSLOCK}&amp;quot;)  另外在 Linux 要模拟按键，可以直接访问 /dev/console：
+import fcntl import os KDSETLED = 0x4B32 console_fd = os.open(&#39;/dev/console&#39;, os.O_NOCTTY) # Turn on caps lock fcntl.ioctl(console_fd, KDSETLED, 0x04) # Turn off caps lock fcntl.ioctl(console_fd, KDSETLED, 0)  原问题地址</description>
+    </item>
+    
+    <item>
+      <title>gcc 内联汇编中 %c 的用法</title>
+      <link>https://blog.yxwang.me/2010/08/gcc-operand-substitution/</link>
+      <pubDate>Wed, 25 Aug 2010 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2010/08/gcc-operand-substitution/</guid>
+      <description>这几天看KVM代码的时候看到里面有个内联汇编的语法很陌生（下面的代码截取了部分内联汇编片段）：
+asm ( &amp;quot;mov %c[rax](%3), %%rax \n\t&amp;quot; &amp;quot;mov %c[rbx](%3), %%rbx \n\t&amp;quot; &amp;quot;mov %c[rdx](%3), %%rdx \n\t&amp;quot; &amp;quot;mov %c[rsi](%3), %%rsi \n\t&amp;quot; &amp;quot;mov %c[rdi](%3), %%rdi \n\t&amp;quot; : &amp;quot;=q&amp;quot; (fail) : &amp;quot;r&amp;quot;(vcpu-&amp;gt;launched), &amp;quot;d&amp;quot;((unsigned long)HOST_RSP), &amp;quot;c&amp;quot;(vcpu), [rax]&amp;quot;i&amp;quot;(offsetof(struct kvm_vcpu, regs[VCPU_REGS_RAX])), [rbx]&amp;quot;i&amp;quot;(offsetof(struct kvm_vcpu, regs[VCPU_REGS_RBX])), [rcx]&amp;quot;i&amp;quot;(offsetof(struct kvm_vcpu, regs[VCPU_REGS_RCX])) : &amp;quot;cc&amp;quot;, &amp;quot;memory&amp;quot; );  stackoverflow上问了下才知道这是gcc的operand substitution语法，%c后面跟上常量名，就能在内联汇编中使用这个常量了。
+以这段代码为例，vcpu是struct kvm_vcpu类型，[rax]&amp;ldquo;i&amp;rdquo;(offsetof(struct kvm_vcpu, regs[VCPU_REGS_RAX])这句话把vcpu-&amp;gt;regs[VCPU_REGS_RAX]相对于vcpu的偏移赋值给了rax这一常量。接下来回到第一行mov %crax, %%eax，%c[rax]等于前面得到的偏移量，加上vcpu并取值后就是vcpu-&amp;gt;regs[VCPU_REGS_RAX]中保存的值了，这个指令会把这个值保存在%rax寄存器中，从而完成了vcpu的rax寄存器恢复工作。</description>
+    </item>
+    
+    <item>
+      <title>利用 HTTPS 代理访问 GitHub</title>
+      <link>https://blog.yxwang.me/2010/05/git-through-https-proxy/</link>
+      <pubDate>Fri, 14 May 2010 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2010/05/git-through-https-proxy/</guid>
+      <description>网上找了不少设置方法，终于翻出来一个可行的，和大家分享下。
+1. 安装 corkscrew ArchLinux 和 Ubuntu 的源里就有，也可以从 http://www.agroman.net/corkscrew/ 下载源码编译一个。
+2. 修改 ~/.ssh/config Host gitproxy User git Hostname ssh.github.com Port 443 ProxyCommand corkscrew proxy.example.com 3128 %h %p IdentityFile /home/username/.ssh/id_rsa  修改其中的 proxy.example.com 和 3128 为代理 IP 和端口，如果代理需要帐号密码，就在 ProxyCommand 这一行的最后加上密码文件，内容为*用户名:密码*。
+参数 IdentitiFile 指定相应帐号的私钥文件地址。
+另外 @cyfdecyf 同学指出只要把这里的 Host 改成 github.com，就可以直接用 git@github.com:user/repository 访问 GitHub 了。
+3. 使用 git@gitproxy 访问 GitHub 例如要把 foo/bar.git 拖下来，执行 git clone git@gitproxy:foo/bar.git 即可。
+原文地址：http://www.wetware.co.nz/blog/2010/03/cant-access-github-behind-proxy-or-firewall/
+更新： 由于 GitHub 现在支持 HTTPS 协议了，所以更简单的方法是使用 GitHub 提供的 HTTPS 地址，然后用 git config --add http.</description>
+    </item>
+    
+    <item>
+      <title>跨站脚本攻击和 BluePrint</title>
+      <link>https://blog.yxwang.me/2010/03/blueprint/</link>
+      <pubDate>Wed, 03 Mar 2010 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2010/03/blueprint/</guid>
+      <description>Blueprint: Robust prevention of cross-site scripting attacks for existing browsers
+这篇论文提出了一种防范是跨站脚本攻击(XSS)的新的方法，发在IEEE S&amp;amp;P 2009上，作者是UIUC的Mike Ter Louw。
+所谓跨站脚本攻击，简单地说就是在网页中注入非法的脚本代码，从而达到攻击的效果。比较著名的例子有当年在MySpace上泛滥的Samy蠕虫，通过特殊的脚本注入手段，每一位访问Samy主页的用户，他们的主页都会被修改加上一段Samy is my hero文字，并且他们的主页也会被植入攻击代码，从而把这段脚本扩散给更多的用户。
+通常防范跨站脚本攻击的方式有两种。一种做在服务器端，为每一段用户上传的内容做检查，并剔除恶意代码。但这种方式很难保证能过滤掉所有的恶意字符串，一方面攻击方法防不甚防，有兴趣的朋友可以参考下XSS Cheat Sheet，上面给出了很多一般人很难想到的攻击代码的组合方式。另一方面由于现在大多数论坛和博客都支持一些基本的文本修饰标签，所以简单的标签剔除或者重新编码都不可行。
+另一种方法是做在浏览器端，但是由于浏览器无法区分某一段脚本到底是来源于不可信的用户还是可信的站点，所以这种方法实现起来也有很大的困难。
+这里实现防范措施的一个难点在于，Web应用把生成HTML的返回给浏览器后，就不参与浏览器的HTML解析工作了。这样浏览器就不知道哪部分出现脚本是安全的，哪部分出现是不安全的。
+BluePrint就着眼于这个点，提出了一种让Web应用“参与”HTML解析工作的设计。下面通过论文里面的一个例子，简单介绍下它的防范机制。
+假如一位恶意的用户在一个博客上上传了这样一段含有恶意代码的留言：
+&amp;lt;p&amp;gt; Here is a page you might find &amp;lt;b &amp;quot;&amp;quot;&amp;quot;&amp;gt;&amp;lt;script&amp;gt;doEvil(. . .)&amp;lt;/script&amp;gt;&amp;quot;&amp;gt;very&amp;lt;/b&amp;gt; interesting: &amp;lt;a href=&amp;quot; &amp;amp;#14; javasc&amp;amp;#x0A;ript:doEvil(. . .);&amp;quot;&amp;gt; Link&amp;lt;/a&amp;gt; &amp;lt;/p&amp;gt;&amp;lt;p style=&amp;quot;nop:expres/*xss*/sion(doEvil(. . .))&amp;quot;&amp;gt; Respectfully, Eve &amp;lt;/p&amp;gt;  可以看到，这段代码里包含了很多可能引发脚本执行的代码，而要在服务器端把这些所有隐藏的攻击可能找出来是一件比较困难的事。那么BluePrint是怎么在不知道这段代码是否含有恶意代码的前提下处理的呢？
+首先，这种由用户上传的不可信的字符串会先在服务器端被解析成一棵树，就像HTML在浏览器中被解析一样，这棵HTML解析树可以用一些简单的DOM API来生成，例如appendChild, createElement等。这些描述如何生成HTML解析树的方法会和数据值（URL、标签属性等）一起，通过特殊的编码（Base64）传递给浏览器。例如上面这段代码，最后在浏览器接收到的HTML中，会变成这样：
+&amp;lt;code style=&amp;quot;display:none;&amp;quot; id=&amp;quot;__bp1&amp;quot;&amp;gt; =Enk/sCkhlcmUgaXMgYSBwYWdlIHlvdSBta... =SkKICAgICI+dmVyeQ===C/k/QIGhlbHBmd... =ECg===C/Enk/gCiAgUmVzcGVjdGZ1bGx5L... &amp;lt;/code&amp;gt;&amp;lt;script id=&amp;quot;__bp1s&amp;quot;&amp;gt; __bp__.cxPCData(&amp;quot;__bp1&amp;quot;, &amp;quot;__bp1s&amp;quot;); &amp;lt;/script&amp;gt;  在浏览器端，这段特殊的代码会被JS库解析成自定义的命令和数据格式，并由前面提到的DOM API动态生成这些HTML结点，从而达到和传统的方式一样的显示效果。当然可信的HTML代码，例如文章正文，还是按传统的方式传输的。</description>
+    </item>
+    
+    <item>
+      <title>记录 GNU screen 中的历史命令</title>
+      <link>https://blog.yxwang.me/2010/03/keep-gnu-screen-history/</link>
+      <pubDate>Mon, 01 Mar 2010 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2010/03/keep-gnu-screen-history/</guid>
+      <description>GNU screen中执行的历史命令保存在内存中，默认情况下并不会像在bash中直接执行的命令一样保存在.bash_history中，这在某些场合下带来了一定的不便。
+在superuser上看到一个解决方法，指定历史文件的读写方式为追加，并在每次命令行提示符显示的时候，自动更新bash的历史命令记录。要实现这个方法很简单，只要在.bashrc中加入下面两行代码即可
+shopt -s histappend export PROMPT_COMMAND=&amp;quot;history -a; history -n&amp;quot;  另外如果之前设置过PROMPT_COMMAND的话，只要在history -a前加入$PROMPT_COMMAND; 就行了。</description>
+    </item>
+    
+    <item>
+      <title>SICP 里提到的画图语言</title>
+      <link>https://blog.yxwang.me/2010/02/the-sicp-picture-language/</link>
+      <pubDate>Wed, 24 Feb 2010 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2010/02/the-sicp-picture-language/</guid>
+      <description>SICP第二章里提到了一种用来画图的Lisp方言，用来演示数据抽象和闭包的表达能力（见http://mitpress.mit.edu/sicp/full-text/book/book-Z-H-15.html#%_sec_2.2.4）。
+最近尝试了下，发现soegaard同学已经在PLT Scheme中实现了一个类似的库，可以很方便的在DrScheme上使用。
+sicp.plt包使用很简单，在Language-&amp;gt;Choose Language中选择Module，然后在需要用到这个包的时候用
+(require (planet soegaard/sicp:2:1/sicp))  声明即可。第一次运行时DrScheme会自动下载这个包并安装，如果网络有限制可以先从http://planet.plt-scheme.org/display.ss?package=sicp.plt&amp;owner=soegaard下载然后在DrScheme中选择本地包安装。
+另外SICP上使用的两个painter（wave和rogers）没有在这个包里提供，取而代之是diagonal-shading和einstein。
+下面这个程序显示了一个简单的分形图像：
+#lang scheme (require (planet &amp;quot;sicp.ss&amp;quot; (&amp;quot;soegaard&amp;quot; &amp;quot;sicp.plt&amp;quot; 2 1))) (define (right-split painter n) (if (= n 0) painter (let ((smaller (right-split painter (- n 1)))) (beside painter (below smaller smaller))))) (define (up-split painter n) (if (= n 0) painter (let ((smaller (up-split painter (- n 1)))) (below painter (beside smaller smaller))))) (define (corner-split painter n) (if (= n 0) painter (let ((up (up-split painter (- n 1))) (right (right-split painter (- n 1)))) (let ((top-left (beside up up)) (bottom-right (below right right)) (corner (corner-split painter (- n 1)))) (beside (below painter top-left) (below bottom-right corner)))))) (paint (corner-split diagonal-shading 4))  程序输出：</description>
+    </item>
+    
+    <item>
+      <title>优化 gitk 的字体显示</title>
+      <link>https://blog.yxwang.me/2010/02/gitk-font/</link>
+      <pubDate>Sun, 14 Feb 2010 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2010/02/gitk-font/</guid>
+      <description>gitk是用Tcl/Tk写的工具，默认使用Tk 8.4，不支持抗锯齿，因此字体显示很难看。好在Tk 8.5支持了部分抗锯齿字体，修改gitk使用Tk 8.5后显示效果会好一点。
+以Ubuntu为例，安装tk8.5包后，编辑/usr/bin/gitk文件，把开头调用wish的那行
+exec /usr/bin/wish &amp;quot;$0&amp;quot; -- &amp;quot;$@&amp;quot;  改成
+exec /usr/bin/wish8.5 &amp;quot;$0&amp;quot; -- &amp;quot;$@&amp;quot;  这样就能在gitk中开启抗锯齿了，虽然效果还不是很好。另外qgit也是一个不错的选择。
+参考链接：http://navarra.ca/?p=44</description>
+    </item>
+    
+    <item>
+      <title>Linear Page Table: 更方便地访问页表</title>
+      <link>https://blog.yxwang.me/2010/02/linear-page-table/</link>
+      <pubDate>Tue, 09 Feb 2010 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2010/02/linear-page-table/</guid>
+      <description>Linear page table 又叫 virtual page table，是一种方便虚拟机监控器 (VMM) / 操作系统 (OS) / 应用程序访问页表的技巧。Xen、64 位 Linux 内核、JOS 操作系统中都用到了这个设计。这里以 x86_32 系统为例，简单介绍一下它的实现和使用，如有错误敬请指出。
+一般情况下，如果 OS 需要访问某个页表，需要将它映射到自己的虚拟空间中，然后再访问。这样带来两个问题，一是访问比较繁琐，需要临时的页映射；二是对于 exo-kernel 这种 fork 等行为都是在用户态程序实现的系统，可能会增加一下安全上的问题。因为用户程序在 fork 的时候需要访问自己的页表，而这时候除非操作系统提供另一些权限控制更精确的系统调用，否则就很难让不可信的应用程序访问自己的页表且不做有害的改动。
+Linear page table 很好的解决了这两个问题。它的实现很简单，只需要在页目录中增加一项 VPT (virtual page table entry)，和一般的页目录项不同的是，这个 VPT 指向的是页目录本身。
+这样带来了什么好处呢？借用一下 MIT 6.828 课件上的图片来更好的说明这个问题：
+增加了 VPT 后，通常的物理地址 -&amp;gt; 虚拟地址的转换还是没变。和之前唯一的不同在于虚拟地址的页目录索引号 (PDX) 为之前设置的 VPT 的时候。
+举个例子来说，假如现在要访问的虚拟地址是 (VPT &amp;lt;&amp;lt; 22) | (VPT &amp;lt;&amp;lt; 12)，即这里的 PDX 和 PTX 都等于 VPT 的时候，整个转换过程是怎么样的呢（假设 TLB miss 的情况）？首先根据 CR3 中的物理地址，硬件开始查找页目录中的第 VPT 项，然后根据这一项中的物理地址，找到了下一级「页表」。注意这时候硬件以为自己得到的页表地址，实际上访问的还是页目录本身。同样，在这个「页表」中找到第 VPT 项指出去的最终页，得到了最终页的物理地址。因为 PTX 还是等于 VPT，所以最后得到的物理地址还是页目录的。</description>
+    </item>
+    
+    <item>
+      <title>gcc 中设置特定代码块的优化级别</title>
+      <link>https://blog.yxwang.me/2010/02/code-specific-optimizations-in-gcc/</link>
+      <pubDate>Mon, 08 Feb 2010 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2010/02/code-specific-optimizations-in-gcc/</guid>
+      <description>今天碰到一个gcc优化相关的问题，为了让一个页变成脏页（页表中dirty位被置上），需要执行下面这段代码：
+uint32_t *page; // ... page[0] = page[0];  最后一行代码很有可能被gcc优化掉，因为这段代码看起来没有任何实际的作用。那么如何防止gcc对这段代码做优化呢？
+设置gcc编译时优化级别为-O0肯定是不合适的，这样对程序性能影响会比较大。stackoverflow上的Dietrich Epp给出了一个强制类型转换的方案：
+((unsigned char volatile *)page)[0] = page[0];  通过volatile关键字禁止gcc的优化，和我之前采用的方法类似。
+Plow同学给出了另一个利用gcc 4.4特性的方法：
+#pragma GCC push_options #pragma GCC optimize (&amp;quot;O0&amp;quot;) your code #pragma GCC pop_options  这里用到了gcc 4.4的特性Function Specific Option Pragmas，在特定代码前保存当前的编译选项，然后对特定的代码使用O0优化级别，最后再恢复之前保存的编译选项。
+俺觉得这个特性有些场合下挺好用的，在这里分享下，虽然因为编译器版本问题最后我还是用了前面一种方法。</description>
+    </item>
+    
+    <item>
+      <title>ecb 和 cscope 的结合使用</title>
+      <link>https://blog.yxwang.me/2010/02/bind-cscope-to-ecb/</link>
+      <pubDate>Sun, 07 Feb 2010 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2010/02/bind-cscope-to-ecb/</guid>
+      <description>前几天试用了下ECB，非常喜欢它的定义列表和文件浏览历史的功能。但是却发现了另外一个问题：使用ECB之前我把整个窗口分成左右两块，左边是代码，右边是cscope的查找结果，现在开启ECB之后就不能再切一块窗口给cscope用了。
+感谢stackoverflow上的sanitynic，给出了自定义ECB窗口的参考。现在俺终于能把cscope窗口绑定到屏幕左下角啦。
+
+自定义ECB layout其实也挺方便的，上图对应的配置为
+(ecb-layout-define &amp;quot;my-cscope-layout&amp;quot; left nil (ecb-set-methods-buffer) (ecb-split-ver 0.5 t) (other-window 1) (ecb-set-history-buffer) (ecb-split-ver 0.25 t) (other-window 1) (ecb-set-cscope-buffer)) (defecb-window-dedicator ecb-set-cscope-buffer &amp;quot; *ECB cscope-buf*&amp;quot; (switch-to-buffer &amp;quot;*cscope*&amp;quot;)) (setq ecb-layout-name &amp;quot;my-cscope-layout&amp;quot;) ;; Disable buckets so that history buffer can display more entries (setq ecb-history-make-buckets &#39;never)  my-cscope-layout这个layout左边窗口分为三部分，最上面的函数列表占一半高度，中间为历史文件列表，下面为cscope的查找结果，它们各占四分之一的高度。
+另外再简单提下cscope插件的安装和配置，使用前需确认当前系统已经安装了cscope，另外要有cscope-indexer这个脚本。在cscope/contrib目录下找到一个xcscope.el，复制到Emacs的插件目录中，并在Emacs初始化文件中加入
+(require &#39;xcscope)  即可。某些发行版的包里面似乎没有cscope-indexer和xcscope.el，直接从网上下一个好了。
+几个常用的快捷键：
+ C-c s I 建立cscope索引 C-c s a 设置搜索目录 C-c s d 查找定义 C-c s s 查找字符串 C-c s c 查找调用者 C-c s n 下一个查找结果 C-c s p 上一个查找结果  更多的快捷键可以在 C-h b 跳转的帮助页面的 cscope-minor-mode 区找到。</description>
+    </item>
+    
+    <item>
+      <title>CLRS Problem 11.1-4</title>
+      <link>https://blog.yxwang.me/2010/02/clrs-problem-111-4/</link>
+      <pubDate>Thu, 04 Feb 2010 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2010/02/clrs-problem-111-4/</guid>
+      <description>简单来说就是给定一个未初始化的巨大的数组，然后通过它实现一个字典。所谓未初始化是指一开始里面元素的值都是随机的，巨大是指可以假设数组长度范围很大，对这个数组做初始化工作（例如清零）的代价自然也是很大。现在的问题是，利用这个数组设计出来的字典，要求初始化、查找、插入、删除操作都能在O(1)时间内完成。
+Intructor&amp;rsquo;s Manual 上的解答设计了一个很巧妙的验证策略。假设T为那个巨大的数组，S为辅助栈，那么对于一个键k，如果k存在于这个字典中，则T[k]保存的是 k在S中的位置j，而S[j]则保存了k值。即1 ≤ T[k] ≤ top[S], S[ T[k] ] = k, T [ S[j] ] = j，我们称这个条件为“验证环”。这个设计的关键在于T和S能够互相验证，从而排除了未初始化位置上随机值的干扰。
+还有一个问题就是，键k对应的值v应该怎么保存呢？其实只要维护另外一个和T或者S平行的数组就行了，既然S的元素个数远小于T，选择和S平行即可。
+根据这个验证策略，我们就能设计出词典的基本操作了： 初始化：建立一个大小为0的栈 查找：给定键k，检查 1 ≤ T [k] ≤ top[S] &amp;amp;&amp;amp; S[ T[k] ] = k，如果满足则返回对应值，否则返回NULL 插入：如果键已经存在则直接替换；否则将新的键值入栈，并且维护T[k] ← top[S] 删除：要确保两件事，一是验证环要被破坏，二是栈S的空洞要被填补。通过把栈顶的元素移动到要删除的元素位置，我们能同时确保这两点：
+S[ T[k] ] ← S[ top[S] ] S[ T[k] ] ← S [ top[S] ] T[ S[ T[k] ] ] ← T [k] T[k] ← 0 top[S] ← top[S] − 1  所有操作都能在O(1)时间内完成</description>
+    </item>
+    
+    <item>
+      <title>为特定的项目配置 semantic</title>
+      <link>https://blog.yxwang.me/2010/02/configuring-semantic/</link>
+      <pubDate>Wed, 03 Feb 2010 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2010/02/configuring-semantic/</guid>
+      <description>semantic是cedet的组件之一，它可以对程序做语义分析，结合company等其他插件，可以实现自动补全菜单等功能。
+之前用semantic+company写MIT 6.828的lab时几乎不需要什么特殊的设置就能直接用，这次拿来改Xen的代码的时候却出现了semantic无法找到符号定义的问题，究其原因在于MIT 6.828的目录结构相对简单，头文件都在inc/目录下，而Xen的头文件在多个目录下，而且做预处理时还要加上Makefile里定义的一些预定义宏。今天参考了Alex Ott的这篇文章终于成功地让semantic支持Xen的代码分析了：
+
+这里分享一下和项目相关的一些设置，semantic安装等问题请参考网上的其他文章。也可以参考我的配置文件http://code.google.com/p/zellux-emacs-conf/source/browse/my-cc-mode.el，cscope ecb semantic和company等配置都在这个文件里了，不过有点混乱。
+;; Danimoth-specified configurations (add-to-list &#39;semanticdb-project-roots &amp;quot;~/danimoth/xen&amp;quot;) (setq semanticdb-project-roots (list (expand-file-name &amp;quot;/&amp;quot;))) (setq danimoth-base-dir &amp;quot;/home/wyx/danimoth&amp;quot;) (add-to-list &#39;auto-mode-alist (cons danimoth-base-dir &#39;c++-mode)) (add-to-list &#39;auto-mode-alist (cons danimoth-base-dir &#39;c-mode)) (add-to-list &#39;semantic-lex-c-preprocessor-symbol-file (concat danimoth-base-dir &amp;quot;/xen/include/config.h&amp;quot;)) (add-to-list &#39;semantic-lex-c-preprocessor-symbol-file (concat danimoth-base-dir &amp;quot;/xen/include/asm-x86/config.h&amp;quot;)) (ede-cpp-root-project &amp;quot;Danimoth&amp;quot; :name &amp;quot;Danimoth&amp;quot; ;; Any file at root directory of the project :file &amp;quot;~/danimoth/xen/Makefile&amp;quot; ;; Relative to the project&#39;s root directory :include-path &#39;(&amp;quot;/&amp;quot; &amp;quot;/include/asm-x86&amp;quot; &amp;quot;/include/xen&amp;quot; &amp;quot;/include/public&amp;quot; &amp;quot;/include/acpi&amp;quot; &amp;quot;/arch/x86/cpu/&amp;quot; ) ;; Pre-definds macro for preprocessing :spp-table &#39;((&amp;quot;__XEN__&amp;quot; .</description>
+    </item>
+    
+    <item>
+      <title>ecb 的简单配置和使用</title>
+      <link>https://blog.yxwang.me/2010/02/ecb-beginning/</link>
+      <pubDate>Tue, 02 Feb 2010 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2010/02/ecb-beginning/</guid>
+      <description>终端下的效果图（Windows 7下使用pietty远登）
+
+下载
+http://ecb.sourceforge.net/downloads.html CVS或者压缩包都可以，当然也可以通过各发行版的包管理器安装。
+安装
+在.emacs中加入
+;; ECB configurations (add-to-list &#39;load-path &amp;quot;~/emacs/ecb-2.40&amp;quot;) (add-to-list &#39;load-path &amp;quot;~/emacs/cedet-1.0pre6/eieio&amp;quot;) (add-to-list &#39;load-path &amp;quot;~/emacs/cedet-1.0pre6/semantic&amp;quot;) (add-to-list &#39;load-path &amp;quot;~/emacs/cedet-1.0pre6/speedbar&amp;quot;) (setq semantic-load-turn-everything-on t) (require &#39;semantic-load) (require &#39;ecb-autoloads)  运行Emacs后执行ecb-byte-compile，并重启Emacs（我这里不重启的话执行ecb-active后会报错）。
+使用
+第一次使用时先要设置项目目录，M-x customize-variable  ecb-source-path ，在这里加上你的项目根目录。
+接下来使用M-x ecb-active就能激活ECB了，成功激活后Emacs窗口会被切成左右两半。左边的几个窗口依次显示：目录，当前目录下的文件，当前文件中的函数/全局变量等定义，文件浏览历史。如果打开了一个源文件后函数定义窗口里面是空的，有可能是因为这个项目过大cedet尚未完成对它的分析，闲置一段时间后就能看到文件里的定义。
+ECB提供了方便在这些窗口间切换的快捷键：
+切换到目录窗口 Ctrl-c . g d 切换到函数/方法窗口 Ctrl-c . g m 切换到文件窗口 Ctrl-c . g s 切换到历史窗口 Ctrl-c . g h 切换到上一个编辑窗口 Ctrl-c . g l
+最基本的使用就是这样，Ctrl-C . h可以看到更详细的帮助信息。</description>
+    </item>
+    
+    <item>
+      <title>这样也能算圆周率</title>
+      <link>https://blog.yxwang.me/2010/01/obfuscated-c/</link>
+      <pubDate>Thu, 28 Jan 2010 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2010/01/obfuscated-c/</guid>
+      <description>reddit programming版面最近的热帖，下面这个程序输出的结果是一个近似的圆周率(3.156)。
+#define _ F--&amp;gt;00 || F-OO--; long F=00,OO=00; main(){F_OO();printf(&amp;quot;%1.3f\n&amp;quot;, 4.*-F/OO/OO);}F_OO() { _-_-_-_ _-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_ _-_-_-_ }  乍看下这个程序有点莫名其妙，分析一下宏后就知道它的方法了。两个全局变量F和OO分别记录 圆的面积和直径 的相反数，根据4*面积/直径/直径就能得到近似的圆周率了。
+至于面积和直径的计算，F在会在每一个_展开的地方减一，这样就得到了圆的面积。直径的计算要展开几行代码才能看得更清楚：
+F--&amp;gt;00 || F-OO--; -F--&amp;gt;00 || F-OO--; -F--&amp;gt;00 || F-OO--; -F--&amp;gt;00 || F-OO--; F--&amp;gt;00 || F-OO--; -F--&amp;gt;00 || F-OO--; -F--&amp;gt;00 || F-OO--; -F--&amp;gt;00 || F-OO--; -F--&amp;gt;00 || F-OO--; -F--&amp;gt;00 || F-OO--; -F--&amp;gt;00 || F-OO--; -F--&amp;gt;00 || F-OO--; -F--&amp;gt;00 || F-OO--;  这是用cpp展开圆形前两行代码的结果，因为或运算的特殊性，F- OO- -只会在每一段的第一行执行，所以OO- -执行的次数就等于圆的直径了。</description>
+    </item>
+    
+    <item>
+      <title>强制程序使用int 0x80做系统调用</title>
+      <link>https://blog.yxwang.me/2010/01/force-int-0x80-for-syscall/</link>
+      <pubDate>Tue, 26 Jan 2010 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2010/01/force-int-0x80-for-syscall/</guid>
+      <description>因为大多数情况下程序都是通过libc间接地发出系统调用的，所以只要编译一个只使用int 0x80的glibc库，然后在执行程序的时候用LD_LIBRARY_PATH或其他方法指定使用新编译的glibc库即可。
+以glibc-2.9, Linux i386为例，在sysdeps/unix/sysv/linux/i386/syscall.S中可以看到
+ENTRY (syscall) PUSHARGS_6 /* Save register contents. */ _DOARGS_6(44) /* Load arguments. */ movl 20(%esp), %eax /* Load syscall number into %eax. */ ENTER_KERNEL /* Do the system call. */ POPARGS_6 /* Restore register contents. */ cmpl $-4095, %eax /* Check %eax for error. */ jae SYSCALL_ERROR_LABEL /* Jump to error handler if error. */  这里使用了ENTER_KERNEL这个宏做系统调用，接下来在sysdeps/unix/sysv/linux/i386/sysdep.h里可以找到这个宏的定义
+/* The original calling convention for system calls on Linux/i386 is to use int $0x80.</description>
+    </item>
+    
+    <item>
+      <title>Git 命令行自动补全</title>
+      <link>https://blog.yxwang.me/2010/01/git-completion/</link>
+      <pubDate>Mon, 25 Jan 2010 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2010/01/git-completion/</guid>
+      <description>在Pro Git上看到的技巧，git的源代码包里的contrib/completion目录下有个git-completion.bash，把这个文件保存到~/.git-completion.bash，然后在.bashrc中加入一行
+source ~/.git-completion.bash  这样就能在bash下用tab自动补全git命令、branch等内容了。另外Debian/Ubuntu里有个包就叫git-completion，这个包安装完成后会自动把这个补全脚本放到/etc/bash_completion.d/下，由bash-compleletion载入执行。</description>
+    </item>
+    
+    <item>
+      <title>使用 grep 查找进程的技巧</title>
+      <link>https://blog.yxwang.me/2010/01/grep-trick/</link>
+      <pubDate>Thu, 21 Jan 2010 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2010/01/grep-trick/</guid>
+      <description>使用grep在ps aux的输出结果中查找进程的时候经常会把grep进程本身也找出来，比如查找emacs进程：
+$ ps aux | grep emacs wyx 7090 0.0 0.0 3336 796 pts/2 S+ 04:49 0:00 grep emacs wyx 10128 0.1 4.9 66904 50388 pts/3 S+ Jan21 2:21 emacs  一个常见的防止grep进程出现的方法就是在后面再加一个grep -v grep：
+$ ps aux | grep emacs | grep -v grep wyx 10128 0.1 4.9 66904 50388 pts/3 S+ Jan21 2:21 emacs  今天在Santosa的博客上看到了另一个巧妙的做法，使用grep [e]macs来搜索emacs这个进程：
+$ ps aux | grep [e]macs wyx 10128 0.1 4.9 66904 50388 pts/3 S+ Jan21 2:21 emacs  为什么会有这样的效果，知道grep正则中[]的作用后想一想就能明白啦。很有意思的trick，虽然说它比| grep -v grep也未必方便多少，因为后者能通过alias简化输入。</description>
+    </item>
+    
+    <item>
+      <title>Ubuntu 下编译 Linux-xen 的问题</title>
+      <link>https://blog.yxwang.me/2009/12/linux-xen-compiling-error-in-ubuntu/</link>
+      <pubDate>Thu, 17 Dec 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2009/12/linux-xen-compiling-error-in-ubuntu/</guid>
+      <description>在Ubuntu下编译Linux-xen时碰到arch/i386/kernel/head-xen.o无法找到的问题，而该目录下有head-xen.S这个文件，说明make之前的的工作并没有把这个.S文件编译成.o。而同样的代码，在ArchLinux和Fedora上svn checkout后编译没有任何问题。
+最后发现问题在于Ubuntu默认会把/bin/sh指向/bin/dash，在scripts/Makefile.build里面加上一行SHELL=/bin/bash指定$(shell)使用bash即可。后来还搜了一下为什么Ubuntu使用dash而不是bash，其理由是dash的执行效率更高，但不可否认的是这个改动也导致了一些项目无法成功编译，虽然无法成功编译的原因可能是Makefile里使用了一些bash的特性而非POSIX shell所提供的那些。
+另外在debug过程中在网上找到了一些debug Makefile的技巧：
+make -n 可以仅仅打印出将要被执行的命令，而不去实际执行
+make -np 可以打印出更多的信息（使用的规则和变量），并执行每一条命令
+remake也是个不错的选择：“remake is a patched and modernized version of GNU make utility that adds improved error reporting, the ability to trace execution in a comprehensible way, and a debugger.”
+在检查shell命令的时候，可以使用set -x使得所有shell命令在执行前都能被输出。</description>
+    </item>
+    
+    <item>
+      <title>Chomp 游戏</title>
+      <link>https://blog.yxwang.me/2009/12/chomp-game/</link>
+      <pubDate>Sun, 13 Dec 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2009/12/chomp-game/</guid>
+      <description>把一堆石子排成n行m列，两人轮流从里面取出石子，条件是取出一个石子后所有在它右边和上面的石子也要被取走。谁取走最后一个石子就算输。以3*5的棋盘举例来说，先手取了(2,5)，因此(3,5)也要被取走；后手取了(3,3)，同时也要取走(3,4)。现在棋盘的状态如下（O代表这个位子的石子还没被取走，x代表已经被取走）：
+3 O O x x x 2 O O O O x 1 O O O O O 1 2 3 4 5  接下来先手又取了(2,1)，于是第二排和第三排就一颗石子都不剩了
+3 x x x x x 2 x x x x x 1 O O O O O 1 2 3 4 5  后手取(1,2)
+3 x x x x x 2 x x x x x 1 O x x x x 1 2 3 4 5  接下来先手就只能取最后一个石子了，后手胜。</description>
+    </item>
+    
+    <item>
+      <title>Emacs 中对不同项目指定不同的风格</title>
+      <link>https://blog.yxwang.me/2009/12/emacs-set-styles-by-projects/</link>
+      <pubDate>Tue, 01 Dec 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2009/12/emacs-set-styles-by-projects/</guid>
+      <description>我的Emacs配置里C语言默认的缩进风格是用4个空格，最近要修改Chromium的代码，而Google的C/C++风格统一为2个空格缩进，所以改代码的时候要把c-basic-offset设置为2。这样在不同项目间切换的时候很不方便。
+在stackoverflow上发帖求助后发现了Emacs 23.1一个很好用的新功能，Per-Directory Local Variables，只需要在项目主目录下放一个.dir-locals.el文件，里面设置该项目特有的变量值，就能应用到整个项目了。
+以我的Chromium为例，Google已经提供了一份C/C++风格的配置，只需要在~/chromius/src/.dir-locals.el里把google-c-style常量粘贴进去即可。另外我不知道为啥加上c-offsets-alist那段后Emacs缩进会变得很奇怪，所以我把它删了。附修改后的.dir-locals.el
+((c++-mode . ((c-recognize-knr-p . nil) (c-enable-xemacs-performance-kludge-p . t) ; speed up indentation in XEmacs (c-basic-offset . 2) (indent-tabs-mode . nil) (c-comment-only-line-offset . 0) (c-hanging-braces-alist . ((defun-open after) (defun-close before after) (class-open after) (class-close before after) (namespace-open after) (inline-open after) (inline-close before after) (block-open after) (block-close . c-snug-do-while) (extern-lang-open after) (extern-lang-close after) (statement-case-open after) (substatement-open after))) (c-hanging-colons-alist . ((case-label) (label after) (access-label after) (member-init-intro before) (inher-intro))) (c-hanging-semi&amp;amp;comma-criteria .</description>
+    </item>
+    
+    <item>
+      <title>NoteExpress and BibTex</title>
+      <link>https://blog.yxwang.me/2009/11/noteexpress-and-bibtex/</link>
+      <pubDate>Mon, 30 Nov 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2009/11/noteexpress-and-bibtex/</guid>
+      <description>最近写了篇survey，分享下用NoteExpress一些经验
+ bibtex 关键字设置：  工具-&amp;gt;样式-&amp;gt;选择当前输出样式，选择BibTex，然后就能在题录的字段中找到bibtex 关键字一项了
+ 导出bibtex时选择ANSI编码，如果设置为UTF-8貌似编译latex时会给出类似You&amp;rsquo;re missing an entry type&amp;mdash;line 1 of file xxx.bib的提示。
+ 导出引用的网页：我的解决方法是在BibTex样式-&amp;gt;题录-&amp;gt;模版里新增一个网页模版，然后右键编辑区选择从模版通用复制，并在里面增加一条***Howpublished = {\url{链接}}, 这样就能使用howpublished字段导出网页链接了。不过好像这样网页地址不会换行，于是我最后还是用手动断行改了下.bib。
+ 另外提下，把png/jpg转成eps，我用的是sam2p，aur上就有。
+  </description>
+    </item>
+    
+    <item>
+      <title>在 Git 中修改之前提交的内容</title>
+      <link>https://blog.yxwang.me/2009/11/git-modify-specified-commit/</link>
+      <pubDate>Tue, 10 Nov 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2009/11/git-modify-specified-commit/</guid>
+      <description>其实这个问题我以前在 Stackoverflow 上回答过别人（链接），不过现在自己反而忘了，还是贴在这下次查起来方便点
+先用 git rebase bbc643cd^ --interactive 退回到要修改的commit的前一个点，这里 bbc643cd 就是要修改的 commit，执行后 git 会调用默认的编辑器显示该次 commit 到最新 commit 的所有记录，在这里我们把要修改的那一项的行首的 pick 改成 edit。
+接下来运行 git commit --amend，使用默认编辑器修改这次 commit。
+最后执行 git rebase --continue 就能提交修改后的 commit 并且返回到原来的 commit 了。</description>
+    </item>
+    
+    <item>
+      <title>新装硬盘空间只有31B/32MB的解决方案</title>
+      <link>https://blog.yxwang.me/2009/10/only-31m-disk-space-detected/</link>
+      <pubDate>Fri, 23 Oct 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2009/10/only-31m-disk-space-detected/</guid>
+      <description>这周买了块西数的1T硬盘，用来放各种美剧/高清电影。装好进入Win7后提示检测到新硬盘，然后进入磁盘管理一看发现磁盘大小只有31兆，重启进入BIOS看到的磁盘容量是0MB。换了一台电脑问题依然存在。
+于是求助superuser，发现了这篇文章http://www.pcstats.com/articleview.cfm?articleid=1139&amp;amp;page=12，貌似是LBA(Logical Block Addressing)相关的问题，下载了个HDD Capacity Restore Tool修复后问题解决。
+附该软件下载地址：http://hdd-tools.com/products/cr/download/crsetup.exe</description>
+    </item>
+    
+    <item>
+      <title>几个有趣的 Quine 变种</title>
+      <link>https://blog.yxwang.me/2009/09/interesting-quines/</link>
+      <pubDate>Mon, 28 Sep 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2009/09/interesting-quines/</guid>
+      <description>Quine是指一类能生成自己的程序，例如下面这个C程序运行后就能把自己的源码完整的打印出来：
+char*f=&amp;quot;char*f=%c%s%c;main() {printf(f,34,f,34,10);}%c&amp;quot;; main(){printf(f,34,f,34,10);}  这类程序的构造方法计算理论导引或者其他相关的书籍中都有涉及，这里不再赘述。这个月看到几个Quine的变种，都挺有趣的。
+首先是sigfpe构造出来的三阶Quine，这是一个只有两行的Haskell程序：
+q a b c=putStrLn $ b ++ [toEnum 10,&#39;q&#39;,&#39;(&#39;] ++ show b ++ [&#39;,&#39;] ++ show c ++ [&#39;,&#39;] ++ show a ++ [&#39;)&#39;] main=q &amp;quot;q a b c=putStrLn $ b ++ [toEnum 10,&#39;q&#39;,&#39;(&#39;] ++ show b ++ [&#39;,&#39;] ++ show c ++ [&#39;,&#39;] ++ show a ++ [&#39;)&#39;]&amp;quot; &amp;quot;def q(a,b,c):print b+chr(10)+&#39;q(&#39;+repr(b)+&#39;,&#39;+repr(c)+&#39;,&#39;+repr(a)+&#39;)&#39;&amp;quot; &amp;quot;def e(x) return 34.chr+x+34.chr end;def q(a,b,c) print b+10.chr+&#39;main=q &#39;+e(b)+&#39; &#39;+e(c)+&#39; &#39;+e(a)+&#39; &#39;+10.</description>
+    </item>
+    
+    <item>
+      <title>Dreamhost 上编译 php5</title>
+      <link>https://blog.yxwang.me/2009/09/compile-php5-on-dreamhost/</link>
+      <pubDate>Sat, 26 Sep 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2009/09/compile-php5-on-dreamhost/</guid>
+      <description>Dreamhost提供的php有不少限制，昨天折腾了一个晚上终于成功地在自己的虚拟主机上编译了php5。
+Why 
+用下来，发现使用自己编译的php5有这么几个好处：
+ 可以自定义内存分配上限，默认只有32M，通过wordpress安装插件的时候经常出现内存不够的问题。
+ 上传文件大小限制也能改，默认只有2M，基本没法通过wordpress传音乐之类的比较大的文件。
+ 使用自己的php后解释执行的进程uid也是自己了，这样就避免了很多nobody用户访问/修改/增加文件所带来的问题。
+  How to compile 
+编译和安装的大部分步骤可以参考http://wiki.dreamhost.com/index.php/Installing_PHP5，这里补充一点我碰到的问题和解决方法。
+因为我这台dreamhost虚拟主机用的是x86_64，而通过下载的php5的configure文件默认查找的是/usr/lib/下面的共享库，通过&amp;ndash;with-libdir=lib64设置查找路径后却无法找到openssl库了，于是我用了个很山寨的方法，把configure脚本里查找libmysqlclient时的路径临时改成了/usr/lib64，然后再改回/usr/lib。
+安装脚本开头定义的几个包的名字可能也要修改下，如果下载出现错误的话去上级目录看下最新的包的名字是什么就行了。另外脚本中解压.Z和.tar.gz文件用的是uncompress命令，似乎在我的这个主机上没有安装，改成tar zxf就行了。
+How to use
+最后说下编译成功后怎么使用，具体方法那个网页上也讲过了，只要把编译后的php.cgi放到/cgi-bin/下然后改下.htaccess即可。
+对于子域名，比如我这个techblog.iamzellux.com，参照网页上的说明把整个cgi-bin用符号链接的方式link到子域名的根目录下是最方便的方案，当然别忘了修改.htaccess。</description>
+    </item>
+    
+    <item>
+      <title>基于函数调用栈的 rootkit</title>
+      <link>https://blog.yxwang.me/2009/08/return-oriented-rookit/</link>
+      <pubDate>Wed, 12 Aug 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2009/08/return-oriented-rookit/</guid>
+      <description>这篇题目为Return-Oriented Rootkits: Bypassing Kernel Code Integrity Protection Mechanisms的论文发在了今年的Usenix Security上，现在在Usenix网站上还不能下到这篇paper的pdf，可以去作者的主页上下。
+现在有不少用来防止栈溢出攻击的技术，比如操作系统保证任何一个页不能同时为可写且可读（WinXP SP2、Win 2003、Exec Shield for Linux等都采用了这个策略），这个方法实现起来比较简单，但只能防范部分形式的攻击，如果攻击者事先准备一张含有恶意代码的用户态的只读页，然后跳转到这个页，就能绕开这种保护措施了；另外也有人提出在操作系统的下面再加一层虚拟层，让它来保证上层系统没有因为各种buffer overflow而执行恶意代码（NICKLE）。
+而这里提到的return-oriented的攻击方法不同于传统的攻击机制，它所采用的攻击代码都是内核自身的代码，因此能绕过前面提到的各种保护手段。
+所谓return-oriented programming，简单的说就是把原来已经存在的代码块拼接起来，拼接的方式是通过一个预先准备好的特殊的返回栈，里面包含了各条指令结束后下一条指令的地址。
+例如现在函数A里面有这么一段指令 instruction A ret
+函数B里面有另外一段： instruction B ret
+它们在正常的运行情况下没有任何关系，但是我发现如果把A和B拼起来就能达到我想要的结果，于是我构造了一个包含有A和B的地址的栈，先通过ret指令返回到instruction A处，之后再执行ret指令时，由于栈是精心构造的，因此接下来会执行到instruction B，这样就得到我想要的结果了。只要这个ret前的指令库足够大，就能实现几乎所有的程序。
+这种攻击方式并非这篇paper的首创，最早是由Shacham提出的（http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.140.9210，http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.78.7135）
+这篇paper的一大贡献在于实现了一个自动从libc和驱动、内核等代码中找到可用的指令，并拼接成所需程序的系统，这里面包括一个扫描可利用代码、并把它们结合起来的Constructor，一套专用的语言，以及把这套语言编译成对应代码片段之和的编译器，最后还有一个计算实际代码地址的Loader。
+这套攻击机制在WinXP SP2/Sp3, Vista SP1等系统上都获得了成功，尽管查找代码并生成这个过程的overhead很大，但对于一次成功的rootkit攻击来说影响并不大。</description>
+    </item>
+    
+    <item>
+      <title>Xen 警告 Time went backwards 的暴力解决方法</title>
+      <link>https://blog.yxwang.me/2009/07/xen-time-went-backwards-solution/</link>
+      <pubDate>Tue, 07 Jul 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2009/07/xen-time-went-backwards-solution/</guid>
+      <description>前几天给测试Xen用的虚拟机挂了，只能用VMware的snapshot返回到之前的镜像，然后似乎因为时间问题启动Xen的时候总是会定时打印出类似
+571 Timer ISR/0: Time went backwards: delta=-11072481 delta_cpu=298927519 shadow=196807680595 off=288495093 processed=197107247546 cpu_processed=196797247546 572 0: 196797247546 573 1: 197107247546  的信息，google了下发现是时间同步的问题，用ntp协议同步时间即可解决这个问题。另外这里再给出一个最暴力的解决方法：在linux-xen源码的arch/i386/kernel/time-xen.c文件中找到Time went backwards，把这行打印语句以及后面的循环打印删除，然后重新编译内核。x86_64体系结构也是修改这个文件。方法很暴力，也没真正解决问题，但是至少不影响我看/var/log/messages的输出了。</description>
+    </item>
+    
+    <item>
+      <title>防止 Firefox 在关闭最后一个 Tab 后退出</title>
+      <link>https://blog.yxwang.me/2009/07/firefox-close-windows-with-last-tab/</link>
+      <pubDate>Wed, 01 Jul 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2009/07/firefox-close-windows-with-last-tab/</guid>
+      <description>记得以前用Firefox 3.0.x时把Tools -&amp;gt; Options -&amp;gt; Tabs -&amp;gt; Always show the tab bar勾上就行了，升级到3.5以后就没用了，搜了下Knowledge Base，最后在
+https://support.mozilla.com/tiki-view_forum_thread.php?locale=zh-CN&amp;comments_parentId=184680&amp;forumId=1
+看到只要将about:config页中的browser.tabs.closeWindowWithLastTab项设为false即可</description>
+    </item>
+    
+    <item>
+      <title>SVN 更新短信通知脚本</title>
+      <link>https://blog.yxwang.me/2009/06/svn-sms-notification/</link>
+      <pubDate>Tue, 16 Jun 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2009/06/svn-sms-notification/</guid>
+      <description>主要功能：开发人员执行svn commit后自动将开发人id、修订版本号和日志内容通过短信的方式通知所有人。
+首先修改svn服务器对应项目目录hook/post-commit文件
+#!/bin/bash export LANG=en_US.utf8 REPOS=&amp;quot;$1&amp;quot; REV=&amp;quot;$2&amp;quot; cd /home/svn/repositories/sebank/hooks ./sms.py commit $REPOS $REV  注意别忘了这里的export LANG，我一开始测试的时候发现中文一直有乱码，后来才意识到shell的环境变量里缺这个。 hook/sms.py
+#!/usr/bin/python # -*- coding: utf-8 -*- import sys, urllib, os from subprocess import * user = &#39;your mobile number&#39; pword = &#39;fetion password&#39; phone = [ &#39;13764444444&#39;, &#39;13813333333&#39;, ] repo = sys.argv[2] rev = sys.argv[3] cmdlog = &#39;svnlook log -r %s %s&#39;%(rev, repo) cmdauthor = &#39;svnlook author -r %s %s&#39;%(rev, repo) log = Popen(cmdlog, stdout=PIPE, shell=True).</description>
+    </item>
+    
+    <item>
+      <title>云计算</title>
+      <link>https://blog.yxwang.me/2009/06/above-the-clouds/</link>
+      <pubDate>Tue, 09 Jun 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2009/06/above-the-clouds/</guid>
+      <description>某门课程的Open Topic，我的话题是关于云计算的，读了一篇技术报告 Above the Clouds: A Berkeley View of Cloud Computing。
+这是 UCB 的 RAD(Reliable Adaptive Distributed) 实验室花了六个月时间 brainstorm 总结出来的 paper，介绍了云计算的概念、现状及未来展望。以下内容主要来自于我上交的文档，做了一些修改，欢迎大家指正。
+虽然现在对云计算这个概念的炒作大于实际研究，以至于很多人听到云计算这个名词就想到忽悠，但这里面还是很多东西需要好好考虑和设计的。云计算和以前的 cluster computing 等概念虽有相同之处，区别也有不少，它涉及了经济学、虚拟化技术、安全等诸多领域的内容。
+何谓云计算？ 云计算包含两方面内容，一是在网络上提供的为计算服务的应用，例如以前被称为 SaaS(Software as a Service) 的那一类应用；二是提供这些服务的在数据中心的硬件和系统软件，这部分也就是我们通常所称呼为「云」的东西。
+云计算平台的优势 云计算带来了三个新颖的观点：
+ 提供了看起来没有上限的可用计算资源，用户不需要提前考虑设备的需求量；
+ 免去了云计算用户的前期投入，使得公司可以从一个规模较小的硬件资源起家，并根据自己的需要增加资源；
+ 细粒度的计费手段，例如按每小时使用处理器数或者每天使用的存储空间计算，并在暂时不需要机器和存储空间时即时减免费用。
+  云计算资源拥有很好的弹性，以 Amazon EC2 为例，用户可以在几分钟内完成硬件资源的添加或者减少操作，这在传统的应用程序部署中是很难做到的。文中提到了 Facebook 上的一个应用 Animoto，这个应用的资源需求在三天内从 50 台服务器上升到了 3500 台服务器。在传统的部署情景中，这样的需求是很难通过预先准备好硬件来满足的。另外还有一个问题，当资源需求下降时，传统方式部署的服务器资源就被闲置了，而通过云计算部署的资源则灵活很多，例如一个网站到了深夜访问量下降，此时就可以通过减少占用的计算资源从而降低支出。
+平台分类 现在的云计算平台提供了不同粒度的 API。Amazon EC2 是一个底层的极端，它提供了类似物理硬件的接口，用户可以几乎控制从内核开始的整个软件栈。通过虚拟技术提供的 CPU、块设备、IP 级别的连通技术使得开发人员几乎可以做任何事情。高度的灵活性带来的是可控性的损失，在自动伸缩性 (automatic scalability) 和容错转移 (failover) 方面，服务商就力不从心了。而 Google AppEngine 则提供了比较高层的 API，主要面向传统的 web 应用，在牺牲灵活性之后能很好的实现自动伸缩和转移，并对用户完全透明。而微软的 Azure 则介于这两者之间，提供了接近 CLR 字节码的接口，用户可以通过 .</description>
+    </item>
+    
+    <item>
+      <title>Company-mode: Emacs 自动补全</title>
+      <link>https://blog.yxwang.me/2009/06/emacs-company-mode/</link>
+      <pubDate>Tue, 02 Jun 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2009/06/emacs-company-mode/</guid>
+      <description>Company的全写是complete everything，它只是一个补全的前端，会自动调用semantic等后端插件。
+新版的Company可以从它的官方主页(http://nschum.de/src/emacs/company-mode/)下载到，也可以从ELPA下载安装这个插件。
+使用这个插件时只要在.emacs中加入
+(add-to-list &#39;load-path &amp;quot;/path/to/company&amp;quot;) (autoload &#39;company-mode &amp;quot;company&amp;quot; nil t)  然后Emacs中使用M-x company-mode启动company模式即可。
+具体的按键可以在company.el中看到
+(defvar company-active-map (let ((keymap (make-sparse-keymap))) (define-key keymap &amp;quot;\e\e\e&amp;quot; &#39;company-abort) (define-key keymap &amp;quot;\C-g&amp;quot; &#39;company-abort) (define-key keymap (kbd &amp;quot;M-n&amp;quot;) &#39;company-select-next) (define-key keymap (kbd &amp;quot;M-p&amp;quot;) &#39;company-select-previous) (define-key keymap (kbd &amp;quot;&amp;quot;) &#39;company-select-next) (define-key keymap (kbd &amp;quot;&amp;quot;) &#39;company-select-previous) (define-key keymap [down-mouse-1] &#39;ignore) (define-key keymap [down-mouse-3] &#39;ignore) (define-key keymap [mouse-1] &#39;company-complete-mouse) (define-key keymap [mouse-3] &#39;company-select-mouse) (define-key keymap [up-mouse-1] &#39;ignore) (define-key keymap [up-mouse-3] &#39;ignore) (define-key keymap &amp;quot;\C-m&amp;quot; &#39;company-complete-selection) (define-key keymap &amp;quot;\t&amp;quot; &#39;company-complete-common) (define-key keymap (kbd &amp;quot;&amp;quot;) &#39;company-show-doc-buffer) (define-key keymap &amp;quot;\C-w&amp;quot; &#39;company-show-location) (define-key keymap &amp;quot;\C-s&amp;quot; &#39;company-search-candidates) (define-key keymap &amp;quot;\C-\M-s&amp;quot; &#39;company-filter-candidates) (dotimes (i 10) (define-key keymap (vector (+ (aref (kbd &amp;quot;M-0&amp;quot;) 0) i)) `(lambda () (interactive) (company-complete-number ,i)))) keymap) &amp;quot;Keymap that is enabled during an active completion.</description>
+    </item>
+    
+    <item>
+      <title>两个和函数构造相关的趣味面试题</title>
+      <link>https://blog.yxwang.me/2009/06/two-function-related-interview-questions/</link>
+      <pubDate>Mon, 01 Jun 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2009/06/two-function-related-interview-questions/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;http://stackoverflow.com/questions/731832/interview-question-ffn-n&#34;&gt;http://stackoverflow.com/questions/731832/interview-question-ffn-n&lt;/a&gt;
+&lt;a href=&#34;http://stackoverflow.com/questions/731832/interview-question-ffn-n&#34;&gt;
+&lt;a href=&#34;http://stackoverflow.com/questions/732485/interview-question-ffx-1-x&#34;&gt;http://stackoverflow.com/questions/732485/interview-question-ffx-1-x&lt;/a&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;问题描述很简单，第一个问题是实现一个函数f，参数为一个带符号的32位整型，使得f(f(x)) = -x，即调用两次后返回的结果为原来的相反数；另一个问题也是实现一个函数g，参数为一个32位浮点，最后使得g(g(x)) = 1/x。如果不能满足所有的情况，就满足尽可能多的情形。&lt;/p&gt;
+
+&lt;p&gt;第二个问题比第一个问题简单一点，目前支持数最高的两个答案如下：
+&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>利用 VMware 的虚拟串口调试 Xen</title>
+      <link>https://blog.yxwang.me/2009/05/debug-xen-with-vmware-serial-port/</link>
+      <pubDate>Wed, 27 May 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2009/05/debug-xen-with-vmware-serial-port/</guid>
+      <description>VMware支持虚拟串口设备，对于调试内核或者虚拟机的帮助很大，具体设置如下（VMware Server 2, Xen 3.3）：
+ VMware中为虚拟机增加串口设备 Add Hardware-&amp;gt;Serial Port，然后在设置中将Connection模式设为File，指定相应的文件路径(如[standard] debian-xen/serial-port.log)
+ 修改虚拟机的grub启动参数，以我的/boot/menu/lst为例
+  title Xen 3.3.0 / Debian GNU/Linux, kernel 2.6.18.8-xen root (hd0,0) kernel /boot/xen-3.3.0.gz com1=115200,8n1 loglvl=all guest_loglvl=all console_to_ring console=com1,vga sync_console module /boot/vmlinuz-2.6.18.8-xen root=/dev/sda1 ro console=tty0 savedefault   重启虚拟机，即可在之前指定的文件中(Host机上的/opt/vmware/Virtual Machines/debian-xen/serial-port.log)中看到虚拟机的输出信息了。  </description>
+    </item>
+    
+    <item>
+      <title>ArchLinux 下安装 git, gitosis, gitweb 服务</title>
+      <link>https://blog.yxwang.me/2009/05/install-git-gitoss-gitweb-in-archlinux/</link>
+      <pubDate>Tue, 26 May 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2009/05/install-git-gitoss-gitweb-in-archlinux/</guid>
+      <description>参考文章：
+[1] http://hokietux.net/blog/?p=58 [2] http://scie.nti.st/2007/11/14/hosting-git-repositories-the-easy-and-secure-way [3] http://www.nkuttler.de/2009/04/06/git-clone-ssh-could-not-resolve-hostname/
+ git  很简单，直接用pacman安装即可 sudo pacman -S git
+ gitosis  gitosis是一个方便管理git仓库的工具，安装方法：
+1) 从yaourt或者aur下载安装gitosis-git包 http://aur.archlinux.org/packages.php?ID=23419
+2) 新建git用户 sudo useradd &amp;ndash;system &amp;ndash;shell /bin/sh &amp;ndash;comment &amp;lsquo;git version control&amp;rsquo;&amp;ndash;user-group &amp;ndash;home-dir /home/git/ git
+3) 将开发用户的rsa公钥导入gitosis，（没有公钥的话请先运行ssh-keygen -t rsa生成） sudo -H -u git gitosis-init &amp;lt; ~/.ssh/id_rsa.pub
+4) 如果以上步骤没有问题，那么运行 git clone ssh://git@hostname/gitosis-admin.git 后应该就能看到gitosis-admin.git这个目录了
+5) 新建项目、添加用户等操作参见[2]，这里不再赘述
+ gitweb  事实上ArchLinux中安装的git包自带了gitweb，可以用which gitweb搜到，一般默认在/usr/share/gitweb。下面假设我的http根目录为/home/httpd
+1) 将/usr/share/gitweb下的文件复制到/home/httpd/cgi-bin（其实似乎只要gitweb.cgi就够了）  sudo cp -R /usr/share/gitweb /home/httpd/cgi-bin/ 
+2) /usr/share/gitweb下的.</description>
+    </item>
+    
+    <item>
+      <title>ISCA 09 - Multi-Execution</title>
+      <link>https://blog.yxwang.me/2009/05/isca-09-multi-execution/</link>
+      <pubDate>Tue, 12 May 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2009/05/isca-09-multi-execution/</guid>
+      <description>Multi-Execution: Multicore Caching for Data-Similar Executions
+这篇paper针对以multi-execution这种模式运行的程序提出了一种新的cache手段。
+所谓multi-execution，指的是同时运行同一个程序的多个进程，而它们的输入数据又互不相同。这种模式在machine-learning领域比较常见，一些相对独立的learner可以以并行的方式被训练，而它们的结果可以通过一种叫做boosting的方式合并起来。给我的感觉似乎有点像mapreduce？
+然后呢，作者们发现以这种方式运行的程序进程的数据有很大一部分是相同的，在合并cache数据上可以做一下文章，节省cache的使用。
+于是这篇paper提出了一种叫做mergeable cache的架构，用于代替传统的L2 cache，L1 cache还是传统的cache架构。首先假设相同的数据的虚拟地址往往也是相同的（应该去掉了address space randomization的影响），以类似Page Coloring的策略进行物理页的分配，使得不同进程同一虚拟地址所对应的物理页都是相邻的。然后把虚拟地址的头9位作为cache tag，再为每个cache line记录一个bit vector用以表示某个processor的数据是否保存在这条cache line中。于是L2 cache hit当且仅当： 1. 虚拟地址的头9位等于cache line的tag 2. cache line中的bit vector的processor对应的位被置上
+另外为了简化cache策略，L1和L2的数据内容是互斥的，或者说一段被cache的数据要么在L1，要么在L2，不可能同时存在于两者中。这样一来L2就只有从L1淘汰出来的数据了，而L2中的数据修改分三步完成： 1. 把数据从L2中标记为不存在（对应processor的bit vector位置0） 2. 数据进入L1 3. 修改数据
+这就是这篇paper提出的cache架构的主要内容，后面的evaluation部分做的也很不错。从数据中可以看出合并的cache里面dirty cache占了比较大的比例，从而说明简单的copy-on-write策略的效果不会很好，因为copy-on-write只能合并clean cache。最后平均的speedup提升在2.5x左右，很不错。但是对于数据无关的并行程序运行，会产生一定的overhead，此时可以选择传统的L2 cache机制。</description>
+    </item>
+    
+    <item>
+      <title>高速缓冲器页着色 (Page Coloring)</title>
+      <link>https://blog.yxwang.me/2009/05/page-coloring/</link>
+      <pubDate>Mon, 11 May 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2009/05/page-coloring/</guid>
+      <description> 读 Multi-Execution (ISCA ’09) 的时候看到的名词，中文叫做高速缓冲器页着色，有点拗口，还是用英文术语好了。
+早期的处理器缓存都是映射虚拟内存的，这样带来两个问题，一是进程切换等场合下需要清空缓存，二是由于多个虚拟地址可能指向同一个物理地址，因此会出现缓存中数据别名的问题(data aliasing)。
+于是现代的处理器更多的通过物理地址进行数据缓存，这也引入了另一个问题，虚拟内存中看到的相邻的两块数据在缓存中很有可能是不相邻的，如果操作系统分配物理页时不考虑这点就会影响性能。
+举例来说，假设CPU能缓存4个物理页，缓存策略是 CS:APP 中提到的最简单的方式，即第n号缓存只用于物理页号除4余数为n的物理页(n=0,1,2,3)，比如第2号缓存对应于2,6,10,..号页面。现在用户为页面号为0的虚拟页申请空间，操作系统把第16号物理页分配给它；接下来用户又为页面号为1的虚拟页申请空间，而17-19号物理页已经用掉，此时操作系统就不应该分配20号物理页给它，因为20号物理页和16号物理页占用同一个缓存地区，假设用户程序的局部性(locality)很好的话这样的分配方式会产生比较严重的抖动(thrashing)，影响系统缓存的性能。所以操作系统应该分配21号物理页给它，而保证这种分配策略的方式就是为每个页标记不同的颜色，并使得同一时间使用的页面颜色尽可能的不同。
+参考资料  http://en.wikipedia.org/wiki/CPU_cache http://www.freebsd.org/doc/en/articles/vm-design/page-coloring-optimizations.html  </description>
+    </item>
+    
+    <item>
+      <title>EuroSys 09 - Orchestra</title>
+      <link>https://blog.yxwang.me/2009/05/eurosys-09-orchestra/</link>
+      <pubDate>Wed, 06 May 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2009/05/eurosys-09-orchestra/</guid>
+      <description>吴总讲的一篇paper，题目是Orchestra: Intrusion Detection Using Parallel Execution and Monitoring of Program Variants in User-Space，发在EuroSys &amp;lsquo;09上，UCI的。
+这篇paper提出了一种检测栈上buffer overflow攻击的方法。想法很有意思，它运行两个孪生进程，这两个进程的唯一的区别就是一个进程的栈往上长而另一个进程的栈往下长，这样在大多数情况下如果没有出现buffer overflow的问题的话那么两者的行为应该是一致的。
+栈的增长行为是由编译器控制的，作者修改了gcc的代码使之生成的代码的栈增长方向相反，关于这个编译器他们之间发过一篇paper在一个叫CATARS的workshop上，题目是Reverse stack execution in a multi-variant execution environment。
+“行为一致”的精确定义是两者的system call的调用方式、参数都一样，也就是说这里system call成了两个进程运行的synchronization point。如果某个点上两个进程调用的syscall不同或者调用参数不同就认为它已经被buffer overflow攻击了。
+整个monitor都是跑在user态的，主要利用了ptrace，使两者的行为尽可能的一致。这里要做的事情很多，比如要保证进程调用getpid()的得到返回值一样才能使得后面的其他系统调用的参数相同，又比如一个进程调用write写入文件时不能影响到另一个进程，此外还要保证两个进程获得的file descriptor、随机数、时间、信号等信息都相同，甚至在进程创建子进行的时候也要保证所有子线程关系的同构。
+用ptrace能够解决上面的大多数问题，但还有一些open problem以及false positive。如这篇paper无法解决进程用MAP_SHARED方式打开一个文件并修改的情况，尽管作者说这种mmap的用例很少见；此外由于两个进程的同步并不是原子性的，中间可能被第三方的程序干扰（比如进程A读入某个文件开头后，该文件被其他进程修改，进程B再读取就和进程A读到的不一样了），这就造成了false positive；另外由于无法截取rdtsc指令的使用，也就无法保证它们的返回值一样，也可能引起另一种false positive。
+感觉这个东东想法不错，但是没什么实用性，工程量也很大。</description>
+    </item>
+    
+    <item>
+      <title>在 Linux Kernel 2.6.29 上安装 VMware Server 2</title>
+      <link>https://blog.yxwang.me/2009/05/install-vmware-server-2-on-kernel-2-6-29/</link>
+      <pubDate>Tue, 05 May 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2009/05/install-vmware-server-2-on-kernel-2-6-29/</guid>
+      <description>在kernel 2.6.29上编译vmware modules时报错了
+/usr/src/linux-2.6.29/arch/x86/include/asm/apicdef.h:132:1: warning: this is the location of the previous definition /tmp/vmware-config0/vmmon-only/linux/driver.c: In function ‘LinuxDriverSyncCallOnEachCPU’: /tmp/vmware-config0/vmmon-only/linux/driver.c:1423: error: too many arguments to function ‘smp_call_function’ /tmp/vmware-config0/vmmon-only/linux/driver.c: In function ‘LinuxDriver_Ioctl’: /tmp/vmware-config0/vmmon-only/linux/driver.c:1987: error: ‘struct task_struct’ has no member named ‘euid’ /tmp/vmware-config0/vmmon-only/linux/driver.c:1987: error: ‘struct task_struct’ has no member named ‘uid’ /tmp/vmware-config0/vmmon-only/linux/driver.c:1988: error: ‘struct task_struct’ has no member named ‘fsuid’ /tmp/vmware-config0/vmmon-only/linux/driver.c:1988: error: ‘struct task_struct’ has no member named ‘uid’ /tmp/vmware-config0/vmmon-only/linux/driver.c:1989: error: ‘struct task_struct’ has no member named ‘egid’ /tmp/vmware-config0/vmmon-only/linux/driver.</description>
+    </item>
+    
+    <item>
+      <title>给你的小指减负：将 Caps Lock 键映射成 Ctrl</title>
+      <link>https://blog.yxwang.me/2009/05/caps-lock-to-ctrl/</link>
+      <pubDate>Mon, 04 May 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2009/05/caps-lock-to-ctrl/</guid>
+      <description>长时间使用Emacs经常会觉得小指疼痛，一个月前我把自己用的三台电脑（两台winxp，一台archlinux）的Caps Lock键的功能都改成了和左Ctrl一样，这样小指按起来就舒服多了，另外由于平时不需要用到Caps Lock键所以也不需要找个组合键来代替它了。
+Windows下有个很方便的改键工具 remapkey，xp安装盘自带。
+Mac OS X系统中改键也很方便，10.4以上版本的OSX中可以直接在Keyboard Preference里找到修改键位映射的选项。
+Linux下的改键我知道两种方法，一种是修改xorg.conf文件，把里面的键盘设备设置改成
+Section &amp;quot;InputDevice&amp;quot; Identifier &amp;quot;Generic Keyboard&amp;quot; Driver &amp;quot;kbd&amp;quot; Option &amp;quot;CoreKeyboard&amp;quot; Option &amp;quot;XkbRules&amp;quot; &amp;quot;xorg&amp;quot; Option &amp;quot;XkbModel&amp;quot; &amp;quot;pc104&amp;quot; Option &amp;quot;XkbLayout&amp;quot; &amp;quot;us&amp;quot; Option &amp;quot;XkbOptions&amp;quot; &amp;quot;ctrl:swapcaps&amp;quot; EndSection  另一种是使用xmodmap这个工具，具体可以参见这篇文章 Changing your caps lock into Ctrl in X，这里简单介绍下
+修改前记得先备份当前的键位映射，xmodmap -pke &amp;gt; xmodmap.backup
+接下来运行
+xmodmap -e &#39;keycode 66 = Control_L&#39; xmodmap -e &#39;clear Lock&#39; xmodmap -e &#39;add Control = Control_L&#39;  这样就修改了Caps Lock的键位映射而不需要重启x，如果要在每次启动时自动修改Caps Lock键的映射，可以新建/修改一个.Xmodmap或者.xmodmap的文件，在里面加入
+keycode 66 = Control_L clear Lock add Control = Control_L    </description>
+    </item>
+    
+    <item>
+      <title>终端下如何在 Emacs 中使用鼠标</title>
+      <link>https://blog.yxwang.me/2009/04/using-mouse-in-emacs-within-terminal/</link>
+      <pubDate>Wed, 29 Apr 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2009/04/using-mouse-in-emacs-within-terminal/</guid>
+      <description>http://linux.about.com/od/emacs_doc/a/emacsdoc567.htm
+M-x xterm-mouse-mode 开启鼠标支持，操作的时候按住shift能恢复到之前的xterm鼠标模式
+M-x mouse-wheel-mode 开启滚轮支持
+一些相关的参数： mouse-drag-copy-region 选中后自动复制 mouse-wheel-scroll-amount 每次滚动的行数 mouse-wheel-follow-mouse 滚动位置 mouse-wheel-progressive-speed 滚动速度</description>
+    </item>
+    
+    <item>
+      <title>PPoPP 08 - FastForward</title>
+      <link>https://blog.yxwang.me/2009/04/ppopp-08-fastforward/</link>
+      <pubDate>Mon, 20 Apr 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2009/04/ppopp-08-fastforward/</guid>
+      <description>FastForward for Efficient Pipeline Parallelism http://systems.cs.colorado.edu/~moseleyt/publications/giacomoni-2008-ppopp-ff.pdf
+这篇paper介绍了一种针对多核访问优化的队列， 主要的特点： 1. Lock-free 2. Single-producer/single-consumer 3. Cache-optimized
+经典的Lamport的lock-free的队列实现可以用下面的伪代码来表述（同样只适用于单一生产者/单一消费者的情形）：
+enqueue_nonblock(data) { if (NEXT(head) == tail) { return EWOULDBLOCK; } buffer[head] = data; head = NEXT(head); return 0; } dequeue_nonblock(data) { (head == tail) { return EWOULDBLOCK; } data = buffer[tail]; tail = NEXT(tail); return 0; }  这种实现尽管做到了lock-free，但是存在几个问题，首先是它只适用于sequential consistency内存模型，在relaxed consistency的内存模型里可能会出现类似于Double-Checked Lock(http://techblog.zellux.czm.cn/?p=30)的问题，当然这个问题可以通过插fence指令来解决；第二个问题是这篇paper着重解决的，就是enqueue和dequeue这两个操作都用到了tail和head这两个全局变量，导致多核在读取/修改这两个变量时的为了保证cache coherency会频繁的进行cache的更新，从而导致cache line threading，降低了效率。
+接下来看FastForward的实现：
+enqueue_nonblock(data) { if (NULL != buffer[head]) { return EWOULDBLOCK; } buffer[head] = data; head = NEXT(head); return 0; } dequeue_nonblock(data) { data = buffer[tail]; if (NULL == data) { return EWOULDBLOCK; } buffer[tail] = NULL; tail = NEXT(tail); return 0; }  这个版本的队列实现粗看和Lamport的那个区别很小，而实际上这里解决了一个重要的问题：解除了head和tail的共享问题。dequeue操作只需要关心tail，enqueue操作只关心head，这样两个变量就变成CPU本地的资源了，不需要做任何同步。当然这个实现同样局限于sequential consistency，不过加fence保证顺序的overhead不大。最后测试中这个版本的单次操作比Lamport的快3.</description>
+    </item>
+    
+    <item>
+      <title>关于 tuple 的读音</title>
+      <link>https://blog.yxwang.me/2009/04/tuple-pronunciation/</link>
+      <pubDate>Fri, 10 Apr 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2009/04/tuple-pronunciation/</guid>
+      <description>水木上有个帖子讨论tuple这个词该怎么读，于是有人翻出来这个三年前的新闻组邮件
+http://coding.derkeiler.com/Archive/Python/comp.lang.python/2006-02/msg01915.html I used to pronounce it toople. But the people that taught me Python found it both comical and confusing. At first they thought I meant a 2 element tuple. So they wondered if a 3 element tuple was a threeple, etc. After much harrassing, I changed my wayward ways and pronounced it tuhple to fit in with the cool Python guys. ;-)
+Then we went to hear Guido speak about Python 2.</description>
+    </item>
+    
+    <item>
+      <title>CGO 09 一篇关于 DCL 检测的论文</title>
+      <link>https://blog.yxwang.me/2009/04/cgo-09-multi-race/</link>
+      <pubDate>Thu, 09 Apr 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2009/04/cgo-09-multi-race/</guid>
+      <description>Double-Checked Lock是一个常见的由于程序员把内存模型默认为sequential momery consistency导致的问题，具体见我去年写的一篇博文http://techblog.iamzellux.com/2008/07/singleton-pattern-and-double-checked-lock/
+虽然Java 5解决了这个问题，但是C++等语言中这个问题依然存在，依然有很多因为程序员假设sequential consistency而编译器做了错误的指令调度后导致的bug，见http://www.newsmth.net/bbscon.php?bid=335&amp;amp;id=250203
+CGO 09的这篇paper Detecting and Eliminating Potential Violations of Sequential Consistency for Concurrent C/C++ Programs针对这个问题进行了深入研究，通过加fence指令的方法解决了因编译器的指令调度造成的违背程序员原义的问题，可以在http://ppi.fudan.edu.cn/yuelu_duan下载到。没有认真读过，俺在这里就不误人子弟了 O.O</description>
+    </item>
+    
+    <item>
+      <title>SOSP 97 - Disco</title>
+      <link>https://blog.yxwang.me/2009/04/disco-running-commodity-operating-systems-on-scalable-multiprocessors/</link>
+      <pubDate>Wed, 08 Apr 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2009/04/disco-running-commodity-operating-systems-on-scalable-multiprocessors/</guid>
+      <description>趁还在编译内核的时候把以前写过的东西都转过来，今年寒假读的 (SOSP &amp;lsquo;97)
+Disco: running commodity operating systems on scalable multiprocessors 很早的一篇paper，发表的第二年Rosenblum就创办了VMWare。这篇paper介绍了一个跑在 FLASH机器上的虚拟机Disco，FLASH的架构是实验性质的cache coherent non-uniform memory architechure(ccNUMA)。
+传统的VMM在实现上主要有三个问题
+ overhead，例如特权指令需要由VMM模拟 资源管理，缺乏对资源配置的细粒度的了解，导致资源分布不均（如调度一个没有价值的计算任务） 通讯和共享，不同虚拟机是不是应该简单的看成是享有相同硬件资源的完全独立的操作系统？  实现细节 1. 虚拟CPU Disco虚拟CPU时是把指令放到物理CPU上直接执行的。当调度到某个虚拟CPU时，Disco就把物理机的寄存器设置为虚拟机的寄存器并跳转到相应的PC。
+直接执行的好处在于大多数操作能获得和在真机上跑一样的效率，而难点在于处理不能直接放到真机上运行的指令，如修改tlb，访问物理内存等。
+Disco为每个虚拟CPU记录了一个类似于传统操作系统中process table entry的数据结构。为了模拟特权指令，Disco还在这个数据结构中维持了虚拟CPU的特权寄存器和tlb的内容。
+在MIPS处理器上，Disco运行在kernel mode掌握着对硬件的完全控制；控制器交给虚拟机的操作系统时，Disco把CPU置为supervisor mode；当进入user mode时取消。Supervisor模式允许操作系统访问受保护的内存区域(supervisor segment)，但仍不能执行特权指令，也不能访问物理内存。诸如page fault的trap发生时，vmm会捕获到这个异常，修改相应的特权寄存器并跳转到虚拟机的trap vector。
+2.虚拟内存 Disco增加了一层物理地址到机器地址的转换。虚拟机使用从0开始的物理地址，大小和为虚拟机的内存相等，Disco把这些物理地址映射到了 FLASH的40位机器地址上。这种映射的实现借助于MIPS处理器的software-reloaded TLB，当操作系统尝试在TLB中插入一个virtual-to-physical的映射时，Disco会把这里的physical address改成对应的machine address，这样之后通过这条TLB记录的地址访问就不需要再经过VMM的处理了，没有额外的overhead。
+为了方便计算TLB地址，Disco为每个虚拟机记录了一个pmap数据结构，每个pmap结构对应着虚拟机的一个物理页。pmap包含了一个指向 机器内存的引用，以及指向虚拟地址的映射（虚拟地址可能有多个，原文中用了复数形式），这主要用于页面被VMM回收时TLB的重置。另外MIPS处理器为 每个TLB记录标记了一个地址空间标识符（ASID, address space identifier），用来防止context switch时不必要的TLB刷新。Disco为了简单化处理，就在物理CPU被调度为另一个虚拟CPU时刷新TLB，这样ASID就能直接使用虚拟机提 供的了。
+这样的处理带来了性能问题，由于TLB在虚拟CPU切换时会被刷新，带来了额外的TLB miss，而TLB miss由于需要被模拟，它的代价很大。为了减少这种性能影响，Disco维持了一个virtual-to-machine的二级软TLB，TLB miss发生的时候首先查看软TLB有没有相关的记录，如果找不到再交给虚拟机上的操作系统去处理。这种处理的影响就是虚拟机所看到的TLB会比实际 CPU的TLB大很多。
+3. NUMA 内存管理 不怎么熟悉NUMA，这部分先粗读了，大致思想是通过动态的页面转移和复制维持locality，从而避免remote cache miss。
+4. 虚拟IO设备 增加特殊的设备驱动是最清晰的实现方法，每个Disco设备都定义了一个monitor call，供设备驱动传参调用。对于支持DMA操作的设备，Disco也需要截获这些DMA请求并转换为相应的machine address。对于仅有一个虚拟机访问的设备，Disco只要保证访问的排外性并翻译DMA请求即可，而不需要虚拟IO资源。截获所有DMA操作的一个 好处是Disco可以在虚拟机间共享磁盘和内存资源。</description>
+    </item>
+    
+    <item>
+      <title>SOSP 99 - Cellular Disco</title>
+      <link>https://blog.yxwang.me/2009/04/sosp-99-cellular-disco/</link>
+      <pubDate>Wed, 08 Apr 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2009/04/sosp-99-cellular-disco/</guid>
+      <description>同样是今年寒假读的
+ 两年前的paper的升级版，这次是利用Disco在一个多核电脑上跑多个操作系统并虚拟成一个cluster。主要解决了两个问题，一是容错性，当硬件错误发生时如何把影响缩小到一个单元里；二是资源的管理，如何高效地在虚拟机间动态的分配物理CPU和内存。
+容错和动态资源管理在某种程度上相互矛盾的。因此在分配资源的时候，要尽可能的减少一个虚拟机使用的cell数。这里的cell是指相对独立的容错 单元，后面还提到一个node的概念，Origin 2000上每个node含两个CPU。CD还提供了两种快速的进程间通讯的primitive，RPC和message。
+关于容错，有这么个问题，Disco在操作系统和硬件之间多弄了这么一层虚拟层，某个虚拟的操作系统出问题时可以不影响到其他操作系统，可是操作系 统不也是保证了进程间的互相独立，当一个进程异常时不影响另一个进程吗？多设立一层Disco对容错有什么帮助吗？这个问题的答案在于，VMM的代码量很 小，可以看作是一个可信的系统软件层(trusted system software layer)，因为当VMM的代码行数少于五万行时，它的复杂度就和其他可信的层（如cache coherence protocol)差不多了，这个复杂度比现代操作系统的复杂度差不多要低两个等级。
+传统操作系统通常使用一个全局的run queue来管理和分配进程在多个CPU上的运行，这种实现不适合CD的容错要求，也带来了更多的contention。所以CD为每个VCPU维护了一 个run queue，同时引入了VCPU migration的机制来平衡VCPU的负载，按颗粒度分三级，intra-node intra-cell inter-cell。内存管理方面，CD实现了memory borrowing机制，使得一个cell可以暂时的从其他cell里获得内存，如果这种借用受限于容错性，就只能使用原来的paging机制了。 CPU管理 CD有两个CPU平衡策略，一个在处理器空闲时发生，另一个定期平衡VCPU的负载。空闲调度时要同时考虑gang scheduling的限制以及因转移破坏的cache/node affinity。而定期的调度则是通过一棵全局的load tree的辅助来实现的。此外还需要一个scalable gang scheduler来保证效率，CD的调度器总是选择优先度最高的gang-runnable VCPU（等待时间最多），然后通过低开销的RPC通知那些拥有(和这个VCPU同属于一个虚拟机的VCPU)的处理器，这些处理器在收到消息后，立即停 止当前正在运行的VCPU，服从同一调度策略。通过这种方式实现的调度就不需要一个全局的管理器了。
+内存管理 每个cell都维护了自己的freelist，每次接收请求时都优先分配本地node上的资源。内存借用也很直接，需要借用内存的cell向有空闲内存的cell发个RPC即可，RPC的返回结果是一个machine page的list。
+测试结果 测试中CD是作为kernel process跑在IRIX 6.4上的，也就是说VMM的下面还有一层操作系统，主要是为了利用IRIX提供的设备驱动。CD在每个CPU上跑一个线程，完全占有整个CPU，IRIX只在需要设备驱动时才被激活。
+测试比较了两个测试环境，跑在真机上的IRIX 6.4（增加了多核支持），和跑在CD上的IRIX 6.2。最后的结果显示大部分情况下（单核、8核、32核）后者和前者的差距在10%以内，最差情况下也只有20%的overhead。接下来的容错机制 的overhead同样很小，不高于2%。</description>
+    </item>
+    
+    <item>
+      <title>ASPLOS 09 - DFTL</title>
+      <link>https://blog.yxwang.me/2009/04/asplos-09-dftl/</link>
+      <pubDate>Tue, 07 Apr 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2009/04/asplos-09-dftl/</guid>
+      <description>Paper标题是DFTL: A Flash Translation Layer Employing Demand-based Selective Caching of Page-level Address Mappings，PSU发表在ASPLOS 09上。这篇paper对我来说更像是篇flash存储的科普文。
+flash存储单元分block和page，每个block有32/64个page，一个page有512/2048K大小。flash的一个缺点在于改写数据时只能先把要改写的block清空，然后再写，由于block的颗粒度比较大，这就带来了比较严重的性能问题。所以现在的flash都在驱动层维护了一张对文件系统透明的logical-to-physical address的映射表(Flash Translation Layer)，这样改写时只要先写在预先清空的page上，再把映射表的对应项的物理地址改成新的page的地址，然后把原来要改的页置为invalid，等gc去清空即可。
+如果为每个page都在内存中维护一份映射关系，会占用比较大的内存空间。以往的ftl的实现试图在page-level和block-level的映射中找平衡，但效果都不甚理想，尤其在随机写比较频繁时会产生比较严重的gc负荷，从而影响写操作的反应速度（因为预先清空的页面不足时需要先做gc）。这篇paper提出的DFTL可以比较好的减少gc的负荷，同时近需要很小的内存空间，前提是程序访问flash的locality很好。
+感觉DFTL的大致思想仿照了二级页表和TLB：flash上的一些page保存了page-level的映射，分散在整个flash中，在内存里面有一个block-level的映射表，记录了每个page-level映射表在flash中的地址。内存中的映射表相当于二级页表中的page directory，指向了flash上的page-level映射表（page table），另外内存中还有一个全局的page-level的映射表用于记录最近访问到的page的logical-to-physical映射，类似于TLB。这样如果程序locality很好的情况下大多数情况下只要查询这张表就行了。</description>
+    </item>
+    
+    <item>
+      <title>Xen DomainU 自动测试脚本</title>
+      <link>https://blog.yxwang.me/2009/04/xen-test-script/</link>
+      <pubDate>Tue, 07 Apr 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2009/04/xen-test-script/</guid>
+      <description>写完代码测试时重复的最多的步骤就是
+ 编译，复制vmlinuz和xen.gz 重启VMware虚拟机 启动domainU xm create domU.conf 4. 开一个screen窗口attach到domainU的console xm console #domid 5. 在domainU中运行测试程序  于是写了个自动执行3 4 5的脚步，主要用到了熊熊推荐的pexpect，这东东很赞啊
+为了提高用户体验，读取domainU的启动信息时我采用的方法是读一行输出一行，读到结尾登陆字符时通过超时设置退出循环，这样可能效率比较低，不过测试脚本也不care这个了
+实际使用时碰到了另一个问题，domainU执行完自动命令后命令行会出现很严重的对齐问题，最后发现登陆后运行一次reset就可以了。
+脚本如下
+#!/usr/bin/python # Automatic test script for Xen DomainU # Author: zellux import pexpect, os conf = { &#39;login_name&#39; : &#39;m2-vm2&#39;, &#39;domainU_name&#39; : &#39;R900-DomU0&#39;, &#39;domainU_conf&#39; : &#39;/home/wyx/domU1&#39;, &#39;domainU_id&#39; : &#39;2&#39;, &#39;domainU_user&#39; : &#39;wyx&#39;, &#39;domainU_passwd&#39; : &#39;wyx&#39;, } # Command to be executed after domainU starts cmd = &amp;quot;&amp;quot;&amp;quot; cd m2 cd reg_test .</description>
+    </item>
+    
+    <item>
+      <title>End-to-End Argument In System Design</title>
+      <link>https://blog.yxwang.me/2009/04/end-to-end-argument-in-system-design/</link>
+      <pubDate>Mon, 06 Apr 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2009/04/end-to-end-argument-in-system-design/</guid>
+      <description>MIT出品，发在1984年的TOCS上，很值得细细品味的一篇paper，可惜做presentation时由于是第一次在组会上讲，效果很差。
+这篇paper的核心思想就是，在设计一个系统各个层次的功能时，如果把某个功能放到某一层时无法保证功能的完全可靠，那就干脆不要做，除非是为了性能等其他因素考虑。
+这里举了一个文件传输的例子，假设要把电脑A的资料通过网络传输给电脑B，而其中文件系统、传输程序、网络等各个子系统都有可能出现问题，那么如果保证传输的可靠，即B能完整不出错的得到A的数据并保存呢？
+如果把验证做在子系统，比如网络数据包校验，文件系统里也为每个文件加checksum，读出来的时候验证下，从而避免磁盘出错的可能。但是这些常见的措施只能保证部分环节的正确性，降低出错的可能，并不能从根本上保证数据传输的可靠性。举个例子来说，这里如果文件传输程序出了bug，网络和文件系统里面的检查即使通过了，最后的结果还是错误的。
+针对这个问题的End-to-End的解决方案很简单，就是在电脑A上保留一份该文件的checksum，电脑B接收并保存后再算一次checksum，相等就说明传输成功了（当然这里要钻牛角尖的话也可以说还是有可能出问题的，但是这个概率已经小到可以完全忽视的地步了，在这里我们假设checksum符合就说明这个环节没有问题）。而这种保障措施不需要任何子系统的参与，也就是End-to-End的。
+那么当一个子系统对要做的事情并不完全了解的时候（比如这里的网络传输层只能保证对方接受到的数据包的正确性，却不知道文件有没有损坏），是不是就没必要在子系统实现这个功能了呢？从正确性是来说是，但是考虑到其他方面，在子系统作检查还有另外两个好处：
+一是大大的降低了出错的概率，准确的说是出错的概率呈指数级降低，这在并不需要一种完美的保障措施的场合下还是很有用的；
+二是提高了性能，如果只用End-to-End的检验的话，有可能传输中丢了个包要等整个文件传输完毕做checksum的时候才会发现；而如果中间在网络传输层加个丢包检验的话就可以及早的发现错误并恢复了。这个问题在网络不可靠，或者文件很大的情况下尤为突出，仅仅是End-to-End的保证会使传输时间的期望值随着文件大小的增加呈指数级上升。
+上网络课的时候有一次老师的问题就是既然OSI七层协议的上层（如transport层）已经做了校验措施，为什么下层（如data-link层）还会有“多余”的error detection呢？当时我想到的一个答案就是为了性能考虑，因为那会儿正好在读这篇paper ;-)
+但是并不是说把功能放到子系统里就一定能提高性能了。如果子系统里面塞满了各种并不是上层都必需的检验机制，整个系统的性能势必会受到影响。所以这个trade-off值得深思熟虑。Exokernel的论文就提出了传统的操作系统中存在的这样一个问题，底层内核过于冗余，影响了应用程序性能，也隐藏了一些对部分应用程序比较重要的信息（比如给数据库提供磁盘原生数据访问的API可以获得更优的性能，另外应用程序也应当能控制自己发生缺页错误时候的行为）。
+这里的“End”在不同的环境下会对应不同的模块。比如在网上聊天这个通信过程中，没有必要在底层做很多校验来保证数据包的完整性，这时候及时性更重要，当数据包丢失或者数据出错时，会有一个更常用的End-to-End的解决方案：没听清的那一方通过语音要求重述就行了，“我听不清，能再说一遍刚才的话吗？”，而此时的End自然是谈话双方。如果换一种情形，在语音留言系统中，就需要保证传输的正确性了，因为这时候数据的及时性变得很次要，而留言系统的特点要求用End-to-End的验证加上底层的措施来保证一方的语音信息尽可能忠实的保存到另一方的留言系统中。
+修改于 2010.2.16</description>
+    </item>
+    
+    <item>
+      <title>报告了个 Emacs 的 bug</title>
+      <link>https://blog.yxwang.me/2009/04/emacs-bug-contribution/</link>
+      <pubDate>Sat, 04 Apr 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2009/04/emacs-bug-contribution/</guid>
+      <description>http://emacsbugs.donarmstrong.com/cgi-bin/bugreport.cgi?bug=2800
+Emacs在窗口过窄时使用minibuffer的auto-complete功能会挂掉，就把这bug报告上去了。负责人貌似是MIT的物理系毕业的博士？敬仰下。
+从后面回复来看，似乎这个bug emacs22里也有，应该还是蛮常见的呀，为啥之前没人report呢@@
+不管怎么说，总算也给Emacs出了份力，嘿嘿。</description>
+    </item>
+    
+    <item>
+      <title>VMware上能跑起来的Linux Kernel配置</title>
+      <link>https://blog.yxwang.me/2009/04/vmware-linux-kernel-config/</link>
+      <pubDate>Fri, 03 Apr 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2009/04/vmware-linux-kernel-config/</guid>
+      <description>在默认的基础上，把这几个都改成built-in (*)，通过Xen启动时就不需要额外加载initrd了
+2010.1.19更新：支持网络
+Device Drivers SCSI device support ---&amp;gt; &amp;lt;*&amp;gt; SCSI disk support &amp;lt;*&amp;gt; SCSI generic support SCSI low-level drivers ---&amp;gt; [*] LSI Logic New Generation RAID Device Drivers &amp;lt;*&amp;gt; Serial ATA (SATA) support &amp;lt;*&amp;gt; Intel PIIX/ICH SATA support Fusion MPT device support ---&amp;gt; &amp;lt;*&amp;gt; Fusion MPT ScsiHost drivers for SPI &amp;lt;*&amp;gt; Fusion MPT ScsiHost drivers for FC &amp;lt;*&amp;gt; Fusion MPT ScsiHost drivers for SAS (128) Maximum number of scatter gather entries (16 - 128) &amp;lt;*&amp;gt; Fusion MPT misc device (ioctl) driver &amp;lt;*&amp;gt; Fusion MPT LAN driver Network device support ---&amp;gt; Ethernet (10 or 100Mbit) ---&amp;gt; [*] EISA, VLB, PCI and on board controllers &amp;lt;*&amp;gt; AMD PCnet32 PCI support  </description>
+    </item>
+    
+    <item>
+      <title>安全方面的经典论文：A Logic of Authentication</title>
+      <link>https://blog.yxwang.me/2009/03/a-logic-of-authentication/</link>
+      <pubDate>Wed, 18 Mar 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2009/03/a-logic-of-authentication/</guid>
+      <description>最近有点忙，今天总算在某个课题deadline前把论文憋出来交上去了。跑这儿来推荐两篇上个月看到的比较有意思的paper，都比较偏理论，也很老。
+今天写介绍下第一篇，剑桥大学的A Logic of Authentication，中了SOSP &amp;lsquo;89，整理后发在1990年的ACM Transactions on Computer Systems上。 http://www.csie.fju.edu.tw/~yeh/research/papers/os-reading-list/burrows-tocs90-logic.pdf
+（另一篇是Safe Kernel Extensions Without Run-Time Checking，改天再写点介绍）
+这篇paper的主要工作是通过构造一种多种类的模态逻辑(many-sorted model logic)，来检查网络中验证协议的安全性。
+基础的逻辑分三部分： 原语，如验证双方A和B，以及服务器S，下文用P Q R泛指 密钥，如K_ab代表a和b之间的通讯密钥，K_a代表a的公钥，{K_a}^{-1}代表对应的私钥，下文用K泛指 公式（或者陈述），用N_a, N_b等表示，下文用X Y泛指
+接下来定义以下约定（constructs） P 信任 X: 原语P完全信任X P 看到 X: 有人发送了一条包含X的信息给P，P可以阅读它或者重复它（当然通常是在做了解密操作后） P 说了 X: 原语P发送过一条包含X的信息，同时也可以确定P是相信X的正确性的 P 控制 X: P可以判定X的正确与否。例如生成密钥的服务器通常被默认为拥有对密钥质量的审核权。 X 是新鲜的: 在此之前X没有被发送过。这个事实可以通过绑定一个时间戳或者其他只会使用一次的标记来证明。 P &amp;lt;-K-&amp;gt; Q: P和Q可以通过共享密钥K进行通讯，且这个K是好的，即不会被P Q不信任的原语知道。 K-&amp;gt; P: P拥有K这么一个公钥，且它对应的解密密钥K^{-1}不会被其他不被P信任的原语知道。 P &amp;lt;=X=&amp;gt; Q: X是一个只被P和Q或者P和Q共同信任的原语知道的陈述，只有P和Q可以通过X来相互证明它们各自的身份，X的一个例子就是密码。 {X}_K: X是一个被K加密了的陈述 _Y: 陈述X被Y所绑定，Y可以用来证明发送X的人的身份
+好了，总算把这些约定列完了，然后来看看通过这些约定能推出一些什么东东： 如果 P 相信 (P &amp;lt;-K-&amp;gt; Q), 且 P 看到 {X}_K，那么 P 相信 Q 说了 X。 这个例子很简单，既然P Q有安全的密钥K，那么P看到通过K加密后的X肯定认为就是Q发出的。</description>
+    </item>
+    
+    <item>
+      <title>Xen 学习笔记 2009-02-19</title>
+      <link>https://blog.yxwang.me/2009/02/2009-02-19-notes/</link>
+      <pubDate>Thu, 19 Feb 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2009/02/2009-02-19-notes/</guid>
+      <description>今天下午真是惊悚，我想把机房的winxp分区删了，ftp上好放点美剧，结果winxp的那个分区是扩展分区，删掉后导致linux的几个分区都消失了。赶紧把硬盘拆下来装到实验室用Disk Genius修复了下，数据基本没什么损坏，分区表还是有点问题。差一点俺就见不到这个博客了 =_=
+然后把昨天折腾了一晚上没搞定的debian 4安装搞定了，关键在于netinst.iso的版本号要和hd-media的完全一致，4.0r7。
+ 编译xen/linux所需的包 apt-get install gettext zlib1g-dev python-dev libncurses-dev libssl-dev libx11-dev bridge-utils iproute gawk  另外 initrd文件的生成需要安装initrd-tools包
+ kernel中memory barrier的实现很简单，barrier宏展开后就是 asm volatile(&amp;ldquo;&amp;rdquo; : : : &amp;ldquo;memory&amp;rdquo;) 这样就保证了在barrier()执行后，cpu不会直接读取寄存器中cache的内存值。
+ 生成initrd mkinitramfs -o /boot/initrd-2.6.18.8-xen.img 2.6.18.8-xen
+ syscall和m2_fastcall的性能测试 测的是getpid()函数，当然为了保证m2_fastcall不在运行逻辑上吃亏，它的对应功能仅仅是返回current-&amp;gt;pid，第一次测出来的结果是syscall明显由于m2_fastcall。宋大牛指出很有可能是glibc做了缓存，果然，自己用汇编发软中断后的数据就正常了。
+  </description>
+    </item>
+    
+    <item>
+      <title>Xen 学习笔记 2009-02-09</title>
+      <link>https://blog.yxwang.me/2009/02/2009-02-09-notes/</link>
+      <pubDate>Wed, 11 Feb 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2009/02/2009-02-09-notes/</guid>
+      <description>Fishing reading Xen 内存管理综述 and have a superficial look on Xen source code.
+ 在Debian x86-64上编译并安装了Xen 3.3.0，安装需要的几个包zlib1g-dev python-dev libncurses-dev libssl-dev libx11-dev bridge-utils iproute gawk gettext
+  3.interrupt gate的注册
+[arch/x86/traps.c] set_swint_gate(TRAP_int3,&amp;amp;int3); /* usable from all privileges */ set_swint_gate(TRAP_overflow,&amp;amp;overflow); /* usable from all privileges */ set_intr_gate(TRAP_bounds,&amp;amp;bounds); set_intr_gate(TRAP_invalid_op,&amp;amp;invalid_op); set_intr_gate(TRAP_no_device,&amp;amp;device_not_available); set_intr_gate(TRAP_copro_seg,&amp;amp;coprocessor_segment_overrun); set_intr_gate(TRAP_invalid_tss,&amp;amp;invalid_TSS);  以page_fault为例 [arch/x86/x86_64/entry.s] ENTRY(handle_exception) SAVE_ALL handle_exception_saved: testb $X86_EFLAGS_IF&amp;gt;&amp;gt;8,UREGS_eflags+1(%rsp) jz exception_with_ints_disabled sti 1: movq %rsp,%rdi movl UREGS_entry_vector(%rsp),%eax leaq exception_table(%rip),%rdx GET_CURRENT(%rbx) PERFC_INCR(PERFC_exceptions, %rax, %rbx) callq *(%rdx,%rax,8) testb $3,UREGS_cs(%rsp) jz restore_all_xen leaq VCPU_trap_bounce(%rbx),%rdx movq VCPU_domain(%rbx),%rax testb $1,DOMAIN_is_32bit_pv(%rax) jnz compat_post_handle_exception testb $TBF_EXCEPTION,TRAPBOUNCE_flags(%rdx) jz test_all_events call create_bounce_frame movb $0,TRAPBOUNCE_flags(%rdx) jmp test_all_events</description>
+    </item>
+    
+    <item>
+      <title>Xen 学习笔记 2009-02-10</title>
+      <link>https://blog.yxwang.me/2009/02/2009-02-10-notes/</link>
+      <pubDate>Wed, 11 Feb 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2009/02/2009-02-10-notes/</guid>
+      <description>x86_64上不支持segment机制，Xen是通过页表机制来控制访问权限的，Xen及其相关数据驻留在0xffff8000 00000000 - 0xffff87ff ffffffff，也就是在原来的kernel space的低地址部分，而x86_32上驻留在最上面的。  [include/asm-x86/config.h] /* * Memory layout: * 0x0000000000000000 - 0x00007fffffffffff [128TB, 2^47 bytes, PML4:0-255] * Guest-defined use (see below for compatibility mode guests). * 0x0000800000000000 - 0xffff7fffffffffff [16EB] * Inaccessible: current arch only supports 48-bit sign-extended VAs. * 0xffff800000000000 - 0xffff803fffffffff [256GB, 2^38 bytes, PML4:256] * Read-only machine-to-phys translation table (GUEST ACCESSIBLE). * 0xffff804000000000 - 0xffff807fffffffff [256GB, 2^38 bytes, PML4:256] * Reserved for future shared info with the guest OS (GUEST ACCESSIBLE).</description>
+    </item>
+    
+    <item>
+      <title>Emacs tramp</title>
+      <link>https://blog.yxwang.me/2009/02/emacs-tramp/</link>
+      <pubDate>Mon, 09 Feb 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2009/02/emacs-tramp/</guid>
+      <description>很好用的东东，可以方便的打开需要root权限或是远程服务器上的文件。
+统一的url格式是 /method:usr@machine:port/path/to.file，这种方式需要在载入tramp前设置tramp-syntax
+(setq tramp-syntax &#39;url) (require &#39;tramp)  也可以用(setq tramp-default-method &amp;ldquo;scp&amp;rdquo;) 指定默认的访问方法，这样就不需要/method://了
+以我现在的org日程管理为例，个人日程文件保存在机房的73号机上，实验室电脑和寝室电脑上的电脑只要通过tramp远程访问这个org文件即可：
+(setq org-agenda-files (list &amp;quot;/scp:wyx@10.132.140.73:/home/wyx/notes/lab.org&amp;quot;))  </description>
+    </item>
+    
+    <item>
+      <title>PieTTY 中按 Ctrl&#43;S 导致挂起的问题解决</title>
+      <link>https://blog.yxwang.me/2009/01/terminal-ctrl-s/</link>
+      <pubDate>Thu, 08 Jan 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2009/01/terminal-ctrl-s/</guid>
+      <description>以前碰到这个问题都得先重启PieTTY然后用screen -x恢复到原来的工作界面，今天不知怎么的emacs里C-x C-s按了就挂起，只能google。
+传说中，早期的终端会遇到显示字符的速度慢于接收字符的速度，为了解决这个问题，C-s用于先挂起当前终端，在数据传输之后用C-q恢复显示。所以最简单的解决方法就是在挂起后按C-q。
+不过我的WinXP中C-q已经和快速启动工具（寝室里是Turbo Launcher，实验室的是Launchy）绑定了，也懒得为了这么个问题改操作习惯，于是再次google，终于找到一个一劳永逸的方法，以bash为例，在~/.bashrc中加入一行
+stty -ixoff -ixon
+即可。另外这样设置后似乎恢复了C-s在bash中正向增量查找的功能。恩。</description>
+    </item>
+    
+    <item>
+      <title>OSDI 08 - CHESS</title>
+      <link>https://blog.yxwang.me/2008/11/finding-and-reproducing-heisenbugs-in-concurrent-programs/</link>
+      <pubDate>Sun, 30 Nov 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2008/11/finding-and-reproducing-heisenbugs-in-concurrent-programs/</guid>
+      <description>Finding and Reproducing Heisenbugs in Concurrent Programs
+OSDI &amp;lsquo;08上微软研究院发的paper，针对并发编程中难以发现的bug问题。
+paper的内容主要分两大块。
+一是如何在发现bug的时候记录下线程的运行先后(thread interleaving)，途径是在线程API和用户程序多写一层wrapper functions，这里还有一些其他的问题，比如只记录下了thread interleaving的话出现data race怎么解决等。
+另外一块内容是如何遍历出给定程序运行后所能产生的结果的集合，加入这个能实现的话那就能把所有隐藏的bug都找出来了。但是这个搜索空间很大，是指数级的，的一个结论就是：给定一个程序有n个的线程，所有线程共完成k条指令，那么c次占先调度后线程的排列情况数的复杂度是$$k^{c}$$的，所以在实现遍历代码的时候必须有效的降低k和c的值。</description>
+    </item>
+    
+    <item>
+      <title>Daily Notes on Python[11.17-11.23]</title>
+      <link>https://blog.yxwang.me/2008/11/daily-notes-on-python1117-1123/</link>
+      <pubDate>Mon, 17 Nov 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2008/11/daily-notes-on-python1117-1123/</guid>
+      <description>模块动态加载机制
+ Advanced Python（某一期Google TechTalks的话题）上提到import指令本质是个语法糖，import sys等价于sys = import(&amp;ldquo;sys&amp;rdquo;)。解析import sys的bytecode可以看到四个指令（参数略）： LOAD_CONST LOAD_CONST IMPORT_NAME STORE_NAME  IMPORT_NAME把sys模块导入并保存到栈上，STORE_NAME把这个指针当作普通对象保存在sys这个变量中。
+2. IMPORT_NAME指令行为分析 将参数打包并用PyEval_CallObject()这个统一调用接口运行import方法，bltinmodule.c中的builtinimport函数包装了这个功能。help(import)显示的import方法的参数列表 import(&amp;hellip;) import(name, globals={}, locals={}, fromlist=[], level=-1) -&amp;gt; module
+对应于builtinimport中调用的另一层函数封装
+PyObject * PyImport_ImportModuleLevel(char *name, PyObject *globals, PyObject *locals, PyObject *fromlist, int level)  这个函数调用了真正干活的函数，import.c中的
+static PyObject * import_module_level(char *name, PyObject *globals, PyObject *locals, PyObject *fromlist, int level)  3. import_module_level函数 首先调用get_parent()得到import发生时的package对象，接下来多次调用load_next依次得到各级的包名，跟踪了下import xml.dom.minidom的行为，发现name的值依次是&amp;rdquo;dom.minidom&amp;rdquo;, &amp;ldquo;minidom&amp;rdquo;。最后根据import的形式是from &amp;hellip; import &amp;hellip;还是import &amp;hellip;返回不同的处理结果。
+4. import_submodule函数 load_next函数中调用这个函数进行模块的查找和载入。主要分三步：find_module, load_module, add_submodule。
+5. from &amp;hellip; import &amp;hellip; ensure_fromlist处理了这个情况。另外对于from &amp;hellip; import *的情况，会从module文件中读入一个all对象，从中知道module公开的符号信息。</description>
+    </item>
+    
+    <item>
+      <title>Godel, Escher, Bach [2]</title>
+      <link>https://blog.yxwang.me/2008/11/godel-escher-bach-2/</link>
+      <pubDate>Tue, 11 Nov 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2008/11/godel-escher-bach-2/</guid>
+      <description> 素数判定的形式化系统，精彩！ 合数的判定系统比较容易构造，素数的判定当然不能简单的通过“不是合数”来解决。 首先构造一个不整除的概念(DND) 公理模式：xyDNDx，其中x和y是短横组成的符号串。（a&amp;gt;b，a自然不整除b） 生成规则：如果xDNDy是个定理，那么xDNDxy也是个定理。 接下来定义一个描述z在2到x的范围内没有因子的语言，zDFx (Divisor-Free) 规则1：如果&amp;ndash;DNDz是个定理，那么zDF&amp;ndash;也是个定理。 规则2：如果zDFx与x-DNDz都是定理，那么zDFx-也是个定理。 好了，到这里已经能检查一个数是否在给定范围内找出因子了，定义素数(Pz)就变得很简单。 规则：若z-DFz是个定理，那么Pz-是个定理。 再处理一个特例，为2制定一条公理 公理：P- -  </description>
+    </item>
+    
+    <item>
+      <title>Godel, Escher, Bach [1]</title>
+      <link>https://blog.yxwang.me/2008/11/godel-escher-bach-1/</link>
+      <pubDate>Mon, 10 Nov 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2008/11/godel-escher-bach-1/</guid>
+      <description>哥德尔定理 用比较通俗的英文来说，就是 All consistent axiomatic formulations of number theory include undicidable propositions.
+ 图形和衬底也许会不带有完全相同的信息 There exist formal systems whose negative space (set of non-theorems) is not the positive space (set of theorems) of any formal system. 用更technical的说法 There exist recursively enumerable sets which are not recursive. 这里recursively enumerable指能按照typographical规则生成，而recursive则对应域指衬底也是个图形的图形。 由此得出一个结论 There exist formal systems for which there is no typographical decision procedure. 证明很简单，用反证法。如果所有的形式系统都能有typographical的判定方法，那么逐个测试所有的符号串，从而能生成一个非定理集合，与前面的定理矛盾。
+ 关于那个数列谜题 {Ai} = 1, 3, 7, 12, 18, 26, 35, 45, 56, 69, &amp;hellip; 既然讲到了衬底自然要考虑这个，负空间数列为 {Bi} = 2, 4, 5, 6, 8, 9, 10, 11, 13, 14, &amp;hellip; An = An-1 + Bn-1</description>
+    </item>
+    
+    <item>
+      <title>FEG归来</title>
+      <link>https://blog.yxwang.me/2008/11/feg/</link>
+      <pubDate>Sat, 08 Nov 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2008/11/feg/</guid>
+      <description>第三届复旦电竞赛，不过这次星际项目报名的高手很少。
+小组赛居然输了一场，不过最后在半决赛把这个对手3:0，复仇成功了，恩。
+貌似今天打了1把zvz，11把zvp，恩
+决赛zvz，不过估计没多少时间准备了。。</description>
+    </item>
+    
+    <item>
+      <title>Why explicit self has to stay</title>
+      <link>https://blog.yxwang.me/2008/10/why-explicit-self-has-to-stay/</link>
+      <pubDate>Mon, 27 Oct 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2008/10/why-explicit-self-has-to-stay/</guid>
+      <description>Bruce Eckel的一篇日志建议把self从方法的参数列表中移除，并把它作为一个关键字使用。 http://www.artima.com/weblogs/viewpost.jsp?thread=239003
+Guido的这篇日志说明了self作为参数是必不可少的。 http://neopythonic.blogspot.com/2008/10/why-explicit-self-has-to-stay.html
+第一个原因是保证foo.meth(arg)和C.meth(foo, arg)这两种方法调用的等价（foo是C的一个实例)，关于后者可以参见Python Reference Manual 3.4.2.3。这个原因理论上的意义比较大。
+第二个原因在于通过self参数我们可以动态修改一个类的行为：
+# Define an empty class: class C: pass # Define a global function: def meth(myself, arg): myself.val = arg return myself.val # Poke the method into the class: C.meth = meth  这样类C就新增了一个meth方法，并且所有C的实例都可以通过c.meth(newval)调用这个方法。
+前面两个原因或许都可以通过一些workaround使得不使用self参数时实现同样的效果，但是在存在decorator的代码中Bruce的方法存在致命的缺陷。(关于decorator的介绍可以参见http://www.python.org/dev/peps/pep-0318/)
+根据修饰对象，decorator分两种，类方法和静态方法。两者在语法上没有什么区别，但前者需要self参数，后者不需要。而Python在实现上也没有对这两种方法加以区分。Bruce日志评论中有一些试图解决decorator问题的方法，但这些方法都需要修改大量底层的实现。
+最后提到了另一种语法糖实现，新增一个名为classmethod的decorator，为每个方法加上一个self参数，当然这种实现也没必要把self作为关键字使用了。不过我觉得这么做还不如每次写类方法时手工加个self =_=</description>
+    </item>
+    
+    <item>
+      <title>Python函数属性</title>
+      <link>https://blog.yxwang.me/2008/10/python-function/</link>
+      <pubDate>Fri, 24 Oct 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2008/10/python-function/</guid>
+      <description>定义一个简单的Python函数 def f(x, y = 10, z = 16): print z dir(f)可以看到函数的几个主要属性 &amp;lsquo;func_closure&amp;rsquo;, &amp;lsquo;func_code&amp;rsquo;, &amp;lsquo;func_defaults&amp;rsquo;, &amp;lsquo;func_dict&amp;rsquo;, &amp;lsquo;func_doc&amp;rsquo;, &amp;lsquo;func_globals&amp;rsquo;, &amp;lsquo;func_name&amp;rsquo;。在funcobject.c中对PyFunction_Type的定义中可以看到这些属性的来源：
+static PyMemberDef func_memberlist[] = { {&amp;quot;func_closure&amp;quot;, T_OBJECT, OFF(func_closure), RESTRICTED|READONLY}, {&amp;quot;func_doc&amp;quot;, T_OBJECT, OFF(func_doc), WRITE_RESTRICTED}, {&amp;quot;__doc__&amp;quot;, T_OBJECT, OFF(func_doc), WRITE_RESTRICTED}, {&amp;quot;func_globals&amp;quot;, T_OBJECT, OFF(func_globals), RESTRICTED|READONLY}, {&amp;quot;__module__&amp;quot;, T_OBJECT, OFF(func_module), WRITE_RESTRICTED}, {NULL} /* Sentinel */ };  static PyGetSetDef func_getsetlist[] = { {&amp;quot;func_code&amp;quot;, (getter)func_get_code, (setter)func_set_code}, {&amp;quot;func_defaults&amp;quot;, (getter)func_get_defaults, (setter)func_set_defaults}, {&amp;quot;func_dict&amp;quot;, (getter)func_get_dict, (setter)func_set_dict}, {&amp;quot;__dict__&amp;quot;, (getter)func_get_dict, (setter)func_set_dict}, {&amp;quot;func_name&amp;quot;, (getter)func_get_name, (setter)func_set_name}, {&amp;quot;__name__&amp;quot;, (getter)func_get_name, (setter)func_set_name}, {NULL} /* Sentinel */ };  f.</description>
+    </item>
+    
+    <item>
+      <title>Python中inner function的binding处理</title>
+      <link>https://blog.yxwang.me/2008/10/python-inner-function-binding/</link>
+      <pubDate>Fri, 17 Oct 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2008/10/python-inner-function-binding/</guid>
+      <description>BBS上的一个帖子，问题是
+def a(): def b(): x += 1 x = 1 print &amp;quot;a: &amp;quot;, x b() print &amp;quot;b: &amp;quot;, x def c(): def d(): x[0] = [4] x = [3] print &amp;quot;c: &amp;quot;, x[0] d() print &amp;quot;d: &amp;quot;, x[0]  运行a()会报UnboundLocalError: local variable &amp;lsquo;x&amp;rsquo; referenced before assignment 但是运行c()会正确地显示3和4。
+原因在于原因在于CPython实现closure的方式和常见的functional language不同，采用了flat closures实现。
+&amp;ldquo;If a name is bound anywhere within a code block, all uses of the name within the block are treated as references to the current block.</description>
+    </item>
+    
+    <item>
+      <title>Zotero与Endnote的互相导入</title>
+      <link>https://blog.yxwang.me/2008/10/sync-between-zotero-and-endnote/</link>
+      <pubDate>Fri, 17 Oct 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2008/10/sync-between-zotero-and-endnote/</guid>
+      <description>&lt;p&gt;两者配合，更完美的知识管理方案&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://hi.baidu.com/qq303520912/blog/item/de5cba082db83e36e924889e.html&#34; target=&#34;_blank&#34;&gt;&lt;a href=&#34;http://hi.baidu.com/qq303520912/blog/item/de5cba082db83e36e924889e.html&#34;&gt;http://hi.baidu.com/qq303520912/blog/item/de5cba082db83e36e924889e.html&lt;/a&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Endnote是目前国内科研人员使用最多的文献管理软件，功能最完备，各数据库或大学图书馆等和它的兼容也是最好。它的Filter和style也最为丰富，而且可以自己创建修改。看看周围的人，大部分都是Endnote的用户。 　　Zotero作为一个新的文件管理系统，与Endnote相比还是稚嫩了些，特别对于国内数据库的支持不佳，更是限制了它的应用。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Live Code Update in Erlang</title>
+      <link>https://blog.yxwang.me/2008/10/live-code-update-in-erlang/</link>
+      <pubDate>Thu, 16 Oct 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2008/10/live-code-update-in-erlang/</guid>
+      <description>http://bc.tech.coop/blog/070713.html
+Joe Armstrong的原话 Live code upgrading is one of the things Erlang was designed for.
+一个最简单的例子
+loop(Fun, State) receive {From, {rpc, Tag, Q}} -&amp;gt; {Reply, State1} = Fun(Q, State), From ! {Tag, Reply}, loop(Fun, State1); {code_upgrade, Fun1} -&amp;gt; loop(Fun1, State) end.  使用时只要发送一个{code_update, Fun1}消息即可 在实际的项目中，live code update需要在一个进程的稳定状态中进行。好在有Erlang天生的分布式特性，结点i进行更新时其他结点可以接管这个结点的任务，直到结点i更新成功，再进行下一个结点的更新。这个形式和结点的crash处理有点类似。于是Erlang中live updating的实际难点在于 1. How to suspend the system and put it into a stable state 2. How to replicate the stable state 3. How to restart from a stable state 4.</description>
+    </item>
+    
+    <item>
+      <title>Erlang的Hello World：一个计数程序</title>
+      <link>https://blog.yxwang.me/2008/10/erlang-hello-world/</link>
+      <pubDate>Mon, 13 Oct 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2008/10/erlang-hello-world/</guid>
+      <description>acm queue 9月的杂志的主题是The Concurrency Problem，力推了Erlang这个语言，其中有篇文章简单的介绍了下这个message-oriented语言。
+查了下这个名字的读法，正确的读法应该是air-lang，这里元音a的发音和bang中的a一样。
+文章中的第一个程序就有点令人费解，主要原因在于Erlang的语法和一般的imperative language差别很大，和functional language比较类似，但是本质上也有很大的不同。
+以Java的一个计数程序为例
+// A shared counter. public class Sequence { private int nextVal = 0; // Retrieve counter and increment. public synchronized int getNext() { return nextVal++; } // Re-initialize counter to zero. public synchronized void reset() { nextVal = 0; } }  这个程序的功能不用多说了，一个同步的计数程序。它的Erlang翻译版的代码为
+-module(sequence1). -export([make_sequence/0, get_next/1, reset/1]). % Create a new shared counter. make_sequence() -&amp;gt; spawn(fun() -&amp;gt; sequence_loop(0) end). sequence_loop(N) -&amp;gt; receive {From, get_next} -&amp;gt; From !</description>
+    </item>
+    
+    <item>
+      <title>DomainU 中调用 do_console_io</title>
+      <link>https://blog.yxwang.me/2008/09/calling-do_console_io-from-domainu/</link>
+      <pubDate>Thu, 25 Sep 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2008/09/calling-do_console_io-from-domainu/</guid>
+      <description>The Definitive Guide to Xen Hypervisor 第二章的 Exercise，通过调用 hypercall page 中的 console_io 项输出Hello World。
+void start_kernel(start_info_t * start_info) { HYPERVISOR_console_io(CONSOLEIO_write,12,&amp;quot;Hello Worldn&amp;quot;); while(1); }  但是默认选项编译和启动的Xen是不会保留DomainU中输出的信息。参考 drivers/char/console.c，可以看到主要有两个选项控制了 DomainU 的 do_console_io 输出：
+#ifndef VERBOSE /* Only domain 0 may access the emergency console. */ if ( current-&amp;gt;domain-&amp;gt;domain_id != 0 ) return -EPERM; #endif  if ( opt_console_to_ring ) { for ( kptr = kbuf; *kptr != &#39;&#39;; kptr++ ) putchar_console_ring(*kptr); send_guest_global_virq(dom0, VIRQ_CON_RING); }  在编译 Xen 的时候开启 debug 选项即可置上 VERBOSE，而 opt_console_to_ring 则是一个启动选项，在 grub 的启动选项中增加 loglvl=all guest_loglvl=all console_to_ring 即可。</description>
+    </item>
+    
+    <item>
+      <title>第一个 testkernel 在 Xen 中的载入</title>
+      <link>https://blog.yxwang.me/2008/09/first-test-kernel-in-xen/</link>
+      <pubDate>Thu, 18 Sep 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2008/09/first-test-kernel-in-xen/</guid>
+      <description>The Definitive Guide to Xen Hypervisor 中第二章的例子，make 成功后运行 xen create domain_config，报错
+Error: (2, &#39;Invalid kernel&#39;, &#39;xc_dom_compat_check: guest type xen-3.0-x86_32 not supported by xen kernel, sorryn&#39;)  Google 之后发现是虚拟机类型设置的问题，运行 xm info 可以看到
+xen_caps : xen-3.0-x86_32p  末尾的 p 表示 Xen 内核开启了 PAE 模式，所以载入的 kernel 也必须开启 PAE，在bootstrap.x86_32.S 中加入 PAE=yes 选项即可。</description>
+    </item>
+    
+    <item>
+      <title>带环链表求环的起点</title>
+      <link>https://blog.yxwang.me/2008/09/find-head-in-circular-linked-list/</link>
+      <pubDate>Mon, 08 Sep 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2008/09/find-head-in-circular-linked-list/</guid>
+      <description>很经典的问题了，求环的长度可以用两个步长分别为1和2的指针遍历链表，直到两者相遇。相遇后把其中指针重新设定为起始点，让两个指针以步长1再走一遍链表，相遇点就是环的起始点。
+证明也很简单，注意第一次相遇时
+慢指针走过的路程S1 = 非环部分长度 + 弧A长
+快指针走过的路程S2 = 非环部分长度 + n * 环长 + 弧A长
+S1 * 2 = S2，可得非环部分长度 = n * 环长 - 弧A长
+指针A回到起始点后，走过一个非环部分长度，指针B走过了相等的长度，也就是n * 环长 - 弧A长，正好回到环的开头。</description>
+    </item>
+    
+    <item>
+      <title>OSLab 之中断处理</title>
+      <link>https://blog.yxwang.me/2008/09/oslab-interrupt-handling/</link>
+      <pubDate>Mon, 01 Sep 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2008/09/oslab-interrupt-handling/</guid>
+      <description>1. 准备工作 在开始分析Support Code之前，先配置下我们的Source Insight，使它能够支持.s文件的搜索。
+在Options-&amp;gt;Document Options-&amp;gt;Document Types中选择x86 Asm Source File，在File fileter中增加一个.s，变成.asm;.inc;.s 然后在Project-&amp;gt;Add and Remove Project Files中重新将整个oslab的目录加入，这样以后进行文本搜索时.s文件也不会漏掉了。
+2. Source Insight使用 接下来简单分析下内核启动的过程，在浏览代码的过程中可以迅速的掌握Source Insight的使用技巧。
+lib/multiboot /multiboot.s完成了初始化工作，可以看到其中一句call EXT(multiboot_main)调用了C函数multiboot_main，使用ctrl+/搜索包含multiboot_main的所有文件，最终base_multiboot_main.c中找到了它的定义。依次进行cpu、内存的初 始化，然后开启中断，跳转到kernel_main函数，也是Lab1中所要改写的函数之一。另外 在这里可以通过ctrl+单击或者ctrl+=跳转到相应的函数定义处，很方便。
+3. irq处理初始化工作 来看下Lab 1的重点之一，irq的处理。跟踪multiboot_main-&amp;gt;base_cpu_setup-&amp;gt;base_cp u_init-&amp;gt;base_irq_init，可以看到这行代码
+gate_init(base_idt, base_irq_inittab, KERNEL_CS);  继续使用ctrl+/找到base_irq_inittab的藏身之处：base_irq_inittab.s
+4. base_irq_inittab.s 这个汇编文件做了不少重复性工作，方便我们在c语言级别实现各种handler。
+GATE_INITTAB_BEGIN(base_irq_inittab) /* irq处理函数表的起始，还记得jump table 吗？ */ MASTER(0, 0) /* irq0 对应的函数 */  来看看这个MASTER(0, 0)宏展开后是什么样子：
+#define MASTER(irq, num) GATE_ENTRY(BASE_IRQ_MASTER_BASE + (num), 0f, ACC_PL_K|ACC_INTR_GATE) ; P2ALIGN(TEXT_ALIGN) ; 0: ; pushl $(irq) /* error code = irq vector */ ; pushl $BASE_IRQ_MASTER_BASE + (num) /* trap number */ ; pusha /* save general registers */ ; movl $(irq),%ecx /* irq vector number */ ; movb $1 &amp;lt;&amp;lt; num,%dl /* pic mask for this irq */ ; jmp master_ints  依次push irq号，trap号（0x20+irq号），通用寄存器（eax ecx等）入栈，把irq号保 存到ecx寄存器，然后跳转到master_ints，master_ints是所有master interrupts公用 的代码。</description>
+    </item>
+    
+    <item>
+      <title>OS Lab 5 Debugging Notes</title>
+      <link>https://blog.yxwang.me/2008/08/os-lab5-debug-notes/</link>
+      <pubDate>Sun, 31 Aug 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2008/08/os-lab5-debug-notes/</guid>
+      <description>还算顺利，不过这个lab蛮无聊的，等有空了把syscall改成类似linux的做法，单一中断号+寄存器选择syscall。
+ 最花时间的一个bug是ls返回值没有改成应用程序数，结果一开始一直以为是brk系统调用没写好，最后才发现问题出在这么小的地方。
+ brk的逻辑还不是很清楚，尽管通过了简单的测试，但是debug输出的信息显示brk增长的很快，经常是一个页一个页涨的，看来还得查下brk的具体行为。
+ 写了个比MAGIC_BREAK好用一点的宏，因为用户态的程序都是按二进制读入的，Simics无法得到函数信息（函数名、当前行数等），利用C99的宏写了个新的INFO_BREAK
+  #define INFO_BREAK \ do { \ lprintf_kern(&amp;quot;break in %s:%d&amp;quot;, __FUNCTION__, __LINE__); \ MAGIC_BREAK; \ } while (0) \  </description>
+    </item>
+    
+    <item>
+      <title>关于smalloc函数与malloc函数的区别</title>
+      <link>https://blog.yxwang.me/2008/08/smalloc-vs-malloc/</link>
+      <pubDate>Sun, 24 Aug 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2008/08/smalloc-vs-malloc/</guid>
+      <description>s前缀的malloc函数（包括smalloc、smemalign等）不记录分配块的大小，比较节省空间，但是要求用户在用sfree释放内存的时候指定被释放的内存块大小。
+malloc则和libc中的同名函数很相似。
+整个分配信息（包括哪些块已被使用）都记录在malloc_lmm这个全局变量中，内存被分为若干个region，每个region中有若干个nodes，这些信息可以通过lmm_dump查看（需要include ）。
+smemalign很适合分配需要页对齐的内存块，因为如果使用memalign分配的话，每个页面就需要多用8字节的空间来记录当前块的大小了（保存在每个内存块的前面），会产生大量内存碎片。</description>
+    </item>
+    
+    <item>
+      <title>OS Lab 4 Debugging Notes</title>
+      <link>https://blog.yxwang.me/2008/08/bugs-related-to-my-fork/</link>
+      <pubDate>Fri, 22 Aug 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2008/08/bugs-related-to-my-fork/</guid>
+      <description> 系统调用 fork() 用Simics跟踪一条条汇编分析页表映射、寄存器值还真是体力活啊。。
+ 实现 Copy On Write 时，如果某一个用户态页面有多个进程共享，其中一个进程修改该页面时需要创建一个新的页面。一开始偶忘了把原来页面的内容复制到新的页面了 =_= 另外由于新的页面要代替老的页面，或者说它们的物理地址不同，但虚拟地址相同，我的方法是在内核态开辟一个大小为一个页面的空间作为中转。
+ do_fork函数中，子进程复制父进程的页表的同时会把父进程页表项置为不可写，注意最后要flush tlb。因为一开始没有flush tlb，导致最后用户态fork返回以后读取的信息来自于tlb，直接改写了共享页面中fork的返回地址，导致切换到子进程时fork的返回地址丢失。这个bug让我郁闷了两三个小时。。
+ 使用两次fork时，第二次fork返回的pid会被改掉。查了下发现为用户空间分配物理页面的代码里居然在分配好以后没有把对应的struct置为已使用，结果导致第二个子进程COW创建新页面时得到了原来的父进程页面，改写了父进程页面内容。
+  系统调用 exec()  清空页表的用户空间映射的函数一开始写得yts，bug到处都是，比如free的时候没使用指向内存块首地址的指针，记录内存地址的变量没有累加。 exec传递给内核态的两个参数必须先在内核态保存一个副本，否则清空用户态页表后就无法得到这两个参数信息了。 分配给用户态的页面必须先清零，一方面考虑到安全性，另一方面不清零会隐藏一些潜在的bug。一开始我没有在内核执行exec的时候完整的复制所有的参数，而是直接指向了原进程的内存空间，由于清空页表后再次申请新页表时得到了原来的页面，结果正好原来那个保存参数的页面和新进程的该页面重合了 =_= 于是浪费了不少时间在这个bug上  </description>
+    </item>
+    
+    <item>
+      <title>Flux OSKit 中 trap_state 的存放位置</title>
+      <link>https://blog.yxwang.me/2008/08/trap_state-in-flux-oskit/</link>
+      <pubDate>Wed, 20 Aug 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2008/08/trap_state-in-flux-oskit/</guid>
+      <description>写fork函数的时候发现实际传给trap handler的ts地址和用(struct trap_state *) (KSTACK_TOP(old))) - 1
+计算出来的结果不一样，后者比前者小0x10。另外ts的实际地址加上ts的大小(92个字节)后就超出了内核栈的范围。
+/* * This structure corresponds to the state of user registers * as saved upon kernel trap/interrupt entry. * As always, it is only a default implementation; * a well-optimized kernel will probably want to override it * with something that allows better optimization. */ struct trap_state { /* Saved segment registers */ unsigned int	gs; unsigned int	fs; unsigned int	es; unsigned int	ds; /* PUSHA register state frame */ unsigned int	edi; unsigned int	esi; unsigned int	ebp; unsigned int	cr2;	/* we save cr2 over esp for page faults */ unsigned int	ebx; unsigned int	edx; unsigned int	ecx; unsigned int	eax; /* Processor trap number, 0-31.</description>
+    </item>
+    
+    <item>
+      <title>汇编文件中导出函数符号</title>
+      <link>https://blog.yxwang.me/2008/08/export-symbols-in-asm/</link>
+      <pubDate>Wed, 20 Aug 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2008/08/export-symbols-in-asm/</guid>
+      <description>Linux 2.4.18的linux/linkage.h文件定义了若干相关的宏
+#define SYMBOL_NAME(X) X #ifdef __STDC__ #define SYMBOL_NAME_LABEL(X) X##: #else #define SYMBOL_NAME_LABEL(X) X/**/: #endif #define __ALIGN .align 16,0x90 #define __ALIGN_STR &amp;quot;.align 16,0x90&amp;quot; #define ALIGN __ALIGN #define ALIGN_STR __ALIGN_STR #define ENTRY(name) .globl SYMBOL_NAME(name); ALIGN; SYMBOL_NAME_LABEL(name)  用ENTRY(name)就能定义函数了。后来发现Flux OSKit中本来就提供了类似功能的宏，定义在inc/asm.h中。
+使用的时候需要再写一个c语言的wrapper function（至少2.4.18里面是这么做的）
+asmlinkage void ret_from_fork(void) __asm__(&amp;quot;ret_from_fork&amp;quot;);  </description>
+    </item>
+    
+    <item>
+      <title>Usenix 08 - LeakSurvivor</title>
+      <link>https://blog.yxwang.me/2008/07/leaksurvivor/</link>
+      <pubDate>Sat, 19 Jul 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2008/07/leaksurvivor/</guid>
+      <description>Paper: LeakSurvivor: Towards Safely Tolerating Memory Leaks for Garbage-Collected Languages
+http://www.usenix.org/events/usenix08/tech/tang.html
+Yan Tang, Qi Gao, and Feng Qin, The Ohio State University
+三位作者好像都是中国人
+这篇paper针对支持垃圾收集的语言中内存泄露问题，提出了一种比较保守的“换出”策略，即把可疑的内存泄露的对象（这些对象通常都是长时间没有被访问的）从内存移动到硬盘上暂时保存，减小内存的压力；如果这些对象后来被再次访问（这种可能性很小），就把它们从硬盘上移回内存。</description>
+    </item>
+    
+    <item>
+      <title>Singleton 模式与双检测锁定(DCL)</title>
+      <link>https://blog.yxwang.me/2008/07/singleton-pattern-and-double-checked-lock/</link>
+      <pubDate>Fri, 04 Jul 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2008/07/singleton-pattern-and-double-checked-lock/</guid>
+      <description>看 OOP 教材时，书里提到了一个双检测锁定（Double-Checked Lock, DCL）的问题，但是没有更多介绍，只是说这是一个和底层内存机制有关的漏洞。查阅了下相关资料，对这个问题大致有了点了解。
+从头开始说吧。
+在多线程的情况下Singleton模式会遇到不少问题，一个简单的例子
+class Singleton { private static Singleton instance = null; public static Singleton instance() { if (instance == null) { instance = new Singleton(); } return instance; } }  假设这样一个场景，有两个线程调用 Singleton.instance()，首先线程一判断 instance 是否等于 null，判断完后一瞬间虚拟机把线程二调度为运行线程，线程二再次判断 instance 是否为 null，然后创建一个Singleton 实例，线程二的时间片用完后，线程一被唤醒，接下来它依然会创建一个新的 Singleton 实例，导致两次调用范围的对象不同。
+最简单的方法自然是在类被载入时就初始化这个对象：
+private static Singleton instance = new Singleton();  JLS (Java Language Specification) 中规定了一个类只会被初始化一次，所以这样做肯定是没问题的。
+但是如果要实现延迟初始化（Lazy initialization），比如这个实例初始化时的参数要在运行期才能确定，应该怎么做呢？
+依然有最简单的方法：使用 synchronized 关键字修饰初始化方法：
+public synchronized static Singleton instance() { if (instance == null) { instance = new Singleton(); } return instance; }  然而引入 synchronized 关键字后，产生了一个性能问题：多个线程同时访问这个方法时，会因为同步原语而导致每次只有一个线程执行这段代码，影响程序性能。而事实上初始化完毕后只需要简单的返回 instance 的引用就行了。</description>
+    </item>
+    
+    <item>
+      <title>ICS Lab 8 - 实现一个简单的代理服务器</title>
+      <link>https://blog.yxwang.me/2008/06/ics-lab-8-a-simple-proxy/</link>
+      <pubDate>Mon, 23 Jun 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2008/06/ics-lab-8-a-simple-proxy/</guid>
+      <description>折腾了一下午加晚上，看了一堆包后总算把HTTPS协议搞定了，趁热写点心得。
+这个Lab很强大，把11 12 13三章的内容全串起来了。
+HTTP部分很简单，读个请求头把主机分析出来（有现成的函数），然后把客户端的所有请求传给Web服务器，再把服务器的所有反馈信息传给客户端就行了。另外注意传信息的时候不要使用Rio_readlineb之类的函数，而要用Rio_readnb，否则传图像时会碰到问题。
+另外把版本统一成HTTP 1.0能明显的提高代理服务器的速度，具体原因还不清楚，明天再问问。
+如果要把这个代理服务器写得健壮一点，要注意各种异常的处理，比如通常浏览器都能发送正确的报头，但是如果有人通过telnet发送了错误的报头也要能够正确的释放内存再结束线程。
+然后是线程，这个问题也不大，使用信号量实现互斥锁，另外在即时free资源就好。
+最后就是HTTPS协议的处理了，由于没正确理解文档的意思，在这上面花了很多时间，不过倒也接触了不少新东西。
+首先是用gdb调试多线程程序，使用info threads查看当前所有线程，然后thread #切换到该线程就能查看那个线程的相关信息了。
+然后来说下HTTPS协议的处理。一开始我有个错误的概念，就是代理服务器的责任是把所有客户端的信息转发到服务器端，把所有服务器端的信息转发到客户端，或者说在浏览器的眼中代理服务器和普通的Web服务器没有区别。其实并非如此，在我用OmniPeek截包看了半天后才意识到自己错了 =_=
+浏览器不通过代理进行HTTPS连接时，只发送加密后的数据；而通过代理服务器时，先告诉代理服务器相关信息，然后再发送密文。另外，HTTPS的明码报头一般不会像文档中那样只有一行，代理服务器要记得所有的明文都读进来（但不转发给Web服务器），然后回复HTTP/1.0 200 Connection established，最后再负责密文的转发。
+HTTPS的数据转发也和HTTP不一样，它需要客户端和服务器端多次的双向数据传输。而默认的read方法在没有信息读取和其他中断发生的时候是会block的。对于这个问题我的解决方法是结合I/O Multiplexing和Non-blocking I/O（搜资料的时候看到过这样处理的效率也比较高，见http://www.kegel.com/c10k.html）。用fcntl设置两个file descriptor的模式为O_NONBLOCK，然后再用select/poll实现multiplexing即可。不知道还有没有更好的方法。
+另外测试HTTPS时建议使用https://mail.google.com，文档中的两个网页貌似firefox都打不开的。</description>
+    </item>
+    
+    <item>
+      <title>ICS Lab 7 数据结构相关</title>
+      <link>https://blog.yxwang.me/2008/06/ics-lab-7-data-structure-related/</link>
+      <pubDate>Mon, 16 Jun 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2008/06/ics-lab-7-data-structure-related/</guid>
+      <description>这个Lab是要自己实现一个malloc函数，要求内存利用率和速度尽可能高。 用红黑树的版本最后得分是97/100，没有针对测试数据作任何优化，据说可以改到100/100，不过95分以上就满分了我也懒得再改了。
+这个Lab的重点在可用内存的管理上。关于数据的组织，似乎有两种比较常见的形式（我不知道的就不算进来了，下同 =_=）。一是slab/buddy系统，就是书上讲的segregated list；还有一种用二叉树实现，这个lab我用了二叉树。
+第一种方法对提高性能很有帮助，但是利用率方面就比较有限了。而这个lab似乎提高性能比较容易，难点在于利用率的提高。
+二叉树方面，也有两种：平衡二叉搜索树（AVL树、红黑树等），字典树（Trie, 似乎也叫Radix tree）
+这些数据结构都比较经典，很多书上都有现成的代码，网上也有一堆，拿来改一下就行了（注意算法导论上的红黑树的left-rotate是有bug的，见勘误表）。
+另外还有个优化，树的结点要保存很多数据，比如父结点、左右结点、前后结点（考虑到同一大小的块的存在），红黑树中还需要保存一个颜色值（当然这个值可以保存在header中）。如果所有的空结点都以这种形式保存的话，势必对利用率影响很大。
+所以建议另外维护一个block size相对较小的（比如小于128字节）的list，把小于这个值的空闲块都放到那个list里。
+差不多就这样了，思路还是蛮简单的，就是实现起来很恶心。
+另外做的时候还可以考虑考虑多线程的情况下这个malloc的表现会如何。
+感觉下学期的几个lab，Lab 4 5 7都和优化程序性能有关，颗粒度不断提高，从最底层的汇编指令，到语言级别的unrolling、splitting，直到现在和具体语言无关的算法层次，对写高效代码的帮助蛮大的。</description>
+    </item>
+    
+    <item>
+      <title>EuroSys 08 - Solitude: App-Level Isolation and Recovery</title>
+      <link>https://blog.yxwang.me/2008/05/application-level-isolation-and-recovery-with-solitude/</link>
+      <pubDate>Wed, 28 May 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2008/05/application-level-isolation-and-recovery-with-solitude/</guid>
+      <description>Application-Level Isolation and Recovery with Solitude
+Shvetank Jain, Fareha Shafique, Vladan Djeric, Ashvin Goel
+Department of Electrical and Computer Engineering, University of Toronto
+http://portal.acm.org/citation.cfm?id=1357010.1352603
+引入一个新的文件系统层(Isolation File System)将安全可信的基础文件系统和不可信的环境（如网上下载的文件等）隔离开来，并对不可信的环境中做出的改动加以记录，一旦发现问题就能即使恢复。</description>
+    </item>
+    
+    <item>
+      <title>ICS Lab 6</title>
+      <link>https://blog.yxwang.me/2008/05/ics-lab-6/</link>
+      <pubDate>Tue, 27 May 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2008/05/ics-lab-6/</guid>
+      <description>重定向：
+主要用到open, close, read和write这几个函数，关于它们的使用方法可以使用 man 2 &amp;lt;函数名&amp;gt; 查看。
+这里简单介绍下： Linux内核为每个进程维护了一张已打开的文件的表格，用File Descriptor（整型，以下简写成fd）可以访问到这些文件。所以很容易理解tsh.c中的函数listjobs为什么需要一个output_fd的整型参数，注意它的后面有这么一行： if (writer(output_fd, buf, strlen(buf)) &amp;lt; 0) …
+这一行就把前面构造好的buf字符串（包括当前进程的信息）输出到这个output_fd对应的文件中了。
+每个进程的值为0, 1, 2的fd都指向相同的文件，0对应标准输入（通常是键盘输入），1对应标准输出（通常为屏幕），2对应标准错误输出。
+可以看到在main方法的开头，有这么一句 dup2(1, 2);
+dup2的作用是把参数二指向的文件改成和参数一一样（如果之前打开了文件，则先关闭），这句话的作用就是把原来要输出到标准错误端(stderr)的内容 输出到标准输出端(stdout)，便于调试。
+理解了fd和dup2的作用后，重定向也就很容易实现了，一种最简单的方法就是先用open函数打开输出文件并得到对应的fd，然后用dup2把标准输出/输入端的指向改成文件的fd。
+另外注意用open创建输出重定向的文件的时候要加上S_IRUSR和S_IWUSR选项，否则创建后的文件没有读写权限。（不过好像这个lab的测试数据比较厚道，会事先touch一下，不加这两个选项应该也能通过测试）
+一些文档中未定义的行为： argv 假如我输入的命令是/bin/ls -l &amp;gt; ls.txt，对应的argv应该包括哪些内容呢？ 一般的情况argv的内容应该是[&amp;lsquo;/bin/ls&amp;rsquo;, &amp;lsquo;-l&amp;rsquo;]，后面的重定向符是不包括的不过在这个lab中似乎没有这个限制，不去掉重定向和管道部分应该还是能通过测试的。
+Job ID的分配 如果现在1, 2, 4号子任务在后台运行，再新增一个进程的话应该给它分配多少呢？ 这个问题不需要处理，只要所有的jobs队列操作统一使用tsh.c中给出的几个函数就行。
+其他： 关于信号的转发、后台前台的转换等内容，文档和书上都说得很清楚了，这里不再赘述。
+P.S. 多进程程序的调试大家之前应该接触的比较少，其实这个lab大致的代码不难写，难点在于细节上的debug比较困难，调试过程对第八章的理解很有帮助。</description>
+    </item>
+    
+    <item>
+      <title>SubVirt: Implementing malware with virtual machines</title>
+      <link>https://blog.yxwang.me/2008/05/subvirt-implementing-malware-with-virtual-machines/</link>
+      <pubDate>Mon, 05 May 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2008/05/subvirt-implementing-malware-with-virtual-machines/</guid>
+      <description>http://ieeexplore.ieee.org/xpl/freeabs_all.jsp?arnumber=1624022&amp;fromcon Proceedings of the 2006 IEEE Symposium on Security and Privacy 作者来自密西根大学和微软研究部门 一个利用虚拟机进行攻击的rootkit。 1. Introduction 传统的攻击程序通常和安全工具（杀毒软件等）在同一个级别上（kernel mode），两者间没有绝对优势可言，因此有很大的限制，比如强大的功能和良好的隐蔽性不能兼得。而虚拟机的出现则可以解决这个问题，通过把恶意程序放在虚拟机上，可以做到对目标机(guest os)的完全监控，同时目标机完全不会知情。这种程序称为VMBR(virtual-machine based rootkit)。 2. Virtual machines VMM(virtual-machine monitor)这里就不多介绍了。VMM上跑着一些其他服务进程，主要用于操作系统的debug，运行中的虚拟机的迁移等功能。这些服务的主要面临的一个问题是理解对应的guest os状态和事件。因为在VMM和虚拟机处在不同的抽象级别，前者只能看到磁盘块(disk blocks)，网络包(network packets)，以及内存；而后者则把这些东西抽象为例如文件、TCP连接、变量等概念，这种差异称为语义差异(semantic gap)。 于是有了Virutal-machine introspection(VMI)，它包含了一系列让VMM上的服务了解并修改guest os的技术。 3. Virtual-machine based rootkit design and implementation 3.1 Installation VMBR的安装和一般病毒程序类似，通过欺骗有管理员权限的用户执行安装程序实现。 当目标机是WinXP时，VMBR被安装在第一个活动分区的开始部分；目标机是Linux时，安装程序会禁止swap分区，把VMBR放在swap分区上（够狠的。。。） 修改系统引导信息的时候还有一个细节，直接修改容易被安全检查程序发现。WinXP上的一种解决方案就是尽可能的在所有程序退出之后再修改（通过注册一个LastChanceShutdownNotification事件处理器），并且使用底层的磁盘驱动进行VMBR启动代码的复制，这样可以绕过文件系统层，而大多数反病毒软件都跑在文件系统层上。Linux上，通过修改关机脚本来保证安装程序在其他程序退出后执行。 安装完成后，目标系统的内容就被保存到了一个虚拟磁盘上。重启后就由VMM控制最底层，它把目标机的对虚拟磁盘的访问转换为对应的物理磁盘的访问。 3.2 Malicious services VMBR使用一个独立的系统执行各种攻击程序，这样目标机就无法察觉到了。对目标系统的攻击主要分三种： 一种是不需要和目标系统进行交互的恶意服务，例如垃圾电子邮件的发送(spam relays)，DDoS攻击，网络钓鱼(phishing web servers)。 第二种恶意服务需要监视目标系统的数据和事件。通过修改VMM的设备模拟软件就能记录下所有硬件级的数据（比如按键信息、网络包等），而这个过程不需要修改guest os，所以目标系统完全不知情。 VMBR还可以用VMI帮助理解目标系统软件级的抽象信息，VMI可以中断目标系统的任意指令，并重新组织数据。例如一个目标应用程序将要使用一个加密的socket发送信息，攻击者可以截获所有的SSL write函数调用并且在明文被加密前得到它。同样这个过程对目标系统完全透明，因为攻击程序跑在它的外层，或者说是“上帝”层 ;-) 第三种攻击是恶意修改目标系统的执行。例如篡改网络通讯，删除email，改变目标应用程序的行为。 3.3 Example malicious services 下面介绍这篇paper提到的4个恶意程序 最简单的，开了个thttpd web服务器进行网络钓鱼，任何发送到8080端口的TCP请求都会被这个服务器截获。 然后是一个按键记录程序，号称只用了60行代码就搞定了这个模块，然后写了一个254行的带图形界面的程序来分析日志并显示。 一个扫描目标机文件系统的程序，这是一个24小时运行的perl脚本，会把诸如/etc/shadow, user_home/.ssh/id_dsa之类的机密信息保存下来。 最后是防止VMM被目标机侦测到的一个服务。paper中提到了一种叫做redpill的虚拟机侦测手段，通过使用sidt指令。这个指令会读出处理器的中断列表(interrupt descritor table)，在VMM上跑的系统和普通的操作系统读出来的结果不一样，当这个指令在内核态被执行时，VMM会模拟这个指令的执行；但是用户态却不会被截获（考虑到性能因素）。所以redpill通过用户态执行sidt来判断当前系统是否运行在虚拟机上。这篇paper提到的针对redpill的解决方案是在每个可执行文件的sidt指令前设置一个断点，截获这个指令后就模拟这个指令，以此绕过redpill检测。但是这种方法不适合于在程序运行期动态生成二进制的sidt指令的程序（想到我的lab4了，呵呵）。道高一丈魔高一尺（原文是Continuing the arms race，军备战争），通过二进制转换(binary translation)，动态生成的sidt同样可以被截获，但是这种方法的overhead会很大。 3.</description>
+    </item>
+    
+    <item>
+      <title>Sorting Networks</title>
+      <link>https://blog.yxwang.me/2008/04/sorting-networks/</link>
+      <pubDate>Wed, 23 Apr 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2008/04/sorting-networks/</guid>
+      <description>算法导论第27章，在并行处理的条件下效率很高的排序算法。
+介绍 如下面左图所示，每条横线(wire)代表一个待 比较的数值，竖线(comparator)表示连接的两条横线要做一次比较，并将较小的值放在输出横线的上方，较大的放在下面。排序过程就是从左往右依次 调用各个comparator（在同一位置上的comparator可以同时做） 有图表示了四个数字3, 2, 4, 1在经过这个Sorting Network时的行为。（由于背景为深色，建议点击图片查看）
+
+下图是一个冒泡排序的Sorting Network表示
+
+可以看到所有的比较都没有并行，效率很低。接下来先介绍一个0-1原理，然后利用它来构造一些比较高效的网络。
+性质 首先是引理27.1： 对 于输入数据A = ，如果某个比较网络(comparison network)的输出是B = ，那么对于任一单调递增的函数f，这个网络能把输入数据f(A) = 变为f(B) = 这个引理的证明很简单，关键在于min(f(x), f(y)) = f(min(x,y))
+接下来就是0-1原理： 一个有n个输入数据的比较网络，如果它能将仅由0和1组成的序列正确的排序（这种输入共有2^n种可能），那么它也能正确的将任意数字组成的序列排序。 证明也不难，利用前面的引理反正即可得到这个定理。
+双调排序 接 下来先考虑双调序列(bitonic sequence)这种特殊情况，所谓双调序列就是先单调递增，后单调递减，或者可以通过环形旋转变化出上述特性的序列，比如和都满足条件（对于后面一种序列，只要把最后的3, 5移到序列开头就行了）。 双调排序(bitonic sorter)有若干步骤，其中有一步叫做half-cleaner，每一次half-cleaner讲数据放到一个深度为1的排序网络中，第i行和第i+n/2行比较(i=1,2,..,n/2)
+
+引理27.3： 做完上述的half-cleaner后，输出的上半部分和下半部分都保持双调的特点，而且上半部分的每个元素都不大于下半部分的任一元素。 分四种情况讨论即可。
+通过递归调用half-cleaner即可完成双调队列的排序。要对n个元素进行双调排序Bitonic-Sorter(n)，首先调用Half-Cleaner(n)，将元素分成上下两部分，接着依次对这两部分执行Bitonic-Sorter(n/2)即可。 调用的深度D(n) = lgn
+归并网络 书上只给出了对0-1序列排序的算法，任意数字的排序算法留作了习题。 合并网络基于这样一个事实：对于两个已经排序了的序列X = 00000111，Y = 00001111，将Y倒过来后和X拼接的结果是一个双调序列。对这个双调序列再做一次Bitonic-Sorter就能有序。 通 过修改Bitonic-Sorter方法的第一步就能实现Merger，关键在于隐式的反转输入的下半部分。Half-Cleaner方法中比较了第i和 第i+n/2两个元素，如果下半部分反转的话就相当于比较第i和第n-i+1个元素。直接继续执行Bitonic-Sorter方法即可，如下图所示。
+
+排序网络 我们已经有了构造一个排序网络所需的工具，接下来介绍一种利用归并网络进行排序的并行版本。 大致方法和传统的归并排序类似，从最小的颗粒开始二分增长，直到整个序列有序。 这样，一共需要lg(n)次Merger，每次归并中需要做lg(i)次Sorter，排序的总深度 D(n) = 0 (n = 1) D(n/2) + lg(n) (n = 2^k且 k&amp;gt;=1) 由Master Method可推出D(n) = big-omega(lg^2(n)) 也就是说理想的并行环境中，n个数可以在O(lg^2(n))时间内完成排序。</description>
+    </item>
+    
+    <item>
+      <title>ASPLOS 08 - Streamware</title>
+      <link>https://blog.yxwang.me/2008/04/streamware/</link>
+      <pubDate>Wed, 16 Apr 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2008/04/streamware/</guid>
+      <description>Streamware: Programming General-Purpose Multicore Processors Using Streams
+Jayanth Gummaraju, Joel Coburn, Yoshio Turner, Mendel Rosenblum
+ASPLOS 08上的文章 http://portal.acm.org/citation.cfm?id=1353534.1346319
+提出了一个通用的多核平台，支持Cell CUDA Brook等多种体系结构，用户只需使用这个平台统一提供的API。
+另外还加入了cache hierarchy的管理，能很好的安排各级cache保存的内容，以至于某个测试结果中单核的情况下用了Streamware的程序比不用的程序跑得还快。</description>
+    </item>
+    
+    <item>
+      <title>《编程之美》一个二进制趣题的讨论</title>
+      <link>https://blog.yxwang.me/2008/04/count-1-bits-in-an-int32/</link>
+      <pubDate>Tue, 15 Apr 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2008/04/count-1-bits-in-an-int32/</guid>
+      <description>问题很简单，给定一个 8 位整型，要求写程序计算这个数的二进制表示中 1 的个数，要求算法的执行效率尽可能的高。
+先来看看样章上给出的几个算法：
+解法一，每次除二，看是否为奇数，是的话就累计加一，最后这个结果就是二进制表示中1的个数。
+解法二，同样用到一个循环，只是里面的操作用位移操作简化了。
+int Count(int v) { int num = 0; while (v) { num += v &amp;amp; 0x01; v &amp;gt;&amp;gt;= 1; } return num; }  解法三，用到一个巧妙的与操作，v &amp;amp; (v - 1) 每次能消去二进制表示中最后一位 1，利用这个技巧可以减少一定的循环次数。
+解法四，查表法，因为 8 位整型的范围是 0 - 255，可以直接把结果保存在一张表中，然后查表就行。书上强调这个算法的复杂度为 O(1)。
+int countTable[256] = { 0, 1, 1, 2, 1, ..., 7, 7, 8 }; int Count(int v) { return countTable[v]; }  好了，这就是样章上给出的四种方案，下面谈谈我的看法。
+首先是对算法的衡量上，复杂度真的是唯一的标准吗？尤其对于这种数据规模给定，而且很小的情况下，复杂度其实是个比较次要的因素。</description>
+    </item>
+    
+    <item>
+      <title>ICS Lab4 常用优化方法</title>
+      <link>https://blog.yxwang.me/2008/03/ics-lab-4-optimizations/</link>
+      <pubDate>Sun, 23 Mar 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2008/03/ics-lab-4-optimizations/</guid>
+      <description>几个基本的优化：
+ 用iaddl代替irmovl, opl，效果显著 删去不必要的andl，效果显著 改变判断分支（大多数是正数），效果显著 实现Load Forwarding，效果显著 函数结束时使用自己的epilogue，效果一般  Unrolling相关：
+ 通过合并相邻两个循环，把mrmovl和rmmovl拆开，效果显著 32, 16, 8, 4, 1分段处理，效果显著，我用这个方法做到过7.2左右  Jump Table
+由Duff&amp;rsquo;s Device引申出来的想法，代替了我原来那个32-16-8-4-1程序。 很好用的一个技巧，配合unrolling就不需要不断比较i和len的大小了。 比如len=15的时候，只要跳转到倒数第15个复制段落，就可以挨个做下来，而不需要多余的判断。 具体的实现可以想想x86里的情况，假设几个复制段落的标签为Loop1, Loop2, &amp;hellip;
+jump: .long Loop1 .long Loop2 &amp;hellip;
+之后就只要取出jump + (len - 1) * 4处的值，然后跳到这个位置就行了。 跳的时候还有个技巧，最简单的是把这个值push到栈，然后再ret。这样的话bubble很多。
+考虑到这个模拟器里代码段是不受保护的，也就是说运行的时候可以动态修改内存中的代码，于是在跳转的地方写个jmp 0，然后运行的时候动态把这个0改掉就行。
+另外要注意用这个方法的时候得手动写几个nop，或者在改内存的语句和jmp语句之间加几个其他命令，因为y86模拟器是默认程序不会修改自己的代码的(p328 灰色背景部分)。
+用这个方法的时候还有一些细节可以优化，就不列举了。另外不知道利用自我修改这个特点能不能做出更神奇的效果呢？
+比如我还想到另一种类似的方法，让程序从头到尾运行，不跳转，而是在程序运行时动态的插入ret语句直接把程序运行流掐断。我还没试过，有兴趣的同学可以试一试。
+不知道还有没有其他的优化方法，欢迎讨论~</description>
+    </item>
+    
+    <item>
+      <title>ICS Lab4 经验</title>
+      <link>https://blog.yxwang.me/2008/03/ics-lab4/</link>
+      <pubDate>Sun, 16 Mar 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2008/03/ics-lab4/</guid>
+      <description>编译 不安装图形界面： 修改sim/Makefile，把前三行非注释部分用#注释掉，变成
+# GUIMODE ... # TKLIB ... # TKINC ...  保存后运行 make
+图形界面 安装Tcl/Tk库  Redhat 9： 可以在Redhat菜单-&amp;gt;System Settings-&amp;gt;Add/Remove Applications中添加X Software Development，根据提示载入相关镜像文件。 然后在 sim 目录下运行 make
+ Arch Linux： 有包管理机制的发行版直接用相关软件安装（比如 Arch 中 pacman -S tcl tk），注意安装好以后生成的动态链接库可能带有版本号（比如 libtcl8.5.so libtk8.5.so）
+  具体版本号通过 pacman -Ql tcl tk | grep &#39;.so&#39; 查得
+接着只要修改Makefile中的TKLIBS参数，或者用ln建个链接即可
+ Ubuntu 由于ubuntu默认没有lex词法分析工具，在编译时需要先安装flex：sudo apt-get install flex  图形界面和Arch类似 sudo apt-get install tcl8.5-dev tk8.5-dev tcl8.5 tk8.5
+然后修改 Makefile</description>
+    </item>
+    
+    <item>
+      <title>ICS Lab3 简易攻略</title>
+      <link>https://blog.yxwang.me/2007/12/ics-lab-3/</link>
+      <pubDate>Sat, 15 Dec 2007 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2007/12/ics-lab-3/</guid>
+      <description>这个 Lab 应该比上一个 Lab 简单不少， Lab 的说明文档也差不多把基本的过关要点都提到了，所以这里主要介绍一下几个相关工具的使用，帮助大家进一步熟悉 Linux 命令行 ;-) 首先从主页上下载一个压缩包，最简单的方法是直接在命令行使用 wget 工具 wget http://10.132.143.100/lab2007/buflab-handout.tar
+顺便提一下 wget 的功能很强大，除了可以在后台运行，它还支持 ftp https http 等协议，提供整个网站下载的功能（类似于 Windows 下的 WebZIP ）
+接着使用 tar 命令解压这个文件
+tar xvf buflab-handout.tar  其中， x 参数表示解压工作， v 表示显示解压所得的文件列表， f 及其后面跟着的文件 名指定了待解压文件
+这样在当前目录下就多出了三个文件： bufbomb, makecookie, sendstring
+接下来使用 makecookie 得到自己学号对应的 cookie 号，用法是 ./makecookie 学号
+这个 cookie 号在后面的几个关卡中都有可能会用到，同时 http://10.132.143.234/bufbombstatus.html 中可以通过自己的 cookie 号随时获得自己现在的过关情况。
+和上一个 Lab 一样，这里介绍一下怎么过 Level 0 。
+这个热身关和两个函数有关， test() 和 smoke() ，正常情况下 smoke 不会被任何函数调用，我们要做的就是输入一串特定的字符，使得 smoke 被调用。另外这个关卡简单之处在于 smoke 被调用后就直接退出程序，我们在破坏了栈的数据后不需要恢复原样。</description>
+    </item>
+    
+    <item>
+      <title>ICS Lab2</title>
+      <link>https://blog.yxwang.me/2007/11/ics-lab2/</link>
+      <pubDate>Tue, 20 Nov 2007 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2007/11/ics-lab2/</guid>
+      <description>这个lab主要考察gdb的使用和对汇编代码的理解。后者在平时的作业中涉及得较多，这里不再赘述，主要介绍一下gdb。其实偶对这个也不是很熟，有错误请指正。
+简单的说，gdb是一款强大的调试工具，尽管它只有文本界面（需要图形界面可以使用ddd，不过区别不大），但是功能却比eclipse等调试环境强很多。
+接下来看看怎样让它为lab2拆炸弹服务，在命令行下运行gdb bomb就能开始调试这个炸弹程序，提高警惕，恩。
+首先最重要的，就是如何阻止炸弹的引爆，gdb自然提供了一般调试工具都包括的断点功能——break命令。
+在gdb中输入help break能够看到相关的信息。
+可以看到 break 允许我们使用行号、函数名或地址设置断点。
+按ctrl+z暂时挂起当前的gdb进程，运行 objdump –d bomb | more 查看反编译后的炸弹文件，可以看到里面有这么一行（开始的那个地址每个人都不同）：
+08049719 &amp;lt;explode_bomb&amp;gt;:  这个就是万恶的引爆炸弹的函数了，运行 fg 返回 gdb 环境，在这个函数设置断点：break explode_bomb （可以使用tab键自动补齐）
+显示
+Breakpoint 1 at 0x8049707  接下来你可以喘口气，一般情况下炸弹是不会引爆的了
+下面我们来拆第一个炸弹，首先同样是设置断点，bomb.c中给出了各个关卡的函数名，第一关就是phase_1，使用break phase_1在第一关设置断点
+接下来就开始运行吧，输入run
+我们已经设置了炸弹断点，这些恐吓可以直接无视。
+输入ABC继续（输入这个是为了方便在后面的测试中找到自己的输入串地址）
+提示Breakpoint 2, 0x08048c2e in phase_1 ()，说明现在程序已经停在第一个关了
+接下来就是分析汇编代码，使用disassemble phase_1显示这个函数的汇编代码
+注意其中关键的几行：
+这个lab很厚道的一点就是函数名很明确地说明了函数的功能 ^_^
+估计这三行代码的意思就是比较两个字符串相等，不相等的话应该就会让炸弹爆炸了
+因为字符串很大，所以传递给这个比较函数的肯定是他们的地址，分别为0x80499b4和0x8(%ebp)
+我们先来看后者，使用p/x *(int*)($ebp + 8)查看字符串所在的地址
+$1 = 0x804a720 ​```` 继续使用`p/x *0x804a720`查看内存中这个地址的内容  $2 = 0x434241
+ 连续的三个数，是不是想起什么了？把这三个数分别转换为十进制，就是67 66 65，分别为 CBA 的 ASCII 码，看来这里保存了我们输入的串。 接下来 0x80499b4 里肯定保存着过关的密码 `p/x *0x80499b4`  $3 = 0x62726556</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://blog.yxwang.me/notes/open-course/deep-learning/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/notes/open-course/deep-learning/</guid>
+      <description> Deep Learning
+Course 1 Neural Networks and Deep Learning Logistic Regression as a Neural Network Notation
+ n features m training examples X \in R^(n*m) Y \in R^(1*m)  Binary Classification Logistic Regression Pooling Layer
+ Makes the representations smaller and more manageable Operates over each activation map independently  </description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://blog.yxwang.me/notes/open-course/self-driving/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/notes/open-course/self-driving/</guid>
+      <description> Canny Edges  High / low thresholds  Hough Transform  Find edges   </description>
+    </item>
+    
+    <item>
+      <title>About Me</title>
+      <link>https://blog.yxwang.me/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/about/</guid>
+      <description> 我的名字是王远轩，Zellux 是我常用的英文名。目前居住在湾区，从事无人车视觉系统的研发，平时对智能家居、星际争霸有浓厚的兴趣。
+我的简历在可以在这里下载，如果你对制作这样的简历有兴趣，可以参考它的源代码。
+链接  LinkedIn GitHub Instagram Stack Overflow Twitter  </description>
+    </item>
+    
+    <item>
+      <title>Archive page</title>
+      <link>https://blog.yxwang.me/archive/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/archive/</guid>
+      <description>Blog archive</description>
+    </item>
+    
+    <item>
+      <title>Game Theory - Stanford</title>
+      <link>https://blog.yxwang.me/notes/open-course/game-theory/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/notes/open-course/game-theory/</guid>
+      <description>课程链接：https://class.coursera.org/gametheory-2012-002/lecture/index
+Week 1: Introduction and Overview  Nash Equilibrium: 已知其他参与者的行为后，每一位参与者的行为能最大化他/她的收益。
+ Best Response：\(a_i^{*} \in BR(a_{-i}) \iff \forall a_i \in A_i, u_i(a_i^{*}, a_{-i}) \geq u_i(a_i, a_{-i})\)
+ \(a = &amp;lt;a_1, ..., a_n&amp;gt;\) 是一个 pure strategy Nash equilibrium 当且仅当 \(\forall i, a_i \in BR(a_{-i})\)，注意这里用了 \(\in\)，因为 best response 可能有多个。
+ \(s_i\) strictly dominates \(s&amp;#39;_i \iff \forall s_{-i} \in S_{-i}, u_i(s_i, s_{-i}) &amp;gt; u_i(s&amp;#39;_i, s_{-i})\)
+ \(s_i\) very weakly dominates \(s&amp;#39;_i \iff \forall s_{-i} \in S_{-i}, u_i(s_i, s_{-i}) \geq u_i(s&amp;#39;_i, s_{-i})\)</description>
+    </item>
+    
+    <item>
+      <title>Git</title>
+      <link>https://blog.yxwang.me/notes/tools/git/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/notes/tools/git/</guid>
+      <description>功能 修改之前提交的内容 http://blog.yxwang.me/2009/11/git-modify-specified-commit/
+函数 将当前分支并入其他分支 [alias] merge-to = &amp;quot;!gitmergeto() { export tmp_branch=`git branch | grep &#39;* &#39; | tr -d &#39;* &#39;` &amp;amp;&amp;amp; git checkout $1 &amp;amp;&amp;amp; git merge $tmp_branch &amp;amp;&amp;amp; git checkout $tmp_branch; unset tmp_branch; }; gitmergeto&amp;quot;  使用方法：要把当前分支合并到 develop，运行 $ git merge-to develop 即可。
+（来源：http://stackoverflow.com/a/7801982/111896）
+GitHub 选择部分 commit 发起 pull request 在目的分支基础上新开一个分支，cherry-pick 需要的 commit，从这个分支发起 pull request。</description>
+    </item>
+    
+    <item>
+      <title>Merriam-Webster&#39;s Vocabulary Builder</title>
+      <link>https://blog.yxwang.me/notes/languages/vocabulary-builder/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/notes/languages/vocabulary-builder/</guid>
+      <description> 我写了一个脚本提取了 Merriam-Webster&amp;rsquo;s Vocabulary Builder 中的生词和解释，方便导入 quizlet 等学习网站。
+提取的脚本请点击此处访问。需要先把 Kindle 版本转成 EPUB 格式。
+Quizlet 上的学习卡片集 这个列表是我根据提取的数据制作的 Quizlet 卡片，会定期更新。
+ Unit 1 Unit 2 Unit 3 Unit 4 Unit 5 Unit 6 Unit 7  </description>
+    </item>
+    
+    <item>
+      <title>Robotics Estimation and Learning</title>
+      <link>https://blog.yxwang.me/notes/open-course/robotics-estimation-and-learning/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/notes/open-course/robotics-estimation-and-learning/</guid>
+      <description>卡尔曼滤波 (Kalman Filter) 这一周的视频质量很一般，slides 做得也不仔细有不少错误。最后看了一些其他网站的文章和视频才有了比较深刻的理解，本文结尾有推荐资料。
+KF 模型  以匀速运动的动力学模型为例  状态 \(x_{t+1}=A x_t + B u_t\)，\(u_t\) 为外部影响 观测结果 \(z_t = C x_t\) \(x_t\) 和 \(z_t\) 都有测量误差 状态 \(x_{t+1}\) 仅包含位置和速度：\(x_{t+1} := \begin{bmatrix}v &amp;amp; \frac{dv}{dt}\end{bmatrix}\) 动力学模型可以通过矩阵 A 描述，\(A = \begin{bmatrix}1 &amp;amp; dt \\ 0 &amp;amp; 1 \end{bmatrix}\)   基于动力学的贝叶斯模型 \[ p(x_{t+1}|x_t) = Ap(x_t) \\ p(z_t|x_t) = Cp(x_t) \]
+加入运动和观测的误差 \[ p(x_{t+1}|x_t) = Ap(x_t)+v_m \\ p(z_t|x_t) = Cp(x_t)+v_0 \]
+假设误差基于高斯分布 \[ p(x_{t+1}|x_t) = A\mathcal{N}(x_t, P_t) + \mathcal{N}(0, \Sigma_m) \\ p(z_t|x_t) = C\mathcal{N}(x_t, P_t) + \mathcal{N}(0, \Sigma_0) \]</description>
+    </item>
+    
+    <item>
+      <title>Robotics Perception</title>
+      <link>https://blog.yxwang.me/notes/open-course/robotics-perception/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/notes/open-course/robotics-perception/</guid>
+      <description>课程链接：https://www.coursera.org/learn/robotics-perception/
+Week 1 Pinhole Model Assuming image plane is in front of the lens
+ \[ y=f\dfrac{Y}{Z} \]
+Vanishing Points   Any two parallel lines have the same vanishing point The ray from C through v point is parallel to the lines An image may have more than one vanishing point  Vanishing Lines   Any set of parallel lines on the plane define a vanishing point The union of all of these vanishing points is the horizon line (also called vanishing line) Note that different planes define different vanishing lines  Point and Line Duality  Line: \(l = x \times x&amp;#39;\) Point: \(x = l \times l&amp;#39;\) Points and lines are dual in projective space: given any formula, can switch the meanings of points and lines to get another formula  Point at Infinity Line \(l = (a, b, c)^T\) intersects at \((b, -a, 0)^T\).</description>
+    </item>
+    
+    <item>
+      <title>Word Power Made Easy</title>
+      <link>https://blog.yxwang.me/notes/languages/word-power-made-easy/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/notes/languages/word-power-made-easy/</guid>
+      <description>单词列表点此下载，用于导入背单词应用。
+Personality types Session 1  egoist egotist altruist introvert extrovert ambivert misanthrope misogynist misogamist ascetic  Session 2 ego- (I)  egoist egotist (obnoxious) egocentric (intolerable) egomaniac (dangerous and slightly mad) egoism egomaniacal  alter- (other)  altruism altruistic alternate alternative alteration altercation: n. 争吵 alter ego  Session 3 depends on how you turn  introvert: intro + verto extrovert: extro + verto ambivert: ambi + verto ambidextrous: ambi + dextrous ambidexterity: ambi + dexterity dexter: adj.</description>
+    </item>
+    
+    <item>
+      <title>《Algorithms》笔记</title>
+      <link>https://blog.yxwang.me/notes/programming/algorithms-sanjoy/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/notes/programming/algorithms-sanjoy/</guid>
+      <description>1. Algorithms with numbers 设计 Hash 函数一般要考虑两个因素，一是它的随机性，即保证数据分布均匀；二是它的一致性，即对于同一份数据每次都要获得相同的结果。
+2. Divide-and-conquer algorithms 多项式乘法 最普通的多项式乘法需要将两个多项式的不同系数一一相乘，算法复杂度是 \(O(n^2)\)。而如果采用点值表示法，即用多项式在 n + 1 个不同的点上的取值来唯一的表示这个多项式的话，计算它们的乘积只需要两个多项式在 2n + 1 个点的值就可以了（乘积的最高项次数为 2n），需要的时间是线性的。所以接下来的问题是如何在点值表示法和系数形式之间高效的转换。
+首先是求值，即给出 n 个系数和 n + 1 组不同的取值，求出这些取值下的多项式的值。将奇数次幂的项的偶数次幂的项分开，则有 \(A(x) = A_e(x^2) + xA_o(x^2)\)，这里 \(A_e\) 代表偶数次幂的项，\(A_o\) 代表奇数次幂的项。同时，考虑到 \(A(x_i)\) 和 \(A(-x_i)\) 的计算： \[ \begin{align*} A(x_i) = A_e(x_{i}^{2}) + x_iA_o(x_{i}^{2}) \\ A(-x_i) = A_e(x_{i}^{2}) - x_iA_o(x_{i}^{2}) \end{align*} \]
+把计算任务减少到了项数低一半的 \(A_e\) 和 \(A_o\)，计算量减少了一半。接着通过引入复数，可以进一步二分计算 \(A_e\) 和 \(A_o\)，从而在 \(O(log n)\) 的时间内得出结果。
+3. Decompositions of graphs 强连通分量 DFS 其实并不需要从根节点开始搜素，因为当子节点先被遍历后，接下来自然会遍历它的父节点。</description>
+    </item>
+    
+    <item>
+      <title>《Metaprogramming Ruby》笔记</title>
+      <link>https://blog.yxwang.me/notes/programming/metaprogramming-ruby/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/notes/programming/metaprogramming-ruby/</guid>
+      <description>Ruby 元编程 一、Ruby 对象模型 class MyClass; end obj1 = MyClass.new  这段代码中 obj1 和 MyClass 都是引用，唯一的区别在于前者是一个变量，后者是一个常量。
+Ruby 对象由两部分组成：实例变量和指向类的引用。
+在类中包含一个模块时，Ruby 会在继承链中插入一个匿名类，这个匿名类包含了该模块所有方法：
+class A; include Math; end A.ancestors # =&amp;gt; [A, Math, Object, Kernel, BasicObject]  正因为这种机制，puts 方法才可以在一个普通类中使用。因为 Object 包含了 Kernel 模块，所以 Kernel 模块的方法会包含在每一个普通类的继承链中，其中包括了 puts 方法，当你在其他类中调用 puts 方法输出时，其实是调用了 Kernel 的 puts 方法。
+Ruby 中私有方法的限制很简单，即不能为私有方法指定一个显式的接收者（例如 abc.method 中 abc 就是显式的接收者） 。也就是说，私有方法只能只能在隐式的接收者（即 self）上调用。
+二、方法 动态定义方法  Module#define_method BasicObject#method_missing 此外 Module#const_missing 可以用来定义常量  Blank Slate 某些情况下需要覆盖类中已经存在的方法（如 jbuilder ）。使用 undef_method 可以取消类中已经存在的函数，但仍需保留 instance_eval 以及 __ 开头的方法。这种特殊的状态被称为 Blank Slate。</description>
+    </item>
+    
+    <item>
+      <title>《Programming Scala》笔记</title>
+      <link>https://blog.yxwang.me/notes/programming/programming-scala/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/notes/programming/programming-scala/</guid>
+      <description>数组取值 Scala 中可以通过 Array.apply()、Map.apply() 等方法获得这些容器中存储的值，而小括号则是 apply 方法的一个语法糖。所以 myArray(i) 等价于 myArray.apply(i)。
+tuple 取值 获取一个 tuple 中第 i 个元素的方法是 _i，例如 pair._1，注意这里编号是从 1 开始的，和 Haskell、ML 等语言一致。
+换行符 换行符通常会被当作分号处理，所以大多数情况下行尾的分号可以省略，除了以下三种情况：
+ 该行结尾处的符号无法使这一行合法中止，例如一个中缀运算符（加号），或者一个逗号； 下一行头部的符号无法开始一个新的语句； 该行被包含在小括号或者中括号中，因为这两个符号无法包含多个语句。  第三种情况也是 for 语句体遇到多个 filter 时要优先使用大括号的原因。
+静态成员 Scala 没有静态成员这一概念，类似功能的成员被转移到 singleton objects 中。这一点倒是和 Ruby 中类对象的 eigenclass 挺像的。当一个 singleton object 的名字和某个类的名字相同时，前者被称为后者的 companion object，当然反过来，后者被称为前者的 companion class。它们可以互相访问对方的私有成员。
+闭包（closure） (x: Int) =&amp;gt; x + more 中的 more 是一个 free variable，因为这一声明没有给它任何定义，而 x 则是 bound variable，它被赋予了函数参数的意义。
+一个函数不包含 free variable 的函数被称为 closed term，这里 term 是指一段代码。而包含 free variable 的函数被称为 open term。对于 open term，程序运行时需要从环境中把对象绑到它们的 free variable 上，绑定后得到的结果就是闭包。也就是说，闭包是闭合 open term 的结果。</description>
+    </item>
+    
+    <item>
+      <title>《Ruby Programming Language》笔记</title>
+      <link>https://blog.yxwang.me/notes/programming/ruby-programming-language/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/notes/programming/ruby-programming-language/</guid>
+      <description>Chapter 3 Datatypes and Objects &amp;quot;360 degrees=#{2*Math::PI} radians&amp;quot; # &amp;quot;360 degrees=6.28318530717959 radians&amp;quot; $salutation = &#39;hello&#39; # Define a global variable &amp;quot;#$salutation world&amp;quot; # Use it in a double-quoted string &amp;quot;My phone #: 555-1234&amp;quot; # No escape needed &amp;quot;Use \#{ to interpolate expressions&amp;quot; # Escape #{ with backslash  Ruby will create a new object for each iteration. For efficiency, you should avoid using literals within loops.
+The &amp;lt;&amp;lt; operator appends its second operand to its first.</description>
+    </item>
+    
+    <item>
+      <title>沪江课程——西班牙语零基础入门</title>
+      <link>https://blog.yxwang.me/notes/languages/introduction-to-spanish/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/notes/languages/introduction-to-spanish/</guid>
+      <description>课程链接 http://class.hujiang.com/136462/
+Lección 1 单词和发音  abuelo 爷爷（外公） abuela 奶奶（外婆） amigo 男性朋友 amiga 女性朋友 español 西班牙语 estudiante 学生 idea 主意 inglés 英语 inteligente 聪明的 oficina 办公室 ocho 八 uno, na 数字一 usted 您 universidad 大学  语法  名词阴阳性（abuelo/abuela） 重音符号 é á  对话 {% conversation %} ¡Hola, Ana! ¡Hola, Ema! ¿Cómo estás? ¡Muy bien, gracias! {% endconversation %}
+Lección 2 单词和发音  d 在停顿后的词首或者词内和词组内的 n/l 后面时发 [d] 音，而在其他情况下发 [ð] 音。 día 天 domingo 星期天 nada 什么都没有 todo 所有的 edad 年龄 usted 您 sed 渴 té 茶 tú 你 taxi Asia 亚洲 estudiante 学生 novia 女朋友，新娘 pie 脚 siete 数字七 miedo 害怕 bueno 好的，优质的 luego 立即，然后 escuela 学校  对话  Buenos días.</description>
+    </item>
+    
+    <item>
+      <title>笔记</title>
+      <link>https://blog.yxwang.me/notes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/notes/</guid>
+      <description> 理论  《Algorithms》by Sanjoy Dasgupta 线性代数笔记  Ruby  《Ruby Programming Language》 《Metaprogramming in Ruby》  语言  《Word Power Made Easy》 《Merriam-Webster&amp;rsquo;s Vocabulary Builder》  公开课  Game Theory Robotics: Estimation and Learning  </description>
+    </item>
+    
+    <item>
+      <title>线性代数笔记</title>
+      <link>https://blog.yxwang.me/notes/linear-algebra/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/notes/linear-algebra/</guid>
+      <description>线性代数学习笔记，主要参考了同济大学的《线性代数》和 《Deep Learning》 的第二章。
+行列式  行列式 (determinant) 与它的转置行列式相等。\(D^T = D\) 余子式 (minor)：在 n 阶行列式中，把 \((i, j)\) 元 \(a_{ij}\) 所在的第 \(i\) 行和第 \(j\) 列划去后留下的 \(n - 1\) 阶行列式叫做 \((i, j)\) 元 \(a_{ij}\) 的余子式，记作 \(M_{ij}\) 代数余子式 (cofactor) \(A_{ij} = (-1)^{i+j}M_{ij}\) 行列式按行展开：\(D = a_{i1}A_{i1} + a_{i2}A_{i2} + \cdots + a_{in}A_{in}\) 行列式按列展开：\(D = a_{1j}A_{1j} + a_{2j}A_{2j} + \cdots + a_{nj}A_{nj}\) 克拉默法则 (Cramer’s rule)：如果线性方程组的系数行列式不等于零，那么方程组有唯一解 \(x_1 = \frac{D_1}{D}, x_2 = \frac{D_2}{D}, \cdots, x_n = \frac{D_n}{D}\)， 其中 \(D_j\) 是把系数行列式 D 中第 j 列的元素用方程组右端的常数项代替后得到的 n 阶行列式。  矩阵及其运算  伴随矩阵 (adjugate matrix) \[ adj(A) = \begin{bmatrix} A_{11} &amp;amp; A_{21} &amp;amp; \cdots &amp;amp; A_{n1} \\ A_{12} &amp;amp; A_{22} &amp;amp; \cdots &amp;amp; A_{n2} \\ \vdots &amp;amp; \vdots &amp;amp; \ddots &amp;amp; \vdots \\ A_{1n} &amp;amp; A_{2n} &amp;amp; \cdots &amp;amp; A_{nn} \\ \end{bmatrix} \]  其中 \(A_{ij}\) 为代数余子式</description>
+    </item>
+    
+  </channel>
+</rss>

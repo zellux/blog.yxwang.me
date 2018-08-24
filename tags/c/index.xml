@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>C on Aiur · Zellux 的博客</title>
+    <link>https://blog.yxwang.me/tags/c/</link>
+    <description>Recent content in C on Aiur · Zellux 的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Thu, 28 Jan 2010 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.yxwang.me/tags/c/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>这样也能算圆周率</title>
+      <link>https://blog.yxwang.me/2010/01/obfuscated-c/</link>
+      <pubDate>Thu, 28 Jan 2010 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2010/01/obfuscated-c/</guid>
+      <description>reddit programming版面最近的热帖，下面这个程序输出的结果是一个近似的圆周率(3.156)。
+#define _ F--&amp;gt;00 || F-OO--; long F=00,OO=00; main(){F_OO();printf(&amp;quot;%1.3f\n&amp;quot;, 4.*-F/OO/OO);}F_OO() { _-_-_-_ _-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_ _-_-_-_ }  乍看下这个程序有点莫名其妙，分析一下宏后就知道它的方法了。两个全局变量F和OO分别记录 圆的面积和直径 的相反数，根据4*面积/直径/直径就能得到近似的圆周率了。
+至于面积和直径的计算，F在会在每一个_展开的地方减一，这样就得到了圆的面积。直径的计算要展开几行代码才能看得更清楚：
+F--&amp;gt;00 || F-OO--; -F--&amp;gt;00 || F-OO--; -F--&amp;gt;00 || F-OO--; -F--&amp;gt;00 || F-OO--; F--&amp;gt;00 || F-OO--; -F--&amp;gt;00 || F-OO--; -F--&amp;gt;00 || F-OO--; -F--&amp;gt;00 || F-OO--; -F--&amp;gt;00 || F-OO--; -F--&amp;gt;00 || F-OO--; -F--&amp;gt;00 || F-OO--; -F--&amp;gt;00 || F-OO--; -F--&amp;gt;00 || F-OO--;  这是用cpp展开圆形前两行代码的结果，因为或运算的特殊性，F- OO- -只会在每一段的第一行执行，所以OO- -执行的次数就等于圆的直径了。</description>
+    </item>
+    
+    <item>
+      <title>强制程序使用int 0x80做系统调用</title>
+      <link>https://blog.yxwang.me/2010/01/force-int-0x80-for-syscall/</link>
+      <pubDate>Tue, 26 Jan 2010 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2010/01/force-int-0x80-for-syscall/</guid>
+      <description>因为大多数情况下程序都是通过libc间接地发出系统调用的，所以只要编译一个只使用int 0x80的glibc库，然后在执行程序的时候用LD_LIBRARY_PATH或其他方法指定使用新编译的glibc库即可。
+以glibc-2.9, Linux i386为例，在sysdeps/unix/sysv/linux/i386/syscall.S中可以看到
+ENTRY (syscall) PUSHARGS_6 /* Save register contents. */ _DOARGS_6(44) /* Load arguments. */ movl 20(%esp), %eax /* Load syscall number into %eax. */ ENTER_KERNEL /* Do the system call. */ POPARGS_6 /* Restore register contents. */ cmpl $-4095, %eax /* Check %eax for error. */ jae SYSCALL_ERROR_LABEL /* Jump to error handler if error. */  这里使用了ENTER_KERNEL这个宏做系统调用，接下来在sysdeps/unix/sysv/linux/i386/sysdep.h里可以找到这个宏的定义
+/* The original calling convention for system calls on Linux/i386 is to use int $0x80.</description>
+    </item>
+    
+    <item>
+      <title>Emacs 中对不同项目指定不同的风格</title>
+      <link>https://blog.yxwang.me/2009/12/emacs-set-styles-by-projects/</link>
+      <pubDate>Tue, 01 Dec 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2009/12/emacs-set-styles-by-projects/</guid>
+      <description>我的Emacs配置里C语言默认的缩进风格是用4个空格，最近要修改Chromium的代码，而Google的C/C++风格统一为2个空格缩进，所以改代码的时候要把c-basic-offset设置为2。这样在不同项目间切换的时候很不方便。
+在stackoverflow上发帖求助后发现了Emacs 23.1一个很好用的新功能，Per-Directory Local Variables，只需要在项目主目录下放一个.dir-locals.el文件，里面设置该项目特有的变量值，就能应用到整个项目了。
+以我的Chromium为例，Google已经提供了一份C/C++风格的配置，只需要在~/chromius/src/.dir-locals.el里把google-c-style常量粘贴进去即可。另外我不知道为啥加上c-offsets-alist那段后Emacs缩进会变得很奇怪，所以我把它删了。附修改后的.dir-locals.el
+((c++-mode . ((c-recognize-knr-p . nil) (c-enable-xemacs-performance-kludge-p . t) ; speed up indentation in XEmacs (c-basic-offset . 2) (indent-tabs-mode . nil) (c-comment-only-line-offset . 0) (c-hanging-braces-alist . ((defun-open after) (defun-close before after) (class-open after) (class-close before after) (namespace-open after) (inline-open after) (inline-close before after) (block-open after) (block-close . c-snug-do-while) (extern-lang-open after) (extern-lang-close after) (statement-case-open after) (substatement-open after))) (c-hanging-colons-alist . ((case-label) (label after) (access-label after) (member-init-intro before) (inher-intro))) (c-hanging-semi&amp;amp;comma-criteria .</description>
+    </item>
+    
+    <item>
+      <title>几个有趣的 Quine 变种</title>
+      <link>https://blog.yxwang.me/2009/09/interesting-quines/</link>
+      <pubDate>Mon, 28 Sep 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2009/09/interesting-quines/</guid>
+      <description>Quine是指一类能生成自己的程序，例如下面这个C程序运行后就能把自己的源码完整的打印出来：
+char*f=&amp;quot;char*f=%c%s%c;main() {printf(f,34,f,34,10);}%c&amp;quot;; main(){printf(f,34,f,34,10);}  这类程序的构造方法计算理论导引或者其他相关的书籍中都有涉及，这里不再赘述。这个月看到几个Quine的变种，都挺有趣的。
+首先是sigfpe构造出来的三阶Quine，这是一个只有两行的Haskell程序：
+q a b c=putStrLn $ b ++ [toEnum 10,&#39;q&#39;,&#39;(&#39;] ++ show b ++ [&#39;,&#39;] ++ show c ++ [&#39;,&#39;] ++ show a ++ [&#39;)&#39;] main=q &amp;quot;q a b c=putStrLn $ b ++ [toEnum 10,&#39;q&#39;,&#39;(&#39;] ++ show b ++ [&#39;,&#39;] ++ show c ++ [&#39;,&#39;] ++ show a ++ [&#39;)&#39;]&amp;quot; &amp;quot;def q(a,b,c):print b+chr(10)+&#39;q(&#39;+repr(b)+&#39;,&#39;+repr(c)+&#39;,&#39;+repr(a)+&#39;)&#39;&amp;quot; &amp;quot;def e(x) return 34.chr+x+34.chr end;def q(a,b,c) print b+10.chr+&#39;main=q &#39;+e(b)+&#39; &#39;+e(c)+&#39; &#39;+e(a)+&#39; &#39;+10.</description>
+    </item>
+    
+    <item>
+      <title>Xen 警告 Time went backwards 的暴力解决方法</title>
+      <link>https://blog.yxwang.me/2009/07/xen-time-went-backwards-solution/</link>
+      <pubDate>Tue, 07 Jul 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2009/07/xen-time-went-backwards-solution/</guid>
+      <description>前几天给测试Xen用的虚拟机挂了，只能用VMware的snapshot返回到之前的镜像，然后似乎因为时间问题启动Xen的时候总是会定时打印出类似
+571 Timer ISR/0: Time went backwards: delta=-11072481 delta_cpu=298927519 shadow=196807680595 off=288495093 processed=197107247546 cpu_processed=196797247546 572 0: 196797247546 573 1: 197107247546  的信息，google了下发现是时间同步的问题，用ntp协议同步时间即可解决这个问题。另外这里再给出一个最暴力的解决方法：在linux-xen源码的arch/i386/kernel/time-xen.c文件中找到Time went backwards，把这行打印语句以及后面的循环打印删除，然后重新编译内核。x86_64体系结构也是修改这个文件。方法很暴力，也没真正解决问题，但是至少不影响我看/var/log/messages的输出了。</description>
+    </item>
+    
+    <item>
+      <title>ICS Lab2</title>
+      <link>https://blog.yxwang.me/2007/11/ics-lab2/</link>
+      <pubDate>Tue, 20 Nov 2007 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2007/11/ics-lab2/</guid>
+      <description>这个lab主要考察gdb的使用和对汇编代码的理解。后者在平时的作业中涉及得较多，这里不再赘述，主要介绍一下gdb。其实偶对这个也不是很熟，有错误请指正。
+简单的说，gdb是一款强大的调试工具，尽管它只有文本界面（需要图形界面可以使用ddd，不过区别不大），但是功能却比eclipse等调试环境强很多。
+接下来看看怎样让它为lab2拆炸弹服务，在命令行下运行gdb bomb就能开始调试这个炸弹程序，提高警惕，恩。
+首先最重要的，就是如何阻止炸弹的引爆，gdb自然提供了一般调试工具都包括的断点功能——break命令。
+在gdb中输入help break能够看到相关的信息。
+可以看到 break 允许我们使用行号、函数名或地址设置断点。
+按ctrl+z暂时挂起当前的gdb进程，运行 objdump –d bomb | more 查看反编译后的炸弹文件，可以看到里面有这么一行（开始的那个地址每个人都不同）：
+08049719 &amp;lt;explode_bomb&amp;gt;:  这个就是万恶的引爆炸弹的函数了，运行 fg 返回 gdb 环境，在这个函数设置断点：break explode_bomb （可以使用tab键自动补齐）
+显示
+Breakpoint 1 at 0x8049707  接下来你可以喘口气，一般情况下炸弹是不会引爆的了
+下面我们来拆第一个炸弹，首先同样是设置断点，bomb.c中给出了各个关卡的函数名，第一关就是phase_1，使用break phase_1在第一关设置断点
+接下来就开始运行吧，输入run
+我们已经设置了炸弹断点，这些恐吓可以直接无视。
+输入ABC继续（输入这个是为了方便在后面的测试中找到自己的输入串地址）
+提示Breakpoint 2, 0x08048c2e in phase_1 ()，说明现在程序已经停在第一个关了
+接下来就是分析汇编代码，使用disassemble phase_1显示这个函数的汇编代码
+注意其中关键的几行：
+这个lab很厚道的一点就是函数名很明确地说明了函数的功能 ^_^
+估计这三行代码的意思就是比较两个字符串相等，不相等的话应该就会让炸弹爆炸了
+因为字符串很大，所以传递给这个比较函数的肯定是他们的地址，分别为0x80499b4和0x8(%ebp)
+我们先来看后者，使用p/x *(int*)($ebp + 8)查看字符串所在的地址
+$1 = 0x804a720 ​```` 继续使用`p/x *0x804a720`查看内存中这个地址的内容  $2 = 0x434241
+ 连续的三个数，是不是想起什么了？把这三个数分别转换为十进制，就是67 66 65，分别为 CBA 的 ASCII 码，看来这里保存了我们输入的串。 接下来 0x80499b4 里肯定保存着过关的密码 `p/x *0x80499b4`  $3 = 0x62726556</description>
+    </item>
+    
+  </channel>
+</rss>

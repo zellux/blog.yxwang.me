@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+  <head>
+	<meta name="generator" content="Hugo 0.46" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="zellux">
+
+    <title> Aiur · Zellux 的博客</title>
+
+    <script src="/js/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
+    <script src="/js/jquery-3.0.47.fancybox.min.js"></script>
+
+    
+    
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.52ea10a8f3a0b8f145adadb8d3761e17a42a7634869f775ef5830ed4de77d3fa.css">
+    
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+    
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    
+    <link href="https://blog.yxwang.me/index.xml" rel="alternate" type="application/rss+xml" title="Aiur · Zellux 的博客" />
+    
+<script type="application/ld+json">
+{
+    "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https://blog.yxwang.me/"
+    },
+    "articleSection" : "",
+    "name" : "Aiur · Zellux 的博客",
+    "headline" : "Aiur · Zellux 的博客",
+    "description" : "",
+    "inLanguage" : "en-US",
+    "author" : "zellux",
+    "creator" : "zellux",
+    "publisher": "zellux",
+    "accountablePerson" : "",
+    "copyrightHolder" : "",
+    "copyrightYear" : "2008",
+    "datePublished": "2008-09-18 00:00:00 &#43;0000 UTC",
+    "dateModified" : "2008-09-18 00:00:00 &#43;0000 UTC",
+    "url" : "https://blog.yxwang.me/",
+    "wordCount" : "0",
+    "keywords" : [ "Blog" ]
+}
+</script>
+
+  </head>
+
+  <body>
+    <nav class="nav">
+  <div class="nav-container">
+    <span class="site-title">
+      <a href="https://blog.yxwang.me/">Aiur · Zellux 的博客</a>
+    </span>
+    
+    <div class="nav-list">
+      
+      <span class="nav-item"><a href="/about">About</a></span>
+      
+      <span class="nav-item"><a href="/archive">Archive</a></span>
+      
+      <span class="nav-item"><a href="/notes">Notes</a></span>
+      
+    </div>
+  </div>
+</nav>
+
+    <div class="container">
+
+
+<div class="content index">
+  <div class="posts">
+     
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2008/09/first-test-kernel-in-xen/">第一个 testkernel 在 Xen 中的载入</a></h2>
+      <span class="post-meta">
+  <time datetime='Thu, Sep 18, 2008' data-updated="true" itemprop="datePublished">Thu, Sep 18, 2008</time>
+  
+  <span class="post-categories">
+    •
+	<a href="https://blog.yxwang.me/categories/computer-system">Computer System</a>
+  </span>
+  
+</span>
+
+      
+      <div class="summary">
+        The Definitive Guide to Xen Hypervisor 中第二章的例子，make 成功后运行 xen create domain_config，报错
+Error: (2, 'Invalid kernel', 'xc_dom_compat_check: guest type xen-3.0-x86_32 not supported by xen kernel, sorryn')  Google 之后发现是虚拟机类型设置的问题，运行 xm info 可以看到
+xen_caps : xen-3.0-x86_32p  末尾的 p 表示 Xen 内核开启了 PAE 模式，所以载入的 kernel 也必须开启 PAE，在bootstrap.x86_32.S 中加入 PAE=yes 选项即可。
+	<a class="read-more" href="/2008/09/first-test-kernel-in-xen/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2008/09/find-head-in-circular-linked-list/">带环链表求环的起点</a></h2>
+      <span class="post-meta">
+  <time datetime='Mon, Sep 8, 2008' data-updated="true" itemprop="datePublished">Mon, Sep 8, 2008</time>
+  
+  <span class="post-categories">
+    •
+	<a href="https://blog.yxwang.me/categories/algorithms">Algorithms</a>
+  </span>
+  
+</span>
+
+      
+      <div class="summary">
+        很经典的问题了，求环的长度可以用两个步长分别为1和2的指针遍历链表，直到两者相遇。相遇后把其中指针重新设定为起始点，让两个指针以步长1再走一遍链表，相遇点就是环的起始点。
+证明也很简单，注意第一次相遇时
+慢指针走过的路程S1 = 非环部分长度 + 弧A长
+快指针走过的路程S2 = 非环部分长度 + n * 环长 + 弧A长
+S1 * 2 = S2，可得非环部分长度 = n * 环长 - 弧A长
+指针A回到起始点后，走过一个非环部分长度，指针B走过了相等的长度，也就是n * 环长 - 弧A长，正好回到环的开头。
+	<a class="read-more" href="/2008/09/find-head-in-circular-linked-list/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2008/09/oslab-interrupt-handling/">OSLab 之中断处理</a></h2>
+      <span class="post-meta">
+  <time datetime='Mon, Sep 1, 2008' data-updated="true" itemprop="datePublished">Mon, Sep 1, 2008</time>
+  
+  <span class="post-categories">
+    •
+	<a href="https://blog.yxwang.me/categories/courses">Courses</a>
+  </span>
+  
+</span>
+
+      
+      <div class="summary">
+        1. 准备工作 在开始分析Support Code之前，先配置下我们的Source Insight，使它能够支持.s文件的搜索。
+在Options-&gt;Document Options-&gt;Document Types中选择x86 Asm Source File，在File fileter中增加一个.s，变成.asm;.inc;.s 然后在Project-&gt;Add and Remove Project Files中重新将整个oslab的目录加入，这样以后进行文本搜索时.s文件也不会漏掉了。
+2. Source Insight使用 接下来简单分析下内核启动的过程，在浏览代码的过程中可以迅速的掌握Source Insight的使用技巧。
+lib/multiboot /multiboot.s完成了初始化工作，可以看到其中一句call EXT(multiboot_main)调用了C函数multiboot_main，使用ctrl+/搜索包含multiboot_main的所有文件，最终base_multiboot_main.c中找到了它的定义。依次进行cpu、内存的初 始化，然后开启中断，跳转到kernel_main函数，也是Lab1中所要改写的函数之一。另外 在这里可以通过ctrl+单击或者ctrl+=跳转到相应的函数定义处，很方便。
+3. irq处理初始化工作 来看下Lab 1的重点之一，irq的处理。跟踪multiboot_main-&gt;base_cpu_setup-&gt;base_cp u_init-&gt;base_irq_init，可以看到这行代码
+gate_init(base_idt, base_irq_inittab, KERNEL_CS);  继续使用ctrl+/找到base_irq_inittab的藏身之处：base_irq_inittab.s
+4. base_irq_inittab.s 这个汇编文件做了不少重复性工作，方便我们在c语言级别实现各种handler。
+GATE_INITTAB_BEGIN(base_irq_inittab) /* irq处理函数表的起始，还记得jump table 吗？ */ MASTER(0, 0) /* irq0 对应的函数 */  来看看这个MASTER(0, 0)宏展开后是什么样子：
+#define MASTER(irq, num) GATE_ENTRY(BASE_IRQ_MASTER_BASE + (num), 0f, ACC_PL_K|ACC_INTR_GATE) ; P2ALIGN(TEXT_ALIGN) ; 0: ; pushl $(irq) /* error code = irq vector */ ; pushl $BASE_IRQ_MASTER_BASE + (num) /* trap number */ ; pusha /* save general registers */ ; movl $(irq),%ecx /* irq vector number */ ; movb $1 &lt;&lt; num,%dl /* pic mask for this irq */ ; jmp master_ints  依次push irq号，trap号（0x20+irq号），通用寄存器（eax ecx等）入栈，把irq号保 存到ecx寄存器，然后跳转到master_ints，master_ints是所有master interrupts公用 的代码。
+	<a class="read-more" href="/2008/09/oslab-interrupt-handling/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2008/08/os-lab5-debug-notes/">OS Lab 5 Debugging Notes</a></h2>
+      <span class="post-meta">
+  <time datetime='Sun, Aug 31, 2008' data-updated="true" itemprop="datePublished">Sun, Aug 31, 2008</time>
+  
+  <span class="post-categories">
+    •
+	<a href="https://blog.yxwang.me/categories/courses">Courses</a>
+  </span>
+  
+</span>
+
+      
+      <div class="summary">
+        还算顺利，不过这个lab蛮无聊的，等有空了把syscall改成类似linux的做法，单一中断号+寄存器选择syscall。
+ 最花时间的一个bug是ls返回值没有改成应用程序数，结果一开始一直以为是brk系统调用没写好，最后才发现问题出在这么小的地方。
+ brk的逻辑还不是很清楚，尽管通过了简单的测试，但是debug输出的信息显示brk增长的很快，经常是一个页一个页涨的，看来还得查下brk的具体行为。
+ 写了个比MAGIC_BREAK好用一点的宏，因为用户态的程序都是按二进制读入的，Simics无法得到函数信息（函数名、当前行数等），利用C99的宏写了个新的INFO_BREAK
+  #define INFO_BREAK \ do { \ lprintf_kern(&quot;break in %s:%d&quot;, __FUNCTION__, __LINE__); \ MAGIC_BREAK; \ } while (0) \  
+	<a class="read-more" href="/2008/08/os-lab5-debug-notes/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2008/08/smalloc-vs-malloc/">关于smalloc函数与malloc函数的区别</a></h2>
+      <span class="post-meta">
+  <time datetime='Sun, Aug 24, 2008' data-updated="true" itemprop="datePublished">Sun, Aug 24, 2008</time>
+  
+  <span class="post-categories">
+    •
+	<a href="https://blog.yxwang.me/categories/courses">Courses</a>
+  </span>
+  
+</span>
+
+      
+      <div class="summary">
+        s前缀的malloc函数（包括smalloc、smemalign等）不记录分配块的大小，比较节省空间，但是要求用户在用sfree释放内存的时候指定被释放的内存块大小。
+malloc则和libc中的同名函数很相似。
+整个分配信息（包括哪些块已被使用）都记录在malloc_lmm这个全局变量中，内存被分为若干个region，每个region中有若干个nodes，这些信息可以通过lmm_dump查看（需要include ）。
+smemalign很适合分配需要页对齐的内存块，因为如果使用memalign分配的话，每个页面就需要多用8字节的空间来记录当前块的大小了（保存在每个内存块的前面），会产生大量内存碎片。
+	<a class="read-more" href="/2008/08/smalloc-vs-malloc/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2008/08/bugs-related-to-my-fork/">OS Lab 4 Debugging Notes</a></h2>
+      <span class="post-meta">
+  <time datetime='Fri, Aug 22, 2008' data-updated="true" itemprop="datePublished">Fri, Aug 22, 2008</time>
+  
+  <span class="post-categories">
+    •
+	<a href="https://blog.yxwang.me/categories/courses">Courses</a>
+  </span>
+  
+</span>
+
+      
+      <div class="summary">
+         系统调用 fork() 用Simics跟踪一条条汇编分析页表映射、寄存器值还真是体力活啊。。
+ 实现 Copy On Write 时，如果某一个用户态页面有多个进程共享，其中一个进程修改该页面时需要创建一个新的页面。一开始偶忘了把原来页面的内容复制到新的页面了 =_= 另外由于新的页面要代替老的页面，或者说它们的物理地址不同，但虚拟地址相同，我的方法是在内核态开辟一个大小为一个页面的空间作为中转。
+ do_fork函数中，子进程复制父进程的页表的同时会把父进程页表项置为不可写，注意最后要flush tlb。因为一开始没有flush tlb，导致最后用户态fork返回以后读取的信息来自于tlb，直接改写了共享页面中fork的返回地址，导致切换到子进程时fork的返回地址丢失。这个bug让我郁闷了两三个小时。。
+ 使用两次fork时，第二次fork返回的pid会被改掉。查了下发现为用户空间分配物理页面的代码里居然在分配好以后没有把对应的struct置为已使用，结果导致第二个子进程COW创建新页面时得到了原来的父进程页面，改写了父进程页面内容。
+  系统调用 exec()  清空页表的用户空间映射的函数一开始写得yts，bug到处都是，比如free的时候没使用指向内存块首地址的指针，记录内存地址的变量没有累加。 exec传递给内核态的两个参数必须先在内核态保存一个副本，否则清空用户态页表后就无法得到这两个参数信息了。 分配给用户态的页面必须先清零，一方面考虑到安全性，另一方面不清零会隐藏一些潜在的bug。一开始我没有在内核执行exec的时候完整的复制所有的参数，而是直接指向了原进程的内存空间，由于清空页表后再次申请新页表时得到了原来的页面，结果正好原来那个保存参数的页面和新进程的该页面重合了 =_= 于是浪费了不少时间在这个bug上  
+	<a class="read-more" href="/2008/08/bugs-related-to-my-fork/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2008/08/trap_state-in-flux-oskit/">Flux OSKit 中 trap_state 的存放位置</a></h2>
+      <span class="post-meta">
+  <time datetime='Wed, Aug 20, 2008' data-updated="true" itemprop="datePublished">Wed, Aug 20, 2008</time>
+  
+  <span class="post-categories">
+    •
+	<a href="https://blog.yxwang.me/categories/courses">Courses</a>
+  </span>
+  
+</span>
+
+      
+      <div class="summary">
+        写fork函数的时候发现实际传给trap handler的ts地址和用(struct trap_state *) (KSTACK_TOP(old))) - 1
+计算出来的结果不一样，后者比前者小0x10。另外ts的实际地址加上ts的大小(92个字节)后就超出了内核栈的范围。
+/* * This structure corresponds to the state of user registers * as saved upon kernel trap/interrupt entry. * As always, it is only a default implementation; * a well-optimized kernel will probably want to override it * with something that allows better optimization. */ struct trap_state { /* Saved segment registers */ unsigned int	gs; unsigned int	fs; unsigned int	es; unsigned int	ds; /* PUSHA register state frame */ unsigned int	edi; unsigned int	esi; unsigned int	ebp; unsigned int	cr2;	/* we save cr2 over esp for page faults */ unsigned int	ebx; unsigned int	edx; unsigned int	ecx; unsigned int	eax; /* Processor trap number, 0-31.
+	<a class="read-more" href="/2008/08/trap_state-in-flux-oskit/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2008/08/export-symbols-in-asm/">汇编文件中导出函数符号</a></h2>
+      <span class="post-meta">
+  <time datetime='Wed, Aug 20, 2008' data-updated="true" itemprop="datePublished">Wed, Aug 20, 2008</time>
+  
+  <span class="post-categories">
+    •
+	<a href="https://blog.yxwang.me/categories/computer-system">Computer System</a>
+  </span>
+  
+</span>
+
+      
+      <div class="summary">
+        Linux 2.4.18的linux/linkage.h文件定义了若干相关的宏
+#define SYMBOL_NAME(X) X #ifdef __STDC__ #define SYMBOL_NAME_LABEL(X) X##: #else #define SYMBOL_NAME_LABEL(X) X/**/: #endif #define __ALIGN .align 16,0x90 #define __ALIGN_STR &quot;.align 16,0x90&quot; #define ALIGN __ALIGN #define ALIGN_STR __ALIGN_STR #define ENTRY(name) .globl SYMBOL_NAME(name); ALIGN; SYMBOL_NAME_LABEL(name)  用ENTRY(name)就能定义函数了。后来发现Flux OSKit中本来就提供了类似功能的宏，定义在inc/asm.h中。
+使用的时候需要再写一个c语言的wrapper function（至少2.4.18里面是这么做的）
+asmlinkage void ret_from_fork(void) __asm__(&quot;ret_from_fork&quot;);  
+	<a class="read-more" href="/2008/08/export-symbols-in-asm/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2008/07/leaksurvivor/">Usenix 08 - LeakSurvivor</a></h2>
+      <span class="post-meta">
+  <time datetime='Sat, Jul 19, 2008' data-updated="true" itemprop="datePublished">Sat, Jul 19, 2008</time>
+  
+  <span class="post-categories">
+    •
+	<a href="https://blog.yxwang.me/categories/computer-system">Computer System</a>
+  </span>
+  
+</span>
+
+      
+      <div class="summary">
+        Paper: LeakSurvivor: Towards Safely Tolerating Memory Leaks for Garbage-Collected Languages
+http://www.usenix.org/events/usenix08/tech/tang.html
+Yan Tang, Qi Gao, and Feng Qin, The Ohio State University
+三位作者好像都是中国人
+这篇paper针对支持垃圾收集的语言中内存泄露问题，提出了一种比较保守的“换出”策略，即把可疑的内存泄露的对象（这些对象通常都是长时间没有被访问的）从内存移动到硬盘上暂时保存，减小内存的压力；如果这些对象后来被再次访问（这种可能性很小），就把它们从硬盘上移回内存。
+	<a class="read-more" href="/2008/07/leaksurvivor/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2008/07/singleton-pattern-and-double-checked-lock/">Singleton 模式与双检测锁定(DCL)</a></h2>
+      <span class="post-meta">
+  <time datetime='Fri, Jul 4, 2008' data-updated="true" itemprop="datePublished">Fri, Jul 4, 2008</time>
+  
+  <span class="post-categories">
+    •
+	<a href="https://blog.yxwang.me/categories/featured">Featured</a>, <a href="https://blog.yxwang.me/categories/programming">Programming</a>
+  </span>
+  
+</span>
+
+      
+      <div class="summary">
+        看 OOP 教材时，书里提到了一个双检测锁定（Double-Checked Lock, DCL）的问题，但是没有更多介绍，只是说这是一个和底层内存机制有关的漏洞。查阅了下相关资料，对这个问题大致有了点了解。
+从头开始说吧。
+在多线程的情况下Singleton模式会遇到不少问题，一个简单的例子
+class Singleton { private static Singleton instance = null; public static Singleton instance() { if (instance == null) { instance = new Singleton(); } return instance; } }  假设这样一个场景，有两个线程调用 Singleton.instance()，首先线程一判断 instance 是否等于 null，判断完后一瞬间虚拟机把线程二调度为运行线程，线程二再次判断 instance 是否为 null，然后创建一个Singleton 实例，线程二的时间片用完后，线程一被唤醒，接下来它依然会创建一个新的 Singleton 实例，导致两次调用范围的对象不同。
+最简单的方法自然是在类被载入时就初始化这个对象：
+private static Singleton instance = new Singleton();  JLS (Java Language Specification) 中规定了一个类只会被初始化一次，所以这样做肯定是没问题的。
+但是如果要实现延迟初始化（Lazy initialization），比如这个实例初始化时的参数要在运行期才能确定，应该怎么做呢？
+依然有最简单的方法：使用 synchronized 关键字修饰初始化方法：
+public synchronized static Singleton instance() { if (instance == null) { instance = new Singleton(); } return instance; }  然而引入 synchronized 关键字后，产生了一个性能问题：多个线程同时访问这个方法时，会因为同步原语而导致每次只有一个线程执行这段代码，影响程序性能。而事实上初始化完毕后只需要简单的返回 instance 的引用就行了。
+	<a class="read-more" href="/2008/07/singleton-pattern-and-double-checked-lock/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
+  </div>
+  <div class="pagination">
+  
+  <a class="btn previous" href="/page/11/">Newer</a>  
+  <a class="btn next" href="/page/13/">Older</a> 
+</div>
+</div>
+
+
+
+
+<div class="footer">
+  
+  <p>Powered by <a href="http://gohugo.io">Hugo</a> and <a href="https://github.com/zhe/hugo-theme-slim">Slim theme</a>.
+  
+      Follow me on <a href="https://twitter.com/zellux">Twitter</a>.
+      </p>
+  </p>
+  
+</div>
+
+                   
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+    Macros: {
+      argmax: "\\operatorname*{argmax}",
+      argmin: "\\operatorname*{argmin}"
+    }
+  },
+  jax: ["input/TeX","output/CommonHTML"]
+});
+</script>
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML">
+</script>
+
+</script>
+
+<script src="https://blog.yxwang.me/js/slim.min.aef36e671f72c9042139aae327dbe693b7ebaa67fd56f30dad4c985a91ba9294.js"></script>
+
+
+<link rel="stylesheet" href="https://blog.yxwang.me/css/solarized-light.min.5499f6bc45da0c78f070be4f720fd28b19af75306b569b77837d57c3cf819430.css" />
+<script src="/js/highlight.pack.js"></script>
+<script>
+  hljs.initHighlightingOnLoad();
+</script>
+
+</div>
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-25551121-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+<script type="text/javascript">
+    window.heap=window.heap||[],heap.load=function(e,t){window.heap.appid=e,window.heap.config=t=t||{};var r=t.forceSSL||"https:"===document.location.protocol,a=document.createElement("script");a.type="text/javascript",a.async=!0,a.src=(r?"https:":"http:")+"//cdn.heapanalytics.com/js/heap-"+e+".js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(a,n);for(var o=function(e){return function(){heap.push([e].concat(Array.prototype.slice.call(arguments,0)))}},p=["addEventProperties","addUserProperties","clearEventProperties","identify","removeEventProperty","setEventProperties","track","unsetEventProperty"],c=0;c<p.length;c++)heap[p[c]]=o(p[c])};
+      heap.load("3166778701");
+</script>
+
+
+</body>
+
+</html>
+

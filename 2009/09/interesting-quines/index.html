@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="Quine是指一类能生成自己的程序，例如下面这个C程序运行后就能把自己的源码完整的打印出来：
+char*f=&quot;char*f=%c%s%c;main() {printf(f,34,f,34,10);}%c&quot;; main(){printf(f,34,f,34,10);}  这类程序的构造方法计算理论导引或者其他相关的书籍中都有涉及，这里不再赘述。这个月看到几个Quine的变种，都挺有趣的。
+首先是sigfpe构造出来的三阶Quine，这是一个只有两行的Haskell程序：
+q a b c=putStrLn $ b &#43;&#43; [toEnum 10,&#39;q&#39;,&#39;(&#39;] &#43;&#43; show b &#43;&#43; [&#39;,&#39;] &#43;&#43; show c &#43;&#43; [&#39;,&#39;] &#43;&#43; show a &#43;&#43; [&#39;)&#39;] main=q &quot;q a b c=putStrLn $ b &#43;&#43; [toEnum 10,&#39;q&#39;,&#39;(&#39;] &#43;&#43; show b &#43;&#43; [&#39;,&#39;] &#43;&#43; show c &#43;&#43; [&#39;,&#39;] &#43;&#43; show a &#43;&#43; [&#39;)&#39;]&quot; &quot;def q(a,b,c):print b&#43;chr(10)&#43;&#39;q(&#39;&#43;repr(b)&#43;&#39;,&#39;&#43;repr(c)&#43;&#39;,&#39;&#43;repr(a)&#43;&#39;)&#39;&quot; &quot;def e(x) return 34.chr&#43;x&#43;34.chr end;def q(a,b,c) print b&#43;10.chr&#43;&#39;main=q &#39;&#43;e(b)&#43;&#39; &#39;&#43;e(c)&#43;&#39; &#39;&#43;e(a)&#43;&#39; &#39;&#43;10.">
+    <meta name="author" content="zellux">
+
+    <title> 几个有趣的 Quine 变种 &middot; Aiur · Zellux 的博客 </title>
+
+    <script src="/js/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
+    <script src="/js/jquery-3.0.47.fancybox.min.js"></script>
+
+    
+    
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.52ea10a8f3a0b8f145adadb8d3761e17a42a7634869f775ef5830ed4de77d3fa.css">
+    
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+    
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    
+    <link href="" rel="alternate" type="application/rss+xml" title="Aiur · Zellux 的博客" />
+    
+<script type="application/ld+json">
+{
+    "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https://blog.yxwang.me/"
+    },
+    "articleSection" : "post",
+    "name" : "几个有趣的 Quine 变种",
+    "headline" : "几个有趣的 Quine 变种",
+    "description" : "Quine是指一类能生成自己的程序，例如下面这个C程序运行后就能把自己的源码完整的打印出来：
+char*f=&quot;char*f=%c%s%c;main() {printf(f,34,f,34,10);}%c&quot;; main(){printf(f,34,f,34,10);}  这类程序的构造方法计算理论导引或者其他相关的书籍中都有涉及，这里不再赘述。这个月看到几个Quine的变种，都挺有趣的。
+首先是sigfpe构造出来的三阶Quine，这是一个只有两行的Haskell程序：
+q a b c=putStrLn $ b ++ [toEnum 10,'q','('] ++ show b ++ [','] ++ show c ++ [','] ++ show a ++ [')'] main=q &quot;q a b c=putStrLn $ b ++ [toEnum 10,'q','('] ++ show b ++ [','] ++ show c ++ [','] ++ show a ++ [')']&quot; &quot;def q(a,b,c):print b+chr(10)+'q('+repr(b)+','+repr(c)+','+repr(a)+')'&quot; &quot;def e(x) return 34.chr+x+34.chr end;def q(a,b,c) print b+10.chr+'main=q '+e(b)+' '+e(c)+' '+e(a)+' '+10.",
+    "inLanguage" : "en-US",
+    "author" : "zellux",
+    "creator" : "zellux",
+    "publisher": "zellux",
+    "accountablePerson" : "",
+    "copyrightHolder" : "",
+    "copyrightYear" : "2009",
+    "datePublished": "2009-09-28 00:00:00 &#43;0000 UTC",
+    "dateModified" : "2009-09-28 00:00:00 &#43;0000 UTC",
+    "url" : "https://blog.yxwang.me/2009/09/interesting-quines/",
+    "wordCount" : "83",
+    "keywords" : [ "Algorithms","C","Quine","Blog" ]
+}
+</script>
+
+  </head>
+
+  <body>
+    <nav class="nav">
+  <div class="nav-container">
+    <span class="site-title">
+      <a href="https://blog.yxwang.me/">Aiur · Zellux 的博客</a>
+    </span>
+    
+    <div class="nav-list">
+      
+      <span class="nav-item"><a href="/about">About</a></span>
+      
+      <span class="nav-item"><a href="/archive">Archive</a></span>
+      
+      <span class="nav-item"><a href="/notes">Notes</a></span>
+      
+    </div>
+  </div>
+</nav>
+
+    <div class="container">
+
+
+<div class="content">
+  <div class="post">
+    <h1 class="post-title"><a href="https://blog.yxwang.me/2009/09/interesting-quines/">几个有趣的 Quine 变种</a></h1>
+    <span class="post-meta">
+  <time datetime='Mon, Sep 28, 2009' data-updated="true" itemprop="datePublished">Mon, Sep 28, 2009</time>
+  
+  <span class="post-categories">
+    •
+	<a href="https://blog.yxwang.me/categories/algorithms">Algorithms</a>
+  </span>
+  
+</span>
+
+    <div class="post-content">
+      <p><a href="http://en.wikipedia.org/wiki/Quine_%28computing%29" target="_blank">Quine</a>是指一类能生成自己的程序，例如下面这个C程序运行后就能把自己的源码完整的打印出来：</p>
+
+<pre><code class="language-c">char*f=&quot;char*f=%c%s%c;main()
+{printf(f,34,f,34,10);}%c&quot;;
+main(){printf(f,34,f,34,10);}
+</code></pre>
+
+<p>这类程序的构造方法<a href="http://www.douban.com/subject/1444980/" target="_blank">计算理论导引</a>或者其他相关的书籍中都有涉及，这里不再赘述。这个月看到几个Quine的变种，都挺有趣的。</p>
+
+<p>首先是sigfpe构造出来的<a href="http://blog.sigfpe.com/2008/02/third-order-quine-in-three-languages.html" target="_blank">三阶Quine</a>，这是一个只有两行的Haskell程序：</p>
+
+<pre><code class="language-haskell">q a b c=putStrLn $ b ++ [toEnum 10,'q','('] ++ show b ++ [','] ++ show c ++ [','] ++ show a ++ [')']
+main=q &quot;q a b c=putStrLn $ b ++ [toEnum 10,'q','('] ++ show b ++ [','] ++ show c ++ [','] ++ show a ++ [')']&quot; &quot;def q(a,b,c):print b+chr(10)+'q('+repr(b)+','+repr(c)+','+repr(a)+')'&quot; &quot;def e(x) return 34.chr+x+34.chr end;def q(a,b,c) print b+10.chr+'main=q '+e(b)+' '+e(c)+' '+e(a)+' '+10.chr end&quot;
+
+</code></pre>
+
+<p>这段程序牛逼在哪里呢？运行后这个程序首先会输出一个Python程序，然后再运行这个Python程序会输出一段Ruby代码，最后这个Ruby代码的运行结果是原来的程序。或者说</p>
+
+<p>$ runhaskell quine.hs | python | ruby</p>
+
+<p>的运行结果就是这段程序本身。</p>
+
+<p>另外两个Quine变种都和zip有关。一个是<a href="http://initiative.yo2.cn/archives/642588" target="_blank">解压得到自己的gzip文件</a>；<a href="http://steike.com/code/useless/zip-file-quine/" target="_blank">另一个</a>看起来更强大一点（不过是真的“更强大”吗？），解压自己能得到一个图片和自己本身，基于lz77算法。</p>
+
+<p>两个zip quine的下载地址分别是<a href="http://upload-001.yo2cdn.com/wp-content/uploads/74/7487/2009/09/selfgz.rar" target="_blank"><a href="http://upload-001.yo2cdn.com/wp-content/uploads/74/7487/2009/09/selfgz.rar">http://upload-001.yo2cdn.com/wp-content/uploads/74/7487/2009/09/selfgz.rar</a></a>和<a href="http://steike.com/code/useless/zip-file-quine/" target="_blank"><a href="http://steike.com/code/useless/zip-file-quine/droste.zip">http://steike.com/code/useless/zip-file-quine/droste.zip</a></a>。</p>
+
+    </div>
+        <div class="cc-license">
+      本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.zh">知识共享署名-非商业性使用 3.0 版本许可协议</a>进行许可，欢迎转载，演绎，但是必须保留本文的署名 <a href="https://blog.yxwang.me/2009/09/interesting-quines/">zellux</a>（包含链接），且不得用于商业目的。
+    </div>
+
+  </div>
+  <div class="pagination">
+    <a class="btn previous " href="https://blog.yxwang.me/2009/10/only-31m-disk-space-detected/"> Prev</a>  
+    <a class="btn next " href="https://blog.yxwang.me/2009/09/compile-php5-on-dreamhost/"> Next</a> 
+  </div>
+</div>
+
+
+<div id="disqus_thread"></div>
+<script>
+  var disqus_config = function () {
+  this.page.url = "https://blog.yxwang.me/2009/09/interesting-quines/";
+  
+  };
+  (function() {
+  var d = document, s = d.createElement('script');
+  s.src = '//aiur-zellux.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+
+<div class="footer">
+  
+  <p>Powered by <a href="http://gohugo.io">Hugo</a> and <a href="https://github.com/zhe/hugo-theme-slim">Slim theme</a>.
+  
+      Follow me on <a href="https://twitter.com/zellux">Twitter</a>.
+      </p>
+  </p>
+  
+</div>
+
+                   
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+    Macros: {
+      argmax: "\\operatorname*{argmax}",
+      argmin: "\\operatorname*{argmin}"
+    }
+  },
+  jax: ["input/TeX","output/CommonHTML"]
+});
+</script>
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML">
+</script>
+
+</script>
+
+<script src="https://blog.yxwang.me/js/slim.min.aef36e671f72c9042139aae327dbe693b7ebaa67fd56f30dad4c985a91ba9294.js"></script>
+
+
+<link rel="stylesheet" href="https://blog.yxwang.me/css/solarized-light.min.5499f6bc45da0c78f070be4f720fd28b19af75306b569b77837d57c3cf819430.css" />
+<script src="/js/highlight.pack.js"></script>
+<script>
+  hljs.initHighlightingOnLoad();
+</script>
+
+</div>
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-25551121-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+<script type="text/javascript">
+    window.heap=window.heap||[],heap.load=function(e,t){window.heap.appid=e,window.heap.config=t=t||{};var r=t.forceSSL||"https:"===document.location.protocol,a=document.createElement("script");a.type="text/javascript",a.async=!0,a.src=(r?"https:":"http:")+"//cdn.heapanalytics.com/js/heap-"+e+".js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(a,n);for(var o=function(e){return function(){heap.push([e].concat(Array.prototype.slice.call(arguments,0)))}},p=["addEventProperties","addUserProperties","clearEventProperties","identify","removeEventProperty","setEventProperties","track","unsetEventProperty"],c=0;c<p.length;c++)heap[p[c]]=o(p[c])};
+      heap.load("3166778701");
+</script>
+
+
+</body>
+
+</html>
+

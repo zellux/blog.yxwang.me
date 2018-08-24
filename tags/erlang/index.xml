@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Erlang on Aiur · Zellux 的博客</title>
+    <link>https://blog.yxwang.me/tags/erlang/</link>
+    <description>Recent content in Erlang on Aiur · Zellux 的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Thu, 16 Oct 2008 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.yxwang.me/tags/erlang/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Live Code Update in Erlang</title>
+      <link>https://blog.yxwang.me/2008/10/live-code-update-in-erlang/</link>
+      <pubDate>Thu, 16 Oct 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2008/10/live-code-update-in-erlang/</guid>
+      <description>http://bc.tech.coop/blog/070713.html
+Joe Armstrong的原话 Live code upgrading is one of the things Erlang was designed for.
+一个最简单的例子
+loop(Fun, State) receive {From, {rpc, Tag, Q}} -&amp;gt; {Reply, State1} = Fun(Q, State), From ! {Tag, Reply}, loop(Fun, State1); {code_upgrade, Fun1} -&amp;gt; loop(Fun1, State) end.  使用时只要发送一个{code_update, Fun1}消息即可 在实际的项目中，live code update需要在一个进程的稳定状态中进行。好在有Erlang天生的分布式特性，结点i进行更新时其他结点可以接管这个结点的任务，直到结点i更新成功，再进行下一个结点的更新。这个形式和结点的crash处理有点类似。于是Erlang中live updating的实际难点在于 1. How to suspend the system and put it into a stable state 2. How to replicate the stable state 3. How to restart from a stable state 4.</description>
+    </item>
+    
+    <item>
+      <title>Erlang的Hello World：一个计数程序</title>
+      <link>https://blog.yxwang.me/2008/10/erlang-hello-world/</link>
+      <pubDate>Mon, 13 Oct 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2008/10/erlang-hello-world/</guid>
+      <description>acm queue 9月的杂志的主题是The Concurrency Problem，力推了Erlang这个语言，其中有篇文章简单的介绍了下这个message-oriented语言。
+查了下这个名字的读法，正确的读法应该是air-lang，这里元音a的发音和bang中的a一样。
+文章中的第一个程序就有点令人费解，主要原因在于Erlang的语法和一般的imperative language差别很大，和functional language比较类似，但是本质上也有很大的不同。
+以Java的一个计数程序为例
+// A shared counter. public class Sequence { private int nextVal = 0; // Retrieve counter and increment. public synchronized int getNext() { return nextVal++; } // Re-initialize counter to zero. public synchronized void reset() { nextVal = 0; } }  这个程序的功能不用多说了，一个同步的计数程序。它的Erlang翻译版的代码为
+-module(sequence1). -export([make_sequence/0, get_next/1, reset/1]). % Create a new shared counter. make_sequence() -&amp;gt; spawn(fun() -&amp;gt; sequence_loop(0) end). sequence_loop(N) -&amp;gt; receive {From, get_next} -&amp;gt; From !</description>
+    </item>
+    
+  </channel>
+</rss>

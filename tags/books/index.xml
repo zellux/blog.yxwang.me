@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Books on Aiur · Zellux 的博客</title>
+    <link>https://blog.yxwang.me/tags/books/</link>
+    <description>Recent content in Books on Aiur · Zellux 的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Tue, 11 Nov 2008 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.yxwang.me/tags/books/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Godel, Escher, Bach [2]</title>
+      <link>https://blog.yxwang.me/2008/11/godel-escher-bach-2/</link>
+      <pubDate>Tue, 11 Nov 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2008/11/godel-escher-bach-2/</guid>
+      <description> 素数判定的形式化系统，精彩！ 合数的判定系统比较容易构造，素数的判定当然不能简单的通过“不是合数”来解决。 首先构造一个不整除的概念(DND) 公理模式：xyDNDx，其中x和y是短横组成的符号串。（a&amp;gt;b，a自然不整除b） 生成规则：如果xDNDy是个定理，那么xDNDxy也是个定理。 接下来定义一个描述z在2到x的范围内没有因子的语言，zDFx (Divisor-Free) 规则1：如果&amp;ndash;DNDz是个定理，那么zDF&amp;ndash;也是个定理。 规则2：如果zDFx与x-DNDz都是定理，那么zDFx-也是个定理。 好了，到这里已经能检查一个数是否在给定范围内找出因子了，定义素数(Pz)就变得很简单。 规则：若z-DFz是个定理，那么Pz-是个定理。 再处理一个特例，为2制定一条公理 公理：P- -  </description>
+    </item>
+    
+    <item>
+      <title>Godel, Escher, Bach [1]</title>
+      <link>https://blog.yxwang.me/2008/11/godel-escher-bach-1/</link>
+      <pubDate>Mon, 10 Nov 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2008/11/godel-escher-bach-1/</guid>
+      <description>哥德尔定理 用比较通俗的英文来说，就是 All consistent axiomatic formulations of number theory include undicidable propositions.
+ 图形和衬底也许会不带有完全相同的信息 There exist formal systems whose negative space (set of non-theorems) is not the positive space (set of theorems) of any formal system. 用更technical的说法 There exist recursively enumerable sets which are not recursive. 这里recursively enumerable指能按照typographical规则生成，而recursive则对应域指衬底也是个图形的图形。 由此得出一个结论 There exist formal systems for which there is no typographical decision procedure. 证明很简单，用反证法。如果所有的形式系统都能有typographical的判定方法，那么逐个测试所有的符号串，从而能生成一个非定理集合，与前面的定理矛盾。
+ 关于那个数列谜题 {Ai} = 1, 3, 7, 12, 18, 26, 35, 45, 56, 69, &amp;hellip; 既然讲到了衬底自然要考虑这个，负空间数列为 {Bi} = 2, 4, 5, 6, 8, 9, 10, 11, 13, 14, &amp;hellip; An = An-1 + Bn-1</description>
+    </item>
+    
+  </channel>
+</rss>

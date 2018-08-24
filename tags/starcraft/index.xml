@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Starcraft on Aiur · Zellux 的博客</title>
+    <link>https://blog.yxwang.me/tags/starcraft/</link>
+    <description>Recent content in Starcraft on Aiur · Zellux 的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Mon, 05 Dec 2011 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.yxwang.me/tags/starcraft/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>一些 ZvT 的心得</title>
+      <link>https://blog.yxwang.me/2011/12/zvt-notes/</link>
+      <pubDate>Mon, 05 Dec 2011 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2011/12/zvt-notes/</guid>
+      <description>&lt;p&gt;一直在国服大师组混，最让我头疼，同时研究的也最多得对战就是 ZvT 了。这里写一点自己关于 ZvT 的心得，欢迎探讨。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>FEG归来</title>
+      <link>https://blog.yxwang.me/2008/11/feg/</link>
+      <pubDate>Sat, 08 Nov 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2008/11/feg/</guid>
+      <description>第三届复旦电竞赛，不过这次星际项目报名的高手很少。
+小组赛居然输了一场，不过最后在半决赛把这个对手3:0，复仇成功了，恩。
+貌似今天打了1把zvz，11把zvp，恩
+决赛zvz，不过估计没多少时间准备了。。</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="主要功能：开发人员执行svn commit后自动将开发人id、修订版本号和日志内容通过短信的方式通知所有人。
+首先修改svn服务器对应项目目录hook/post-commit文件
+#!/bin/bash export LANG=en_US.utf8 REPOS=&quot;$1&quot; REV=&quot;$2&quot; cd /home/svn/repositories/sebank/hooks ./sms.py commit $REPOS $REV  注意别忘了这里的export LANG，我一开始测试的时候发现中文一直有乱码，后来才意识到shell的环境变量里缺这个。 hook/sms.py
+#!/usr/bin/python # -*- coding: utf-8 -*- import sys, urllib, os from subprocess import * user = &#39;your mobile number&#39; pword = &#39;fetion password&#39; phone = [ &#39;13764444444&#39;, &#39;13813333333&#39;, ] repo = sys.argv[2] rev = sys.argv[3] cmdlog = &#39;svnlook log -r %s %s&#39;%(rev, repo) cmdauthor = &#39;svnlook author -r %s %s&#39;%(rev, repo) log = Popen(cmdlog, stdout=PIPE, shell=True).">
+    <meta name="author" content="zellux">
+
+    <title> SVN 更新短信通知脚本 &middot; Aiur · Zellux 的博客 </title>
+
+    <script src="/js/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
+    <script src="/js/jquery-3.0.47.fancybox.min.js"></script>
+
+    
+    
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.52ea10a8f3a0b8f145adadb8d3761e17a42a7634869f775ef5830ed4de77d3fa.css">
+    
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+    
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    
+    <link href="" rel="alternate" type="application/rss+xml" title="Aiur · Zellux 的博客" />
+    
+<script type="application/ld+json">
+{
+    "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https://blog.yxwang.me/"
+    },
+    "articleSection" : "post",
+    "name" : "SVN 更新短信通知脚本",
+    "headline" : "SVN 更新短信通知脚本",
+    "description" : "主要功能：开发人员执行svn commit后自动将开发人id、修订版本号和日志内容通过短信的方式通知所有人。
+首先修改svn服务器对应项目目录hook/post-commit文件
+#!/bin/bash export LANG=en_US.utf8 REPOS=&quot;$1&quot; REV=&quot;$2&quot; cd /home/svn/repositories/sebank/hooks ./sms.py commit $REPOS $REV  注意别忘了这里的export LANG，我一开始测试的时候发现中文一直有乱码，后来才意识到shell的环境变量里缺这个。 hook/sms.py
+#!/usr/bin/python # -*- coding: utf-8 -*- import sys, urllib, os from subprocess import * user = 'your mobile number' pword = 'fetion password' phone = [ '13764444444', '13813333333', ] repo = sys.argv[2] rev = sys.argv[3] cmdlog = 'svnlook log -r %s %s'%(rev, repo) cmdauthor = 'svnlook author -r %s %s'%(rev, repo) log = Popen(cmdlog, stdout=PIPE, shell=True).",
+    "inLanguage" : "en-US",
+    "author" : "zellux",
+    "creator" : "zellux",
+    "publisher": "zellux",
+    "accountablePerson" : "",
+    "copyrightHolder" : "",
+    "copyrightYear" : "2009",
+    "datePublished": "2009-06-16 00:00:00 &#43;0000 UTC",
+    "dateModified" : "2009-06-16 00:00:00 &#43;0000 UTC",
+    "url" : "https://blog.yxwang.me/2009/06/svn-sms-notification/",
+    "wordCount" : "115",
+    "keywords" : [ "Scripting","Tooling","svn","Blog" ]
+}
+</script>
+
+  </head>
+
+  <body>
+    <nav class="nav">
+  <div class="nav-container">
+    <span class="site-title">
+      <a href="https://blog.yxwang.me/">Aiur · Zellux 的博客</a>
+    </span>
+    
+    <div class="nav-list">
+      
+      <span class="nav-item"><a href="/about">About</a></span>
+      
+      <span class="nav-item"><a href="/archive">Archive</a></span>
+      
+      <span class="nav-item"><a href="/notes">Notes</a></span>
+      
+    </div>
+  </div>
+</nav>
+
+    <div class="container">
+
+
+<div class="content">
+  <div class="post">
+    <h1 class="post-title"><a href="https://blog.yxwang.me/2009/06/svn-sms-notification/">SVN 更新短信通知脚本</a></h1>
+    <span class="post-meta">
+  <time datetime='Tue, Jun 16, 2009' data-updated="true" itemprop="datePublished">Tue, Jun 16, 2009</time>
+  
+  <span class="post-categories">
+    •
+	<a href="https://blog.yxwang.me/categories/tooling">Tooling</a>
+  </span>
+  
+</span>
+
+    <div class="post-content">
+      <p>主要功能：开发人员执行svn commit后自动将开发人id、修订版本号和日志内容通过短信的方式通知所有人。</p>
+
+<p>首先修改svn服务器对应项目目录hook/post-commit文件</p>
+
+<pre><code class="language-bash">#!/bin/bash
+
+export LANG=en_US.utf8
+REPOS=&quot;$1&quot;
+REV=&quot;$2&quot;
+
+cd /home/svn/repositories/sebank/hooks
+./sms.py commit $REPOS $REV
+</code></pre>
+
+<p>注意别忘了这里的export LANG，我一开始测试的时候发现中文一直有乱码，后来才意识到shell的环境变量里缺这个。
+hook/sms.py</p>
+
+<pre><code class="language-python">#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+import sys, urllib, os
+from subprocess import *
+
+user = 'your mobile number'
+pword = 'fetion password'
+phone = [
+        '13764444444',
+        '13813333333',
+        ]
+
+repo = sys.argv[2]
+rev = sys.argv[3]
+cmdlog = 'svnlook log -r %s %s'%(rev, repo)
+cmdauthor = 'svnlook author -r %s %s'%(rev, repo)
+log = Popen(cmdlog, stdout=PIPE, shell=True).stdout.read().strip()
+author = Popen(cmdauthor, stdout=PIPE, shell=True).stdout.read().strip()
+
+msg = 'sebank #%s %s: %s' % (rev, author, log)
+
+for number in phone:
+    url = 'http://sms.api.bz/fetion.php?username=%s&amp;password=%s&amp;sendto=%s&amp;message=%s' % (user, pword, number, urllib.quote_plus(msg))
+    cmd = 'curl &quot;%s&quot;' % url
+    send = Popen(cmd, shell=True, stdout=PIPE, stderr=PIPE)
+    send.wait()
+</code></pre>
+
+<p>这里user是发送者的手机号，且该用户的飞信好友需包含其他用户，pword为飞信密码，phone为用户手机号码列表。
+最后设置下这两个文件的权限，保证http/svn用户能执行即可。另外由于sms.py中飞信密码是明文保存的，注意控制它的读权限。</p>
+
+    </div>
+        <div class="cc-license">
+      本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.zh">知识共享署名-非商业性使用 3.0 版本许可协议</a>进行许可，欢迎转载，演绎，但是必须保留本文的署名 <a href="https://blog.yxwang.me/2009/06/svn-sms-notification/">zellux</a>（包含链接），且不得用于商业目的。
+    </div>
+
+  </div>
+  <div class="pagination">
+    <a class="btn previous " href="https://blog.yxwang.me/2009/07/firefox-close-windows-with-last-tab/"> Prev</a>  
+    <a class="btn next " href="https://blog.yxwang.me/2009/06/above-the-clouds/"> Next</a> 
+  </div>
+</div>
+
+
+<div id="disqus_thread"></div>
+<script>
+  var disqus_config = function () {
+  this.page.url = "https://blog.yxwang.me/2009/06/svn-sms-notification/";
+  
+  };
+  (function() {
+  var d = document, s = d.createElement('script');
+  s.src = '//aiur-zellux.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+
+<div class="footer">
+  
+  <p>Powered by <a href="http://gohugo.io">Hugo</a> and <a href="https://github.com/zhe/hugo-theme-slim">Slim theme</a>.
+  
+      Follow me on <a href="https://twitter.com/zellux">Twitter</a>.
+      </p>
+  </p>
+  
+</div>
+
+                   
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+    Macros: {
+      argmax: "\\operatorname*{argmax}",
+      argmin: "\\operatorname*{argmin}"
+    }
+  },
+  jax: ["input/TeX","output/CommonHTML"]
+});
+</script>
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML">
+</script>
+
+</script>
+
+<script src="https://blog.yxwang.me/js/slim.min.aef36e671f72c9042139aae327dbe693b7ebaa67fd56f30dad4c985a91ba9294.js"></script>
+
+
+<link rel="stylesheet" href="https://blog.yxwang.me/css/solarized-light.min.5499f6bc45da0c78f070be4f720fd28b19af75306b569b77837d57c3cf819430.css" />
+<script src="/js/highlight.pack.js"></script>
+<script>
+  hljs.initHighlightingOnLoad();
+</script>
+
+</div>
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-25551121-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+<script type="text/javascript">
+    window.heap=window.heap||[],heap.load=function(e,t){window.heap.appid=e,window.heap.config=t=t||{};var r=t.forceSSL||"https:"===document.location.protocol,a=document.createElement("script");a.type="text/javascript",a.async=!0,a.src=(r?"https:":"http:")+"//cdn.heapanalytics.com/js/heap-"+e+".js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(a,n);for(var o=function(e){return function(){heap.push([e].concat(Array.prototype.slice.call(arguments,0)))}},p=["addEventProperties","addUserProperties","clearEventProperties","identify","removeEventProperty","setEventProperties","track","unsetEventProperty"],c=0;c<p.length;c++)heap[p[c]]=o(p[c])};
+      heap.load("3166778701");
+</script>
+
+
+</body>
+
+</html>
+

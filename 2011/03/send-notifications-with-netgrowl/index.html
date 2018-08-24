@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="我平时用的系统是 Windows 7 和 Mac OS X，实验室项目一般都是 ssh 远登到 Ubuntu 和 Linux 上开发的。有时碰到内核和虚拟机等项目编译比较耗时，编译开始后要时不时的看一下编译任务是否完成，或者有没有中途出错，这时候如果有个通知系统就比较方便了。
+Google 了一把找到了 netgrowl 这个好东东，它是一个开源的 Python 模块，实现了 Growl 协议，可以向 Mac 或 Windows 上的 Growl 服务发送通知。使用也非常方便，先用 GrowlRegistrationPacket 函数注册一个应用，接着就可以用 GrowlNotificationPacket 发送通知了：
+notify.py
+#!/usr/bin/python from netgrowl import * import sys title = &quot;Notification from Ubuntu&quot; desc = &quot;&quot; if len(sys.argv) &gt; 2: title = sys.argv[1] desc = sys.argv[2] addr = (&quot;10.131.251.101&quot;, GROWL_UDP_PORT) s = socket(AF_INET,SOCK_DGRAM) p = GrowlRegistrationPacket(application=&quot;Ubuntu&quot;, password=&quot;i&quot;) p.addNotification(&quot;Ubuntu Notifications&quot;, enabled=True) s.">
+    <meta name="author" content="zellux">
+
+    <title> 利用 netgrowl 向 Windows / Mac OS X 发送消息 &middot; Aiur · Zellux 的博客 </title>
+
+    <script src="/js/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
+    <script src="/js/jquery-3.0.47.fancybox.min.js"></script>
+
+    
+    
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.52ea10a8f3a0b8f145adadb8d3761e17a42a7634869f775ef5830ed4de77d3fa.css">
+    
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+    
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    
+    <link href="" rel="alternate" type="application/rss+xml" title="Aiur · Zellux 的博客" />
+    
+<script type="application/ld+json">
+{
+    "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https://blog.yxwang.me/"
+    },
+    "articleSection" : "post",
+    "name" : "利用 netgrowl 向 Windows / Mac OS X 发送消息",
+    "headline" : "利用 netgrowl 向 Windows / Mac OS X 发送消息",
+    "description" : "我平时用的系统是 Windows 7 和 Mac OS X，实验室项目一般都是 ssh 远登到 Ubuntu 和 Linux 上开发的。有时碰到内核和虚拟机等项目编译比较耗时，编译开始后要时不时的看一下编译任务是否完成，或者有没有中途出错，这时候如果有个通知系统就比较方便了。
+Google 了一把找到了 netgrowl 这个好东东，它是一个开源的 Python 模块，实现了 Growl 协议，可以向 Mac 或 Windows 上的 Growl 服务发送通知。使用也非常方便，先用 GrowlRegistrationPacket 函数注册一个应用，接着就可以用 GrowlNotificationPacket 发送通知了：
+notify.py
+#!/usr/bin/python from netgrowl import * import sys title = &quot;Notification from Ubuntu&quot; desc = &quot;&quot; if len(sys.argv) &gt; 2: title = sys.argv[1] desc = sys.argv[2] addr = (&quot;10.131.251.101&quot;, GROWL_UDP_PORT) s = socket(AF_INET,SOCK_DGRAM) p = GrowlRegistrationPacket(application=&quot;Ubuntu&quot;, password=&quot;i&quot;) p.addNotification(&quot;Ubuntu Notifications&quot;, enabled=True) s.",
+    "inLanguage" : "en-US",
+    "author" : "zellux",
+    "creator" : "zellux",
+    "publisher": "zellux",
+    "accountablePerson" : "",
+    "copyrightHolder" : "",
+    "copyrightYear" : "2011",
+    "datePublished": "2011-03-02 00:00:00 &#43;0000 UTC",
+    "dateModified" : "2011-03-02 00:00:00 &#43;0000 UTC",
+    "url" : "https://blog.yxwang.me/2011/03/send-notifications-with-netgrowl/",
+    "wordCount" : "135",
+    "keywords" : [ "Growl","Linux","Python","Scripting","Tooling","Blog" ]
+}
+</script>
+
+  </head>
+
+  <body>
+    <nav class="nav">
+  <div class="nav-container">
+    <span class="site-title">
+      <a href="https://blog.yxwang.me/">Aiur · Zellux 的博客</a>
+    </span>
+    
+    <div class="nav-list">
+      
+      <span class="nav-item"><a href="/about">About</a></span>
+      
+      <span class="nav-item"><a href="/archive">Archive</a></span>
+      
+      <span class="nav-item"><a href="/notes">Notes</a></span>
+      
+    </div>
+  </div>
+</nav>
+
+    <div class="container">
+
+
+<div class="content">
+  <div class="post">
+    <h1 class="post-title"><a href="https://blog.yxwang.me/2011/03/send-notifications-with-netgrowl/">利用 netgrowl 向 Windows / Mac OS X 发送消息</a></h1>
+    <span class="post-meta">
+  <time datetime='Wed, Mar 2, 2011' data-updated="true" itemprop="datePublished">Wed, Mar 2, 2011</time>
+  
+  <span class="post-categories">
+    •
+	<a href="https://blog.yxwang.me/categories/tooling">Tooling</a>
+  </span>
+  
+</span>
+
+    <div class="post-content">
+      <p>我平时用的系统是 Windows 7 和 Mac OS X，实验室项目一般都是 ssh 远登到 Ubuntu 和 Linux 上开发的。有时碰到内核和虚拟机等项目编译比较耗时，编译开始后要时不时的看一下编译任务是否完成，或者有没有中途出错，这时候如果有个通知系统就比较方便了。</p>
+
+<p>Google 了一把找到了 <a title="netgrowl" href="http://the.taoofmac.com/space/projects/netgrowl" target="_blank">netgrowl</a> 这个好东东，它是一个开源的 Python 模块，实现了 Growl 协议，可以向 Mac 或 Windows 上的 Growl 服务发送通知。使用也非常方便，先用 GrowlRegistrationPacket 函数注册一个应用，接着就可以用 GrowlNotificationPacket 发送通知了：</p>
+
+<p><u>notify.py</u></p>
+
+<pre><code class="language-python">#!/usr/bin/python
+
+from netgrowl import *
+import sys
+
+title = &quot;Notification from Ubuntu&quot;
+desc = &quot;&quot;
+if len(sys.argv) &gt; 2:
+    title = sys.argv[1]
+    desc = sys.argv[2]
+
+addr = (&quot;10.131.251.101&quot;, GROWL_UDP_PORT)
+s = socket(AF_INET,SOCK_DGRAM)
+p = GrowlRegistrationPacket(application=&quot;Ubuntu&quot;, password=&quot;i&quot;)
+p.addNotification(&quot;Ubuntu Notifications&quot;, enabled=True)
+s.sendto(p.payload(), addr)
+p = GrowlNotificationPacket(application=&quot;Ubuntu&quot;,
+    notification=&quot;Ubuntu Notifications&quot;, title=title,
+    description=desc, priority=1,
+    sticky=True, password=&quot;i&quot;)
+s.sendto(p.payload(),addr)
+s.close()
+</code></pre>
+
+<p>这里的 addr 是接收方的地址，GrowlRegistrationPacket 和 GrowlNotificationPacket 中需要指定 Growl 远程服务的密码。</p>
+
+<p>然后是一个简化 notify.py 调用的 shell 脚本：</p>
+
+<p><u>growl.sh</u></p>
+
+<pre><code class="language-bash">#!/bin/bash
+
+cmd=$@
+$cmd
+python ~/bin/notify.py Done &quot;$cmd under $PWD is finished&quot;
+</code></pre>
+
+<p>把 growl.sh 加入到 PATH 中，之后只要运行 <u>growl.sh make all</u> 就能运行 make all 命令 ，并且在执行完成后向 Growl 客户端发送消息了。如果安装了 <a title="BoxCar" href="http://boxcar.io" target="_blank">BoxCar</a>，还能把这条消息转发到 iPhone / iPad 上。</p>
+
+<p>P.S. Growl for Windows 可以在<a title="这里" href="http://www.growlforwindows.com/" target="_blank">这里</a>找到。</p>
+
+    </div>
+        <div class="cc-license">
+      本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.zh">知识共享署名-非商业性使用 3.0 版本许可协议</a>进行许可，欢迎转载，演绎，但是必须保留本文的署名 <a href="https://blog.yxwang.me/2011/03/send-notifications-with-netgrowl/">zellux</a>（包含链接），且不得用于商业目的。
+    </div>
+
+  </div>
+  <div class="pagination">
+    <a class="btn previous " href="https://blog.yxwang.me/2011/07/full-screen-emacs-in-lion/"> Prev</a>  
+    <a class="btn next " href="https://blog.yxwang.me/2011/01/return-oriented-intro-2/"> Next</a> 
+  </div>
+</div>
+
+
+<div id="disqus_thread"></div>
+<script>
+  var disqus_config = function () {
+  this.page.url = "https://blog.yxwang.me/2011/03/send-notifications-with-netgrowl/";
+  
+  };
+  (function() {
+  var d = document, s = d.createElement('script');
+  s.src = '//aiur-zellux.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+
+<div class="footer">
+  
+  <p>Powered by <a href="http://gohugo.io">Hugo</a> and <a href="https://github.com/zhe/hugo-theme-slim">Slim theme</a>.
+  
+      Follow me on <a href="https://twitter.com/zellux">Twitter</a>.
+      </p>
+  </p>
+  
+</div>
+
+                   
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+    Macros: {
+      argmax: "\\operatorname*{argmax}",
+      argmin: "\\operatorname*{argmin}"
+    }
+  },
+  jax: ["input/TeX","output/CommonHTML"]
+});
+</script>
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML">
+</script>
+
+</script>
+
+<script src="https://blog.yxwang.me/js/slim.min.aef36e671f72c9042139aae327dbe693b7ebaa67fd56f30dad4c985a91ba9294.js"></script>
+
+
+<link rel="stylesheet" href="https://blog.yxwang.me/css/solarized-light.min.5499f6bc45da0c78f070be4f720fd28b19af75306b569b77837d57c3cf819430.css" />
+<script src="/js/highlight.pack.js"></script>
+<script>
+  hljs.initHighlightingOnLoad();
+</script>
+
+</div>
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-25551121-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+<script type="text/javascript">
+    window.heap=window.heap||[],heap.load=function(e,t){window.heap.appid=e,window.heap.config=t=t||{};var r=t.forceSSL||"https:"===document.location.protocol,a=document.createElement("script");a.type="text/javascript",a.async=!0,a.src=(r?"https:":"http:")+"//cdn.heapanalytics.com/js/heap-"+e+".js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(a,n);for(var o=function(e){return function(){heap.push([e].concat(Array.prototype.slice.call(arguments,0)))}},p=["addEventProperties","addUserProperties","clearEventProperties","identify","removeEventProperty","setEventProperties","track","unsetEventProperty"],c=0;c<p.length;c++)heap[p[c]]=o(p[c])};
+      heap.load("3166778701");
+</script>
+
+
+</body>
+
+</html>
+

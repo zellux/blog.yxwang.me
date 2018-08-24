@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Cooking on Aiur · Zellux 的博客</title>
+    <link>https://blog.yxwang.me/categories/cooking/</link>
+    <description>Recent content in Cooking on Aiur · Zellux 的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sat, 21 Jul 2018 15:14:53 -0700</lastBuildDate>
+    
+	<atom:link href="https://blog.yxwang.me/categories/cooking/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Sous Vide 低温慢煮龙虾</title>
+      <link>https://blog.yxwang.me/2018/07/sous-vide-lobster/</link>
+      <pubDate>Sat, 21 Jul 2018 15:14:53 -0700</pubDate>
+      
+      <guid>https://blog.yxwang.me/2018/07/sous-vide-lobster/</guid>
+      <description>&lt;p&gt;Prime Day 的时候入了一套 Sous Vide （真空低温烹饪，读作 soo veed）装备，周末在家尝试了龙虾，味道很不错。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

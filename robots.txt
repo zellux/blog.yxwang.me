@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /categories/
+Disallow: /tags/
+Disallow: /archive/
+Disallow: /pages/
+
+Sitemap: http://blog.yxwang.me/sitemap.xml

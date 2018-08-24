@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Scala on Aiur · Zellux 的博客</title>
+    <link>https://blog.yxwang.me/tags/scala/</link>
+    <description>Recent content in Scala on Aiur · Zellux 的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sat, 30 Jun 2012 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.yxwang.me/tags/scala/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Scala 中的协变和逆变</title>
+      <link>https://blog.yxwang.me/2012/06/variances-in-scala/</link>
+      <pubDate>Sat, 30 Jun 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2012/06/variances-in-scala/</guid>
+      <description>&lt;h2 id=&#34;java-数组&#34;&gt;Java 数组&lt;/h2&gt;
+
+&lt;p&gt;先来看一个 Java 中的例子，Java 中的数组是协变的。也就是说，一个 String 数组(String[])是可以被当成 Object 数组(Object[])处理的：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;String[] a1 = { &amp;quot;abc&amp;quot; };
+Object[] a2 = a1;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这种协变虽然在读取数组内容时不会有问题（a1 数组中的 String 元素可以被当成 Object 使用），但是修改数组内容时就会出现无法在编译期检测出来的错误了：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;a2[0] = new Integer(17)
+String s  = a1[0]  // java.lang.ArrayStoreException
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

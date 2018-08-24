@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Featured on Aiur · Zellux 的博客</title>
+    <link>https://blog.yxwang.me/tags/featured/</link>
+    <description>Recent content in Featured on Aiur · Zellux 的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Tue, 09 Feb 2010 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.yxwang.me/tags/featured/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Linear Page Table: 更方便地访问页表</title>
+      <link>https://blog.yxwang.me/2010/02/linear-page-table/</link>
+      <pubDate>Tue, 09 Feb 2010 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2010/02/linear-page-table/</guid>
+      <description>Linear page table 又叫 virtual page table，是一种方便虚拟机监控器 (VMM) / 操作系统 (OS) / 应用程序访问页表的技巧。Xen、64 位 Linux 内核、JOS 操作系统中都用到了这个设计。这里以 x86_32 系统为例，简单介绍一下它的实现和使用，如有错误敬请指出。
+一般情况下，如果 OS 需要访问某个页表，需要将它映射到自己的虚拟空间中，然后再访问。这样带来两个问题，一是访问比较繁琐，需要临时的页映射；二是对于 exo-kernel 这种 fork 等行为都是在用户态程序实现的系统，可能会增加一下安全上的问题。因为用户程序在 fork 的时候需要访问自己的页表，而这时候除非操作系统提供另一些权限控制更精确的系统调用，否则就很难让不可信的应用程序访问自己的页表且不做有害的改动。
+Linear page table 很好的解决了这两个问题。它的实现很简单，只需要在页目录中增加一项 VPT (virtual page table entry)，和一般的页目录项不同的是，这个 VPT 指向的是页目录本身。
+这样带来了什么好处呢？借用一下 MIT 6.828 课件上的图片来更好的说明这个问题：
+增加了 VPT 后，通常的物理地址 -&amp;gt; 虚拟地址的转换还是没变。和之前唯一的不同在于虚拟地址的页目录索引号 (PDX) 为之前设置的 VPT 的时候。
+举个例子来说，假如现在要访问的虚拟地址是 (VPT &amp;lt;&amp;lt; 22) | (VPT &amp;lt;&amp;lt; 12)，即这里的 PDX 和 PTX 都等于 VPT 的时候，整个转换过程是怎么样的呢（假设 TLB miss 的情况）？首先根据 CR3 中的物理地址，硬件开始查找页目录中的第 VPT 项，然后根据这一项中的物理地址，找到了下一级「页表」。注意这时候硬件以为自己得到的页表地址，实际上访问的还是页目录本身。同样，在这个「页表」中找到第 VPT 项指出去的最终页，得到了最终页的物理地址。因为 PTX 还是等于 VPT，所以最后得到的物理地址还是页目录的。</description>
+    </item>
+    
+    <item>
+      <title>Singleton 模式与双检测锁定(DCL)</title>
+      <link>https://blog.yxwang.me/2008/07/singleton-pattern-and-double-checked-lock/</link>
+      <pubDate>Fri, 04 Jul 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2008/07/singleton-pattern-and-double-checked-lock/</guid>
+      <description>看 OOP 教材时，书里提到了一个双检测锁定（Double-Checked Lock, DCL）的问题，但是没有更多介绍，只是说这是一个和底层内存机制有关的漏洞。查阅了下相关资料，对这个问题大致有了点了解。
+从头开始说吧。
+在多线程的情况下Singleton模式会遇到不少问题，一个简单的例子
+class Singleton { private static Singleton instance = null; public static Singleton instance() { if (instance == null) { instance = new Singleton(); } return instance; } }  假设这样一个场景，有两个线程调用 Singleton.instance()，首先线程一判断 instance 是否等于 null，判断完后一瞬间虚拟机把线程二调度为运行线程，线程二再次判断 instance 是否为 null，然后创建一个Singleton 实例，线程二的时间片用完后，线程一被唤醒，接下来它依然会创建一个新的 Singleton 实例，导致两次调用范围的对象不同。
+最简单的方法自然是在类被载入时就初始化这个对象：
+private static Singleton instance = new Singleton();  JLS (Java Language Specification) 中规定了一个类只会被初始化一次，所以这样做肯定是没问题的。
+但是如果要实现延迟初始化（Lazy initialization），比如这个实例初始化时的参数要在运行期才能确定，应该怎么做呢？
+依然有最简单的方法：使用 synchronized 关键字修饰初始化方法：
+public synchronized static Singleton instance() { if (instance == null) { instance = new Singleton(); } return instance; }  然而引入 synchronized 关键字后，产生了一个性能问题：多个线程同时访问这个方法时，会因为同步原语而导致每次只有一个线程执行这段代码，影响程序性能。而事实上初始化完毕后只需要简单的返回 instance 的引用就行了。</description>
+    </item>
+    
+    <item>
+      <title>《编程之美》一个二进制趣题的讨论</title>
+      <link>https://blog.yxwang.me/2008/04/count-1-bits-in-an-int32/</link>
+      <pubDate>Tue, 15 Apr 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2008/04/count-1-bits-in-an-int32/</guid>
+      <description>问题很简单，给定一个 8 位整型，要求写程序计算这个数的二进制表示中 1 的个数，要求算法的执行效率尽可能的高。
+先来看看样章上给出的几个算法：
+解法一，每次除二，看是否为奇数，是的话就累计加一，最后这个结果就是二进制表示中1的个数。
+解法二，同样用到一个循环，只是里面的操作用位移操作简化了。
+int Count(int v) { int num = 0; while (v) { num += v &amp;amp; 0x01; v &amp;gt;&amp;gt;= 1; } return num; }  解法三，用到一个巧妙的与操作，v &amp;amp; (v - 1) 每次能消去二进制表示中最后一位 1，利用这个技巧可以减少一定的循环次数。
+解法四，查表法，因为 8 位整型的范围是 0 - 255，可以直接把结果保存在一张表中，然后查表就行。书上强调这个算法的复杂度为 O(1)。
+int countTable[256] = { 0, 1, 1, 2, 1, ..., 7, 7, 8 }; int Count(int v) { return countTable[v]; }  好了，这就是样章上给出的四种方案，下面谈谈我的看法。
+首先是对算法的衡量上，复杂度真的是唯一的标准吗？尤其对于这种数据规模给定，而且很小的情况下，复杂度其实是个比较次要的因素。</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="课程链接：https://class.coursera.org/gametheory-2012-002/lecture/index
+Week 1: Introduction and Overview  Nash Equilibrium: 已知其他参与者的行为后，每一位参与者的行为能最大化他/她的收益。
+ Best Response：\(a_i^{*} \in BR(a_{-i}) \iff \forall a_i \in A_i, u_i(a_i^{*}, a_{-i}) \geq u_i(a_i, a_{-i})\)
+ \(a = &lt;a_1, ..., a_n&gt;\) 是一个 pure strategy Nash equilibrium 当且仅当 \(\forall i, a_i \in BR(a_{-i})\)，注意这里用了 \(\in\)，因为 best response 可能有多个。
+ \(s_i\) strictly dominates \(s&#39;_i \iff \forall s_{-i} \in S_{-i}, u_i(s_i, s_{-i}) &gt; u_i(s&#39;_i, s_{-i})\)
+ \(s_i\) very weakly dominates \(s&#39;_i \iff \forall s_{-i} \in S_{-i}, u_i(s_i, s_{-i}) \geq u_i(s&#39;_i, s_{-i})\)">
+    <meta name="author" content="zellux">
+
+    <title> Game Theory - Stanford &middot; Aiur · Zellux 的博客 </title>
+
+    <script src="/js/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
+    <script src="/js/jquery-3.0.47.fancybox.min.js"></script>
+
+    
+    
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.52ea10a8f3a0b8f145adadb8d3761e17a42a7634869f775ef5830ed4de77d3fa.css">
+    
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+    
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    
+    <link href="" rel="alternate" type="application/rss+xml" title="Aiur · Zellux 的博客" />
+    
+<script type="application/ld+json">
+{
+    "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https://blog.yxwang.me/"
+    },
+    "articleSection" : "notes",
+    "name" : "Game Theory - Stanford",
+    "headline" : "Game Theory - Stanford",
+    "description" : "课程链接：https://class.coursera.org/gametheory-2012-002/lecture/index
+Week 1: Introduction and Overview  Nash Equilibrium: 已知其他参与者的行为后，每一位参与者的行为能最大化他/她的收益。
+ Best Response：\(a_i^{*} \in BR(a_{-i}) \iff \forall a_i \in A_i, u_i(a_i^{*}, a_{-i}) \geq u_i(a_i, a_{-i})\)
+ \(a = &lt;a_1, ..., a_n&gt;\) 是一个 pure strategy Nash equilibrium 当且仅当 \(\forall i, a_i \in BR(a_{-i})\)，注意这里用了 \(\in\)，因为 best response 可能有多个。
+ \(s_i\) strictly dominates \(s&#39;_i \iff \forall s_{-i} \in S_{-i}, u_i(s_i, s_{-i}) &gt; u_i(s&#39;_i, s_{-i})\)
+ \(s_i\) very weakly dominates \(s&#39;_i \iff \forall s_{-i} \in S_{-i}, u_i(s_i, s_{-i}) \geq u_i(s&#39;_i, s_{-i})\)",
+    "inLanguage" : "en-US",
+    "author" : "zellux",
+    "creator" : "zellux",
+    "publisher": "zellux",
+    "accountablePerson" : "",
+    "copyrightHolder" : "",
+    "copyrightYear" : "0001",
+    "datePublished": "0001-01-01 00:00:00 &#43;0000 UTC",
+    "dateModified" : "0001-01-01 00:00:00 &#43;0000 UTC",
+    "url" : "https://blog.yxwang.me/notes/open-course/game-theory/",
+    "wordCount" : "480",
+    "keywords" : [ "Blog" ]
+}
+</script>
+
+  </head>
+
+  <body>
+    <nav class="nav">
+  <div class="nav-container">
+    <span class="site-title">
+      <a href="https://blog.yxwang.me/">Aiur · Zellux 的博客</a>
+    </span>
+    
+    <div class="nav-list">
+      
+      <span class="nav-item"><a href="/about">About</a></span>
+      
+      <span class="nav-item"><a href="/archive">Archive</a></span>
+      
+      <span class="nav-item"><a href="/notes">Notes</a></span>
+      
+    </div>
+  </div>
+</nav>
+
+    <div class="container">
+
+
+<div class="content">
+  <div class="posts">
+    <div class="post">
+      <h1 class="post-title"><a href="https://blog.yxwang.me/notes/open-course/game-theory/">Game Theory - Stanford</a></h1>
+      <div class="post-content">
+        <p>课程链接：<a href="https://class.coursera.org/gametheory-2012-002/lecture/index" class="uri">https://class.coursera.org/gametheory-2012-002/lecture/index</a></p>
+<h2 id="week-1-introduction-and-overview">Week 1: Introduction and Overview</h2>
+<ul>
+<li><p>Nash Equilibrium: 已知其他参与者的行为后，每一位参与者的行为能最大化他/她的收益。</p></li>
+<li><p>Best Response：<span class="math inline">\(a_i^{*} \in BR(a_{-i}) \iff \forall a_i \in A_i, u_i(a_i^{*}, a_{-i}) \geq u_i(a_i, a_{-i})\)</span></p></li>
+<li><p><span class="math inline">\(a = &lt;a_1, ..., a_n&gt;\)</span> 是一个 pure strategy Nash equilibrium 当且仅当 <span class="math inline">\(\forall i, a_i \in BR(a_{-i})\)</span>，注意这里用了 <span class="math inline">\(\in\)</span>，因为 best response 可能有多个。</p></li>
+<li><p><span class="math inline">\(s_i\)</span> <strong>strictly dominates</strong> <span class="math inline">\(s&#39;_i \iff \forall s_{-i} \in S_{-i}, u_i(s_i, s_{-i}) &gt; u_i(s&#39;_i, s_{-i})\)</span></p></li>
+<li><p><span class="math inline">\(s_i\)</span> <strong>very weakly dominates</strong> <span class="math inline">\(s&#39;_i \iff \forall s_{-i} \in S_{-i}, u_i(s_i, s_{-i}) \geq u_i(s&#39;_i, s_{-i})\)</span></p></li>
+<li><p>Best response 是针对已知其他参与者的行为而言的，而 dominating 则是无论其他人怎么做都最优的方案。</p></li>
+<li><p>Best response 的条件是已知对手的行为后，该行为的收益<strong>不低于</strong>其他的行为，也就是说是可以和其他行为有相同收益的。这也意味着 Nash equilibrium 同样可以包含一些行为，这些行为和其他行为的收益一样。</p></li>
+</ul>
+<h2 id="week-2-mixed-strategy-nash-equilibrium">Week 2: Mixed-Strategy Nash Equilibrium</h2>
+<ul>
+<li>Mixed strategy 的期望收益： <span class="math display">\[u_i(s) = \sum_{a \in A}{u_i(a)Pr(a|s)}\]</span> <span class="math display">\[Pr(a|s) = \prod_{j \in N}{s_j(a_j)}\]</span> `</li>
+<li>对于 mixed strategy，best response 和 Nash equilibrium 的定义和 pure strategy 的类似，只是把行为（a）改成了策略（s）：</li>
+</ul>
+<p>Best Response: <span class="math inline">\(s_i^{*} \in BR(s_{-i}) \iff \forall s_i \in S_i, u_i(s_i^{*}, s_{-i}) \geq u_i(s_i, s_{-i})\)</span></p>
+<p>Nash equilibrium: <span class="math inline">\(s = &lt;s_1, ..., s_n&gt;\)</span> 是一个 Nash equilibrium 当且仅当 <span class="math inline">\(\forall i, s_i \in BR(s_{-i})\)</span></p>
+<p>注意这里的 <span class="math inline">\(S_i\)</span> 是个无限集合。</p>
+<ul>
+<li><p>每一个有限游戏都有一个 Nash equilibrium。</p></li>
+<li><p>关于 2.3 中 indifferent 问题我的理解：首先这里 indifferent 是指玩家 2 的决策必须让玩家 1 关于 B 和 F 的收益相同，如果不是这样，假设玩家 1 选择 B 的收益高一点，那么玩家 1 肯定就会选择 100% 选择 B 了，与假设（best response 且 mixed strategy）矛盾。</p></li>
+<li><p>寻找 Nash equilibrium 问题被证明是 PPAD-complete 的，PPAD 位于 P 和 NP 之间，即 P -&gt; PPAD -&gt; NP -&gt; NPC。</p>
+<ul>
+<li>点球时如果守门员左右防守能力均衡，射手不擅长右脚（右脚有一定几率射出范围），为了获得最大期望他应该以更大的概率往右踢。一个反直觉的结论。而实际上，有人统计过 FIFA 1400 多场比赛中守门员和射手的表现，实际数据和 Nash equilibrium 得出的结论相当接近。</li>
+</ul></li>
+</ul>
+<h2 id="week-3-alternate-solution-concepts">Week 3: Alternate Solution Concepts</h2>
+<ul>
+<li><p>移除的策略必须是 strictly dominated，也就是说等号不能成立。但是策略可以被另外一个混合策略 strictly dominated。</p></li>
+<li><p>Maxmin strategy：在最差条件的下获得最大收益的策略。与之相反，minmax 是在双人博弈中，让对手在最佳条件下获得最小收益的策略。在一个有限的双人零和博弈中，任何 nash equilibiurm 同时也是每个玩家的 minmax 和 maxmin 策略。</p></li>
+<li><p>Correlated Equilibrium: 通过外界指定行为的建议，使得双方都愿意遵从这一约定（例如红绿灯）。</p></li>
+</ul>
+<h2 id="week-4-extensive-form-games">Week 4: Extensive-Form Games</h2>
+<ul>
+<li><p>pure strategy 的定义是<strong>所有可能会发生的情形</strong>下用户行为的描述。</p></li>
+<li><p>subgame perfect equilibrium 是指博弈树中的每一个子树都是 Nash equilibrium。</p></li>
+<li><p>非 subgame perfect 的 Nash equilibrium 的问题在于，只有当玩家<strong>相信</strong>对方的确会这么做时，他才会采用相应的策略。</p></li>
+<li><p>把 extensive form 转成 normal form 后就没法恢复回来了，但是两者的策略和均衡都是一样。</p></li>
+<li><p>behavioural strategy 和 mixed strategy 的不同点在于，前者是某种情形下选择不同行为的概率分布，而后者是对于整个博弈的概率分布，两者在 perfect recall 的前提下可以互相转换。</p></li>
+</ul>
+<h2 id="week-5-repeated-games">Week 5: Repeated Games</h2>
+<ul>
+<li><p>Discounted reward: 未来的收益的实际效果会逐渐减小 <span class="math inline">\(\sum_{j=1}^{\infty}{\beta^{j}r_{j}}, (0 &lt; \beta &lt; 1)\)</span></p></li>
+<li><p>如果 fictitious play 中每个玩家的策略概率分布都收敛于某一定值，那么这个收敛后的概率分布一定是一个 Nash equilibrium。</p></li>
+<li>以下任一条件都可以使得 fictitious play 的结果收敛：
+<ul>
+<li>zero sum game</li>
+<li>迭代去掉 strictly dominated strategies 后这个博弈有解</li>
+<li>potential game</li>
+<li>2 x n game &amp; generic payoffs</li>
+</ul></li>
+<li><p>Regret: <span class="math inline">\(R^t(s) = \alpha^t(s) - \alpha^t\)</span> （slides 有误）</p></li>
+<li><p>No-regret learning: <span class="math inline">\(Pr(\lim_{t \rightarrow \infty}R^t(s) \le 0) = 1\)</span></p></li>
+<li><p>enforceable: 任何人的收益都不比最差情况下的收益差</p></li>
+<li><p>feasible</p></li>
+<li><p>Nash equilibrium =&gt; enforceable</p></li>
+<li><p>enforceable + feasible =&gt; Nash equilibrium</p></li>
+</ul>
+<h2 id="week-6-coalitional-games">Week 6: Coalitional Games</h2>
+<ul>
+<li><p>superadditive: <span class="math inline">\(G = (N, v)\)</span> is superadditive if <span class="math inline">\(\forall S, T \subset N, S \cap T = \varnothing \Rightarrow v(S \cup T ) \geq v(S) + v(T)\)</span></p></li>
+<li><p>interchangeable: 对于<strong>所有</strong>不包括 i 或 j 的子集 S，<span class="math inline">\(v(S \cup \{i\}) = v(S \cup \{j\})\)</span>，则 i 和 j 是 interchangeable 的。</p></li>
+<li><p>dummy player: 对于<strong>所有</strong>不包括 i 的子集 S，<span class="math inline">\(v(S \cup \{i\}) = v(S)\)</span>，则 i 是 dummy player。</p></li>
+<li><p>Shapley value: 每个成员的收益都和他们的边际贡献成正比。它是唯一满足 interchangeable（相等）、dummy player（分配为零）和 superadditive（累加）的分法。</p></li>
+<li><p>Shapley value 的问题在于忽略了稳定性，对于某些参与者而言组成更小的团队或许更有诱惑。</p></li>
+<li><p>Core: payoff <span class="math inline">\(x\)</span> 在 core 中当且仅当 <span class="math inline">\(\forall S \subset N, \sum_{i \in S}{x_i \geq v(S)}\)</span>。即对于任一子集，组成这个子集的玩家所能分配到的收益的总和，都不应该低于这个子集的收益。否则组成这个更小的集体就会变得更有吸引力。</p></li>
+<li><p>Core 和 Nash equilibrium 很类似，只是 core 背叛的方式是通过组成小集体。</p></li>
+<li><p>Simple game: 任一子集的收益要么是 0，要么是 1。</p></li>
+<li><p>Veto player: 如果没有他，那么剩下的人组成的任一集体收益都是 0。</p></li>
+<li><p>对于 simple game，如果没有 veto player，那也就不会有 core；如果有 veto player，那么 core 里的分配方式必然是其他玩家都获得 0 的方式。</p></li>
+<li><p>Convex game: <span class="math inline">\(\forall S,T \subset N, v(S \cup T) \geq v(S) + v(T) - v(S \cap T)\)</span>。Convex 的条件比 superadditive 更严格。</p></li>
+<li><p>对于所有的 convex game，Shapley value 是属于 core 的。</p></li>
+</ul>
+<h2 id="week-7-bayesian-games">Week 7: Bayesian Games</h2>
+
+      </div>
+          <div class="cc-license">
+      本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.zh">知识共享署名-非商业性使用 3.0 版本许可协议</a>进行许可，欢迎转载，演绎，但是必须保留本文的署名 <a href="https://blog.yxwang.me/notes/open-course/game-theory/">zellux</a>（包含链接），且不得用于商业目的。
+    </div>
+
+    </div>
+    <div class="pagination">
+      <a class="btn previous " href="https://blog.yxwang.me/archive/"> Prev</a>  
+      <a class="btn next " href="https://blog.yxwang.me/notes/tools/git/"> Next</a> 
+    </div>
+  </div>
+</div>
+
+
+<div id="disqus_thread"></div>
+<script>
+  var disqus_config = function () {
+  this.page.url = "https://blog.yxwang.me/notes/open-course/game-theory/";
+  
+  };
+  (function() {
+  var d = document, s = d.createElement('script');
+  s.src = '//aiur-zellux.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+
+<div class="footer">
+  
+  <p>Powered by <a href="http://gohugo.io">Hugo</a> and <a href="https://github.com/zhe/hugo-theme-slim">Slim theme</a>.
+  
+      Follow me on <a href="https://twitter.com/zellux">Twitter</a>.
+      </p>
+  </p>
+  
+</div>
+
+                   
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+    Macros: {
+      argmax: "\\operatorname*{argmax}",
+      argmin: "\\operatorname*{argmin}"
+    }
+  },
+  jax: ["input/TeX","output/CommonHTML"]
+});
+</script>
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML">
+</script>
+
+</script>
+
+<script src="https://blog.yxwang.me/js/slim.min.aef36e671f72c9042139aae327dbe693b7ebaa67fd56f30dad4c985a91ba9294.js"></script>
+
+
+<link rel="stylesheet" href="https://blog.yxwang.me/css/solarized-light.min.5499f6bc45da0c78f070be4f720fd28b19af75306b569b77837d57c3cf819430.css" />
+<script src="/js/highlight.pack.js"></script>
+<script>
+  hljs.initHighlightingOnLoad();
+</script>
+
+</div>
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-25551121-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+<script type="text/javascript">
+    window.heap=window.heap||[],heap.load=function(e,t){window.heap.appid=e,window.heap.config=t=t||{};var r=t.forceSSL||"https:"===document.location.protocol,a=document.createElement("script");a.type="text/javascript",a.async=!0,a.src=(r?"https:":"http:")+"//cdn.heapanalytics.com/js/heap-"+e+".js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(a,n);for(var o=function(e){return function(){heap.push([e].concat(Array.prototype.slice.call(arguments,0)))}},p=["addEventProperties","addUserProperties","clearEventProperties","identify","removeEventProperty","setEventProperties","track","unsetEventProperty"],c=0;c<p.length;c++)heap[p[c]]=o(p[c])};
+      heap.load("3166778701");
+</script>
+
+
+</body>
+
+</html>
+

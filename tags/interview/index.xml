@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Interview on Aiur · Zellux 的博客</title>
+    <link>https://blog.yxwang.me/tags/interview/</link>
+    <description>Recent content in Interview on Aiur · Zellux 的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Mon, 01 Jun 2009 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.yxwang.me/tags/interview/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>两个和函数构造相关的趣味面试题</title>
+      <link>https://blog.yxwang.me/2009/06/two-function-related-interview-questions/</link>
+      <pubDate>Mon, 01 Jun 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2009/06/two-function-related-interview-questions/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;http://stackoverflow.com/questions/731832/interview-question-ffn-n&#34;&gt;http://stackoverflow.com/questions/731832/interview-question-ffn-n&lt;/a&gt;
+&lt;a href=&#34;http://stackoverflow.com/questions/731832/interview-question-ffn-n&#34;&gt;
+&lt;a href=&#34;http://stackoverflow.com/questions/732485/interview-question-ffx-1-x&#34;&gt;http://stackoverflow.com/questions/732485/interview-question-ffx-1-x&lt;/a&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;问题描述很简单，第一个问题是实现一个函数f，参数为一个带符号的32位整型，使得f(f(x)) = -x，即调用两次后返回的结果为原来的相反数；另一个问题也是实现一个函数g，参数为一个32位浮点，最后使得g(g(x)) = 1/x。如果不能满足所有的情况，就满足尽可能多的情形。&lt;/p&gt;
+
+&lt;p&gt;第二个问题比第一个问题简单一点，目前支持数最高的两个答案如下：
+&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

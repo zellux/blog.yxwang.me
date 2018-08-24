@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="1. Algorithms with numbers 设计 Hash 函数一般要考虑两个因素，一是它的随机性，即保证数据分布均匀；二是它的一致性，即对于同一份数据每次都要获得相同的结果。
+2. Divide-and-conquer algorithms 多项式乘法 最普通的多项式乘法需要将两个多项式的不同系数一一相乘，算法复杂度是 \(O(n^2)\)。而如果采用点值表示法，即用多项式在 n &#43; 1 个不同的点上的取值来唯一的表示这个多项式的话，计算它们的乘积只需要两个多项式在 2n &#43; 1 个点的值就可以了（乘积的最高项次数为 2n），需要的时间是线性的。所以接下来的问题是如何在点值表示法和系数形式之间高效的转换。
+首先是求值，即给出 n 个系数和 n &#43; 1 组不同的取值，求出这些取值下的多项式的值。将奇数次幂的项的偶数次幂的项分开，则有 \(A(x) = A_e(x^2) &#43; xA_o(x^2)\)，这里 \(A_e\) 代表偶数次幂的项，\(A_o\) 代表奇数次幂的项。同时，考虑到 \(A(x_i)\) 和 \(A(-x_i)\) 的计算： \[ \begin{align*} A(x_i) = A_e(x_{i}^{2}) &#43; x_iA_o(x_{i}^{2}) \\ A(-x_i) = A_e(x_{i}^{2}) - x_iA_o(x_{i}^{2}) \end{align*} \]
+把计算任务减少到了项数低一半的 \(A_e\) 和 \(A_o\)，计算量减少了一半。接着通过引入复数，可以进一步二分计算 \(A_e\) 和 \(A_o\)，从而在 \(O(log n)\) 的时间内得出结果。
+3. Decompositions of graphs 强连通分量 DFS 其实并不需要从根节点开始搜素，因为当子节点先被遍历后，接下来自然会遍历它的父节点。">
+    <meta name="author" content="zellux">
+
+    <title> 《Algorithms》笔记 &middot; Aiur · Zellux 的博客 </title>
+
+    <script src="/js/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
+    <script src="/js/jquery-3.0.47.fancybox.min.js"></script>
+
+    
+    
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.52ea10a8f3a0b8f145adadb8d3761e17a42a7634869f775ef5830ed4de77d3fa.css">
+    
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+    
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    
+    <link href="" rel="alternate" type="application/rss+xml" title="Aiur · Zellux 的博客" />
+    
+<script type="application/ld+json">
+{
+    "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https://blog.yxwang.me/"
+    },
+    "articleSection" : "notes",
+    "name" : "《Algorithms》笔记",
+    "headline" : "《Algorithms》笔记",
+    "description" : "1. Algorithms with numbers 设计 Hash 函数一般要考虑两个因素，一是它的随机性，即保证数据分布均匀；二是它的一致性，即对于同一份数据每次都要获得相同的结果。
+2. Divide-and-conquer algorithms 多项式乘法 最普通的多项式乘法需要将两个多项式的不同系数一一相乘，算法复杂度是 \(O(n^2)\)。而如果采用点值表示法，即用多项式在 n + 1 个不同的点上的取值来唯一的表示这个多项式的话，计算它们的乘积只需要两个多项式在 2n + 1 个点的值就可以了（乘积的最高项次数为 2n），需要的时间是线性的。所以接下来的问题是如何在点值表示法和系数形式之间高效的转换。
+首先是求值，即给出 n 个系数和 n + 1 组不同的取值，求出这些取值下的多项式的值。将奇数次幂的项的偶数次幂的项分开，则有 \(A(x) = A_e(x^2) + xA_o(x^2)\)，这里 \(A_e\) 代表偶数次幂的项，\(A_o\) 代表奇数次幂的项。同时，考虑到 \(A(x_i)\) 和 \(A(-x_i)\) 的计算： \[ \begin{align*} A(x_i) = A_e(x_{i}^{2}) + x_iA_o(x_{i}^{2}) \\ A(-x_i) = A_e(x_{i}^{2}) - x_iA_o(x_{i}^{2}) \end{align*} \]
+把计算任务减少到了项数低一半的 \(A_e\) 和 \(A_o\)，计算量减少了一半。接着通过引入复数，可以进一步二分计算 \(A_e\) 和 \(A_o\)，从而在 \(O(log n)\) 的时间内得出结果。
+3. Decompositions of graphs 强连通分量 DFS 其实并不需要从根节点开始搜素，因为当子节点先被遍历后，接下来自然会遍历它的父节点。",
+    "inLanguage" : "en-US",
+    "author" : "zellux",
+    "creator" : "zellux",
+    "publisher": "zellux",
+    "accountablePerson" : "",
+    "copyrightHolder" : "",
+    "copyrightYear" : "0001",
+    "datePublished": "0001-01-01 00:00:00 &#43;0000 UTC",
+    "dateModified" : "0001-01-01 00:00:00 &#43;0000 UTC",
+    "url" : "https://blog.yxwang.me/notes/programming/algorithms-sanjoy/",
+    "wordCount" : "411",
+    "keywords" : [ "Blog" ]
+}
+</script>
+
+  </head>
+
+  <body>
+    <nav class="nav">
+  <div class="nav-container">
+    <span class="site-title">
+      <a href="https://blog.yxwang.me/">Aiur · Zellux 的博客</a>
+    </span>
+    
+    <div class="nav-list">
+      
+      <span class="nav-item"><a href="/about">About</a></span>
+      
+      <span class="nav-item"><a href="/archive">Archive</a></span>
+      
+      <span class="nav-item"><a href="/notes">Notes</a></span>
+      
+    </div>
+  </div>
+</nav>
+
+    <div class="container">
+
+
+<div class="content">
+  <div class="posts">
+    <div class="post">
+      <h1 class="post-title"><a href="https://blog.yxwang.me/notes/programming/algorithms-sanjoy/">《Algorithms》笔记</a></h1>
+      <div class="post-content">
+        <h2 id="algorithms-with-numbers">1. Algorithms with numbers</h2>
+<p>设计 Hash 函数一般要考虑两个因素，一是它的随机性，即保证数据分布均匀；二是它的一致性，即对于同一份数据每次都要获得相同的结果。</p>
+<h2 id="divide-and-conquer-algorithms">2. Divide-and-conquer algorithms</h2>
+<h3 id="多项式乘法">多项式乘法</h3>
+<p>最普通的多项式乘法需要将两个多项式的不同系数一一相乘，算法复杂度是 <span class="math inline">\(O(n^2)\)</span>。而如果采用点值表示法，即用多项式在 n + 1 个不同的点上的取值来唯一的表示这个多项式的话，计算它们的乘积只需要两个多项式在 2n + 1 个点的值就可以了（乘积的最高项次数为 2n），需要的时间是线性的。所以接下来的问题是如何在点值表示法和系数形式之间高效的转换。</p>
+<p>首先是求值，即给出 n 个系数和 n + 1 组不同的取值，求出这些取值下的多项式的值。将奇数次幂的项的偶数次幂的项分开，则有 <span class="math inline">\(A(x) = A_e(x^2) + xA_o(x^2)\)</span>，这里 <span class="math inline">\(A_e\)</span> 代表偶数次幂的项，<span class="math inline">\(A_o\)</span> 代表奇数次幂的项。同时，考虑到 <span class="math inline">\(A(x_i)\)</span> 和 <span class="math inline">\(A(-x_i)\)</span> 的计算： <span class="math display">\[
+\begin{align*}
+A(x_i) = A_e(x_{i}^{2}) + x_iA_o(x_{i}^{2}) \\
+A(-x_i) = A_e(x_{i}^{2}) - x_iA_o(x_{i}^{2})
+\end{align*}
+\]</span></p>
+<p>把计算任务减少到了项数低一半的 <span class="math inline">\(A_e\)</span> 和 <span class="math inline">\(A_o\)</span>，计算量减少了一半。接着通过引入复数，可以进一步二分计算 <span class="math inline">\(A_e\)</span> 和 <span class="math inline">\(A_o\)</span>，从而在 <span class="math inline">\(O(log n)\)</span> 的时间内得出结果。</p>
+<h2 id="decompositions-of-graphs">3. Decompositions of graphs</h2>
+<h3 id="强连通分量">强连通分量</h3>
+<p>DFS 其实并不需要从根节点开始搜素，因为当子节点先被遍历后，接下来自然会遍历它的父节点。</p>
+<p>关于用 DFS 检测有向图中的强连通分量，关键的理论依据在于书上的性质 3：对于两个强连通分量 C 和 C’，如果有一条边从 C 上的点通向 C’ 上的点，则 C 中点的 post 值的最大值肯定比 C’ 中的最大值更大。证明：如果 DFS 先访问了 C，然后再访问 C’，那么在离开 C 中最后一个顶点前，C’ 的所有顶点都肯定已经被访问过了；如果 C’ 被先访问，那么在 C’ 中所有顶点访问完成之前，C 中的任一结点都不会被访问到，DFS 在遍历完 C 中结点后就会寻找下一个没有被访问过的连通分量，这里面包括 C。</p>
+<p>性质 3 换句话说，就是可以根据顶点 post 值的最大值，将不同强连通分量由高到低排序后，得到的就是这些连通分量的拓扑序列，排在最前的强连通分量也就是源（source）所在的强连通分量。但是我们需要的是汇（sink）所在的强连通分量，为了得到这个结果，可以先在图 G 的逆向图上跑一遍 DFS，从而获得逆向图中源所在的强连通分量，亦即原图中汇所在的强连通分量。遍历汇所在的强连通分量后（遍历时不会访问到其他强连通分量），删除这一强连通分量，继续遍历下一个汇所在的分量，多次遍历后就能找出所有的强连通分量了。</p>
+<h2 id="paths-in-graphs">4. Paths in graphs</h2>
+<h3 id="单源最短路径">单源最短路径</h3>
+<p>Dijkstra 算法其实是 BFS 针对这一类问题的一种改良，它没法检测图中是否存在负环。Bellman-Ford 算法把所有的边都更新（算法导论上这个过程被称为 relax） |V| - 1 次，如果要检测负环只要再多 relax 一次，看看最短路径的数据有没有变就知道了。</p>
+<h2 id="greedy-algorithms">5. Greedy algorithms</h2>
+<h3 id="最小生成树">最小生成树</h3>
+<p>Kruskal 算法和 Prim 算法都依赖于最小生成树的 cut property：假设边集 X 是图 G = (V, E) 的最小生成树的一部分，选取任意一组点集 S，使得 X 中不包含横跨 S 和 V-S 两个点集的边，另 e 为所有横跨 S 和 V-S 的边中最短的那条，则 <span class="math inline">\(X \cup \left \{ e \right \}\)</span> 一定是某一棵最小生成树的一部分。</p>
+<p>Kruskal 和 Prim 都利用了这个 cut property 扩大结果集，它们的区别在于 Kruskal 每次都把不会形成环的权值最小的边放到生成树 T 中，构建过程中的部分生成图是零散的，需要一个并查集高效的维护不同连通块之间的合并关系；而 Prim 则每次选择一条和当前的部分生成树相连、不会形成环、且权值最小的边，构建过程中始终形成一棵树的结构。换句话说，它们的区别在于切分 S 和 V-S 两个子集的策略不同。</p>
+<h3 id="哈夫曼编码">哈夫曼编码</h3>
+<p>衡量一个系统的熵的方法之一是对取样后的数据进行哈夫曼编码，编码的总长度越短，系统的熵就越小，其随机程度也越低。对于一个长度为 m 的序列，每个取值的可能性分别为 <span class="math inline">\(p_1, p_2, ..., p_n\)</span>，则由数学归纳法可证编码这一序列需要的位数为 <span class="math inline">\(\sum_{i=1}^{n}m p_i log(1/p_i)\)</span>，平均每个字符需要的位数为 <span class="math display">\[\sum_{i=1}^{n}m p_i log(1/p_i)\]</span> 这就是这个分布的熵。</p>
+<h2 id="dynamic-programming">6. Dynamic programming</h2>
+<p>讲了几个经典的动态规划问题</p>
+<ul>
+<li>单源最短路径</li>
+<li>最短编辑距离（书上的例子应该是 Hamming distance）</li>
+<li>01 背包问题</li>
+<li>矩阵乘法链的优化</li>
+<li>全源最短路径</li>
+</ul>
+<h2 id="linear-programming-and-reductions">7. Linear programming and reductions</h2>
+<h3 id="单纯形法simplex-method">单纯形法（Simplex method）</h3>
+<p>单纯形法就是从任一一个顶点开始，寻找邻近的收益更高的顶点，直到找不到更高的顶点为止。由于图形是一个简单几何体，因此找到的局部最优解也必然是全局最优解。</p>
+<h3 id="网络流">网络流</h3>
+<p>网络流其实可以规约到线性规划问题，从而使用单纯形法解决。而使用单纯形法解决网络流问题的方法正是不断在当前图的 residual network 中找连通 source 和 sink 的流，直到找不到这样的流为止。在 residual network 中查找满足要求的流可以使用 BFS，使得找到的流的边数最少，从而保证在 <span class="math inline">\(O(|V| * |E^2|)\)</span> 的时间内解决问题。</p>
+<p>关于单纯形法解决网络流问题的正确性也很容易证明。在最终的 residual netwoking 中，必然不存在从 source 到 sink 的流。另 L 为 source 能够到达的顶点的集合，而 R 为图中除了 L 外的顶点的集合，则 (L, R) 是原图的一个最小割（可以用反证法证明），且它的容量等于当前流的流量。结合最大流最小割定理，就能证明单纯形法的正确性。</p>
+<h3 id="线性规划的对偶性">线性规划的对偶性</h3>
+<p>网络流中，流往往比割小，而最大流和最小割的相等性则证明了它们的最优性。回到线性规划的问题上，每一个线性最大化的问题也有一个对偶的最小化的问题，它们之前的关系和最大流最小割很像。转化的方法很简单，通过给线性最大化问题的不等式加上不同的系数，可以获得不同的解的限制。这些限制大多很宽松，比实际解的值大。因此问题可以转换为找到合理的系数，使得限制的值最小，从而转化为了一个线性最小化的问题。</p>
+<p>如果一个线性规划的问题存在一个有限的最优解，那么它的对偶问题也存在最优解，且这两个最优值相同。</p>
+<h3 id="最短路径问题中的对偶性">最短路径问题中的对偶性</h3>
+<p>这个举例也很有意思。我们把最短路径假象成一个现实中的物理模型：用绳子代表图中的边，绳子的长度即边的长度，绳子之间的关系和图中边的关系一样。找从 s 点到 t 点的最短路径的方法之一，便是手握 s 点和 t 点，并将这一模型拉紧，拉紧后它们的距离就是 s 点到 t 点的最短路径的距离。</p>
+<p>这个例子中，「拉紧」这一过程不断的增加 s 和 t 之间的距离，是一个最大化的过程；而最短路径本身，则是一个求最小值的问题。于是这又是一对对偶的问题。</p>
+<h3 id="多维空间中的顶点">多维空间中的顶点</h3>
+<p>在多维空间里，顶点的定义是对于全部不等式的任意子集，如果存在一个唯一的点使它们的等号成立，且这个点在可行区间里，改点即为一个顶点。</p>
+<p>对于有 n 个变量的线性规划问题，至少要 n 个方程才能确定一个顶点。而如果定义两个顶点的方程里有 n - 1 个是相同的，那么这两个顶点相邻。</p>
+<h3 id="多维空间中的单纯形法">多维空间中的单纯形法</h3>
+<p>大致过程主要是两步：</p>
+<ol type="1">
+<li>查看当前顶点是否已经最优；</li>
+<li>如果不是，则往下一个顶点移动。</li>
+</ol>
+<p>如果当前顶点就是原点，在判断如何往下一个顶点移动时会很方便，只要放开其中一个约束方程，让某个变量不断增加即可。而为了保证当前顶点是原点，需要在每次移动后使用平移、旋转等方法，使新的顶点成为当前坐标系的原点。</p>
+<h3 id="电路求值">电路求值</h3>
+<p>电路求值的问题是指，给定一个由与、或、非构成的电路和它的输入，问最终的输出结果是真还是假。</p>
+<p>这个问题可以规约到线性规划，每一个门都可以被若干个不等式表达，例如 c = OR(a, b) 就等价于 <span class="math inline">\(x_c \geq x_a, x_c \geq x_b, x_c \leq x_a = x_b\)</span>。同时，任何一个 P 问题都可以规约到电路求值（计算机本身就是由电路实现的），因此所有的 P 问题都可以规约到线性规划问题。此外，如果给线性规划问题加一个限制，要求所有的变量都是整数，就成了整数规划问题，它是一个 NPC 问题。</p>
+<h2 id="np-complete-problems">8. NP-complete problems</h2>
+<p>证明一个问题是 NPC 问题通常分两个步骤，一是证明它是 NP 问题，这一点可以通过证明它是多项式时间内可证的就行；二是证明某一个 NPC 问题可以规约到它。这里有一个问题，第一个 NPC 问题是怎么来的呢？<a href="http://en.wikipedia.org/wiki/Cook%27s_theorem">Cook’s theorem</a> 证明了 SAT 是一个 NPC 问题，因为任何一个非确定性图灵机都能被编码成一个二进制的式子，而这个图灵机接收某一串输入当且仅当这个式子是可满足的。</p>
+<p>NP 问题除了 NPC 和 P 问题之外，剩下的问题既不能被证明可以在多项式内解决，也无法从其他 NPC 问题规约而来。经典的例子就是图的同构判断和质因数分解问题。</p>
+<p>这一章内容和之前看过的《Introduction to the Theory of Computation》的后半部分很像，主要介绍了几个 NPC 问题和它们之间相互规约的方法。</p>
+<h2 id="coping-with-np-completeness">9. Coping with NP-completeness</h2>
+<p>这一章内容和 Stanford 公开课 <a href="https://www.ai-class.com/">Artificial Intelligence</a> 的前面一半课程内容很接近，包括：</p>
+<ul>
+<li>搜索中的回溯</li>
+<li>分枝定界法</li>
+<li>近似算法</li>
+<li>k-Cluster</li>
+<li>局部最优近似（restart、randomization、退火）</li>
+</ul>
+<h2 id="quantum-algorithms">10. Quantum algorithms</h2>
+<h3 id="量子">量子</h3>
+<p>经典比特是由高电压和低电压表示的。而在量子世界中，一个量子除了基态(ground state) <span class="math inline">\(|0 \rangle\)</span> 和激发态(excited state) <span class="math inline">\(|1 \rangle\)</span> 外，还可以在这两种状态的组合，即叠加态(superposition) <span class="math inline">\(a_0 |0\rangle + a_1|1\rangle\)</span>，这里 <span class="math inline">\(a_0\)</span> 和 <span class="math inline">\(a_1\)</span> 可以是任意复数，只要它们满足 <span class="math inline">\(a_0^2 + a_1^2 = 1\)</span>。而 <span class="math inline">\(a_0 |0\rangle + a_1|1\rangle\)</span> 便是量子计算机中描述信息的基本单元，被称为「量子比特」(qubit)。</p>
+<p>对量子的测量会引起波函数坍塌，测量结果有 <span class="math inline">\(|a_0|^2\)</span> 的概率成为 0，有 <span class="math inline">\(|a_1|^2\)</span> 的概率成为 1，且测量后系统状态就会变成基态活激发态。注意这里的 <span class="math inline">\(a_0\)</span> 和 <span class="math inline">\(a_1\)</span> 可以是虚数，因此概率未必是非负实数。</p>
+
+      </div>
+          <div class="cc-license">
+      本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.zh">知识共享署名-非商业性使用 3.0 版本许可协议</a>进行许可，欢迎转载，演绎，但是必须保留本文的署名 <a href="https://blog.yxwang.me/notes/programming/algorithms-sanjoy/">zellux</a>（包含链接），且不得用于商业目的。
+    </div>
+
+    </div>
+    <div class="pagination">
+      <a class="btn previous " href="https://blog.yxwang.me/notes/languages/word-power-made-easy/"> Prev</a>  
+      <a class="btn next " href="https://blog.yxwang.me/notes/programming/metaprogramming-ruby/"> Next</a> 
+    </div>
+  </div>
+</div>
+
+
+<div id="disqus_thread"></div>
+<script>
+  var disqus_config = function () {
+  this.page.url = "https://blog.yxwang.me/notes/programming/algorithms-sanjoy/";
+  
+  };
+  (function() {
+  var d = document, s = d.createElement('script');
+  s.src = '//aiur-zellux.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+
+<div class="footer">
+  
+  <p>Powered by <a href="http://gohugo.io">Hugo</a> and <a href="https://github.com/zhe/hugo-theme-slim">Slim theme</a>.
+  
+      Follow me on <a href="https://twitter.com/zellux">Twitter</a>.
+      </p>
+  </p>
+  
+</div>
+
+                   
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+    Macros: {
+      argmax: "\\operatorname*{argmax}",
+      argmin: "\\operatorname*{argmin}"
+    }
+  },
+  jax: ["input/TeX","output/CommonHTML"]
+});
+</script>
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML">
+</script>
+
+</script>
+
+<script src="https://blog.yxwang.me/js/slim.min.aef36e671f72c9042139aae327dbe693b7ebaa67fd56f30dad4c985a91ba9294.js"></script>
+
+
+<link rel="stylesheet" href="https://blog.yxwang.me/css/solarized-light.min.5499f6bc45da0c78f070be4f720fd28b19af75306b569b77837d57c3cf819430.css" />
+<script src="/js/highlight.pack.js"></script>
+<script>
+  hljs.initHighlightingOnLoad();
+</script>
+
+</div>
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-25551121-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+<script type="text/javascript">
+    window.heap=window.heap||[],heap.load=function(e,t){window.heap.appid=e,window.heap.config=t=t||{};var r=t.forceSSL||"https:"===document.location.protocol,a=document.createElement("script");a.type="text/javascript",a.async=!0,a.src=(r?"https:":"http:")+"//cdn.heapanalytics.com/js/heap-"+e+".js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(a,n);for(var o=function(e){return function(){heap.push([e].concat(Array.prototype.slice.call(arguments,0)))}},p=["addEventProperties","addUserProperties","clearEventProperties","identify","removeEventProperty","setEventProperties","track","unsetEventProperty"],c=0;c<p.length;c++)heap[p[c]]=o(p[c])};
+      heap.load("3166778701");
+</script>
+
+
+</body>
+
+</html>
+

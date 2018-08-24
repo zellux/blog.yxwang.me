@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Firefox on Aiur · Zellux 的博客</title>
+    <link>https://blog.yxwang.me/tags/firefox/</link>
+    <description>Recent content in Firefox on Aiur · Zellux 的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Wed, 01 Jul 2009 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.yxwang.me/tags/firefox/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>防止 Firefox 在关闭最后一个 Tab 后退出</title>
+      <link>https://blog.yxwang.me/2009/07/firefox-close-windows-with-last-tab/</link>
+      <pubDate>Wed, 01 Jul 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2009/07/firefox-close-windows-with-last-tab/</guid>
+      <description>记得以前用Firefox 3.0.x时把Tools -&amp;gt; Options -&amp;gt; Tabs -&amp;gt; Always show the tab bar勾上就行了，升级到3.5以后就没用了，搜了下Knowledge Base，最后在
+https://support.mozilla.com/tiki-view_forum_thread.php?locale=zh-CN&amp;comments_parentId=184680&amp;forumId=1
+看到只要将about:config页中的browser.tabs.closeWindowWithLastTab项设为false即可</description>
+    </item>
+    
+  </channel>
+</rss>

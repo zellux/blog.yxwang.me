@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="这个 Lab 应该比上一个 Lab 简单不少， Lab 的说明文档也差不多把基本的过关要点都提到了，所以这里主要介绍一下几个相关工具的使用，帮助大家进一步熟悉 Linux 命令行 ;-) 首先从主页上下载一个压缩包，最简单的方法是直接在命令行使用 wget 工具 wget http://10.132.143.100/lab2007/buflab-handout.tar
+顺便提一下 wget 的功能很强大，除了可以在后台运行，它还支持 ftp https http 等协议，提供整个网站下载的功能（类似于 Windows 下的 WebZIP ）
+接着使用 tar 命令解压这个文件
+tar xvf buflab-handout.tar  其中， x 参数表示解压工作， v 表示显示解压所得的文件列表， f 及其后面跟着的文件 名指定了待解压文件
+这样在当前目录下就多出了三个文件： bufbomb, makecookie, sendstring
+接下来使用 makecookie 得到自己学号对应的 cookie 号，用法是 ./makecookie 学号
+这个 cookie 号在后面的几个关卡中都有可能会用到，同时 http://10.132.143.234/bufbombstatus.html 中可以通过自己的 cookie 号随时获得自己现在的过关情况。
+和上一个 Lab 一样，这里介绍一下怎么过 Level 0 。
+这个热身关和两个函数有关， test() 和 smoke() ，正常情况下 smoke 不会被任何函数调用，我们要做的就是输入一串特定的字符，使得 smoke 被调用。另外这个关卡简单之处在于 smoke 被调用后就直接退出程序，我们在破坏了栈的数据后不需要恢复原样。">
+    <meta name="author" content="zellux">
+
+    <title> ICS Lab3 简易攻略 &middot; Aiur · Zellux 的博客 </title>
+
+    <script src="/js/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
+    <script src="/js/jquery-3.0.47.fancybox.min.js"></script>
+
+    
+    
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.52ea10a8f3a0b8f145adadb8d3761e17a42a7634869f775ef5830ed4de77d3fa.css">
+    
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+    
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    
+    <link href="" rel="alternate" type="application/rss+xml" title="Aiur · Zellux 的博客" />
+    
+<script type="application/ld+json">
+{
+    "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https://blog.yxwang.me/"
+    },
+    "articleSection" : "post",
+    "name" : "ICS Lab3 简易攻略",
+    "headline" : "ICS Lab3 简易攻略",
+    "description" : "这个 Lab 应该比上一个 Lab 简单不少， Lab 的说明文档也差不多把基本的过关要点都提到了，所以这里主要介绍一下几个相关工具的使用，帮助大家进一步熟悉 Linux 命令行 ;-) 首先从主页上下载一个压缩包，最简单的方法是直接在命令行使用 wget 工具 wget http://10.132.143.100/lab2007/buflab-handout.tar
+顺便提一下 wget 的功能很强大，除了可以在后台运行，它还支持 ftp https http 等协议，提供整个网站下载的功能（类似于 Windows 下的 WebZIP ）
+接着使用 tar 命令解压这个文件
+tar xvf buflab-handout.tar  其中， x 参数表示解压工作， v 表示显示解压所得的文件列表， f 及其后面跟着的文件 名指定了待解压文件
+这样在当前目录下就多出了三个文件： bufbomb, makecookie, sendstring
+接下来使用 makecookie 得到自己学号对应的 cookie 号，用法是 ./makecookie 学号
+这个 cookie 号在后面的几个关卡中都有可能会用到，同时 http://10.132.143.234/bufbombstatus.html 中可以通过自己的 cookie 号随时获得自己现在的过关情况。
+和上一个 Lab 一样，这里介绍一下怎么过 Level 0 。
+这个热身关和两个函数有关， test() 和 smoke() ，正常情况下 smoke 不会被任何函数调用，我们要做的就是输入一串特定的字符，使得 smoke 被调用。另外这个关卡简单之处在于 smoke 被调用后就直接退出程序，我们在破坏了栈的数据后不需要恢复原样。",
+    "inLanguage" : "en-US",
+    "author" : "zellux",
+    "creator" : "zellux",
+    "publisher": "zellux",
+    "accountablePerson" : "",
+    "copyrightHolder" : "",
+    "copyrightYear" : "2007",
+    "datePublished": "2007-12-15 00:00:00 &#43;0000 UTC",
+    "dateModified" : "2007-12-15 00:00:00 &#43;0000 UTC",
+    "url" : "https://blog.yxwang.me/2007/12/ics-lab-3/",
+    "wordCount" : "293",
+    "keywords" : [ "Courses","ICS","Lab","Blog" ]
+}
+</script>
+
+  </head>
+
+  <body>
+    <nav class="nav">
+  <div class="nav-container">
+    <span class="site-title">
+      <a href="https://blog.yxwang.me/">Aiur · Zellux 的博客</a>
+    </span>
+    
+    <div class="nav-list">
+      
+      <span class="nav-item"><a href="/about">About</a></span>
+      
+      <span class="nav-item"><a href="/archive">Archive</a></span>
+      
+      <span class="nav-item"><a href="/notes">Notes</a></span>
+      
+    </div>
+  </div>
+</nav>
+
+    <div class="container">
+
+
+<div class="content">
+  <div class="post">
+    <h1 class="post-title"><a href="https://blog.yxwang.me/2007/12/ics-lab-3/">ICS Lab3 简易攻略</a></h1>
+    <span class="post-meta">
+  <time datetime='Sat, Dec 15, 2007' data-updated="true" itemprop="datePublished">Sat, Dec 15, 2007</time>
+  
+  <span class="post-categories">
+    •
+	<a href="https://blog.yxwang.me/categories/courses">Courses</a>
+  </span>
+  
+</span>
+
+    <div class="post-content">
+      
+
+<p>这个 Lab 应该比上一个 Lab 简单不少， Lab 的说明文档也差不多把基本的过关要点都提到了，所以这里主要介绍一下几个相关工具的使用，帮助大家进一步熟悉 Linux 命令行   ;-)
+首先从主页上下载一个压缩包，最简单的方法是直接在命令行使用 wget 工具
+ <code>wget http://10.132.143.100/lab2007/buflab-handout.tar</code></p>
+
+<p>顺便提一下 wget 的功能很强大，除了可以在后台运行，它还支持 ftp https http 等协议，提供整个网站下载的功能（类似于 Windows 下的 WebZIP ）</p>
+
+<p>接着使用 tar 命令解压这个文件</p>
+
+<pre><code class="language-bash">tar xvf  buflab-handout.tar
+</code></pre>
+
+<p>其中， x 参数表示解压工作， v 表示显示解压所得的文件列表， f 及其后面跟着的文件
+名指定了待解压文件</p>
+
+<p>这样在当前目录下就多出了三个文件： bufbomb, makecookie, sendstring</p>
+
+<p>接下来使用 makecookie 得到自己学号对应的 cookie 号，用法是
+<code>./makecookie 学号</code></p>
+
+<p>这个 cookie 号在后面的几个关卡中都有可能会用到，同时 <a href="http://10.132.143.234/bufbombstatus.html">http://10.132.143.234/bufbombstatus.html</a> 中可以通过自己的 cookie 号随时获得自己现在的过关情况。</p>
+
+<p>和上一个 Lab 一样，这里介绍一下怎么过 Level 0 。</p>
+
+<p>这个热身关和两个函数有关， test() 和 smoke() ，正常情况下 smoke 不会被任何函数调用，我们要做的就是输入一串特定的字符，使得 smoke 被调用。另外这个关卡简单之处在于 smoke 被调用后就直接退出程序，我们在破坏了栈的数据后不需要恢复原样。</p>
+
+<p>注意到 test 中调用了 getbuf 函数，联系到 CS:APP Section 3.13 ，看来只要把 getbuf 的返回地址改成 smoke 的地址就行了。</p>
+
+<p>召唤 gdb 监视 bufbomb 的运行，设置断点在 getbuf ，使用 run -t 学号 运行，程序停在 getbuf 的第三行，使用 disas 查看当前函数 (getbuf) 的汇编代码</p>
+
+<pre><code class="language-nasm">0x08048ab3 :  lea    0xffffffe8(%ebp),%eax
+0x08048ab6 :  sub    $0x24,%esp
+0x08048ab9 :  push   %eax
+0x08048aba :  call   0x8048bbc
+0x08048abf :  mov    $0x1,%eax
+</code></pre>
+
+<p>看来这里的 %eax 保存了字符串的首字节地址，从第一句可以算出，它与 %ebp 指向的地址相差了 24 。</p>
+
+<p>也就是说我们输入 24 个字符后，接下来输入的 4 个字符会覆盖掉原来的帧指针，再之后的 4 个字符就会覆盖函数的返回地址。把这个地址覆盖成 smoke 的就行，用 disas smoke 得到 smoke 的地址为 0x08048964 。</p>
+
+<p>知道了这些后，我们就来构造这条特殊的字符串，新建一个文本文件（当然也可以在 sendstring 中键盘输入，不过调试起来比较麻烦），输入</p>
+
+<pre><code>00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 64 89 04 08
+</code></pre>
+
+<p>最后四个字节就是 smoke 的地址，注意是 little endian 约定。假设保存文件为 ans.txt</p>
+
+<p>但这只是文本格式的指令，需要把它转换为二进制值， sendstring 工具可以帮助我们生成二进制串：<code>cat ans.txt | ./sendstring &gt; raw.txt</code></p>
+
+<p>这行命令用到了 shell 的管道和重定向功能，它的作用是把 ans.txt 的内容放到 sendstring 中，把 sendstring 生成的内容放到 raw.txt 中。这样在 raw.txt 中包含了最后的二进制代码。</p>
+
+<p>回到 gdb ，使用 run -t 学号 &lt; raw.txt 运行程序，程序停在 getbuf 中的断点后，使用几个 ni 命令往下运行，等调用完 Gets 函数后（一般是在 0x08048abf ），查看当前的帧指针附近的信息：</p>
+
+<pre><code>(gdb) p/x *(int*) ebp@2
+$ 1 = {0x0, 0x8048964}
+</code></pre>
+
+<p>看来我们已经成功得把返回地址改掉了，使用 c(ontinue) 继续运行，就可以看到成功信息了。</p>
+
+<p>后面几关（除了最后一个）和这个热身关差不多，只是返回地址需要指向 buf 数组，运行嵌在其中的代码再返回原来的地址，要获得嵌入的二进制代码，可以先写一个包含汇编指令的 .s 文件，使用 gcc -c 把这个文件编译成 relocatable object ，再用 objdump -d 得到这段二进制代码。大致思路 pdf 上已经写得很详细了，这里不再赘述。</p>
+
+<p>关于最后一关， CS:APP 书上有一个类似的题目 (3.38, P236) ，我记得我当时做的时候栈帧地址也是会跳动的，只是没有 Level 4 那个那么明显，有兴趣的同学可以试一下。</p>
+
+<p>程序的下载地址： <a href="http://10.132.141.124/study/ics/bufbomb.c">http://10.132.141.124/study/ics/bufbomb.c</a></p>
+
+<h4 id="其他几个提示">其他几个提示</h4>
+
+<p>输入的文本格式的二进制代码计算字节数比较麻烦，可以每 10 个字节一行，写完后使用 vim 的 shift+j 快捷键把这几行都拼起来。</p>
+
+<p>本地过关后记得查看网站确定一下。</p>
+
+<p>gdb 的 run 命令会自动根据上一次的参数运行程序，所以第一次输入 run -t 学号 &lt; raw.txt 后，以后只要简单的使用 r 就可以了。</p>
+
+<p>建议开两个 PieTTY 窗口，一个 gdb 调试，一个修改、生成二进制文本，很方便。</p>
+
+    </div>
+        <div class="cc-license">
+      本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.zh">知识共享署名-非商业性使用 3.0 版本许可协议</a>进行许可，欢迎转载，演绎，但是必须保留本文的署名 <a href="https://blog.yxwang.me/2007/12/ics-lab-3/">zellux</a>（包含链接），且不得用于商业目的。
+    </div>
+
+  </div>
+  <div class="pagination">
+    <a class="btn previous " href="https://blog.yxwang.me/2008/03/ics-lab4/"> Prev</a>  
+    <a class="btn next " href="https://blog.yxwang.me/2007/11/ics-lab2/"> Next</a> 
+  </div>
+</div>
+
+
+<div id="disqus_thread"></div>
+<script>
+  var disqus_config = function () {
+  this.page.url = "https://blog.yxwang.me/2007/12/ics-lab-3/";
+  
+  };
+  (function() {
+  var d = document, s = d.createElement('script');
+  s.src = '//aiur-zellux.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+
+<div class="footer">
+  
+  <p>Powered by <a href="http://gohugo.io">Hugo</a> and <a href="https://github.com/zhe/hugo-theme-slim">Slim theme</a>.
+  
+      Follow me on <a href="https://twitter.com/zellux">Twitter</a>.
+      </p>
+  </p>
+  
+</div>
+
+                   
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+    Macros: {
+      argmax: "\\operatorname*{argmax}",
+      argmin: "\\operatorname*{argmin}"
+    }
+  },
+  jax: ["input/TeX","output/CommonHTML"]
+});
+</script>
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML">
+</script>
+
+</script>
+
+<script src="https://blog.yxwang.me/js/slim.min.aef36e671f72c9042139aae327dbe693b7ebaa67fd56f30dad4c985a91ba9294.js"></script>
+
+
+<link rel="stylesheet" href="https://blog.yxwang.me/css/solarized-light.min.5499f6bc45da0c78f070be4f720fd28b19af75306b569b77837d57c3cf819430.css" />
+<script src="/js/highlight.pack.js"></script>
+<script>
+  hljs.initHighlightingOnLoad();
+</script>
+
+</div>
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-25551121-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+<script type="text/javascript">
+    window.heap=window.heap||[],heap.load=function(e,t){window.heap.appid=e,window.heap.config=t=t||{};var r=t.forceSSL||"https:"===document.location.protocol,a=document.createElement("script");a.type="text/javascript",a.async=!0,a.src=(r?"https:":"http:")+"//cdn.heapanalytics.com/js/heap-"+e+".js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(a,n);for(var o=function(e){return function(){heap.push([e].concat(Array.prototype.slice.call(arguments,0)))}},p=["addEventProperties","addUserProperties","clearEventProperties","identify","removeEventProperty","setEventProperties","track","unsetEventProperty"],c=0;c<p.length;c++)heap[p[c]]=o(p[c])};
+      heap.load("3166778701");
+</script>
+
+
+</body>
+
+</html>
+

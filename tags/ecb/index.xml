@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ecb on Aiur · Zellux 的博客</title>
+    <link>https://blog.yxwang.me/tags/ecb/</link>
+    <description>Recent content in Ecb on Aiur · Zellux 的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sun, 07 Feb 2010 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.yxwang.me/tags/ecb/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>ecb 和 cscope 的结合使用</title>
+      <link>https://blog.yxwang.me/2010/02/bind-cscope-to-ecb/</link>
+      <pubDate>Sun, 07 Feb 2010 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2010/02/bind-cscope-to-ecb/</guid>
+      <description>前几天试用了下ECB，非常喜欢它的定义列表和文件浏览历史的功能。但是却发现了另外一个问题：使用ECB之前我把整个窗口分成左右两块，左边是代码，右边是cscope的查找结果，现在开启ECB之后就不能再切一块窗口给cscope用了。
+感谢stackoverflow上的sanitynic，给出了自定义ECB窗口的参考。现在俺终于能把cscope窗口绑定到屏幕左下角啦。
+
+自定义ECB layout其实也挺方便的，上图对应的配置为
+(ecb-layout-define &amp;quot;my-cscope-layout&amp;quot; left nil (ecb-set-methods-buffer) (ecb-split-ver 0.5 t) (other-window 1) (ecb-set-history-buffer) (ecb-split-ver 0.25 t) (other-window 1) (ecb-set-cscope-buffer)) (defecb-window-dedicator ecb-set-cscope-buffer &amp;quot; *ECB cscope-buf*&amp;quot; (switch-to-buffer &amp;quot;*cscope*&amp;quot;)) (setq ecb-layout-name &amp;quot;my-cscope-layout&amp;quot;) ;; Disable buckets so that history buffer can display more entries (setq ecb-history-make-buckets &#39;never)  my-cscope-layout这个layout左边窗口分为三部分，最上面的函数列表占一半高度，中间为历史文件列表，下面为cscope的查找结果，它们各占四分之一的高度。
+另外再简单提下cscope插件的安装和配置，使用前需确认当前系统已经安装了cscope，另外要有cscope-indexer这个脚本。在cscope/contrib目录下找到一个xcscope.el，复制到Emacs的插件目录中，并在Emacs初始化文件中加入
+(require &#39;xcscope)  即可。某些发行版的包里面似乎没有cscope-indexer和xcscope.el，直接从网上下一个好了。
+几个常用的快捷键：
+ C-c s I 建立cscope索引 C-c s a 设置搜索目录 C-c s d 查找定义 C-c s s 查找字符串 C-c s c 查找调用者 C-c s n 下一个查找结果 C-c s p 上一个查找结果  更多的快捷键可以在 C-h b 跳转的帮助页面的 cscope-minor-mode 区找到。</description>
+    </item>
+    
+    <item>
+      <title>ecb 的简单配置和使用</title>
+      <link>https://blog.yxwang.me/2010/02/ecb-beginning/</link>
+      <pubDate>Tue, 02 Feb 2010 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2010/02/ecb-beginning/</guid>
+      <description>终端下的效果图（Windows 7下使用pietty远登）
+
+下载
+http://ecb.sourceforge.net/downloads.html CVS或者压缩包都可以，当然也可以通过各发行版的包管理器安装。
+安装
+在.emacs中加入
+;; ECB configurations (add-to-list &#39;load-path &amp;quot;~/emacs/ecb-2.40&amp;quot;) (add-to-list &#39;load-path &amp;quot;~/emacs/cedet-1.0pre6/eieio&amp;quot;) (add-to-list &#39;load-path &amp;quot;~/emacs/cedet-1.0pre6/semantic&amp;quot;) (add-to-list &#39;load-path &amp;quot;~/emacs/cedet-1.0pre6/speedbar&amp;quot;) (setq semantic-load-turn-everything-on t) (require &#39;semantic-load) (require &#39;ecb-autoloads)  运行Emacs后执行ecb-byte-compile，并重启Emacs（我这里不重启的话执行ecb-active后会报错）。
+使用
+第一次使用时先要设置项目目录，M-x customize-variable  ecb-source-path ，在这里加上你的项目根目录。
+接下来使用M-x ecb-active就能激活ECB了，成功激活后Emacs窗口会被切成左右两半。左边的几个窗口依次显示：目录，当前目录下的文件，当前文件中的函数/全局变量等定义，文件浏览历史。如果打开了一个源文件后函数定义窗口里面是空的，有可能是因为这个项目过大cedet尚未完成对它的分析，闲置一段时间后就能看到文件里的定义。
+ECB提供了方便在这些窗口间切换的快捷键：
+切换到目录窗口 Ctrl-c . g d 切换到函数/方法窗口 Ctrl-c . g m 切换到文件窗口 Ctrl-c . g s 切换到历史窗口 Ctrl-c . g h 切换到上一个编辑窗口 Ctrl-c . g l
+最基本的使用就是这样，Ctrl-C . h可以看到更详细的帮助信息。</description>
+    </item>
+    
+  </channel>
+</rss>

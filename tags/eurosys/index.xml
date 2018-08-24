@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Eurosys on Aiur · Zellux 的博客</title>
+    <link>https://blog.yxwang.me/tags/eurosys/</link>
+    <description>Recent content in Eurosys on Aiur · Zellux 的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sun, 16 Jan 2011 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.yxwang.me/tags/eurosys/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>良性代码，恶意利用：浅谈 Return-Oriented 攻击（二）</title>
+      <link>https://blog.yxwang.me/2011/01/return-oriented-intro-2/</link>
+      <pubDate>Sun, 16 Jan 2011 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2011/01/return-oriented-intro-2/</guid>
+      <description>在上一篇文章中我们介绍了 return-oriented 这种攻击手段，它的强大之处在于攻击者不需要插入恶意代码，通过构造特殊的函数返回栈利用程序中原有的代码即可达到攻击者的目地。
+北卡州立大学的学者们提出了一种防止 return-oriented 攻击的思路，思路很简单，一句话概括，就是去掉代码里所有的 ret 指令！
+思路很简单，真正做起来还是很复杂的。x86 中的 ret 指令只有一个字节，即 0xc3。要去掉所有的 0xc3，不仅要修改原来代码中的 ret 指令，还要移除其他指令片段中的 0xc3（例如 movl $0xc3, %rax）。接下来我们来看看 EuroSys 10 上的这篇文章是怎么解决这些问题的。
+首先是原来就作为 ret 指令用的 0xc3 代码。注意 return-oriented 之所以成功一大原因就是 ret 指令在返回时不会检查栈上的返回地址是否正确。要保证这一点，需要引入一个间接跳转层。传统的调用过程是调用者把返回地址压入栈上，然后被调用函数返回时从栈上得到返回地址并返回。现在我们加入一个新的跳转表，这张表里记录了所有的返回地址，而且它不在栈上，因此不能被攻击者修改。当调用者调用函数时，把返回地址在表中的序号压入栈上；函数返回时，从栈上读出地址序号，再查表得到实际地址，然后返回。通过引入这样一层额外的地址转换机制，攻击者就不能通过修改栈上返回地址让函数返回到任意地址了。
+接下来我们要解决其他指令引入的 0xc3，这里面也分几类情况。首先是由于寄存器分配引起的。例如 movl %rax, %rbx 对应的机器码是 48 89 c3，这边就有个 0xc3。对于这一类代码，只需要在编译器做寄存器分配时把有可能产生 0xc3 的情况排除掉即可。
+另一类是代码中直接使用了 0xc3 作为直接数。这种情况需要对代码进行适当的修补，以 cmp $0xc3, %ecx 为例，0xc3 这个直接数可以通过 0xc4 - 1 得到，于是这条指令可以被修改为：
+mov $0xc4, %reg dec %reg cmp %reg, %ecx  到这里所有包含 0xc3 的代码都已经被修改成具有同等功能的不包含 0xc3 的版本了，也就彻底杜绝了 ret 指令被用来做 return-oriented 攻击的可能。对具体实现细节有兴趣的同学可以读一下这篇论文，作者借助 LLVM 生成了一个没有 0xc3 的 FreeBSD 内核。</description>
+    </item>
+    
+    <item>
+      <title>EuroSys 09 - Orchestra</title>
+      <link>https://blog.yxwang.me/2009/05/eurosys-09-orchestra/</link>
+      <pubDate>Wed, 06 May 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2009/05/eurosys-09-orchestra/</guid>
+      <description>吴总讲的一篇paper，题目是Orchestra: Intrusion Detection Using Parallel Execution and Monitoring of Program Variants in User-Space，发在EuroSys &amp;lsquo;09上，UCI的。
+这篇paper提出了一种检测栈上buffer overflow攻击的方法。想法很有意思，它运行两个孪生进程，这两个进程的唯一的区别就是一个进程的栈往上长而另一个进程的栈往下长，这样在大多数情况下如果没有出现buffer overflow的问题的话那么两者的行为应该是一致的。
+栈的增长行为是由编译器控制的，作者修改了gcc的代码使之生成的代码的栈增长方向相反，关于这个编译器他们之间发过一篇paper在一个叫CATARS的workshop上，题目是Reverse stack execution in a multi-variant execution environment。
+“行为一致”的精确定义是两者的system call的调用方式、参数都一样，也就是说这里system call成了两个进程运行的synchronization point。如果某个点上两个进程调用的syscall不同或者调用参数不同就认为它已经被buffer overflow攻击了。
+整个monitor都是跑在user态的，主要利用了ptrace，使两者的行为尽可能的一致。这里要做的事情很多，比如要保证进程调用getpid()的得到返回值一样才能使得后面的其他系统调用的参数相同，又比如一个进程调用write写入文件时不能影响到另一个进程，此外还要保证两个进程获得的file descriptor、随机数、时间、信号等信息都相同，甚至在进程创建子进行的时候也要保证所有子线程关系的同构。
+用ptrace能够解决上面的大多数问题，但还有一些open problem以及false positive。如这篇paper无法解决进程用MAP_SHARED方式打开一个文件并修改的情况，尽管作者说这种mmap的用例很少见；此外由于两个进程的同步并不是原子性的，中间可能被第三方的程序干扰（比如进程A读入某个文件开头后，该文件被其他进程修改，进程B再读取就和进程A读到的不一样了），这就造成了false positive；另外由于无法截取rdtsc指令的使用，也就无法保证它们的返回值一样，也可能引起另一种false positive。
+感觉这个东东想法不错，但是没什么实用性，工程量也很大。</description>
+    </item>
+    
+    <item>
+      <title>EuroSys 08 - Solitude: App-Level Isolation and Recovery</title>
+      <link>https://blog.yxwang.me/2008/05/application-level-isolation-and-recovery-with-solitude/</link>
+      <pubDate>Wed, 28 May 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2008/05/application-level-isolation-and-recovery-with-solitude/</guid>
+      <description>Application-Level Isolation and Recovery with Solitude
+Shvetank Jain, Fareha Shafique, Vladan Djeric, Ashvin Goel
+Department of Electrical and Computer Engineering, University of Toronto
+http://portal.acm.org/citation.cfm?id=1357010.1352603
+引入一个新的文件系统层(Isolation File System)将安全可信的基础文件系统和不可信的环境（如网上下载的文件等）隔离开来，并对不可信的环境中做出的改动加以记录，一旦发现问题就能即使恢复。</description>
+    </item>
+    
+  </channel>
+</rss>

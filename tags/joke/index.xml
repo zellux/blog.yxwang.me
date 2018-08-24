@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Joke on Aiur · Zellux 的博客</title>
+    <link>https://blog.yxwang.me/tags/joke/</link>
+    <description>Recent content in Joke on Aiur · Zellux 的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Fri, 10 Apr 2009 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.yxwang.me/tags/joke/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>关于 tuple 的读音</title>
+      <link>https://blog.yxwang.me/2009/04/tuple-pronunciation/</link>
+      <pubDate>Fri, 10 Apr 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2009/04/tuple-pronunciation/</guid>
+      <description>水木上有个帖子讨论tuple这个词该怎么读，于是有人翻出来这个三年前的新闻组邮件
+http://coding.derkeiler.com/Archive/Python/comp.lang.python/2006-02/msg01915.html I used to pronounce it toople. But the people that taught me Python found it both comical and confusing. At first they thought I meant a 2 element tuple. So they wondered if a 3 element tuple was a threeple, etc. After much harrassing, I changed my wayward ways and pronounced it tuhple to fit in with the cool Python guys. ;-)
+Then we went to hear Guido speak about Python 2.</description>
+    </item>
+    
+  </channel>
+</rss>

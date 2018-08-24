@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Lisp on Aiur · Zellux 的博客</title>
+    <link>https://blog.yxwang.me/tags/lisp/</link>
+    <description>Recent content in Lisp on Aiur · Zellux 的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Wed, 24 Feb 2010 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.yxwang.me/tags/lisp/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>SICP 里提到的画图语言</title>
+      <link>https://blog.yxwang.me/2010/02/the-sicp-picture-language/</link>
+      <pubDate>Wed, 24 Feb 2010 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2010/02/the-sicp-picture-language/</guid>
+      <description>SICP第二章里提到了一种用来画图的Lisp方言，用来演示数据抽象和闭包的表达能力（见http://mitpress.mit.edu/sicp/full-text/book/book-Z-H-15.html#%_sec_2.2.4）。
+最近尝试了下，发现soegaard同学已经在PLT Scheme中实现了一个类似的库，可以很方便的在DrScheme上使用。
+sicp.plt包使用很简单，在Language-&amp;gt;Choose Language中选择Module，然后在需要用到这个包的时候用
+(require (planet soegaard/sicp:2:1/sicp))  声明即可。第一次运行时DrScheme会自动下载这个包并安装，如果网络有限制可以先从http://planet.plt-scheme.org/display.ss?package=sicp.plt&amp;owner=soegaard下载然后在DrScheme中选择本地包安装。
+另外SICP上使用的两个painter（wave和rogers）没有在这个包里提供，取而代之是diagonal-shading和einstein。
+下面这个程序显示了一个简单的分形图像：
+#lang scheme (require (planet &amp;quot;sicp.ss&amp;quot; (&amp;quot;soegaard&amp;quot; &amp;quot;sicp.plt&amp;quot; 2 1))) (define (right-split painter n) (if (= n 0) painter (let ((smaller (right-split painter (- n 1)))) (beside painter (below smaller smaller))))) (define (up-split painter n) (if (= n 0) painter (let ((smaller (up-split painter (- n 1)))) (below painter (beside smaller smaller))))) (define (corner-split painter n) (if (= n 0) painter (let ((up (up-split painter (- n 1))) (right (right-split painter (- n 1)))) (let ((top-left (beside up up)) (bottom-right (below right right)) (corner (corner-split painter (- n 1)))) (beside (below painter top-left) (below bottom-right corner)))))) (paint (corner-split diagonal-shading 4))  程序输出：</description>
+    </item>
+    
+  </channel>
+</rss>

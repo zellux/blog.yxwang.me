@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="zellux">
+
+    <title> Posts &middot; Aiur · Zellux 的博客 </title>
+
+    <script src="/js/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
+    <script src="/js/jquery-3.0.47.fancybox.min.js"></script>
+
+    
+    
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.52ea10a8f3a0b8f145adadb8d3761e17a42a7634869f775ef5830ed4de77d3fa.css">
+    
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+    
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    
+    <link href="https://blog.yxwang.me/post/index.xml" rel="alternate" type="application/rss+xml" title="Aiur · Zellux 的博客" />
+    
+<script type="application/ld+json">
+{
+    "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https://blog.yxwang.me/"
+    },
+    "articleSection" : "post",
+    "name" : "Posts",
+    "headline" : "Posts",
+    "description" : "",
+    "inLanguage" : "en-US",
+    "author" : "zellux",
+    "creator" : "zellux",
+    "publisher": "zellux",
+    "accountablePerson" : "",
+    "copyrightHolder" : "",
+    "copyrightYear" : "2011",
+    "datePublished": "2011-01-16 00:00:00 &#43;0000 UTC",
+    "dateModified" : "2011-01-16 00:00:00 &#43;0000 UTC",
+    "url" : "https://blog.yxwang.me/post/",
+    "wordCount" : "0",
+    "keywords" : [ "Blog" ]
+}
+</script>
+
+  </head>
+
+  <body>
+    <nav class="nav">
+  <div class="nav-container">
+    <span class="site-title">
+      <a href="https://blog.yxwang.me/">Aiur · Zellux 的博客</a>
+    </span>
+    
+    <div class="nav-list">
+      
+      <span class="nav-item"><a href="/about">About</a></span>
+      
+      <span class="nav-item"><a href="/archive">Archive</a></span>
+      
+      <span class="nav-item"><a href="/notes">Notes</a></span>
+      
+    </div>
+  </div>
+</nav>
+
+    <div class="container">
+
+
+<div class="content">
+  <div class="posts">
+     
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2011/01/return-oriented-intro-2/">良性代码，恶意利用：浅谈 Return-Oriented 攻击（二）</a></h2>
+      <span class="post-date">Jan 16, 2011</span>
+      
+      <span class="post-tags">
+	
+	#<a href="https://blog.yxwang.me/tags/computer-system">Computer System</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/eurosys">EuroSys</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/llvm">LLVM</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/return-oriented">Return-oriented</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/security">Security</a>&nbsp;
+	
+      </span>
+      
+      
+      
+      <div class="summary">
+	在上一篇文章中我们介绍了 return-oriented 这种攻击手段，它的强大之处在于攻击者不需要插入恶意代码，通过构造特殊的函数返回栈利用程序中原有的代码即可达到攻击者的目地。
+北卡州立大学的学者们提出了一种防止 return-oriented 攻击的思路，思路很简单，一句话概括，就是去掉代码里所有的 ret 指令！
+思路很简单，真正做起来还是很复杂的。x86 中的 ret 指令只有一个字节，即 0xc3。要去掉所有的 0xc3，不仅要修改原来代码中的 ret 指令，还要移除其他指令片段中的 0xc3（例如 movl $0xc3, %rax）。接下来我们来看看 EuroSys 10 上的这篇文章是怎么解决这些问题的。
+首先是原来就作为 ret 指令用的 0xc3 代码。注意 return-oriented 之所以成功一大原因就是 ret 指令在返回时不会检查栈上的返回地址是否正确。要保证这一点，需要引入一个间接跳转层。传统的调用过程是调用者把返回地址压入栈上，然后被调用函数返回时从栈上得到返回地址并返回。现在我们加入一个新的跳转表，这张表里记录了所有的返回地址，而且它不在栈上，因此不能被攻击者修改。当调用者调用函数时，把返回地址在表中的序号压入栈上；函数返回时，从栈上读出地址序号，再查表得到实际地址，然后返回。通过引入这样一层额外的地址转换机制，攻击者就不能通过修改栈上返回地址让函数返回到任意地址了。
+接下来我们要解决其他指令引入的 0xc3，这里面也分几类情况。首先是由于寄存器分配引起的。例如 movl %rax, %rbx 对应的机器码是 48 89 c3，这边就有个 0xc3。对于这一类代码，只需要在编译器做寄存器分配时把有可能产生 0xc3 的情况排除掉即可。
+另一类是代码中直接使用了 0xc3 作为直接数。这种情况需要对代码进行适当的修补，以 cmp $0xc3, %ecx 为例，0xc3 这个直接数可以通过 0xc4 - 1 得到，于是这条指令可以被修改为：
+mov $0xc4, %reg dec %reg cmp %reg, %ecx  到这里所有包含 0xc3 的代码都已经被修改成具有同等功能的不包含 0xc3 的版本了，也就彻底杜绝了 ret 指令被用来做 return-oriented 攻击的可能。对具体实现细节有兴趣的同学可以读一下这篇论文，作者借助 LLVM 生成了一个没有 0xc3 的 FreeBSD 内核。
+	<a class="read-more" href="/2011/01/return-oriented-intro-2/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2010/11/return-oriented-intro-1/">良性代码，恶意利用：浅谈 Return-Oriented 攻击（一）</a></h2>
+      <span class="post-date">Nov 19, 2010</span>
+      
+      <span class="post-tags">
+	
+	#<a href="https://blog.yxwang.me/tags/computer-system">Computer System</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/return-oriented">Return-oriented</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/security">Security</a>&nbsp;
+	
+      </span>
+      
+      
+      
+      <div class="summary">
+	众多的安全漏洞中，栈溢出（stack-based buffer overflows）算是非常常见的了。一方面因为程序员的疏忽，使用了 strcpy、sprintf 等不安全的函数，增加了栈溢出漏洞的可能。另一方面，因为栈上保存了函数的返回地址等信息，因此如果攻击者能任意覆盖栈上的数据，通常情况下就意味着他能修改程序的执行流程，从而造成更大的破坏。
+对于栈溢出漏洞，传统的攻击方式是嵌入攻击代码，然后修改栈上的返回地址，使它指向攻击代码段，从而执行攻击者指定的代码。本科时候上过一门计算机系统基础，其中的某一个lab就要求学生做这么一件事。
+现在的安全技术已经能比较好的防范传统的栈溢出攻击了。常见的技术有这么几种：
+随机空间，前面提到攻击者需要修改栈上返回地址，使它指向注入的代码起始地址。但如果用户栈的起始地址是随机分布的，甚至每次新建一个栈帧时的地址都有一定程度的随机波动，要获得准确的返回地址就很困难了。这个技术大大增加了代码嵌入攻击的难度，但是却没用从理论上杜绝成功的可能性。攻击者可以使用大量的空指令（nop），并在可以修改的区域重复添加攻击代码，以此增加攻击成功的几率。
+W ^ X，把所有的可读可写页标记为不可执行，也就是说攻击者无法添加或修改可执行代码，这样包含了嵌入代码的页面就无法被攻击者调用执行了。Windows 的 DEP、 Linux 的 PaX 都利用了这一项技术。
+此外还有一些诸如 StackGuard 等栈保护手段，不过由于它们对性能影响很大，实际中使用并不广泛。
+这些手段使得在受保护的进程中利用栈溢出嵌入恶意代码并执行变得几乎不可能，然而这并不意味着栈溢出漏洞没有利用的价值了。聪明的黑客们想到了另外一种自定义程序行为的途径：利用程序或者动态库中原有的代码。这些代码虽然本身是良性的，但适当利用的话，同样可以产生恶意的效果。
+最简单的手段就是著名的 return-to-libc 攻击。libc 中有一些函数可以用于执行其他的进程，例如 execve 和 system。这些函数很容易被攻击者利用，只要找到一个栈溢出漏洞，并适当的构造函数调用参数，并使栈上返回地址指向这些函数的起始地址，攻击者就能以这个程序的权限执行任意其他程序了！注意这里所有执行的代码都是合法的，所以前面提到的W^X技术对此就无能为力了。
+return-to-libc 这种攻击方式也有一个局限，就是需要代码库中有 system 这样符合要求的函数，如果对于内核代码，或是检查调用来源的库，return-to-libc 就不那么给力了。于是另一种理论上更强大、也更难构造的攻击方式浮出水面，也就是标题的 return-oriented 攻击。
+关于 return-oriented 攻击，我之前的一篇博文已经介绍过这个概念了，这里再解释一下。
+一般程序中都包含着大量的返回指令（ret），它们通常位于一个函数的结尾，或是中途返回的地方。而这些返回指令之前的一两条指令，成为了 return-oriented 攻击指令的来源。攻击者要做的就是把这些零零碎碎的指令拼接起来，拼成一段恶意的代码。这里的难点有两个地方，一是怎么找到符合要求的代码片段，二是找到之后怎么拼接。
+先来看第一个问题，可用的代码片段虽然多，但是都是固定的。这就意味着原来的一条指令现在可能需要多条指令执行后得到相同的效果了。举例来说，要把一个寄存器赋值为 4 的话，可能没有现成的直接赋值的代码片段，需要一条赋值为 1 的指令，和三条寄存器加 1 的指令拼凑而成。这样通过拼凑，受限的指令可以完成一些基本的操作，再由这些基本的操作，组成一段有实际意义的攻击代码。这里涉及到不少编译相关的知识，具体细节就不赘述了。
+关于第二个问题，因为前面找到的代码片段都是以 ret 指令结尾的，所以只要把栈上的返回地址改成片段1的起始地址，代码片段1执行之后就会通过 ret 指令返回，此时读取的返回地址还是在被攻击的栈上，所以攻击者只要把对应位置的值改成代码片段2的起始地址，就能紧接着执行代码片段2了，如此循环，只要栈够大，就可以把攻击片段跑完。
+对于 Linux 内核、glibc 这些庞大的程序来说，ret 指令前面一两条指令组成的代码库非常巨大，基本上可以达到图灵完备的要求了，也就是说，只要栈够大，任何程序都能由这些代码片段表达出来。另外这里为什么强调“一两条指令”呢？当然四五条甚至十几条指令的复用也是可以的，只是这样会大大增加搜索空间，要通过这些可能的代码片段生成一个程序需要太多的时间了。
+那么如何防范 return-oriented 攻击呢？之后的博文里，我会介绍一些和它相关的国外研究。
+	<a class="read-more" href="/2010/11/return-oriented-intro-1/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2010/10/change-caps-lock-state-by-software/">软件修改 Caps Lock 状态</a></h2>
+      <span class="post-date">Oct 19, 2010</span>
+      
+      <span class="post-tags">
+	
+	#<a href="https://blog.yxwang.me/tags/keyboard">Keyboard</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/python">Python</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/tooling">Tooling</a>&nbsp;
+	
+      </span>
+      
+      
+      
+      <div class="summary">
+	我经常使用的几台电脑中的Caps Lock 键都被我改成了 Ctrl 键，这样修改以后用起 Emacs 来就顺手多了。
+最近在 Windows 上用 VMware Remote Control 远登虚拟机调试内核的时候，问题就出来了：可能是这个浏览器插件的 bug，有时键盘的 Caps Lock 会被莫名打开。然后我的这个键盘键位又比较少，不想再让 Caps Lock 键替换另一个用得更少的按键了，于是想到了软件关闭的方法。
+搜了下 Stackoverflow 找到个很好用的 Python 库SendKeys，只要两行代码就能在 Windows 下模拟 Caps Lock 按键了：
+import SendKeys SendKeys.SendKeys(&quot;{CAPSLOCK}&quot;)  另外在 Linux 要模拟按键，可以直接访问 /dev/console：
+import fcntl import os KDSETLED = 0x4B32 console_fd = os.open('/dev/console', os.O_NOCTTY) # Turn on caps lock fcntl.ioctl(console_fd, KDSETLED, 0x04) # Turn off caps lock fcntl.ioctl(console_fd, KDSETLED, 0)  原问题地址
+	<a class="read-more" href="/2010/10/change-caps-lock-state-by-software/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2010/08/gcc-operand-substitution/">gcc 内联汇编中 %c 的用法</a></h2>
+      <span class="post-date">Aug 25, 2010</span>
+      
+      <span class="post-tags">
+	
+	#<a href="https://blog.yxwang.me/tags/assembly">Assembly</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/computer-languages">Computer Languages</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/gcc">GCC</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/programming">Programming</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/gcc">gcc</a>&nbsp;
+	
+      </span>
+      
+      
+      
+      <div class="summary">
+	这几天看KVM代码的时候看到里面有个内联汇编的语法很陌生（下面的代码截取了部分内联汇编片段）：
+asm ( &quot;mov %c[rax](%3), %%rax \n\t&quot; &quot;mov %c[rbx](%3), %%rbx \n\t&quot; &quot;mov %c[rdx](%3), %%rdx \n\t&quot; &quot;mov %c[rsi](%3), %%rsi \n\t&quot; &quot;mov %c[rdi](%3), %%rdi \n\t&quot; : &quot;=q&quot; (fail) : &quot;r&quot;(vcpu-&gt;launched), &quot;d&quot;((unsigned long)HOST_RSP), &quot;c&quot;(vcpu), [rax]&quot;i&quot;(offsetof(struct kvm_vcpu, regs[VCPU_REGS_RAX])), [rbx]&quot;i&quot;(offsetof(struct kvm_vcpu, regs[VCPU_REGS_RBX])), [rcx]&quot;i&quot;(offsetof(struct kvm_vcpu, regs[VCPU_REGS_RCX])) : &quot;cc&quot;, &quot;memory&quot; );  stackoverflow上问了下才知道这是gcc的operand substitution语法，%c后面跟上常量名，就能在内联汇编中使用这个常量了。
+以这段代码为例，vcpu是struct kvm_vcpu类型，[rax]&ldquo;i&rdquo;(offsetof(struct kvm_vcpu, regs[VCPU_REGS_RAX])这句话把vcpu-&gt;regs[VCPU_REGS_RAX]相对于vcpu的偏移赋值给了rax这一常量。接下来回到第一行mov %crax, %%eax，%c[rax]等于前面得到的偏移量，加上vcpu并取值后就是vcpu-&gt;regs[VCPU_REGS_RAX]中保存的值了，这个指令会把这个值保存在%rax寄存器中，从而完成了vcpu的rax寄存器恢复工作。
+	<a class="read-more" href="/2010/08/gcc-operand-substitution/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2010/05/git-through-https-proxy/">利用 HTTPS 代理访问 GitHub</a></h2>
+      <span class="post-date">May 14, 2010</span>
+      
+      <span class="post-tags">
+	
+	#<a href="https://blog.yxwang.me/tags/proxy">Proxy</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/tooling">Tooling</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/git">git</a>&nbsp;
+	
+      </span>
+      
+      
+      
+      <div class="summary">
+	网上找了不少设置方法，终于翻出来一个可行的，和大家分享下。
+1. 安装 corkscrew ArchLinux 和 Ubuntu 的源里就有，也可以从 http://www.agroman.net/corkscrew/ 下载源码编译一个。
+2. 修改 ~/.ssh/config Host gitproxy User git Hostname ssh.github.com Port 443 ProxyCommand corkscrew proxy.example.com 3128 %h %p IdentityFile /home/username/.ssh/id_rsa  修改其中的 proxy.example.com 和 3128 为代理 IP 和端口，如果代理需要帐号密码，就在 ProxyCommand 这一行的最后加上密码文件，内容为*用户名:密码*。
+参数 IdentitiFile 指定相应帐号的私钥文件地址。
+另外 @cyfdecyf 同学指出只要把这里的 Host 改成 github.com，就可以直接用 git@github.com:user/repository 访问 GitHub 了。
+3. 使用 git@gitproxy 访问 GitHub 例如要把 foo/bar.git 拖下来，执行 git clone git@gitproxy:foo/bar.git 即可。
+原文地址：http://www.wetware.co.nz/blog/2010/03/cant-access-github-behind-proxy-or-firewall/
+更新： 由于 GitHub 现在支持 HTTPS 协议了，所以更简单的方法是使用 GitHub 提供的 HTTPS 地址，然后用 git config --add http.
+	<a class="read-more" href="/2010/05/git-through-https-proxy/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2010/03/blueprint/">跨站脚本攻击和 BluePrint</a></h2>
+      <span class="post-date">Mar 3, 2010</span>
+      
+      <span class="post-tags">
+	
+	#<a href="https://blog.yxwang.me/tags/computer-system">Computer System</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/paper">Paper</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/sampp">S&amp;amp;P</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/security">Security</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/xss">XSS</a>&nbsp;
+	
+      </span>
+      
+      
+      
+      <div class="summary">
+	Blueprint: Robust prevention of cross-site scripting attacks for existing browsers
+这篇论文提出了一种防范是跨站脚本攻击(XSS)的新的方法，发在IEEE S&amp;P 2009上，作者是UIUC的Mike Ter Louw。
+所谓跨站脚本攻击，简单地说就是在网页中注入非法的脚本代码，从而达到攻击的效果。比较著名的例子有当年在MySpace上泛滥的Samy蠕虫，通过特殊的脚本注入手段，每一位访问Samy主页的用户，他们的主页都会被修改加上一段Samy is my hero文字，并且他们的主页也会被植入攻击代码，从而把这段脚本扩散给更多的用户。
+通常防范跨站脚本攻击的方式有两种。一种做在服务器端，为每一段用户上传的内容做检查，并剔除恶意代码。但这种方式很难保证能过滤掉所有的恶意字符串，一方面攻击方法防不甚防，有兴趣的朋友可以参考下XSS Cheat Sheet，上面给出了很多一般人很难想到的攻击代码的组合方式。另一方面由于现在大多数论坛和博客都支持一些基本的文本修饰标签，所以简单的标签剔除或者重新编码都不可行。
+另一种方法是做在浏览器端，但是由于浏览器无法区分某一段脚本到底是来源于不可信的用户还是可信的站点，所以这种方法实现起来也有很大的困难。
+这里实现防范措施的一个难点在于，Web应用把生成HTML的返回给浏览器后，就不参与浏览器的HTML解析工作了。这样浏览器就不知道哪部分出现脚本是安全的，哪部分出现是不安全的。
+BluePrint就着眼于这个点，提出了一种让Web应用“参与”HTML解析工作的设计。下面通过论文里面的一个例子，简单介绍下它的防范机制。
+假如一位恶意的用户在一个博客上上传了这样一段含有恶意代码的留言：
+&lt;p&gt; Here is a page you might find &lt;b &quot;&quot;&quot;&gt;&lt;script&gt;doEvil(. . .)&lt;/script&gt;&quot;&gt;very&lt;/b&gt; interesting: &lt;a href=&quot; &amp;#14; javasc&amp;#x0A;ript:doEvil(. . .);&quot;&gt; Link&lt;/a&gt; &lt;/p&gt;&lt;p style=&quot;nop:expres/*xss*/sion(doEvil(. . .))&quot;&gt; Respectfully, Eve &lt;/p&gt;  可以看到，这段代码里包含了很多可能引发脚本执行的代码，而要在服务器端把这些所有隐藏的攻击可能找出来是一件比较困难的事。那么BluePrint是怎么在不知道这段代码是否含有恶意代码的前提下处理的呢？
+首先，这种由用户上传的不可信的字符串会先在服务器端被解析成一棵树，就像HTML在浏览器中被解析一样，这棵HTML解析树可以用一些简单的DOM API来生成，例如appendChild, createElement等。这些描述如何生成HTML解析树的方法会和数据值（URL、标签属性等）一起，通过特殊的编码（Base64）传递给浏览器。例如上面这段代码，最后在浏览器接收到的HTML中，会变成这样：
+&lt;code style=&quot;display:none;&quot; id=&quot;__bp1&quot;&gt; =Enk/sCkhlcmUgaXMgYSBwYWdlIHlvdSBta... =SkKICAgICI+dmVyeQ===C/k/QIGhlbHBmd... =ECg===C/Enk/gCiAgUmVzcGVjdGZ1bGx5L... &lt;/code&gt;&lt;script id=&quot;__bp1s&quot;&gt; __bp__.cxPCData(&quot;__bp1&quot;, &quot;__bp1s&quot;); &lt;/script&gt;  在浏览器端，这段特殊的代码会被JS库解析成自定义的命令和数据格式，并由前面提到的DOM API动态生成这些HTML结点，从而达到和传统的方式一样的显示效果。当然可信的HTML代码，例如文章正文，还是按传统的方式传输的。
+	<a class="read-more" href="/2010/03/blueprint/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2010/03/keep-gnu-screen-history/">记录 GNU screen 中的历史命令</a></h2>
+      <span class="post-date">Mar 1, 2010</span>
+      
+      <span class="post-tags">
+	
+	#<a href="https://blog.yxwang.me/tags/linux">Linux</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/shell">Shell</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/tooling">Tooling</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/bash">bash</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/screen">screen</a>&nbsp;
+	
+      </span>
+      
+      
+      
+      <div class="summary">
+	GNU screen中执行的历史命令保存在内存中，默认情况下并不会像在bash中直接执行的命令一样保存在.bash_history中，这在某些场合下带来了一定的不便。
+在superuser上看到一个解决方法，指定历史文件的读写方式为追加，并在每次命令行提示符显示的时候，自动更新bash的历史命令记录。要实现这个方法很简单，只要在.bashrc中加入下面两行代码即可
+shopt -s histappend export PROMPT_COMMAND=&quot;history -a; history -n&quot;  另外如果之前设置过PROMPT_COMMAND的话，只要在history -a前加入$PROMPT_COMMAND; 就行了。
+	<a class="read-more" href="/2010/03/keep-gnu-screen-history/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2010/02/the-sicp-picture-language/">SICP 里提到的画图语言</a></h2>
+      <span class="post-date">Feb 24, 2010</span>
+      
+      <span class="post-tags">
+	
+	#<a href="https://blog.yxwang.me/tags/lisp">Lisp</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/programming">Programming</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/programming-languages">Programming Languages</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/sicp">SICP</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/scheme">Scheme</a>&nbsp;
+	
+      </span>
+      
+      
+      
+      <div class="summary">
+	SICP第二章里提到了一种用来画图的Lisp方言，用来演示数据抽象和闭包的表达能力（见http://mitpress.mit.edu/sicp/full-text/book/book-Z-H-15.html#%_sec_2.2.4）。
+最近尝试了下，发现soegaard同学已经在PLT Scheme中实现了一个类似的库，可以很方便的在DrScheme上使用。
+sicp.plt包使用很简单，在Language-&gt;Choose Language中选择Module，然后在需要用到这个包的时候用
+(require (planet soegaard/sicp:2:1/sicp))  声明即可。第一次运行时DrScheme会自动下载这个包并安装，如果网络有限制可以先从http://planet.plt-scheme.org/display.ss?package=sicp.plt&owner=soegaard下载然后在DrScheme中选择本地包安装。
+另外SICP上使用的两个painter（wave和rogers）没有在这个包里提供，取而代之是diagonal-shading和einstein。
+下面这个程序显示了一个简单的分形图像：
+#lang scheme (require (planet &quot;sicp.ss&quot; (&quot;soegaard&quot; &quot;sicp.plt&quot; 2 1))) (define (right-split painter n) (if (= n 0) painter (let ((smaller (right-split painter (- n 1)))) (beside painter (below smaller smaller))))) (define (up-split painter n) (if (= n 0) painter (let ((smaller (up-split painter (- n 1)))) (below painter (beside smaller smaller))))) (define (corner-split painter n) (if (= n 0) painter (let ((up (up-split painter (- n 1))) (right (right-split painter (- n 1)))) (let ((top-left (beside up up)) (bottom-right (below right right)) (corner (corner-split painter (- n 1)))) (beside (below painter top-left) (below bottom-right corner)))))) (paint (corner-split diagonal-shading 4))  程序输出：
+	<a class="read-more" href="/2010/02/the-sicp-picture-language/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2010/02/gitk-font/">优化 gitk 的字体显示</a></h2>
+      <span class="post-date">Feb 14, 2010</span>
+      
+      <span class="post-tags">
+	
+	#<a href="https://blog.yxwang.me/tags/fonts">Fonts</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/git">Git</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/tooling">Tooling</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/git">git</a>&nbsp;
+	
+      </span>
+      
+      
+      
+      <div class="summary">
+	gitk是用Tcl/Tk写的工具，默认使用Tk 8.4，不支持抗锯齿，因此字体显示很难看。好在Tk 8.5支持了部分抗锯齿字体，修改gitk使用Tk 8.5后显示效果会好一点。
+以Ubuntu为例，安装tk8.5包后，编辑/usr/bin/gitk文件，把开头调用wish的那行
+exec /usr/bin/wish &quot;$0&quot; -- &quot;$@&quot;  改成
+exec /usr/bin/wish8.5 &quot;$0&quot; -- &quot;$@&quot;  这样就能在gitk中开启抗锯齿了，虽然效果还不是很好。另外qgit也是一个不错的选择。
+参考链接：http://navarra.ca/?p=44
+	<a class="read-more" href="/2010/02/gitk-font/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2010/02/linear-page-table/">Linear Page Table: 更方便地访问页表</a></h2>
+      <span class="post-date">Feb 9, 2010</span>
+      
+      <span class="post-tags">
+	
+	#<a href="https://blog.yxwang.me/tags/computer-system">Computer System</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/featured">Featured</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/kernel">Kernel</a>&nbsp;
+	
+      </span>
+      
+      
+      
+      <div class="summary">
+	Linear page table 又叫 virtual page table，是一种方便虚拟机监控器 (VMM) / 操作系统 (OS) / 应用程序访问页表的技巧。Xen、64 位 Linux 内核、JOS 操作系统中都用到了这个设计。这里以 x86_32 系统为例，简单介绍一下它的实现和使用，如有错误敬请指出。
+一般情况下，如果 OS 需要访问某个页表，需要将它映射到自己的虚拟空间中，然后再访问。这样带来两个问题，一是访问比较繁琐，需要临时的页映射；二是对于 exo-kernel 这种 fork 等行为都是在用户态程序实现的系统，可能会增加一下安全上的问题。因为用户程序在 fork 的时候需要访问自己的页表，而这时候除非操作系统提供另一些权限控制更精确的系统调用，否则就很难让不可信的应用程序访问自己的页表且不做有害的改动。
+Linear page table 很好的解决了这两个问题。它的实现很简单，只需要在页目录中增加一项 VPT (virtual page table entry)，和一般的页目录项不同的是，这个 VPT 指向的是页目录本身。
+这样带来了什么好处呢？借用一下 MIT 6.828 课件上的图片来更好的说明这个问题：
+增加了 VPT 后，通常的物理地址 -&gt; 虚拟地址的转换还是没变。和之前唯一的不同在于虚拟地址的页目录索引号 (PDX) 为之前设置的 VPT 的时候。
+举个例子来说，假如现在要访问的虚拟地址是 (VPT &lt;&lt; 22) | (VPT &lt;&lt; 12)，即这里的 PDX 和 PTX 都等于 VPT 的时候，整个转换过程是怎么样的呢（假设 TLB miss 的情况）？首先根据 CR3 中的物理地址，硬件开始查找页目录中的第 VPT 项，然后根据这一项中的物理地址，找到了下一级「页表」。注意这时候硬件以为自己得到的页表地址，实际上访问的还是页目录本身。同样，在这个「页表」中找到第 VPT 项指出去的最终页，得到了最终页的物理地址。因为 PTX 还是等于 VPT，所以最后得到的物理地址还是页目录的。
+	<a class="read-more" href="/2010/02/linear-page-table/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
+  </div>
+  <div class="pagination">
+  
+  <a class="btn previous" href="/post/page/4/">Newer</a>  
+  <a class="btn next" href="/post/page/6/">Older</a> 
+</div>
+</div>
+
+
+
+
+<div class="footer">
+  
+  <p>Powered by <a href="http://gohugo.io">Hugo</a> and <a href="https://github.com/zhe/hugo-theme-slim">Slim theme</a>.
+  
+      Follow me on <a href="https://twitter.com/zellux">Twitter</a>.
+      </p>
+  </p>
+  
+</div>
+
+                   
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+    Macros: {
+      argmax: "\\operatorname*{argmax}",
+      argmin: "\\operatorname*{argmin}"
+    }
+  },
+  jax: ["input/TeX","output/CommonHTML"]
+});
+</script>
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML">
+</script>
+
+</script>
+
+<script src="https://blog.yxwang.me/js/slim.min.aef36e671f72c9042139aae327dbe693b7ebaa67fd56f30dad4c985a91ba9294.js"></script>
+
+
+<link rel="stylesheet" href="https://blog.yxwang.me/css/solarized-light.min.5499f6bc45da0c78f070be4f720fd28b19af75306b569b77837d57c3cf819430.css" />
+<script src="/js/highlight.pack.js"></script>
+<script>
+  hljs.initHighlightingOnLoad();
+</script>
+
+</div>
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-25551121-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+<script type="text/javascript">
+    window.heap=window.heap||[],heap.load=function(e,t){window.heap.appid=e,window.heap.config=t=t||{};var r=t.forceSSL||"https:"===document.location.protocol,a=document.createElement("script");a.type="text/javascript",a.async=!0,a.src=(r?"https:":"http:")+"//cdn.heapanalytics.com/js/heap-"+e+".js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(a,n);for(var o=function(e){return function(){heap.push([e].concat(Array.prototype.slice.call(arguments,0)))}},p=["addEventProperties","addUserProperties","clearEventProperties","identify","removeEventProperty","setEventProperties","track","unsetEventProperty"],c=0;c<p.length;c++)heap[p[c]]=o(p[c])};
+      heap.load("3166778701");
+</script>
+
+
+</body>
+
+</html>
+

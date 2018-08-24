@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="最后一周讲定位 (localization)，也就是 SLAM 里面的 L。主要包括粒子滤波和迭代最近点。
+">
+    <meta name="author" content="zellux">
+
+    <title> SLAM 笔记 4：定位 &middot; Aiur · Zellux 的博客 </title>
+
+    <script src="/js/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
+    <script src="/js/jquery-3.0.47.fancybox.min.js"></script>
+
+    
+    
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.52ea10a8f3a0b8f145adadb8d3761e17a42a7634869f775ef5830ed4de77d3fa.css">
+    
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+    
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    
+    <link href="" rel="alternate" type="application/rss+xml" title="Aiur · Zellux 的博客" />
+    
+<script type="application/ld+json">
+{
+    "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https://blog.yxwang.me/"
+    },
+    "articleSection" : "post",
+    "name" : "SLAM 笔记 4：定位",
+    "headline" : "SLAM 笔记 4：定位",
+    "description" : "<p>最后一周讲定位 (localization)，也就是 SLAM 里面的 L。主要包括粒子滤波和迭代最近点。</p>
+<p></p>",
+    "inLanguage" : "en-US",
+    "author" : "zellux",
+    "creator" : "zellux",
+    "publisher": "zellux",
+    "accountablePerson" : "",
+    "copyrightHolder" : "",
+    "copyrightYear" : "2018",
+    "datePublished": "2018-08-07 00:56:13 -0700 PDT",
+    "dateModified" : "2018-08-07 00:56:13 -0700 PDT",
+    "url" : "https://blog.yxwang.me/2018/08/robotics-slam-week4/",
+    "wordCount" : "167",
+    "keywords" : [ "Robotics","Courses","Notes","Blog" ]
+}
+</script>
+
+  </head>
+
+  <body>
+    <nav class="nav">
+  <div class="nav-container">
+    <span class="site-title">
+      <a href="https://blog.yxwang.me/">Aiur · Zellux 的博客</a>
+    </span>
+    
+    <div class="nav-list">
+      
+      <span class="nav-item"><a href="/about">About</a></span>
+      
+      <span class="nav-item"><a href="/archive">Archive</a></span>
+      
+      <span class="nav-item"><a href="/notes">Notes</a></span>
+      
+    </div>
+  </div>
+</nav>
+
+    <div class="container">
+
+
+<div class="content">
+  <div class="post">
+    <h1 class="post-title"><a href="https://blog.yxwang.me/2018/08/robotics-slam-week4/">SLAM 笔记 4：定位</a></h1>
+    <span class="post-meta">
+  <time datetime='Tue, Aug 7, 2018' data-updated="true" itemprop="datePublished">Tue, Aug 7, 2018</time>
+  
+  <span class="post-categories">
+    •
+	<a href="https://blog.yxwang.me/categories/robotics">Robotics</a>
+  </span>
+  
+</span>
+
+    <div class="post-content">
+      <p>最后一周讲定位 (localization)，也就是 SLAM 里面的 L。主要包括粒子滤波和迭代最近点。</p>
+<p></p>
+<h2 id="里程计定位-odometry">里程计定位 (Odometry)</h2>
+<p>里程计定位法直接从设备里读取信息，更新当前的位置状态。例如要跟踪车子的位置状态，可以在车轮上安装计数器记录车轮转动的次数，从而了解车子前进了多少。对于转弯的情况，可以从内外轮子的计数差得到转弯的角度。假设内轮转了 <span class="math inline">\(e_i\)</span> 圈，外轮转了 <span class="math inline">\(e_o\)</span> 圈，内轮半径 <span class="math inline">\(r_i\)</span>，外轮半径 <span class="math inline">\(r_o\)</span>，则有 <span class="math display">\[
+e_i = \theta r_i \\
+e_o = \theta r_o
+\]</span> 这里 <span class="math inline">\(\theta\)</span> 就是车子转动的角度，上面的方程可以解得 <span class="math display">\[
+\theta = \frac{e_o - e_i}{r_o - r_i}
+\]</span> 然后就能根据转动角度更新车辆当前的位置了。</p>
+<p>这种方法用车辆本身的坐标系统记录位置，虽然实现起来简单但是测量精度非常局限于测量误差。例如上例中轮子打滑或事漂移都会导致结果不准确。更成熟的方案需要结合地图信息。</p>
+<h2 id="地图定位-map-registration">地图定位 (Map Registration)</h2>
+<p>可以用下面三张图来来介绍地图定位问题，左图是当前的区域地图，中间是激光测距传感器得到的结果，地图定位的目的就是根据传感器返回的结果判断机器人当前坐标和朝向，右图就是一个理想的结果。</p>
+<a data-fancybox="gallery"  data-caption="地图定位" href=/images/2018-08/slam-map-registraion.png ><img src=/images/2018-08/slam-map-registraion.png  width="480" /></a>
+
+<a data-fancybox="gallery"  data-caption="地图定位" href=/images/2018-08/slam-map-registraion-2.png ><img src=/images/2018-08/slam-map-registraion-2.png  width="240" /></a>
+
+<p>配合第三周讲的占据栅格地图障碍物的概率 <span class="math inline">\(m(x, y)\)</span>，我们可以定义最佳定位结果应该满足 <span class="math display">\[
+\max_p \sum_r \delta(p_x + r\cos(p_{\theta} + r_{\theta}), p_y + r\sin(p_{\theta} + r_{\theta})) \cdot{m(x,y)}
+\]</span> 接下来介绍两种解决地图定位的方法。</p>
+<h2 id="粒子滤波-particle-filters">粒子滤波 (Particle Filters)</h2>
+<p>粒子滤波（有没有觉得这个术语的中文翻译很科幻）又称为序列蒙特卡洛 (Sequential Monte Carlo)，是一种非参数 (non-parametric) 模型。它用一系列样本（粒子）表示可能性分布。每一个粒子都是方差接近于 0 的高斯分布，这种分布又被称为狄拉克δ函数 (Dirac Delta)，采用这个分布好处之一是可以把连续数学中的工具应用到离散的结果中。</p>
+<p>在地图定位问题中，粒子的状态代表位置和朝向，同时每个粒子分别有自己的权重。初始状态的粒子滤波分布由一开始的假设决定，可能是均匀分布，也可能是以某个点为中心的高斯分布。初始化完成后，重复以下步骤更新粒子的分布：</p>
+<ol type="1">
+<li>根据里程计的信息更新粒子的状态。</li>
+<li>由于里程计本事有不确定，更新每个粒子状态的时候可以加入里程计带入的噪音，通常也是一个高斯分布。</li>
+<li>从每个粒子更新后带噪音的分布中采样。</li>
+<li>根据距离传感器得到的信息，更新每个粒子的权重（例如由传感器得知前方近距离有障碍物，而某个粒子并没有，那么这个粒子的权重都会大幅降低）。</li>
+<li>这样得到的结果可能会有有效粒子过少的问题，需要重新采样。有效粒子的数量可以用 <span class="math inline">\(n_{effective} = \frac{(\sum_i w_i)^2}{\sum_i w_i^2}\)</span> 表示。</li>
+<li>重新采样的方法就是根据权重重新从粒子集中独立抽取同样数量的粒子，注意这里高权重的粒子可能会被多次抽取。重复抽取的粒子会在下一轮更新时因为里程计噪音再次分散。</li>
+<li>重复步骤，直到粒子集中在某一状态。</li>
+</ol>
+<h2 id="迭代最近点-iterative-closest-point">迭代最近点 (Iterative Closest Point)</h2>
+<p>粒子滤波的缺点之一在于高维度中，需要大量的粒子才能保证理想的分布。ICP 算法可以更好的适应高维度的场景。</p>
+<a data-fancybox="gallery"  data-caption="ICP" href=/images/2018-08/slam-icp.png ><img src=/images/2018-08/slam-icp.png  width="360" /></a>
+
+<p>如图所示，ICP 的目的在于已知测量结果和地图，要求出左侧测量结果如何旋转移动后，可以和右侧的地图局部吻合。这里主要有两个问题，一是旋转和移动矩阵，二是测量点和地图点的对应关系。具体的 ICP 算法可以参考<a href="http://post.queensu.ca/~sdb2/PAPERS/PAMI-3DLS-1987.pdf">这篇论文</a>，它的大致思路和<a href="/2018/07/robotics-slam-week1/">第一周</a>提到的解高斯混合模型的 EM 算法很接近：</p>
+<ol type="1">
+<li>初始化旋转 (R) 和移动 (t) 矩阵。</li>
+<li>固定 R 和 t，优化点的对应关系：<span class="math inline">\(y_i = \argmin_{y_j \in Y} \Vert x_i - y_j \Vert\)</span>。</li>
+<li>固定点的对应关系，优化 R 和 t：<span class="math inline">\(R, t = \argmin \sum_{x_i, y_i \in C} \Vert d(x_i, y_i) \Vert ^2\)</span>。</li>
+<li>重复 2 和 3，直到稳定。</li>
+</ol>
+<h2 id="作业">作业</h2>
+<p>这次的作业是实现一个粒子滤波，应该是整个课程最难的一次了。分享几个 debug 的技巧：</p>
+<ol type="1">
+<li>一开始给的 <code>-init_pose</code> 就是第一个扫描结果的最优解，所以在实现粒子滤波的时候可以先确保第一次扫描结果里，最接近 <code>-init_pose</code> 的粒子得分最高。</li>
+<li>计算每个例子的得分时，一种做法是用上一周的作业中用到的 bresenham 函数计算发出点到障碍物中间所经历的空白格，然后对每个空白格计算加权，但是这个做法实在太慢了，我最后计算得分时只用了障碍物所在格的状态。</li>
+</ol>
+<h2 id="小结">小结</h2>
+<p>至此 Robotics Estimation and Learning 这门课就上完了。课程设置不错，但是讲解不够详细，尤其是第二周和第四周，这小哥讲得太简单了，slides 上还有不少错误。推荐《<a href="https://amzn.to/2AZqRIu">Probabilistic Robotics</a>》这本书，在上课的时候参考了里面一部分章节，写得很详细，作者 Thrun 也是机器人领域的大神。</p>
+<h2 id="全课程的笔记链接">全课程的笔记链接</h2>
+<ul>
+<li><a href="/2018/07/robotics-slam-week1/">第一周笔记：高斯分布</a></li>
+<li><a href="/2018/07/robotics-slam-week2/">第二周笔记：卡尔曼滤波</a></li>
+<li><a href="/2018/08/robotics-slam-week3/">第三周笔记：地图</a></li>
+<li>第四周笔记：定位</li>
+</ul>
+    </div>
+        <div class="cc-license">
+      本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.zh">知识共享署名-非商业性使用 3.0 版本许可协议</a>进行许可，欢迎转载，演绎，但是必须保留本文的署名 <a href="https://blog.yxwang.me/2018/08/robotics-slam-week4/">zellux</a>（包含链接），且不得用于商业目的。
+    </div>
+
+  </div>
+  <div class="pagination"> 
+    <a class="btn next " href="https://blog.yxwang.me/2018/08/robotics-slam-week3/"> Next</a> 
+  </div>
+</div>
+
+
+<div id="disqus_thread"></div>
+<script>
+  var disqus_config = function () {
+  this.page.url = "https://blog.yxwang.me/2018/08/robotics-slam-week4/";
+  
+  };
+  (function() {
+  var d = document, s = d.createElement('script');
+  s.src = '//aiur-zellux.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+
+<div class="footer">
+  
+  <p>Powered by <a href="http://gohugo.io">Hugo</a> and <a href="https://github.com/zhe/hugo-theme-slim">Slim theme</a>.
+  
+      Follow me on <a href="https://twitter.com/zellux">Twitter</a>.
+      </p>
+  </p>
+  
+</div>
+
+                   
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+    Macros: {
+      argmax: "\\operatorname*{argmax}",
+      argmin: "\\operatorname*{argmin}"
+    }
+  },
+  jax: ["input/TeX","output/CommonHTML"]
+});
+</script>
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML">
+</script>
+
+</script>
+
+<script src="https://blog.yxwang.me/js/slim.min.aef36e671f72c9042139aae327dbe693b7ebaa67fd56f30dad4c985a91ba9294.js"></script>
+
+
+<link rel="stylesheet" href="https://blog.yxwang.me/css/solarized-light.min.5499f6bc45da0c78f070be4f720fd28b19af75306b569b77837d57c3cf819430.css" />
+<script src="/js/highlight.pack.js"></script>
+<script>
+  hljs.initHighlightingOnLoad();
+</script>
+
+</div>
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-25551121-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+<script type="text/javascript">
+    window.heap=window.heap||[],heap.load=function(e,t){window.heap.appid=e,window.heap.config=t=t||{};var r=t.forceSSL||"https:"===document.location.protocol,a=document.createElement("script");a.type="text/javascript",a.async=!0,a.src=(r?"https:":"http:")+"//cdn.heapanalytics.com/js/heap-"+e+".js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(a,n);for(var o=function(e){return function(){heap.push([e].concat(Array.prototype.slice.call(arguments,0)))}},p=["addEventProperties","addUserProperties","clearEventProperties","identify","removeEventProperty","setEventProperties","track","unsetEventProperty"],c=0;c<p.length;c++)heap[p[c]]=o(p[c])};
+      heap.load("3166778701");
+</script>
+
+
+</body>
+
+</html>
+

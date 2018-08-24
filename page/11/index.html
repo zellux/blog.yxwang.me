@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+  <head>
+	<meta name="generator" content="Hugo 0.46" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="zellux">
+
+    <title> Aiur · Zellux 的博客</title>
+
+    <script src="/js/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
+    <script src="/js/jquery-3.0.47.fancybox.min.js"></script>
+
+    
+    
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.52ea10a8f3a0b8f145adadb8d3761e17a42a7634869f775ef5830ed4de77d3fa.css">
+    
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+    
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    
+    <link href="https://blog.yxwang.me/index.xml" rel="alternate" type="application/rss+xml" title="Aiur · Zellux 的博客" />
+    
+<script type="application/ld+json">
+{
+    "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https://blog.yxwang.me/"
+    },
+    "articleSection" : "",
+    "name" : "Aiur · Zellux 的博客",
+    "headline" : "Aiur · Zellux 的博客",
+    "description" : "",
+    "inLanguage" : "en-US",
+    "author" : "zellux",
+    "creator" : "zellux",
+    "publisher": "zellux",
+    "accountablePerson" : "",
+    "copyrightHolder" : "",
+    "copyrightYear" : "2008",
+    "datePublished": "2008-11-11 00:00:00 &#43;0000 UTC",
+    "dateModified" : "2008-11-11 00:00:00 &#43;0000 UTC",
+    "url" : "https://blog.yxwang.me/",
+    "wordCount" : "0",
+    "keywords" : [ "Blog" ]
+}
+</script>
+
+  </head>
+
+  <body>
+    <nav class="nav">
+  <div class="nav-container">
+    <span class="site-title">
+      <a href="https://blog.yxwang.me/">Aiur · Zellux 的博客</a>
+    </span>
+    
+    <div class="nav-list">
+      
+      <span class="nav-item"><a href="/about">About</a></span>
+      
+      <span class="nav-item"><a href="/archive">Archive</a></span>
+      
+      <span class="nav-item"><a href="/notes">Notes</a></span>
+      
+    </div>
+  </div>
+</nav>
+
+    <div class="container">
+
+
+<div class="content index">
+  <div class="posts">
+     
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2008/11/godel-escher-bach-2/">Godel, Escher, Bach [2]</a></h2>
+      <span class="post-meta">
+  <time datetime='Tue, Nov 11, 2008' data-updated="true" itemprop="datePublished">Tue, Nov 11, 2008</time>
+  
+  <span class="post-categories">
+    •
+	<a href="https://blog.yxwang.me/categories/algorithms">Algorithms</a>
+  </span>
+  
+</span>
+
+      
+      <div class="summary">
+         素数判定的形式化系统，精彩！ 合数的判定系统比较容易构造，素数的判定当然不能简单的通过“不是合数”来解决。 首先构造一个不整除的概念(DND) 公理模式：xyDNDx，其中x和y是短横组成的符号串。（a&gt;b，a自然不整除b） 生成规则：如果xDNDy是个定理，那么xDNDxy也是个定理。 接下来定义一个描述z在2到x的范围内没有因子的语言，zDFx (Divisor-Free) 规则1：如果&ndash;DNDz是个定理，那么zDF&ndash;也是个定理。 规则2：如果zDFx与x-DNDz都是定理，那么zDFx-也是个定理。 好了，到这里已经能检查一个数是否在给定范围内找出因子了，定义素数(Pz)就变得很简单。 规则：若z-DFz是个定理，那么Pz-是个定理。 再处理一个特例，为2制定一条公理 公理：P- -  
+	<a class="read-more" href="/2008/11/godel-escher-bach-2/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2008/11/godel-escher-bach-1/">Godel, Escher, Bach [1]</a></h2>
+      <span class="post-meta">
+  <time datetime='Mon, Nov 10, 2008' data-updated="true" itemprop="datePublished">Mon, Nov 10, 2008</time>
+  
+  <span class="post-categories">
+    •
+	<a href="https://blog.yxwang.me/categories/algorithms">Algorithms</a>
+  </span>
+  
+</span>
+
+      
+      <div class="summary">
+        哥德尔定理 用比较通俗的英文来说，就是 All consistent axiomatic formulations of number theory include undicidable propositions.
+ 图形和衬底也许会不带有完全相同的信息 There exist formal systems whose negative space (set of non-theorems) is not the positive space (set of theorems) of any formal system. 用更technical的说法 There exist recursively enumerable sets which are not recursive. 这里recursively enumerable指能按照typographical规则生成，而recursive则对应域指衬底也是个图形的图形。 由此得出一个结论 There exist formal systems for which there is no typographical decision procedure. 证明很简单，用反证法。如果所有的形式系统都能有typographical的判定方法，那么逐个测试所有的符号串，从而能生成一个非定理集合，与前面的定理矛盾。
+ 关于那个数列谜题 {Ai} = 1, 3, 7, 12, 18, 26, 35, 45, 56, 69, &hellip; 既然讲到了衬底自然要考虑这个，负空间数列为 {Bi} = 2, 4, 5, 6, 8, 9, 10, 11, 13, 14, &hellip; An = An-1 + Bn-1
+	<a class="read-more" href="/2008/11/godel-escher-bach-1/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2008/11/feg/">FEG归来</a></h2>
+      <span class="post-meta">
+  <time datetime='Sat, Nov 8, 2008' data-updated="true" itemprop="datePublished">Sat, Nov 8, 2008</time>
+  
+  <span class="post-categories">
+    •
+	<a href="https://blog.yxwang.me/categories/life">Life</a>
+  </span>
+  
+</span>
+
+      
+      <div class="summary">
+        第三届复旦电竞赛，不过这次星际项目报名的高手很少。
+小组赛居然输了一场，不过最后在半决赛把这个对手3:0，复仇成功了，恩。
+貌似今天打了1把zvz，11把zvp，恩
+决赛zvz，不过估计没多少时间准备了。。
+	<a class="read-more" href="/2008/11/feg/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2008/10/why-explicit-self-has-to-stay/">Why explicit self has to stay</a></h2>
+      <span class="post-meta">
+  <time datetime='Mon, Oct 27, 2008' data-updated="true" itemprop="datePublished">Mon, Oct 27, 2008</time>
+  
+  <span class="post-categories">
+    •
+	<a href="https://blog.yxwang.me/categories/programming">Programming</a>
+  </span>
+  
+</span>
+
+      
+      <div class="summary">
+        Bruce Eckel的一篇日志建议把self从方法的参数列表中移除，并把它作为一个关键字使用。 http://www.artima.com/weblogs/viewpost.jsp?thread=239003
+Guido的这篇日志说明了self作为参数是必不可少的。 http://neopythonic.blogspot.com/2008/10/why-explicit-self-has-to-stay.html
+第一个原因是保证foo.meth(arg)和C.meth(foo, arg)这两种方法调用的等价（foo是C的一个实例)，关于后者可以参见Python Reference Manual 3.4.2.3。这个原因理论上的意义比较大。
+第二个原因在于通过self参数我们可以动态修改一个类的行为：
+# Define an empty class: class C: pass # Define a global function: def meth(myself, arg): myself.val = arg return myself.val # Poke the method into the class: C.meth = meth  这样类C就新增了一个meth方法，并且所有C的实例都可以通过c.meth(newval)调用这个方法。
+前面两个原因或许都可以通过一些workaround使得不使用self参数时实现同样的效果，但是在存在decorator的代码中Bruce的方法存在致命的缺陷。(关于decorator的介绍可以参见http://www.python.org/dev/peps/pep-0318/)
+根据修饰对象，decorator分两种，类方法和静态方法。两者在语法上没有什么区别，但前者需要self参数，后者不需要。而Python在实现上也没有对这两种方法加以区分。Bruce日志评论中有一些试图解决decorator问题的方法，但这些方法都需要修改大量底层的实现。
+最后提到了另一种语法糖实现，新增一个名为classmethod的decorator，为每个方法加上一个self参数，当然这种实现也没必要把self作为关键字使用了。不过我觉得这么做还不如每次写类方法时手工加个self =_=
+	<a class="read-more" href="/2008/10/why-explicit-self-has-to-stay/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2008/10/python-function/">Python函数属性</a></h2>
+      <span class="post-meta">
+  <time datetime='Fri, Oct 24, 2008' data-updated="true" itemprop="datePublished">Fri, Oct 24, 2008</time>
+  
+  <span class="post-categories">
+    •
+	<a href="https://blog.yxwang.me/categories/programming">Programming</a>
+  </span>
+  
+</span>
+
+      
+      <div class="summary">
+        定义一个简单的Python函数 def f(x, y = 10, z = 16): print z dir(f)可以看到函数的几个主要属性 &lsquo;func_closure&rsquo;, &lsquo;func_code&rsquo;, &lsquo;func_defaults&rsquo;, &lsquo;func_dict&rsquo;, &lsquo;func_doc&rsquo;, &lsquo;func_globals&rsquo;, &lsquo;func_name&rsquo;。在funcobject.c中对PyFunction_Type的定义中可以看到这些属性的来源：
+static PyMemberDef func_memberlist[] = { {&quot;func_closure&quot;, T_OBJECT, OFF(func_closure), RESTRICTED|READONLY}, {&quot;func_doc&quot;, T_OBJECT, OFF(func_doc), WRITE_RESTRICTED}, {&quot;__doc__&quot;, T_OBJECT, OFF(func_doc), WRITE_RESTRICTED}, {&quot;func_globals&quot;, T_OBJECT, OFF(func_globals), RESTRICTED|READONLY}, {&quot;__module__&quot;, T_OBJECT, OFF(func_module), WRITE_RESTRICTED}, {NULL} /* Sentinel */ };  static PyGetSetDef func_getsetlist[] = { {&quot;func_code&quot;, (getter)func_get_code, (setter)func_set_code}, {&quot;func_defaults&quot;, (getter)func_get_defaults, (setter)func_set_defaults}, {&quot;func_dict&quot;, (getter)func_get_dict, (setter)func_set_dict}, {&quot;__dict__&quot;, (getter)func_get_dict, (setter)func_set_dict}, {&quot;func_name&quot;, (getter)func_get_name, (setter)func_set_name}, {&quot;__name__&quot;, (getter)func_get_name, (setter)func_set_name}, {NULL} /* Sentinel */ };  f.
+	<a class="read-more" href="/2008/10/python-function/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2008/10/python-inner-function-binding/">Python中inner function的binding处理</a></h2>
+      <span class="post-meta">
+  <time datetime='Fri, Oct 17, 2008' data-updated="true" itemprop="datePublished">Fri, Oct 17, 2008</time>
+  
+  <span class="post-categories">
+    •
+	<a href="https://blog.yxwang.me/categories/programming">Programming</a>
+  </span>
+  
+</span>
+
+      
+      <div class="summary">
+        BBS上的一个帖子，问题是
+def a(): def b(): x += 1 x = 1 print &quot;a: &quot;, x b() print &quot;b: &quot;, x def c(): def d(): x[0] = [4] x = [3] print &quot;c: &quot;, x[0] d() print &quot;d: &quot;, x[0]  运行a()会报UnboundLocalError: local variable &lsquo;x&rsquo; referenced before assignment 但是运行c()会正确地显示3和4。
+原因在于原因在于CPython实现closure的方式和常见的functional language不同，采用了flat closures实现。
+&ldquo;If a name is bound anywhere within a code block, all uses of the name within the block are treated as references to the current block.
+	<a class="read-more" href="/2008/10/python-inner-function-binding/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2008/10/sync-between-zotero-and-endnote/">Zotero与Endnote的互相导入</a></h2>
+      <span class="post-meta">
+  <time datetime='Fri, Oct 17, 2008' data-updated="true" itemprop="datePublished">Fri, Oct 17, 2008</time>
+  
+  <span class="post-categories">
+    •
+	<a href="https://blog.yxwang.me/categories/tooling">Tooling</a>
+  </span>
+  
+</span>
+
+      
+      <div class="summary">
+        <p>两者配合，更完美的知识管理方案</p>
+
+<p><a href="http://hi.baidu.com/qq303520912/blog/item/de5cba082db83e36e924889e.html" target="_blank"><a href="http://hi.baidu.com/qq303520912/blog/item/de5cba082db83e36e924889e.html">http://hi.baidu.com/qq303520912/blog/item/de5cba082db83e36e924889e.html</a></a></p>
+
+<p>Endnote是目前国内科研人员使用最多的文献管理软件，功能最完备，各数据库或大学图书馆等和它的兼容也是最好。它的Filter和style也最为丰富，而且可以自己创建修改。看看周围的人，大部分都是Endnote的用户。 　　Zotero作为一个新的文件管理系统，与Endnote相比还是稚嫩了些，特别对于国内数据库的支持不佳，更是限制了它的应用。</p>
+	<a class="read-more" href="/2008/10/sync-between-zotero-and-endnote/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2008/10/live-code-update-in-erlang/">Live Code Update in Erlang</a></h2>
+      <span class="post-meta">
+  <time datetime='Thu, Oct 16, 2008' data-updated="true" itemprop="datePublished">Thu, Oct 16, 2008</time>
+  
+  <span class="post-categories">
+    •
+	<a href="https://blog.yxwang.me/categories/programming">Programming</a>
+  </span>
+  
+</span>
+
+      
+      <div class="summary">
+        http://bc.tech.coop/blog/070713.html
+Joe Armstrong的原话 Live code upgrading is one of the things Erlang was designed for.
+一个最简单的例子
+loop(Fun, State) receive {From, {rpc, Tag, Q}} -&gt; {Reply, State1} = Fun(Q, State), From ! {Tag, Reply}, loop(Fun, State1); {code_upgrade, Fun1} -&gt; loop(Fun1, State) end.  使用时只要发送一个{code_update, Fun1}消息即可 在实际的项目中，live code update需要在一个进程的稳定状态中进行。好在有Erlang天生的分布式特性，结点i进行更新时其他结点可以接管这个结点的任务，直到结点i更新成功，再进行下一个结点的更新。这个形式和结点的crash处理有点类似。于是Erlang中live updating的实际难点在于 1. How to suspend the system and put it into a stable state 2. How to replicate the stable state 3. How to restart from a stable state 4.
+	<a class="read-more" href="/2008/10/live-code-update-in-erlang/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2008/10/erlang-hello-world/">Erlang的Hello World：一个计数程序</a></h2>
+      <span class="post-meta">
+  <time datetime='Mon, Oct 13, 2008' data-updated="true" itemprop="datePublished">Mon, Oct 13, 2008</time>
+  
+  <span class="post-categories">
+    •
+	<a href="https://blog.yxwang.me/categories/programming">Programming</a>
+  </span>
+  
+</span>
+
+      
+      <div class="summary">
+        acm queue 9月的杂志的主题是The Concurrency Problem，力推了Erlang这个语言，其中有篇文章简单的介绍了下这个message-oriented语言。
+查了下这个名字的读法，正确的读法应该是air-lang，这里元音a的发音和bang中的a一样。
+文章中的第一个程序就有点令人费解，主要原因在于Erlang的语法和一般的imperative language差别很大，和functional language比较类似，但是本质上也有很大的不同。
+以Java的一个计数程序为例
+// A shared counter. public class Sequence { private int nextVal = 0; // Retrieve counter and increment. public synchronized int getNext() { return nextVal++; } // Re-initialize counter to zero. public synchronized void reset() { nextVal = 0; } }  这个程序的功能不用多说了，一个同步的计数程序。它的Erlang翻译版的代码为
+-module(sequence1). -export([make_sequence/0, get_next/1, reset/1]). % Create a new shared counter. make_sequence() -&gt; spawn(fun() -&gt; sequence_loop(0) end). sequence_loop(N) -&gt; receive {From, get_next} -&gt; From !
+	<a class="read-more" href="/2008/10/erlang-hello-world/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2008/09/calling-do_console_io-from-domainu/">DomainU 中调用 do_console_io</a></h2>
+      <span class="post-meta">
+  <time datetime='Thu, Sep 25, 2008' data-updated="true" itemprop="datePublished">Thu, Sep 25, 2008</time>
+  
+  <span class="post-categories">
+    •
+	<a href="https://blog.yxwang.me/categories/computer-system">Computer System</a>
+  </span>
+  
+</span>
+
+      
+      <div class="summary">
+        The Definitive Guide to Xen Hypervisor 第二章的 Exercise，通过调用 hypercall page 中的 console_io 项输出Hello World。
+void start_kernel(start_info_t * start_info) { HYPERVISOR_console_io(CONSOLEIO_write,12,&quot;Hello Worldn&quot;); while(1); }  但是默认选项编译和启动的Xen是不会保留DomainU中输出的信息。参考 drivers/char/console.c，可以看到主要有两个选项控制了 DomainU 的 do_console_io 输出：
+#ifndef VERBOSE /* Only domain 0 may access the emergency console. */ if ( current-&gt;domain-&gt;domain_id != 0 ) return -EPERM; #endif  if ( opt_console_to_ring ) { for ( kptr = kbuf; *kptr != ''; kptr++ ) putchar_console_ring(*kptr); send_guest_global_virq(dom0, VIRQ_CON_RING); }  在编译 Xen 的时候开启 debug 选项即可置上 VERBOSE，而 opt_console_to_ring 则是一个启动选项，在 grub 的启动选项中增加 loglvl=all guest_loglvl=all console_to_ring 即可。
+	<a class="read-more" href="/2008/09/calling-do_console_io-from-domainu/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
+  </div>
+  <div class="pagination">
+  
+  <a class="btn previous" href="/page/10/">Newer</a>  
+  <a class="btn next" href="/page/12/">Older</a> 
+</div>
+</div>
+
+
+
+
+<div class="footer">
+  
+  <p>Powered by <a href="http://gohugo.io">Hugo</a> and <a href="https://github.com/zhe/hugo-theme-slim">Slim theme</a>.
+  
+      Follow me on <a href="https://twitter.com/zellux">Twitter</a>.
+      </p>
+  </p>
+  
+</div>
+
+                   
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+    Macros: {
+      argmax: "\\operatorname*{argmax}",
+      argmin: "\\operatorname*{argmin}"
+    }
+  },
+  jax: ["input/TeX","output/CommonHTML"]
+});
+</script>
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML">
+</script>
+
+</script>
+
+<script src="https://blog.yxwang.me/js/slim.min.aef36e671f72c9042139aae327dbe693b7ebaa67fd56f30dad4c985a91ba9294.js"></script>
+
+
+<link rel="stylesheet" href="https://blog.yxwang.me/css/solarized-light.min.5499f6bc45da0c78f070be4f720fd28b19af75306b569b77837d57c3cf819430.css" />
+<script src="/js/highlight.pack.js"></script>
+<script>
+  hljs.initHighlightingOnLoad();
+</script>
+
+</div>
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-25551121-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+<script type="text/javascript">
+    window.heap=window.heap||[],heap.load=function(e,t){window.heap.appid=e,window.heap.config=t=t||{};var r=t.forceSSL||"https:"===document.location.protocol,a=document.createElement("script");a.type="text/javascript",a.async=!0,a.src=(r?"https:":"http:")+"//cdn.heapanalytics.com/js/heap-"+e+".js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(a,n);for(var o=function(e){return function(){heap.push([e].concat(Array.prototype.slice.call(arguments,0)))}},p=["addEventProperties","addUserProperties","clearEventProperties","identify","removeEventProperty","setEventProperties","track","unsetEventProperty"],c=0;c<p.length;c++)heap[p[c]]=o(p[c])};
+      heap.load("3166778701");
+</script>
+
+
+</body>
+
+</html>
+

@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Programming on Aiur · Zellux 的博客</title>
+    <link>https://blog.yxwang.me/tags/programming/</link>
+    <description>Recent content in Programming on Aiur · Zellux 的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Thu, 14 Feb 2013 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.yxwang.me/tags/programming/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Ruby 命令行中快速查看函数源码</title>
+      <link>https://blog.yxwang.me/2013/02/view-ruby-source-in-shell/</link>
+      <pubDate>Thu, 14 Feb 2013 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2013/02/view-ruby-source-in-shell/</guid>
+      <description>&lt;p&gt;如果要查看 ActiveRecord 的 update_attribute 函数的源代码，一个比较常见的方法是直接在 Rails 源码中搜索 &lt;code&gt;def update_attribute&lt;/code&gt;。博客 &lt;a href=&#34;http://pragmaticstudio.com/blog&#34;&gt;The Pragmatic Studio&lt;/a&gt; 介绍了一个更方便的技巧，在 Ruby 命令行中就能启动编辑器直接访问。&lt;/p&gt;
+
+&lt;p&gt;通过 &lt;a href=&#34;http://rdoc.info/stdlib/core/Object:method&#34;&gt;Object#method&lt;/a&gt; 方法可以获得 update_attribute 方法的对象，而 &lt;a href=&#34;http://rdoc.info/stdlib/core/Method:source_location&#34;&gt;Method#source_location&lt;/a&gt; 则返回这个方法定义的文件和位置。有了这个信息后，就能启动编辑器查看源代码了：&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Rails 中关于 respond_to 不同格式的顺序</title>
+      <link>https://blog.yxwang.me/2013/01/order-of-formats-in-response-to-does-matter/</link>
+      <pubDate>Fri, 04 Jan 2013 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2013/01/order-of-formats-in-response-to-does-matter/</guid>
+      <description>&lt;p&gt;以前没注意过 Rails controller 中 respond_to 的格式顺序，后来碰到了一个诡异的 bug，才发现这里的顺序对程序行为是有影响的。bug 的现象是用某个应用商店桌面端浏览网站时，会出现返回 JSON 而不是网页的情况。由于当时报告错误的用户给出的 bug 描述是「点击链接后出现乱码」，导致 debug 一开始没找对方向，废了不少功夫才解决这个问题。&lt;/p&gt;
+
+&lt;p&gt;问题就出在不同格式的声明先后上，有问题的代码是：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;respond_to do |format|
+  format.json { render json: @items }
+  format.html
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Scala 中的协变和逆变</title>
+      <link>https://blog.yxwang.me/2012/06/variances-in-scala/</link>
+      <pubDate>Sat, 30 Jun 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2012/06/variances-in-scala/</guid>
+      <description>&lt;h2 id=&#34;java-数组&#34;&gt;Java 数组&lt;/h2&gt;
+
+&lt;p&gt;先来看一个 Java 中的例子，Java 中的数组是协变的。也就是说，一个 String 数组(String[])是可以被当成 Object 数组(Object[])处理的：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;String[] a1 = { &amp;quot;abc&amp;quot; };
+Object[] a2 = a1;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这种协变虽然在读取数组内容时不会有问题（a1 数组中的 String 元素可以被当成 Object 使用），但是修改数组内容时就会出现无法在编译期检测出来的错误了：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;a2[0] = new Integer(17)
+String s  = a1[0]  // java.lang.ArrayStoreException
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>利用 ETag 优化 Rails 应用</title>
+      <link>https://blog.yxwang.me/2012/02/etags-in-rails/</link>
+      <pubDate>Sat, 18 Feb 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2012/02/etags-in-rails/</guid>
+      <description>&lt;p&gt;ETag 是 HTTP 协议的一部分，可以用来检测客户端的缓存是否仍然有效。不少网站都实现了对 ETag 的支持，在 HTTP 响应头中加入当前传送内容的 ETag。以 heroku.com 为例：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ curl -I www.heroku.com
+HTTP/1.1 200 OK
+Server: nginx
+Date: Fri, 17 Feb 2012 17:36:44 GMT
+Content-Type: text/html; charset=utf-8
+Connection: keep-alive
+Etag: &amp;quot;f74bb78aa48d36e6a0b2072a131b20b9&amp;quot;
+Cache-Control: public, max-age=300
+Content-Length: 15481
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>ActiveRecord 的一些细节</title>
+      <link>https://blog.yxwang.me/2011/11/notes-on-active-record/</link>
+      <pubDate>Thu, 24 Nov 2011 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2011/11/notes-on-active-record/</guid>
+      <description>对象属性 ActiveRecord 对象在数据库中的属性并不是以实体变量的方式保存的，如果要为一个属性设置默认值的话，
+class Item &amp;lt; ActiveRecord::Base def category @category || &#39;n/a&#39; end end  这样的实现是不可行的。读取和修改这些属性时应该使用 read_attribute 和 write_attribute：
+class Item &amp;lt; ActiveRecord::Base def category read_attribute(:category) || &#39;n/a&#39; end end  Hash 和相等性 ActiveRecord 的 hash 值是根据主键的值计算出来的，这就意味着未保存对象的 hash 值是不可靠的。同样两个 model 对象的相等比较（即==操作符）也是基于主键的，所以两个 model 对象即使它们的其他属性不一样，仍有可能被当作相等。
+查找 find_by_attribute 方法后面加个 ! 号，即使用 find_by_attribute!，就能在找不到对象的时候触发一个 RecordNotFound 异常，而不是返回 nil。
+find_or_initialize_by 和 find_or_create_by 也是两个好用的方法，它们在找不到对象时分别使用 new 和 create 新建一个，并用查找的属性初始化新建的对象。
+手写 SQL 不得不手写 SQL 同时又要防止注入攻击的一个比较简洁的写法是
+Order.where(&amp;quot;name = :name and pay_type = :pay_type&amp;quot;, params[:order])  回调函数 出于性能考虑，after_find 和 after_initialize 只能通过函数声明的方式定义，即不能用类似 before_validation :normalize_fields 这样的形式。</description>
+    </item>
+    
+    <item>
+      <title>REST 服务的方法</title>
+      <link>https://blog.yxwang.me/2011/11/methods-in-restful-applications/</link>
+      <pubDate>Sun, 20 Nov 2011 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2011/11/methods-in-restful-applications/</guid>
+      <description>HEAD 方法和 GET 方法比较像，但是它不返回对象的实际表示，只返回一个 HTTP 头。HEAD 可以用来查看对象修改时间、大小等信息，Amazon S3 的客户端就用它来读取文件元信息。
+用 PUT 和 POST 创建对象时的一个区别在于，使用前者时客户端知道被创建对象的 URL（例如 /items/3），而后者则不需要客户端了解（例如 /items/new）。
+OPTIONS 用来查看客户端对某个资源有那些可用的操作。
+正确的设计应当保证：
+ GET 和 HEAD 是安全的，即不会修改任何对象状态。多次调用它们的结果应当和只调用一次甚至不调用一样。 GET、HEAD、PUT 和 DELETE 方法是幂等（idempotent）的。多次调用它们的结果应当和只调用一次一样。  这两点保证了在一个不可靠的网络中，客户端仍能进行有效的操作。
+参考：Restful Web Services</description>
+    </item>
+    
+    <item>
+      <title>Rails 中 render 方法的可选参数</title>
+      <link>https://blog.yxwang.me/2011/11/options-for-render/</link>
+      <pubDate>Sun, 20 Nov 2011 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2011/11/options-for-render/</guid>
+      <description>:content_type 设置返回内容的 MIME 类型
+render :file =&amp;gt; filename, :content_type =&amp;gt; &#39;application/rss&#39;  :layout 指定 layout
+:status 指定返回的 HTTP 代码
+:location 指定 HTTP 头中的 Location 字段
+Rails 生成的 controller 代码中，create.json 方法在生成对象后会将 Location 设置为新生成对象的 json 地址：
+respond_to do |format| if @item.save format.html { redirect_to @item, notice: &#39;Item was successfully created.&#39; } format.json { render json: @item, status: :created, location: @item } else format.html { render action: &amp;quot;new&amp;quot; } format.json { render json: @item.</description>
+    </item>
+    
+    <item>
+      <title>rspec 跳过指定测试</title>
+      <link>https://blog.yxwang.me/2011/11/skip-specs-by-tags/</link>
+      <pubDate>Sun, 20 Nov 2011 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2011/11/skip-specs-by-tags/</guid>
+      <description>有些测试比较耗时间，而且很少被修改，如果能在测试的时候跳过它们就能让 spec 快不少。
+跳过测试的方法很简单，spec 的 describe 方法可以给对应的测试加上标签，例如
+describe SalesController, :slow =&amp;gt; true do # specs end  接下来只要在 spec/spec_helper.rb 中声明跳过这个标签即可：
+RSpec.configure do |config| config.filter_run_excluding :slow =&amp;gt; true end  与 filter_run_excluding 相反的是 filter_run，指定会被运行的标签，不包含在这个列表中的测试将被忽略。
+参考：http://www.dixis.com/?p=283</description>
+    </item>
+    
+    <item>
+      <title>gcc 内联汇编中 %c 的用法</title>
+      <link>https://blog.yxwang.me/2010/08/gcc-operand-substitution/</link>
+      <pubDate>Wed, 25 Aug 2010 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2010/08/gcc-operand-substitution/</guid>
+      <description>这几天看KVM代码的时候看到里面有个内联汇编的语法很陌生（下面的代码截取了部分内联汇编片段）：
+asm ( &amp;quot;mov %c[rax](%3), %%rax \n\t&amp;quot; &amp;quot;mov %c[rbx](%3), %%rbx \n\t&amp;quot; &amp;quot;mov %c[rdx](%3), %%rdx \n\t&amp;quot; &amp;quot;mov %c[rsi](%3), %%rsi \n\t&amp;quot; &amp;quot;mov %c[rdi](%3), %%rdi \n\t&amp;quot; : &amp;quot;=q&amp;quot; (fail) : &amp;quot;r&amp;quot;(vcpu-&amp;gt;launched), &amp;quot;d&amp;quot;((unsigned long)HOST_RSP), &amp;quot;c&amp;quot;(vcpu), [rax]&amp;quot;i&amp;quot;(offsetof(struct kvm_vcpu, regs[VCPU_REGS_RAX])), [rbx]&amp;quot;i&amp;quot;(offsetof(struct kvm_vcpu, regs[VCPU_REGS_RBX])), [rcx]&amp;quot;i&amp;quot;(offsetof(struct kvm_vcpu, regs[VCPU_REGS_RCX])) : &amp;quot;cc&amp;quot;, &amp;quot;memory&amp;quot; );  stackoverflow上问了下才知道这是gcc的operand substitution语法，%c后面跟上常量名，就能在内联汇编中使用这个常量了。
+以这段代码为例，vcpu是struct kvm_vcpu类型，[rax]&amp;ldquo;i&amp;rdquo;(offsetof(struct kvm_vcpu, regs[VCPU_REGS_RAX])这句话把vcpu-&amp;gt;regs[VCPU_REGS_RAX]相对于vcpu的偏移赋值给了rax这一常量。接下来回到第一行mov %crax, %%eax，%c[rax]等于前面得到的偏移量，加上vcpu并取值后就是vcpu-&amp;gt;regs[VCPU_REGS_RAX]中保存的值了，这个指令会把这个值保存在%rax寄存器中，从而完成了vcpu的rax寄存器恢复工作。</description>
+    </item>
+    
+    <item>
+      <title>SICP 里提到的画图语言</title>
+      <link>https://blog.yxwang.me/2010/02/the-sicp-picture-language/</link>
+      <pubDate>Wed, 24 Feb 2010 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2010/02/the-sicp-picture-language/</guid>
+      <description>SICP第二章里提到了一种用来画图的Lisp方言，用来演示数据抽象和闭包的表达能力（见http://mitpress.mit.edu/sicp/full-text/book/book-Z-H-15.html#%_sec_2.2.4）。
+最近尝试了下，发现soegaard同学已经在PLT Scheme中实现了一个类似的库，可以很方便的在DrScheme上使用。
+sicp.plt包使用很简单，在Language-&amp;gt;Choose Language中选择Module，然后在需要用到这个包的时候用
+(require (planet soegaard/sicp:2:1/sicp))  声明即可。第一次运行时DrScheme会自动下载这个包并安装，如果网络有限制可以先从http://planet.plt-scheme.org/display.ss?package=sicp.plt&amp;owner=soegaard下载然后在DrScheme中选择本地包安装。
+另外SICP上使用的两个painter（wave和rogers）没有在这个包里提供，取而代之是diagonal-shading和einstein。
+下面这个程序显示了一个简单的分形图像：
+#lang scheme (require (planet &amp;quot;sicp.ss&amp;quot; (&amp;quot;soegaard&amp;quot; &amp;quot;sicp.plt&amp;quot; 2 1))) (define (right-split painter n) (if (= n 0) painter (let ((smaller (right-split painter (- n 1)))) (beside painter (below smaller smaller))))) (define (up-split painter n) (if (= n 0) painter (let ((smaller (up-split painter (- n 1)))) (below painter (beside smaller smaller))))) (define (corner-split painter n) (if (= n 0) painter (let ((up (up-split painter (- n 1))) (right (right-split painter (- n 1)))) (let ((top-left (beside up up)) (bottom-right (below right right)) (corner (corner-split painter (- n 1)))) (beside (below painter top-left) (below bottom-right corner)))))) (paint (corner-split diagonal-shading 4))  程序输出：</description>
+    </item>
+    
+    <item>
+      <title>gcc 中设置特定代码块的优化级别</title>
+      <link>https://blog.yxwang.me/2010/02/code-specific-optimizations-in-gcc/</link>
+      <pubDate>Mon, 08 Feb 2010 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2010/02/code-specific-optimizations-in-gcc/</guid>
+      <description>今天碰到一个gcc优化相关的问题，为了让一个页变成脏页（页表中dirty位被置上），需要执行下面这段代码：
+uint32_t *page; // ... page[0] = page[0];  最后一行代码很有可能被gcc优化掉，因为这段代码看起来没有任何实际的作用。那么如何防止gcc对这段代码做优化呢？
+设置gcc编译时优化级别为-O0肯定是不合适的，这样对程序性能影响会比较大。stackoverflow上的Dietrich Epp给出了一个强制类型转换的方案：
+((unsigned char volatile *)page)[0] = page[0];  通过volatile关键字禁止gcc的优化，和我之前采用的方法类似。
+Plow同学给出了另一个利用gcc 4.4特性的方法：
+#pragma GCC push_options #pragma GCC optimize (&amp;quot;O0&amp;quot;) your code #pragma GCC pop_options  这里用到了gcc 4.4的特性Function Specific Option Pragmas，在特定代码前保存当前的编译选项，然后对特定的代码使用O0优化级别，最后再恢复之前保存的编译选项。
+俺觉得这个特性有些场合下挺好用的，在这里分享下，虽然因为编译器版本问题最后我还是用了前面一种方法。</description>
+    </item>
+    
+    <item>
+      <title>这样也能算圆周率</title>
+      <link>https://blog.yxwang.me/2010/01/obfuscated-c/</link>
+      <pubDate>Thu, 28 Jan 2010 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2010/01/obfuscated-c/</guid>
+      <description>reddit programming版面最近的热帖，下面这个程序输出的结果是一个近似的圆周率(3.156)。
+#define _ F--&amp;gt;00 || F-OO--; long F=00,OO=00; main(){F_OO();printf(&amp;quot;%1.3f\n&amp;quot;, 4.*-F/OO/OO);}F_OO() { _-_-_-_ _-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_ _-_-_-_ }  乍看下这个程序有点莫名其妙，分析一下宏后就知道它的方法了。两个全局变量F和OO分别记录 圆的面积和直径 的相反数，根据4*面积/直径/直径就能得到近似的圆周率了。
+至于面积和直径的计算，F在会在每一个_展开的地方减一，这样就得到了圆的面积。直径的计算要展开几行代码才能看得更清楚：
+F--&amp;gt;00 || F-OO--; -F--&amp;gt;00 || F-OO--; -F--&amp;gt;00 || F-OO--; -F--&amp;gt;00 || F-OO--; F--&amp;gt;00 || F-OO--; -F--&amp;gt;00 || F-OO--; -F--&amp;gt;00 || F-OO--; -F--&amp;gt;00 || F-OO--; -F--&amp;gt;00 || F-OO--; -F--&amp;gt;00 || F-OO--; -F--&amp;gt;00 || F-OO--; -F--&amp;gt;00 || F-OO--; -F--&amp;gt;00 || F-OO--;  这是用cpp展开圆形前两行代码的结果，因为或运算的特殊性，F- OO- -只会在每一段的第一行执行，所以OO- -执行的次数就等于圆的直径了。</description>
+    </item>
+    
+    <item>
+      <title>关于 tuple 的读音</title>
+      <link>https://blog.yxwang.me/2009/04/tuple-pronunciation/</link>
+      <pubDate>Fri, 10 Apr 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2009/04/tuple-pronunciation/</guid>
+      <description>水木上有个帖子讨论tuple这个词该怎么读，于是有人翻出来这个三年前的新闻组邮件
+http://coding.derkeiler.com/Archive/Python/comp.lang.python/2006-02/msg01915.html I used to pronounce it toople. But the people that taught me Python found it both comical and confusing. At first they thought I meant a 2 element tuple. So they wondered if a 3 element tuple was a threeple, etc. After much harrassing, I changed my wayward ways and pronounced it tuhple to fit in with the cool Python guys. ;-)
+Then we went to hear Guido speak about Python 2.</description>
+    </item>
+    
+    <item>
+      <title>Daily Notes on Python[11.17-11.23]</title>
+      <link>https://blog.yxwang.me/2008/11/daily-notes-on-python1117-1123/</link>
+      <pubDate>Mon, 17 Nov 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2008/11/daily-notes-on-python1117-1123/</guid>
+      <description>模块动态加载机制
+ Advanced Python（某一期Google TechTalks的话题）上提到import指令本质是个语法糖，import sys等价于sys = import(&amp;ldquo;sys&amp;rdquo;)。解析import sys的bytecode可以看到四个指令（参数略）： LOAD_CONST LOAD_CONST IMPORT_NAME STORE_NAME  IMPORT_NAME把sys模块导入并保存到栈上，STORE_NAME把这个指针当作普通对象保存在sys这个变量中。
+2. IMPORT_NAME指令行为分析 将参数打包并用PyEval_CallObject()这个统一调用接口运行import方法，bltinmodule.c中的builtinimport函数包装了这个功能。help(import)显示的import方法的参数列表 import(&amp;hellip;) import(name, globals={}, locals={}, fromlist=[], level=-1) -&amp;gt; module
+对应于builtinimport中调用的另一层函数封装
+PyObject * PyImport_ImportModuleLevel(char *name, PyObject *globals, PyObject *locals, PyObject *fromlist, int level)  这个函数调用了真正干活的函数，import.c中的
+static PyObject * import_module_level(char *name, PyObject *globals, PyObject *locals, PyObject *fromlist, int level)  3. import_module_level函数 首先调用get_parent()得到import发生时的package对象，接下来多次调用load_next依次得到各级的包名，跟踪了下import xml.dom.minidom的行为，发现name的值依次是&amp;rdquo;dom.minidom&amp;rdquo;, &amp;ldquo;minidom&amp;rdquo;。最后根据import的形式是from &amp;hellip; import &amp;hellip;还是import &amp;hellip;返回不同的处理结果。
+4. import_submodule函数 load_next函数中调用这个函数进行模块的查找和载入。主要分三步：find_module, load_module, add_submodule。
+5. from &amp;hellip; import &amp;hellip; ensure_fromlist处理了这个情况。另外对于from &amp;hellip; import *的情况，会从module文件中读入一个all对象，从中知道module公开的符号信息。</description>
+    </item>
+    
+    <item>
+      <title>Why explicit self has to stay</title>
+      <link>https://blog.yxwang.me/2008/10/why-explicit-self-has-to-stay/</link>
+      <pubDate>Mon, 27 Oct 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2008/10/why-explicit-self-has-to-stay/</guid>
+      <description>Bruce Eckel的一篇日志建议把self从方法的参数列表中移除，并把它作为一个关键字使用。 http://www.artima.com/weblogs/viewpost.jsp?thread=239003
+Guido的这篇日志说明了self作为参数是必不可少的。 http://neopythonic.blogspot.com/2008/10/why-explicit-self-has-to-stay.html
+第一个原因是保证foo.meth(arg)和C.meth(foo, arg)这两种方法调用的等价（foo是C的一个实例)，关于后者可以参见Python Reference Manual 3.4.2.3。这个原因理论上的意义比较大。
+第二个原因在于通过self参数我们可以动态修改一个类的行为：
+# Define an empty class: class C: pass # Define a global function: def meth(myself, arg): myself.val = arg return myself.val # Poke the method into the class: C.meth = meth  这样类C就新增了一个meth方法，并且所有C的实例都可以通过c.meth(newval)调用这个方法。
+前面两个原因或许都可以通过一些workaround使得不使用self参数时实现同样的效果，但是在存在decorator的代码中Bruce的方法存在致命的缺陷。(关于decorator的介绍可以参见http://www.python.org/dev/peps/pep-0318/)
+根据修饰对象，decorator分两种，类方法和静态方法。两者在语法上没有什么区别，但前者需要self参数，后者不需要。而Python在实现上也没有对这两种方法加以区分。Bruce日志评论中有一些试图解决decorator问题的方法，但这些方法都需要修改大量底层的实现。
+最后提到了另一种语法糖实现，新增一个名为classmethod的decorator，为每个方法加上一个self参数，当然这种实现也没必要把self作为关键字使用了。不过我觉得这么做还不如每次写类方法时手工加个self =_=</description>
+    </item>
+    
+    <item>
+      <title>Python函数属性</title>
+      <link>https://blog.yxwang.me/2008/10/python-function/</link>
+      <pubDate>Fri, 24 Oct 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2008/10/python-function/</guid>
+      <description>定义一个简单的Python函数 def f(x, y = 10, z = 16): print z dir(f)可以看到函数的几个主要属性 &amp;lsquo;func_closure&amp;rsquo;, &amp;lsquo;func_code&amp;rsquo;, &amp;lsquo;func_defaults&amp;rsquo;, &amp;lsquo;func_dict&amp;rsquo;, &amp;lsquo;func_doc&amp;rsquo;, &amp;lsquo;func_globals&amp;rsquo;, &amp;lsquo;func_name&amp;rsquo;。在funcobject.c中对PyFunction_Type的定义中可以看到这些属性的来源：
+static PyMemberDef func_memberlist[] = { {&amp;quot;func_closure&amp;quot;, T_OBJECT, OFF(func_closure), RESTRICTED|READONLY}, {&amp;quot;func_doc&amp;quot;, T_OBJECT, OFF(func_doc), WRITE_RESTRICTED}, {&amp;quot;__doc__&amp;quot;, T_OBJECT, OFF(func_doc), WRITE_RESTRICTED}, {&amp;quot;func_globals&amp;quot;, T_OBJECT, OFF(func_globals), RESTRICTED|READONLY}, {&amp;quot;__module__&amp;quot;, T_OBJECT, OFF(func_module), WRITE_RESTRICTED}, {NULL} /* Sentinel */ };  static PyGetSetDef func_getsetlist[] = { {&amp;quot;func_code&amp;quot;, (getter)func_get_code, (setter)func_set_code}, {&amp;quot;func_defaults&amp;quot;, (getter)func_get_defaults, (setter)func_set_defaults}, {&amp;quot;func_dict&amp;quot;, (getter)func_get_dict, (setter)func_set_dict}, {&amp;quot;__dict__&amp;quot;, (getter)func_get_dict, (setter)func_set_dict}, {&amp;quot;func_name&amp;quot;, (getter)func_get_name, (setter)func_set_name}, {&amp;quot;__name__&amp;quot;, (getter)func_get_name, (setter)func_set_name}, {NULL} /* Sentinel */ };  f.</description>
+    </item>
+    
+    <item>
+      <title>Python中inner function的binding处理</title>
+      <link>https://blog.yxwang.me/2008/10/python-inner-function-binding/</link>
+      <pubDate>Fri, 17 Oct 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2008/10/python-inner-function-binding/</guid>
+      <description>BBS上的一个帖子，问题是
+def a(): def b(): x += 1 x = 1 print &amp;quot;a: &amp;quot;, x b() print &amp;quot;b: &amp;quot;, x def c(): def d(): x[0] = [4] x = [3] print &amp;quot;c: &amp;quot;, x[0] d() print &amp;quot;d: &amp;quot;, x[0]  运行a()会报UnboundLocalError: local variable &amp;lsquo;x&amp;rsquo; referenced before assignment 但是运行c()会正确地显示3和4。
+原因在于原因在于CPython实现closure的方式和常见的functional language不同，采用了flat closures实现。
+&amp;ldquo;If a name is bound anywhere within a code block, all uses of the name within the block are treated as references to the current block.</description>
+    </item>
+    
+    <item>
+      <title>Live Code Update in Erlang</title>
+      <link>https://blog.yxwang.me/2008/10/live-code-update-in-erlang/</link>
+      <pubDate>Thu, 16 Oct 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2008/10/live-code-update-in-erlang/</guid>
+      <description>http://bc.tech.coop/blog/070713.html
+Joe Armstrong的原话 Live code upgrading is one of the things Erlang was designed for.
+一个最简单的例子
+loop(Fun, State) receive {From, {rpc, Tag, Q}} -&amp;gt; {Reply, State1} = Fun(Q, State), From ! {Tag, Reply}, loop(Fun, State1); {code_upgrade, Fun1} -&amp;gt; loop(Fun1, State) end.  使用时只要发送一个{code_update, Fun1}消息即可 在实际的项目中，live code update需要在一个进程的稳定状态中进行。好在有Erlang天生的分布式特性，结点i进行更新时其他结点可以接管这个结点的任务，直到结点i更新成功，再进行下一个结点的更新。这个形式和结点的crash处理有点类似。于是Erlang中live updating的实际难点在于 1. How to suspend the system and put it into a stable state 2. How to replicate the stable state 3. How to restart from a stable state 4.</description>
+    </item>
+    
+    <item>
+      <title>Erlang的Hello World：一个计数程序</title>
+      <link>https://blog.yxwang.me/2008/10/erlang-hello-world/</link>
+      <pubDate>Mon, 13 Oct 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2008/10/erlang-hello-world/</guid>
+      <description>acm queue 9月的杂志的主题是The Concurrency Problem，力推了Erlang这个语言，其中有篇文章简单的介绍了下这个message-oriented语言。
+查了下这个名字的读法，正确的读法应该是air-lang，这里元音a的发音和bang中的a一样。
+文章中的第一个程序就有点令人费解，主要原因在于Erlang的语法和一般的imperative language差别很大，和functional language比较类似，但是本质上也有很大的不同。
+以Java的一个计数程序为例
+// A shared counter. public class Sequence { private int nextVal = 0; // Retrieve counter and increment. public synchronized int getNext() { return nextVal++; } // Re-initialize counter to zero. public synchronized void reset() { nextVal = 0; } }  这个程序的功能不用多说了，一个同步的计数程序。它的Erlang翻译版的代码为
+-module(sequence1). -export([make_sequence/0, get_next/1, reset/1]). % Create a new shared counter. make_sequence() -&amp;gt; spawn(fun() -&amp;gt; sequence_loop(0) end). sequence_loop(N) -&amp;gt; receive {From, get_next} -&amp;gt; From !</description>
+    </item>
+    
+  </channel>
+</rss>
