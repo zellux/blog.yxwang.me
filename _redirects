@@ -1,0 +1,3 @@
+# Redirect default Netlify subdomain to primary domain
+https://blog-yxwang-me.netlify.com/* https://blog.yxwang.me/:splat 301!
+
