@@ -49,7 +49,7 @@
     "datePublished": "2018-08-07 00:56:13 -0700 PDT",
     "dateModified" : "2018-08-07 00:56:13 -0700 PDT",
     "url" : "https://blog.yxwang.me/2018/08/robotics-slam-week4/",
-    "wordCount" : "167",
+    "wordCount" : "155",
     "keywords" : [ "Robotics","Courses","Notes","Blog" ]
 }
 </script>
@@ -133,12 +133,6 @@ e_o = \theta r_o
 <li>固定 R 和 t，优化点的对应关系：<span class="math inline">\(y_i = \argmin_{y_j \in Y} \Vert x_i - y_j \Vert\)</span>。</li>
 <li>固定点的对应关系，优化 R 和 t：<span class="math inline">\(R, t = \argmin \sum_{x_i, y_i \in C} \Vert d(x_i, y_i) \Vert ^2\)</span>。</li>
 <li>重复 2 和 3，直到稳定。</li>
-</ol>
-<h2 id="作业">作业</h2>
-<p>这次的作业是实现一个粒子滤波，应该是整个课程最难的一次了。分享几个 debug 的技巧：</p>
-<ol type="1">
-<li>一开始给的 <code>-init_pose</code> 就是第一个扫描结果的最优解，所以在实现粒子滤波的时候可以先确保第一次扫描结果里，最接近 <code>-init_pose</code> 的粒子得分最高。</li>
-<li>计算每个例子的得分时，一种做法是用上一周的作业中用到的 bresenham 函数计算发出点到障碍物中间所经历的空白格，然后对每个空白格计算加权，但是这个做法实在太慢了，我最后计算得分时只用了障碍物所在格的状态。</li>
 </ol>
 <h2 id="小结">小结</h2>
 <p>至此 Robotics Estimation and Learning 这门课就上完了。课程设置不错，但是讲解不够详细，尤其是第二周和第四周，这小哥讲得太简单了，slides 上还有不少错误。推荐《<a href="https://amzn.to/2AZqRIu">Probabilistic Robotics</a>》这本书，在上课的时候参考了里面一部分章节，写得很详细，作者 Thrun 也是机器人领域的大神。</p>
