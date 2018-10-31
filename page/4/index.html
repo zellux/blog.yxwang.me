@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 
   <head>
-	<meta name="generator" content="Hugo 0.46" />
+	<meta name="generator" content="Hugo 0.50" />
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <meta name="description" content="">
@@ -16,7 +16,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.52ea10a8f3a0b8f145adadb8d3761e17a42a7634869f775ef5830ed4de77d3fa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.ed1552d157cb762708b44a3b93f88e37a2968174c1bbbabed432bcae85290d3a.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -45,8 +45,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2012",
-    "datePublished": "2012-01-02 00:00:00 &#43;0000 UTC",
-    "dateModified" : "2012-01-02 00:00:00 &#43;0000 UTC",
+    "datePublished": "2012-02-18 00:00:00 &#43;0000 UTC",
+    "dateModified" : "2012-02-18 00:00:00 &#43;0000 UTC",
     "url" : "https://blog.yxwang.me/",
     "wordCount" : "0",
     "keywords" : [ "Blog" ]
@@ -80,6 +80,39 @@
 <div class="content index">
   <div class="posts">
      
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2012/02/etags-in-rails/">利用 ETag 优化 Rails 应用</a></h2>
+      <span class="post-meta">
+  <time datetime='Sat, Feb 18, 2012' data-updated="true" itemprop="datePublished">Sat, Feb 18, 2012</time>
+  
+  <span class="post-categories">
+    •
+	<a href="https://blog.yxwang.me/categories/programming">Programming</a>
+  </span>
+  
+</span>
+
+      
+      <div class="summary">
+        <p>ETag 是 HTTP 协议的一部分，可以用来检测客户端的缓存是否仍然有效。不少网站都实现了对 ETag 的支持，在 HTTP 响应头中加入当前传送内容的 ETag。以 heroku.com 为例：</p>
+
+<pre><code class="language-bash">$ curl -I www.heroku.com
+HTTP/1.1 200 OK
+Server: nginx
+Date: Fri, 17 Feb 2012 17:36:44 GMT
+Content-Type: text/html; charset=utf-8
+Connection: keep-alive
+Etag: &quot;f74bb78aa48d36e6a0b2072a131b20b9&quot;
+Cache-Control: public, max-age=300
+Content-Length: 15481
+</code></pre>
+
+<p></p>
+	<a class="read-more" href="/2012/02/etags-in-rails/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
     <div class="post">
       <h2 class="post-title"><a href="https://blog.yxwang.me/2012/01/visio-export-to-eps/">转换 Visio 图片为 EPS 格式</a></h2>
       <span class="post-meta">
@@ -297,29 +330,6 @@ RSpec.configure do |config| config.filter_run_excluding :slow =&gt; true end  �
 直接用 brew install emacs &ndash;cocoa &ndash;srgb 似乎会碰到编译错误：
 Finding pointers to doc strings... Finding pointers to doc strings...done Dumping under the name emacs unexec: cannot write section __data --- List of All Regions --- address size prot maxp --- List of Regions to be Dumped --- address size prot maxp --- Header Information --- Magic = 0xfeedfacf CPUType = 16777223 CPUSubType = -2147483645 FileType = 0x2 NCmds = 20 SizeOfCmds = 3464 Flags = 0x00200085 Highest address of load commands in input file: 0x5dd000 Lowest offset of all sections in __TEXT segment: 0x22f0 --- List of Load Commands in Input File ---  github issues 上已经有人报告这个问题了，解决方法也很简单，运行 brew edit emacs 打开 emacs 的安装脚本，在 def install 的后面加上两行：
 	<a class="read-more" href="/2011/07/full-screen-emacs-in-lion/">阅读全文 →</a>
-      </div>
-      
-    </div>
-    
-    <div class="post">
-      <h2 class="post-title"><a href="https://blog.yxwang.me/2011/03/send-notifications-with-netgrowl/">利用 netgrowl 向 Windows / Mac OS X 发送消息</a></h2>
-      <span class="post-meta">
-  <time datetime='Wed, Mar 2, 2011' data-updated="true" itemprop="datePublished">Wed, Mar 2, 2011</time>
-  
-  <span class="post-categories">
-    •
-	<a href="https://blog.yxwang.me/categories/tooling">Tooling</a>
-  </span>
-  
-</span>
-
-      
-      <div class="summary">
-        我平时用的系统是 Windows 7 和 Mac OS X，实验室项目一般都是 ssh 远登到 Ubuntu 和 Linux 上开发的。有时碰到内核和虚拟机等项目编译比较耗时，编译开始后要时不时的看一下编译任务是否完成，或者有没有中途出错，这时候如果有个通知系统就比较方便了。
-Google 了一把找到了 netgrowl 这个好东东，它是一个开源的 Python 模块，实现了 Growl 协议，可以向 Mac 或 Windows 上的 Growl 服务发送通知。使用也非常方便，先用 GrowlRegistrationPacket 函数注册一个应用，接着就可以用 GrowlNotificationPacket 发送通知了：
-notify.py
-#!/usr/bin/python from netgrowl import * import sys title = &quot;Notification from Ubuntu&quot; desc = &quot;&quot; if len(sys.argv) &gt; 2: title = sys.argv[1] desc = sys.argv[2] addr = (&quot;10.131.251.101&quot;, GROWL_UDP_PORT) s = socket(AF_INET,SOCK_DGRAM) p = GrowlRegistrationPacket(application=&quot;Ubuntu&quot;, password=&quot;i&quot;) p.addNotification(&quot;Ubuntu Notifications&quot;, enabled=True) s.
-	<a class="read-more" href="/2011/03/send-notifications-with-netgrowl/">阅读全文 →</a>
       </div>
       
     </div>

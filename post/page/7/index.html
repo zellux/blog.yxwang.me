@@ -15,7 +15,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.52ea10a8f3a0b8f145adadb8d3761e17a42a7634869f775ef5830ed4de77d3fa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.ed1552d157cb762708b44a3b93f88e37a2968174c1bbbabed432bcae85290d3a.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -44,8 +44,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2009",
-    "datePublished": "2009-12-13 00:00:00 &#43;0000 UTC",
-    "dateModified" : "2009-12-13 00:00:00 &#43;0000 UTC",
+    "datePublished": "2009-12-17 00:00:00 &#43;0000 UTC",
+    "dateModified" : "2009-12-17 00:00:00 &#43;0000 UTC",
     "url" : "https://blog.yxwang.me/post/",
     "wordCount" : "0",
     "keywords" : [ "Blog" ]
@@ -79,6 +79,39 @@
 <div class="content">
   <div class="posts">
      
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2009/12/linux-xen-compiling-error-in-ubuntu/">Ubuntu 下编译 Linux-xen 的问题</a></h2>
+      <span class="post-date">Dec 17, 2009</span>
+      
+      <span class="post-tags">
+	
+	#<a href="https://blog.yxwang.me/tags/computer-system">Computer System</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/debug">Debug</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/makefile">Makefile</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/ubuntu">Ubuntu</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/xen">Xen</a>&nbsp;
+	
+      </span>
+      
+      
+      
+      <div class="summary">
+	在Ubuntu下编译Linux-xen时碰到arch/i386/kernel/head-xen.o无法找到的问题，而该目录下有head-xen.S这个文件，说明make之前的的工作并没有把这个.S文件编译成.o。而同样的代码，在ArchLinux和Fedora上svn checkout后编译没有任何问题。
+最后发现问题在于Ubuntu默认会把/bin/sh指向/bin/dash，在scripts/Makefile.build里面加上一行SHELL=/bin/bash指定$(shell)使用bash即可。后来还搜了一下为什么Ubuntu使用dash而不是bash，其理由是dash的执行效率更高，但不可否认的是这个改动也导致了一些项目无法成功编译，虽然无法成功编译的原因可能是Makefile里使用了一些bash的特性而非POSIX shell所提供的那些。
+另外在debug过程中在网上找到了一些debug Makefile的技巧：
+make -n 可以仅仅打印出将要被执行的命令，而不去实际执行
+make -np 可以打印出更多的信息（使用的规则和变量），并执行每一条命令
+remake也是个不错的选择：“remake is a patched and modernized version of GNU make utility that adds improved error reporting, the ability to trace execution in a comprehensible way, and a debugger.”
+在检查shell命令的时候，可以使用set -x使得所有shell命令在执行前都能被输出。
+	<a class="read-more" href="/2009/12/linux-xen-compiling-error-in-ubuntu/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
     <div class="post">
       <h2 class="post-title"><a href="https://blog.yxwang.me/2009/12/chomp-game/">Chomp 游戏</a></h2>
       <span class="post-date">Dec 13, 2009</span>
@@ -327,29 +360,6 @@ How to use
 	前几天给测试Xen用的虚拟机挂了，只能用VMware的snapshot返回到之前的镜像，然后似乎因为时间问题启动Xen的时候总是会定时打印出类似
 571 Timer ISR/0: Time went backwards: delta=-11072481 delta_cpu=298927519 shadow=196807680595 off=288495093 processed=197107247546 cpu_processed=196797247546 572 0: 196797247546 573 1: 197107247546  的信息，google了下发现是时间同步的问题，用ntp协议同步时间即可解决这个问题。另外这里再给出一个最暴力的解决方法：在linux-xen源码的arch/i386/kernel/time-xen.c文件中找到Time went backwards，把这行打印语句以及后面的循环打印删除，然后重新编译内核。x86_64体系结构也是修改这个文件。方法很暴力，也没真正解决问题，但是至少不影响我看/var/log/messages的输出了。
 	<a class="read-more" href="/2009/07/xen-time-went-backwards-solution/">阅读全文 →</a>
-      </div>
-      
-    </div>
-    
-    <div class="post">
-      <h2 class="post-title"><a href="https://blog.yxwang.me/2009/07/firefox-close-windows-with-last-tab/">防止 Firefox 在关闭最后一个 Tab 后退出</a></h2>
-      <span class="post-date">Jul 1, 2009</span>
-      
-      <span class="post-tags">
-	
-	#<a href="https://blog.yxwang.me/tags/firefox">Firefox</a>&nbsp;
-	
-	#<a href="https://blog.yxwang.me/tags/tooling">Tooling</a>&nbsp;
-	
-      </span>
-      
-      
-      
-      <div class="summary">
-	记得以前用Firefox 3.0.x时把Tools -&gt; Options -&gt; Tabs -&gt; Always show the tab bar勾上就行了，升级到3.5以后就没用了，搜了下Knowledge Base，最后在
-https://support.mozilla.com/tiki-view_forum_thread.php?locale=zh-CN&comments_parentId=184680&forumId=1
-看到只要将about:config页中的browser.tabs.closeWindowWithLastTab项设为false即可
-	<a class="read-more" href="/2009/07/firefox-close-windows-with-last-tab/">阅读全文 →</a>
       </div>
       
     </div>

@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 
   <head>
-	<meta name="generator" content="Hugo 0.46" />
+	<meta name="generator" content="Hugo 0.50" />
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <meta name="description" content="">
@@ -16,7 +16,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.52ea10a8f3a0b8f145adadb8d3761e17a42a7634869f775ef5830ed4de77d3fa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.ed1552d157cb762708b44a3b93f88e37a2968174c1bbbabed432bcae85290d3a.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -45,8 +45,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2011",
-    "datePublished": "2011-01-16 00:00:00 &#43;0000 UTC",
-    "dateModified" : "2011-01-16 00:00:00 &#43;0000 UTC",
+    "datePublished": "2011-03-02 00:00:00 &#43;0000 UTC",
+    "dateModified" : "2011-03-02 00:00:00 &#43;0000 UTC",
     "url" : "https://blog.yxwang.me/",
     "wordCount" : "0",
     "keywords" : [ "Blog" ]
@@ -80,6 +80,29 @@
 <div class="content index">
   <div class="posts">
      
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2011/03/send-notifications-with-netgrowl/">利用 netgrowl 向 Windows / Mac OS X 发送消息</a></h2>
+      <span class="post-meta">
+  <time datetime='Wed, Mar 2, 2011' data-updated="true" itemprop="datePublished">Wed, Mar 2, 2011</time>
+  
+  <span class="post-categories">
+    •
+	<a href="https://blog.yxwang.me/categories/tooling">Tooling</a>
+  </span>
+  
+</span>
+
+      
+      <div class="summary">
+        我平时用的系统是 Windows 7 和 Mac OS X，实验室项目一般都是 ssh 远登到 Ubuntu 和 Linux 上开发的。有时碰到内核和虚拟机等项目编译比较耗时，编译开始后要时不时的看一下编译任务是否完成，或者有没有中途出错，这时候如果有个通知系统就比较方便了。
+Google 了一把找到了 netgrowl 这个好东东，它是一个开源的 Python 模块，实现了 Growl 协议，可以向 Mac 或 Windows 上的 Growl 服务发送通知。使用也非常方便，先用 GrowlRegistrationPacket 函数注册一个应用，接着就可以用 GrowlNotificationPacket 发送通知了：
+notify.py
+#!/usr/bin/python from netgrowl import * import sys title = &quot;Notification from Ubuntu&quot; desc = &quot;&quot; if len(sys.argv) &gt; 2: title = sys.argv[1] desc = sys.argv[2] addr = (&quot;10.131.251.101&quot;, GROWL_UDP_PORT) s = socket(AF_INET,SOCK_DGRAM) p = GrowlRegistrationPacket(application=&quot;Ubuntu&quot;, password=&quot;i&quot;) p.addNotification(&quot;Ubuntu Notifications&quot;, enabled=True) s.
+	<a class="read-more" href="/2011/03/send-notifications-with-netgrowl/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
     <div class="post">
       <h2 class="post-title"><a href="https://blog.yxwang.me/2011/01/return-oriented-intro-2/">良性代码，恶意利用：浅谈 Return-Oriented 攻击（二）</a></h2>
       <span class="post-meta">
@@ -311,31 +334,6 @@ exec /usr/bin/wish &quot;$0&quot; -- &quot;$@&quot;  改成
 exec /usr/bin/wish8.5 &quot;$0&quot; -- &quot;$@&quot;  这样就能在gitk中开启抗锯齿了，虽然效果还不是很好。另外qgit也是一个不错的选择。
 参考链接：http://navarra.ca/?p=44
 	<a class="read-more" href="/2010/02/gitk-font/">阅读全文 →</a>
-      </div>
-      
-    </div>
-    
-    <div class="post">
-      <h2 class="post-title"><a href="https://blog.yxwang.me/2010/02/linear-page-table/">Linear Page Table: 更方便地访问页表</a></h2>
-      <span class="post-meta">
-  <time datetime='Tue, Feb 9, 2010' data-updated="true" itemprop="datePublished">Tue, Feb 9, 2010</time>
-  
-  <span class="post-categories">
-    •
-	<a href="https://blog.yxwang.me/categories/computer-system">Computer System</a>
-  </span>
-  
-</span>
-
-      
-      <div class="summary">
-        Linear page table 又叫 virtual page table，是一种方便虚拟机监控器 (VMM) / 操作系统 (OS) / 应用程序访问页表的技巧。Xen、64 位 Linux 内核、JOS 操作系统中都用到了这个设计。这里以 x86_32 系统为例，简单介绍一下它的实现和使用，如有错误敬请指出。
-一般情况下，如果 OS 需要访问某个页表，需要将它映射到自己的虚拟空间中，然后再访问。这样带来两个问题，一是访问比较繁琐，需要临时的页映射；二是对于 exo-kernel 这种 fork 等行为都是在用户态程序实现的系统，可能会增加一下安全上的问题。因为用户程序在 fork 的时候需要访问自己的页表，而这时候除非操作系统提供另一些权限控制更精确的系统调用，否则就很难让不可信的应用程序访问自己的页表且不做有害的改动。
-Linear page table 很好的解决了这两个问题。它的实现很简单，只需要在页目录中增加一项 VPT (virtual page table entry)，和一般的页目录项不同的是，这个 VPT 指向的是页目录本身。
-这样带来了什么好处呢？借用一下 MIT 6.828 课件上的图片来更好的说明这个问题：
-增加了 VPT 后，通常的物理地址 -&gt; 虚拟地址的转换还是没变。和之前唯一的不同在于虚拟地址的页目录索引号 (PDX) 为之前设置的 VPT 的时候。
-举个例子来说，假如现在要访问的虚拟地址是 (VPT &lt;&lt; 22) | (VPT &lt;&lt; 12)，即这里的 PDX 和 PTX 都等于 VPT 的时候，整个转换过程是怎么样的呢（假设 TLB miss 的情况）？首先根据 CR3 中的物理地址，硬件开始查找页目录中的第 VPT 项，然后根据这一项中的物理地址，找到了下一级「页表」。注意这时候硬件以为自己得到的页表地址，实际上访问的还是页目录本身。同样，在这个「页表」中找到第 VPT 项指出去的最终页，得到了最终页的物理地址。因为 PTX 还是等于 VPT，所以最后得到的物理地址还是页目录的。
-	<a class="read-more" href="/2010/02/linear-page-table/">阅读全文 →</a>
       </div>
       
     </div>

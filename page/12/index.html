@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 
   <head>
-	<meta name="generator" content="Hugo 0.46" />
+	<meta name="generator" content="Hugo 0.50" />
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <meta name="description" content="">
@@ -16,7 +16,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.52ea10a8f3a0b8f145adadb8d3761e17a42a7634869f775ef5830ed4de77d3fa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.ed1552d157cb762708b44a3b93f88e37a2968174c1bbbabed432bcae85290d3a.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -45,8 +45,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2008",
-    "datePublished": "2008-09-18 00:00:00 &#43;0000 UTC",
-    "dateModified" : "2008-09-18 00:00:00 &#43;0000 UTC",
+    "datePublished": "2008-09-25 00:00:00 &#43;0000 UTC",
+    "dateModified" : "2008-09-25 00:00:00 &#43;0000 UTC",
     "url" : "https://blog.yxwang.me/",
     "wordCount" : "0",
     "keywords" : [ "Blog" ]
@@ -80,6 +80,28 @@
 <div class="content index">
   <div class="posts">
      
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2008/09/calling-do_console_io-from-domainu/">DomainU 中调用 do_console_io</a></h2>
+      <span class="post-meta">
+  <time datetime='Thu, Sep 25, 2008' data-updated="true" itemprop="datePublished">Thu, Sep 25, 2008</time>
+  
+  <span class="post-categories">
+    •
+	<a href="https://blog.yxwang.me/categories/computer-system">Computer System</a>
+  </span>
+  
+</span>
+
+      
+      <div class="summary">
+        The Definitive Guide to Xen Hypervisor 第二章的 Exercise，通过调用 hypercall page 中的 console_io 项输出Hello World。
+void start_kernel(start_info_t * start_info) { HYPERVISOR_console_io(CONSOLEIO_write,12,&quot;Hello Worldn&quot;); while(1); }  但是默认选项编译和启动的Xen是不会保留DomainU中输出的信息。参考 drivers/char/console.c，可以看到主要有两个选项控制了 DomainU 的 do_console_io 输出：
+#ifndef VERBOSE /* Only domain 0 may access the emergency console. */ if ( current-&gt;domain-&gt;domain_id != 0 ) return -EPERM; #endif  if ( opt_console_to_ring ) { for ( kptr = kbuf; *kptr != ''; kptr++ ) putchar_console_ring(*kptr); send_guest_global_virq(dom0, VIRQ_CON_RING); }  在编译 Xen 的时候开启 debug 选项即可置上 VERBOSE，而 opt_console_to_ring 则是一个启动选项，在 grub 的启动选项中增加 loglvl=all guest_loglvl=all console_to_ring 即可。
+	<a class="read-more" href="/2008/09/calling-do_console_io-from-domainu/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
     <div class="post">
       <h2 class="post-title"><a href="https://blog.yxwang.me/2008/09/first-test-kernel-in-xen/">第一个 testkernel 在 Xen 中的载入</a></h2>
       <span class="post-meta">
@@ -291,34 +313,6 @@ Yan Tang, Qi Gao, and Feng Qin, The Ohio State University
 三位作者好像都是中国人
 这篇paper针对支持垃圾收集的语言中内存泄露问题，提出了一种比较保守的“换出”策略，即把可疑的内存泄露的对象（这些对象通常都是长时间没有被访问的）从内存移动到硬盘上暂时保存，减小内存的压力；如果这些对象后来被再次访问（这种可能性很小），就把它们从硬盘上移回内存。
 	<a class="read-more" href="/2008/07/leaksurvivor/">阅读全文 →</a>
-      </div>
-      
-    </div>
-    
-    <div class="post">
-      <h2 class="post-title"><a href="https://blog.yxwang.me/2008/07/singleton-pattern-and-double-checked-lock/">Singleton 模式与双检测锁定(DCL)</a></h2>
-      <span class="post-meta">
-  <time datetime='Fri, Jul 4, 2008' data-updated="true" itemprop="datePublished">Fri, Jul 4, 2008</time>
-  
-  <span class="post-categories">
-    •
-	<a href="https://blog.yxwang.me/categories/featured">Featured</a>, <a href="https://blog.yxwang.me/categories/programming">Programming</a>
-  </span>
-  
-</span>
-
-      
-      <div class="summary">
-        看 OOP 教材时，书里提到了一个双检测锁定（Double-Checked Lock, DCL）的问题，但是没有更多介绍，只是说这是一个和底层内存机制有关的漏洞。查阅了下相关资料，对这个问题大致有了点了解。
-从头开始说吧。
-在多线程的情况下Singleton模式会遇到不少问题，一个简单的例子
-class Singleton { private static Singleton instance = null; public static Singleton instance() { if (instance == null) { instance = new Singleton(); } return instance; } }  假设这样一个场景，有两个线程调用 Singleton.instance()，首先线程一判断 instance 是否等于 null，判断完后一瞬间虚拟机把线程二调度为运行线程，线程二再次判断 instance 是否为 null，然后创建一个Singleton 实例，线程二的时间片用完后，线程一被唤醒，接下来它依然会创建一个新的 Singleton 实例，导致两次调用范围的对象不同。
-最简单的方法自然是在类被载入时就初始化这个对象：
-private static Singleton instance = new Singleton();  JLS (Java Language Specification) 中规定了一个类只会被初始化一次，所以这样做肯定是没问题的。
-但是如果要实现延迟初始化（Lazy initialization），比如这个实例初始化时的参数要在运行期才能确定，应该怎么做呢？
-依然有最简单的方法：使用 synchronized 关键字修饰初始化方法：
-public synchronized static Singleton instance() { if (instance == null) { instance = new Singleton(); } return instance; }  然而引入 synchronized 关键字后，产生了一个性能问题：多个线程同时访问这个方法时，会因为同步原语而导致每次只有一个线程执行这段代码，影响程序性能。而事实上初始化完毕后只需要简单的返回 instance 的引用就行了。
-	<a class="read-more" href="/2008/07/singleton-pattern-and-double-checked-lock/">阅读全文 →</a>
       </div>
       
     </div>

@@ -15,7 +15,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.52ea10a8f3a0b8f145adadb8d3761e17a42a7634869f775ef5830ed4de77d3fa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.ed1552d157cb762708b44a3b93f88e37a2968174c1bbbabed432bcae85290d3a.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -44,8 +44,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2010",
-    "datePublished": "2010-02-08 00:00:00 &#43;0000 UTC",
-    "dateModified" : "2010-02-08 00:00:00 &#43;0000 UTC",
+    "datePublished": "2010-02-09 00:00:00 &#43;0000 UTC",
+    "dateModified" : "2010-02-09 00:00:00 &#43;0000 UTC",
     "url" : "https://blog.yxwang.me/post/",
     "wordCount" : "0",
     "keywords" : [ "Blog" ]
@@ -79,6 +79,34 @@
 <div class="content">
   <div class="posts">
      
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2010/02/linear-page-table/">Linear Page Table: 更方便地访问页表</a></h2>
+      <span class="post-date">Feb 9, 2010</span>
+      
+      <span class="post-tags">
+	
+	#<a href="https://blog.yxwang.me/tags/computer-system">Computer System</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/featured">Featured</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/kernel">Kernel</a>&nbsp;
+	
+      </span>
+      
+      
+      
+      <div class="summary">
+	Linear page table 又叫 virtual page table，是一种方便虚拟机监控器 (VMM) / 操作系统 (OS) / 应用程序访问页表的技巧。Xen、64 位 Linux 内核、JOS 操作系统中都用到了这个设计。这里以 x86_32 系统为例，简单介绍一下它的实现和使用，如有错误敬请指出。
+一般情况下，如果 OS 需要访问某个页表，需要将它映射到自己的虚拟空间中，然后再访问。这样带来两个问题，一是访问比较繁琐，需要临时的页映射；二是对于 exo-kernel 这种 fork 等行为都是在用户态程序实现的系统，可能会增加一下安全上的问题。因为用户程序在 fork 的时候需要访问自己的页表，而这时候除非操作系统提供另一些权限控制更精确的系统调用，否则就很难让不可信的应用程序访问自己的页表且不做有害的改动。
+Linear page table 很好的解决了这两个问题。它的实现很简单，只需要在页目录中增加一项 VPT (virtual page table entry)，和一般的页目录项不同的是，这个 VPT 指向的是页目录本身。
+这样带来了什么好处呢？借用一下 MIT 6.828 课件上的图片来更好的说明这个问题：
+增加了 VPT 后，通常的物理地址 -&gt; 虚拟地址的转换还是没变。和之前唯一的不同在于虚拟地址的页目录索引号 (PDX) 为之前设置的 VPT 的时候。
+举个例子来说，假如现在要访问的虚拟地址是 (VPT &lt;&lt; 22) | (VPT &lt;&lt; 12)，即这里的 PDX 和 PTX 都等于 VPT 的时候，整个转换过程是怎么样的呢（假设 TLB miss 的情况）？首先根据 CR3 中的物理地址，硬件开始查找页目录中的第 VPT 项，然后根据这一项中的物理地址，找到了下一级「页表」。注意这时候硬件以为自己得到的页表地址，实际上访问的还是页目录本身。同样，在这个「页表」中找到第 VPT 项指出去的最终页，得到了最终页的物理地址。因为 PTX 还是等于 VPT，所以最后得到的物理地址还是页目录的。
+	<a class="read-more" href="/2010/02/linear-page-table/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
     <div class="post">
       <h2 class="post-title"><a href="https://blog.yxwang.me/2010/02/code-specific-optimizations-in-gcc/">gcc 中设置特定代码块的优化级别</a></h2>
       <span class="post-date">Feb 8, 2010</span>
@@ -332,39 +360,6 @@ $ ps aux | grep emacs wyx 7090 0.0 0.0 3336 796 pts/2 S+ 04:49 0:00 grep emacs w
 $ ps aux | grep emacs | grep -v grep wyx 10128 0.1 4.9 66904 50388 pts/3 S+ Jan21 2:21 emacs  今天在Santosa的博客上看到了另一个巧妙的做法，使用grep [e]macs来搜索emacs这个进程：
 $ ps aux | grep [e]macs wyx 10128 0.1 4.9 66904 50388 pts/3 S+ Jan21 2:21 emacs  为什么会有这样的效果，知道grep正则中[]的作用后想一想就能明白啦。很有意思的trick，虽然说它比| grep -v grep也未必方便多少，因为后者能通过alias简化输入。
 	<a class="read-more" href="/2010/01/grep-trick/">阅读全文 →</a>
-      </div>
-      
-    </div>
-    
-    <div class="post">
-      <h2 class="post-title"><a href="https://blog.yxwang.me/2009/12/linux-xen-compiling-error-in-ubuntu/">Ubuntu 下编译 Linux-xen 的问题</a></h2>
-      <span class="post-date">Dec 17, 2009</span>
-      
-      <span class="post-tags">
-	
-	#<a href="https://blog.yxwang.me/tags/computer-system">Computer System</a>&nbsp;
-	
-	#<a href="https://blog.yxwang.me/tags/debug">Debug</a>&nbsp;
-	
-	#<a href="https://blog.yxwang.me/tags/makefile">Makefile</a>&nbsp;
-	
-	#<a href="https://blog.yxwang.me/tags/ubuntu">Ubuntu</a>&nbsp;
-	
-	#<a href="https://blog.yxwang.me/tags/xen">Xen</a>&nbsp;
-	
-      </span>
-      
-      
-      
-      <div class="summary">
-	在Ubuntu下编译Linux-xen时碰到arch/i386/kernel/head-xen.o无法找到的问题，而该目录下有head-xen.S这个文件，说明make之前的的工作并没有把这个.S文件编译成.o。而同样的代码，在ArchLinux和Fedora上svn checkout后编译没有任何问题。
-最后发现问题在于Ubuntu默认会把/bin/sh指向/bin/dash，在scripts/Makefile.build里面加上一行SHELL=/bin/bash指定$(shell)使用bash即可。后来还搜了一下为什么Ubuntu使用dash而不是bash，其理由是dash的执行效率更高，但不可否认的是这个改动也导致了一些项目无法成功编译，虽然无法成功编译的原因可能是Makefile里使用了一些bash的特性而非POSIX shell所提供的那些。
-另外在debug过程中在网上找到了一些debug Makefile的技巧：
-make -n 可以仅仅打印出将要被执行的命令，而不去实际执行
-make -np 可以打印出更多的信息（使用的规则和变量），并执行每一条命令
-remake也是个不错的选择：“remake is a patched and modernized version of GNU make utility that adds improved error reporting, the ability to trace execution in a comprehensible way, and a debugger.”
-在检查shell命令的时候，可以使用set -x使得所有shell命令在执行前都能被输出。
-	<a class="read-more" href="/2009/12/linux-xen-compiling-error-in-ubuntu/">阅读全文 →</a>
       </div>
       
     </div>

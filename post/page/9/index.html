@@ -15,7 +15,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.52ea10a8f3a0b8f145adadb8d3761e17a42a7634869f775ef5830ed4de77d3fa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.ed1552d157cb762708b44a3b93f88e37a2968174c1bbbabed432bcae85290d3a.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -44,8 +44,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2009",
-    "datePublished": "2009-05-04 00:00:00 &#43;0000 UTC",
-    "dateModified" : "2009-05-04 00:00:00 &#43;0000 UTC",
+    "datePublished": "2009-05-05 00:00:00 &#43;0000 UTC",
+    "dateModified" : "2009-05-05 00:00:00 &#43;0000 UTC",
     "url" : "https://blog.yxwang.me/post/",
     "wordCount" : "0",
     "keywords" : [ "Blog" ]
@@ -79,6 +79,30 @@
 <div class="content">
   <div class="posts">
      
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2009/05/install-vmware-server-2-on-kernel-2-6-29/">在 Linux Kernel 2.6.29 上安装 VMware Server 2</a></h2>
+      <span class="post-date">May 5, 2009</span>
+      
+      <span class="post-tags">
+	
+	#<a href="https://blog.yxwang.me/tags/computer-system">Computer System</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/installation">Installation</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/vmware">VMware</a>&nbsp;
+	
+      </span>
+      
+      
+      
+      <div class="summary">
+	在kernel 2.6.29上编译vmware modules时报错了
+/usr/src/linux-2.6.29/arch/x86/include/asm/apicdef.h:132:1: warning: this is the location of the previous definition /tmp/vmware-config0/vmmon-only/linux/driver.c: In function ‘LinuxDriverSyncCallOnEachCPU’: /tmp/vmware-config0/vmmon-only/linux/driver.c:1423: error: too many arguments to function ‘smp_call_function’ /tmp/vmware-config0/vmmon-only/linux/driver.c: In function ‘LinuxDriver_Ioctl’: /tmp/vmware-config0/vmmon-only/linux/driver.c:1987: error: ‘struct task_struct’ has no member named ‘euid’ /tmp/vmware-config0/vmmon-only/linux/driver.c:1987: error: ‘struct task_struct’ has no member named ‘uid’ /tmp/vmware-config0/vmmon-only/linux/driver.c:1988: error: ‘struct task_struct’ has no member named ‘fsuid’ /tmp/vmware-config0/vmmon-only/linux/driver.c:1988: error: ‘struct task_struct’ has no member named ‘uid’ /tmp/vmware-config0/vmmon-only/linux/driver.c:1989: error: ‘struct task_struct’ has no member named ‘egid’ /tmp/vmware-config0/vmmon-only/linux/driver.
+	<a class="read-more" href="/2009/05/install-vmware-server-2-on-kernel-2-6-29/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
     <div class="post">
       <h2 class="post-title"><a href="https://blog.yxwang.me/2009/05/caps-lock-to-ctrl/">给你的小指减负：将 Caps Lock 键映射成 Ctrl</a></h2>
       <span class="post-date">May 4, 2009</span>
@@ -356,42 +380,6 @@ flash存储单元分block和page，每个block有32/64个page，一个page有512
 脚本如下
 #!/usr/bin/python # Automatic test script for Xen DomainU # Author: zellux import pexpect, os conf = { 'login_name' : 'm2-vm2', 'domainU_name' : 'R900-DomU0', 'domainU_conf' : '/home/wyx/domU1', 'domainU_id' : '2', 'domainU_user' : 'wyx', 'domainU_passwd' : 'wyx', } # Command to be executed after domainU starts cmd = &quot;&quot;&quot; cd m2 cd reg_test .
 	<a class="read-more" href="/2009/04/xen-test-script/">阅读全文 →</a>
-      </div>
-      
-    </div>
-    
-    <div class="post">
-      <h2 class="post-title"><a href="https://blog.yxwang.me/2009/04/end-to-end-argument-in-system-design/">End-to-End Argument In System Design</a></h2>
-      <span class="post-date">Apr 6, 2009</span>
-      
-      <span class="post-tags">
-	
-	#<a href="https://blog.yxwang.me/tags/architecture">Architecture</a>&nbsp;
-	
-	#<a href="https://blog.yxwang.me/tags/computer-system">Computer System</a>&nbsp;
-	
-	#<a href="https://blog.yxwang.me/tags/paper">Paper</a>&nbsp;
-	
-	#<a href="https://blog.yxwang.me/tags/tocs">TOCS</a>&nbsp;
-	
-      </span>
-      
-      
-      
-      <div class="summary">
-	MIT出品，发在1984年的TOCS上，很值得细细品味的一篇paper，可惜做presentation时由于是第一次在组会上讲，效果很差。
-这篇paper的核心思想就是，在设计一个系统各个层次的功能时，如果把某个功能放到某一层时无法保证功能的完全可靠，那就干脆不要做，除非是为了性能等其他因素考虑。
-这里举了一个文件传输的例子，假设要把电脑A的资料通过网络传输给电脑B，而其中文件系统、传输程序、网络等各个子系统都有可能出现问题，那么如果保证传输的可靠，即B能完整不出错的得到A的数据并保存呢？
-如果把验证做在子系统，比如网络数据包校验，文件系统里也为每个文件加checksum，读出来的时候验证下，从而避免磁盘出错的可能。但是这些常见的措施只能保证部分环节的正确性，降低出错的可能，并不能从根本上保证数据传输的可靠性。举个例子来说，这里如果文件传输程序出了bug，网络和文件系统里面的检查即使通过了，最后的结果还是错误的。
-针对这个问题的End-to-End的解决方案很简单，就是在电脑A上保留一份该文件的checksum，电脑B接收并保存后再算一次checksum，相等就说明传输成功了（当然这里要钻牛角尖的话也可以说还是有可能出问题的，但是这个概率已经小到可以完全忽视的地步了，在这里我们假设checksum符合就说明这个环节没有问题）。而这种保障措施不需要任何子系统的参与，也就是End-to-End的。
-那么当一个子系统对要做的事情并不完全了解的时候（比如这里的网络传输层只能保证对方接受到的数据包的正确性，却不知道文件有没有损坏），是不是就没必要在子系统实现这个功能了呢？从正确性是来说是，但是考虑到其他方面，在子系统作检查还有另外两个好处：
-一是大大的降低了出错的概率，准确的说是出错的概率呈指数级降低，这在并不需要一种完美的保障措施的场合下还是很有用的；
-二是提高了性能，如果只用End-to-End的检验的话，有可能传输中丢了个包要等整个文件传输完毕做checksum的时候才会发现；而如果中间在网络传输层加个丢包检验的话就可以及早的发现错误并恢复了。这个问题在网络不可靠，或者文件很大的情况下尤为突出，仅仅是End-to-End的保证会使传输时间的期望值随着文件大小的增加呈指数级上升。
-上网络课的时候有一次老师的问题就是既然OSI七层协议的上层（如transport层）已经做了校验措施，为什么下层（如data-link层）还会有“多余”的error detection呢？当时我想到的一个答案就是为了性能考虑，因为那会儿正好在读这篇paper ;-)
-但是并不是说把功能放到子系统里就一定能提高性能了。如果子系统里面塞满了各种并不是上层都必需的检验机制，整个系统的性能势必会受到影响。所以这个trade-off值得深思熟虑。Exokernel的论文就提出了传统的操作系统中存在的这样一个问题，底层内核过于冗余，影响了应用程序性能，也隐藏了一些对部分应用程序比较重要的信息（比如给数据库提供磁盘原生数据访问的API可以获得更优的性能，另外应用程序也应当能控制自己发生缺页错误时候的行为）。
-这里的“End”在不同的环境下会对应不同的模块。比如在网上聊天这个通信过程中，没有必要在底层做很多校验来保证数据包的完整性，这时候及时性更重要，当数据包丢失或者数据出错时，会有一个更常用的End-to-End的解决方案：没听清的那一方通过语音要求重述就行了，“我听不清，能再说一遍刚才的话吗？”，而此时的End自然是谈话双方。如果换一种情形，在语音留言系统中，就需要保证传输的正确性了，因为这时候数据的及时性变得很次要，而留言系统的特点要求用End-to-End的验证加上底层的措施来保证一方的语音信息尽可能忠实的保存到另一方的留言系统中。
-修改于 2010.2.16
-	<a class="read-more" href="/2009/04/end-to-end-argument-in-system-design/">阅读全文 →</a>
       </div>
       
     </div>

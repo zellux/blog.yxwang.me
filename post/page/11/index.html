@@ -15,7 +15,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.52ea10a8f3a0b8f145adadb8d3761e17a42a7634869f775ef5830ed4de77d3fa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.ed1552d157cb762708b44a3b93f88e37a2968174c1bbbabed432bcae85290d3a.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -44,8 +44,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2008",
-    "datePublished": "2008-11-11 00:00:00 &#43;0000 UTC",
-    "dateModified" : "2008-11-11 00:00:00 &#43;0000 UTC",
+    "datePublished": "2008-11-17 00:00:00 &#43;0000 UTC",
+    "dateModified" : "2008-11-17 00:00:00 &#43;0000 UTC",
     "url" : "https://blog.yxwang.me/post/",
     "wordCount" : "0",
     "keywords" : [ "Blog" ]
@@ -79,6 +79,36 @@
 <div class="content">
   <div class="posts">
      
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2008/11/daily-notes-on-python1117-1123/">Daily Notes on Python[11.17-11.23]</a></h2>
+      <span class="post-date">Nov 17, 2008</span>
+      
+      <span class="post-tags">
+	
+	#<a href="https://blog.yxwang.me/tags/programming">Programming</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/programming-languages">Programming Languages</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/python">Python</a>&nbsp;
+	
+      </span>
+      
+      
+      
+      <div class="summary">
+	模块动态加载机制
+ Advanced Python（某一期Google TechTalks的话题）上提到import指令本质是个语法糖，import sys等价于sys = import(&ldquo;sys&rdquo;)。解析import sys的bytecode可以看到四个指令（参数略）： LOAD_CONST LOAD_CONST IMPORT_NAME STORE_NAME  IMPORT_NAME把sys模块导入并保存到栈上，STORE_NAME把这个指针当作普通对象保存在sys这个变量中。
+2. IMPORT_NAME指令行为分析 将参数打包并用PyEval_CallObject()这个统一调用接口运行import方法，bltinmodule.c中的builtinimport函数包装了这个功能。help(import)显示的import方法的参数列表 import(&hellip;) import(name, globals={}, locals={}, fromlist=[], level=-1) -&gt; module
+对应于builtinimport中调用的另一层函数封装
+PyObject * PyImport_ImportModuleLevel(char *name, PyObject *globals, PyObject *locals, PyObject *fromlist, int level)  这个函数调用了真正干活的函数，import.c中的
+static PyObject * import_module_level(char *name, PyObject *globals, PyObject *locals, PyObject *fromlist, int level)  3. import_module_level函数 首先调用get_parent()得到import发生时的package对象，接下来多次调用load_next依次得到各级的包名，跟踪了下import xml.dom.minidom的行为，发现name的值依次是&rdquo;dom.minidom&rdquo;, &ldquo;minidom&rdquo;。最后根据import的形式是from &hellip; import &hellip;还是import &hellip;返回不同的处理结果。
+4. import_submodule函数 load_next函数中调用这个函数进行模块的查找和载入。主要分三步：find_module, load_module, add_submodule。
+5. from &hellip; import &hellip; ensure_fromlist处理了这个情况。另外对于from &hellip; import *的情况，会从module文件中读入一个all对象，从中知道module公开的符号信息。
+	<a class="read-more" href="/2008/11/daily-notes-on-python1117-1123/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
     <div class="post">
       <h2 class="post-title"><a href="https://blog.yxwang.me/2008/11/godel-escher-bach-2/">Godel, Escher, Bach [2]</a></h2>
       <span class="post-date">Nov 11, 2008</span>
@@ -324,31 +354,6 @@ loop(Fun, State) receive {From, {rpc, Tag, Q}} -&gt; {Reply, State1} = Fun(Q, St
 // A shared counter. public class Sequence { private int nextVal = 0; // Retrieve counter and increment. public synchronized int getNext() { return nextVal++; } // Re-initialize counter to zero. public synchronized void reset() { nextVal = 0; } }  这个程序的功能不用多说了，一个同步的计数程序。它的Erlang翻译版的代码为
 -module(sequence1). -export([make_sequence/0, get_next/1, reset/1]). % Create a new shared counter. make_sequence() -&gt; spawn(fun() -&gt; sequence_loop(0) end). sequence_loop(N) -&gt; receive {From, get_next} -&gt; From !
 	<a class="read-more" href="/2008/10/erlang-hello-world/">阅读全文 →</a>
-      </div>
-      
-    </div>
-    
-    <div class="post">
-      <h2 class="post-title"><a href="https://blog.yxwang.me/2008/09/calling-do_console_io-from-domainu/">DomainU 中调用 do_console_io</a></h2>
-      <span class="post-date">Sep 25, 2008</span>
-      
-      <span class="post-tags">
-	
-	#<a href="https://blog.yxwang.me/tags/computer-system">Computer System</a>&nbsp;
-	
-	#<a href="https://blog.yxwang.me/tags/xen">Xen</a>&nbsp;
-	
-	#<a href="https://blog.yxwang.me/tags/virtualization">virtualization</a>&nbsp;
-	
-      </span>
-      
-      
-      
-      <div class="summary">
-	The Definitive Guide to Xen Hypervisor 第二章的 Exercise，通过调用 hypercall page 中的 console_io 项输出Hello World。
-void start_kernel(start_info_t * start_info) { HYPERVISOR_console_io(CONSOLEIO_write,12,&quot;Hello Worldn&quot;); while(1); }  但是默认选项编译和启动的Xen是不会保留DomainU中输出的信息。参考 drivers/char/console.c，可以看到主要有两个选项控制了 DomainU 的 do_console_io 输出：
-#ifndef VERBOSE /* Only domain 0 may access the emergency console. */ if ( current-&gt;domain-&gt;domain_id != 0 ) return -EPERM; #endif  if ( opt_console_to_ring ) { for ( kptr = kbuf; *kptr != ''; kptr++ ) putchar_console_ring(*kptr); send_guest_global_virq(dom0, VIRQ_CON_RING); }  在编译 Xen 的时候开启 debug 选项即可置上 VERBOSE，而 opt_console_to_ring 则是一个启动选项，在 grub 的启动选项中增加 loglvl=all guest_loglvl=all console_to_ring 即可。
-	<a class="read-more" href="/2008/09/calling-do_console_io-from-domainu/">阅读全文 →</a>
       </div>
       
     </div>
