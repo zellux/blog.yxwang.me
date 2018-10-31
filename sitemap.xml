@@ -702,13 +702,13 @@
   </url>
   
   <url>
-    <loc>https://blog.yxwang.me/categories/algorithms/</loc>
+    <loc>https://blog.yxwang.me/tags/algorithms/</loc>
     <lastmod>2018-07-14T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://blog.yxwang.me/tags/algorithms/</loc>
+    <loc>https://blog.yxwang.me/categories/algorithms/</loc>
     <lastmod>2018-07-14T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -832,13 +832,13 @@
   </url>
   
   <url>
-    <loc>https://blog.yxwang.me/categories/computer-system/</loc>
+    <loc>https://blog.yxwang.me/tags/computer-system/</loc>
     <lastmod>2012-08-09T17:37:12+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://blog.yxwang.me/tags/computer-system/</loc>
+    <loc>https://blog.yxwang.me/categories/computer-system/</loc>
     <lastmod>2012-08-09T17:37:12+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -862,14 +862,14 @@
   </url>
   
   <url>
-    <loc>https://blog.yxwang.me/categories/courses/</loc>
-    <lastmod>2008-09-01T00:00:00+00:00</lastmod>
+    <loc>https://blog.yxwang.me/tags/courses/</loc>
+    <lastmod>2018-08-07T00:56:13-07:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://blog.yxwang.me/tags/courses/</loc>
-    <lastmod>2018-08-07T00:56:13-07:00</lastmod>
+    <loc>https://blog.yxwang.me/categories/courses/</loc>
+    <lastmod>2008-09-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -970,14 +970,14 @@
   </url>
   
   <url>
-    <loc>https://blog.yxwang.me/categories/featured/</loc>
-    <lastmod>2008-07-04T00:00:00+00:00</lastmod>
+    <loc>https://blog.yxwang.me/tags/featured/</loc>
+    <lastmod>2010-02-09T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://blog.yxwang.me/tags/featured/</loc>
-    <lastmod>2010-02-09T00:00:00+00:00</lastmod>
+    <loc>https://blog.yxwang.me/categories/featured/</loc>
+    <lastmod>2008-07-04T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -1146,13 +1146,13 @@
   </url>
   
   <url>
-    <loc>https://blog.yxwang.me/categories/life/</loc>
+    <loc>https://blog.yxwang.me/tags/life/</loc>
     <lastmod>2018-10-30T21:35:07-07:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://blog.yxwang.me/tags/life/</loc>
+    <loc>https://blog.yxwang.me/categories/life/</loc>
     <lastmod>2018-10-30T21:35:07-07:00</lastmod>
     <priority>0</priority>
   </url>
@@ -1258,13 +1258,13 @@
   </url>
   
   <url>
-    <loc>https://blog.yxwang.me/categories/meta/</loc>
+    <loc>https://blog.yxwang.me/tags/meta/</loc>
     <lastmod>2012-12-31T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://blog.yxwang.me/tags/meta/</loc>
+    <loc>https://blog.yxwang.me/categories/meta/</loc>
     <lastmod>2012-12-31T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -1353,13 +1353,13 @@
   </url>
   
   <url>
-    <loc>https://blog.yxwang.me/categories/programming/</loc>
+    <loc>https://blog.yxwang.me/tags/programming/</loc>
     <lastmod>2013-02-14T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://blog.yxwang.me/tags/programming/</loc>
+    <loc>https://blog.yxwang.me/categories/programming/</loc>
     <lastmod>2013-02-14T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -1413,13 +1413,13 @@
   </url>
   
   <url>
-    <loc>https://blog.yxwang.me/categories/robotics/</loc>
+    <loc>https://blog.yxwang.me/tags/robotics/</loc>
     <lastmod>2018-08-07T00:56:13-07:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://blog.yxwang.me/tags/robotics/</loc>
+    <loc>https://blog.yxwang.me/categories/robotics/</loc>
     <lastmod>2018-08-07T00:56:13-07:00</lastmod>
     <priority>0</priority>
   </url>
@@ -1577,13 +1577,13 @@
   </url>
   
   <url>
-    <loc>https://blog.yxwang.me/categories/tooling/</loc>
+    <loc>https://blog.yxwang.me/tags/tooling/</loc>
     <lastmod>2014-02-13T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://blog.yxwang.me/tags/tooling/</loc>
+    <loc>https://blog.yxwang.me/categories/tooling/</loc>
     <lastmod>2014-02-13T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
