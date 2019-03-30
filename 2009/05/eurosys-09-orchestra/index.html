@@ -4,13 +4,7 @@
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-    <meta name="description" content="吴总讲的一篇paper，题目是Orchestra: Intrusion Detection Using Parallel Execution and Monitoring of Program Variants in User-Space，发在EuroSys &lsquo;09上，UCI的。
-这篇paper提出了一种检测栈上buffer overflow攻击的方法。想法很有意思，它运行两个孪生进程，这两个进程的唯一的区别就是一个进程的栈往上长而另一个进程的栈往下长，这样在大多数情况下如果没有出现buffer overflow的问题的话那么两者的行为应该是一致的。
-栈的增长行为是由编译器控制的，作者修改了gcc的代码使之生成的代码的栈增长方向相反，关于这个编译器他们之间发过一篇paper在一个叫CATARS的workshop上，题目是Reverse stack execution in a multi-variant execution environment。
-“行为一致”的精确定义是两者的system call的调用方式、参数都一样，也就是说这里system call成了两个进程运行的synchronization point。如果某个点上两个进程调用的syscall不同或者调用参数不同就认为它已经被buffer overflow攻击了。
-整个monitor都是跑在user态的，主要利用了ptrace，使两者的行为尽可能的一致。这里要做的事情很多，比如要保证进程调用getpid()的得到返回值一样才能使得后面的其他系统调用的参数相同，又比如一个进程调用write写入文件时不能影响到另一个进程，此外还要保证两个进程获得的file descriptor、随机数、时间、信号等信息都相同，甚至在进程创建子进行的时候也要保证所有子线程关系的同构。
-用ptrace能够解决上面的大多数问题，但还有一些open problem以及false positive。如这篇paper无法解决进程用MAP_SHARED方式打开一个文件并修改的情况，尽管作者说这种mmap的用例很少见；此外由于两个进程的同步并不是原子性的，中间可能被第三方的程序干扰（比如进程A读入某个文件开头后，该文件被其他进程修改，进程B再读取就和进程A读到的不一样了），这就造成了false positive；另外由于无法截取rdtsc指令的使用，也就无法保证它们的返回值一样，也可能引起另一种false positive。
-感觉这个东东想法不错，但是没什么实用性，工程量也很大。">
+    <meta name="description" content="">
     <meta name="author" content="zellux">
 
     <title> EuroSys 09 - Orchestra &middot; Aiur · Zellux 的博客 </title>

@@ -4,14 +4,7 @@
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-    <meta name="description" content="编译 不安装图形界面： 修改sim/Makefile，把前三行非注释部分用#注释掉，变成
-# GUIMODE ... # TKLIB ... # TKINC ...  保存后运行 make
-图形界面 安装Tcl/Tk库  Redhat 9： 可以在Redhat菜单-&gt;System Settings-&gt;Add/Remove Applications中添加X Software Development，根据提示载入相关镜像文件。 然后在 sim 目录下运行 make
- Arch Linux： 有包管理机制的发行版直接用相关软件安装（比如 Arch 中 pacman -S tcl tk），注意安装好以后生成的动态链接库可能带有版本号（比如 libtcl8.5.so libtk8.5.so）
-  具体版本号通过 pacman -Ql tcl tk | grep &#39;.so&#39; 查得
-接着只要修改Makefile中的TKLIBS参数，或者用ln建个链接即可
- Ubuntu 由于ubuntu默认没有lex词法分析工具，在编译时需要先安装flex：sudo apt-get install flex  图形界面和Arch类似 sudo apt-get install tcl8.5-dev tk8.5-dev tcl8.5 tk8.5
-然后修改 Makefile">
+    <meta name="description" content="">
     <meta name="author" content="zellux">
 
     <title> ICS Lab4 经验 &middot; Aiur · Zellux 的博客 </title>

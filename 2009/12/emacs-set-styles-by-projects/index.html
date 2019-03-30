@@ -4,10 +4,7 @@
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-    <meta name="description" content="我的Emacs配置里C语言默认的缩进风格是用4个空格，最近要修改Chromium的代码，而Google的C/C&#43;&#43;风格统一为2个空格缩进，所以改代码的时候要把c-basic-offset设置为2。这样在不同项目间切换的时候很不方便。
-在stackoverflow上发帖求助后发现了Emacs 23.1一个很好用的新功能，Per-Directory Local Variables，只需要在项目主目录下放一个.dir-locals.el文件，里面设置该项目特有的变量值，就能应用到整个项目了。
-以我的Chromium为例，Google已经提供了一份C/C&#43;&#43;风格的配置，只需要在~/chromius/src/.dir-locals.el里把google-c-style常量粘贴进去即可。另外我不知道为啥加上c-offsets-alist那段后Emacs缩进会变得很奇怪，所以我把它删了。附修改后的.dir-locals.el
-((c&#43;&#43;-mode . ((c-recognize-knr-p . nil) (c-enable-xemacs-performance-kludge-p . t) ; speed up indentation in XEmacs (c-basic-offset . 2) (indent-tabs-mode . nil) (c-comment-only-line-offset . 0) (c-hanging-braces-alist . ((defun-open after) (defun-close before after) (class-open after) (class-close before after) (namespace-open after) (inline-open after) (inline-close before after) (block-open after) (block-close . c-snug-do-while) (extern-lang-open after) (extern-lang-close after) (statement-case-open after) (substatement-open after))) (c-hanging-colons-alist . ((case-label) (label after) (access-label after) (member-init-intro before) (inher-intro))) (c-hanging-semi&amp;comma-criteria .">
+    <meta name="description" content="">
     <meta name="author" content="zellux">
 
     <title> Emacs 中对不同项目指定不同的风格 &middot; Aiur · Zellux 的博客 </title>

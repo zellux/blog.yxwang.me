@@ -4,9 +4,7 @@
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-    <meta name="description" content="这几天看KVM代码的时候看到里面有个内联汇编的语法很陌生（下面的代码截取了部分内联汇编片段）：
-asm ( &quot;mov %c[rax](%3), %%rax \n\t&quot; &quot;mov %c[rbx](%3), %%rbx \n\t&quot; &quot;mov %c[rdx](%3), %%rdx \n\t&quot; &quot;mov %c[rsi](%3), %%rsi \n\t&quot; &quot;mov %c[rdi](%3), %%rdi \n\t&quot; : &quot;=q&quot; (fail) : &quot;r&quot;(vcpu-&gt;launched), &quot;d&quot;((unsigned long)HOST_RSP), &quot;c&quot;(vcpu), [rax]&quot;i&quot;(offsetof(struct kvm_vcpu, regs[VCPU_REGS_RAX])), [rbx]&quot;i&quot;(offsetof(struct kvm_vcpu, regs[VCPU_REGS_RBX])), [rcx]&quot;i&quot;(offsetof(struct kvm_vcpu, regs[VCPU_REGS_RCX])) : &quot;cc&quot;, &quot;memory&quot; );  stackoverflow上问了下才知道这是gcc的operand substitution语法，%c后面跟上常量名，就能在内联汇编中使用这个常量了。
-以这段代码为例，vcpu是struct kvm_vcpu类型，[rax]&ldquo;i&rdquo;(offsetof(struct kvm_vcpu, regs[VCPU_REGS_RAX])这句话把vcpu-&gt;regs[VCPU_REGS_RAX]相对于vcpu的偏移赋值给了rax这一常量。接下来回到第一行mov %crax, %%eax，%c[rax]等于前面得到的偏移量，加上vcpu并取值后就是vcpu-&gt;regs[VCPU_REGS_RAX]中保存的值了，这个指令会把这个值保存在%rax寄存器中，从而完成了vcpu的rax寄存器恢复工作。">
+    <meta name="description" content="">
     <meta name="author" content="zellux">
 
     <title> gcc 内联汇编中 %c 的用法 &middot; Aiur · Zellux 的博客 </title>

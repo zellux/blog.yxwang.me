@@ -4,16 +4,7 @@
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-    <meta name="description" content="这个Lab是要自己实现一个malloc函数，要求内存利用率和速度尽可能高。 用红黑树的版本最后得分是97/100，没有针对测试数据作任何优化，据说可以改到100/100，不过95分以上就满分了我也懒得再改了。
-这个Lab的重点在可用内存的管理上。关于数据的组织，似乎有两种比较常见的形式（我不知道的就不算进来了，下同 =_=）。一是slab/buddy系统，就是书上讲的segregated list；还有一种用二叉树实现，这个lab我用了二叉树。
-第一种方法对提高性能很有帮助，但是利用率方面就比较有限了。而这个lab似乎提高性能比较容易，难点在于利用率的提高。
-二叉树方面，也有两种：平衡二叉搜索树（AVL树、红黑树等），字典树（Trie, 似乎也叫Radix tree）
-这些数据结构都比较经典，很多书上都有现成的代码，网上也有一堆，拿来改一下就行了（注意算法导论上的红黑树的left-rotate是有bug的，见勘误表）。
-另外还有个优化，树的结点要保存很多数据，比如父结点、左右结点、前后结点（考虑到同一大小的块的存在），红黑树中还需要保存一个颜色值（当然这个值可以保存在header中）。如果所有的空结点都以这种形式保存的话，势必对利用率影响很大。
-所以建议另外维护一个block size相对较小的（比如小于128字节）的list，把小于这个值的空闲块都放到那个list里。
-差不多就这样了，思路还是蛮简单的，就是实现起来很恶心。
-另外做的时候还可以考虑考虑多线程的情况下这个malloc的表现会如何。
-感觉下学期的几个lab，Lab 4 5 7都和优化程序性能有关，颗粒度不断提高，从最底层的汇编指令，到语言级别的unrolling、splitting，直到现在和具体语言无关的算法层次，对写高效代码的帮助蛮大的。">
+    <meta name="description" content="">
     <meta name="author" content="zellux">
 
     <title> ICS Lab 7 数据结构相关 &middot; Aiur · Zellux 的博客 </title>

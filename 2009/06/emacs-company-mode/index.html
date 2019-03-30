@@ -4,12 +4,7 @@
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-    <meta name="description" content="Company的全写是complete everything，它只是一个补全的前端，会自动调用semantic等后端插件。
-新版的Company可以从它的官方主页(http://nschum.de/src/emacs/company-mode/)下载到，也可以从ELPA下载安装这个插件。
-使用这个插件时只要在.emacs中加入
-(add-to-list &#39;load-path &quot;/path/to/company&quot;) (autoload &#39;company-mode &quot;company&quot; nil t)  然后Emacs中使用M-x company-mode启动company模式即可。
-具体的按键可以在company.el中看到
-(defvar company-active-map (let ((keymap (make-sparse-keymap))) (define-key keymap &quot;\e\e\e&quot; &#39;company-abort) (define-key keymap &quot;\C-g&quot; &#39;company-abort) (define-key keymap (kbd &quot;M-n&quot;) &#39;company-select-next) (define-key keymap (kbd &quot;M-p&quot;) &#39;company-select-previous) (define-key keymap (kbd &quot;&quot;) &#39;company-select-next) (define-key keymap (kbd &quot;&quot;) &#39;company-select-previous) (define-key keymap [down-mouse-1] &#39;ignore) (define-key keymap [down-mouse-3] &#39;ignore) (define-key keymap [mouse-1] &#39;company-complete-mouse) (define-key keymap [mouse-3] &#39;company-select-mouse) (define-key keymap [up-mouse-1] &#39;ignore) (define-key keymap [up-mouse-3] &#39;ignore) (define-key keymap &quot;\C-m&quot; &#39;company-complete-selection) (define-key keymap &quot;\t&quot; &#39;company-complete-common) (define-key keymap (kbd &quot;&quot;) &#39;company-show-doc-buffer) (define-key keymap &quot;\C-w&quot; &#39;company-show-location) (define-key keymap &quot;\C-s&quot; &#39;company-search-candidates) (define-key keymap &quot;\C-\M-s&quot; &#39;company-filter-candidates) (dotimes (i 10) (define-key keymap (vector (&#43; (aref (kbd &quot;M-0&quot;) 0) i)) `(lambda () (interactive) (company-complete-number ,i)))) keymap) &quot;Keymap that is enabled during an active completion.">
+    <meta name="description" content="">
     <meta name="author" content="zellux">
 
     <title> Company-mode: Emacs 自动补全 &middot; Aiur · Zellux 的博客 </title>

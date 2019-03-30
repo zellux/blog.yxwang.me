@@ -4,10 +4,7 @@
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-    <meta name="description" content="Fishing reading Xen 内存管理综述 and have a superficial look on Xen source code.
- 在Debian x86-64上编译并安装了Xen 3.3.0，安装需要的几个包zlib1g-dev python-dev libncurses-dev libssl-dev libx11-dev bridge-utils iproute gawk gettext
-  3.interrupt gate的注册
-[arch/x86/traps.c] set_swint_gate(TRAP_int3,&amp;int3); /* usable from all privileges */ set_swint_gate(TRAP_overflow,&amp;overflow); /* usable from all privileges */ set_intr_gate(TRAP_bounds,&amp;bounds); set_intr_gate(TRAP_invalid_op,&amp;invalid_op); set_intr_gate(TRAP_no_device,&amp;device_not_available); set_intr_gate(TRAP_copro_seg,&amp;coprocessor_segment_overrun); set_intr_gate(TRAP_invalid_tss,&amp;invalid_TSS);  以page_fault为例 [arch/x86/x86_64/entry.s] ENTRY(handle_exception) SAVE_ALL handle_exception_saved: testb $X86_EFLAGS_IF&gt;&gt;8,UREGS_eflags&#43;1(%rsp) jz exception_with_ints_disabled sti 1: movq %rsp,%rdi movl UREGS_entry_vector(%rsp),%eax leaq exception_table(%rip),%rdx GET_CURRENT(%rbx) PERFC_INCR(PERFC_exceptions, %rax, %rbx) callq *(%rdx,%rax,8) testb $3,UREGS_cs(%rsp) jz restore_all_xen leaq VCPU_trap_bounce(%rbx),%rdx movq VCPU_domain(%rbx),%rax testb $1,DOMAIN_is_32bit_pv(%rax) jnz compat_post_handle_exception testb $TBF_EXCEPTION,TRAPBOUNCE_flags(%rdx) jz test_all_events call create_bounce_frame movb $0,TRAPBOUNCE_flags(%rdx) jmp test_all_events">
+    <meta name="description" content="">
     <meta name="author" content="zellux">
 
     <title> Xen 学习笔记 2009-02-09 &middot; Aiur · Zellux 的博客 </title>

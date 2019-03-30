@@ -4,9 +4,7 @@
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-    <meta name="description" content="The Definitive Guide to Xen Hypervisor 中第二章的例子，make 成功后运行 xen create domain_config，报错
-Error: (2, &#39;Invalid kernel&#39;, &#39;xc_dom_compat_check: guest type xen-3.0-x86_32 not supported by xen kernel, sorryn&#39;)  Google 之后发现是虚拟机类型设置的问题，运行 xm info 可以看到
-xen_caps : xen-3.0-x86_32p  末尾的 p 表示 Xen 内核开启了 PAE 模式，所以载入的 kernel 也必须开启 PAE，在bootstrap.x86_32.S 中加入 PAE=yes 选项即可。">
+    <meta name="description" content="">
     <meta name="author" content="zellux">
 
     <title> 第一个 testkernel 在 Xen 中的载入 &middot; Aiur · Zellux 的博客 </title>

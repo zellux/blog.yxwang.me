@@ -4,11 +4,7 @@
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-    <meta name="description" content="有些测试比较耗时间，而且很少被修改，如果能在测试的时候跳过它们就能让 spec 快不少。
-跳过测试的方法很简单，spec 的 describe 方法可以给对应的测试加上标签，例如
-describe SalesController, :slow =&gt; true do # specs end  接下来只要在 spec/spec_helper.rb 中声明跳过这个标签即可：
-RSpec.configure do |config| config.filter_run_excluding :slow =&gt; true end  与 filter_run_excluding 相反的是 filter_run，指定会被运行的标签，不包含在这个列表中的测试将被忽略。
-参考：http://www.dixis.com/?p=283">
+    <meta name="description" content="">
     <meta name="author" content="zellux">
 
     <title> rspec 跳过指定测试 &middot; Aiur · Zellux 的博客 </title>

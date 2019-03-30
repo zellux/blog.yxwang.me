@@ -4,10 +4,7 @@
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-    <meta name="description" content="Linux 2.4.18的linux/linkage.h文件定义了若干相关的宏
-#define SYMBOL_NAME(X) X #ifdef __STDC__ #define SYMBOL_NAME_LABEL(X) X##: #else #define SYMBOL_NAME_LABEL(X) X/**/: #endif #define __ALIGN .align 16,0x90 #define __ALIGN_STR &quot;.align 16,0x90&quot; #define ALIGN __ALIGN #define ALIGN_STR __ALIGN_STR #define ENTRY(name) .globl SYMBOL_NAME(name); ALIGN; SYMBOL_NAME_LABEL(name)  用ENTRY(name)就能定义函数了。后来发现Flux OSKit中本来就提供了类似功能的宏，定义在inc/asm.h中。
-使用的时候需要再写一个c语言的wrapper function（至少2.4.18里面是这么做的）
-asmlinkage void ret_from_fork(void) __asm__(&quot;ret_from_fork&quot;);  ">
+    <meta name="description" content="">
     <meta name="author" content="zellux">
 
     <title> 汇编文件中导出函数符号 &middot; Aiur · Zellux 的博客 </title>

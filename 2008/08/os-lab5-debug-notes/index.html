@@ -4,11 +4,7 @@
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-    <meta name="description" content="还算顺利，不过这个lab蛮无聊的，等有空了把syscall改成类似linux的做法，单一中断号&#43;寄存器选择syscall。
- 最花时间的一个bug是ls返回值没有改成应用程序数，结果一开始一直以为是brk系统调用没写好，最后才发现问题出在这么小的地方。
- brk的逻辑还不是很清楚，尽管通过了简单的测试，但是debug输出的信息显示brk增长的很快，经常是一个页一个页涨的，看来还得查下brk的具体行为。
- 写了个比MAGIC_BREAK好用一点的宏，因为用户态的程序都是按二进制读入的，Simics无法得到函数信息（函数名、当前行数等），利用C99的宏写了个新的INFO_BREAK
-  #define INFO_BREAK \ do { \ lprintf_kern(&quot;break in %s:%d&quot;, __FUNCTION__, __LINE__); \ MAGIC_BREAK; \ } while (0) \  ">
+    <meta name="description" content="">
     <meta name="author" content="zellux">
 
     <title> OS Lab 5 Debugging Notes &middot; Aiur · Zellux 的博客 </title>

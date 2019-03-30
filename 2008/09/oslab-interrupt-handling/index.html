@@ -4,15 +4,7 @@
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-    <meta name="description" content="1. 准备工作 在开始分析Support Code之前，先配置下我们的Source Insight，使它能够支持.s文件的搜索。
-在Options-&gt;Document Options-&gt;Document Types中选择x86 Asm Source File，在File fileter中增加一个.s，变成.asm;.inc;.s 然后在Project-&gt;Add and Remove Project Files中重新将整个oslab的目录加入，这样以后进行文本搜索时.s文件也不会漏掉了。
-2. Source Insight使用 接下来简单分析下内核启动的过程，在浏览代码的过程中可以迅速的掌握Source Insight的使用技巧。
-lib/multiboot /multiboot.s完成了初始化工作，可以看到其中一句call EXT(multiboot_main)调用了C函数multiboot_main，使用ctrl&#43;/搜索包含multiboot_main的所有文件，最终base_multiboot_main.c中找到了它的定义。依次进行cpu、内存的初 始化，然后开启中断，跳转到kernel_main函数，也是Lab1中所要改写的函数之一。另外 在这里可以通过ctrl&#43;单击或者ctrl&#43;=跳转到相应的函数定义处，很方便。
-3. irq处理初始化工作 来看下Lab 1的重点之一，irq的处理。跟踪multiboot_main-&gt;base_cpu_setup-&gt;base_cp u_init-&gt;base_irq_init，可以看到这行代码
-gate_init(base_idt, base_irq_inittab, KERNEL_CS);  继续使用ctrl&#43;/找到base_irq_inittab的藏身之处：base_irq_inittab.s
-4. base_irq_inittab.s 这个汇编文件做了不少重复性工作，方便我们在c语言级别实现各种handler。
-GATE_INITTAB_BEGIN(base_irq_inittab) /* irq处理函数表的起始，还记得jump table 吗？ */ MASTER(0, 0) /* irq0 对应的函数 */  来看看这个MASTER(0, 0)宏展开后是什么样子：
-#define MASTER(irq, num) GATE_ENTRY(BASE_IRQ_MASTER_BASE &#43; (num), 0f, ACC_PL_K|ACC_INTR_GATE) ; P2ALIGN(TEXT_ALIGN) ; 0: ; pushl $(irq) /* error code = irq vector */ ; pushl $BASE_IRQ_MASTER_BASE &#43; (num) /* trap number */ ; pusha /* save general registers */ ; movl $(irq),%ecx /* irq vector number */ ; movb $1 &lt;&lt; num,%dl /* pic mask for this irq */ ; jmp master_ints  依次push irq号，trap号（0x20&#43;irq号），通用寄存器（eax ecx等）入栈，把irq号保 存到ecx寄存器，然后跳转到master_ints，master_ints是所有master interrupts公用 的代码。">
+    <meta name="description" content="">
     <meta name="author" content="zellux">
 
     <title> OSLab 之中断处理 &middot; Aiur · Zellux 的博客 </title>

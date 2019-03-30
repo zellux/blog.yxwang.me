@@ -4,18 +4,7 @@
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-    <meta name="description" content="趁还在编译内核的时候把以前写过的东西都转过来，今年寒假读的 (SOSP &lsquo;97)
-Disco: running commodity operating systems on scalable multiprocessors 很早的一篇paper，发表的第二年Rosenblum就创办了VMWare。这篇paper介绍了一个跑在 FLASH机器上的虚拟机Disco，FLASH的架构是实验性质的cache coherent non-uniform memory architechure(ccNUMA)。
-传统的VMM在实现上主要有三个问题
- overhead，例如特权指令需要由VMM模拟 资源管理，缺乏对资源配置的细粒度的了解，导致资源分布不均（如调度一个没有价值的计算任务） 通讯和共享，不同虚拟机是不是应该简单的看成是享有相同硬件资源的完全独立的操作系统？  实现细节 1. 虚拟CPU Disco虚拟CPU时是把指令放到物理CPU上直接执行的。当调度到某个虚拟CPU时，Disco就把物理机的寄存器设置为虚拟机的寄存器并跳转到相应的PC。
-直接执行的好处在于大多数操作能获得和在真机上跑一样的效率，而难点在于处理不能直接放到真机上运行的指令，如修改tlb，访问物理内存等。
-Disco为每个虚拟CPU记录了一个类似于传统操作系统中process table entry的数据结构。为了模拟特权指令，Disco还在这个数据结构中维持了虚拟CPU的特权寄存器和tlb的内容。
-在MIPS处理器上，Disco运行在kernel mode掌握着对硬件的完全控制；控制器交给虚拟机的操作系统时，Disco把CPU置为supervisor mode；当进入user mode时取消。Supervisor模式允许操作系统访问受保护的内存区域(supervisor segment)，但仍不能执行特权指令，也不能访问物理内存。诸如page fault的trap发生时，vmm会捕获到这个异常，修改相应的特权寄存器并跳转到虚拟机的trap vector。
-2.虚拟内存 Disco增加了一层物理地址到机器地址的转换。虚拟机使用从0开始的物理地址，大小和为虚拟机的内存相等，Disco把这些物理地址映射到了 FLASH的40位机器地址上。这种映射的实现借助于MIPS处理器的software-reloaded TLB，当操作系统尝试在TLB中插入一个virtual-to-physical的映射时，Disco会把这里的physical address改成对应的machine address，这样之后通过这条TLB记录的地址访问就不需要再经过VMM的处理了，没有额外的overhead。
-为了方便计算TLB地址，Disco为每个虚拟机记录了一个pmap数据结构，每个pmap结构对应着虚拟机的一个物理页。pmap包含了一个指向 机器内存的引用，以及指向虚拟地址的映射（虚拟地址可能有多个，原文中用了复数形式），这主要用于页面被VMM回收时TLB的重置。另外MIPS处理器为 每个TLB记录标记了一个地址空间标识符（ASID, address space identifier），用来防止context switch时不必要的TLB刷新。Disco为了简单化处理，就在物理CPU被调度为另一个虚拟CPU时刷新TLB，这样ASID就能直接使用虚拟机提 供的了。
-这样的处理带来了性能问题，由于TLB在虚拟CPU切换时会被刷新，带来了额外的TLB miss，而TLB miss由于需要被模拟，它的代价很大。为了减少这种性能影响，Disco维持了一个virtual-to-machine的二级软TLB，TLB miss发生的时候首先查看软TLB有没有相关的记录，如果找不到再交给虚拟机上的操作系统去处理。这种处理的影响就是虚拟机所看到的TLB会比实际 CPU的TLB大很多。
-3. NUMA 内存管理 不怎么熟悉NUMA，这部分先粗读了，大致思想是通过动态的页面转移和复制维持locality，从而避免remote cache miss。
-4. 虚拟IO设备 增加特殊的设备驱动是最清晰的实现方法，每个Disco设备都定义了一个monitor call，供设备驱动传参调用。对于支持DMA操作的设备，Disco也需要截获这些DMA请求并转换为相应的machine address。对于仅有一个虚拟机访问的设备，Disco只要保证访问的排外性并翻译DMA请求即可，而不需要虚拟IO资源。截获所有DMA操作的一个 好处是Disco可以在虚拟机间共享磁盘和内存资源。">
+    <meta name="description" content="">
     <meta name="author" content="zellux">
 
     <title> SOSP 97 - Disco &middot; Aiur · Zellux 的博客 </title>

@@ -4,14 +4,7 @@
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-    <meta name="description" content="网上找了不少设置方法，终于翻出来一个可行的，和大家分享下。
-1. 安装 corkscrew ArchLinux 和 Ubuntu 的源里就有，也可以从 http://www.agroman.net/corkscrew/ 下载源码编译一个。
-2. 修改 ~/.ssh/config Host gitproxy User git Hostname ssh.github.com Port 443 ProxyCommand corkscrew proxy.example.com 3128 %h %p IdentityFile /home/username/.ssh/id_rsa  修改其中的 proxy.example.com 和 3128 为代理 IP 和端口，如果代理需要帐号密码，就在 ProxyCommand 这一行的最后加上密码文件，内容为*用户名:密码*。
-参数 IdentitiFile 指定相应帐号的私钥文件地址。
-另外 @cyfdecyf 同学指出只要把这里的 Host 改成 github.com，就可以直接用 git@github.com:user/repository 访问 GitHub 了。
-3. 使用 git@gitproxy 访问 GitHub 例如要把 foo/bar.git 拖下来，执行 git clone git@gitproxy:foo/bar.git 即可。
-原文地址：http://www.wetware.co.nz/blog/2010/03/cant-access-github-behind-proxy-or-firewall/
-更新： 由于 GitHub 现在支持 HTTPS 协议了，所以更简单的方法是使用 GitHub 提供的 HTTPS 地址，然后用 git config --add http.">
+    <meta name="description" content="">
     <meta name="author" content="zellux">
 
     <title> 利用 HTTPS 代理访问 GitHub &middot; Aiur · Zellux 的博客 </title>

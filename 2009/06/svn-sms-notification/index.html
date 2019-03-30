@@ -4,10 +4,7 @@
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-    <meta name="description" content="主要功能：开发人员执行svn commit后自动将开发人id、修订版本号和日志内容通过短信的方式通知所有人。
-首先修改svn服务器对应项目目录hook/post-commit文件
-#!/bin/bash export LANG=en_US.utf8 REPOS=&quot;$1&quot; REV=&quot;$2&quot; cd /home/svn/repositories/sebank/hooks ./sms.py commit $REPOS $REV  注意别忘了这里的export LANG，我一开始测试的时候发现中文一直有乱码，后来才意识到shell的环境变量里缺这个。 hook/sms.py
-#!/usr/bin/python # -*- coding: utf-8 -*- import sys, urllib, os from subprocess import * user = &#39;your mobile number&#39; pword = &#39;fetion password&#39; phone = [ &#39;13764444444&#39;, &#39;13813333333&#39;, ] repo = sys.argv[2] rev = sys.argv[3] cmdlog = &#39;svnlook log -r %s %s&#39;%(rev, repo) cmdauthor = &#39;svnlook author -r %s %s&#39;%(rev, repo) log = Popen(cmdlog, stdout=PIPE, shell=True).">
+    <meta name="description" content="">
     <meta name="author" content="zellux">
 
     <title> SVN 更新短信通知脚本 &middot; Aiur · Zellux 的博客 </title>

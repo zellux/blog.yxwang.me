@@ -4,7 +4,7 @@
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-    <meta name="description" content="x86_64上不支持segment机制，Xen是通过页表机制来控制访问权限的，Xen及其相关数据驻留在0xffff8000 00000000 - 0xffff87ff ffffffff，也就是在原来的kernel space的低地址部分，而x86_32上驻留在最上面的。  [include/asm-x86/config.h] /* * Memory layout: * 0x0000000000000000 - 0x00007fffffffffff [128TB, 2^47 bytes, PML4:0-255] * Guest-defined use (see below for compatibility mode guests). * 0x0000800000000000 - 0xffff7fffffffffff [16EB] * Inaccessible: current arch only supports 48-bit sign-extended VAs. * 0xffff800000000000 - 0xffff803fffffffff [256GB, 2^38 bytes, PML4:256] * Read-only machine-to-phys translation table (GUEST ACCESSIBLE). * 0xffff804000000000 - 0xffff807fffffffff [256GB, 2^38 bytes, PML4:256] * Reserved for future shared info with the guest OS (GUEST ACCESSIBLE).">
+    <meta name="description" content="">
     <meta name="author" content="zellux">
 
     <title> Xen 学习笔记 2009-02-10 &middot; Aiur · Zellux 的博客 </title>

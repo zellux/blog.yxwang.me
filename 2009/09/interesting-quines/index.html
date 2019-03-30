@@ -4,10 +4,7 @@
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-    <meta name="description" content="Quine是指一类能生成自己的程序，例如下面这个C程序运行后就能把自己的源码完整的打印出来：
-char*f=&quot;char*f=%c%s%c;main() {printf(f,34,f,34,10);}%c&quot;; main(){printf(f,34,f,34,10);}  这类程序的构造方法计算理论导引或者其他相关的书籍中都有涉及，这里不再赘述。这个月看到几个Quine的变种，都挺有趣的。
-首先是sigfpe构造出来的三阶Quine，这是一个只有两行的Haskell程序：
-q a b c=putStrLn $ b &#43;&#43; [toEnum 10,&#39;q&#39;,&#39;(&#39;] &#43;&#43; show b &#43;&#43; [&#39;,&#39;] &#43;&#43; show c &#43;&#43; [&#39;,&#39;] &#43;&#43; show a &#43;&#43; [&#39;)&#39;] main=q &quot;q a b c=putStrLn $ b &#43;&#43; [toEnum 10,&#39;q&#39;,&#39;(&#39;] &#43;&#43; show b &#43;&#43; [&#39;,&#39;] &#43;&#43; show c &#43;&#43; [&#39;,&#39;] &#43;&#43; show a &#43;&#43; [&#39;)&#39;]&quot; &quot;def q(a,b,c):print b&#43;chr(10)&#43;&#39;q(&#39;&#43;repr(b)&#43;&#39;,&#39;&#43;repr(c)&#43;&#39;,&#39;&#43;repr(a)&#43;&#39;)&#39;&quot; &quot;def e(x) return 34.chr&#43;x&#43;34.chr end;def q(a,b,c) print b&#43;10.chr&#43;&#39;main=q &#39;&#43;e(b)&#43;&#39; &#39;&#43;e(c)&#43;&#39; &#39;&#43;e(a)&#43;&#39; &#39;&#43;10.">
+    <meta name="description" content="">
     <meta name="author" content="zellux">
 
     <title> 几个有趣的 Quine 变种 &middot; Aiur · Zellux 的博客 </title>

@@ -4,22 +4,7 @@
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-    <meta name="description" content="以前部署新机器时都要把一堆配置文件 scp 过去，今天折腾了下用 Git 统一管理这些配置文件。
-
-做起来很简单，创建一个 dotfiles 目录，把所有要同步的配置文件都放到这个目录下，并重命名去掉文件名开头的点，以免被 Git 忽略。写了一个脚本链接这些配置文件到 HOME 目录：
-
-#!/usr/bin/env ruby
-
-safe_mode = ARGV.include? &#39;--safe&#39;
-
-files = %w(zshrc tmux.conf gitconfig vimrc emacs gitignore_global LS_COLORS)
-files.each do |file|
-  unless safe_mode and File.exists?(&quot;#{ENV[&#39;HOME&#39;]}/.#{file}&quot;)
-    %x(ln -s -i -v $PWD/#{file} ~/.#{file})
-    puts &quot;.#{file} linked&quot; if safe_mode
-  end
-end
-">
+    <meta name="description" content="">
     <meta name="author" content="zellux">
 
     <title> 用 Git 管理命令行配置 &middot; Aiur · Zellux 的博客 </title>

@@ -4,14 +4,7 @@
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-    <meta name="description" content="博客最早用的是 wordpress，首页上提供的 Atom 源是 /feed/。迁移到 Octopress 后，Atom 源地址变成了 /atom.xml。在 Google Reader 里看到订阅 /feed/ 的读者还是有不少的，用默认的地址这些读者就收不到博客更新了。
-
-一个方法是改服务器的配置文件，以我之前使用的 nginx 为例，在相应站点的配置中增加一项 /feed/，把所有对它的访问重定向到 /atom.xml 即可：
-
-location = /feed/ {
-    rewrite ^(.*)$ http://blog.yxwang.me/atom.xml;
-}
-">
+    <meta name="description" content="">
     <meta name="author" content="zellux">
 
     <title> 为 Octopress 添加多个 Atom 地址 &middot; Aiur · Zellux 的博客 </title>

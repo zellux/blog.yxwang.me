@@ -4,10 +4,7 @@
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-    <meta name="description" content="BBS上的一个帖子，问题是
-def a(): def b(): x &#43;= 1 x = 1 print &quot;a: &quot;, x b() print &quot;b: &quot;, x def c(): def d(): x[0] = [4] x = [3] print &quot;c: &quot;, x[0] d() print &quot;d: &quot;, x[0]  运行a()会报UnboundLocalError: local variable &lsquo;x&rsquo; referenced before assignment 但是运行c()会正确地显示3和4。
-原因在于原因在于CPython实现closure的方式和常见的functional language不同，采用了flat closures实现。
-&ldquo;If a name is bound anywhere within a code block, all uses of the name within the block are treated as references to the current block.">
+    <meta name="description" content="">
     <meta name="author" content="zellux">
 
     <title> Python中inner function的binding处理 &middot; Aiur · Zellux 的博客 </title>
