@@ -15,7 +15,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.adcf086c1f059a87f5d683b251786185c0db7c1ec7f84cfd5542ca1d1c566d48.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -44,8 +44,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2009",
-    "datePublished": "2009-05-05 00:00:00 &#43;0000 UTC",
-    "dateModified" : "2009-05-05 00:00:00 &#43;0000 UTC",
+    "datePublished": "2009-05-06 00:00:00 &#43;0000 UTC",
+    "dateModified" : "2009-05-06 00:00:00 &#43;0000 UTC",
     "url" : "https://blog.yxwang.me/post/",
     "wordCount" : "0",
     "keywords" : [ "Blog" ]
@@ -79,6 +79,37 @@
 <div class="content">
   <div class="posts">
      
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2009/05/eurosys-09-orchestra/">EuroSys 09 - Orchestra</a></h2>
+      <span class="post-date">May 6, 2009</span>
+      
+      <span class="post-tags">
+	
+	#<a href="https://blog.yxwang.me/tags/computer-system">Computer System</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/eurosys">EuroSys</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/paper">Paper</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/security">Security</a>&nbsp;
+	
+      </span>
+      
+      
+      
+      <div class="summary">
+	吴总讲的一篇paper，题目是Orchestra: Intrusion Detection Using Parallel Execution and Monitoring of Program Variants in User-Space，发在EuroSys &lsquo;09上，UCI的。
+这篇paper提出了一种检测栈上buffer overflow攻击的方法。想法很有意思，它运行两个孪生进程，这两个进程的唯一的区别就是一个进程的栈往上长而另一个进程的栈往下长，这样在大多数情况下如果没有出现buffer overflow的问题的话那么两者的行为应该是一致的。
+栈的增长行为是由编译器控制的，作者修改了gcc的代码使之生成的代码的栈增长方向相反，关于这个编译器他们之间发过一篇paper在一个叫CATARS的workshop上，题目是Reverse stack execution in a multi-variant execution environment。
+“行为一致”的精确定义是两者的system call的调用方式、参数都一样，也就是说这里system call成了两个进程运行的synchronization point。如果某个点上两个进程调用的syscall不同或者调用参数不同就认为它已经被buffer overflow攻击了。
+整个monitor都是跑在user态的，主要利用了ptrace，使两者的行为尽可能的一致。这里要做的事情很多，比如要保证进程调用getpid()的得到返回值一样才能使得后面的其他系统调用的参数相同，又比如一个进程调用write写入文件时不能影响到另一个进程，此外还要保证两个进程获得的file descriptor、随机数、时间、信号等信息都相同，甚至在进程创建子进行的时候也要保证所有子线程关系的同构。
+用ptrace能够解决上面的大多数问题，但还有一些open problem以及false positive。如这篇paper无法解决进程用MAP_SHARED方式打开一个文件并修改的情况，尽管作者说这种mmap的用例很少见；此外由于两个进程的同步并不是原子性的，中间可能被第三方的程序干扰（比如进程A读入某个文件开头后，该文件被其他进程修改，进程B再读取就和进程A读到的不一样了），这就造成了false positive；另外由于无法截取rdtsc指令的使用，也就无法保证它们的返回值一样，也可能引起另一种false positive。
+感觉这个东东想法不错，但是没什么实用性，工程量也很大。
+	<a class="read-more" href="/2009/05/eurosys-09-orchestra/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
     <div class="post">
       <h2 class="post-title"><a href="https://blog.yxwang.me/2009/05/install-vmware-server-2-on-kernel-2-6-29/">在 Linux Kernel 2.6.29 上安装 VMware Server 2</a></h2>
       <span class="post-date">May 5, 2009</span>
@@ -350,36 +381,6 @@ flash存储单元分block和page，每个block有32/64个page，一个page有512
 如果为每个page都在内存中维护一份映射关系，会占用比较大的内存空间。以往的ftl的实现试图在page-level和block-level的映射中找平衡，但效果都不甚理想，尤其在随机写比较频繁时会产生比较严重的gc负荷，从而影响写操作的反应速度（因为预先清空的页面不足时需要先做gc）。这篇paper提出的DFTL可以比较好的减少gc的负荷，同时近需要很小的内存空间，前提是程序访问flash的locality很好。
 感觉DFTL的大致思想仿照了二级页表和TLB：flash上的一些page保存了page-level的映射，分散在整个flash中，在内存里面有一个block-level的映射表，记录了每个page-level映射表在flash中的地址。内存中的映射表相当于二级页表中的page directory，指向了flash上的page-level映射表（page table），另外内存中还有一个全局的page-level的映射表用于记录最近访问到的page的logical-to-physical映射，类似于TLB。这样如果程序locality很好的情况下大多数情况下只要查询这张表就行了。
 	<a class="read-more" href="/2009/04/asplos-09-dftl/">阅读全文 →</a>
-      </div>
-      
-    </div>
-    
-    <div class="post">
-      <h2 class="post-title"><a href="https://blog.yxwang.me/2009/04/xen-test-script/">Xen DomainU 自动测试脚本</a></h2>
-      <span class="post-date">Apr 7, 2009</span>
-      
-      <span class="post-tags">
-	
-	#<a href="https://blog.yxwang.me/tags/cerberus">Cerberus</a>&nbsp;
-	
-	#<a href="https://blog.yxwang.me/tags/computer-system">Computer System</a>&nbsp;
-	
-	#<a href="https://blog.yxwang.me/tags/python">Python</a>&nbsp;
-	
-	#<a href="https://blog.yxwang.me/tags/xen">Xen</a>&nbsp;
-	
-      </span>
-      
-      
-      
-      <div class="summary">
-	写完代码测试时重复的最多的步骤就是
- 编译，复制vmlinuz和xen.gz 重启VMware虚拟机 启动domainU xm create domU.conf 4. 开一个screen窗口attach到domainU的console xm console #domid 5. 在domainU中运行测试程序  于是写了个自动执行3 4 5的脚步，主要用到了熊熊推荐的pexpect，这东东很赞啊
-为了提高用户体验，读取domainU的启动信息时我采用的方法是读一行输出一行，读到结尾登陆字符时通过超时设置退出循环，这样可能效率比较低，不过测试脚本也不care这个了
-实际使用时碰到了另一个问题，domainU执行完自动命令后命令行会出现很严重的对齐问题，最后发现登陆后运行一次reset就可以了。
-脚本如下
-#!/usr/bin/python # Automatic test script for Xen DomainU # Author: zellux import pexpect, os conf = { 'login_name' : 'm2-vm2', 'domainU_name' : 'R900-DomU0', 'domainU_conf' : '/home/wyx/domU1', 'domainU_id' : '2', 'domainU_user' : 'wyx', 'domainU_passwd' : 'wyx', } # Command to be executed after domainU starts cmd = &quot;&quot;&quot; cd m2 cd reg_test .
-	<a class="read-more" href="/2009/04/xen-test-script/">阅读全文 →</a>
       </div>
       
     </div>

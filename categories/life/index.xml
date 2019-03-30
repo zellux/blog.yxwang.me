@@ -27,9 +27,7 @@
       <pubDate>Sun, 15 Oct 2017 00:09:39 +0000</pubDate>
       
       <guid>https://blog.yxwang.me/2017/10/smart-home-2/</guid>
-      <description>&lt;p&gt;装修了半年多，两个月前正式入住，可以开始好好折腾智能家居了。现在用的一些方案和之前写的&lt;a href=&#34;http://blog.yxwang.me/2017/03/remodel-smart-home/&#34;&gt;智能家居之计划篇&lt;/a&gt;差了不少，于是有了这篇博客聊聊现在的设计。这里直入主题，之前的计划篇里有更多的背景介绍。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;装修了半年多，两个月前正式入住，可以开始好好折腾智能家居了。现在用的一些方案和之前写的&lt;a href=&#34;http://blog.yxwang.me/2017/03/remodel-smart-home/&#34;&gt;智能家居之计划篇&lt;/a&gt;差了不少，于是有了这篇博客聊聊现在的设计。这里直入主题，之前的计划篇里有更多的背景介绍。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -38,9 +36,7 @@
       <pubDate>Tue, 21 Mar 2017 00:00:00 +0000</pubDate>
       
       <guid>https://blog.yxwang.me/2017/03/remodel-smart-home/</guid>
-      <description>&lt;p&gt;二月中旬开始装修房子，做了不少智能家居的研究，分享一下。坐标湾区，项目目前还在计划和购买阶段，欢迎拍砖，欢迎种草。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;二月中旬开始装修房子，做了不少智能家居的研究，分享一下。坐标湾区，项目目前还在计划和购买阶段，欢迎拍砖，欢迎种草。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -49,10 +45,7 @@
       <pubDate>Sun, 14 Jul 2013 00:00:00 +0000</pubDate>
       
       <guid>https://blog.yxwang.me/2013/07/dusit-thani-maldives/</guid>
-      <description>&lt;a data-fancybox=&#34;gallery&#34;  href=/images/2013-07/maldives-tree.jpg &gt;&lt;img src=/images/2013-07/maldives-tree.jpg  width=&#34;560&#34; /&gt;&lt;/a&gt;
-
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;a data-fancybox=&#34;gallery&#34;  href=https://blog.yxwang.me/images/2013-07/maldives-tree.jpg &gt;&lt;img src=https://blog.yxwang.me/images/2013-07/maldives-tree.jpg  width=&#34;560&#34; /&gt;&lt;/a&gt;</description>
     </item>
     
     <item>
@@ -73,9 +66,7 @@
 
 &lt;p&gt;Hulu 是这几个公司里唯一一个我没有找人内推而拿到面试机会的，也是面试体验最好的一个公司。Hulu 和 Twitter、Zynga、Foursquare 等公司一样，用了 &lt;a href=&#34;https://hire.jobvite.com/&#34;&gt;jobvite&lt;/a&gt; 接受和追踪职位申请。因为是申请的第一家公司，我在申请 Hulu 时的 cover letter 写得很详细，针对职位需求上的每一条都写了我的相关工作经验，这也许是最后能拿到面试机会的原因吧。其他公司的 cover letter 都写得很简单，短短两段就结束了。&lt;/p&gt;
 
-&lt;p&gt;Hulu 的第一轮电面和其他公司的有些不同。45 分钟里要做四个题。面试官提前十分钟发了一封邮件给我，上面有两段代码。第一段代码是一个检查两个字符串是否是 &lt;a href=&#34;http://en.wikipedia.org/wiki/Anagram&#34;&gt;anagram&lt;/a&gt; 的程序，写得很绕而且性能很差。面试官先问我这段代码的用途，然后问有什么方法优化，并要求我把代码写在 titanpad 上。接着他问了我第二段代码是做什么的。第二段代码也写得有点复杂，不过可以看出是一个检查有向图里面是否存在环的程序。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;Hulu 的第一轮电面和其他公司的有些不同。45 分钟里要做四个题。面试官提前十分钟发了一封邮件给我，上面有两段代码。第一段代码是一个检查两个字符串是否是 &lt;a href=&#34;http://en.wikipedia.org/wiki/Anagram&#34;&gt;anagram&lt;/a&gt; 的程序，写得很绕而且性能很差。面试官先问我这段代码的用途，然后问有什么方法优化，并要求我把代码写在 titanpad 上。接着他问了我第二段代码是做什么的。第二段代码也写得有点复杂，不过可以看出是一个检查有向图里面是否存在环的程序。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -98,9 +89,7 @@
 
 &lt;p&gt;电面都和 coding 有关，面试官会给你一个 Google Docs 链接，在电话里描述题目后要求你在 Google Docs 上写程序。题目的难度不高，两轮一共四题，都是对基本数据结构的操作，例如给在一个未排序的数组中去掉重复的数字，还有把一个有序数组转成一个平衡二叉搜索树，在一个已排序但有重复数字的数组中查找元素等。&lt;/p&gt;
 
-&lt;p&gt;第一轮电面聊天的时候还发现第一轮的面试官是在 ITA Software 做的。正好前几天用他们的产品 &lt;a href=&#34;http://matrix.itasoftware.com/&#34;&gt;Matrix Airfare Search&lt;/a&gt; 订到了低价的去土耳其的机票，过了一星期神奇的在面试的时候碰到了这个团队的工程师。当时一下子就兴奋起来，聊了不少和 Matrix 的有关的话题。这位面试官听说中国的机票也能用他们的平台查询，还挺吃惊的。他还提到他们原本想把计算任务放到 Google 内部的计算框架上，但是由于和合作方的合同的限制，没法把一些商业数据放到 Google 的平台里，只能继续用原有的计算引擎。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;第一轮电面聊天的时候还发现第一轮的面试官是在 ITA Software 做的。正好前几天用他们的产品 &lt;a href=&#34;http://matrix.itasoftware.com/&#34;&gt;Matrix Airfare Search&lt;/a&gt; 订到了低价的去土耳其的机票，过了一星期神奇的在面试的时候碰到了这个团队的工程师。当时一下子就兴奋起来，聊了不少和 Matrix 的有关的话题。这位面试官听说中国的机票也能用他们的平台查询，还挺吃惊的。他还提到他们原本想把计算任务放到 Google 内部的计算框架上，但是由于和合作方的合同的限制，没法把一些商业数据放到 Google 的平台里，只能继续用原有的计算引擎。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -121,9 +110,7 @@
 
 &lt;p&gt;先简单介绍下自己，国内硕士在读，明年毕业，没有牛 paper，也没参加过 ACM-ICPC 竞赛。在实验室做过内核、虚拟机和 Android 底层相关的研究工作，接过一些网页和移动开发的外包，2011 年开始在&lt;a href=&#34;http://tangcha.tc/&#34;&gt;字节社&lt;/a&gt;兼职负责后台开发。另外也经常上 &lt;a href=&#34;http://stackoverflow.com/users/111896/zellux&#34;&gt;Stackoverflow&lt;/a&gt; 和 &lt;a href=&#34;http://github.com/zellux&#34;&gt;GitHub&lt;/a&gt;。&lt;/p&gt;
 
-&lt;p&gt;这次决定直接申请美国的职位后，由于心里没底，不知道国外公司招聘的难度，所以一开始投了很多公司。几个大公司都找人内推或者直接投了，小公司也投了不少，比如 Foursquare、Path、Pinterest 和 Square 等都试了。当时甚至在手机上找了一圈应用，把可能涉及后端开发的应用都投了一遍。不过大多数公司都没给我安排面试，最后 Microsoft、Google、Facebook、Twitter 和 Hulu 这五家公司愿意给我面试机会。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;这次决定直接申请美国的职位后，由于心里没底，不知道国外公司招聘的难度，所以一开始投了很多公司。几个大公司都找人内推或者直接投了，小公司也投了不少，比如 Foursquare、Path、Pinterest 和 Square 等都试了。当时甚至在手机上找了一圈应用，把可能涉及后端开发的应用都投了一遍。不过大多数公司都没给我安排面试，最后 Microsoft、Google、Facebook、Twitter 和 Hulu 这五家公司愿意给我面试机会。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -140,9 +127,7 @@
 
 &lt;p&gt;但是当下了飞机，双脚踏在松山机场的时候，我才意识到这一次台湾之旅真的成行了。&lt;/p&gt;
 
-&lt;p&gt;台湾这次旅游其实对我心理上的积极意义很大，不知道怎么描述，大致就是一件事原以为离自己很远的事情从慢慢部署准备到突然意识到已经成功了的感觉。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;台湾这次旅游其实对我心理上的积极意义很大，不知道怎么描述，大致就是一件事原以为离自己很远的事情从慢慢部署准备到突然意识到已经成功了的感觉。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -164,9 +149,7 @@
 &lt;ul&gt;
 &lt;li&gt;办证需要的具体证件网上能搜到很多，这里就不细讲了。办理入台证需要的证件可以直接问旅行社，不同旅行社的要求可能会有细小的差异，比如在存款证明时间上。&lt;/li&gt;
 &lt;li&gt;微博上的 &lt;a href=&#34;http://e.weibo.com/go2tw&#34;&gt;@台湾自由行&lt;/a&gt; 前一阵子推荐几家大陆的低价入台证办理点，应该比较靠谱，可以参考下。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;/ul&gt;</description>
     </item>
     
     <item>
@@ -175,9 +158,7 @@
       <pubDate>Wed, 17 Oct 2012 00:00:00 +0000</pubDate>
       
       <guid>https://blog.yxwang.me/2012/10/travel-in-turkey/</guid>
-      <description>&lt;p&gt;刚从土耳其呆了两星期回来，我们的行程是 Istanbul（一天一晚），过夜大巴到 Göreme（三天两晚），过夜大巴到 Fethiye（三天两晚），过夜大巴到 Bursa（一天一晚），下午的轮船回 Istanbul（四天三晚）。趁着记忆还新鲜，写一点土耳其旅游相关的 tips。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;刚从土耳其呆了两星期回来，我们的行程是 Istanbul（一天一晚），过夜大巴到 Göreme（三天两晚），过夜大巴到 Fethiye（三天两晚），过夜大巴到 Bursa（一天一晚），下午的轮船回 Istanbul（四天三晚）。趁着记忆还新鲜，写一点土耳其旅游相关的 tips。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -186,9 +167,7 @@
       <pubDate>Mon, 05 Dec 2011 00:00:00 +0000</pubDate>
       
       <guid>https://blog.yxwang.me/2011/12/zvt-notes/</guid>
-      <description>&lt;p&gt;一直在国服大师组混，最让我头疼，同时研究的也最多得对战就是 ZvT 了。这里写一点自己关于 ZvT 的心得，欢迎探讨。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;一直在国服大师组混，最让我头疼，同时研究的也最多得对战就是 ZvT 了。这里写一点自己关于 ZvT 的心得，欢迎探讨。&lt;/p&gt;</description>
     </item>
     
     <item>

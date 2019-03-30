@@ -15,7 +15,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.adcf086c1f059a87f5d683b251786185c0db7c1ec7f84cfd5542ca1d1c566d48.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -44,8 +44,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2008",
-    "datePublished": "2008-09-25 00:00:00 &#43;0000 UTC",
-    "dateModified" : "2008-09-25 00:00:00 &#43;0000 UTC",
+    "datePublished": "2008-10-13 00:00:00 &#43;0000 UTC",
+    "dateModified" : "2008-10-13 00:00:00 &#43;0000 UTC",
     "url" : "https://blog.yxwang.me/post/",
     "wordCount" : "0",
     "keywords" : [ "Blog" ]
@@ -79,6 +79,36 @@
 <div class="content">
   <div class="posts">
      
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2008/10/erlang-hello-world/">Erlang的Hello World：一个计数程序</a></h2>
+      <span class="post-date">Oct 13, 2008</span>
+      
+      <span class="post-tags">
+	
+	#<a href="https://blog.yxwang.me/tags/distributed-system">Distributed System</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/erlang">Erlang</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/programming">Programming</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/acm-queue">acm queue</a>&nbsp;
+	
+      </span>
+      
+      
+      
+      <div class="summary">
+	acm queue 9月的杂志的主题是The Concurrency Problem，力推了Erlang这个语言，其中有篇文章简单的介绍了下这个message-oriented语言。
+查了下这个名字的读法，正确的读法应该是air-lang，这里元音a的发音和bang中的a一样。
+文章中的第一个程序就有点令人费解，主要原因在于Erlang的语法和一般的imperative language差别很大，和functional language比较类似，但是本质上也有很大的不同。
+以Java的一个计数程序为例
+// A shared counter. public class Sequence { private int nextVal = 0; // Retrieve counter and increment. public synchronized int getNext() { return nextVal++; } // Re-initialize counter to zero. public synchronized void reset() { nextVal = 0; } }  这个程序的功能不用多说了，一个同步的计数程序。它的Erlang翻译版的代码为
+-module(sequence1). -export([make_sequence/0, get_next/1, reset/1]). % Create a new shared counter. make_sequence() -&gt; spawn(fun() -&gt; sequence_loop(0) end). sequence_loop(N) -&gt; receive {From, get_next} -&gt; From !
+	<a class="read-more" href="/2008/10/erlang-hello-world/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
     <div class="post">
       <h2 class="post-title"><a href="https://blog.yxwang.me/2008/09/calling-do_console_io-from-domainu/">DomainU 中调用 do_console_io</a></h2>
       <span class="post-date">Sep 25, 2008</span>
@@ -327,37 +357,6 @@ smemalign很适合分配需要页对齐的内存块，因为如果使用memalign
 使用的时候需要再写一个c语言的wrapper function（至少2.4.18里面是这么做的）
 asmlinkage void ret_from_fork(void) __asm__(&quot;ret_from_fork&quot;);  
 	<a class="read-more" href="/2008/08/export-symbols-in-asm/">阅读全文 →</a>
-      </div>
-      
-    </div>
-    
-    <div class="post">
-      <h2 class="post-title"><a href="https://blog.yxwang.me/2008/07/leaksurvivor/">Usenix 08 - LeakSurvivor</a></h2>
-      <span class="post-date">Jul 19, 2008</span>
-      
-      <span class="post-tags">
-	
-	#<a href="https://blog.yxwang.me/tags/computer-system">Computer System</a>&nbsp;
-	
-	#<a href="https://blog.yxwang.me/tags/memory">Memory</a>&nbsp;
-	
-	#<a href="https://blog.yxwang.me/tags/paper">Paper</a>&nbsp;
-	
-	#<a href="https://blog.yxwang.me/tags/research">Research</a>&nbsp;
-	
-	#<a href="https://blog.yxwang.me/tags/usenix">Usenix</a>&nbsp;
-	
-      </span>
-      
-      
-      
-      <div class="summary">
-	Paper: LeakSurvivor: Towards Safely Tolerating Memory Leaks for Garbage-Collected Languages
-http://www.usenix.org/events/usenix08/tech/tang.html
-Yan Tang, Qi Gao, and Feng Qin, The Ohio State University
-三位作者好像都是中国人
-这篇paper针对支持垃圾收集的语言中内存泄露问题，提出了一种比较保守的“换出”策略，即把可疑的内存泄露的对象（这些对象通常都是长时间没有被访问的）从内存移动到硬盘上暂时保存，减小内存的压力；如果这些对象后来被再次访问（这种可能性很小），就把它们从硬盘上移回内存。
-	<a class="read-more" href="/2008/07/leaksurvivor/">阅读全文 →</a>
       </div>
       
     </div>

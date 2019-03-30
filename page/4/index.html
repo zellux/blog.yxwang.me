@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 
   <head>
-	<meta name="generator" content="Hugo 0.50" />
+	<meta name="generator" content="Hugo 0.54.0" />
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <meta name="description" content="">
@@ -16,7 +16,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.adcf086c1f059a87f5d683b251786185c0db7c1ec7f84cfd5542ca1d1c566d48.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -45,8 +45,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2012",
-    "datePublished": "2012-02-18 00:00:00 &#43;0000 UTC",
-    "dateModified" : "2012-02-18 00:00:00 &#43;0000 UTC",
+    "datePublished": "2012-03-28 00:00:00 &#43;0000 UTC",
+    "dateModified" : "2012-03-28 00:00:00 &#43;0000 UTC",
     "url" : "https://blog.yxwang.me/",
     "wordCount" : "0",
     "keywords" : [ "Blog" ]
@@ -81,6 +81,41 @@
   <div class="posts">
      
     <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2012/03/managing-dotfiles-with-git/">用 Git 管理命令行配置</a></h2>
+      <span class="post-meta">
+  <time datetime='Wed, Mar 28, 2012' data-updated="true" itemprop="datePublished">Wed, Mar 28, 2012</time>
+  
+  <span class="post-categories">
+    •
+	<a href="https://blog.yxwang.me/categories/tooling">Tooling</a>
+  </span>
+  
+</span>
+
+      
+      <div class="summary">
+        <p>以前部署新机器时都要把一堆配置文件 scp 过去，今天折腾了下用 Git 统一管理这些配置文件。</p>
+
+<p>做起来很简单，创建一个 dotfiles 目录，把所有要同步的配置文件都放到这个目录下，并重命名去掉文件名开头的点，以免被 Git 忽略。写了一个脚本链接这些配置文件到 HOME 目录：</p>
+
+<pre><code class="language-ruby">#!/usr/bin/env ruby
+
+safe_mode = ARGV.include? '--safe'
+
+files = %w(zshrc tmux.conf gitconfig vimrc emacs gitignore_global LS_COLORS)
+files.each do |file|
+  unless safe_mode and File.exists?(&quot;#{ENV['HOME']}/.#{file}&quot;)
+    %x(ln -s -i -v $PWD/#{file} ~/.#{file})
+    puts &quot;.#{file} linked&quot; if safe_mode
+  end
+end
+</code></pre>
+	<a class="read-more" href="/2012/03/managing-dotfiles-with-git/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
+    <div class="post">
       <h2 class="post-title"><a href="https://blog.yxwang.me/2012/02/etags-in-rails/">利用 ETag 优化 Rails 应用</a></h2>
       <span class="post-meta">
   <time datetime='Sat, Feb 18, 2012' data-updated="true" itemprop="datePublished">Sat, Feb 18, 2012</time>
@@ -106,8 +141,6 @@ Etag: &quot;f74bb78aa48d36e6a0b2072a131b20b9&quot;
 Cache-Control: public, max-age=300
 Content-Length: 15481
 </code></pre>
-
-<p></p>
 	<a class="read-more" href="/2012/02/etags-in-rails/">阅读全文 →</a>
       </div>
       
@@ -135,8 +168,6 @@ Content-Length: 15481
 <li>Document Options -&gt; PostScript Options -&gt; PostScript Output Option 中，选择 Encapsulated PostScript (EPS)</li>
 <li>保存时别忘了加后缀名 .eps</li>
 </ul>
-
-<p></p>
 	<a class="read-more" href="/2012/01/visio-export-to-eps/">阅读全文 →</a>
       </div>
       
@@ -157,8 +188,6 @@ Content-Length: 15481
       
       <div class="summary">
         <p>一直在国服大师组混，最让我头疼，同时研究的也最多得对战就是 ZvT 了。这里写一点自己关于 ZvT 的心得，欢迎探讨。</p>
-
-<p></p>
 	<a class="read-more" href="/2011/12/zvt-notes/">阅读全文 →</a>
       </div>
       
@@ -308,28 +337,6 @@ RSpec.configure do |config| config.filter_run_excluding :slow =&gt; true end  �
       <div class="summary">
         最近要给某个类写一个 hash 方法，这个类包括一些整型和字符串属性，需要把它们都放到 hash 中。担心自己想出来的 hash 算法会造成比较严重的冲突，网上搜了一下，发现 Effective Java 中已经介绍过一种简单有效的算法了：  将任一非零常数赋值给 result 找到该类中所有需要包含在 hash 中的属性，并根据它们的类型进行计算 c  对于布尔类型，将它们转换为 0/1 对于 byte, char, short, 和 int 类型，将它们转换为 int 对于长整型 long，计算高位和低位的异或结果 (int) (f ^ (f &gt;&gt;&gt; 32)) 对于 float 类型，采用它的二进制表示，在 Java 中为 Float.floatToIntBits，Ruby 中我估计用 Float.hash 也可以 对于 double 类型，调用 Double.doubleToIntBits 后再次用前面的方法处理得到的 long 类型 对于数组，利用方法 3 合并计算结果 对于其它的对象，递归调用该对象的 hash 方法  将计算结果合并到 result 变量：result = 37 * result + c 返回 result  另外这个博客的域名已经改成了 blog.
 	<a class="read-more" href="/2011/09/recipe-for-hashing/">阅读全文 →</a>
-      </div>
-      
-    </div>
-    
-    <div class="post">
-      <h2 class="post-title"><a href="https://blog.yxwang.me/2011/07/full-screen-emacs-in-lion/">让 Emacs 支持 Lion 的全屏模式</a></h2>
-      <span class="post-meta">
-  <time datetime='Thu, Jul 28, 2011' data-updated="true" itemprop="datePublished">Thu, Jul 28, 2011</time>
-  
-  <span class="post-categories">
-    •
-	<a href="https://blog.yxwang.me/categories/tooling">Tooling</a>
-  </span>
-  
-</span>
-
-      
-      <div class="summary">
-        前几天给我的 MacBook Pro 装上了 Lion，不过原来的 Emacs 并不支持在 Lion 下全屏运行。github 上搜了下发现已经有让 Emacs 支持全屏模式的补丁了，Homebrew 中这个补丁也已经被吸收。
-直接用 brew install emacs &ndash;cocoa &ndash;srgb 似乎会碰到编译错误：
-Finding pointers to doc strings... Finding pointers to doc strings...done Dumping under the name emacs unexec: cannot write section __data --- List of All Regions --- address size prot maxp --- List of Regions to be Dumped --- address size prot maxp --- Header Information --- Magic = 0xfeedfacf CPUType = 16777223 CPUSubType = -2147483645 FileType = 0x2 NCmds = 20 SizeOfCmds = 3464 Flags = 0x00200085 Highest address of load commands in input file: 0x5dd000 Lowest offset of all sections in __TEXT segment: 0x22f0 --- List of Load Commands in Input File ---  github issues 上已经有人报告这个问题了，解决方法也很简单，运行 brew edit emacs 打开 emacs 的安装脚本，在 def install 的后面加上两行：
-	<a class="read-more" href="/2011/07/full-screen-emacs-in-lion/">阅读全文 →</a>
       </div>
       
     </div>

@@ -9,8 +9,6 @@
 $ find . -name &quot;*.java&quot; -or -name &quot;*.aidl&quot; -or -name &quot;*.cpp&quot; &gt; cscope.files
 
 $ cscope -b
-
-
 ">
     <meta name="author" content="zellux">
 
@@ -22,7 +20,7 @@ $ cscope -b
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.adcf086c1f059a87f5d683b251786185c0db7c1ec7f84cfd5542ca1d1c566d48.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -48,9 +46,7 @@ $ cscope -b
 <pre><code class="language-bash">$ find . -name &quot;*.java&quot; -or -name &quot;*.aidl&quot; -or -name &quot;*.cpp&quot; &gt; cscope.files
 
 $ cscope -b
-</code></pre>
-
-<p></p>",
+</code></pre>",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -110,8 +106,6 @@ $ cscope -b
 
 $ cscope -b
 </code></pre>
-
-<p></p>
 
 <p>这样做的缺点很明显，索引功能没有做到 Emacs 里，需要单独起一个 shell，比较麻烦。我发现这个问题的本质在于 xcscope 创建索引用的是 <a href="https://github.com/To1ne/xcscope/blob/master/cscope-indexer">cscope-indexer</a> 这个脚本，而 cscope-indexer 默认只会扫描 C/C++ 的源码文件。所以其实只要修改 cscope-indexer，把第 140 行从原来的</p>
 

@@ -15,7 +15,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.adcf086c1f059a87f5d683b251786185c0db7c1ec7f84cfd5542ca1d1c566d48.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -43,9 +43,9 @@
     "publisher": "zellux",
     "accountablePerson" : "",
     "copyrightHolder" : "",
-    "copyrightYear" : "2013",
-    "datePublished": "2013-08-21 00:00:00 &#43;0000 UTC",
-    "dateModified" : "2013-08-21 00:00:00 &#43;0000 UTC",
+    "copyrightYear" : "2014",
+    "datePublished": "2014-02-13 00:00:00 &#43;0000 UTC",
+    "dateModified" : "2014-02-13 00:00:00 &#43;0000 UTC",
     "url" : "https://blog.yxwang.me/post/",
     "wordCount" : "0",
     "keywords" : [ "Blog" ]
@@ -80,6 +80,29 @@
   <div class="posts">
      
     <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2014/02/local-markdown-wiki/">本地 Markdown 预览工具</a></h2>
+      <span class="post-date">Feb 13, 2014</span>
+      
+      <span class="post-tags">
+	
+	#<a href="https://blog.yxwang.me/tags/tooling">Tooling</a>&nbsp;
+	
+      </span>
+      
+      
+      
+      <div class="summary">
+	<p>最近一直用 <a href="http://www.iawriter.com/mac/">iA Writer</a> 做笔记，用不同的文件保存不同的主题，由于 iA Writer 并没有很好的管理和浏览功能，于是就想做个 Web 工具方便浏览和管理。</p>
+
+<p><a href="https://github.com/zellux/markdown-wiki">markdown-wiki</a> 是我用 Sinatra 做的一个简单的预览工具，它可以把某个目录下的 Markdown 文件以 Wiki 的形式呈现出来。界面上借用了 <a href="http://ghost.io/">Ghost</a> 的 CSS，可以在 <a href="http://markdown-wiki-demo.herokuapp.com/">http://markdown-wiki-demo.herokuapp.com/</a> 预览（因为是非本地的内容，上方的 Edit 按钮没有作用）。</p>
+
+<p>Markdown 语法方面，由于用了 <a href="https://github.com/vmg/redcarpet">redcarpet</a> 所以有不少语法扩展，包括代码块、删除线、下划线、上标等，另外包含了 Wiki 内部链接支持。</p>
+	<a class="read-more" href="/2014/02/local-markdown-wiki/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
+    <div class="post">
       <h2 class="post-title"><a href="https://blog.yxwang.me/2013/08/adjusting-mac-volume-with-pc-keyboard/">用外接 PC 键盘控制 Mac 音量</a></h2>
       <span class="post-date">Aug 21, 2013</span>
       
@@ -97,8 +120,6 @@
       
       <div class="summary">
 	<p>写了个 <a href="https://github.com/zellux/adjust-volume">Alfred 插件</a>，用于外接 PC 键盘控制 Mac 的系统音量。</p>
-
-<p></p>
 	<a class="read-more" href="/2013/08/adjusting-mac-volume-with-pc-keyboard/">阅读全文 →</a>
       </div>
       
@@ -120,9 +141,6 @@
       
       <div class="summary">
 	<a data-fancybox="gallery"  href=/images/2013-07/maldives-tree.jpg ><img src=/images/2013-07/maldives-tree.jpg  width="560" /></a>
-
-
-<p></p>
 	<a class="read-more" href="/2013/07/dusit-thani-maldives/">阅读全文 →</a>
       </div>
       
@@ -147,8 +165,6 @@
 
 <a data-fancybox="gallery"  href=/images/2013-06/zhihu-kindle-2.jpg ><img src=/images/2013-06/zhihu-kindle-2.jpg  width="300" /></a>
 </p>
-
-<p></p>
 	<a class="read-more" href="/2013/06/zhihu-daily-for-kindle/">阅读全文 →</a>
       </div>
       
@@ -172,8 +188,6 @@
 	<p>如果要查看 ActiveRecord 的 update_attribute 函数的源代码，一个比较常见的方法是直接在 Rails 源码中搜索 <code>def update_attribute</code>。博客 <a href="http://pragmaticstudio.com/blog">The Pragmatic Studio</a> 介绍了一个更方便的技巧，在 Ruby 命令行中就能启动编辑器直接访问。</p>
 
 <p>通过 <a href="http://rdoc.info/stdlib/core/Object:method">Object#method</a> 方法可以获得 update_attribute 方法的对象，而 <a href="http://rdoc.info/stdlib/core/Method:source_location">Method#source_location</a> 则返回这个方法定义的文件和位置。有了这个信息后，就能启动编辑器查看源代码了：</p>
-
-<p></p>
 	<a class="read-more" href="/2013/02/view-ruby-source-in-shell/">阅读全文 →</a>
       </div>
       
@@ -199,8 +213,6 @@
 <p><img src="/images/2013-01/zsh-untracked-mark.png" alt="" /></p>
 
 <p>使用 <code>git status</code> 和 <code>git diff</code>，都看不到任何未提交的改动。一开始我以为是 zsh 或者 git 的 bug，把它们的版本都更新到最新版后还是有这个问题。于是看 steeef 主题的源码，发现了红色标记的判断依据：</p>
-
-<p></p>
 	<a class="read-more" href="/2013/01/cleaning-zsh-vcs-status/">阅读全文 →</a>
       </div>
       
@@ -227,8 +239,6 @@
 
 $ cscope -b
 </code></pre>
-
-<p></p>
 	<a class="read-more" href="/2013/01/java-and-aidl-support-in-emacs-cscope/">阅读全文 →</a>
       </div>
       
@@ -258,8 +268,6 @@ $ cscope -b
   format.html
 end
 </code></pre>
-
-<p></p>
 	<a class="read-more" href="/2013/01/order-of-formats-in-response-to-does-matter/">阅读全文 →</a>
       </div>
       
@@ -290,8 +298,6 @@ end
     rewrite ^(.*)$ http://blog.yxwang.me/atom.xml;
 }
 </code></pre>
-
-<p></p>
 	<a class="read-more" href="/2012/12/multiple-feeds-in-octopress/">阅读全文 →</a>
       </div>
       
@@ -325,46 +331,7 @@ end
 <p>Hulu 是这几个公司里唯一一个我没有找人内推而拿到面试机会的，也是面试体验最好的一个公司。Hulu 和 Twitter、Zynga、Foursquare 等公司一样，用了 <a href="https://hire.jobvite.com/">jobvite</a> 接受和追踪职位申请。因为是申请的第一家公司，我在申请 Hulu 时的 cover letter 写得很详细，针对职位需求上的每一条都写了我的相关工作经验，这也许是最后能拿到面试机会的原因吧。其他公司的 cover letter 都写得很简单，短短两段就结束了。</p>
 
 <p>Hulu 的第一轮电面和其他公司的有些不同。45 分钟里要做四个题。面试官提前十分钟发了一封邮件给我，上面有两段代码。第一段代码是一个检查两个字符串是否是 <a href="http://en.wikipedia.org/wiki/Anagram">anagram</a> 的程序，写得很绕而且性能很差。面试官先问我这段代码的用途，然后问有什么方法优化，并要求我把代码写在 titanpad 上。接着他问了我第二段代码是做什么的。第二段代码也写得有点复杂，不过可以看出是一个检查有向图里面是否存在环的程序。</p>
-
-<p></p>
 	<a class="read-more" href="/2012/12/job-hunting-in-usa-3/">阅读全文 →</a>
-      </div>
-      
-    </div>
-    
-    <div class="post">
-      <h2 class="post-title"><a href="https://blog.yxwang.me/2012/12/job-hunting-in-usa-2/">北美求职记（二）：Google &amp; Facebook</a></h2>
-      <span class="post-date">Dec 25, 2012</span>
-      
-      <span class="post-tags">
-	
-	#<a href="https://blog.yxwang.me/tags/career">Career</a>&nbsp;
-	
-	#<a href="https://blog.yxwang.me/tags/life">Life</a>&nbsp;
-	
-      </span>
-      
-      
-      
-      <div class="summary">
-	<h4 id="北美求职记系列文章">北美求职记系列文章</h4>
-
-<ul>
-<li><a href="http://blog.yxwang.me/2012/12/job-hunting-in-usa-1/">北美求职记（一）：Microsoft</a></li>
-<li>北美求职记（二）：Google &amp; Facebook</li>
-<li><a href="http://blog.yxwang.me/2012/12/job-hunting-in-usa-3/">北美求职记（三）：Hulu &amp; Twitter</a></li>
-</ul>
-
-<h2 id="google">Google</h2>
-
-<p>Google 面试也是托学长推荐了。HR 说我的简历看起来很不错，先给我安排了两轮电面。</p>
-
-<p>电面都和 coding 有关，面试官会给你一个 Google Docs 链接，在电话里描述题目后要求你在 Google Docs 上写程序。题目的难度不高，两轮一共四题，都是对基本数据结构的操作，例如给在一个未排序的数组中去掉重复的数字，还有把一个有序数组转成一个平衡二叉搜索树，在一个已排序但有重复数字的数组中查找元素等。</p>
-
-<p>第一轮电面聊天的时候还发现第一轮的面试官是在 ITA Software 做的。正好前几天用他们的产品 <a href="http://matrix.itasoftware.com/">Matrix Airfare Search</a> 订到了低价的去土耳其的机票，过了一星期神奇的在面试的时候碰到了这个团队的工程师。当时一下子就兴奋起来，聊了不少和 Matrix 的有关的话题。这位面试官听说中国的机票也能用他们的平台查询，还挺吃惊的。他还提到他们原本想把计算任务放到 Google 内部的计算框架上，但是由于和合作方的合同的限制，没法把一些商业数据放到 Google 的平台里，只能继续用原有的计算引擎。</p>
-
-<p></p>
-	<a class="read-more" href="/2012/12/job-hunting-in-usa-2/">阅读全文 →</a>
       </div>
       
     </div>

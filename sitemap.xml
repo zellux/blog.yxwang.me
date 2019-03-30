@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://blog.yxwang.me/2019/03/bev-detection/</loc>
+    <lastmod>2019-03-29T16:03:45-07:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://blog.yxwang.me/2018/10/green-card/</loc>
     <lastmod>2018-10-30T21:35:07-07:00</lastmod>
   </url>
@@ -691,7 +696,7 @@
   
   <url>
     <loc>https://blog.yxwang.me/</loc>
-    <lastmod>2018-10-30T21:35:07-07:00</lastmod>
+    <lastmod>2019-03-29T16:03:45-07:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -844,6 +849,18 @@
   </url>
   
   <url>
+    <loc>https://blog.yxwang.me/categories/computer-vision/</loc>
+    <lastmod>2019-03-29T16:03:45-07:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.yxwang.me/tags/computer-vision/</loc>
+    <lastmod>2019-03-29T16:03:45-07:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.yxwang.me/tags/concurrency/</loc>
     <lastmod>2009-04-20T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -900,6 +917,12 @@
   <url>
     <loc>https://blog.yxwang.me/tags/debugging/</loc>
     <lastmod>2009-05-27T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.yxwang.me/tags/deep-learning/</loc>
+    <lastmod>2019-03-29T16:03:45-07:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -1324,7 +1347,7 @@
   
   <url>
     <loc>https://blog.yxwang.me/tags/paper/</loc>
-    <lastmod>2012-06-11T00:00:00+00:00</lastmod>
+    <lastmod>2019-03-29T16:03:45-07:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -1342,7 +1365,7 @@
   
   <url>
     <loc>https://blog.yxwang.me/post/</loc>
-    <lastmod>2018-10-30T21:35:07-07:00</lastmod>
+    <lastmod>2019-03-29T16:03:45-07:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -1396,7 +1419,7 @@
   
   <url>
     <loc>https://blog.yxwang.me/tags/research/</loc>
-    <lastmod>2009-08-12T00:00:00+00:00</lastmod>
+    <lastmod>2019-03-29T16:03:45-07:00</lastmod>
     <priority>0</priority>
   </url>
   

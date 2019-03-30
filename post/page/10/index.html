@@ -15,7 +15,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.adcf086c1f059a87f5d683b251786185c0db7c1ec7f84cfd5542ca1d1c566d48.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -44,8 +44,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2009",
-    "datePublished": "2009-04-06 00:00:00 &#43;0000 UTC",
-    "dateModified" : "2009-04-06 00:00:00 &#43;0000 UTC",
+    "datePublished": "2009-04-07 00:00:00 &#43;0000 UTC",
+    "dateModified" : "2009-04-07 00:00:00 &#43;0000 UTC",
     "url" : "https://blog.yxwang.me/post/",
     "wordCount" : "0",
     "keywords" : [ "Blog" ]
@@ -79,6 +79,36 @@
 <div class="content">
   <div class="posts">
      
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2009/04/xen-test-script/">Xen DomainU 自动测试脚本</a></h2>
+      <span class="post-date">Apr 7, 2009</span>
+      
+      <span class="post-tags">
+	
+	#<a href="https://blog.yxwang.me/tags/cerberus">Cerberus</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/computer-system">Computer System</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/python">Python</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/xen">Xen</a>&nbsp;
+	
+      </span>
+      
+      
+      
+      <div class="summary">
+	写完代码测试时重复的最多的步骤就是
+ 编译，复制vmlinuz和xen.gz 重启VMware虚拟机 启动domainU xm create domU.conf 4. 开一个screen窗口attach到domainU的console xm console #domid 5. 在domainU中运行测试程序  于是写了个自动执行3 4 5的脚步，主要用到了熊熊推荐的pexpect，这东东很赞啊
+为了提高用户体验，读取domainU的启动信息时我采用的方法是读一行输出一行，读到结尾登陆字符时通过超时设置退出循环，这样可能效率比较低，不过测试脚本也不care这个了
+实际使用时碰到了另一个问题，domainU执行完自动命令后命令行会出现很严重的对齐问题，最后发现登陆后运行一次reset就可以了。
+脚本如下
+#!/usr/bin/python # Automatic test script for Xen DomainU # Author: zellux import pexpect, os conf = { 'login_name' : 'm2-vm2', 'domainU_name' : 'R900-DomU0', 'domainU_conf' : '/home/wyx/domU1', 'domainU_id' : '2', 'domainU_user' : 'wyx', 'domainU_passwd' : 'wyx', } # Command to be executed after domainU starts cmd = &quot;&quot;&quot; cd m2 cd reg_test .
+	<a class="read-more" href="/2009/04/xen-test-script/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
     <div class="post">
       <h2 class="post-title"><a href="https://blog.yxwang.me/2009/04/end-to-end-argument-in-system-design/">End-to-End Argument In System Design</a></h2>
       <span class="post-date">Apr 6, 2009</span>
@@ -333,37 +363,6 @@ Device Drivers SCSI device support ---&gt; &lt;*&gt; SCSI disk support &lt;*&gt;
 stty -ixoff -ixon
 即可。另外这样设置后似乎恢复了C-s在bash中正向增量查找的功能。恩。
 	<a class="read-more" href="/2009/01/terminal-ctrl-s/">阅读全文 →</a>
-      </div>
-      
-    </div>
-    
-    <div class="post">
-      <h2 class="post-title"><a href="https://blog.yxwang.me/2008/11/finding-and-reproducing-heisenbugs-in-concurrent-programs/">OSDI 08 - CHESS</a></h2>
-      <span class="post-date">Nov 30, 2008</span>
-      
-      <span class="post-tags">
-	
-	#<a href="https://blog.yxwang.me/tags/computer-system">Computer System</a>&nbsp;
-	
-	#<a href="https://blog.yxwang.me/tags/concurrency">Concurrency</a>&nbsp;
-	
-	#<a href="https://blog.yxwang.me/tags/osdi">OSDI</a>&nbsp;
-	
-	#<a href="https://blog.yxwang.me/tags/paper">Paper</a>&nbsp;
-	
-	#<a href="https://blog.yxwang.me/tags/research">Research</a>&nbsp;
-	
-      </span>
-      
-      
-      
-      <div class="summary">
-	Finding and Reproducing Heisenbugs in Concurrent Programs
-OSDI &lsquo;08上微软研究院发的paper，针对并发编程中难以发现的bug问题。
-paper的内容主要分两大块。
-一是如何在发现bug的时候记录下线程的运行先后(thread interleaving)，途径是在线程API和用户程序多写一层wrapper functions，这里还有一些其他的问题，比如只记录下了thread interleaving的话出现data race怎么解决等。
-另外一块内容是如何遍历出给定程序运行后所能产生的结果的集合，加入这个能实现的话那就能把所有隐藏的bug都找出来了。但是这个搜索空间很大，是指数级的，的一个结论就是：给定一个程序有n个的线程，所有线程共完成k条指令，那么c次占先调度后线程的排列情况数的复杂度是$$k^{c}$$的，所以在实现遍历代码的时候必须有效的降低k和c的值。
-	<a class="read-more" href="/2008/11/finding-and-reproducing-heisenbugs-in-concurrent-programs/">阅读全文 →</a>
       </div>
       
     </div>

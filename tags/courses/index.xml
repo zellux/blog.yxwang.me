@@ -17,8 +17,7 @@
       <pubDate>Tue, 07 Aug 2018 00:56:13 -0700</pubDate>
       
       <guid>https://blog.yxwang.me/2018/08/robotics-slam-week4/</guid>
-      <description>&lt;p&gt;最后一周讲定位 (localization)，也就是 SLAM 里面的 L。主要包括粒子滤波和迭代最近点。&lt;/p&gt;
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;最后一周讲定位 (localization)，也就是 SLAM 里面的 L。主要包括粒子滤波和迭代最近点。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -36,8 +35,7 @@
       <pubDate>Wed, 25 Jul 2018 07:57:26 +0000</pubDate>
       
       <guid>https://blog.yxwang.me/2018/07/robotics-slam-week2/</guid>
-      <description>&lt;p&gt;这一周主要讲卡尔曼滤波 (Kalman Filter)，视频讲得比较简略，slides 做得里也有不少错误。最后看了一些其他网站的文章和视频才有了比较深刻的理解。参考资料推荐在本文结尾。&lt;/p&gt;
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;这一周主要讲卡尔曼滤波 (Kalman Filter)，视频讲得比较简略，slides 做得里也有不少错误。最后看了一些其他网站的文章和视频才有了比较深刻的理解。参考资料推荐在本文结尾。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -46,8 +44,7 @@
       <pubDate>Mon, 23 Jul 2018 00:18:32 +0000</pubDate>
       
       <guid>https://blog.yxwang.me/2018/07/robotics-slam-week1/</guid>
-      <description>&lt;p&gt;最近宾大在 Coursera 上开了一个&lt;a href=&#34;https://www.coursera.org/specializations/robotics&#34;&gt;机器人系列课程&lt;/a&gt;，包含了视觉、运动规划、机械设计等课题。我对 &lt;a href=&#34;https://en.wikipedia.org/wiki/Simultaneous_localization_and_mapping&#34;&gt;SLAM&lt;/a&gt; 很感兴趣，于是就选了 Robotics Estimation and Learning 这门课，课程主页是&lt;a href=&#34;https://www.coursera.org/learn/robotics-learning/&#34; class=&#34;uri&#34;&gt;https://www.coursera.org/learn/robotics-learning/&lt;/a&gt;。第一周的内容是高斯分布。&lt;/p&gt;
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;最近宾大在 Coursera 上开了一个&lt;a href=&#34;https://www.coursera.org/specializations/robotics&#34;&gt;机器人系列课程&lt;/a&gt;，包含了视觉、运动规划、机械设计等课题。我对 &lt;a href=&#34;https://en.wikipedia.org/wiki/Simultaneous_localization_and_mapping&#34;&gt;SLAM&lt;/a&gt; 很感兴趣，于是就选了 Robotics Estimation and Learning 这门课，课程主页是&lt;a href=&#34;https://www.coursera.org/learn/robotics-learning/&#34; class=&#34;uri&#34;&gt;https://www.coursera.org/learn/robotics-learning/&lt;/a&gt;。第一周的内容是高斯分布。&lt;/p&gt;</description>
     </item>
     
     <item>

@@ -4,8 +4,7 @@
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-    <meta name="description" content="最后一周讲定位 (localization)，也就是 SLAM 里面的 L。主要包括粒子滤波和迭代最近点。
-">
+    <meta name="description" content="最后一周讲定位 (localization)，也就是 SLAM 里面的 L。主要包括粒子滤波和迭代最近点。">
     <meta name="author" content="zellux">
 
     <title> SLAM 笔记 4：定位 &middot; Aiur · Zellux 的博客 </title>
@@ -16,7 +15,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.adcf086c1f059a87f5d683b251786185c0db7c1ec7f84cfd5542ca1d1c566d48.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -37,8 +36,7 @@
     "articleSection" : "post",
     "name" : "SLAM 笔记 4：定位",
     "headline" : "SLAM 笔记 4：定位",
-    "description" : "<p>最后一周讲定位 (localization)，也就是 SLAM 里面的 L。主要包括粒子滤波和迭代最近点。</p>
-<p></p>",
+    "description" : "<p>最后一周讲定位 (localization)，也就是 SLAM 里面的 L。主要包括粒子滤波和迭代最近点。</p>",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -93,7 +91,6 @@
 
     <div class="post-content">
       <p>最后一周讲定位 (localization)，也就是 SLAM 里面的 L。主要包括粒子滤波和迭代最近点。</p>
-<p></p>
 <h2 id="里程计定位-odometry">里程计定位 (Odometry)</h2>
 <p>里程计定位法直接从设备里读取信息，更新当前的位置状态。例如要跟踪车子的位置状态，可以在车轮上安装计数器记录车轮转动的次数，从而了解车子前进了多少。对于转弯的情况，可以从内外轮子的计数差得到转弯的角度。假设内轮转了 <span class="math inline">\(e_i\)</span> 圈，外轮转了 <span class="math inline">\(e_o\)</span> 圈，内轮半径 <span class="math inline">\(r_i\)</span>，外轮半径 <span class="math inline">\(r_o\)</span>，则有 <span class="math display">\[
 e_i = \theta r_i \\

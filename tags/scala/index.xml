@@ -29,9 +29,7 @@ Object[] a2 = a1;
 
 &lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;a2[0] = new Integer(17)
 String s  = a1[0]  // java.lang.ArrayStoreException
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;/code&gt;&lt;/pre&gt;</description>
     </item>
     
   </channel>

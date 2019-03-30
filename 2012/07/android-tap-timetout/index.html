@@ -4,9 +4,7 @@
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-    <meta name="description" content="最近实验室做的一个东西会向 Android 应用快速注入一系列触屏事件，模拟用户的点击。但是我们发现当按下和弹起的 MotionEvent 之间时间间隔过小（例如小于 100ms）时，会导致该事件被忽略。看了代码后发现 Android 中按下和弹起之间时间间隔要在 115ms 以上才会被认为是一个点击事件。这里结合 Android 的源码分析一下点击事件的产生过程。
-
-">
+    <meta name="description" content="最近实验室做的一个东西会向 Android 应用快速注入一系列触屏事件，模拟用户的点击。但是我们发现当按下和弹起的 MotionEvent 之间时间间隔过小（例如小于 100ms）时，会导致该事件被忽略。看了代码后发现 Android 中按下和弹起之间时间间隔要在 115ms 以上才会被认为是一个点击事件。这里结合 Android 的源码分析一下点击事件的产生过程。">
     <meta name="author" content="zellux">
 
     <title> Android 中点击事件的判断 &middot; Aiur · Zellux 的博客 </title>
@@ -17,7 +15,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.adcf086c1f059a87f5d683b251786185c0db7c1ec7f84cfd5542ca1d1c566d48.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -38,9 +36,7 @@
     "articleSection" : "post",
     "name" : "Android 中点击事件的判断",
     "headline" : "Android 中点击事件的判断",
-    "description" : "<p>最近实验室做的一个东西会向 Android 应用快速注入一系列触屏事件，模拟用户的点击。但是我们发现当按下和弹起的 MotionEvent 之间时间间隔过小（例如小于 100ms）时，会导致该事件被忽略。看了代码后发现 Android 中按下和弹起之间时间间隔要在 115ms 以上才会被认为是一个点击事件。这里结合 Android 的源码分析一下点击事件的产生过程。</p>
-
-<p></p>",
+    "description" : "<p>最近实验室做的一个东西会向 Android 应用快速注入一系列触屏事件，模拟用户的点击。但是我们发现当按下和弹起的 MotionEvent 之间时间间隔过小（例如小于 100ms）时，会导致该事件被忽略。看了代码后发现 Android 中按下和弹起之间时间间隔要在 115ms 以上才会被认为是一个点击事件。这里结合 Android 的源码分析一下点击事件的产生过程。</p>",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -95,8 +91,6 @@
 
     <div class="post-content">
       <p>最近实验室做的一个东西会向 Android 应用快速注入一系列触屏事件，模拟用户的点击。但是我们发现当按下和弹起的 MotionEvent 之间时间间隔过小（例如小于 100ms）时，会导致该事件被忽略。看了代码后发现 Android 中按下和弹起之间时间间隔要在 115ms 以上才会被认为是一个点击事件。这里结合 Android 的源码分析一下点击事件的产生过程。</p>
-
-<p></p>
 
 <p>当用户触摸屏幕后，底层驱动会将这一事件包装成一个 <a href="https://github.com/android/platform_frameworks_base/blob/froyo/core/java/android/view/MotionEvent.java">MotionEvent</a> 对象，传递给 <a href="https://github.com/android/platform_frameworks_base/blob/froyo/services/java/com/android/server/WindowManagerService.java">WindowsManagerService</a>。后者维护了一个事件队列，会将事件分发给正获得焦点的控件，其中，dispatchPointer 方法负责将触屏事件发送给当前活动窗口(Window)。每一个 Window 都有一个 <a href="https://github.com/android/platform_frameworks_base/blob/froyo/core/java/android/view/ViewRoot.java">ViewRoot</a> 实例接收来自 WindowManagerService 的消息。活动窗口的 ViewRoot 在 handleMessage 方法中接收了这一触屏事件后，就会调用最上层的 View 对象的 dispatchTouchEvent 方法。和大多数图形系统一样，Android 中的 view 也是以树状结构组织的，事件会从最上层依次向下层传递，直到某一结点能处理这一事件为止。</p>
 

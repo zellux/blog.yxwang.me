@@ -21,9 +21,7 @@
 
 &lt;p&gt;&lt;img src=&#34;https://blog.yxwang.me/images/2013-01/zsh-untracked-mark.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 
-&lt;p&gt;使用 &lt;code&gt;git status&lt;/code&gt; 和 &lt;code&gt;git diff&lt;/code&gt;，都看不到任何未提交的改动。一开始我以为是 zsh 或者 git 的 bug，把它们的版本都更新到最新版后还是有这个问题。于是看 steeef 主题的源码，发现了红色标记的判断依据：&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;使用 &lt;code&gt;git status&lt;/code&gt; 和 &lt;code&gt;git diff&lt;/code&gt;，都看不到任何未提交的改动。一开始我以为是 zsh 或者 git 的 bug，把它们的版本都更新到最新版后还是有这个问题。于是看 steeef 主题的源码，发现了红色标记的判断依据：&lt;/p&gt;</description>
     </item>
     
   </channel>

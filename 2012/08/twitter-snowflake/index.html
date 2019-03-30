@@ -6,9 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <meta name="description" content="这是一篇两年前 Twitter 开发团队写的文章，今天挖出来研究了一下。原文地址 http://engineering.twitter.com/2010/06/announcing-snowflake.html
 
-Twitter 早期用 MySQL 存储数据，随着用户的增长，单一的 MySQL 实例没法承受海量的数据，开发团队就开始用 Cassandra 和 sharded MySQL 替代原有的系统。然而和 MySQL 不同的是，Cassandra 没有内置为每一条数据生成唯一 ID 的功能，因为在一个分布式环境下，很难有完美的 ID 生成方案。
-
-">
+Twitter 早期用 MySQL 存储数据，随着用户的增长，单一的 MySQL 实例没法承受海量的数据，开发团队就开始用 Cassandra 和 sharded MySQL 替代原有的系统。然而和 MySQL 不同的是，Cassandra 没有内置为每一条数据生成唯一 ID 的功能，因为在一个分布式环境下，很难有完美的 ID 生成方案。">
     <meta name="author" content="zellux">
 
     <title> Twitter Snowflake &middot; Aiur · Zellux 的博客 </title>
@@ -19,7 +17,7 @@ Twitter 早期用 MySQL 存储数据，随着用户的增长，单一的 MySQL �
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.adcf086c1f059a87f5d683b251786185c0db7c1ec7f84cfd5542ca1d1c566d48.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -42,9 +40,7 @@ Twitter 早期用 MySQL 存储数据，随着用户的增长，单一的 MySQL �
     "headline" : "Twitter Snowflake",
     "description" : "<p>这是一篇两年前 Twitter 开发团队写的文章，今天挖出来研究了一下。原文地址 <a href="http://engineering.twitter.com/2010/06/announcing-snowflake.html">http://engineering.twitter.com/2010/06/announcing-snowflake.html</a></p>
 
-<p>Twitter 早期用 MySQL 存储数据，随着用户的增长，单一的 MySQL 实例没法承受海量的数据，开发团队就开始用 <a href="http://cassandra.apache.org/">Cassandra</a> 和 sharded MySQL 替代原有的系统。然而和 MySQL 不同的是，Cassandra 没有内置为每一条数据生成唯一 ID 的功能，因为在一个分布式环境下，很难有完美的 ID 生成方案。</p>
-
-<p></p>",
+<p>Twitter 早期用 MySQL 存储数据，随着用户的增长，单一的 MySQL 实例没法承受海量的数据，开发团队就开始用 <a href="http://cassandra.apache.org/">Cassandra</a> 和 sharded MySQL 替代原有的系统。然而和 MySQL 不同的是，Cassandra 没有内置为每一条数据生成唯一 ID 的功能，因为在一个分布式环境下，很难有完美的 ID 生成方案。</p>",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -101,8 +97,6 @@ Twitter 早期用 MySQL 存储数据，随着用户的增长，单一的 MySQL �
       <p>这是一篇两年前 Twitter 开发团队写的文章，今天挖出来研究了一下。原文地址 <a href="http://engineering.twitter.com/2010/06/announcing-snowflake.html">http://engineering.twitter.com/2010/06/announcing-snowflake.html</a></p>
 
 <p>Twitter 早期用 MySQL 存储数据，随着用户的增长，单一的 MySQL 实例没法承受海量的数据，开发团队就开始用 <a href="http://cassandra.apache.org/">Cassandra</a> 和 sharded MySQL 替代原有的系统。然而和 MySQL 不同的是，Cassandra 没有内置为每一条数据生成唯一 ID 的功能，因为在一个分布式环境下，很难有完美的 ID 生成方案。</p>
-
-<p></p>
 
 <p>对于 Twitter 而言，这样的 ID 生成方案要满足两个基本的要求，一是每秒能生成几十万条 ID 用于标识不同的 tweet；二是这些 ID 应该可以有个大致的顺序，也就是说发布时间相近的两条 tweet，它们的 ID 也应当相近，这样才能方便各种客户端对 tweet 进行排序。</p>
 

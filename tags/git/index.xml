@@ -32,9 +32,7 @@ files.each do |file|
     puts &amp;quot;.#{file} linked&amp;quot; if safe_mode
   end
 end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;/code&gt;&lt;/pre&gt;</description>
     </item>
     
     <item>

@@ -6,9 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <meta name="description" content="如果要查看 ActiveRecord 的 update_attribute 函数的源代码，一个比较常见的方法是直接在 Rails 源码中搜索 def update_attribute。博客 The Pragmatic Studio 介绍了一个更方便的技巧，在 Ruby 命令行中就能启动编辑器直接访问。
 
-通过 Object#method 方法可以获得 update_attribute 方法的对象，而 Method#source_location 则返回这个方法定义的文件和位置。有了这个信息后，就能启动编辑器查看源代码了：
-
-">
+通过 Object#method 方法可以获得 update_attribute 方法的对象，而 Method#source_location 则返回这个方法定义的文件和位置。有了这个信息后，就能启动编辑器查看源代码了：">
     <meta name="author" content="zellux">
 
     <title> Ruby 命令行中快速查看函数源码 &middot; Aiur · Zellux 的博客 </title>
@@ -19,7 +17,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.adcf086c1f059a87f5d683b251786185c0db7c1ec7f84cfd5542ca1d1c566d48.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -42,9 +40,7 @@
     "headline" : "Ruby 命令行中快速查看函数源码",
     "description" : "<p>如果要查看 ActiveRecord 的 update_attribute 函数的源代码，一个比较常见的方法是直接在 Rails 源码中搜索 <code>def update_attribute</code>。博客 <a href="http://pragmaticstudio.com/blog">The Pragmatic Studio</a> 介绍了一个更方便的技巧，在 Ruby 命令行中就能启动编辑器直接访问。</p>
 
-<p>通过 <a href="http://rdoc.info/stdlib/core/Object:method">Object#method</a> 方法可以获得 update_attribute 方法的对象，而 <a href="http://rdoc.info/stdlib/core/Method:source_location">Method#source_location</a> 则返回这个方法定义的文件和位置。有了这个信息后，就能启动编辑器查看源代码了：</p>
-
-<p></p>",
+<p>通过 <a href="http://rdoc.info/stdlib/core/Object:method">Object#method</a> 方法可以获得 update_attribute 方法的对象，而 <a href="http://rdoc.info/stdlib/core/Method:source_location">Method#source_location</a> 则返回这个方法定义的文件和位置。有了这个信息后，就能启动编辑器查看源代码了：</p>",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -101,8 +97,6 @@
       <p>如果要查看 ActiveRecord 的 update_attribute 函数的源代码，一个比较常见的方法是直接在 Rails 源码中搜索 <code>def update_attribute</code>。博客 <a href="http://pragmaticstudio.com/blog">The Pragmatic Studio</a> 介绍了一个更方便的技巧，在 Ruby 命令行中就能启动编辑器直接访问。</p>
 
 <p>通过 <a href="http://rdoc.info/stdlib/core/Object:method">Object#method</a> 方法可以获得 update_attribute 方法的对象，而 <a href="http://rdoc.info/stdlib/core/Method:source_location">Method#source_location</a> 则返回这个方法定义的文件和位置。有了这个信息后，就能启动编辑器查看源代码了：</p>
-
-<p></p>
 
 <pre><code class="language-ruby">&gt; method = User.first.method(:update_attribute)
   User Load (0.5ms)  SELECT `users`.* FROM `users` LIMIT 1

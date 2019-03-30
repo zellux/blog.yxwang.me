@@ -6,10 +6,22 @@
     <description>Recent content on Aiur · Zellux 的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Tue, 30 Oct 2018 21:35:07 -0700</lastBuildDate>
+    <lastBuildDate>Fri, 29 Mar 2019 16:03:45 -0700</lastBuildDate>
     
 	<atom:link href="https://blog.yxwang.me/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>3D 目标检测之鸟瞰图检测 (Pixor / HDNet)</title>
+      <link>https://blog.yxwang.me/2019/03/bev-detection/</link>
+      <pubDate>Fri, 29 Mar 2019 16:03:45 -0700</pubDate>
+      
+      <guid>https://blog.yxwang.me/2019/03/bev-detection/</guid>
+      <description>随着无人驾驶的兴起，激光雷达数据的目标检测成为了这几年的研究热点之一。常见的 3D 检测模型可以分成两类，一类是用 3D 小方格代表所有的激光点数据，每个小方格包含了这个方格内的特征，例如 VoxelNet 和 Vote3deep 。另一类则是先把三维信息投射到一个二维平面，通常是鸟瞰图 (Bird Eye View) 或是正视图 (Range View)，生成二维特征图后再用传统的二维目标模型检测图中的物体，例如 MV3D 和 FaF。
+无人驾驶场景中的大多数的目标物体都处在同一地面上，非常适合鸟瞰图。相比正视图，鸟瞰图中的目标在不同位置大小固定，我们可以用已知的常见物体大小优化检测效果。对于鸟瞰图模型来说，主要的问题在于如何选择最终图像的特征，如何生成的图像中做出精确的检测。此文旨在介绍鸟瞰图检测相关的模型 Pixor 和 HDNet。
+Pixor Pixor 是 Uber ATG 的 Bin Yang 等人在 CVPR 18 上提出的鸟瞰图检测模型。在特征生成方面，Pixor 把整个点云切成了 L x W x H 个小方格，每个小方格用 0 或 1 表示这个方格内是否有激光点存在，接着沿高度方向把三维特征压缩到一个二维平面，每个压缩后的二维方格就有了 H 个特征表示这个方格上的不同高度是否有点存在。此外 Pixor 还计算了落在每个方格中激光点的平均强度作为额外的特征，最终拿到了一个分辨率为 L x W、包含 H + 1 个特征通道的图像。
+ Pixor 结构  检测方面，Pixor 采用了基于 RetinaNet 的 one-stage 的结构，如上图所示（这里用了海报上的截图，和论文中的有一些细小的差别）。网络里面用了 ResNet 和类似 FPN 的结构。FPN 结构输出的特征图经过一个头部网络后，直接生成对每个像素点的分类和 bounding box 的回归结果。</description>
+    </item>
     
     <item>
       <title>绿卡终于批了</title>
@@ -27,8 +39,7 @@
       <pubDate>Tue, 07 Aug 2018 00:56:13 -0700</pubDate>
       
       <guid>https://blog.yxwang.me/2018/08/robotics-slam-week4/</guid>
-      <description>&lt;p&gt;最后一周讲定位 (localization)，也就是 SLAM 里面的 L。主要包括粒子滤波和迭代最近点。&lt;/p&gt;
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;最后一周讲定位 (localization)，也就是 SLAM 里面的 L。主要包括粒子滤波和迭代最近点。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -46,8 +57,7 @@
       <pubDate>Wed, 25 Jul 2018 07:57:26 +0000</pubDate>
       
       <guid>https://blog.yxwang.me/2018/07/robotics-slam-week2/</guid>
-      <description>&lt;p&gt;这一周主要讲卡尔曼滤波 (Kalman Filter)，视频讲得比较简略，slides 做得里也有不少错误。最后看了一些其他网站的文章和视频才有了比较深刻的理解。参考资料推荐在本文结尾。&lt;/p&gt;
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;这一周主要讲卡尔曼滤波 (Kalman Filter)，视频讲得比较简略，slides 做得里也有不少错误。最后看了一些其他网站的文章和视频才有了比较深刻的理解。参考资料推荐在本文结尾。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -56,8 +66,7 @@
       <pubDate>Mon, 23 Jul 2018 00:18:32 +0000</pubDate>
       
       <guid>https://blog.yxwang.me/2018/07/robotics-slam-week1/</guid>
-      <description>&lt;p&gt;最近宾大在 Coursera 上开了一个&lt;a href=&#34;https://www.coursera.org/specializations/robotics&#34;&gt;机器人系列课程&lt;/a&gt;，包含了视觉、运动规划、机械设计等课题。我对 &lt;a href=&#34;https://en.wikipedia.org/wiki/Simultaneous_localization_and_mapping&#34;&gt;SLAM&lt;/a&gt; 很感兴趣，于是就选了 Robotics Estimation and Learning 这门课，课程主页是&lt;a href=&#34;https://www.coursera.org/learn/robotics-learning/&#34; class=&#34;uri&#34;&gt;https://www.coursera.org/learn/robotics-learning/&lt;/a&gt;。第一周的内容是高斯分布。&lt;/p&gt;
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;最近宾大在 Coursera 上开了一个&lt;a href=&#34;https://www.coursera.org/specializations/robotics&#34;&gt;机器人系列课程&lt;/a&gt;，包含了视觉、运动规划、机械设计等课题。我对 &lt;a href=&#34;https://en.wikipedia.org/wiki/Simultaneous_localization_and_mapping&#34;&gt;SLAM&lt;/a&gt; 很感兴趣，于是就选了 Robotics Estimation and Learning 这门课，课程主页是&lt;a href=&#34;https://www.coursera.org/learn/robotics-learning/&#34; class=&#34;uri&#34;&gt;https://www.coursera.org/learn/robotics-learning/&lt;/a&gt;。第一周的内容是高斯分布。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -66,9 +75,7 @@
       <pubDate>Sat, 21 Jul 2018 15:14:53 -0700</pubDate>
       
       <guid>https://blog.yxwang.me/2018/07/sous-vide-lobster/</guid>
-      <description>&lt;p&gt;Prime Day 的时候入了一套 Sous Vide （真空低温烹饪，读作 soo veed）装备，周末在家尝试了龙虾，味道很不错。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;Prime Day 的时候入了一套 Sous Vide （真空低温烹饪，读作 soo veed）装备，周末在家尝试了龙虾，味道很不错。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -87,9 +94,7 @@
       <pubDate>Sun, 15 Oct 2017 00:09:39 +0000</pubDate>
       
       <guid>https://blog.yxwang.me/2017/10/smart-home-2/</guid>
-      <description>&lt;p&gt;装修了半年多，两个月前正式入住，可以开始好好折腾智能家居了。现在用的一些方案和之前写的&lt;a href=&#34;http://blog.yxwang.me/2017/03/remodel-smart-home/&#34;&gt;智能家居之计划篇&lt;/a&gt;差了不少，于是有了这篇博客聊聊现在的设计。这里直入主题，之前的计划篇里有更多的背景介绍。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;装修了半年多，两个月前正式入住，可以开始好好折腾智能家居了。现在用的一些方案和之前写的&lt;a href=&#34;http://blog.yxwang.me/2017/03/remodel-smart-home/&#34;&gt;智能家居之计划篇&lt;/a&gt;差了不少，于是有了这篇博客聊聊现在的设计。这里直入主题，之前的计划篇里有更多的背景介绍。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -98,9 +103,7 @@
       <pubDate>Tue, 21 Mar 2017 00:00:00 +0000</pubDate>
       
       <guid>https://blog.yxwang.me/2017/03/remodel-smart-home/</guid>
-      <description>&lt;p&gt;二月中旬开始装修房子，做了不少智能家居的研究，分享一下。坐标湾区，项目目前还在计划和购买阶段，欢迎拍砖，欢迎种草。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;二月中旬开始装修房子，做了不少智能家居的研究，分享一下。坐标湾区，项目目前还在计划和购买阶段，欢迎拍砖，欢迎种草。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -113,9 +116,7 @@
 
 &lt;p&gt;&lt;a href=&#34;https://github.com/zellux/markdown-wiki&#34;&gt;markdown-wiki&lt;/a&gt; 是我用 Sinatra 做的一个简单的预览工具，它可以把某个目录下的 Markdown 文件以 Wiki 的形式呈现出来。界面上借用了 &lt;a href=&#34;http://ghost.io/&#34;&gt;Ghost&lt;/a&gt; 的 CSS，可以在 &lt;a href=&#34;http://markdown-wiki-demo.herokuapp.com/&#34;&gt;http://markdown-wiki-demo.herokuapp.com/&lt;/a&gt; 预览（因为是非本地的内容，上方的 Edit 按钮没有作用）。&lt;/p&gt;
 
-&lt;p&gt;Markdown 语法方面，由于用了 &lt;a href=&#34;https://github.com/vmg/redcarpet&#34;&gt;redcarpet&lt;/a&gt; 所以有不少语法扩展，包括代码块、删除线、下划线、上标等，另外包含了 Wiki 内部链接支持。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;Markdown 语法方面，由于用了 &lt;a href=&#34;https://github.com/vmg/redcarpet&#34;&gt;redcarpet&lt;/a&gt; 所以有不少语法扩展，包括代码块、删除线、下划线、上标等，另外包含了 Wiki 内部链接支持。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -124,9 +125,7 @@
       <pubDate>Wed, 21 Aug 2013 00:00:00 +0000</pubDate>
       
       <guid>https://blog.yxwang.me/2013/08/adjusting-mac-volume-with-pc-keyboard/</guid>
-      <description>&lt;p&gt;写了个 &lt;a href=&#34;https://github.com/zellux/adjust-volume&#34;&gt;Alfred 插件&lt;/a&gt;，用于外接 PC 键盘控制 Mac 的系统音量。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;写了个 &lt;a href=&#34;https://github.com/zellux/adjust-volume&#34;&gt;Alfred 插件&lt;/a&gt;，用于外接 PC 键盘控制 Mac 的系统音量。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -135,10 +134,7 @@
       <pubDate>Sun, 14 Jul 2013 00:00:00 +0000</pubDate>
       
       <guid>https://blog.yxwang.me/2013/07/dusit-thani-maldives/</guid>
-      <description>&lt;a data-fancybox=&#34;gallery&#34;  href=/images/2013-07/maldives-tree.jpg &gt;&lt;img src=/images/2013-07/maldives-tree.jpg  width=&#34;560&#34; /&gt;&lt;/a&gt;
-
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;a data-fancybox=&#34;gallery&#34;  href=https://blog.yxwang.me/images/2013-07/maldives-tree.jpg &gt;&lt;img src=https://blog.yxwang.me/images/2013-07/maldives-tree.jpg  width=&#34;560&#34; /&gt;&lt;/a&gt;</description>
     </item>
     
     <item>
@@ -149,12 +145,10 @@
       <guid>https://blog.yxwang.me/2013/06/zhihu-daily-for-kindle/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;http://daily.zhihu.com/&#34;&gt;知乎日报&lt;/a&gt;每天都会更新有意思的问答。我比较习惯用 Kindle 看这样的文章，就写了一个 calibre 的&lt;a href=&#34;https://gist.github.com/zellux/5844688&#34;&gt;插件&lt;/a&gt;抓取每天的内容。&lt;/p&gt;
 
-&lt;p&gt;&lt;a data-fancybox=&#34;gallery&#34;  href=/images/2013-06/zhihu-kindle-1.jpg &gt;&lt;img src=/images/2013-06/zhihu-kindle-1.jpg  width=&#34;300&#34; /&gt;&lt;/a&gt;
+&lt;p&gt;&lt;a data-fancybox=&#34;gallery&#34;  href=https://blog.yxwang.me/images/2013-06/zhihu-kindle-1.jpg &gt;&lt;img src=https://blog.yxwang.me/images/2013-06/zhihu-kindle-1.jpg  width=&#34;300&#34; /&gt;&lt;/a&gt;
 
-&lt;a data-fancybox=&#34;gallery&#34;  href=/images/2013-06/zhihu-kindle-2.jpg &gt;&lt;img src=/images/2013-06/zhihu-kindle-2.jpg  width=&#34;300&#34; /&gt;&lt;/a&gt;
-&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;a data-fancybox=&#34;gallery&#34;  href=https://blog.yxwang.me/images/2013-06/zhihu-kindle-2.jpg &gt;&lt;img src=https://blog.yxwang.me/images/2013-06/zhihu-kindle-2.jpg  width=&#34;300&#34; /&gt;&lt;/a&gt;
+&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -165,9 +159,7 @@
       <guid>https://blog.yxwang.me/2013/02/view-ruby-source-in-shell/</guid>
       <description>&lt;p&gt;如果要查看 ActiveRecord 的 update_attribute 函数的源代码，一个比较常见的方法是直接在 Rails 源码中搜索 &lt;code&gt;def update_attribute&lt;/code&gt;。博客 &lt;a href=&#34;http://pragmaticstudio.com/blog&#34;&gt;The Pragmatic Studio&lt;/a&gt; 介绍了一个更方便的技巧，在 Ruby 命令行中就能启动编辑器直接访问。&lt;/p&gt;
 
-&lt;p&gt;通过 &lt;a href=&#34;http://rdoc.info/stdlib/core/Object:method&#34;&gt;Object#method&lt;/a&gt; 方法可以获得 update_attribute 方法的对象，而 &lt;a href=&#34;http://rdoc.info/stdlib/core/Method:source_location&#34;&gt;Method#source_location&lt;/a&gt; 则返回这个方法定义的文件和位置。有了这个信息后，就能启动编辑器查看源代码了：&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;通过 &lt;a href=&#34;http://rdoc.info/stdlib/core/Object:method&#34;&gt;Object#method&lt;/a&gt; 方法可以获得 update_attribute 方法的对象，而 &lt;a href=&#34;http://rdoc.info/stdlib/core/Method:source_location&#34;&gt;Method#source_location&lt;/a&gt; 则返回这个方法定义的文件和位置。有了这个信息后，就能启动编辑器查看源代码了：&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -180,9 +172,7 @@
 
 &lt;p&gt;&lt;img src=&#34;https://blog.yxwang.me/images/2013-01/zsh-untracked-mark.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 
-&lt;p&gt;使用 &lt;code&gt;git status&lt;/code&gt; 和 &lt;code&gt;git diff&lt;/code&gt;，都看不到任何未提交的改动。一开始我以为是 zsh 或者 git 的 bug，把它们的版本都更新到最新版后还是有这个问题。于是看 steeef 主题的源码，发现了红色标记的判断依据：&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;使用 &lt;code&gt;git status&lt;/code&gt; 和 &lt;code&gt;git diff&lt;/code&gt;，都看不到任何未提交的改动。一开始我以为是 zsh 或者 git 的 bug，把它们的版本都更新到最新版后还是有这个问题。于是看 steeef 主题的源码，发现了红色标记的判断依据：&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -196,9 +186,7 @@
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ find . -name &amp;quot;*.java&amp;quot; -or -name &amp;quot;*.aidl&amp;quot; -or -name &amp;quot;*.cpp&amp;quot; &amp;gt; cscope.files
 
 $ cscope -b
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;/code&gt;&lt;/pre&gt;</description>
     </item>
     
     <item>
@@ -215,9 +203,7 @@ $ cscope -b
   format.json { render json: @items }
   format.html
 end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;/code&gt;&lt;/pre&gt;</description>
     </item>
     
     <item>
@@ -233,9 +219,7 @@ end
 &lt;pre&gt;&lt;code&gt;location = /feed/ {
     rewrite ^(.*)$ http://blog.yxwang.me/atom.xml;
 }
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;/code&gt;&lt;/pre&gt;</description>
     </item>
     
     <item>
@@ -256,9 +240,7 @@ end
 
 &lt;p&gt;Hulu 是这几个公司里唯一一个我没有找人内推而拿到面试机会的，也是面试体验最好的一个公司。Hulu 和 Twitter、Zynga、Foursquare 等公司一样，用了 &lt;a href=&#34;https://hire.jobvite.com/&#34;&gt;jobvite&lt;/a&gt; 接受和追踪职位申请。因为是申请的第一家公司，我在申请 Hulu 时的 cover letter 写得很详细，针对职位需求上的每一条都写了我的相关工作经验，这也许是最后能拿到面试机会的原因吧。其他公司的 cover letter 都写得很简单，短短两段就结束了。&lt;/p&gt;
 
-&lt;p&gt;Hulu 的第一轮电面和其他公司的有些不同。45 分钟里要做四个题。面试官提前十分钟发了一封邮件给我，上面有两段代码。第一段代码是一个检查两个字符串是否是 &lt;a href=&#34;http://en.wikipedia.org/wiki/Anagram&#34;&gt;anagram&lt;/a&gt; 的程序，写得很绕而且性能很差。面试官先问我这段代码的用途，然后问有什么方法优化，并要求我把代码写在 titanpad 上。接着他问了我第二段代码是做什么的。第二段代码也写得有点复杂，不过可以看出是一个检查有向图里面是否存在环的程序。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;Hulu 的第一轮电面和其他公司的有些不同。45 分钟里要做四个题。面试官提前十分钟发了一封邮件给我，上面有两段代码。第一段代码是一个检查两个字符串是否是 &lt;a href=&#34;http://en.wikipedia.org/wiki/Anagram&#34;&gt;anagram&lt;/a&gt; 的程序，写得很绕而且性能很差。面试官先问我这段代码的用途，然后问有什么方法优化，并要求我把代码写在 titanpad 上。接着他问了我第二段代码是做什么的。第二段代码也写得有点复杂，不过可以看出是一个检查有向图里面是否存在环的程序。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -281,9 +263,7 @@ end
 
 &lt;p&gt;电面都和 coding 有关，面试官会给你一个 Google Docs 链接，在电话里描述题目后要求你在 Google Docs 上写程序。题目的难度不高，两轮一共四题，都是对基本数据结构的操作，例如给在一个未排序的数组中去掉重复的数字，还有把一个有序数组转成一个平衡二叉搜索树，在一个已排序但有重复数字的数组中查找元素等。&lt;/p&gt;
 
-&lt;p&gt;第一轮电面聊天的时候还发现第一轮的面试官是在 ITA Software 做的。正好前几天用他们的产品 &lt;a href=&#34;http://matrix.itasoftware.com/&#34;&gt;Matrix Airfare Search&lt;/a&gt; 订到了低价的去土耳其的机票，过了一星期神奇的在面试的时候碰到了这个团队的工程师。当时一下子就兴奋起来，聊了不少和 Matrix 的有关的话题。这位面试官听说中国的机票也能用他们的平台查询，还挺吃惊的。他还提到他们原本想把计算任务放到 Google 内部的计算框架上，但是由于和合作方的合同的限制，没法把一些商业数据放到 Google 的平台里，只能继续用原有的计算引擎。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;第一轮电面聊天的时候还发现第一轮的面试官是在 ITA Software 做的。正好前几天用他们的产品 &lt;a href=&#34;http://matrix.itasoftware.com/&#34;&gt;Matrix Airfare Search&lt;/a&gt; 订到了低价的去土耳其的机票，过了一星期神奇的在面试的时候碰到了这个团队的工程师。当时一下子就兴奋起来，聊了不少和 Matrix 的有关的话题。这位面试官听说中国的机票也能用他们的平台查询，还挺吃惊的。他还提到他们原本想把计算任务放到 Google 内部的计算框架上，但是由于和合作方的合同的限制，没法把一些商业数据放到 Google 的平台里，只能继续用原有的计算引擎。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -304,9 +284,7 @@ end
 
 &lt;p&gt;先简单介绍下自己，国内硕士在读，明年毕业，没有牛 paper，也没参加过 ACM-ICPC 竞赛。在实验室做过内核、虚拟机和 Android 底层相关的研究工作，接过一些网页和移动开发的外包，2011 年开始在&lt;a href=&#34;http://tangcha.tc/&#34;&gt;字节社&lt;/a&gt;兼职负责后台开发。另外也经常上 &lt;a href=&#34;http://stackoverflow.com/users/111896/zellux&#34;&gt;Stackoverflow&lt;/a&gt; 和 &lt;a href=&#34;http://github.com/zellux&#34;&gt;GitHub&lt;/a&gt;。&lt;/p&gt;
 
-&lt;p&gt;这次决定直接申请美国的职位后，由于心里没底，不知道国外公司招聘的难度，所以一开始投了很多公司。几个大公司都找人内推或者直接投了，小公司也投了不少，比如 Foursquare、Path、Pinterest 和 Square 等都试了。当时甚至在手机上找了一圈应用，把可能涉及后端开发的应用都投了一遍。不过大多数公司都没给我安排面试，最后 Microsoft、Google、Facebook、Twitter 和 Hulu 这五家公司愿意给我面试机会。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;这次决定直接申请美国的职位后，由于心里没底，不知道国外公司招聘的难度，所以一开始投了很多公司。几个大公司都找人内推或者直接投了，小公司也投了不少，比如 Foursquare、Path、Pinterest 和 Square 等都试了。当时甚至在手机上找了一圈应用，把可能涉及后端开发的应用都投了一遍。不过大多数公司都没给我安排面试，最后 Microsoft、Google、Facebook、Twitter 和 Hulu 这五家公司愿意给我面试机会。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -323,9 +301,7 @@ end
 
 &lt;p&gt;但是当下了飞机，双脚踏在松山机场的时候，我才意识到这一次台湾之旅真的成行了。&lt;/p&gt;
 
-&lt;p&gt;台湾这次旅游其实对我心理上的积极意义很大，不知道怎么描述，大致就是一件事原以为离自己很远的事情从慢慢部署准备到突然意识到已经成功了的感觉。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;台湾这次旅游其实对我心理上的积极意义很大，不知道怎么描述，大致就是一件事原以为离自己很远的事情从慢慢部署准备到突然意识到已经成功了的感觉。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -347,9 +323,7 @@ end
 &lt;ul&gt;
 &lt;li&gt;办证需要的具体证件网上能搜到很多，这里就不细讲了。办理入台证需要的证件可以直接问旅行社，不同旅行社的要求可能会有细小的差异，比如在存款证明时间上。&lt;/li&gt;
 &lt;li&gt;微博上的 &lt;a href=&#34;http://e.weibo.com/go2tw&#34;&gt;@台湾自由行&lt;/a&gt; 前一阵子推荐几家大陆的低价入台证办理点，应该比较靠谱，可以参考下。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;/ul&gt;</description>
     </item>
     
     <item>
@@ -358,9 +332,7 @@ end
       <pubDate>Wed, 17 Oct 2012 00:00:00 +0000</pubDate>
       
       <guid>https://blog.yxwang.me/2012/10/travel-in-turkey/</guid>
-      <description>&lt;p&gt;刚从土耳其呆了两星期回来，我们的行程是 Istanbul（一天一晚），过夜大巴到 Göreme（三天两晚），过夜大巴到 Fethiye（三天两晚），过夜大巴到 Bursa（一天一晚），下午的轮船回 Istanbul（四天三晚）。趁着记忆还新鲜，写一点土耳其旅游相关的 tips。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;刚从土耳其呆了两星期回来，我们的行程是 Istanbul（一天一晚），过夜大巴到 Göreme（三天两晚），过夜大巴到 Fethiye（三天两晚），过夜大巴到 Bursa（一天一晚），下午的轮船回 Istanbul（四天三晚）。趁着记忆还新鲜，写一点土耳其旅游相关的 tips。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -371,9 +343,7 @@ end
       <guid>https://blog.yxwang.me/2012/08/twitter-snowflake/</guid>
       <description>&lt;p&gt;这是一篇两年前 Twitter 开发团队写的文章，今天挖出来研究了一下。原文地址 &lt;a href=&#34;http://engineering.twitter.com/2010/06/announcing-snowflake.html&#34;&gt;http://engineering.twitter.com/2010/06/announcing-snowflake.html&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;Twitter 早期用 MySQL 存储数据，随着用户的增长，单一的 MySQL 实例没法承受海量的数据，开发团队就开始用 &lt;a href=&#34;http://cassandra.apache.org/&#34;&gt;Cassandra&lt;/a&gt; 和 sharded MySQL 替代原有的系统。然而和 MySQL 不同的是，Cassandra 没有内置为每一条数据生成唯一 ID 的功能，因为在一个分布式环境下，很难有完美的 ID 生成方案。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;Twitter 早期用 MySQL 存储数据，随着用户的增长，单一的 MySQL 实例没法承受海量的数据，开发团队就开始用 &lt;a href=&#34;http://cassandra.apache.org/&#34;&gt;Cassandra&lt;/a&gt; 和 sharded MySQL 替代原有的系统。然而和 MySQL 不同的是，Cassandra 没有内置为每一条数据生成唯一 ID 的功能，因为在一个分布式环境下，很难有完美的 ID 生成方案。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -393,9 +363,7 @@ end
       <pubDate>Sat, 21 Jul 2012 00:00:00 +0000</pubDate>
       
       <guid>https://blog.yxwang.me/2012/07/android-tap-timetout/</guid>
-      <description>&lt;p&gt;最近实验室做的一个东西会向 Android 应用快速注入一系列触屏事件，模拟用户的点击。但是我们发现当按下和弹起的 MotionEvent 之间时间间隔过小（例如小于 100ms）时，会导致该事件被忽略。看了代码后发现 Android 中按下和弹起之间时间间隔要在 115ms 以上才会被认为是一个点击事件。这里结合 Android 的源码分析一下点击事件的产生过程。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;最近实验室做的一个东西会向 Android 应用快速注入一系列触屏事件，模拟用户的点击。但是我们发现当按下和弹起的 MotionEvent 之间时间间隔过小（例如小于 100ms）时，会导致该事件被忽略。看了代码后发现 Android 中按下和弹起之间时间间隔要在 115ms 以上才会被认为是一个点击事件。这里结合 Android 的源码分析一下点击事件的产生过程。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -416,9 +384,7 @@ Object[] a2 = a1;
 
 &lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;a2[0] = new Integer(17)
 String s  = a1[0]  // java.lang.ArrayStoreException
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;/code&gt;&lt;/pre&gt;</description>
     </item>
     
     <item>
@@ -429,12 +395,10 @@ String s  = a1[0]  // java.lang.ArrayStoreException
       <guid>https://blog.yxwang.me/2012/06/revisiting-storage-for-smartphones/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;https://www.usenix.org/comment/260&#34;&gt;Revisiting Storage for Smartphones&lt;/a&gt; 是今年 FAST 会议上的最佳论文，这篇论文提出了一个违背直觉的观点，很有意思。这里简单介绍一下这篇论文的内容，有兴趣的朋友可以直接访问前面的链接下载原文或是观看现场录像。&lt;/p&gt;
 
-&lt;a data-fancybox=&#34;gallery&#34;  data-caption=&#34;移动存储性能&#34; href=/images/2012-06/mobile-flash-throughtput.png &gt;&lt;img src=/images/2012-06/mobile-flash-throughtput.png  /&gt;&lt;/a&gt;
+&lt;a data-fancybox=&#34;gallery&#34;  data-caption=&#34;移动存储性能&#34; href=https://blog.yxwang.me/images/2012-06/mobile-flash-throughtput.png &gt;&lt;img src=https://blog.yxwang.me/images/2012-06/mobile-flash-throughtput.png  /&gt;&lt;/a&gt;
 
 
-&lt;p&gt;传统的观点认为，移动应用性能的主要瓶颈在网络和 CPU，而闪存的读写速率明显高于网络传输速度，不会成为性能的瓶颈。然而，根据上图作者给出的关于移动存储性能的图例（纵坐标单位为 Mbps，本文图片均来自演讲 slides 和原论文），我们可以看到，虽然移动存储顺序读写的性能明显高于 wifi 和 3G，但是随机写的性能却比它们差很多，因此移动存储成为应用性能瓶颈是完全有可能的。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;传统的观点认为，移动应用性能的主要瓶颈在网络和 CPU，而闪存的读写速率明显高于网络传输速度，不会成为性能的瓶颈。然而，根据上图作者给出的关于移动存储性能的图例（纵坐标单位为 Mbps，本文图片均来自演讲 slides 和原论文），我们可以看到，虽然移动存储顺序读写的性能明显高于 wifi 和 3G，但是随机写的性能却比它们差很多，因此移动存储成为应用性能瓶颈是完全有可能的。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -458,9 +422,7 @@ files.each do |file|
     puts &amp;quot;.#{file} linked&amp;quot; if safe_mode
   end
 end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;/code&gt;&lt;/pre&gt;</description>
     </item>
     
     <item>
@@ -480,9 +442,7 @@ Connection: keep-alive
 Etag: &amp;quot;f74bb78aa48d36e6a0b2072a131b20b9&amp;quot;
 Cache-Control: public, max-age=300
 Content-Length: 15481
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;/code&gt;&lt;/pre&gt;</description>
     </item>
     
     <item>
@@ -498,9 +458,7 @@ Content-Length: 15481
 &lt;li&gt;在 Visio 中打印，选择新添加的打印机，选中 Print to file，点 Properties -&amp;gt; Advanced&lt;/li&gt;
 &lt;li&gt;Document Options -&amp;gt; PostScript Options -&amp;gt; PostScript Output Option 中，选择 Encapsulated PostScript (EPS)&lt;/li&gt;
 &lt;li&gt;保存时别忘了加后缀名 .eps&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;/ul&gt;</description>
     </item>
     
     <item>
@@ -509,9 +467,7 @@ Content-Length: 15481
       <pubDate>Mon, 05 Dec 2011 00:00:00 +0000</pubDate>
       
       <guid>https://blog.yxwang.me/2011/12/zvt-notes/</guid>
-      <description>&lt;p&gt;一直在国服大师组混，最让我头疼，同时研究的也最多得对战就是 ZvT 了。这里写一点自己关于 ZvT 的心得，欢迎探讨。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;一直在国服大师组混，最让我头疼，同时研究的也最多得对战就是 ZvT 了。这里写一点自己关于 ZvT 的心得，欢迎探讨。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -1098,8 +1054,7 @@ https://support.mozilla.com/tiki-view_forum_thread.php?locale=zh-CN&amp;comments
 
 &lt;p&gt;问题描述很简单，第一个问题是实现一个函数f，参数为一个带符号的32位整型，使得f(f(x)) = -x，即调用两次后返回的结果为原来的相反数；另一个问题也是实现一个函数g，参数为一个32位浮点，最后使得g(g(x)) = 1/x。如果不能满足所有的情况，就满足尽可能多的情形。&lt;/p&gt;
 
-&lt;p&gt;第二个问题比第一个问题简单一点，目前支持数最高的两个答案如下：
-&lt;/p&gt;</description>
+&lt;p&gt;第二个问题比第一个问题简单一点，目前支持数最高的两个答案如下：&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -1543,7 +1498,9 @@ def a(): def b(): x += 1 x = 1 print &amp;quot;a: &amp;quot;, x b() print &amp;q
 
 &lt;p&gt;&lt;a href=&#34;http://hi.baidu.com/qq303520912/blog/item/de5cba082db83e36e924889e.html&#34; target=&#34;_blank&#34;&gt;&lt;a href=&#34;http://hi.baidu.com/qq303520912/blog/item/de5cba082db83e36e924889e.html&#34;&gt;http://hi.baidu.com/qq303520912/blog/item/de5cba082db83e36e924889e.html&lt;/a&gt;&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;Endnote是目前国内科研人员使用最多的文献管理软件，功能最完备，各数据库或大学图书馆等和它的兼容也是最好。它的Filter和style也最为丰富，而且可以自己创建修改。看看周围的人，大部分都是Endnote的用户。 　　Zotero作为一个新的文件管理系统，与Endnote相比还是稚嫩了些，特别对于国内数据库的支持不佳，更是限制了它的应用。&lt;/p&gt;</description>
+&lt;p&gt;Endnote是目前国内科研人员使用最多的文献管理软件，功能最完备，各数据库或大学图书馆等和它的兼容也是最好。它的Filter和style也最为丰富，而且可以自己创建修改。看看周围的人，大部分都是Endnote的用户。 　　Zotero作为一个新的文件管理系统，与Endnote相比还是稚嫩了些，特别对于国内数据库的支持不佳，更是限制了它的应用。&lt;/p&gt;
+
+&lt;p&gt;不过，Zotero作为Firefox浏览器的插件，还是有一些特别之处。&lt;/p&gt;</description>
     </item>
     
     <item>

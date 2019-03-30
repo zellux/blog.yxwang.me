@@ -16,8 +16,6 @@ Object[] a2 = a1;
 
 a2[0] = new Integer(17)
 String s  = a1[0]  // java.lang.ArrayStoreException
-
-
 ">
     <meta name="author" content="zellux">
 
@@ -29,7 +27,7 @@ String s  = a1[0]  // java.lang.ArrayStoreException
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.adcf086c1f059a87f5d683b251786185c0db7c1ec7f84cfd5542ca1d1c566d48.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -62,9 +60,7 @@ Object[] a2 = a1;
 
 <pre><code class="language-java">a2[0] = new Integer(17)
 String s  = a1[0]  // java.lang.ArrayStoreException
-</code></pre>
-
-<p></p>",
+</code></pre>",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -131,8 +127,6 @@ Object[] a2 = a1;
 <pre><code class="language-java">a2[0] = new Integer(17)
 String s  = a1[0]  // java.lang.ArrayStoreException
 </code></pre>
-
-<p></p>
 
 <p>之所以要采用这种设计，Java 的发明者 James Gosling 曾解释说，这样做就能用一种简单通用的方式处理 Java 数组了。例如 java.util.Arrays 提供了sort 方法用于所有数组类型的排序，它的函数声明是 <code>sort(Object[] a, Comparator c)</code>，如果 Java 数组不支持协变，那么就很难简单的写出这样通用的排序方法了。</p>
 

@@ -19,9 +19,7 @@
       <guid>https://blog.yxwang.me/2013/02/view-ruby-source-in-shell/</guid>
       <description>&lt;p&gt;如果要查看 ActiveRecord 的 update_attribute 函数的源代码，一个比较常见的方法是直接在 Rails 源码中搜索 &lt;code&gt;def update_attribute&lt;/code&gt;。博客 &lt;a href=&#34;http://pragmaticstudio.com/blog&#34;&gt;The Pragmatic Studio&lt;/a&gt; 介绍了一个更方便的技巧，在 Ruby 命令行中就能启动编辑器直接访问。&lt;/p&gt;
 
-&lt;p&gt;通过 &lt;a href=&#34;http://rdoc.info/stdlib/core/Object:method&#34;&gt;Object#method&lt;/a&gt; 方法可以获得 update_attribute 方法的对象，而 &lt;a href=&#34;http://rdoc.info/stdlib/core/Method:source_location&#34;&gt;Method#source_location&lt;/a&gt; 则返回这个方法定义的文件和位置。有了这个信息后，就能启动编辑器查看源代码了：&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;通过 &lt;a href=&#34;http://rdoc.info/stdlib/core/Object:method&#34;&gt;Object#method&lt;/a&gt; 方法可以获得 update_attribute 方法的对象，而 &lt;a href=&#34;http://rdoc.info/stdlib/core/Method:source_location&#34;&gt;Method#source_location&lt;/a&gt; 则返回这个方法定义的文件和位置。有了这个信息后，就能启动编辑器查看源代码了：&lt;/p&gt;</description>
     </item>
     
     <item>

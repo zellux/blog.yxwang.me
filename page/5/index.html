@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 
   <head>
-	<meta name="generator" content="Hugo 0.50" />
+	<meta name="generator" content="Hugo 0.54.0" />
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <meta name="description" content="">
@@ -16,7 +16,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.adcf086c1f059a87f5d683b251786185c0db7c1ec7f84cfd5542ca1d1c566d48.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -45,8 +45,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2011",
-    "datePublished": "2011-03-02 00:00:00 &#43;0000 UTC",
-    "dateModified" : "2011-03-02 00:00:00 &#43;0000 UTC",
+    "datePublished": "2011-07-28 00:00:00 &#43;0000 UTC",
+    "dateModified" : "2011-07-28 00:00:00 &#43;0000 UTC",
     "url" : "https://blog.yxwang.me/",
     "wordCount" : "0",
     "keywords" : [ "Blog" ]
@@ -80,6 +80,28 @@
 <div class="content index">
   <div class="posts">
      
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2011/07/full-screen-emacs-in-lion/">让 Emacs 支持 Lion 的全屏模式</a></h2>
+      <span class="post-meta">
+  <time datetime='Thu, Jul 28, 2011' data-updated="true" itemprop="datePublished">Thu, Jul 28, 2011</time>
+  
+  <span class="post-categories">
+    •
+	<a href="https://blog.yxwang.me/categories/tooling">Tooling</a>
+  </span>
+  
+</span>
+
+      
+      <div class="summary">
+        前几天给我的 MacBook Pro 装上了 Lion，不过原来的 Emacs 并不支持在 Lion 下全屏运行。github 上搜了下发现已经有让 Emacs 支持全屏模式的补丁了，Homebrew 中这个补丁也已经被吸收。
+直接用 brew install emacs &ndash;cocoa &ndash;srgb 似乎会碰到编译错误：
+Finding pointers to doc strings... Finding pointers to doc strings...done Dumping under the name emacs unexec: cannot write section __data --- List of All Regions --- address size prot maxp --- List of Regions to be Dumped --- address size prot maxp --- Header Information --- Magic = 0xfeedfacf CPUType = 16777223 CPUSubType = -2147483645 FileType = 0x2 NCmds = 20 SizeOfCmds = 3464 Flags = 0x00200085 Highest address of load commands in input file: 0x5dd000 Lowest offset of all sections in __TEXT segment: 0x22f0 --- List of Load Commands in Input File ---  github issues 上已经有人报告这个问题了，解决方法也很简单，运行 brew edit emacs 打开 emacs 的安装脚本，在 def install 的后面加上两行：
+	<a class="read-more" href="/2011/07/full-screen-emacs-in-lion/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
     <div class="post">
       <h2 class="post-title"><a href="https://blog.yxwang.me/2011/03/send-notifications-with-netgrowl/">利用 netgrowl 向 Windows / Mac OS X 发送消息</a></h2>
       <span class="post-meta">
@@ -310,30 +332,6 @@ sicp.plt包使用很简单，在Language-&gt;Choose Language中选择Module，�
 下面这个程序显示了一个简单的分形图像：
 #lang scheme (require (planet &quot;sicp.ss&quot; (&quot;soegaard&quot; &quot;sicp.plt&quot; 2 1))) (define (right-split painter n) (if (= n 0) painter (let ((smaller (right-split painter (- n 1)))) (beside painter (below smaller smaller))))) (define (up-split painter n) (if (= n 0) painter (let ((smaller (up-split painter (- n 1)))) (below painter (beside smaller smaller))))) (define (corner-split painter n) (if (= n 0) painter (let ((up (up-split painter (- n 1))) (right (right-split painter (- n 1)))) (let ((top-left (beside up up)) (bottom-right (below right right)) (corner (corner-split painter (- n 1)))) (beside (below painter top-left) (below bottom-right corner)))))) (paint (corner-split diagonal-shading 4))  程序输出：
 	<a class="read-more" href="/2010/02/the-sicp-picture-language/">阅读全文 →</a>
-      </div>
-      
-    </div>
-    
-    <div class="post">
-      <h2 class="post-title"><a href="https://blog.yxwang.me/2010/02/gitk-font/">优化 gitk 的字体显示</a></h2>
-      <span class="post-meta">
-  <time datetime='Sun, Feb 14, 2010' data-updated="true" itemprop="datePublished">Sun, Feb 14, 2010</time>
-  
-  <span class="post-categories">
-    •
-	<a href="https://blog.yxwang.me/categories/tooling">Tooling</a>
-  </span>
-  
-</span>
-
-      
-      <div class="summary">
-        gitk是用Tcl/Tk写的工具，默认使用Tk 8.4，不支持抗锯齿，因此字体显示很难看。好在Tk 8.5支持了部分抗锯齿字体，修改gitk使用Tk 8.5后显示效果会好一点。
-以Ubuntu为例，安装tk8.5包后，编辑/usr/bin/gitk文件，把开头调用wish的那行
-exec /usr/bin/wish &quot;$0&quot; -- &quot;$@&quot;  改成
-exec /usr/bin/wish8.5 &quot;$0&quot; -- &quot;$@&quot;  这样就能在gitk中开启抗锯齿了，虽然效果还不是很好。另外qgit也是一个不错的选择。
-参考链接：http://navarra.ca/?p=44
-	<a class="read-more" href="/2010/02/gitk-font/">阅读全文 →</a>
       </div>
       
     </div>

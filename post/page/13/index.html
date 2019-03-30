@@ -15,7 +15,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.adcf086c1f059a87f5d683b251786185c0db7c1ec7f84cfd5542ca1d1c566d48.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -44,8 +44,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2008",
-    "datePublished": "2008-07-04 00:00:00 &#43;0000 UTC",
-    "dateModified" : "2008-07-04 00:00:00 &#43;0000 UTC",
+    "datePublished": "2008-07-19 00:00:00 &#43;0000 UTC",
+    "dateModified" : "2008-07-19 00:00:00 &#43;0000 UTC",
     "url" : "https://blog.yxwang.me/post/",
     "wordCount" : "0",
     "keywords" : [ "Blog" ]
@@ -79,6 +79,37 @@
 <div class="content">
   <div class="posts">
      
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2008/07/leaksurvivor/">Usenix 08 - LeakSurvivor</a></h2>
+      <span class="post-date">Jul 19, 2008</span>
+      
+      <span class="post-tags">
+	
+	#<a href="https://blog.yxwang.me/tags/computer-system">Computer System</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/memory">Memory</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/paper">Paper</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/research">Research</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/usenix">Usenix</a>&nbsp;
+	
+      </span>
+      
+      
+      
+      <div class="summary">
+	Paper: LeakSurvivor: Towards Safely Tolerating Memory Leaks for Garbage-Collected Languages
+http://www.usenix.org/events/usenix08/tech/tang.html
+Yan Tang, Qi Gao, and Feng Qin, The Ohio State University
+三位作者好像都是中国人
+这篇paper针对支持垃圾收集的语言中内存泄露问题，提出了一种比较保守的“换出”策略，即把可疑的内存泄露的对象（这些对象通常都是长时间没有被访问的）从内存移动到硬盘上暂时保存，减小内存的压力；如果这些对象后来被再次访问（这种可能性很小），就把它们从硬盘上移回内存。
+	<a class="read-more" href="/2008/07/leaksurvivor/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
     <div class="post">
       <h2 class="post-title"><a href="https://blog.yxwang.me/2008/07/singleton-pattern-and-double-checked-lock/">Singleton 模式与双检测锁定(DCL)</a></h2>
       <span class="post-date">Jul 4, 2008</span>
@@ -369,39 +400,6 @@ int Count(int v) { int num = 0; while (v) { num += v &amp; 0x01; v &gt;&gt;= 1; 
 int countTable[256] = { 0, 1, 1, 2, 1, ..., 7, 7, 8 }; int Count(int v) { return countTable[v]; }  好了，这就是样章上给出的四种方案，下面谈谈我的看法。
 首先是对算法的衡量上，复杂度真的是唯一的标准吗？尤其对于这种数据规模给定，而且很小的情况下，复杂度其实是个比较次要的因素。
 	<a class="read-more" href="/2008/04/count-1-bits-in-an-int32/">阅读全文 →</a>
-      </div>
-      
-    </div>
-    
-    <div class="post">
-      <h2 class="post-title"><a href="https://blog.yxwang.me/2008/03/ics-lab-4-optimizations/">ICS Lab4 常用优化方法</a></h2>
-      <span class="post-date">Mar 23, 2008</span>
-      
-      <span class="post-tags">
-	
-	#<a href="https://blog.yxwang.me/tags/courses">Courses</a>&nbsp;
-	
-	#<a href="https://blog.yxwang.me/tags/ics">ICS</a>&nbsp;
-	
-	#<a href="https://blog.yxwang.me/tags/lab">Lab</a>&nbsp;
-	
-      </span>
-      
-      
-      
-      <div class="summary">
-	几个基本的优化：
- 用iaddl代替irmovl, opl，效果显著 删去不必要的andl，效果显著 改变判断分支（大多数是正数），效果显著 实现Load Forwarding，效果显著 函数结束时使用自己的epilogue，效果一般  Unrolling相关：
- 通过合并相邻两个循环，把mrmovl和rmmovl拆开，效果显著 32, 16, 8, 4, 1分段处理，效果显著，我用这个方法做到过7.2左右  Jump Table
-由Duff&rsquo;s Device引申出来的想法，代替了我原来那个32-16-8-4-1程序。 很好用的一个技巧，配合unrolling就不需要不断比较i和len的大小了。 比如len=15的时候，只要跳转到倒数第15个复制段落，就可以挨个做下来，而不需要多余的判断。 具体的实现可以想想x86里的情况，假设几个复制段落的标签为Loop1, Loop2, &hellip;
-jump: .long Loop1 .long Loop2 &hellip;
-之后就只要取出jump + (len - 1) * 4处的值，然后跳到这个位置就行了。 跳的时候还有个技巧，最简单的是把这个值push到栈，然后再ret。这样的话bubble很多。
-考虑到这个模拟器里代码段是不受保护的，也就是说运行的时候可以动态修改内存中的代码，于是在跳转的地方写个jmp 0，然后运行的时候动态把这个0改掉就行。
-另外要注意用这个方法的时候得手动写几个nop，或者在改内存的语句和jmp语句之间加几个其他命令，因为y86模拟器是默认程序不会修改自己的代码的(p328 灰色背景部分)。
-用这个方法的时候还有一些细节可以优化，就不列举了。另外不知道利用自我修改这个特点能不能做出更神奇的效果呢？
-比如我还想到另一种类似的方法，让程序从头到尾运行，不跳转，而是在程序运行时动态的插入ret语句直接把程序运行流掐断。我还没试过，有兴趣的同学可以试一试。
-不知道还有没有其他的优化方法，欢迎讨论~
-	<a class="read-more" href="/2008/03/ics-lab-4-optimizations/">阅读全文 →</a>
       </div>
       
     </div>

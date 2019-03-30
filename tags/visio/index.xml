@@ -24,9 +24,7 @@
 &lt;li&gt;在 Visio 中打印，选择新添加的打印机，选中 Print to file，点 Properties -&amp;gt; Advanced&lt;/li&gt;
 &lt;li&gt;Document Options -&amp;gt; PostScript Options -&amp;gt; PostScript Output Option 中，选择 Encapsulated PostScript (EPS)&lt;/li&gt;
 &lt;li&gt;保存时别忘了加后缀名 .eps&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;/ul&gt;</description>
     </item>
     
   </channel>

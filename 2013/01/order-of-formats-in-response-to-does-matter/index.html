@@ -12,8 +12,6 @@ respond_to do |format|
   format.json { render json: @items }
   format.html
 end
-
-
 ">
     <meta name="author" content="zellux">
 
@@ -25,7 +23,7 @@ end
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.adcf086c1f059a87f5d683b251786185c0db7c1ec7f84cfd5542ca1d1c566d48.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -54,9 +52,7 @@ end
   format.json { render json: @items }
   format.html
 end
-</code></pre>
-
-<p></p>",
+</code></pre>",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -119,8 +115,6 @@ end
   format.html
 end
 </code></pre>
-
-<p></p>
 
 <p>有些浏览器或者内嵌了 WebKit 控件的程序，发送的 HTTP 请求头中，<code>Content-Type</code> 的值是 <code>*/*</code>。这就导致 JSON 的 MIME (application/json) 匹配成功后返回给了浏览器。自然用户看到的是 JSON 而不是一个完整的网页。所以从这个角度来说，把 format.html 放在第一位比较合适（不知道有什么例外情况吗？）。</p>
 

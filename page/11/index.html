@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 
   <head>
-	<meta name="generator" content="Hugo 0.50" />
+	<meta name="generator" content="Hugo 0.54.0" />
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <meta name="description" content="">
@@ -16,7 +16,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.adcf086c1f059a87f5d683b251786185c0db7c1ec7f84cfd5542ca1d1c566d48.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -45,8 +45,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2008",
-    "datePublished": "2008-11-17 00:00:00 &#43;0000 UTC",
-    "dateModified" : "2008-11-17 00:00:00 &#43;0000 UTC",
+    "datePublished": "2008-11-30 00:00:00 &#43;0000 UTC",
+    "dateModified" : "2008-11-30 00:00:00 &#43;0000 UTC",
     "url" : "https://blog.yxwang.me/",
     "wordCount" : "0",
     "keywords" : [ "Blog" ]
@@ -80,6 +80,30 @@
 <div class="content index">
   <div class="posts">
      
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2008/11/finding-and-reproducing-heisenbugs-in-concurrent-programs/">OSDI 08 - CHESS</a></h2>
+      <span class="post-meta">
+  <time datetime='Sun, Nov 30, 2008' data-updated="true" itemprop="datePublished">Sun, Nov 30, 2008</time>
+  
+  <span class="post-categories">
+    •
+	<a href="https://blog.yxwang.me/categories/computer-system">Computer System</a>
+  </span>
+  
+</span>
+
+      
+      <div class="summary">
+        Finding and Reproducing Heisenbugs in Concurrent Programs
+OSDI &lsquo;08上微软研究院发的paper，针对并发编程中难以发现的bug问题。
+paper的内容主要分两大块。
+一是如何在发现bug的时候记录下线程的运行先后(thread interleaving)，途径是在线程API和用户程序多写一层wrapper functions，这里还有一些其他的问题，比如只记录下了thread interleaving的话出现data race怎么解决等。
+另外一块内容是如何遍历出给定程序运行后所能产生的结果的集合，加入这个能实现的话那就能把所有隐藏的bug都找出来了。但是这个搜索空间很大，是指数级的，的一个结论就是：给定一个程序有n个的线程，所有线程共完成k条指令，那么c次占先调度后线程的排列情况数的复杂度是$$k^{c}$$的，所以在实现遍历代码的时候必须有效的降低k和c的值。
+	<a class="read-more" href="/2008/11/finding-and-reproducing-heisenbugs-in-concurrent-programs/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
     <div class="post">
       <h2 class="post-title"><a href="https://blog.yxwang.me/2008/11/daily-notes-on-python1117-1123/">Daily Notes on Python[11.17-11.23]</a></h2>
       <span class="post-meta">
@@ -262,6 +286,8 @@ def a(): def b(): x += 1 x = 1 print &quot;a: &quot;, x b() print &quot;b: &quot
 <p><a href="http://hi.baidu.com/qq303520912/blog/item/de5cba082db83e36e924889e.html" target="_blank"><a href="http://hi.baidu.com/qq303520912/blog/item/de5cba082db83e36e924889e.html">http://hi.baidu.com/qq303520912/blog/item/de5cba082db83e36e924889e.html</a></a></p>
 
 <p>Endnote是目前国内科研人员使用最多的文献管理软件，功能最完备，各数据库或大学图书馆等和它的兼容也是最好。它的Filter和style也最为丰富，而且可以自己创建修改。看看周围的人，大部分都是Endnote的用户。 　　Zotero作为一个新的文件管理系统，与Endnote相比还是稚嫩了些，特别对于国内数据库的支持不佳，更是限制了它的应用。</p>
+
+<p>不过，Zotero作为Firefox浏览器的插件，还是有一些特别之处。</p>
 	<a class="read-more" href="/2008/10/sync-between-zotero-and-endnote/">阅读全文 →</a>
       </div>
       
@@ -286,31 +312,6 @@ Joe Armstrong的原话 Live code upgrading is one of the things Erlang was desig
 一个最简单的例子
 loop(Fun, State) receive {From, {rpc, Tag, Q}} -&gt; {Reply, State1} = Fun(Q, State), From ! {Tag, Reply}, loop(Fun, State1); {code_upgrade, Fun1} -&gt; loop(Fun1, State) end.  使用时只要发送一个{code_update, Fun1}消息即可 在实际的项目中，live code update需要在一个进程的稳定状态中进行。好在有Erlang天生的分布式特性，结点i进行更新时其他结点可以接管这个结点的任务，直到结点i更新成功，再进行下一个结点的更新。这个形式和结点的crash处理有点类似。于是Erlang中live updating的实际难点在于 1. How to suspend the system and put it into a stable state 2. How to replicate the stable state 3. How to restart from a stable state 4.
 	<a class="read-more" href="/2008/10/live-code-update-in-erlang/">阅读全文 →</a>
-      </div>
-      
-    </div>
-    
-    <div class="post">
-      <h2 class="post-title"><a href="https://blog.yxwang.me/2008/10/erlang-hello-world/">Erlang的Hello World：一个计数程序</a></h2>
-      <span class="post-meta">
-  <time datetime='Mon, Oct 13, 2008' data-updated="true" itemprop="datePublished">Mon, Oct 13, 2008</time>
-  
-  <span class="post-categories">
-    •
-	<a href="https://blog.yxwang.me/categories/programming">Programming</a>
-  </span>
-  
-</span>
-
-      
-      <div class="summary">
-        acm queue 9月的杂志的主题是The Concurrency Problem，力推了Erlang这个语言，其中有篇文章简单的介绍了下这个message-oriented语言。
-查了下这个名字的读法，正确的读法应该是air-lang，这里元音a的发音和bang中的a一样。
-文章中的第一个程序就有点令人费解，主要原因在于Erlang的语法和一般的imperative language差别很大，和functional language比较类似，但是本质上也有很大的不同。
-以Java的一个计数程序为例
-// A shared counter. public class Sequence { private int nextVal = 0; // Retrieve counter and increment. public synchronized int getNext() { return nextVal++; } // Re-initialize counter to zero. public synchronized void reset() { nextVal = 0; } }  这个程序的功能不用多说了，一个同步的计数程序。它的Erlang翻译版的代码为
--module(sequence1). -export([make_sequence/0, get_next/1, reset/1]). % Create a new shared counter. make_sequence() -&gt; spawn(fun() -&gt; sequence_loop(0) end). sequence_loop(N) -&gt; receive {From, get_next} -&gt; From !
-	<a class="read-more" href="/2008/10/erlang-hello-world/">阅读全文 →</a>
       </div>
       
     </div>

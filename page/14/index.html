@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 
   <head>
-	<meta name="generator" content="Hugo 0.50" />
+	<meta name="generator" content="Hugo 0.54.0" />
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <meta name="description" content="">
@@ -16,7 +16,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.adcf086c1f059a87f5d683b251786185c0db7c1ec7f84cfd5542ca1d1c566d48.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -45,8 +45,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2008",
-    "datePublished": "2008-03-16 00:00:00 &#43;0000 UTC",
-    "dateModified" : "2008-03-16 00:00:00 &#43;0000 UTC",
+    "datePublished": "2008-03-23 00:00:00 &#43;0000 UTC",
+    "dateModified" : "2008-03-23 00:00:00 &#43;0000 UTC",
     "url" : "https://blog.yxwang.me/",
     "wordCount" : "0",
     "keywords" : [ "Blog" ]
@@ -80,6 +80,36 @@
 <div class="content index">
   <div class="posts">
      
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2008/03/ics-lab-4-optimizations/">ICS Lab4 常用优化方法</a></h2>
+      <span class="post-meta">
+  <time datetime='Sun, Mar 23, 2008' data-updated="true" itemprop="datePublished">Sun, Mar 23, 2008</time>
+  
+  <span class="post-categories">
+    •
+	<a href="https://blog.yxwang.me/categories/courses">Courses</a>
+  </span>
+  
+</span>
+
+      
+      <div class="summary">
+        几个基本的优化：
+ 用iaddl代替irmovl, opl，效果显著 删去不必要的andl，效果显著 改变判断分支（大多数是正数），效果显著 实现Load Forwarding，效果显著 函数结束时使用自己的epilogue，效果一般  Unrolling相关：
+ 通过合并相邻两个循环，把mrmovl和rmmovl拆开，效果显著 32, 16, 8, 4, 1分段处理，效果显著，我用这个方法做到过7.2左右  Jump Table
+由Duff&rsquo;s Device引申出来的想法，代替了我原来那个32-16-8-4-1程序。 很好用的一个技巧，配合unrolling就不需要不断比较i和len的大小了。 比如len=15的时候，只要跳转到倒数第15个复制段落，就可以挨个做下来，而不需要多余的判断。 具体的实现可以想想x86里的情况，假设几个复制段落的标签为Loop1, Loop2, &hellip;
+jump: .long Loop1 .long Loop2 &hellip;
+之后就只要取出jump + (len - 1) * 4处的值，然后跳到这个位置就行了。 跳的时候还有个技巧，最简单的是把这个值push到栈，然后再ret。这样的话bubble很多。
+考虑到这个模拟器里代码段是不受保护的，也就是说运行的时候可以动态修改内存中的代码，于是在跳转的地方写个jmp 0，然后运行的时候动态把这个0改掉就行。
+另外要注意用这个方法的时候得手动写几个nop，或者在改内存的语句和jmp语句之间加几个其他命令，因为y86模拟器是默认程序不会修改自己的代码的(p328 灰色背景部分)。
+用这个方法的时候还有一些细节可以优化，就不列举了。另外不知道利用自我修改这个特点能不能做出更神奇的效果呢？
+比如我还想到另一种类似的方法，让程序从头到尾运行，不跳转，而是在程序运行时动态的插入ret语句直接把程序运行流掐断。我还没试过，有兴趣的同学可以试一试。
+不知道还有没有其他的优化方法，欢迎讨论~
+	<a class="read-more" href="/2008/03/ics-lab-4-optimizations/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
     <div class="post">
       <h2 class="post-title"><a href="https://blog.yxwang.me/2008/03/ics-lab4/">ICS Lab4 经验</a></h2>
       <span class="post-meta">

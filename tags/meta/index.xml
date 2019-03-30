@@ -24,9 +24,7 @@
 &lt;pre&gt;&lt;code&gt;location = /feed/ {
     rewrite ^(.*)$ http://blog.yxwang.me/atom.xml;
 }
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;/code&gt;&lt;/pre&gt;</description>
     </item>
     
     <item>

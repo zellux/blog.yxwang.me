@@ -17,9 +17,7 @@
       <pubDate>Sat, 21 Jul 2012 00:00:00 +0000</pubDate>
       
       <guid>https://blog.yxwang.me/2012/07/android-tap-timetout/</guid>
-      <description>&lt;p&gt;最近实验室做的一个东西会向 Android 应用快速注入一系列触屏事件，模拟用户的点击。但是我们发现当按下和弹起的 MotionEvent 之间时间间隔过小（例如小于 100ms）时，会导致该事件被忽略。看了代码后发现 Android 中按下和弹起之间时间间隔要在 115ms 以上才会被认为是一个点击事件。这里结合 Android 的源码分析一下点击事件的产生过程。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;最近实验室做的一个东西会向 Android 应用快速注入一系列触屏事件，模拟用户的点击。但是我们发现当按下和弹起的 MotionEvent 之间时间间隔过小（例如小于 100ms）时，会导致该事件被忽略。看了代码后发现 Android 中按下和弹起之间时间间隔要在 115ms 以上才会被认为是一个点击事件。这里结合 Android 的源码分析一下点击事件的产生过程。&lt;/p&gt;</description>
     </item>
     
   </channel>

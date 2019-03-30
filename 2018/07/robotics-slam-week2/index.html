@@ -4,8 +4,7 @@
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-    <meta name="description" content="这一周主要讲卡尔曼滤波 (Kalman Filter)，视频讲得比较简略，slides 做得里也有不少错误。最后看了一些其他网站的文章和视频才有了比较深刻的理解。参考资料推荐在本文结尾。
-">
+    <meta name="description" content="这一周主要讲卡尔曼滤波 (Kalman Filter)，视频讲得比较简略，slides 做得里也有不少错误。最后看了一些其他网站的文章和视频才有了比较深刻的理解。参考资料推荐在本文结尾。">
     <meta name="author" content="zellux">
 
     <title> SLAM 笔记 2：卡尔曼滤波 &middot; Aiur · Zellux 的博客 </title>
@@ -16,7 +15,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.adcf086c1f059a87f5d683b251786185c0db7c1ec7f84cfd5542ca1d1c566d48.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -37,8 +36,7 @@
     "articleSection" : "post",
     "name" : "SLAM 笔记 2：卡尔曼滤波",
     "headline" : "SLAM 笔记 2：卡尔曼滤波",
-    "description" : "<p>这一周主要讲卡尔曼滤波 (Kalman Filter)，视频讲得比较简略，slides 做得里也有不少错误。最后看了一些其他网站的文章和视频才有了比较深刻的理解。参考资料推荐在本文结尾。</p>
-<p></p>",
+    "description" : "<p>这一周主要讲卡尔曼滤波 (Kalman Filter)，视频讲得比较简略，slides 做得里也有不少错误。最后看了一些其他网站的文章和视频才有了比较深刻的理解。参考资料推荐在本文结尾。</p>",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -93,7 +91,6 @@
 
     <div class="post-content">
       <p>这一周主要讲卡尔曼滤波 (Kalman Filter)，视频讲得比较简略，slides 做得里也有不少错误。最后看了一些其他网站的文章和视频才有了比较深刻的理解。参考资料推荐在本文结尾。</p>
-<p></p>
 <h2 id="卡尔曼滤波-kf">卡尔曼滤波 KF</h2>
 <p>卡尔曼滤波可以从一系列包含噪音的观测数据中，估计出每个时间点系统的状态。KF 有几个基本假设：</p>
 <ol type="1">

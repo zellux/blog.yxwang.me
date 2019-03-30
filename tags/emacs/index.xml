@@ -22,9 +22,7 @@
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ find . -name &amp;quot;*.java&amp;quot; -or -name &amp;quot;*.aidl&amp;quot; -or -name &amp;quot;*.cpp&amp;quot; &amp;gt; cscope.files
 
 $ cscope -b
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;/code&gt;&lt;/pre&gt;</description>
     </item>
     
     <item>

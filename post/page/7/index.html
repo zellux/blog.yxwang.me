@@ -15,7 +15,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.adcf086c1f059a87f5d683b251786185c0db7c1ec7f84cfd5542ca1d1c566d48.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -43,9 +43,9 @@
     "publisher": "zellux",
     "accountablePerson" : "",
     "copyrightHolder" : "",
-    "copyrightYear" : "2009",
-    "datePublished": "2009-12-17 00:00:00 &#43;0000 UTC",
-    "dateModified" : "2009-12-17 00:00:00 &#43;0000 UTC",
+    "copyrightYear" : "2010",
+    "datePublished": "2010-01-21 00:00:00 &#43;0000 UTC",
+    "dateModified" : "2010-01-21 00:00:00 &#43;0000 UTC",
     "url" : "https://blog.yxwang.me/post/",
     "wordCount" : "0",
     "keywords" : [ "Blog" ]
@@ -79,6 +79,36 @@
 <div class="content">
   <div class="posts">
      
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2010/01/grep-trick/">使用 grep 查找进程的技巧</a></h2>
+      <span class="post-date">Jan 21, 2010</span>
+      
+      <span class="post-tags">
+	
+	#<a href="https://blog.yxwang.me/tags/grep">Grep</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/linux">Linux</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/shell">Shell</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/tooling">Tooling</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/grep">grep</a>&nbsp;
+	
+      </span>
+      
+      
+      
+      <div class="summary">
+	使用grep在ps aux的输出结果中查找进程的时候经常会把grep进程本身也找出来，比如查找emacs进程：
+$ ps aux | grep emacs wyx 7090 0.0 0.0 3336 796 pts/2 S+ 04:49 0:00 grep emacs wyx 10128 0.1 4.9 66904 50388 pts/3 S+ Jan21 2:21 emacs  一个常见的防止grep进程出现的方法就是在后面再加一个grep -v grep：
+$ ps aux | grep emacs | grep -v grep wyx 10128 0.1 4.9 66904 50388 pts/3 S+ Jan21 2:21 emacs  今天在Santosa的博客上看到了另一个巧妙的做法，使用grep [e]macs来搜索emacs这个进程：
+$ ps aux | grep [e]macs wyx 10128 0.1 4.9 66904 50388 pts/3 S+ Jan21 2:21 emacs  为什么会有这样的效果，知道grep正则中[]的作用后想一想就能明白啦。很有意思的trick，虽然说它比| grep -v grep也未必方便多少，因为后者能通过alias简化输入。
+	<a class="read-more" href="/2010/01/grep-trick/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
     <div class="post">
       <h2 class="post-title"><a href="https://blog.yxwang.me/2009/12/linux-xen-compiling-error-in-ubuntu/">Ubuntu 下编译 Linux-xen 的问题</a></h2>
       <span class="post-date">Dec 17, 2009</span>
@@ -336,30 +366,6 @@ How to use
 这篇paper的一大贡献在于实现了一个自动从libc和驱动、内核等代码中找到可用的指令，并拼接成所需程序的系统，这里面包括一个扫描可利用代码、并把它们结合起来的Constructor，一套专用的语言，以及把这套语言编译成对应代码片段之和的编译器，最后还有一个计算实际代码地址的Loader。
 这套攻击机制在WinXP SP2/Sp3, Vista SP1等系统上都获得了成功，尽管查找代码并生成这个过程的overhead很大，但对于一次成功的rootkit攻击来说影响并不大。
 	<a class="read-more" href="/2009/08/return-oriented-rookit/">阅读全文 →</a>
-      </div>
-      
-    </div>
-    
-    <div class="post">
-      <h2 class="post-title"><a href="https://blog.yxwang.me/2009/07/xen-time-went-backwards-solution/">Xen 警告 Time went backwards 的暴力解决方法</a></h2>
-      <span class="post-date">Jul 7, 2009</span>
-      
-      <span class="post-tags">
-	
-	#<a href="https://blog.yxwang.me/tags/c">C</a>&nbsp;
-	
-	#<a href="https://blog.yxwang.me/tags/computer-system">Computer System</a>&nbsp;
-	
-	#<a href="https://blog.yxwang.me/tags/xen">Xen</a>&nbsp;
-	
-      </span>
-      
-      
-      
-      <div class="summary">
-	前几天给测试Xen用的虚拟机挂了，只能用VMware的snapshot返回到之前的镜像，然后似乎因为时间问题启动Xen的时候总是会定时打印出类似
-571 Timer ISR/0: Time went backwards: delta=-11072481 delta_cpu=298927519 shadow=196807680595 off=288495093 processed=197107247546 cpu_processed=196797247546 572 0: 196797247546 573 1: 197107247546  的信息，google了下发现是时间同步的问题，用ntp协议同步时间即可解决这个问题。另外这里再给出一个最暴力的解决方法：在linux-xen源码的arch/i386/kernel/time-xen.c文件中找到Time went backwards，把这行打印语句以及后面的循环打印删除，然后重新编译内核。x86_64体系结构也是修改这个文件。方法很暴力，也没真正解决问题，但是至少不影响我看/var/log/messages的输出了。
-	<a class="read-more" href="/2009/07/xen-time-went-backwards-solution/">阅读全文 →</a>
       </div>
       
     </div>

@@ -15,8 +15,6 @@ Connection: keep-alive
 Etag: &quot;f74bb78aa48d36e6a0b2072a131b20b9&quot;
 Cache-Control: public, max-age=300
 Content-Length: 15481
-
-
 ">
     <meta name="author" content="zellux">
 
@@ -28,7 +26,7 @@ Content-Length: 15481
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.adcf086c1f059a87f5d683b251786185c0db7c1ec7f84cfd5542ca1d1c566d48.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -60,9 +58,7 @@ Connection: keep-alive
 Etag: &quot;f74bb78aa48d36e6a0b2072a131b20b9&quot;
 Cache-Control: public, max-age=300
 Content-Length: 15481
-</code></pre>
-
-<p></p>",
+</code></pre>",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -128,8 +124,6 @@ Etag: &quot;f74bb78aa48d36e6a0b2072a131b20b9&quot;
 Cache-Control: public, max-age=300
 Content-Length: 15481
 </code></pre>
-
-<p></p>
 
 <p>可以看到响应头中给出了请求内容的 ETag 为 f74&hellip;b9。接下来我们再次向服务器发起请求，并通过 If-None-Match 字段告之服务器我们已经获得过一份 ETag 为 f74&hellip;b9 的内容。服务器收到请求并生成页面后，如果发现页面的 ETag 不变，就会返回 304，声明缓存有效：</p>
 

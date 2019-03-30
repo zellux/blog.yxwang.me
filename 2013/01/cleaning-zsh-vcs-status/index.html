@@ -8,9 +8,7 @@
 
 
 
-使用 git status 和 git diff，都看不到任何未提交的改动。一开始我以为是 zsh 或者 git 的 bug，把它们的版本都更新到最新版后还是有这个问题。于是看 steeef 主题的源码，发现了红色标记的判断依据：
-
-">
+使用 git status 和 git diff，都看不到任何未提交的改动。一开始我以为是 zsh 或者 git 的 bug，把它们的版本都更新到最新版后还是有这个问题。于是看 steeef 主题的源码，发现了红色标记的判断依据：">
     <meta name="author" content="zellux">
 
     <title> 清除 zsh steeef 主题的未追踪标记 &middot; Aiur · Zellux 的博客 </title>
@@ -21,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.adcf086c1f059a87f5d683b251786185c0db7c1ec7f84cfd5542ca1d1c566d48.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -46,9 +44,7 @@
 
 <p><img src="/images/2013-01/zsh-untracked-mark.png" alt="" /></p>
 
-<p>使用 <code>git status</code> 和 <code>git diff</code>，都看不到任何未提交的改动。一开始我以为是 zsh 或者 git 的 bug，把它们的版本都更新到最新版后还是有这个问题。于是看 steeef 主题的源码，发现了红色标记的判断依据：</p>
-
-<p></p>",
+<p>使用 <code>git status</code> 和 <code>git diff</code>，都看不到任何未提交的改动。一开始我以为是 zsh 或者 git 的 bug，把它们的版本都更新到最新版后还是有这个问题。于是看 steeef 主题的源码，发现了红色标记的判断依据：</p>",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -107,8 +103,6 @@
 <p><img src="/images/2013-01/zsh-untracked-mark.png" alt="" /></p>
 
 <p>使用 <code>git status</code> 和 <code>git diff</code>，都看不到任何未提交的改动。一开始我以为是 zsh 或者 git 的 bug，把它们的版本都更新到最新版后还是有这个问题。于是看 steeef 主题的源码，发现了红色标记的判断依据：</p>
-
-<p></p>
 
 <pre><code class="language-bash"># check for untracked files or updated submodules, since vcs_info doesn't
 if git ls-files --other --exclude-standard --directory 2&gt; /dev/null | grep -q &quot;.&quot;; then
