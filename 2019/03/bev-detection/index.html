@@ -104,7 +104,7 @@ Pixor Pixor 是 Uber ATG 的 Bin Yang 等人在 CVPR 18 上提出的鸟瞰图检
 <img src="/images/2019-03/pixor-layers.png" alt="Pixor 结构" /><figcaption>Pixor 结构</figcaption>
 </figure>
 <p>检测方面，Pixor 采用了基于 <a href="https://arxiv.org/abs/1708.02002">RetinaNet</a> 的 one-stage 的结构，如上图所示（这里用了<a href="http://www.cs.toronto.edu/~byang/projects/pixor/pixor_poster.pdf">海报</a>上的截图，和论文中的有一些细小的差别）。网络里面用了 ResNet 和类似 FPN 的结构。FPN 结构输出的特征图经过一个头部网络后，直接生成对每个像素点的分类和 bounding box 的回归结果。</p>
-<p>优化目标方面，分类目标用了 RetinaNet 中的 focal loss，回归目标用了 smoooth L1。论文中回归目标可能有笔误了，按照海报和 <a href="http://www.cs.toronto.edu/~byang/projects/pixor/pixor_faq.txt">FAQ</a> 的说法应该是 <span class="math inline">\(\{ \cos 2\theta, \sin 2\theta, dx, dy, \log W, \log L \}\)</span>。这里巧妙的用了 <span class="math inline">\(2 \theta\)</span> 的三角函数作为车头朝向的回归目标，因为车辆是往前还是往后开这个问题会在 tracker 中处理，在检测的时候只要知道车身线的偏离角度就行了，至于这个角度是 5° 还是 185° 影响不大。</p>
+<p>优化目标方面，分类目标用了 RetinaNet 中的 focal loss，回归目标用了 smoooth L1。论文中回归目标有笔误，按照海报和 <a href="http://www.cs.toronto.edu/~byang/projects/pixor/pixor_faq.txt">FAQ</a> 的说法应该是 <span class="math inline">\(\{ \cos 2\theta, \sin 2\theta, dx, dy, \log W, \log L \}\)</span>。这里巧妙的用了 <span class="math inline">\(2 \theta\)</span> 的三角函数作为车头朝向的回归目标，因为车辆是往前还是往后开这个问题会在 tracker 中处理，在检测的时候只要知道车身线的偏离角度就行了，至于这个角度是 5° 还是 185° 影响不大。</p>
 <p>整个网络的运行速度非常快，在 Titan XP 上可以在 35 毫秒内完成。除此之外论文还测试了不同 backbone 网络和头部网络特征层共享的不同选择，做了模型简化测试 (ablation study)，感兴趣的朋友可以细读。</p>
 <h2 id="hdnet">HDNet</h2>
 <p>Pixor 沿高度方向把整个点云切成不同的高度区间，例如 Kitti 数据集上 -2.5 到 1 米之间的点会被分成 35 片，这个区间之外的点会被忽略。当地面坡度较大时，远处的点很容易被排除在外。为了解决这个问题，Bin Yang 等人提出了把高精地图作为额外特征的方案，发表在 <a href="https://eng.uber.com/research/hdnet-exploiting-hd-maps-for-3d-object-detection/">CoRL 18</a> 上。</p>
