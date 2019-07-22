@@ -142,7 +142,7 @@
         option: Running
 </code></pre>
 
-<p>另一块是设备停止运转的检测，这里根据不同的设备可能要进行微调。我这里设置了洗衣机用电低于 3 瓦且超过 1 分钟以上后，把状态切换成空置并通过 Twilio 发送短信通知。</p>
+<p>另一块是设备停止运转的检测，根据不同的设备可能要进行微调。我这里设置了洗衣机用电低于 3 瓦且超过 1 分钟以上后，把状态切换成空置并通过 Twilio 发送短信通知。</p>
 
 <pre><code class="language-yaml">automation:
   - alias: Set washer inactive
