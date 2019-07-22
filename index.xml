@@ -17,7 +17,7 @@
       <pubDate>Sun, 21 Jul 2019 20:54:27 -0700</pubDate>
       
       <guid>https://blog.yxwang.me/2019/07/washer-dryer-notification/</guid>
-      <description>家里用的是三星的洗衣机和烘干机，买的时候为了完成时的提醒功能特地挑了带有「智能监控」功能的机型。然而对应的三星洗衣机的 app 几乎没法用，推送和状态更新都有问题。于是我打算自己实现一个类似的功能。</description>
+      <description>家里用的是三星的洗衣机和烘干机，买的时候为了完成时有提醒特地挑了带有「智能监控」功能的机型。然而对应的三星洗衣机的 app 几乎没法用，推送和状态更新都有问题。于是我打算自己实现一个类似的功能。</description>
     </item>
     
     <item>
