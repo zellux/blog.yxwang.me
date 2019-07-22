@@ -46,8 +46,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2019",
-    "datePublished": "2019-03-29 16:03:45 -0700 PDT",
-    "dateModified" : "2019-03-29 16:03:45 -0700 PDT",
+    "datePublished": "2019-07-21 20:54:27 -0700 PDT",
+    "dateModified" : "2019-07-21 20:54:27 -0700 PDT",
     "url" : "https:\/\/blog.yxwang.me\/",
     "wordCount" : "0",
     "keywords" : [ "Blog" ]
@@ -81,6 +81,30 @@
 <div class="content index">
   <div class="posts">
      
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2009/05/page-coloring/">高速缓冲器页着色 (Page Coloring)</a></h2>
+      <span class="post-meta">
+  <time datetime='Mon, May 11, 2009' data-updated="true" itemprop="datePublished">Mon, May 11, 2009</time>
+  
+  <span class="post-categories">
+    •
+	<a href="https://blog.yxwang.me/categories/computer-system">Computer System</a>
+  </span>
+  
+</span>
+
+      
+      <div class="summary">
+         读 Multi-Execution (ISCA ’09) 的时候看到的名词，中文叫做高速缓冲器页着色，有点拗口，还是用英文术语好了。
+早期的处理器缓存都是映射虚拟内存的，这样带来两个问题，一是进程切换等场合下需要清空缓存，二是由于多个虚拟地址可能指向同一个物理地址，因此会出现缓存中数据别名的问题(data aliasing)。
+于是现代的处理器更多的通过物理地址进行数据缓存，这也引入了另一个问题，虚拟内存中看到的相邻的两块数据在缓存中很有可能是不相邻的，如果操作系统分配物理页时不考虑这点就会影响性能。
+举例来说，假设CPU能缓存4个物理页，缓存策略是 CS:APP 中提到的最简单的方式，即第n号缓存只用于物理页号除4余数为n的物理页(n=0,1,2,3)，比如第2号缓存对应于2,6,10,..号页面。现在用户为页面号为0的虚拟页申请空间，操作系统把第16号物理页分配给它；接下来用户又为页面号为1的虚拟页申请空间，而17-19号物理页已经用掉，此时操作系统就不应该分配20号物理页给它，因为20号物理页和16号物理页占用同一个缓存地区，假设用户程序的局部性(locality)很好的话这样的分配方式会产生比较严重的抖动(thrashing)，影响系统缓存的性能。所以操作系统应该分配21号物理页给它，而保证这种分配策略的方式就是为每个页标记不同的颜色，并使得同一时间使用的页面颜色尽可能的不同。
+参考资料  http://en.wikipedia.org/wiki/CPU_cache http://www.freebsd.org/doc/en/articles/vm-design/page-coloring-optimizations.html  
+	<a class="read-more" href="/2009/05/page-coloring/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
     <div class="post">
       <h2 class="post-title"><a href="https://blog.yxwang.me/2009/05/eurosys-09-orchestra/">EuroSys 09 - Orchestra</a></h2>
       <span class="post-meta">
@@ -302,29 +326,6 @@ Disco为每个虚拟CPU记录了一个类似于传统操作系统中process tabl
 测试结果 测试中CD是作为kernel process跑在IRIX 6.4上的，也就是说VMM的下面还有一层操作系统，主要是为了利用IRIX提供的设备驱动。CD在每个CPU上跑一个线程，完全占有整个CPU，IRIX只在需要设备驱动时才被激活。
 测试比较了两个测试环境，跑在真机上的IRIX 6.4（增加了多核支持），和跑在CD上的IRIX 6.2。最后的结果显示大部分情况下（单核、8核、32核）后者和前者的差距在10%以内，最差情况下也只有20%的overhead。接下来的容错机制 的overhead同样很小，不高于2%。
 	<a class="read-more" href="/2009/04/sosp-99-cellular-disco/">阅读全文 →</a>
-      </div>
-      
-    </div>
-    
-    <div class="post">
-      <h2 class="post-title"><a href="https://blog.yxwang.me/2009/04/asplos-09-dftl/">ASPLOS 09 - DFTL</a></h2>
-      <span class="post-meta">
-  <time datetime='Tue, Apr 7, 2009' data-updated="true" itemprop="datePublished">Tue, Apr 7, 2009</time>
-  
-  <span class="post-categories">
-    •
-	<a href="https://blog.yxwang.me/categories/computer-system">Computer System</a>
-  </span>
-  
-</span>
-
-      
-      <div class="summary">
-        Paper标题是DFTL: A Flash Translation Layer Employing Demand-based Selective Caching of Page-level Address Mappings，PSU发表在ASPLOS 09上。这篇paper对我来说更像是篇flash存储的科普文。
-flash存储单元分block和page，每个block有32/64个page，一个page有512/2048K大小。flash的一个缺点在于改写数据时只能先把要改写的block清空，然后再写，由于block的颗粒度比较大，这就带来了比较严重的性能问题。所以现在的flash都在驱动层维护了一张对文件系统透明的logical-to-physical address的映射表(Flash Translation Layer)，这样改写时只要先写在预先清空的page上，再把映射表的对应项的物理地址改成新的page的地址，然后把原来要改的页置为invalid，等gc去清空即可。
-如果为每个page都在内存中维护一份映射关系，会占用比较大的内存空间。以往的ftl的实现试图在page-level和block-level的映射中找平衡，但效果都不甚理想，尤其在随机写比较频繁时会产生比较严重的gc负荷，从而影响写操作的反应速度（因为预先清空的页面不足时需要先做gc）。这篇paper提出的DFTL可以比较好的减少gc的负荷，同时近需要很小的内存空间，前提是程序访问flash的locality很好。
-感觉DFTL的大致思想仿照了二级页表和TLB：flash上的一些page保存了page-level的映射，分散在整个flash中，在内存里面有一个block-level的映射表，记录了每个page-level映射表在flash中的地址。内存中的映射表相当于二级页表中的page directory，指向了flash上的page-level映射表（page table），另外内存中还有一个全局的page-level的映射表用于记录最近访问到的page的logical-to-physical映射，类似于TLB。这样如果程序locality很好的情况下大多数情况下只要查询这张表就行了。
-	<a class="read-more" href="/2009/04/asplos-09-dftl/">阅读全文 →</a>
       </div>
       
     </div>

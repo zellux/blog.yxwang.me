@@ -45,8 +45,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2019",
-    "datePublished": "2019-03-29 16:03:45 -0700 PDT",
-    "dateModified" : "2019-03-29 16:03:45 -0700 PDT",
+    "datePublished": "2019-07-21 20:54:27 -0700 PDT",
+    "dateModified" : "2019-07-21 20:54:27 -0700 PDT",
     "url" : "https:\/\/blog.yxwang.me\/post\/",
     "wordCount" : "0",
     "keywords" : [ "Blog" ]
@@ -80,6 +80,36 @@
 <div class="content">
   <div class="posts">
      
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2008/04/count-1-bits-in-an-int32/">《编程之美》一个二进制趣题的讨论</a></h2>
+      <span class="post-date">Apr 15, 2008</span>
+      
+      <span class="post-tags">
+	
+	#<a href="https://blog.yxwang.me/tags/algorithms">Algorithms</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/bit-hacking">Bit Hacking</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/featured">Featured</a>&nbsp;
+	
+      </span>
+      
+      
+      
+      <div class="summary">
+	问题很简单，给定一个 8 位整型，要求写程序计算这个数的二进制表示中 1 的个数，要求算法的执行效率尽可能的高。
+先来看看样章上给出的几个算法：
+解法一，每次除二，看是否为奇数，是的话就累计加一，最后这个结果就是二进制表示中1的个数。
+解法二，同样用到一个循环，只是里面的操作用位移操作简化了。
+int Count(int v) { int num = 0; while (v) { num += v &amp; 0x01; v &gt;&gt;= 1; } return num; }  解法三，用到一个巧妙的与操作，v &amp; (v - 1) 每次能消去二进制表示中最后一位 1，利用这个技巧可以减少一定的循环次数。
+解法四，查表法，因为 8 位整型的范围是 0 - 255，可以直接把结果保存在一张表中，然后查表就行。书上强调这个算法的复杂度为 O(1)。
+int countTable[256] = { 0, 1, 1, 2, 1, ..., 7, 7, 8 }; int Count(int v) { return countTable[v]; }  好了，这就是样章上给出的四种方案，下面谈谈我的看法。
+首先是对算法的衡量上，复杂度真的是唯一的标准吗？尤其对于这种数据规模给定，而且很小的情况下，复杂度其实是个比较次要的因素。
+	<a class="read-more" href="/2008/04/count-1-bits-in-an-int32/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
     <div class="post">
       <h2 class="post-title"><a href="https://blog.yxwang.me/2008/03/ics-lab-4-optimizations/">ICS Lab4 常用优化方法</a></h2>
       <span class="post-date">Mar 23, 2008</span>

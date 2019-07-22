@@ -6,10 +6,19 @@
     <description>Recent content in Posts on Aiur · Zellux 的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Fri, 29 Mar 2019 16:03:45 -0700</lastBuildDate>
+    <lastBuildDate>Sun, 21 Jul 2019 20:54:27 -0700</lastBuildDate>
     
 	<atom:link href="https://blog.yxwang.me/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>DIY 洗衣机完成提醒</title>
+      <link>https://blog.yxwang.me/2019/07/washer-dryer-notification/</link>
+      <pubDate>Sun, 21 Jul 2019 20:54:27 -0700</pubDate>
+      
+      <guid>https://blog.yxwang.me/2019/07/washer-dryer-notification/</guid>
+      <description>家里用的是三星的洗衣机和烘干机，买的时候为了完成时的提醒功能特地挑了带有「智能监控」功能的机型。然而对应的三星洗衣机的 app 几乎没法用，推送和状态更新都有问题。于是我打算自己实现一个类似的功能。</description>
+    </item>
     
     <item>
       <title>3D 目标检测之鸟瞰图检测 (Pixor / HDNet)</title>

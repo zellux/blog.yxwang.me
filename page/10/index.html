@@ -46,8 +46,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2019",
-    "datePublished": "2019-03-29 16:03:45 -0700 PDT",
-    "dateModified" : "2019-03-29 16:03:45 -0700 PDT",
+    "datePublished": "2019-07-21 20:54:27 -0700 PDT",
+    "dateModified" : "2019-07-21 20:54:27 -0700 PDT",
     "url" : "https:\/\/blog.yxwang.me\/",
     "wordCount" : "0",
     "keywords" : [ "Blog" ]
@@ -81,6 +81,29 @@
 <div class="content index">
   <div class="posts">
      
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2009/04/asplos-09-dftl/">ASPLOS 09 - DFTL</a></h2>
+      <span class="post-meta">
+  <time datetime='Tue, Apr 7, 2009' data-updated="true" itemprop="datePublished">Tue, Apr 7, 2009</time>
+  
+  <span class="post-categories">
+    •
+	<a href="https://blog.yxwang.me/categories/computer-system">Computer System</a>
+  </span>
+  
+</span>
+
+      
+      <div class="summary">
+        Paper标题是DFTL: A Flash Translation Layer Employing Demand-based Selective Caching of Page-level Address Mappings，PSU发表在ASPLOS 09上。这篇paper对我来说更像是篇flash存储的科普文。
+flash存储单元分block和page，每个block有32/64个page，一个page有512/2048K大小。flash的一个缺点在于改写数据时只能先把要改写的block清空，然后再写，由于block的颗粒度比较大，这就带来了比较严重的性能问题。所以现在的flash都在驱动层维护了一张对文件系统透明的logical-to-physical address的映射表(Flash Translation Layer)，这样改写时只要先写在预先清空的page上，再把映射表的对应项的物理地址改成新的page的地址，然后把原来要改的页置为invalid，等gc去清空即可。
+如果为每个page都在内存中维护一份映射关系，会占用比较大的内存空间。以往的ftl的实现试图在page-level和block-level的映射中找平衡，但效果都不甚理想，尤其在随机写比较频繁时会产生比较严重的gc负荷，从而影响写操作的反应速度（因为预先清空的页面不足时需要先做gc）。这篇paper提出的DFTL可以比较好的减少gc的负荷，同时近需要很小的内存空间，前提是程序访问flash的locality很好。
+感觉DFTL的大致思想仿照了二级页表和TLB：flash上的一些page保存了page-level的映射，分散在整个flash中，在内存里面有一个block-level的映射表，记录了每个page-level映射表在flash中的地址。内存中的映射表相当于二级页表中的page directory，指向了flash上的page-level映射表（page table），另外内存中还有一个全局的page-level的映射表用于记录最近访问到的page的logical-to-physical映射，类似于TLB。这样如果程序locality很好的情况下大多数情况下只要查询这张表就行了。
+	<a class="read-more" href="/2009/04/asplos-09-dftl/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
     <div class="post">
       <h2 class="post-title"><a href="https://blog.yxwang.me/2009/04/xen-test-script/">Xen DomainU 自动测试脚本</a></h2>
       <span class="post-meta">
@@ -297,30 +320,6 @@ Device Drivers SCSI device support ---&gt; &lt;*&gt; SCSI disk support &lt;*&gt;
 以我现在的org日程管理为例，个人日程文件保存在机房的73号机上，实验室电脑和寝室电脑上的电脑只要通过tramp远程访问这个org文件即可：
 (setq org-agenda-files (list &quot;/scp:wyx@10.132.140.73:/home/wyx/notes/lab.org&quot;))  
 	<a class="read-more" href="/2009/02/emacs-tramp/">阅读全文 →</a>
-      </div>
-      
-    </div>
-    
-    <div class="post">
-      <h2 class="post-title"><a href="https://blog.yxwang.me/2009/01/terminal-ctrl-s/">PieTTY 中按 Ctrl&#43;S 导致挂起的问题解决</a></h2>
-      <span class="post-meta">
-  <time datetime='Thu, Jan 8, 2009' data-updated="true" itemprop="datePublished">Thu, Jan 8, 2009</time>
-  
-  <span class="post-categories">
-    •
-	<a href="https://blog.yxwang.me/categories/tooling">Tooling</a>
-  </span>
-  
-</span>
-
-      
-      <div class="summary">
-        以前碰到这个问题都得先重启PieTTY然后用screen -x恢复到原来的工作界面，今天不知怎么的emacs里C-x C-s按了就挂起，只能google。
-传说中，早期的终端会遇到显示字符的速度慢于接收字符的速度，为了解决这个问题，C-s用于先挂起当前终端，在数据传输之后用C-q恢复显示。所以最简单的解决方法就是在挂起后按C-q。
-不过我的WinXP中C-q已经和快速启动工具（寝室里是Turbo Launcher，实验室的是Launchy）绑定了，也懒得为了这么个问题改操作习惯，于是再次google，终于找到一个一劳永逸的方法，以bash为例，在~/.bashrc中加入一行
-stty -ixoff -ixon
-即可。另外这样设置后似乎恢复了C-s在bash中正向增量查找的功能。恩。
-	<a class="read-more" href="/2009/01/terminal-ctrl-s/">阅读全文 →</a>
       </div>
       
     </div>

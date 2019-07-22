@@ -45,8 +45,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2019",
-    "datePublished": "2019-03-29 16:03:45 -0700 PDT",
-    "dateModified" : "2019-03-29 16:03:45 -0700 PDT",
+    "datePublished": "2019-07-21 20:54:27 -0700 PDT",
+    "dateModified" : "2019-07-21 20:54:27 -0700 PDT",
     "url" : "https:\/\/blog.yxwang.me\/post\/",
     "wordCount" : "0",
     "keywords" : [ "Blog" ]
@@ -80,6 +80,32 @@
 <div class="content">
   <div class="posts">
      
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2010/01/git-completion/">Git 命令行自动补全</a></h2>
+      <span class="post-date">Jan 25, 2010</span>
+      
+      <span class="post-tags">
+	
+	#<a href="https://blog.yxwang.me/tags/git">Git</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/shell">Shell</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/tooling">Tooling</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/git">git</a>&nbsp;
+	
+      </span>
+      
+      
+      
+      <div class="summary">
+	在Pro Git上看到的技巧，git的源代码包里的contrib/completion目录下有个git-completion.bash，把这个文件保存到~/.git-completion.bash，然后在.bashrc中加入一行
+source ~/.git-completion.bash  这样就能在bash下用tab自动补全git命令、branch等内容了。另外Debian/Ubuntu里有个包就叫git-completion，这个包安装完成后会自动把这个补全脚本放到/etc/bash_completion.d/下，由bash-compleletion载入执行。
+	<a class="read-more" href="/2010/01/git-completion/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
     <div class="post">
       <h2 class="post-title"><a href="https://blog.yxwang.me/2010/01/grep-trick/">使用 grep 查找进程的技巧</a></h2>
       <span class="post-date">Jan 21, 2010</span>
@@ -329,44 +355,6 @@ How to use
 最后说下编译成功后怎么使用，具体方法那个网页上也讲过了，只要把编译后的php.cgi放到/cgi-bin/下然后改下.htaccess即可。
 对于子域名，比如我这个techblog.iamzellux.com，参照网页上的说明把整个cgi-bin用符号链接的方式link到子域名的根目录下是最方便的方案，当然别忘了修改.htaccess。
 	<a class="read-more" href="/2009/09/compile-php5-on-dreamhost/">阅读全文 →</a>
-      </div>
-      
-    </div>
-    
-    <div class="post">
-      <h2 class="post-title"><a href="https://blog.yxwang.me/2009/08/return-oriented-rookit/">基于函数调用栈的 rootkit</a></h2>
-      <span class="post-date">Aug 12, 2009</span>
-      
-      <span class="post-tags">
-	
-	#<a href="https://blog.yxwang.me/tags/computer-system">Computer System</a>&nbsp;
-	
-	#<a href="https://blog.yxwang.me/tags/research">Research</a>&nbsp;
-	
-	#<a href="https://blog.yxwang.me/tags/return-oriented">Return-oriented</a>&nbsp;
-	
-	#<a href="https://blog.yxwang.me/tags/rootkit">Rootkit</a>&nbsp;
-	
-	#<a href="https://blog.yxwang.me/tags/security">Security</a>&nbsp;
-	
-	#<a href="https://blog.yxwang.me/tags/usenix">Usenix</a>&nbsp;
-	
-      </span>
-      
-      
-      
-      <div class="summary">
-	这篇题目为Return-Oriented Rootkits: Bypassing Kernel Code Integrity Protection Mechanisms的论文发在了今年的Usenix Security上，现在在Usenix网站上还不能下到这篇paper的pdf，可以去作者的主页上下。
-现在有不少用来防止栈溢出攻击的技术，比如操作系统保证任何一个页不能同时为可写且可读（WinXP SP2、Win 2003、Exec Shield for Linux等都采用了这个策略），这个方法实现起来比较简单，但只能防范部分形式的攻击，如果攻击者事先准备一张含有恶意代码的用户态的只读页，然后跳转到这个页，就能绕开这种保护措施了；另外也有人提出在操作系统的下面再加一层虚拟层，让它来保证上层系统没有因为各种buffer overflow而执行恶意代码（NICKLE）。
-而这里提到的return-oriented的攻击方法不同于传统的攻击机制，它所采用的攻击代码都是内核自身的代码，因此能绕过前面提到的各种保护手段。
-所谓return-oriented programming，简单的说就是把原来已经存在的代码块拼接起来，拼接的方式是通过一个预先准备好的特殊的返回栈，里面包含了各条指令结束后下一条指令的地址。
-例如现在函数A里面有这么一段指令 instruction A ret
-函数B里面有另外一段： instruction B ret
-它们在正常的运行情况下没有任何关系，但是我发现如果把A和B拼起来就能达到我想要的结果，于是我构造了一个包含有A和B的地址的栈，先通过ret指令返回到instruction A处，之后再执行ret指令时，由于栈是精心构造的，因此接下来会执行到instruction B，这样就得到我想要的结果了。只要这个ret前的指令库足够大，就能实现几乎所有的程序。
-这种攻击方式并非这篇paper的首创，最早是由Shacham提出的（http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.140.9210，http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.78.7135）
-这篇paper的一大贡献在于实现了一个自动从libc和驱动、内核等代码中找到可用的指令，并拼接成所需程序的系统，这里面包括一个扫描可利用代码、并把它们结合起来的Constructor，一套专用的语言，以及把这套语言编译成对应代码片段之和的编译器，最后还有一个计算实际代码地址的Loader。
-这套攻击机制在WinXP SP2/Sp3, Vista SP1等系统上都获得了成功，尽管查找代码并生成这个过程的overhead很大，但对于一次成功的rootkit攻击来说影响并不大。
-	<a class="read-more" href="/2009/08/return-oriented-rookit/">阅读全文 →</a>
       </div>
       
     </div>

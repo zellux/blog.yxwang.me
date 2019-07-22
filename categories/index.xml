@@ -6,10 +6,19 @@
     <description>Recent content in Categories on Aiur · Zellux 的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Fri, 29 Mar 2019 16:03:45 -0700</lastBuildDate>
+    <lastBuildDate>Sun, 21 Jul 2019 20:54:27 -0700</lastBuildDate>
     
 	<atom:link href="https://blog.yxwang.me/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Life</title>
+      <link>https://blog.yxwang.me/categories/life/</link>
+      <pubDate>Sun, 21 Jul 2019 20:54:27 -0700</pubDate>
+      
+      <guid>https://blog.yxwang.me/categories/life/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Computer Vision</title>
@@ -17,15 +26,6 @@
       <pubDate>Fri, 29 Mar 2019 16:03:45 -0700</pubDate>
       
       <guid>https://blog.yxwang.me/categories/computer-vision/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Life</title>
-      <link>https://blog.yxwang.me/categories/life/</link>
-      <pubDate>Tue, 30 Oct 2018 21:35:07 -0700</pubDate>
-      
-      <guid>https://blog.yxwang.me/categories/life/</guid>
       <description></description>
     </item>
     

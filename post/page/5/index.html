@@ -45,8 +45,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2019",
-    "datePublished": "2019-03-29 16:03:45 -0700 PDT",
-    "dateModified" : "2019-03-29 16:03:45 -0700 PDT",
+    "datePublished": "2019-07-21 20:54:27 -0700 PDT",
+    "dateModified" : "2019-07-21 20:54:27 -0700 PDT",
     "url" : "https:\/\/blog.yxwang.me\/post\/",
     "wordCount" : "0",
     "keywords" : [ "Blog" ]
@@ -80,6 +80,27 @@
 <div class="content">
   <div class="posts">
      
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2011/09/recipe-for-hashing/">一个简单有效的 hash 算法</a></h2>
+      <span class="post-date">Sep 17, 2011</span>
+      
+      <span class="post-tags">
+	
+	#<a href="https://blog.yxwang.me/tags/algorithms">Algorithms</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/hash">Hash</a>&nbsp;
+	
+      </span>
+      
+      
+      
+      <div class="summary">
+	最近要给某个类写一个 hash 方法，这个类包括一些整型和字符串属性，需要把它们都放到 hash 中。担心自己想出来的 hash 算法会造成比较严重的冲突，网上搜了一下，发现 Effective Java 中已经介绍过一种简单有效的算法了：  将任一非零常数赋值给 result 找到该类中所有需要包含在 hash 中的属性，并根据它们的类型进行计算 c  对于布尔类型，将它们转换为 0/1 对于 byte, char, short, 和 int 类型，将它们转换为 int 对于长整型 long，计算高位和低位的异或结果 (int) (f ^ (f &gt;&gt;&gt; 32)) 对于 float 类型，采用它的二进制表示，在 Java 中为 Float.floatToIntBits，Ruby 中我估计用 Float.hash 也可以 对于 double 类型，调用 Double.doubleToIntBits 后再次用前面的方法处理得到的 long 类型 对于数组，利用方法 3 合并计算结果 对于其它的对象，递归调用该对象的 hash 方法  将计算结果合并到 result 变量：result = 37 * result + c 返回 result  另外这个博客的域名已经改成了 blog.
+	<a class="read-more" href="/2011/09/recipe-for-hashing/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
     <div class="post">
       <h2 class="post-title"><a href="https://blog.yxwang.me/2011/07/full-screen-emacs-in-lion/">让 Emacs 支持 Lion 的全屏模式</a></h2>
       <span class="post-date">Jul 28, 2011</span>
@@ -359,39 +380,6 @@ BluePrint就着眼于这个点，提出了一种让Web应用“参与”HTML解�
 在superuser上看到一个解决方法，指定历史文件的读写方式为追加，并在每次命令行提示符显示的时候，自动更新bash的历史命令记录。要实现这个方法很简单，只要在.bashrc中加入下面两行代码即可
 shopt -s histappend export PROMPT_COMMAND=&quot;history -a; history -n&quot;  另外如果之前设置过PROMPT_COMMAND的话，只要在history -a前加入$PROMPT_COMMAND; 就行了。
 	<a class="read-more" href="/2010/03/keep-gnu-screen-history/">阅读全文 →</a>
-      </div>
-      
-    </div>
-    
-    <div class="post">
-      <h2 class="post-title"><a href="https://blog.yxwang.me/2010/02/the-sicp-picture-language/">SICP 里提到的画图语言</a></h2>
-      <span class="post-date">Feb 24, 2010</span>
-      
-      <span class="post-tags">
-	
-	#<a href="https://blog.yxwang.me/tags/lisp">Lisp</a>&nbsp;
-	
-	#<a href="https://blog.yxwang.me/tags/programming">Programming</a>&nbsp;
-	
-	#<a href="https://blog.yxwang.me/tags/programming-languages">Programming Languages</a>&nbsp;
-	
-	#<a href="https://blog.yxwang.me/tags/sicp">SICP</a>&nbsp;
-	
-	#<a href="https://blog.yxwang.me/tags/scheme">Scheme</a>&nbsp;
-	
-      </span>
-      
-      
-      
-      <div class="summary">
-	SICP第二章里提到了一种用来画图的Lisp方言，用来演示数据抽象和闭包的表达能力（见http://mitpress.mit.edu/sicp/full-text/book/book-Z-H-15.html#%_sec_2.2.4）。
-最近尝试了下，发现soegaard同学已经在PLT Scheme中实现了一个类似的库，可以很方便的在DrScheme上使用。
-sicp.plt包使用很简单，在Language-&gt;Choose Language中选择Module，然后在需要用到这个包的时候用
-(require (planet soegaard/sicp:2:1/sicp))  声明即可。第一次运行时DrScheme会自动下载这个包并安装，如果网络有限制可以先从http://planet.plt-scheme.org/display.ss?package=sicp.plt&owner=soegaard下载然后在DrScheme中选择本地包安装。
-另外SICP上使用的两个painter（wave和rogers）没有在这个包里提供，取而代之是diagonal-shading和einstein。
-下面这个程序显示了一个简单的分形图像：
-#lang scheme (require (planet &quot;sicp.ss&quot; (&quot;soegaard&quot; &quot;sicp.plt&quot; 2 1))) (define (right-split painter n) (if (= n 0) painter (let ((smaller (right-split painter (- n 1)))) (beside painter (below smaller smaller))))) (define (up-split painter n) (if (= n 0) painter (let ((smaller (up-split painter (- n 1)))) (below painter (beside smaller smaller))))) (define (corner-split painter n) (if (= n 0) painter (let ((up (up-split painter (- n 1))) (right (right-split painter (- n 1)))) (let ((top-left (beside up up)) (bottom-right (below right right)) (corner (corner-split painter (- n 1)))) (beside (below painter top-left) (below bottom-right corner)))))) (paint (corner-split diagonal-shading 4))  程序输出：
-	<a class="read-more" href="/2010/02/the-sicp-picture-language/">阅读全文 →</a>
       </div>
       
     </div>

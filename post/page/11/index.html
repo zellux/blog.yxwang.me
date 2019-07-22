@@ -45,8 +45,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2019",
-    "datePublished": "2019-03-29 16:03:45 -0700 PDT",
-    "dateModified" : "2019-03-29 16:03:45 -0700 PDT",
+    "datePublished": "2019-07-21 20:54:27 -0700 PDT",
+    "dateModified" : "2019-07-21 20:54:27 -0700 PDT",
     "url" : "https:\/\/blog.yxwang.me\/post\/",
     "wordCount" : "0",
     "keywords" : [ "Blog" ]
@@ -80,6 +80,33 @@
 <div class="content">
   <div class="posts">
      
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2009/01/terminal-ctrl-s/">PieTTY 中按 Ctrl&#43;S 导致挂起的问题解决</a></h2>
+      <span class="post-date">Jan 8, 2009</span>
+      
+      <span class="post-tags">
+	
+	#<a href="https://blog.yxwang.me/tags/tooling">Tooling</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/faq">faq</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/terminal">terminal</a>&nbsp;
+	
+      </span>
+      
+      
+      
+      <div class="summary">
+	以前碰到这个问题都得先重启PieTTY然后用screen -x恢复到原来的工作界面，今天不知怎么的emacs里C-x C-s按了就挂起，只能google。
+传说中，早期的终端会遇到显示字符的速度慢于接收字符的速度，为了解决这个问题，C-s用于先挂起当前终端，在数据传输之后用C-q恢复显示。所以最简单的解决方法就是在挂起后按C-q。
+不过我的WinXP中C-q已经和快速启动工具（寝室里是Turbo Launcher，实验室的是Launchy）绑定了，也懒得为了这么个问题改操作习惯，于是再次google，终于找到一个一劳永逸的方法，以bash为例，在~/.bashrc中加入一行
+stty -ixoff -ixon
+即可。另外这样设置后似乎恢复了C-s在bash中正向增量查找的功能。恩。
+	<a class="read-more" href="/2009/01/terminal-ctrl-s/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
     <div class="post">
       <h2 class="post-title"><a href="https://blog.yxwang.me/2008/11/finding-and-reproducing-heisenbugs-in-concurrent-programs/">OSDI 08 - CHESS</a></h2>
       <span class="post-date">Nov 30, 2008</span>
@@ -330,34 +357,6 @@ def a(): def b(): x += 1 x = 1 print &quot;a: &quot;, x b() print &quot;b: &quot
 
 <p>不过，Zotero作为Firefox浏览器的插件，还是有一些特别之处。</p>
 	<a class="read-more" href="/2008/10/sync-between-zotero-and-endnote/">阅读全文 →</a>
-      </div>
-      
-    </div>
-    
-    <div class="post">
-      <h2 class="post-title"><a href="https://blog.yxwang.me/2008/10/live-code-update-in-erlang/">Live Code Update in Erlang</a></h2>
-      <span class="post-date">Oct 16, 2008</span>
-      
-      <span class="post-tags">
-	
-	#<a href="https://blog.yxwang.me/tags/erlang">Erlang</a>&nbsp;
-	
-	#<a href="https://blog.yxwang.me/tags/live-updating">Live Updating</a>&nbsp;
-	
-	#<a href="https://blog.yxwang.me/tags/programming">Programming</a>&nbsp;
-	
-	#<a href="https://blog.yxwang.me/tags/programming-languages">Programming Languages</a>&nbsp;
-	
-      </span>
-      
-      
-      
-      <div class="summary">
-	http://bc.tech.coop/blog/070713.html
-Joe Armstrong的原话 Live code upgrading is one of the things Erlang was designed for.
-一个最简单的例子
-loop(Fun, State) receive {From, {rpc, Tag, Q}} -&gt; {Reply, State1} = Fun(Q, State), From ! {Tag, Reply}, loop(Fun, State1); {code_upgrade, Fun1} -&gt; loop(Fun1, State) end.  使用时只要发送一个{code_update, Fun1}消息即可 在实际的项目中，live code update需要在一个进程的稳定状态中进行。好在有Erlang天生的分布式特性，结点i进行更新时其他结点可以接管这个结点的任务，直到结点i更新成功，再进行下一个结点的更新。这个形式和结点的crash处理有点类似。于是Erlang中live updating的实际难点在于 1. How to suspend the system and put it into a stable state 2. How to replicate the stable state 3. How to restart from a stable state 4.
-	<a class="read-more" href="/2008/10/live-code-update-in-erlang/">阅读全文 →</a>
       </div>
       
     </div>

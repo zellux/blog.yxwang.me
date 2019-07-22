@@ -45,8 +45,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2019",
-    "datePublished": "2019-03-29 16:03:45 -0700 PDT",
-    "dateModified" : "2019-03-29 16:03:45 -0700 PDT",
+    "datePublished": "2019-07-21 20:54:27 -0700 PDT",
+    "dateModified" : "2019-07-21 20:54:27 -0700 PDT",
     "url" : "https:\/\/blog.yxwang.me\/post\/",
     "wordCount" : "0",
     "keywords" : [ "Blog" ]
@@ -80,6 +80,39 @@
 <div class="content">
   <div class="posts">
      
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2010/02/the-sicp-picture-language/">SICP 里提到的画图语言</a></h2>
+      <span class="post-date">Feb 24, 2010</span>
+      
+      <span class="post-tags">
+	
+	#<a href="https://blog.yxwang.me/tags/lisp">Lisp</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/programming">Programming</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/programming-languages">Programming Languages</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/sicp">SICP</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/scheme">Scheme</a>&nbsp;
+	
+      </span>
+      
+      
+      
+      <div class="summary">
+	SICP第二章里提到了一种用来画图的Lisp方言，用来演示数据抽象和闭包的表达能力（见http://mitpress.mit.edu/sicp/full-text/book/book-Z-H-15.html#%_sec_2.2.4）。
+最近尝试了下，发现soegaard同学已经在PLT Scheme中实现了一个类似的库，可以很方便的在DrScheme上使用。
+sicp.plt包使用很简单，在Language-&gt;Choose Language中选择Module，然后在需要用到这个包的时候用
+(require (planet soegaard/sicp:2:1/sicp))  声明即可。第一次运行时DrScheme会自动下载这个包并安装，如果网络有限制可以先从http://planet.plt-scheme.org/display.ss?package=sicp.plt&owner=soegaard下载然后在DrScheme中选择本地包安装。
+另外SICP上使用的两个painter（wave和rogers）没有在这个包里提供，取而代之是diagonal-shading和einstein。
+下面这个程序显示了一个简单的分形图像：
+#lang scheme (require (planet &quot;sicp.ss&quot; (&quot;soegaard&quot; &quot;sicp.plt&quot; 2 1))) (define (right-split painter n) (if (= n 0) painter (let ((smaller (right-split painter (- n 1)))) (beside painter (below smaller smaller))))) (define (up-split painter n) (if (= n 0) painter (let ((smaller (up-split painter (- n 1)))) (below painter (beside smaller smaller))))) (define (corner-split painter n) (if (= n 0) painter (let ((up (up-split painter (- n 1))) (right (right-split painter (- n 1)))) (let ((top-left (beside up up)) (bottom-right (below right right)) (corner (corner-split painter (- n 1)))) (beside (below painter top-left) (below bottom-right corner)))))) (paint (corner-split diagonal-shading 4))  程序输出：
+	<a class="read-more" href="/2010/02/the-sicp-picture-language/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
     <div class="post">
       <h2 class="post-title"><a href="https://blog.yxwang.me/2010/02/gitk-font/">优化 gitk 的字体显示</a></h2>
       <span class="post-date">Feb 14, 2010</span>
@@ -334,32 +367,6 @@ F--&gt;00 || F-OO--; -F--&gt;00 || F-OO--; -F--&gt;00 || F-OO--; -F--&gt;00 || F
 ENTRY (syscall) PUSHARGS_6 /* Save register contents. */ _DOARGS_6(44) /* Load arguments. */ movl 20(%esp), %eax /* Load syscall number into %eax. */ ENTER_KERNEL /* Do the system call. */ POPARGS_6 /* Restore register contents. */ cmpl $-4095, %eax /* Check %eax for error. */ jae SYSCALL_ERROR_LABEL /* Jump to error handler if error. */  这里使用了ENTER_KERNEL这个宏做系统调用，接下来在sysdeps/unix/sysv/linux/i386/sysdep.h里可以找到这个宏的定义
 /* The original calling convention for system calls on Linux/i386 is to use int $0x80.
 	<a class="read-more" href="/2010/01/force-int-0x80-for-syscall/">阅读全文 →</a>
-      </div>
-      
-    </div>
-    
-    <div class="post">
-      <h2 class="post-title"><a href="https://blog.yxwang.me/2010/01/git-completion/">Git 命令行自动补全</a></h2>
-      <span class="post-date">Jan 25, 2010</span>
-      
-      <span class="post-tags">
-	
-	#<a href="https://blog.yxwang.me/tags/git">Git</a>&nbsp;
-	
-	#<a href="https://blog.yxwang.me/tags/shell">Shell</a>&nbsp;
-	
-	#<a href="https://blog.yxwang.me/tags/tooling">Tooling</a>&nbsp;
-	
-	#<a href="https://blog.yxwang.me/tags/git">git</a>&nbsp;
-	
-      </span>
-      
-      
-      
-      <div class="summary">
-	在Pro Git上看到的技巧，git的源代码包里的contrib/completion目录下有个git-completion.bash，把这个文件保存到~/.git-completion.bash，然后在.bashrc中加入一行
-source ~/.git-completion.bash  这样就能在bash下用tab自动补全git命令、branch等内容了。另外Debian/Ubuntu里有个包就叫git-completion，这个包安装完成后会自动把这个补全脚本放到/etc/bash_completion.d/下，由bash-compleletion载入执行。
-	<a class="read-more" href="/2010/01/git-completion/">阅读全文 →</a>
       </div>
       
     </div>

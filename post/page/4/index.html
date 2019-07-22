@@ -45,8 +45,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2019",
-    "datePublished": "2019-03-29 16:03:45 -0700 PDT",
-    "dateModified" : "2019-03-29 16:03:45 -0700 PDT",
+    "datePublished": "2019-07-21 20:54:27 -0700 PDT",
+    "dateModified" : "2019-07-21 20:54:27 -0700 PDT",
     "url" : "https:\/\/blog.yxwang.me\/post\/",
     "wordCount" : "0",
     "keywords" : [ "Blog" ]
@@ -80,6 +80,35 @@
 <div class="content">
   <div class="posts">
      
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2012/06/revisiting-storage-for-smartphones/">存储是移动应用性能的瓶颈？</a></h2>
+      <span class="post-date">Jun 11, 2012</span>
+      
+      <span class="post-tags">
+	
+	#<a href="https://blog.yxwang.me/tags/computer-system">Computer System</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/mobile">Mobile</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/paper">Paper</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/storage">Storage</a>&nbsp;
+	
+      </span>
+      
+      
+      
+      <div class="summary">
+	<p><a href="https://www.usenix.org/comment/260">Revisiting Storage for Smartphones</a> 是今年 FAST 会议上的最佳论文，这篇论文提出了一个违背直觉的观点，很有意思。这里简单介绍一下这篇论文的内容，有兴趣的朋友可以直接访问前面的链接下载原文或是观看现场录像。</p>
+
+<p><a data-fancybox="gallery"  data-caption="移动存储性能" href=/images/2012-06/mobile-flash-throughtput.png ><img src=/images/2012-06/mobile-flash-throughtput.png  /></a></p>
+
+<p>传统的观点认为，移动应用性能的主要瓶颈在网络和 CPU，而闪存的读写速率明显高于网络传输速度，不会成为性能的瓶颈。然而，根据上图作者给出的关于移动存储性能的图例（纵坐标单位为 Mbps，本文图片均来自演讲 slides 和原论文），我们可以看到，虽然移动存储顺序读写的性能明显高于 wifi 和 3G，但是随机写的性能却比它们差很多，因此移动存储成为应用性能瓶颈是完全有可能的。</p>
+	<a class="read-more" href="/2012/06/revisiting-storage-for-smartphones/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
     <div class="post">
       <h2 class="post-title"><a href="https://blog.yxwang.me/2012/03/managing-dotfiles-with-git/">用 Git 管理命令行配置</a></h2>
       <span class="post-date">Mar 28, 2012</span>
@@ -354,27 +383,6 @@ describe SalesController, :slow =&gt; true do # specs end  接下来只要在 sp
 RSpec.configure do |config| config.filter_run_excluding :slow =&gt; true end  与 filter_run_excluding 相反的是 filter_run，指定会被运行的标签，不包含在这个列表中的测试将被忽略。
 参考：http://www.dixis.com/?p=283
 	<a class="read-more" href="/2011/11/skip-specs-by-tags/">阅读全文 →</a>
-      </div>
-      
-    </div>
-    
-    <div class="post">
-      <h2 class="post-title"><a href="https://blog.yxwang.me/2011/09/recipe-for-hashing/">一个简单有效的 hash 算法</a></h2>
-      <span class="post-date">Sep 17, 2011</span>
-      
-      <span class="post-tags">
-	
-	#<a href="https://blog.yxwang.me/tags/algorithms">Algorithms</a>&nbsp;
-	
-	#<a href="https://blog.yxwang.me/tags/hash">Hash</a>&nbsp;
-	
-      </span>
-      
-      
-      
-      <div class="summary">
-	最近要给某个类写一个 hash 方法，这个类包括一些整型和字符串属性，需要把它们都放到 hash 中。担心自己想出来的 hash 算法会造成比较严重的冲突，网上搜了一下，发现 Effective Java 中已经介绍过一种简单有效的算法了：  将任一非零常数赋值给 result 找到该类中所有需要包含在 hash 中的属性，并根据它们的类型进行计算 c  对于布尔类型，将它们转换为 0/1 对于 byte, char, short, 和 int 类型，将它们转换为 int 对于长整型 long，计算高位和低位的异或结果 (int) (f ^ (f &gt;&gt;&gt; 32)) 对于 float 类型，采用它的二进制表示，在 Java 中为 Float.floatToIntBits，Ruby 中我估计用 Float.hash 也可以 对于 double 类型，调用 Double.doubleToIntBits 后再次用前面的方法处理得到的 long 类型 对于数组，利用方法 3 合并计算结果 对于其它的对象，递归调用该对象的 hash 方法  将计算结果合并到 result 变量：result = 37 * result + c 返回 result  另外这个博客的域名已经改成了 blog.
-	<a class="read-more" href="/2011/09/recipe-for-hashing/">阅读全文 →</a>
       </div>
       
     </div>
