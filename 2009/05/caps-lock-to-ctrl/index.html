@@ -34,20 +34,12 @@
     "@type" : "BlogPosting",
     "mainEntityOfPage": {
          "@type": "WebPage",
-         "@id": "https://blog.yxwang.me/"
+         "@id": "https:\/\/blog.yxwang.me\/"
     },
     "articleSection" : "post",
     "name" : "给你的小指减负：将 Caps Lock 键映射成 Ctrl",
     "headline" : "给你的小指减负：将 Caps Lock 键映射成 Ctrl",
-    "description" : "长时间使用Emacs经常会觉得小指疼痛，一个月前我把自己用的三台电脑（两台winxp，一台archlinux）的Caps Lock键的功能都改成了和左Ctrl一样，这样小指按起来就舒服多了，另外由于平时不需要用到Caps Lock键所以也不需要找个组合键来代替它了。
-Windows下有个很方便的改键工具 remapkey，xp安装盘自带。
-Mac OS X系统中改键也很方便，10.4以上版本的OSX中可以直接在Keyboard Preference里找到修改键位映射的选项。
-Linux下的改键我知道两种方法，一种是修改xorg.conf文件，把里面的键盘设备设置改成
-Section &quot;InputDevice&quot; Identifier &quot;Generic Keyboard&quot; Driver &quot;kbd&quot; Option &quot;CoreKeyboard&quot; Option &quot;XkbRules&quot; &quot;xorg&quot; Option &quot;XkbModel&quot; &quot;pc104&quot; Option &quot;XkbLayout&quot; &quot;us&quot; Option &quot;XkbOptions&quot; &quot;ctrl:swapcaps&quot; EndSection  另一种是使用xmodmap这个工具，具体可以参见这篇文章 Changing your caps lock into Ctrl in X，这里简单介绍下
-修改前记得先备份当前的键位映射，xmodmap -pke &gt; xmodmap.backup
-接下来运行
-xmodmap -e 'keycode 66 = Control_L' xmodmap -e 'clear Lock' xmodmap -e 'add Control = Control_L'  这样就修改了Caps Lock的键位映射而不需要重启x，如果要在每次启动时自动修改Caps Lock键的映射，可以新建/修改一个.Xmodmap或者.xmodmap的文件，在里面加入
-keycode 66 = Control_L clear Lock add Control = Control_L    ",
+    "description" : "长时间使用Emacs经常会觉得小指疼痛，一个月前我把自己用的三台电脑（两台winxp，一台archlinux）的Caps Lock键的功能都改成了和左Ctrl一样，这样小指按起来就舒服多了，另外由于平时不需要用到Caps Lock键所以也不需要找个组合键来代替它了。\nWindows下有个很方便的改键工具 remapkey，xp安装盘自带。\nMac OS X系统中改键也很方便，10.4以上版本的OSX中可以直接在Keyboard Preference里找到修改键位映射的选项。\nLinux下的改键我知道两种方法，一种是修改xorg.conf文件，把里面的键盘设备设置改成\nSection \x26quot;InputDevice\x26quot; Identifier \x26quot;Generic Keyboard\x26quot; Driver \x26quot;kbd\x26quot; Option \x26quot;CoreKeyboard\x26quot; Option \x26quot;XkbRules\x26quot; \x26quot;xorg\x26quot; Option \x26quot;XkbModel\x26quot; \x26quot;pc104\x26quot; Option \x26quot;XkbLayout\x26quot; \x26quot;us\x26quot; Option \x26quot;XkbOptions\x26quot; \x26quot;ctrl:swapcaps\x26quot; EndSection  另一种是使用xmodmap这个工具，具体可以参见这篇文章 Changing your caps lock into Ctrl in X，这里简单介绍下\n修改前记得先备份当前的键位映射，xmodmap -pke \x26gt; xmodmap.backup\n接下来运行\nxmodmap -e \x27keycode 66 = Control_L\x27 xmodmap -e \x27clear Lock\x27 xmodmap -e \x27add Control = Control_L\x27  这样就修改了Caps Lock的键位映射而不需要重启x，如果要在每次启动时自动修改Caps Lock键的映射，可以新建\/修改一个.Xmodmap或者.xmodmap的文件，在里面加入\nkeycode 66 = Control_L clear Lock add Control = Control_L    ",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -55,9 +47,9 @@ keycode 66 = Control_L clear Lock add Control = Control_L    ",
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2009",
-    "datePublished": "2009-05-04 00:00:00 &#43;0000 UTC",
-    "dateModified" : "2009-05-04 00:00:00 &#43;0000 UTC",
-    "url" : "https://blog.yxwang.me/2009/05/caps-lock-to-ctrl/",
+    "datePublished": "2009-05-04 00:00:00 \x2b0000 UTC",
+    "dateModified" : "2009-05-04 00:00:00 \x2b0000 UTC",
+    "url" : "https:\/\/blog.yxwang.me\/2009\/05\/caps-lock-to-ctrl\/",
     "wordCount" : "75",
     "keywords" : [ "Emacs","Tooling","Blog" ]
 }

@@ -34,14 +34,12 @@
     "@type" : "BlogPosting",
     "mainEntityOfPage": {
          "@type": "WebPage",
-         "@id": "https://blog.yxwang.me/"
+         "@id": "https:\/\/blog.yxwang.me\/"
     },
     "articleSection" : "post",
     "name" : "Flux OSKit 中 trap_state 的存放位置",
     "headline" : "Flux OSKit 中 trap_state 的存放位置",
-    "description" : "写fork函数的时候发现实际传给trap handler的ts地址和用(struct trap_state *) (KSTACK_TOP(old))) - 1
-计算出来的结果不一样，后者比前者小0x10。另外ts的实际地址加上ts的大小(92个字节)后就超出了内核栈的范围。
-/* * This structure corresponds to the state of user registers * as saved upon kernel trap/interrupt entry. * As always, it is only a default implementation; * a well-optimized kernel will probably want to override it * with something that allows better optimization. */ struct trap_state { /* Saved segment registers */ unsigned int	gs; unsigned int	fs; unsigned int	es; unsigned int	ds; /* PUSHA register state frame */ unsigned int	edi; unsigned int	esi; unsigned int	ebp; unsigned int	cr2;	/* we save cr2 over esp for page faults */ unsigned int	ebx; unsigned int	edx; unsigned int	ecx; unsigned int	eax; /* Processor trap number, 0-31.",
+    "description" : "写fork函数的时候发现实际传给trap handler的ts地址和用(struct trap_state *) (KSTACK_TOP(old))) - 1\n计算出来的结果不一样，后者比前者小0x10。另外ts的实际地址加上ts的大小(92个字节)后就超出了内核栈的范围。\n\/* * This structure corresponds to the state of user registers * as saved upon kernel trap\/interrupt entry. * As always, it is only a default implementation; * a well-optimized kernel will probably want to override it * with something that allows better optimization. *\/ struct trap_state { \/* Saved segment registers *\/ unsigned int\tgs; unsigned int\tfs; unsigned int\tes; unsigned int\tds; \/* PUSHA register state frame *\/ unsigned int\tedi; unsigned int\tesi; unsigned int\tebp; unsigned int\tcr2;\t\/* we save cr2 over esp for page faults *\/ unsigned int\tebx; unsigned int\tedx; unsigned int\tecx; unsigned int\teax; \/* Processor trap number, 0-31.",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -49,9 +47,9 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2008",
-    "datePublished": "2008-08-20 00:00:00 &#43;0000 UTC",
-    "dateModified" : "2008-08-20 00:00:00 &#43;0000 UTC",
-    "url" : "https://blog.yxwang.me/2008/08/trap_state-in-flux-oskit/",
+    "datePublished": "2008-08-20 00:00:00 \x2b0000 UTC",
+    "dateModified" : "2008-08-20 00:00:00 \x2b0000 UTC",
+    "url" : "https:\/\/blog.yxwang.me\/2008\/08\/trap_state-in-flux-oskit\/",
     "wordCount" : "180",
     "keywords" : [ "Courses","Flux OSKit","Lab","OS","Blog" ]
 }

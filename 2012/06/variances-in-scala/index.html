@@ -34,24 +34,12 @@
     "@type" : "BlogPosting",
     "mainEntityOfPage": {
          "@type": "WebPage",
-         "@id": "https://blog.yxwang.me/"
+         "@id": "https:\/\/blog.yxwang.me\/"
     },
     "articleSection" : "post",
     "name" : "Scala 中的协变和逆变",
     "headline" : "Scala 中的协变和逆变",
-    "description" : "<h2 id="java-数组">Java 数组</h2>
-
-<p>先来看一个 Java 中的例子，Java 中的数组是协变的。也就是说，一个 String 数组(String[])是可以被当成 Object 数组(Object[])处理的：</p>
-
-<pre><code class="language-java">String[] a1 = { &quot;abc&quot; };
-Object[] a2 = a1;
-</code></pre>
-
-<p>这种协变虽然在读取数组内容时不会有问题（a1 数组中的 String 元素可以被当成 Object 使用），但是修改数组内容时就会出现无法在编译期检测出来的错误了：</p>
-
-<pre><code class="language-java">a2[0] = new Integer(17)
-String s  = a1[0]  // java.lang.ArrayStoreException
-</code></pre>",
+    "description" : "\x3ch2 id=\x22java-数组\x22\x3eJava 数组\x3c\/h2\x3e\n\n\x3cp\x3e先来看一个 Java 中的例子，Java 中的数组是协变的。也就是说，一个 String 数组(String[])是可以被当成 Object 数组(Object[])处理的：\x3c\/p\x3e\n\n\x3cpre\x3e\x3ccode class=\x22language-java\x22\x3eString[] a1 = { \x26quot;abc\x26quot; };\nObject[] a2 = a1;\n\x3c\/code\x3e\x3c\/pre\x3e\n\n\x3cp\x3e这种协变虽然在读取数组内容时不会有问题（a1 数组中的 String 元素可以被当成 Object 使用），但是修改数组内容时就会出现无法在编译期检测出来的错误了：\x3c\/p\x3e\n\n\x3cpre\x3e\x3ccode class=\x22language-java\x22\x3ea2[0] = new Integer(17)\nString s  = a1[0]  \/\/ java.lang.ArrayStoreException\n\x3c\/code\x3e\x3c\/pre\x3e",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -59,9 +47,9 @@ String s  = a1[0]  // java.lang.ArrayStoreException
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2012",
-    "datePublished": "2012-06-30 00:00:00 &#43;0000 UTC",
-    "dateModified" : "2012-06-30 00:00:00 &#43;0000 UTC",
-    "url" : "https://blog.yxwang.me/2012/06/variances-in-scala/",
+    "datePublished": "2012-06-30 00:00:00 \x2b0000 UTC",
+    "dateModified" : "2012-06-30 00:00:00 \x2b0000 UTC",
+    "url" : "https:\/\/blog.yxwang.me\/2012\/06\/variances-in-scala\/",
     "wordCount" : "250",
     "keywords" : [ "Programming","Scala","Blog" ]
 }

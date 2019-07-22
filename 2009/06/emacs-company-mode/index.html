@@ -34,17 +34,12 @@
     "@type" : "BlogPosting",
     "mainEntityOfPage": {
          "@type": "WebPage",
-         "@id": "https://blog.yxwang.me/"
+         "@id": "https:\/\/blog.yxwang.me\/"
     },
     "articleSection" : "post",
     "name" : "Company-mode: Emacs 自动补全",
     "headline" : "Company-mode: Emacs 自动补全",
-    "description" : "Company的全写是complete everything，它只是一个补全的前端，会自动调用semantic等后端插件。
-新版的Company可以从它的官方主页(http://nschum.de/src/emacs/company-mode/)下载到，也可以从ELPA下载安装这个插件。
-使用这个插件时只要在.emacs中加入
-(add-to-list 'load-path &quot;/path/to/company&quot;) (autoload 'company-mode &quot;company&quot; nil t)  然后Emacs中使用M-x company-mode启动company模式即可。
-具体的按键可以在company.el中看到
-(defvar company-active-map (let ((keymap (make-sparse-keymap))) (define-key keymap &quot;\e\e\e&quot; 'company-abort) (define-key keymap &quot;\C-g&quot; 'company-abort) (define-key keymap (kbd &quot;M-n&quot;) 'company-select-next) (define-key keymap (kbd &quot;M-p&quot;) 'company-select-previous) (define-key keymap (kbd &quot;&quot;) 'company-select-next) (define-key keymap (kbd &quot;&quot;) 'company-select-previous) (define-key keymap [down-mouse-1] 'ignore) (define-key keymap [down-mouse-3] 'ignore) (define-key keymap [mouse-1] 'company-complete-mouse) (define-key keymap [mouse-3] 'company-select-mouse) (define-key keymap [up-mouse-1] 'ignore) (define-key keymap [up-mouse-3] 'ignore) (define-key keymap &quot;\C-m&quot; 'company-complete-selection) (define-key keymap &quot;\t&quot; 'company-complete-common) (define-key keymap (kbd &quot;&quot;) 'company-show-doc-buffer) (define-key keymap &quot;\C-w&quot; 'company-show-location) (define-key keymap &quot;\C-s&quot; 'company-search-candidates) (define-key keymap &quot;\C-\M-s&quot; 'company-filter-candidates) (dotimes (i 10) (define-key keymap (vector (+ (aref (kbd &quot;M-0&quot;) 0) i)) `(lambda () (interactive) (company-complete-number ,i)))) keymap) &quot;Keymap that is enabled during an active completion.",
+    "description" : "Company的全写是complete everything，它只是一个补全的前端，会自动调用semantic等后端插件。\n新版的Company可以从它的官方主页(http:\/\/nschum.de\/src\/emacs\/company-mode\/)下载到，也可以从ELPA下载安装这个插件。\n使用这个插件时只要在.emacs中加入\n(add-to-list \x27load-path \x26quot;\/path\/to\/company\x26quot;) (autoload \x27company-mode \x26quot;company\x26quot; nil t)  然后Emacs中使用M-x company-mode启动company模式即可。\n具体的按键可以在company.el中看到\n(defvar company-active-map (let ((keymap (make-sparse-keymap))) (define-key keymap \x26quot;\\e\\e\\e\x26quot; \x27company-abort) (define-key keymap \x26quot;\\C-g\x26quot; \x27company-abort) (define-key keymap (kbd \x26quot;M-n\x26quot;) \x27company-select-next) (define-key keymap (kbd \x26quot;M-p\x26quot;) \x27company-select-previous) (define-key keymap (kbd \x26quot;\x26quot;) \x27company-select-next) (define-key keymap (kbd \x26quot;\x26quot;) \x27company-select-previous) (define-key keymap [down-mouse-1] \x27ignore) (define-key keymap [down-mouse-3] \x27ignore) (define-key keymap [mouse-1] \x27company-complete-mouse) (define-key keymap [mouse-3] \x27company-select-mouse) (define-key keymap [up-mouse-1] \x27ignore) (define-key keymap [up-mouse-3] \x27ignore) (define-key keymap \x26quot;\\C-m\x26quot; \x27company-complete-selection) (define-key keymap \x26quot;\\t\x26quot; \x27company-complete-common) (define-key keymap (kbd \x26quot;\x26quot;) \x27company-show-doc-buffer) (define-key keymap \x26quot;\\C-w\x26quot; \x27company-show-location) (define-key keymap \x26quot;\\C-s\x26quot; \x27company-search-candidates) (define-key keymap \x26quot;\\C-\\M-s\x26quot; \x27company-filter-candidates) (dotimes (i 10) (define-key keymap (vector (\x2b (aref (kbd \x26quot;M-0\x26quot;) 0) i)) `(lambda () (interactive) (company-complete-number ,i)))) keymap) \x26quot;Keymap that is enabled during an active completion.",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -52,9 +47,9 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2009",
-    "datePublished": "2009-06-02 00:00:00 &#43;0000 UTC",
-    "dateModified" : "2009-06-02 00:00:00 &#43;0000 UTC",
-    "url" : "https://blog.yxwang.me/2009/06/emacs-company-mode/",
+    "datePublished": "2009-06-02 00:00:00 \x2b0000 UTC",
+    "dateModified" : "2009-06-02 00:00:00 \x2b0000 UTC",
+    "url" : "https:\/\/blog.yxwang.me\/2009\/06\/emacs-company-mode\/",
     "wordCount" : "134",
     "keywords" : [ "Emacs","Tooling","Blog" ]
 }

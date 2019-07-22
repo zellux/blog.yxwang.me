@@ -34,15 +34,12 @@
     "@type" : "BlogPosting",
     "mainEntityOfPage": {
          "@type": "WebPage",
-         "@id": "https://blog.yxwang.me/"
+         "@id": "https:\/\/blog.yxwang.me\/"
     },
     "articleSection" : "post",
     "name" : "使用 grep 查找进程的技巧",
     "headline" : "使用 grep 查找进程的技巧",
-    "description" : "使用grep在ps aux的输出结果中查找进程的时候经常会把grep进程本身也找出来，比如查找emacs进程：
-$ ps aux | grep emacs wyx 7090 0.0 0.0 3336 796 pts/2 S+ 04:49 0:00 grep emacs wyx 10128 0.1 4.9 66904 50388 pts/3 S+ Jan21 2:21 emacs  一个常见的防止grep进程出现的方法就是在后面再加一个grep -v grep：
-$ ps aux | grep emacs | grep -v grep wyx 10128 0.1 4.9 66904 50388 pts/3 S+ Jan21 2:21 emacs  今天在Santosa的博客上看到了另一个巧妙的做法，使用grep [e]macs来搜索emacs这个进程：
-$ ps aux | grep [e]macs wyx 10128 0.1 4.9 66904 50388 pts/3 S+ Jan21 2:21 emacs  为什么会有这样的效果，知道grep正则中[]的作用后想一想就能明白啦。很有意思的trick，虽然说它比| grep -v grep也未必方便多少，因为后者能通过alias简化输入。",
+    "description" : "使用grep在ps aux的输出结果中查找进程的时候经常会把grep进程本身也找出来，比如查找emacs进程：\n$ ps aux | grep emacs wyx 7090 0.0 0.0 3336 796 pts\/2 S\x2b 04:49 0:00 grep emacs wyx 10128 0.1 4.9 66904 50388 pts\/3 S\x2b Jan21 2:21 emacs  一个常见的防止grep进程出现的方法就是在后面再加一个grep -v grep：\n$ ps aux | grep emacs | grep -v grep wyx 10128 0.1 4.9 66904 50388 pts\/3 S\x2b Jan21 2:21 emacs  今天在Santosa的博客上看到了另一个巧妙的做法，使用grep [e]macs来搜索emacs这个进程：\n$ ps aux | grep [e]macs wyx 10128 0.1 4.9 66904 50388 pts\/3 S\x2b Jan21 2:21 emacs  为什么会有这样的效果，知道grep正则中[]的作用后想一想就能明白啦。很有意思的trick，虽然说它比| grep -v grep也未必方便多少，因为后者能通过alias简化输入。",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -50,9 +47,9 @@ $ ps aux | grep [e]macs wyx 10128 0.1 4.9 66904 50388 pts/3 S+ Jan21 2:21 emacs 
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2010",
-    "datePublished": "2010-01-21 00:00:00 &#43;0000 UTC",
-    "dateModified" : "2010-01-21 00:00:00 &#43;0000 UTC",
-    "url" : "https://blog.yxwang.me/2010/01/grep-trick/",
+    "datePublished": "2010-01-21 00:00:00 \x2b0000 UTC",
+    "dateModified" : "2010-01-21 00:00:00 \x2b0000 UTC",
+    "url" : "https:\/\/blog.yxwang.me\/2010\/01\/grep-trick\/",
     "wordCount" : "78",
     "keywords" : [ "Grep","Linux","Shell","Tooling","grep","Blog" ]
 }

@@ -34,14 +34,12 @@
     "@type" : "BlogPosting",
     "mainEntityOfPage": {
          "@type": "WebPage",
-         "@id": "https://blog.yxwang.me/"
+         "@id": "https:\/\/blog.yxwang.me\/"
     },
     "articleSection" : "post",
     "name" : "gcc 内联汇编中 %c 的用法",
     "headline" : "gcc 内联汇编中 %c 的用法",
-    "description" : "这几天看KVM代码的时候看到里面有个内联汇编的语法很陌生（下面的代码截取了部分内联汇编片段）：
-asm ( &quot;mov %c[rax](%3), %%rax \n\t&quot; &quot;mov %c[rbx](%3), %%rbx \n\t&quot; &quot;mov %c[rdx](%3), %%rdx \n\t&quot; &quot;mov %c[rsi](%3), %%rsi \n\t&quot; &quot;mov %c[rdi](%3), %%rdi \n\t&quot; : &quot;=q&quot; (fail) : &quot;r&quot;(vcpu-&gt;launched), &quot;d&quot;((unsigned long)HOST_RSP), &quot;c&quot;(vcpu), [rax]&quot;i&quot;(offsetof(struct kvm_vcpu, regs[VCPU_REGS_RAX])), [rbx]&quot;i&quot;(offsetof(struct kvm_vcpu, regs[VCPU_REGS_RBX])), [rcx]&quot;i&quot;(offsetof(struct kvm_vcpu, regs[VCPU_REGS_RCX])) : &quot;cc&quot;, &quot;memory&quot; );  stackoverflow上问了下才知道这是gcc的operand substitution语法，%c后面跟上常量名，就能在内联汇编中使用这个常量了。
-以这段代码为例，vcpu是struct kvm_vcpu类型，[rax]&ldquo;i&rdquo;(offsetof(struct kvm_vcpu, regs[VCPU_REGS_RAX])这句话把vcpu-&gt;regs[VCPU_REGS_RAX]相对于vcpu的偏移赋值给了rax这一常量。接下来回到第一行mov %crax, %%eax，%c[rax]等于前面得到的偏移量，加上vcpu并取值后就是vcpu-&gt;regs[VCPU_REGS_RAX]中保存的值了，这个指令会把这个值保存在%rax寄存器中，从而完成了vcpu的rax寄存器恢复工作。",
+    "description" : "这几天看KVM代码的时候看到里面有个内联汇编的语法很陌生（下面的代码截取了部分内联汇编片段）：\nasm ( \x26quot;mov %c[rax](%3), %%rax \\n\\t\x26quot; \x26quot;mov %c[rbx](%3), %%rbx \\n\\t\x26quot; \x26quot;mov %c[rdx](%3), %%rdx \\n\\t\x26quot; \x26quot;mov %c[rsi](%3), %%rsi \\n\\t\x26quot; \x26quot;mov %c[rdi](%3), %%rdi \\n\\t\x26quot; : \x26quot;=q\x26quot; (fail) : \x26quot;r\x26quot;(vcpu-\x26gt;launched), \x26quot;d\x26quot;((unsigned long)HOST_RSP), \x26quot;c\x26quot;(vcpu), [rax]\x26quot;i\x26quot;(offsetof(struct kvm_vcpu, regs[VCPU_REGS_RAX])), [rbx]\x26quot;i\x26quot;(offsetof(struct kvm_vcpu, regs[VCPU_REGS_RBX])), [rcx]\x26quot;i\x26quot;(offsetof(struct kvm_vcpu, regs[VCPU_REGS_RCX])) : \x26quot;cc\x26quot;, \x26quot;memory\x26quot; );  stackoverflow上问了下才知道这是gcc的operand substitution语法，%c后面跟上常量名，就能在内联汇编中使用这个常量了。\n以这段代码为例，vcpu是struct kvm_vcpu类型，[rax]\x26ldquo;i\x26rdquo;(offsetof(struct kvm_vcpu, regs[VCPU_REGS_RAX])这句话把vcpu-\x26gt;regs[VCPU_REGS_RAX]相对于vcpu的偏移赋值给了rax这一常量。接下来回到第一行mov %crax, %%eax，%c[rax]等于前面得到的偏移量，加上vcpu并取值后就是vcpu-\x26gt;regs[VCPU_REGS_RAX]中保存的值了，这个指令会把这个值保存在%rax寄存器中，从而完成了vcpu的rax寄存器恢复工作。",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -49,9 +47,9 @@ asm ( &quot;mov %c[rax](%3), %%rax \n\t&quot; &quot;mov %c[rbx](%3), %%rbx \n\t&
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2010",
-    "datePublished": "2010-08-25 00:00:00 &#43;0000 UTC",
-    "dateModified" : "2010-08-25 00:00:00 &#43;0000 UTC",
-    "url" : "https://blog.yxwang.me/2010/08/gcc-operand-substitution/",
+    "datePublished": "2010-08-25 00:00:00 \x2b0000 UTC",
+    "dateModified" : "2010-08-25 00:00:00 \x2b0000 UTC",
+    "url" : "https:\/\/blog.yxwang.me\/2010\/08\/gcc-operand-substitution\/",
     "wordCount" : "52",
     "keywords" : [ "Assembly","Computer Languages","GCC","Programming","gcc","Blog" ]
 }

@@ -34,15 +34,12 @@
     "@type" : "BlogPosting",
     "mainEntityOfPage": {
          "@type": "WebPage",
-         "@id": "https://blog.yxwang.me/"
+         "@id": "https:\/\/blog.yxwang.me\/"
     },
     "articleSection" : "post",
     "name" : "汇编文件中导出函数符号",
     "headline" : "汇编文件中导出函数符号",
-    "description" : "Linux 2.4.18的linux/linkage.h文件定义了若干相关的宏
-#define SYMBOL_NAME(X) X #ifdef __STDC__ #define SYMBOL_NAME_LABEL(X) X##: #else #define SYMBOL_NAME_LABEL(X) X/**/: #endif #define __ALIGN .align 16,0x90 #define __ALIGN_STR &quot;.align 16,0x90&quot; #define ALIGN __ALIGN #define ALIGN_STR __ALIGN_STR #define ENTRY(name) .globl SYMBOL_NAME(name); ALIGN; SYMBOL_NAME_LABEL(name)  用ENTRY(name)就能定义函数了。后来发现Flux OSKit中本来就提供了类似功能的宏，定义在inc/asm.h中。
-使用的时候需要再写一个c语言的wrapper function（至少2.4.18里面是这么做的）
-asmlinkage void ret_from_fork(void) __asm__(&quot;ret_from_fork&quot;);  ",
+    "description" : "Linux 2.4.18的linux\/linkage.h文件定义了若干相关的宏\n#define SYMBOL_NAME(X) X #ifdef __STDC__ #define SYMBOL_NAME_LABEL(X) X##: #else #define SYMBOL_NAME_LABEL(X) X\/**\/: #endif #define __ALIGN .align 16,0x90 #define __ALIGN_STR \x26quot;.align 16,0x90\x26quot; #define ALIGN __ALIGN #define ALIGN_STR __ALIGN_STR #define ENTRY(name) .globl SYMBOL_NAME(name); ALIGN; SYMBOL_NAME_LABEL(name)  用ENTRY(name)就能定义函数了。后来发现Flux OSKit中本来就提供了类似功能的宏，定义在inc\/asm.h中。\n使用的时候需要再写一个c语言的wrapper function（至少2.4.18里面是这么做的）\nasmlinkage void ret_from_fork(void) __asm__(\x26quot;ret_from_fork\x26quot;);  ",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -50,9 +47,9 @@ asmlinkage void ret_from_fork(void) __asm__(&quot;ret_from_fork&quot;);  ",
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2008",
-    "datePublished": "2008-08-20 00:00:00 &#43;0000 UTC",
-    "dateModified" : "2008-08-20 00:00:00 &#43;0000 UTC",
-    "url" : "https://blog.yxwang.me/2008/08/export-symbols-in-asm/",
+    "datePublished": "2008-08-20 00:00:00 \x2b0000 UTC",
+    "dateModified" : "2008-08-20 00:00:00 \x2b0000 UTC",
+    "url" : "https:\/\/blog.yxwang.me\/2008\/08\/export-symbols-in-asm\/",
     "wordCount" : "43",
     "keywords" : [ "Assembly","Computer System","Flux OSKit","Lab","OS","Blog" ]
 }

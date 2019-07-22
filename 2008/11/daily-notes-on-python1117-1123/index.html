@@ -34,19 +34,12 @@
     "@type" : "BlogPosting",
     "mainEntityOfPage": {
          "@type": "WebPage",
-         "@id": "https://blog.yxwang.me/"
+         "@id": "https:\/\/blog.yxwang.me\/"
     },
     "articleSection" : "post",
     "name" : "Daily Notes on Python[11.17-11.23]",
     "headline" : "Daily Notes on Python[11.17-11.23]",
-    "description" : "模块动态加载机制
- Advanced Python（某一期Google TechTalks的话题）上提到import指令本质是个语法糖，import sys等价于sys = import(&ldquo;sys&rdquo;)。解析import sys的bytecode可以看到四个指令（参数略）： LOAD_CONST LOAD_CONST IMPORT_NAME STORE_NAME  IMPORT_NAME把sys模块导入并保存到栈上，STORE_NAME把这个指针当作普通对象保存在sys这个变量中。
-2. IMPORT_NAME指令行为分析 将参数打包并用PyEval_CallObject()这个统一调用接口运行import方法，bltinmodule.c中的builtinimport函数包装了这个功能。help(import)显示的import方法的参数列表 import(&hellip;) import(name, globals={}, locals={}, fromlist=[], level=-1) -&gt; module
-对应于builtinimport中调用的另一层函数封装
-PyObject * PyImport_ImportModuleLevel(char *name, PyObject *globals, PyObject *locals, PyObject *fromlist, int level)  这个函数调用了真正干活的函数，import.c中的
-static PyObject * import_module_level(char *name, PyObject *globals, PyObject *locals, PyObject *fromlist, int level)  3. import_module_level函数 首先调用get_parent()得到import发生时的package对象，接下来多次调用load_next依次得到各级的包名，跟踪了下import xml.dom.minidom的行为，发现name的值依次是&rdquo;dom.minidom&rdquo;, &ldquo;minidom&rdquo;。最后根据import的形式是from &hellip; import &hellip;还是import &hellip;返回不同的处理结果。
-4. import_submodule函数 load_next函数中调用这个函数进行模块的查找和载入。主要分三步：find_module, load_module, add_submodule。
-5. from &hellip; import &hellip; ensure_fromlist处理了这个情况。另外对于from &hellip; import *的情况，会从module文件中读入一个all对象，从中知道module公开的符号信息。",
+    "description" : "模块动态加载机制\n Advanced Python（某一期Google TechTalks的话题）上提到import指令本质是个语法糖，import sys等价于sys = import(\x26ldquo;sys\x26rdquo;)。解析import sys的bytecode可以看到四个指令（参数略）： LOAD_CONST LOAD_CONST IMPORT_NAME STORE_NAME  IMPORT_NAME把sys模块导入并保存到栈上，STORE_NAME把这个指针当作普通对象保存在sys这个变量中。\n2. IMPORT_NAME指令行为分析 将参数打包并用PyEval_CallObject()这个统一调用接口运行import方法，bltinmodule.c中的builtinimport函数包装了这个功能。help(import)显示的import方法的参数列表 import(\x26hellip;) import(name, globals={}, locals={}, fromlist=[], level=-1) -\x26gt; module\n对应于builtinimport中调用的另一层函数封装\nPyObject * PyImport_ImportModuleLevel(char *name, PyObject *globals, PyObject *locals, PyObject *fromlist, int level)  这个函数调用了真正干活的函数，import.c中的\nstatic PyObject * import_module_level(char *name, PyObject *globals, PyObject *locals, PyObject *fromlist, int level)  3. import_module_level函数 首先调用get_parent()得到import发生时的package对象，接下来多次调用load_next依次得到各级的包名，跟踪了下import xml.dom.minidom的行为，发现name的值依次是\x26rdquo;dom.minidom\x26rdquo;, \x26ldquo;minidom\x26rdquo;。最后根据import的形式是from \x26hellip; import \x26hellip;还是import \x26hellip;返回不同的处理结果。\n4. import_submodule函数 load_next函数中调用这个函数进行模块的查找和载入。主要分三步：find_module, load_module, add_submodule。\n5. from \x26hellip; import \x26hellip; ensure_fromlist处理了这个情况。另外对于from \x26hellip; import *的情况，会从module文件中读入一个all对象，从中知道module公开的符号信息。",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -54,9 +47,9 @@ static PyObject * import_module_level(char *name, PyObject *globals, PyObject *l
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2008",
-    "datePublished": "2008-11-17 00:00:00 &#43;0000 UTC",
-    "dateModified" : "2008-11-17 00:00:00 &#43;0000 UTC",
-    "url" : "https://blog.yxwang.me/2008/11/daily-notes-on-python1117-1123/",
+    "datePublished": "2008-11-17 00:00:00 \x2b0000 UTC",
+    "dateModified" : "2008-11-17 00:00:00 \x2b0000 UTC",
+    "url" : "https:\/\/blog.yxwang.me\/2008\/11\/daily-notes-on-python1117-1123\/",
     "wordCount" : "161",
     "keywords" : [ "Programming","Programming Languages","Python","Blog" ]
 }

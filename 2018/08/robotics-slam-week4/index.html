@@ -34,12 +34,12 @@
     "@type" : "BlogPosting",
     "mainEntityOfPage": {
          "@type": "WebPage",
-         "@id": "https://blog.yxwang.me/"
+         "@id": "https:\/\/blog.yxwang.me\/"
     },
     "articleSection" : "post",
     "name" : "SLAM 公开课笔记 4：定位",
     "headline" : "SLAM 公开课笔记 4：定位",
-    "description" : "<p>最后一周讲定位 (localization)，也就是 SLAM 里面的 L。主要包括粒子滤波和迭代最近点。</p>",
+    "description" : "\x3cp\x3e最后一周讲定位 (localization)，也就是 SLAM 里面的 L。主要包括粒子滤波和迭代最近点。\x3c\/p\x3e",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -49,7 +49,7 @@
     "copyrightYear" : "2018",
     "datePublished": "2018-08-07 00:56:13 -0700 PDT",
     "dateModified" : "2018-08-07 00:56:13 -0700 PDT",
-    "url" : "https://blog.yxwang.me/2018/08/robotics-slam-week4/",
+    "url" : "https:\/\/blog.yxwang.me\/2018\/08\/robotics-slam-week4\/",
     "wordCount" : "172",
     "keywords" : [ "Robotics","Courses","Notes","Blog" ]
 }
@@ -104,10 +104,8 @@ e_o = \theta r_o
 <p>这种方法用车辆本身的坐标系统记录位置，虽然实现起来简单但是测量精度非常局限于测量误差。例如上例中轮子打滑或事漂移都会导致结果不准确。更成熟的方案需要结合地图信息。</p>
 <h2 id="地图定位-map-registration">地图定位 (Map Registration)</h2>
 <p>可以用下面三张图来来介绍地图定位问题，左图是当前的区域地图，中间是激光测距传感器得到的结果，地图定位的目的就是根据传感器返回的结果判断机器人当前坐标和朝向，右图就是一个理想的结果。</p>
-<a data-fancybox="gallery"  data-caption="地图定位" href=/images/2018-08/slam-map-registraion.png ><img src=/images/2018-08/slam-map-registraion.png  width="480" /></a>
-
-<a data-fancybox="gallery"  data-caption="地图定位" href=/images/2018-08/slam-map-registraion-2.png ><img src=/images/2018-08/slam-map-registraion-2.png  width="240" /></a>
-
+<p><a data-fancybox="gallery"  data-caption="地图定位" href=/images/2018-08/slam-map-registraion.png ><img src=/images/2018-08/slam-map-registraion.png  width="480" /></a></p>
+<p><a data-fancybox="gallery"  data-caption="地图定位" href=/images/2018-08/slam-map-registraion-2.png ><img src=/images/2018-08/slam-map-registraion-2.png  width="240" /></a></p>
 <p>配合第三周讲的占据栅格地图障碍物的概率 <span class="math inline">\(m(x, y)\)</span>，我们可以定义最佳定位结果应该满足 <span class="math display">\[
 \max_p \sum_r \delta(p_x + r\cos(p_{\theta} + r_{\theta}), p_y + r\sin(p_{\theta} + r_{\theta})) \cdot{m(x,y)}
 \]</span> 接下来介绍两种解决地图定位的方法。</p>
@@ -125,8 +123,7 @@ e_o = \theta r_o
 </ol>
 <h2 id="迭代最近点-iterative-closest-point">迭代最近点 (Iterative Closest Point)</h2>
 <p>粒子滤波的缺点之一在于高维度中，需要大量的粒子才能保证理想的分布。ICP 算法可以更好的适应高维度的场景。</p>
-<a data-fancybox="gallery"  data-caption="ICP" href=/images/2018-08/slam-icp.png ><img src=/images/2018-08/slam-icp.png  width="360" /></a>
-
+<p><a data-fancybox="gallery"  data-caption="ICP" href=/images/2018-08/slam-icp.png ><img src=/images/2018-08/slam-icp.png  width="360" /></a></p>
 <p>如图所示，ICP 的目的在于已知测量结果和地图，要求出左侧测量结果如何旋转移动后，可以和右侧的地图局部吻合。这里主要有两个问题，一是旋转和移动矩阵，二是测量点和地图点的对应关系。具体的 ICP 算法可以参考<a href="http://post.queensu.ca/~sdb2/PAPERS/PAMI-3DLS-1987.pdf">这篇论文</a>，它的大致思路和<a href="/2018/07/robotics-slam-week1/">第一周</a>提到的解高斯混合模型的 EM 算法很接近：</p>
 <ol type="1">
 <li>初始化旋转 (R) 和移动 (t) 矩阵。</li>

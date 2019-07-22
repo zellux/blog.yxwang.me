@@ -34,15 +34,12 @@
     "@type" : "BlogPosting",
     "mainEntityOfPage": {
          "@type": "WebPage",
-         "@id": "https://blog.yxwang.me/"
+         "@id": "https:\/\/blog.yxwang.me\/"
     },
     "articleSection" : "post",
     "name" : "SVN 更新短信通知脚本",
     "headline" : "SVN 更新短信通知脚本",
-    "description" : "主要功能：开发人员执行svn commit后自动将开发人id、修订版本号和日志内容通过短信的方式通知所有人。
-首先修改svn服务器对应项目目录hook/post-commit文件
-#!/bin/bash export LANG=en_US.utf8 REPOS=&quot;$1&quot; REV=&quot;$2&quot; cd /home/svn/repositories/sebank/hooks ./sms.py commit $REPOS $REV  注意别忘了这里的export LANG，我一开始测试的时候发现中文一直有乱码，后来才意识到shell的环境变量里缺这个。 hook/sms.py
-#!/usr/bin/python # -*- coding: utf-8 -*- import sys, urllib, os from subprocess import * user = 'your mobile number' pword = 'fetion password' phone = [ '13764444444', '13813333333', ] repo = sys.argv[2] rev = sys.argv[3] cmdlog = 'svnlook log -r %s %s'%(rev, repo) cmdauthor = 'svnlook author -r %s %s'%(rev, repo) log = Popen(cmdlog, stdout=PIPE, shell=True).",
+    "description" : "主要功能：开发人员执行svn commit后自动将开发人id、修订版本号和日志内容通过短信的方式通知所有人。\n首先修改svn服务器对应项目目录hook\/post-commit文件\n#!\/bin\/bash export LANG=en_US.utf8 REPOS=\x26quot;$1\x26quot; REV=\x26quot;$2\x26quot; cd \/home\/svn\/repositories\/sebank\/hooks .\/sms.py commit $REPOS $REV  注意别忘了这里的export LANG，我一开始测试的时候发现中文一直有乱码，后来才意识到shell的环境变量里缺这个。 hook\/sms.py\n#!\/usr\/bin\/python # -*- coding: utf-8 -*- import sys, urllib, os from subprocess import * user = \x27your mobile number\x27 pword = \x27fetion password\x27 phone = [ \x2713764444444\x27, \x2713813333333\x27, ] repo = sys.argv[2] rev = sys.argv[3] cmdlog = \x27svnlook log -r %s %s\x27%(rev, repo) cmdauthor = \x27svnlook author -r %s %s\x27%(rev, repo) log = Popen(cmdlog, stdout=PIPE, shell=True).",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -50,9 +47,9 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2009",
-    "datePublished": "2009-06-16 00:00:00 &#43;0000 UTC",
-    "dateModified" : "2009-06-16 00:00:00 &#43;0000 UTC",
-    "url" : "https://blog.yxwang.me/2009/06/svn-sms-notification/",
+    "datePublished": "2009-06-16 00:00:00 \x2b0000 UTC",
+    "dateModified" : "2009-06-16 00:00:00 \x2b0000 UTC",
+    "url" : "https:\/\/blog.yxwang.me\/2009\/06\/svn-sms-notification\/",
     "wordCount" : "115",
     "keywords" : [ "Scripting","Tooling","svn","Blog" ]
 }

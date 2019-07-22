@@ -34,15 +34,12 @@
     "@type" : "BlogPosting",
     "mainEntityOfPage": {
          "@type": "WebPage",
-         "@id": "https://blog.yxwang.me/"
+         "@id": "https:\/\/blog.yxwang.me\/"
     },
     "articleSection" : "post",
     "name" : "Python中inner function的binding处理",
     "headline" : "Python中inner function的binding处理",
-    "description" : "BBS上的一个帖子，问题是
-def a(): def b(): x += 1 x = 1 print &quot;a: &quot;, x b() print &quot;b: &quot;, x def c(): def d(): x[0] = [4] x = [3] print &quot;c: &quot;, x[0] d() print &quot;d: &quot;, x[0]  运行a()会报UnboundLocalError: local variable &lsquo;x&rsquo; referenced before assignment 但是运行c()会正确地显示3和4。
-原因在于原因在于CPython实现closure的方式和常见的functional language不同，采用了flat closures实现。
-&ldquo;If a name is bound anywhere within a code block, all uses of the name within the block are treated as references to the current block.",
+    "description" : "BBS上的一个帖子，问题是\ndef a(): def b(): x \x2b= 1 x = 1 print \x26quot;a: \x26quot;, x b() print \x26quot;b: \x26quot;, x def c(): def d(): x[0] = [4] x = [3] print \x26quot;c: \x26quot;, x[0] d() print \x26quot;d: \x26quot;, x[0]  运行a()会报UnboundLocalError: local variable \x26lsquo;x\x26rsquo; referenced before assignment 但是运行c()会正确地显示3和4。\n原因在于原因在于CPython实现closure的方式和常见的functional language不同，采用了flat closures实现。\n\x26ldquo;If a name is bound anywhere within a code block, all uses of the name within the block are treated as references to the current block.",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -50,9 +47,9 @@ def a(): def b(): x += 1 x = 1 print &quot;a: &quot;, x b() print &quot;b: &quot
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2008",
-    "datePublished": "2008-10-17 00:00:00 &#43;0000 UTC",
-    "dateModified" : "2008-10-17 00:00:00 &#43;0000 UTC",
-    "url" : "https://blog.yxwang.me/2008/10/python-inner-function-binding/",
+    "datePublished": "2008-10-17 00:00:00 \x2b0000 UTC",
+    "dateModified" : "2008-10-17 00:00:00 \x2b0000 UTC",
+    "url" : "https:\/\/blog.yxwang.me\/2008\/10\/python-inner-function-binding\/",
     "wordCount" : "96",
     "keywords" : [ "Closure","Programming","Programming Languages","Python","Blog" ]
 }

@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
@@ -11,11 +10,45 @@
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   <url>
     <loc>https://blog.yxwang.me/2018/10/green-card/</loc>
     <lastmod>2018-10-30T21:35:07-07:00</lastmod>
     
   </url>
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -51,6 +84,8 @@
   
   
   
+  
+  
   <url>
     <loc>https://blog.yxwang.me/2018/07/sous-vide-lobster/</loc>
     <lastmod>2018-07-21T15:14:53-07:00</lastmod>
@@ -59,11 +94,19 @@
   
   
   
+  
+  
+  
+  
+  
+  
   <url>
     <loc>https://blog.yxwang.me/2018/07/linear-algebra-notes/</loc>
     <lastmod>2018-07-14T00:00:00+00:00</lastmod>
     
   </url>
+  
+  
   
   
   
@@ -83,6 +126,10 @@
   
   
   
+  
+  
+  
+  
   <url>
     <loc>https://blog.yxwang.me/2014/02/local-markdown-wiki/</loc>
     <lastmod>2014-02-13T00:00:00+00:00</lastmod>
@@ -91,11 +138,17 @@
   
   
   
+  
+  
+  
+  
   <url>
     <loc>https://blog.yxwang.me/2013/08/adjusting-mac-volume-with-pc-keyboard/</loc>
     <lastmod>2013-08-21T00:00:00+00:00</lastmod>
     
   </url>
+  
+  
   
   
   
@@ -115,11 +168,19 @@
   
   
   
+  
+  
+  
+  
+  
+  
   <url>
     <loc>https://blog.yxwang.me/2013/02/view-ruby-source-in-shell/</loc>
     <lastmod>2013-02-14T00:00:00+00:00</lastmod>
     
   </url>
+  
+  
   
   
   
@@ -131,11 +192,15 @@
   
   
   
+  
+  
   <url>
     <loc>https://blog.yxwang.me/2013/01/java-and-aidl-support-in-emacs-cscope/</loc>
     <lastmod>2013-01-09T00:00:00+00:00</lastmod>
     
   </url>
+  
+  
   
   
   
@@ -147,11 +212,21 @@
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
   <url>
     <loc>https://blog.yxwang.me/2012/12/multiple-feeds-in-octopress/</loc>
     <lastmod>2012-12-31T00:00:00+00:00</lastmod>
     
   </url>
+  
+  
   
   
   
@@ -203,11 +278,19 @@
   
   
   
+  
+  
+  
+  
+  
+  
   <url>
     <loc>https://blog.yxwang.me/2012/08/twitter-snowflake/</loc>
     <lastmod>2012-08-09T17:37:12+00:00</lastmod>
     
   </url>
+  
+  
   
   
   
@@ -219,11 +302,17 @@
   
   
   
+  
+  
   <url>
     <loc>https://blog.yxwang.me/2012/07/android-tap-timetout/</loc>
     <lastmod>2012-07-21T00:00:00+00:00</lastmod>
     
   </url>
+  
+  
+  
+  
   
   
   
@@ -235,11 +324,17 @@
   
   
   
+  
+  
   <url>
     <loc>https://blog.yxwang.me/2012/06/revisiting-storage-for-smartphones/</loc>
     <lastmod>2012-06-11T00:00:00+00:00</lastmod>
     
   </url>
+  
+  
+  
+  
   
   
   
@@ -251,6 +346,10 @@
   
   
   
+  
+  
+  
+  
   <url>
     <loc>https://blog.yxwang.me/2012/02/etags-in-rails/</loc>
     <lastmod>2012-02-18T00:00:00+00:00</lastmod>
@@ -259,11 +358,19 @@
   
   
   
+  
+  
+  
+  
   <url>
     <loc>https://blog.yxwang.me/2012/01/visio-export-to-eps/</loc>
     <lastmod>2012-01-02T00:00:00+00:00</lastmod>
     
   </url>
+  
+  
+  
+  
   
   
   
@@ -291,6 +398,8 @@
   
   
   
+  
+  
   <url>
     <loc>https://blog.yxwang.me/2011/11/methods-in-restful-applications/</loc>
     <lastmod>2011-11-20T00:00:00+00:00</lastmod>
@@ -307,11 +416,15 @@
   
   
   
+  
+  
   <url>
     <loc>https://blog.yxwang.me/2011/11/skip-specs-by-tags/</loc>
     <lastmod>2011-11-20T00:00:00+00:00</lastmod>
     
   </url>
+  
+  
   
   
   
@@ -323,6 +436,14 @@
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
   <url>
     <loc>https://blog.yxwang.me/2011/07/full-screen-emacs-in-lion/</loc>
     <lastmod>2011-07-28T00:00:00+00:00</lastmod>
@@ -331,11 +452,27 @@
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
   <url>
     <loc>https://blog.yxwang.me/2011/03/send-notifications-with-netgrowl/</loc>
     <lastmod>2011-03-02T00:00:00+00:00</lastmod>
     
   </url>
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -355,11 +492,19 @@
   
   
   
+  
+  
   <url>
     <loc>https://blog.yxwang.me/2010/10/change-caps-lock-state-by-software/</loc>
     <lastmod>2010-10-19T00:00:00+00:00</lastmod>
     
   </url>
+  
+  
+  
+  
+  
+  
   
   
   
@@ -371,11 +516,17 @@
   
   
   
+  
+  
   <url>
     <loc>https://blog.yxwang.me/2010/05/git-through-https-proxy/</loc>
     <lastmod>2010-05-14T00:00:00+00:00</lastmod>
     
   </url>
+  
+  
+  
+  
   
   
   
@@ -387,11 +538,21 @@
   
   
   
+  
+  
+  
+  
   <url>
     <loc>https://blog.yxwang.me/2010/03/keep-gnu-screen-history/</loc>
     <lastmod>2010-03-01T00:00:00+00:00</lastmod>
     
   </url>
+  
+  
+  
+  
+  
+  
   
   
   
@@ -403,11 +564,19 @@
   
   
   
+  
+  
+  
+  
   <url>
     <loc>https://blog.yxwang.me/2010/02/gitk-font/</loc>
     <lastmod>2010-02-14T00:00:00+00:00</lastmod>
     
   </url>
+  
+  
+  
+  
   
   
   
@@ -427,6 +596,10 @@
   
   
   
+  
+  
+  
+  
   <url>
     <loc>https://blog.yxwang.me/2010/02/bind-cscope-to-ecb/</loc>
     <lastmod>2010-02-07T00:00:00+00:00</lastmod>
@@ -435,11 +608,15 @@
   
   
   
+  
+  
   <url>
     <loc>https://blog.yxwang.me/2010/02/clrs-problem-111-4/</loc>
     <lastmod>2010-02-04T00:00:00+00:00</lastmod>
     
   </url>
+  
+  
   
   
   
@@ -459,11 +636,15 @@
   
   
   
+  
+  
   <url>
     <loc>https://blog.yxwang.me/2010/01/obfuscated-c/</loc>
     <lastmod>2010-01-28T00:00:00+00:00</lastmod>
     
   </url>
+  
+  
   
   
   
@@ -483,11 +664,19 @@
   
   
   
+  
+  
   <url>
     <loc>https://blog.yxwang.me/2010/01/grep-trick/</loc>
     <lastmod>2010-01-21T00:00:00+00:00</lastmod>
     
   </url>
+  
+  
+  
+  
+  
+  
   
   
   
@@ -499,6 +688,8 @@
   
   
   
+  
+  
   <url>
     <loc>https://blog.yxwang.me/2009/12/chomp-game/</loc>
     <lastmod>2009-12-13T00:00:00+00:00</lastmod>
@@ -507,11 +698,15 @@
   
   
   
+  
+  
   <url>
     <loc>https://blog.yxwang.me/2009/12/emacs-set-styles-by-projects/</loc>
     <lastmod>2009-12-01T00:00:00+00:00</lastmod>
     
   </url>
+  
+  
   
   
   
@@ -531,11 +726,17 @@
   
   
   
+  
+  
+  
+  
   <url>
     <loc>https://blog.yxwang.me/2009/10/only-31m-disk-space-detected/</loc>
     <lastmod>2009-10-23T00:00:00+00:00</lastmod>
     
   </url>
+  
+  
   
   
   
@@ -547,11 +748,21 @@
   
   
   
+  
+  
   <url>
     <loc>https://blog.yxwang.me/2009/09/compile-php5-on-dreamhost/</loc>
     <lastmod>2009-09-26T00:00:00+00:00</lastmod>
     
   </url>
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -571,6 +782,8 @@
   
   
   
+  
+  
   <url>
     <loc>https://blog.yxwang.me/2009/07/firefox-close-windows-with-last-tab/</loc>
     <lastmod>2009-07-01T00:00:00+00:00</lastmod>
@@ -584,6 +797,10 @@
     <lastmod>2009-06-16T00:00:00+00:00</lastmod>
     
   </url>
+  
+  
+  
+  
   
   
   
@@ -603,11 +820,17 @@
   
   
   
+  
+  
   <url>
     <loc>https://blog.yxwang.me/2009/06/two-function-related-interview-questions/</loc>
     <lastmod>2009-06-01T00:00:00+00:00</lastmod>
     
   </url>
+  
+  
+  
+  
   
   
   
@@ -619,6 +842,8 @@
   
   
   
+  
+  
   <url>
     <loc>https://blog.yxwang.me/2009/05/install-git-gitoss-gitweb-in-archlinux/</loc>
     <lastmod>2009-05-26T00:00:00+00:00</lastmod>
@@ -627,11 +852,21 @@
   
   
   
+  
+  
+  
+  
+  
+  
   <url>
     <loc>https://blog.yxwang.me/2009/05/isca-09-multi-execution/</loc>
     <lastmod>2009-05-12T00:00:00+00:00</lastmod>
     
   </url>
+  
+  
+  
+  
   
   
   
@@ -651,6 +886,8 @@
   
   
   
+  
+  
   <url>
     <loc>https://blog.yxwang.me/2009/05/install-vmware-server-2-on-kernel-2-6-29/</loc>
     <lastmod>2009-05-05T00:00:00+00:00</lastmod>
@@ -667,11 +904,19 @@
   
   
   
+  
+  
   <url>
     <loc>https://blog.yxwang.me/2009/04/using-mouse-in-emacs-within-terminal/</loc>
     <lastmod>2009-04-29T00:00:00+00:00</lastmod>
     
   </url>
+  
+  
+  
+  
+  
+  
   
   
   
@@ -683,6 +928,8 @@
   
   
   
+  
+  
   <url>
     <loc>https://blog.yxwang.me/2009/04/tuple-pronunciation/</loc>
     <lastmod>2009-04-10T00:00:00+00:00</lastmod>
@@ -691,11 +938,17 @@
   
   
   
+  
+  
   <url>
     <loc>https://blog.yxwang.me/2009/04/cgo-09-multi-race/</loc>
     <lastmod>2009-04-09T00:00:00+00:00</lastmod>
     
   </url>
+  
+  
+  
+  
   
   
   
@@ -715,11 +968,19 @@
   
   
   
+  
+  
+  
+  
   <url>
     <loc>https://blog.yxwang.me/2009/04/asplos-09-dftl/</loc>
     <lastmod>2009-04-07T00:00:00+00:00</lastmod>
     
   </url>
+  
+  
+  
+  
   
   
   
@@ -731,11 +992,17 @@
   
   
   
+  
+  
   <url>
     <loc>https://blog.yxwang.me/2009/04/end-to-end-argument-in-system-design/</loc>
     <lastmod>2009-04-06T00:00:00+00:00</lastmod>
     
   </url>
+  
+  
+  
+  
   
   
   
@@ -752,6 +1019,8 @@
     <lastmod>2009-04-03T00:00:00+00:00</lastmod>
     
   </url>
+  
+  
   
   
   
@@ -795,11 +1064,17 @@
   
   
   
+  
+  
   <url>
     <loc>https://blog.yxwang.me/2009/01/terminal-ctrl-s/</loc>
     <lastmod>2009-01-08T00:00:00+00:00</lastmod>
     
   </url>
+  
+  
+  
+  
   
   
   
@@ -819,6 +1094,12 @@
   
   
   
+  
+  
+  
+  
+  
+  
   <url>
     <loc>https://blog.yxwang.me/2008/11/godel-escher-bach-2/</loc>
     <lastmod>2008-11-11T00:00:00+00:00</lastmod>
@@ -832,6 +1113,8 @@
     <lastmod>2008-11-10T00:00:00+00:00</lastmod>
     
   </url>
+  
+  
   
   
   
@@ -859,11 +1142,17 @@
   
   
   
+  
+  
+  
+  
   <url>
     <loc>https://blog.yxwang.me/2008/10/python-inner-function-binding/</loc>
     <lastmod>2008-10-17T00:00:00+00:00</lastmod>
     
   </url>
+  
+  
   
   
   
@@ -875,6 +1164,8 @@
   
   
   
+  
+  
   <url>
     <loc>https://blog.yxwang.me/2008/10/live-code-update-in-erlang/</loc>
     <lastmod>2008-10-16T00:00:00+00:00</lastmod>
@@ -883,11 +1174,17 @@
   
   
   
+  
+  
+  
+  
   <url>
     <loc>https://blog.yxwang.me/2008/10/erlang-hello-world/</loc>
     <lastmod>2008-10-13T00:00:00+00:00</lastmod>
     
   </url>
+  
+  
   
   
   
@@ -907,11 +1204,19 @@
   
   
   
+  
+  
   <url>
     <loc>https://blog.yxwang.me/2008/09/find-head-in-circular-linked-list/</loc>
     <lastmod>2008-09-08T00:00:00+00:00</lastmod>
     
   </url>
+  
+  
+  
+  
+  
+  
   
   
   
@@ -928,6 +1233,8 @@
     <lastmod>2008-08-31T00:00:00+00:00</lastmod>
     
   </url>
+  
+  
   
   
   
@@ -963,11 +1270,19 @@
   
   
   
+  
+  
   <url>
     <loc>https://blog.yxwang.me/2008/07/leaksurvivor/</loc>
     <lastmod>2008-07-19T00:00:00+00:00</lastmod>
     
   </url>
+  
+  
+  
+  
+  
+  
   
   
   
@@ -979,6 +1294,8 @@
   
   
   
+  
+  
   <url>
     <loc>https://blog.yxwang.me/2008/06/ics-lab-8-a-simple-proxy/</loc>
     <lastmod>2008-06-23T00:00:00+00:00</lastmod>
@@ -987,11 +1304,15 @@
   
   
   
+  
+  
   <url>
     <loc>https://blog.yxwang.me/2008/06/ics-lab-7-data-structure-related/</loc>
     <lastmod>2008-06-16T00:00:00+00:00</lastmod>
     
   </url>
+  
+  
   
   
   
@@ -1019,6 +1340,8 @@
   
   
   
+  
+  
   <url>
     <loc>https://blog.yxwang.me/2008/04/sorting-networks/</loc>
     <lastmod>2008-04-23T00:00:00+00:00</lastmod>
@@ -1027,11 +1350,15 @@
   
   
   
+  
+  
   <url>
     <loc>https://blog.yxwang.me/2008/04/streamware/</loc>
     <lastmod>2008-04-16T00:00:00+00:00</lastmod>
     
   </url>
+  
+  
   
   
   
@@ -1075,24 +1402,11 @@
   
   
   
-  <url>
-    <loc>https://blog.yxwang.me/notes/</loc>
-    
-  </url>
   
   
   
-  <url>
-    <loc>https://blog.yxwang.me/notes/open-course/deep-learning/</loc>
-    
-  </url>
   
   
-  
-  <url>
-    <loc>https://blog.yxwang.me/notes/open-course/self-driving/</loc>
-    
-  </url>
   
   
   
@@ -1103,130 +1417,10 @@
   
   
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   <url>
     <loc>https://blog.yxwang.me/archive/</loc>
     
   </url>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -1237,16 +1431,6 @@
   
   
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   <url>
     <loc>https://blog.yxwang.me/notes/tools/git/</loc>
     
@@ -1254,128 +1438,10 @@
   
   
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   <url>
     <loc>https://blog.yxwang.me/notes/languages/vocabulary-builder/</loc>
     
   </url>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -1395,92 +1461,10 @@
   
   
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   <url>
     <loc>https://blog.yxwang.me/notes/languages/word-power-made-easy/</loc>
     
   </url>
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   

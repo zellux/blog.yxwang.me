@@ -34,18 +34,12 @@
     "@type" : "BlogPosting",
     "mainEntityOfPage": {
          "@type": "WebPage",
-         "@id": "https://blog.yxwang.me/"
+         "@id": "https:\/\/blog.yxwang.me\/"
     },
     "articleSection" : "notes",
     "name" : "《Programming Scala》笔记",
     "headline" : "《Programming Scala》笔记",
-    "description" : "数组取值 Scala 中可以通过 Array.apply()、Map.apply() 等方法获得这些容器中存储的值，而小括号则是 apply 方法的一个语法糖。所以 myArray(i) 等价于 myArray.apply(i)。
-tuple 取值 获取一个 tuple 中第 i 个元素的方法是 _i，例如 pair._1，注意这里编号是从 1 开始的，和 Haskell、ML 等语言一致。
-换行符 换行符通常会被当作分号处理，所以大多数情况下行尾的分号可以省略，除了以下三种情况：
- 该行结尾处的符号无法使这一行合法中止，例如一个中缀运算符（加号），或者一个逗号； 下一行头部的符号无法开始一个新的语句； 该行被包含在小括号或者中括号中，因为这两个符号无法包含多个语句。  第三种情况也是 for 语句体遇到多个 filter 时要优先使用大括号的原因。
-静态成员 Scala 没有静态成员这一概念，类似功能的成员被转移到 singleton objects 中。这一点倒是和 Ruby 中类对象的 eigenclass 挺像的。当一个 singleton object 的名字和某个类的名字相同时，前者被称为后者的 companion object，当然反过来，后者被称为前者的 companion class。它们可以互相访问对方的私有成员。
-闭包（closure） (x: Int) =&gt; x + more 中的 more 是一个 free variable，因为这一声明没有给它任何定义，而 x 则是 bound variable，它被赋予了函数参数的意义。
-一个函数不包含 free variable 的函数被称为 closed term，这里 term 是指一段代码。而包含 free variable 的函数被称为 open term。对于 open term，程序运行时需要从环境中把对象绑到它们的 free variable 上，绑定后得到的结果就是闭包。也就是说，闭包是闭合 open term 的结果。",
+    "description" : "数组取值 Scala 中可以通过 Array.apply()、Map.apply() 等方法获得这些容器中存储的值，而小括号则是 apply 方法的一个语法糖。所以 myArray(i) 等价于 myArray.apply(i)。\ntuple 取值 获取一个 tuple 中第 i 个元素的方法是 _i，例如 pair._1，注意这里编号是从 1 开始的，和 Haskell、ML 等语言一致。\n换行符 换行符通常会被当作分号处理，所以大多数情况下行尾的分号可以省略，除了以下三种情况：\n 该行结尾处的符号无法使这一行合法中止，例如一个中缀运算符（加号），或者一个逗号； 下一行头部的符号无法开始一个新的语句； 该行被包含在小括号或者中括号中，因为这两个符号无法包含多个语句。  第三种情况也是 for 语句体遇到多个 filter 时要优先使用大括号的原因。\n静态成员 Scala 没有静态成员这一概念，类似功能的成员被转移到 singleton objects 中。这一点倒是和 Ruby 中类对象的 eigenclass 挺像的。当一个 singleton object 的名字和某个类的名字相同时，前者被称为后者的 companion object，当然反过来，后者被称为前者的 companion class。它们可以互相访问对方的私有成员。\n闭包（closure） (x: Int) =\x26gt; x \x2b more 中的 more 是一个 free variable，因为这一声明没有给它任何定义，而 x 则是 bound variable，它被赋予了函数参数的意义。\n一个函数不包含 free variable 的函数被称为 closed term，这里 term 是指一段代码。而包含 free variable 的函数被称为 open term。对于 open term，程序运行时需要从环境中把对象绑到它们的 free variable 上，绑定后得到的结果就是闭包。也就是说，闭包是闭合 open term 的结果。",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -53,9 +47,9 @@ tuple 取值 获取一个 tuple 中第 i 个元素的方法是 _i，例如 pair.
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "0001",
-    "datePublished": "0001-01-01 00:00:00 &#43;0000 UTC",
-    "dateModified" : "0001-01-01 00:00:00 &#43;0000 UTC",
-    "url" : "https://blog.yxwang.me/notes/programming/programming-scala/",
+    "datePublished": "0001-01-01 00:00:00 \x2b0000 UTC",
+    "dateModified" : "0001-01-01 00:00:00 \x2b0000 UTC",
+    "url" : "https:\/\/blog.yxwang.me\/notes\/programming\/programming-scala\/",
     "wordCount" : "221",
     "keywords" : [ "Blog" ]
 }

@@ -34,14 +34,12 @@
     "@type" : "BlogPosting",
     "mainEntityOfPage": {
          "@type": "WebPage",
-         "@id": "https://blog.yxwang.me/"
+         "@id": "https:\/\/blog.yxwang.me\/"
     },
     "articleSection" : "post",
     "name" : "第一个 testkernel 在 Xen 中的载入",
     "headline" : "第一个 testkernel 在 Xen 中的载入",
-    "description" : "The Definitive Guide to Xen Hypervisor 中第二章的例子，make 成功后运行 xen create domain_config，报错
-Error: (2, 'Invalid kernel', 'xc_dom_compat_check: guest type xen-3.0-x86_32 not supported by xen kernel, sorryn')  Google 之后发现是虚拟机类型设置的问题，运行 xm info 可以看到
-xen_caps : xen-3.0-x86_32p  末尾的 p 表示 Xen 内核开启了 PAE 模式，所以载入的 kernel 也必须开启 PAE，在bootstrap.x86_32.S 中加入 PAE=yes 选项即可。",
+    "description" : "The Definitive Guide to Xen Hypervisor 中第二章的例子，make 成功后运行 xen create domain_config，报错\nError: (2, \x27Invalid kernel\x27, \x27xc_dom_compat_check: guest type xen-3.0-x86_32 not supported by xen kernel, sorryn\x27)  Google 之后发现是虚拟机类型设置的问题，运行 xm info 可以看到\nxen_caps : xen-3.0-x86_32p  末尾的 p 表示 Xen 内核开启了 PAE 模式，所以载入的 kernel 也必须开启 PAE，在bootstrap.x86_32.S 中加入 PAE=yes 选项即可。",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -49,9 +47,9 @@ xen_caps : xen-3.0-x86_32p  末尾的 p 表示 Xen 内核开启了 PAE 模式�
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2008",
-    "datePublished": "2008-09-18 00:00:00 &#43;0000 UTC",
-    "dateModified" : "2008-09-18 00:00:00 &#43;0000 UTC",
-    "url" : "https://blog.yxwang.me/2008/09/first-test-kernel-in-xen/",
+    "datePublished": "2008-09-18 00:00:00 \x2b0000 UTC",
+    "dateModified" : "2008-09-18 00:00:00 \x2b0000 UTC",
+    "url" : "https:\/\/blog.yxwang.me\/2008\/09\/first-test-kernel-in-xen\/",
     "wordCount" : "46",
     "keywords" : [ "Computer System","Xen","virtualization","Blog" ]
 }

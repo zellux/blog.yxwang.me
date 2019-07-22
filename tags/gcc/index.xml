@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Gcc on Aiur · Zellux 的博客</title>
+    <title>GCC on Aiur · Zellux 的博客</title>
     <link>https://blog.yxwang.me/tags/gcc/</link>
-    <description>Recent content in Gcc on Aiur · Zellux 的博客</description>
+    <description>Recent content in GCC on Aiur · Zellux 的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Wed, 25 Aug 2010 00:00:00 +0000</lastBuildDate>

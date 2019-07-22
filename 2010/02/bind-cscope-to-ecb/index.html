@@ -34,20 +34,12 @@
     "@type" : "BlogPosting",
     "mainEntityOfPage": {
          "@type": "WebPage",
-         "@id": "https://blog.yxwang.me/"
+         "@id": "https:\/\/blog.yxwang.me\/"
     },
     "articleSection" : "post",
     "name" : "ecb 和 cscope 的结合使用",
     "headline" : "ecb 和 cscope 的结合使用",
-    "description" : "前几天试用了下ECB，非常喜欢它的定义列表和文件浏览历史的功能。但是却发现了另外一个问题：使用ECB之前我把整个窗口分成左右两块，左边是代码，右边是cscope的查找结果，现在开启ECB之后就不能再切一块窗口给cscope用了。
-感谢stackoverflow上的sanitynic，给出了自定义ECB窗口的参考。现在俺终于能把cscope窗口绑定到屏幕左下角啦。
-
-自定义ECB layout其实也挺方便的，上图对应的配置为
-(ecb-layout-define &quot;my-cscope-layout&quot; left nil (ecb-set-methods-buffer) (ecb-split-ver 0.5 t) (other-window 1) (ecb-set-history-buffer) (ecb-split-ver 0.25 t) (other-window 1) (ecb-set-cscope-buffer)) (defecb-window-dedicator ecb-set-cscope-buffer &quot; *ECB cscope-buf*&quot; (switch-to-buffer &quot;*cscope*&quot;)) (setq ecb-layout-name &quot;my-cscope-layout&quot;) ;; Disable buckets so that history buffer can display more entries (setq ecb-history-make-buckets 'never)  my-cscope-layout这个layout左边窗口分为三部分，最上面的函数列表占一半高度，中间为历史文件列表，下面为cscope的查找结果，它们各占四分之一的高度。
-另外再简单提下cscope插件的安装和配置，使用前需确认当前系统已经安装了cscope，另外要有cscope-indexer这个脚本。在cscope/contrib目录下找到一个xcscope.el，复制到Emacs的插件目录中，并在Emacs初始化文件中加入
-(require 'xcscope)  即可。某些发行版的包里面似乎没有cscope-indexer和xcscope.el，直接从网上下一个好了。
-几个常用的快捷键：
- C-c s I 建立cscope索引 C-c s a 设置搜索目录 C-c s d 查找定义 C-c s s 查找字符串 C-c s c 查找调用者 C-c s n 下一个查找结果 C-c s p 上一个查找结果  更多的快捷键可以在 C-h b 跳转的帮助页面的 cscope-minor-mode 区找到。",
+    "description" : "前几天试用了下ECB，非常喜欢它的定义列表和文件浏览历史的功能。但是却发现了另外一个问题：使用ECB之前我把整个窗口分成左右两块，左边是代码，右边是cscope的查找结果，现在开启ECB之后就不能再切一块窗口给cscope用了。\n感谢stackoverflow上的sanitynic，给出了自定义ECB窗口的参考。现在俺终于能把cscope窗口绑定到屏幕左下角啦。\n\n自定义ECB layout其实也挺方便的，上图对应的配置为\n(ecb-layout-define \x26quot;my-cscope-layout\x26quot; left nil (ecb-set-methods-buffer) (ecb-split-ver 0.5 t) (other-window 1) (ecb-set-history-buffer) (ecb-split-ver 0.25 t) (other-window 1) (ecb-set-cscope-buffer)) (defecb-window-dedicator ecb-set-cscope-buffer \x26quot; *ECB cscope-buf*\x26quot; (switch-to-buffer \x26quot;*cscope*\x26quot;)) (setq ecb-layout-name \x26quot;my-cscope-layout\x26quot;) ;; Disable buckets so that history buffer can display more entries (setq ecb-history-make-buckets \x27never)  my-cscope-layout这个layout左边窗口分为三部分，最上面的函数列表占一半高度，中间为历史文件列表，下面为cscope的查找结果，它们各占四分之一的高度。\n另外再简单提下cscope插件的安装和配置，使用前需确认当前系统已经安装了cscope，另外要有cscope-indexer这个脚本。在cscope\/contrib目录下找到一个xcscope.el，复制到Emacs的插件目录中，并在Emacs初始化文件中加入\n(require \x27xcscope)  即可。某些发行版的包里面似乎没有cscope-indexer和xcscope.el，直接从网上下一个好了。\n几个常用的快捷键：\n C-c s I 建立cscope索引 C-c s a 设置搜索目录 C-c s d 查找定义 C-c s s 查找字符串 C-c s c 查找调用者 C-c s n 下一个查找结果 C-c s p 上一个查找结果  更多的快捷键可以在 C-h b 跳转的帮助页面的 cscope-minor-mode 区找到。",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -55,9 +47,9 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2010",
-    "datePublished": "2010-02-07 00:00:00 &#43;0000 UTC",
-    "dateModified" : "2010-02-07 00:00:00 &#43;0000 UTC",
-    "url" : "https://blog.yxwang.me/2010/02/bind-cscope-to-ecb/",
+    "datePublished": "2010-02-07 00:00:00 \x2b0000 UTC",
+    "dateModified" : "2010-02-07 00:00:00 \x2b0000 UTC",
+    "url" : "https:\/\/blog.yxwang.me\/2010\/02\/bind-cscope-to-ecb\/",
     "wordCount" : "85",
     "keywords" : [ "ECB","Emacs","Tooling","cscope","Blog" ]
 }

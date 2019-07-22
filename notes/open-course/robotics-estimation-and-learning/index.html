@@ -34,15 +34,12 @@
     "@type" : "BlogPosting",
     "mainEntityOfPage": {
          "@type": "WebPage",
-         "@id": "https://blog.yxwang.me/"
+         "@id": "https:\/\/blog.yxwang.me\/"
     },
     "articleSection" : "notes",
     "name" : "Robotics Estimation and Learning",
     "headline" : "Robotics Estimation and Learning",
-    "description" : "卡尔曼滤波 (Kalman Filter) 这一周的视频质量很一般，slides 做得也不仔细有不少错误。最后看了一些其他网站的文章和视频才有了比较深刻的理解，本文结尾有推荐资料。
-KF 模型  以匀速运动的动力学模型为例  状态 \(x_{t+1}=A x_t + B u_t\)，\(u_t\) 为外部影响 观测结果 \(z_t = C x_t\) \(x_t\) 和 \(z_t\) 都有测量误差 状态 \(x_{t+1}\) 仅包含位置和速度：\(x_{t+1} := \begin{bmatrix}v &amp; \frac{dv}{dt}\end{bmatrix}\) 动力学模型可以通过矩阵 A 描述，\(A = \begin{bmatrix}1 &amp; dt \\ 0 &amp; 1 \end{bmatrix}\)   基于动力学的贝叶斯模型 \[ p(x_{t+1}|x_t) = Ap(x_t) \\ p(z_t|x_t) = Cp(x_t) \]
-加入运动和观测的误差 \[ p(x_{t+1}|x_t) = Ap(x_t)+v_m \\ p(z_t|x_t) = Cp(x_t)+v_0 \]
-假设误差基于高斯分布 \[ p(x_{t+1}|x_t) = A\mathcal{N}(x_t, P_t) + \mathcal{N}(0, \Sigma_m) \\ p(z_t|x_t) = C\mathcal{N}(x_t, P_t) + \mathcal{N}(0, \Sigma_0) \]",
+    "description" : "卡尔曼滤波 (Kalman Filter) 这一周的视频质量很一般，slides 做得也不仔细有不少错误。最后看了一些其他网站的文章和视频才有了比较深刻的理解，本文结尾有推荐资料。\nKF 模型  以匀速运动的动力学模型为例  状态 \\(x_{t\x2b1}=A x_t \x2b B u_t\\)，\\(u_t\\) 为外部影响 观测结果 \\(z_t = C x_t\\) \\(x_t\\) 和 \\(z_t\\) 都有测量误差 状态 \\(x_{t\x2b1}\\) 仅包含位置和速度：\\(x_{t\x2b1} := \\begin{bmatrix}v \x26amp; \\frac{dv}{dt}\\end{bmatrix}\\) 动力学模型可以通过矩阵 A 描述，\\(A = \\begin{bmatrix}1 \x26amp; dt \\\\ 0 \x26amp; 1 \\end{bmatrix}\\)   基于动力学的贝叶斯模型 \\[ p(x_{t\x2b1}|x_t) = Ap(x_t) \\\\ p(z_t|x_t) = Cp(x_t) \\]\n加入运动和观测的误差 \\[ p(x_{t\x2b1}|x_t) = Ap(x_t)\x2bv_m \\\\ p(z_t|x_t) = Cp(x_t)\x2bv_0 \\]\n假设误差基于高斯分布 \\[ p(x_{t\x2b1}|x_t) = A\\mathcal{N}(x_t, P_t) \x2b \\mathcal{N}(0, \\Sigma_m) \\\\ p(z_t|x_t) = C\\mathcal{N}(x_t, P_t) \x2b \\mathcal{N}(0, \\Sigma_0) \\]",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -50,9 +47,9 @@ KF 模型  以匀速运动的动力学模型为例  状态 \(x_{t+1}=A x_t + B u
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "0001",
-    "datePublished": "0001-01-01 00:00:00 &#43;0000 UTC",
-    "dateModified" : "0001-01-01 00:00:00 &#43;0000 UTC",
-    "url" : "https://blog.yxwang.me/notes/open-course/robotics-estimation-and-learning/",
+    "datePublished": "0001-01-01 00:00:00 \x2b0000 UTC",
+    "dateModified" : "0001-01-01 00:00:00 \x2b0000 UTC",
+    "url" : "https:\/\/blog.yxwang.me\/notes\/open-course\/robotics-estimation-and-learning\/",
     "wordCount" : "299",
     "keywords" : [ "Blog" ]
 }

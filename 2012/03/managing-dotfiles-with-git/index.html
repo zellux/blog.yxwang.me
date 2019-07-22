@@ -34,27 +34,12 @@
     "@type" : "BlogPosting",
     "mainEntityOfPage": {
          "@type": "WebPage",
-         "@id": "https://blog.yxwang.me/"
+         "@id": "https:\/\/blog.yxwang.me\/"
     },
     "articleSection" : "post",
     "name" : "用 Git 管理命令行配置",
     "headline" : "用 Git 管理命令行配置",
-    "description" : "<p>以前部署新机器时都要把一堆配置文件 scp 过去，今天折腾了下用 Git 统一管理这些配置文件。</p>
-
-<p>做起来很简单，创建一个 dotfiles 目录，把所有要同步的配置文件都放到这个目录下，并重命名去掉文件名开头的点，以免被 Git 忽略。写了一个脚本链接这些配置文件到 HOME 目录：</p>
-
-<pre><code class="language-ruby">#!/usr/bin/env ruby
-
-safe_mode = ARGV.include? '--safe'
-
-files = %w(zshrc tmux.conf gitconfig vimrc emacs gitignore_global LS_COLORS)
-files.each do |file|
-  unless safe_mode and File.exists?(&quot;#{ENV['HOME']}/.#{file}&quot;)
-    %x(ln -s -i -v $PWD/#{file} ~/.#{file})
-    puts &quot;.#{file} linked&quot; if safe_mode
-  end
-end
-</code></pre>",
+    "description" : "\x3cp\x3e以前部署新机器时都要把一堆配置文件 scp 过去，今天折腾了下用 Git 统一管理这些配置文件。\x3c\/p\x3e\n\n\x3cp\x3e做起来很简单，创建一个 dotfiles 目录，把所有要同步的配置文件都放到这个目录下，并重命名去掉文件名开头的点，以免被 Git 忽略。写了一个脚本链接这些配置文件到 HOME 目录：\x3c\/p\x3e\n\n\x3cpre\x3e\x3ccode class=\x22language-ruby\x22\x3e#!\/usr\/bin\/env ruby\n\nsafe_mode = ARGV.include? \x27--safe\x27\n\nfiles = %w(zshrc tmux.conf gitconfig vimrc emacs gitignore_global LS_COLORS)\nfiles.each do |file|\n  unless safe_mode and File.exists?(\x26quot;#{ENV[\x27HOME\x27]}\/.#{file}\x26quot;)\n    %x(ln -s -i -v $PWD\/#{file} ~\/.#{file})\n    puts \x26quot;.#{file} linked\x26quot; if safe_mode\n  end\nend\n\x3c\/code\x3e\x3c\/pre\x3e",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -62,9 +47,9 @@ end
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2012",
-    "datePublished": "2012-03-28 00:00:00 &#43;0000 UTC",
-    "dateModified" : "2012-03-28 00:00:00 &#43;0000 UTC",
-    "url" : "https://blog.yxwang.me/2012/03/managing-dotfiles-with-git/",
+    "datePublished": "2012-03-28 00:00:00 \x2b0000 UTC",
+    "dateModified" : "2012-03-28 00:00:00 \x2b0000 UTC",
+    "url" : "https:\/\/blog.yxwang.me\/2012\/03\/managing-dotfiles-with-git\/",
     "wordCount" : "87",
     "keywords" : [ "Git","Shell","Tooling","Blog" ]
 }

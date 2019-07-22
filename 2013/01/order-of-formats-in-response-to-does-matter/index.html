@@ -34,20 +34,12 @@
     "@type" : "BlogPosting",
     "mainEntityOfPage": {
          "@type": "WebPage",
-         "@id": "https://blog.yxwang.me/"
+         "@id": "https:\/\/blog.yxwang.me\/"
     },
     "articleSection" : "post",
     "name" : "Rails 中关于 respond_to 不同格式的顺序",
     "headline" : "Rails 中关于 respond_to 不同格式的顺序",
-    "description" : "<p>以前没注意过 Rails controller 中 respond_to 的格式顺序，后来碰到了一个诡异的 bug，才发现这里的顺序对程序行为是有影响的。bug 的现象是用某个应用商店桌面端浏览网站时，会出现返回 JSON 而不是网页的情况。由于当时报告错误的用户给出的 bug 描述是「点击链接后出现乱码」，导致 debug 一开始没找对方向，废了不少功夫才解决这个问题。</p>
-
-<p>问题就出在不同格式的声明先后上，有问题的代码是：</p>
-
-<pre><code class="language-ruby">respond_to do |format|
-  format.json { render json: @items }
-  format.html
-end
-</code></pre>",
+    "description" : "\x3cp\x3e以前没注意过 Rails controller 中 respond_to 的格式顺序，后来碰到了一个诡异的 bug，才发现这里的顺序对程序行为是有影响的。bug 的现象是用某个应用商店桌面端浏览网站时，会出现返回 JSON 而不是网页的情况。由于当时报告错误的用户给出的 bug 描述是「点击链接后出现乱码」，导致 debug 一开始没找对方向，废了不少功夫才解决这个问题。\x3c\/p\x3e\n\n\x3cp\x3e问题就出在不同格式的声明先后上，有问题的代码是：\x3c\/p\x3e\n\n\x3cpre\x3e\x3ccode class=\x22language-ruby\x22\x3erespond_to do |format|\n  format.json { render json: @items }\n  format.html\nend\n\x3c\/code\x3e\x3c\/pre\x3e",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -55,9 +47,9 @@ end
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2013",
-    "datePublished": "2013-01-04 00:00:00 &#43;0000 UTC",
-    "dateModified" : "2013-01-04 00:00:00 &#43;0000 UTC",
-    "url" : "https://blog.yxwang.me/2013/01/order-of-formats-in-response-to-does-matter/",
+    "datePublished": "2013-01-04 00:00:00 \x2b0000 UTC",
+    "dateModified" : "2013-01-04 00:00:00 \x2b0000 UTC",
+    "url" : "https:\/\/blog.yxwang.me\/2013\/01\/order-of-formats-in-response-to-does-matter\/",
     "wordCount" : "50",
     "keywords" : [ "Programming","Rails","Blog" ]
 }

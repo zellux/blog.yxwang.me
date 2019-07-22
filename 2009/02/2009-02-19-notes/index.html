@@ -34,18 +34,12 @@
     "@type" : "BlogPosting",
     "mainEntityOfPage": {
          "@type": "WebPage",
-         "@id": "https://blog.yxwang.me/"
+         "@id": "https:\/\/blog.yxwang.me\/"
     },
     "articleSection" : "post",
     "name" : "Xen 学习笔记 2009-02-19",
     "headline" : "Xen 学习笔记 2009-02-19",
-    "description" : "今天下午真是惊悚，我想把机房的winxp分区删了，ftp上好放点美剧，结果winxp的那个分区是扩展分区，删掉后导致linux的几个分区都消失了。赶紧把硬盘拆下来装到实验室用Disk Genius修复了下，数据基本没什么损坏，分区表还是有点问题。差一点俺就见不到这个博客了 =_=
-然后把昨天折腾了一晚上没搞定的debian 4安装搞定了，关键在于netinst.iso的版本号要和hd-media的完全一致，4.0r7。
- 编译xen/linux所需的包 apt-get install gettext zlib1g-dev python-dev libncurses-dev libssl-dev libx11-dev bridge-utils iproute gawk  另外 initrd文件的生成需要安装initrd-tools包
- kernel中memory barrier的实现很简单，barrier宏展开后就是 asm volatile(&ldquo;&rdquo; : : : &ldquo;memory&rdquo;) 这样就保证了在barrier()执行后，cpu不会直接读取寄存器中cache的内存值。
- 生成initrd mkinitramfs -o /boot/initrd-2.6.18.8-xen.img 2.6.18.8-xen
- syscall和m2_fastcall的性能测试 测的是getpid()函数，当然为了保证m2_fastcall不在运行逻辑上吃亏，它的对应功能仅仅是返回current-&gt;pid，第一次测出来的结果是syscall明显由于m2_fastcall。宋大牛指出很有可能是glibc做了缓存，果然，自己用汇编发软中断后的数据就正常了。
-  ",
+    "description" : "今天下午真是惊悚，我想把机房的winxp分区删了，ftp上好放点美剧，结果winxp的那个分区是扩展分区，删掉后导致linux的几个分区都消失了。赶紧把硬盘拆下来装到实验室用Disk Genius修复了下，数据基本没什么损坏，分区表还是有点问题。差一点俺就见不到这个博客了 =_=\n然后把昨天折腾了一晚上没搞定的debian 4安装搞定了，关键在于netinst.iso的版本号要和hd-media的完全一致，4.0r7。\n 编译xen\/linux所需的包 apt-get install gettext zlib1g-dev python-dev libncurses-dev libssl-dev libx11-dev bridge-utils iproute gawk  另外 initrd文件的生成需要安装initrd-tools包\n kernel中memory barrier的实现很简单，barrier宏展开后就是 asm volatile(\x26ldquo;\x26rdquo; : : : \x26ldquo;memory\x26rdquo;) 这样就保证了在barrier()执行后，cpu不会直接读取寄存器中cache的内存值。\n 生成initrd mkinitramfs -o \/boot\/initrd-2.6.18.8-xen.img 2.6.18.8-xen\n syscall和m2_fastcall的性能测试 测的是getpid()函数，当然为了保证m2_fastcall不在运行逻辑上吃亏，它的对应功能仅仅是返回current-\x26gt;pid，第一次测出来的结果是syscall明显由于m2_fastcall。宋大牛指出很有可能是glibc做了缓存，果然，自己用汇编发软中断后的数据就正常了。\n  ",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -53,9 +47,9 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2009",
-    "datePublished": "2009-02-19 00:00:00 &#43;0000 UTC",
-    "dateModified" : "2009-02-19 00:00:00 &#43;0000 UTC",
-    "url" : "https://blog.yxwang.me/2009/02/2009-02-19-notes/",
+    "datePublished": "2009-02-19 00:00:00 \x2b0000 UTC",
+    "dateModified" : "2009-02-19 00:00:00 \x2b0000 UTC",
+    "url" : "https:\/\/blog.yxwang.me\/2009\/02\/2009-02-19-notes\/",
     "wordCount" : "35",
     "keywords" : [ "Computer System","Xen","virtualization","Blog" ]
 }

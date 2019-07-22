@@ -34,17 +34,12 @@
     "@type" : "BlogPosting",
     "mainEntityOfPage": {
          "@type": "WebPage",
-         "@id": "https://blog.yxwang.me/"
+         "@id": "https:\/\/blog.yxwang.me\/"
     },
     "articleSection" : "post",
     "name" : "Xen DomainU 自动测试脚本",
     "headline" : "Xen DomainU 自动测试脚本",
-    "description" : "写完代码测试时重复的最多的步骤就是
- 编译，复制vmlinuz和xen.gz 重启VMware虚拟机 启动domainU xm create domU.conf 4. 开一个screen窗口attach到domainU的console xm console #domid 5. 在domainU中运行测试程序  于是写了个自动执行3 4 5的脚步，主要用到了熊熊推荐的pexpect，这东东很赞啊
-为了提高用户体验，读取domainU的启动信息时我采用的方法是读一行输出一行，读到结尾登陆字符时通过超时设置退出循环，这样可能效率比较低，不过测试脚本也不care这个了
-实际使用时碰到了另一个问题，domainU执行完自动命令后命令行会出现很严重的对齐问题，最后发现登陆后运行一次reset就可以了。
-脚本如下
-#!/usr/bin/python # Automatic test script for Xen DomainU # Author: zellux import pexpect, os conf = { 'login_name' : 'm2-vm2', 'domainU_name' : 'R900-DomU0', 'domainU_conf' : '/home/wyx/domU1', 'domainU_id' : '2', 'domainU_user' : 'wyx', 'domainU_passwd' : 'wyx', } # Command to be executed after domainU starts cmd = &quot;&quot;&quot; cd m2 cd reg_test .",
+    "description" : "写完代码测试时重复的最多的步骤就是\n 编译，复制vmlinuz和xen.gz 重启VMware虚拟机 启动domainU xm create domU.conf 4. 开一个screen窗口attach到domainU的console xm console #domid 5. 在domainU中运行测试程序  于是写了个自动执行3 4 5的脚步，主要用到了熊熊推荐的pexpect，这东东很赞啊\n为了提高用户体验，读取domainU的启动信息时我采用的方法是读一行输出一行，读到结尾登陆字符时通过超时设置退出循环，这样可能效率比较低，不过测试脚本也不care这个了\n实际使用时碰到了另一个问题，domainU执行完自动命令后命令行会出现很严重的对齐问题，最后发现登陆后运行一次reset就可以了。\n脚本如下\n#!\/usr\/bin\/python # Automatic test script for Xen DomainU # Author: zellux import pexpect, os conf = { \x27login_name\x27 : \x27m2-vm2\x27, \x27domainU_name\x27 : \x27R900-DomU0\x27, \x27domainU_conf\x27 : \x27\/home\/wyx\/domU1\x27, \x27domainU_id\x27 : \x272\x27, \x27domainU_user\x27 : \x27wyx\x27, \x27domainU_passwd\x27 : \x27wyx\x27, } # Command to be executed after domainU starts cmd = \x26quot;\x26quot;\x26quot; cd m2 cd reg_test .",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -52,9 +47,9 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2009",
-    "datePublished": "2009-04-07 00:00:00 &#43;0000 UTC",
-    "dateModified" : "2009-04-07 00:00:00 &#43;0000 UTC",
-    "url" : "https://blog.yxwang.me/2009/04/xen-test-script/",
+    "datePublished": "2009-04-07 00:00:00 \x2b0000 UTC",
+    "dateModified" : "2009-04-07 00:00:00 \x2b0000 UTC",
+    "url" : "https:\/\/blog.yxwang.me\/2009\/04\/xen-test-script\/",
     "wordCount" : "170",
     "keywords" : [ "Cerberus","Computer System","Python","Xen","Blog" ]
 }

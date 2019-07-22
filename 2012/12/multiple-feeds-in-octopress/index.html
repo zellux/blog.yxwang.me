@@ -34,19 +34,12 @@
     "@type" : "BlogPosting",
     "mainEntityOfPage": {
          "@type": "WebPage",
-         "@id": "https://blog.yxwang.me/"
+         "@id": "https:\/\/blog.yxwang.me\/"
     },
     "articleSection" : "post",
     "name" : "为 Octopress 添加多个 Atom 地址",
     "headline" : "为 Octopress 添加多个 Atom 地址",
-    "description" : "<p>博客最早用的是 wordpress，首页上提供的 Atom 源是 /feed/。迁移到 Octopress 后，Atom 源地址变成了 /atom.xml。在 Google Reader 里看到订阅 /feed/ 的读者还是有不少的，用默认的地址这些读者就收不到博客更新了。</p>
-
-<p>一个方法是改服务器的配置文件，以我之前使用的 nginx 为例，在相应站点的配置中增加一项 /feed/，把所有对它的访问重定向到 /atom.xml 即可：</p>
-
-<pre><code>location = /feed/ {
-    rewrite ^(.*)$ http://blog.yxwang.me/atom.xml;
-}
-</code></pre>",
+    "description" : "\x3cp\x3e博客最早用的是 wordpress，首页上提供的 Atom 源是 \/feed\/。迁移到 Octopress 后，Atom 源地址变成了 \/atom.xml。在 Google Reader 里看到订阅 \/feed\/ 的读者还是有不少的，用默认的地址这些读者就收不到博客更新了。\x3c\/p\x3e\n\n\x3cp\x3e一个方法是改服务器的配置文件，以我之前使用的 nginx 为例，在相应站点的配置中增加一项 \/feed\/，把所有对它的访问重定向到 \/atom.xml 即可：\x3c\/p\x3e\n\n\x3cpre\x3e\x3ccode\x3elocation = \/feed\/ {\n    rewrite ^(.*)$ http:\/\/blog.yxwang.me\/atom.xml;\n}\n\x3c\/code\x3e\x3c\/pre\x3e",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -54,9 +47,9 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2012",
-    "datePublished": "2012-12-31 00:00:00 &#43;0000 UTC",
-    "dateModified" : "2012-12-31 00:00:00 &#43;0000 UTC",
-    "url" : "https://blog.yxwang.me/2012/12/multiple-feeds-in-octopress/",
+    "datePublished": "2012-12-31 00:00:00 \x2b0000 UTC",
+    "dateModified" : "2012-12-31 00:00:00 \x2b0000 UTC",
+    "url" : "https:\/\/blog.yxwang.me\/2012\/12\/multiple-feeds-in-octopress\/",
     "wordCount" : "101",
     "keywords" : [ "Meta","Meta-blogging","Octopress","Blog" ]
 }

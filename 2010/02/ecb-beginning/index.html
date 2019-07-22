@@ -34,24 +34,12 @@
     "@type" : "BlogPosting",
     "mainEntityOfPage": {
          "@type": "WebPage",
-         "@id": "https://blog.yxwang.me/"
+         "@id": "https:\/\/blog.yxwang.me\/"
     },
     "articleSection" : "post",
     "name" : "ecb 的简单配置和使用",
     "headline" : "ecb 的简单配置和使用",
-    "description" : "终端下的效果图（Windows 7下使用pietty远登）
-
-下载
-http://ecb.sourceforge.net/downloads.html CVS或者压缩包都可以，当然也可以通过各发行版的包管理器安装。
-安装
-在.emacs中加入
-;; ECB configurations (add-to-list 'load-path &quot;~/emacs/ecb-2.40&quot;) (add-to-list 'load-path &quot;~/emacs/cedet-1.0pre6/eieio&quot;) (add-to-list 'load-path &quot;~/emacs/cedet-1.0pre6/semantic&quot;) (add-to-list 'load-path &quot;~/emacs/cedet-1.0pre6/speedbar&quot;) (setq semantic-load-turn-everything-on t) (require 'semantic-load) (require 'ecb-autoloads)  运行Emacs后执行ecb-byte-compile，并重启Emacs（我这里不重启的话执行ecb-active后会报错）。
-使用
-第一次使用时先要设置项目目录，M-x customize-variable  ecb-source-path ，在这里加上你的项目根目录。
-接下来使用M-x ecb-active就能激活ECB了，成功激活后Emacs窗口会被切成左右两半。左边的几个窗口依次显示：目录，当前目录下的文件，当前文件中的函数/全局变量等定义，文件浏览历史。如果打开了一个源文件后函数定义窗口里面是空的，有可能是因为这个项目过大cedet尚未完成对它的分析，闲置一段时间后就能看到文件里的定义。
-ECB提供了方便在这些窗口间切换的快捷键：
-切换到目录窗口 Ctrl-c . g d 切换到函数/方法窗口 Ctrl-c . g m 切换到文件窗口 Ctrl-c . g s 切换到历史窗口 Ctrl-c . g h 切换到上一个编辑窗口 Ctrl-c . g l
-最基本的使用就是这样，Ctrl-C . h可以看到更详细的帮助信息。",
+    "description" : "终端下的效果图（Windows 7下使用pietty远登）\n\n下载\nhttp:\/\/ecb.sourceforge.net\/downloads.html CVS或者压缩包都可以，当然也可以通过各发行版的包管理器安装。\n安装\n在.emacs中加入\n;; ECB configurations (add-to-list \x27load-path \x26quot;~\/emacs\/ecb-2.40\x26quot;) (add-to-list \x27load-path \x26quot;~\/emacs\/cedet-1.0pre6\/eieio\x26quot;) (add-to-list \x27load-path \x26quot;~\/emacs\/cedet-1.0pre6\/semantic\x26quot;) (add-to-list \x27load-path \x26quot;~\/emacs\/cedet-1.0pre6\/speedbar\x26quot;) (setq semantic-load-turn-everything-on t) (require \x27semantic-load) (require \x27ecb-autoloads)  运行Emacs后执行ecb-byte-compile，并重启Emacs（我这里不重启的话执行ecb-active后会报错）。\n使用\n第一次使用时先要设置项目目录，M-x customize-variable  ecb-source-path ，在这里加上你的项目根目录。\n接下来使用M-x ecb-active就能激活ECB了，成功激活后Emacs窗口会被切成左右两半。左边的几个窗口依次显示：目录，当前目录下的文件，当前文件中的函数\/全局变量等定义，文件浏览历史。如果打开了一个源文件后函数定义窗口里面是空的，有可能是因为这个项目过大cedet尚未完成对它的分析，闲置一段时间后就能看到文件里的定义。\nECB提供了方便在这些窗口间切换的快捷键：\n切换到目录窗口 Ctrl-c . g d 切换到函数\/方法窗口 Ctrl-c . g m 切换到文件窗口 Ctrl-c . g s 切换到历史窗口 Ctrl-c . g h 切换到上一个编辑窗口 Ctrl-c . g l\n最基本的使用就是这样，Ctrl-C . h可以看到更详细的帮助信息。",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -59,9 +47,9 @@ ECB提供了方便在这些窗口间切换的快捷键：
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2010",
-    "datePublished": "2010-02-02 00:00:00 &#43;0000 UTC",
-    "dateModified" : "2010-02-02 00:00:00 &#43;0000 UTC",
-    "url" : "https://blog.yxwang.me/2010/02/ecb-beginning/",
+    "datePublished": "2010-02-02 00:00:00 \x2b0000 UTC",
+    "dateModified" : "2010-02-02 00:00:00 \x2b0000 UTC",
+    "url" : "https:\/\/blog.yxwang.me\/2010\/02\/ecb-beginning\/",
     "wordCount" : "66",
     "keywords" : [ "ECB","Emacs","Tooling","Blog" ]
 }

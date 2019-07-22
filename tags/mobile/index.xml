@@ -28,8 +28,7 @@
       <guid>https://blog.yxwang.me/2012/06/revisiting-storage-for-smartphones/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;https://www.usenix.org/comment/260&#34;&gt;Revisiting Storage for Smartphones&lt;/a&gt; 是今年 FAST 会议上的最佳论文，这篇论文提出了一个违背直觉的观点，很有意思。这里简单介绍一下这篇论文的内容，有兴趣的朋友可以直接访问前面的链接下载原文或是观看现场录像。&lt;/p&gt;
 
-&lt;a data-fancybox=&#34;gallery&#34;  data-caption=&#34;移动存储性能&#34; href=https://blog.yxwang.me/images/2012-06/mobile-flash-throughtput.png &gt;&lt;img src=https://blog.yxwang.me/images/2012-06/mobile-flash-throughtput.png  /&gt;&lt;/a&gt;
-
+&lt;p&gt;&lt;a data-fancybox=&#34;gallery&#34;  data-caption=&#34;移动存储性能&#34; href=https://blog.yxwang.me/images/2012-06/mobile-flash-throughtput.png &gt;&lt;img src=https://blog.yxwang.me/images/2012-06/mobile-flash-throughtput.png  /&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;传统的观点认为，移动应用性能的主要瓶颈在网络和 CPU，而闪存的读写速率明显高于网络传输速度，不会成为性能的瓶颈。然而，根据上图作者给出的关于移动存储性能的图例（纵坐标单位为 Mbps，本文图片均来自演讲 slides 和原论文），我们可以看到，虽然移动存储顺序读写的性能明显高于 wifi 和 3G，但是随机写的性能却比它们差很多，因此移动存储成为应用性能瓶颈是完全有可能的。&lt;/p&gt;</description>
     </item>

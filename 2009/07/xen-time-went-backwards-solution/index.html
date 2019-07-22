@@ -34,13 +34,12 @@
     "@type" : "BlogPosting",
     "mainEntityOfPage": {
          "@type": "WebPage",
-         "@id": "https://blog.yxwang.me/"
+         "@id": "https:\/\/blog.yxwang.me\/"
     },
     "articleSection" : "post",
     "name" : "Xen 警告 Time went backwards 的暴力解决方法",
     "headline" : "Xen 警告 Time went backwards 的暴力解决方法",
-    "description" : "前几天给测试Xen用的虚拟机挂了，只能用VMware的snapshot返回到之前的镜像，然后似乎因为时间问题启动Xen的时候总是会定时打印出类似
-571 Timer ISR/0: Time went backwards: delta=-11072481 delta_cpu=298927519 shadow=196807680595 off=288495093 processed=197107247546 cpu_processed=196797247546 572 0: 196797247546 573 1: 197107247546  的信息，google了下发现是时间同步的问题，用ntp协议同步时间即可解决这个问题。另外这里再给出一个最暴力的解决方法：在linux-xen源码的arch/i386/kernel/time-xen.c文件中找到Time went backwards，把这行打印语句以及后面的循环打印删除，然后重新编译内核。x86_64体系结构也是修改这个文件。方法很暴力，也没真正解决问题，但是至少不影响我看/var/log/messages的输出了。",
+    "description" : "前几天给测试Xen用的虚拟机挂了，只能用VMware的snapshot返回到之前的镜像，然后似乎因为时间问题启动Xen的时候总是会定时打印出类似\n571 Timer ISR\/0: Time went backwards: delta=-11072481 delta_cpu=298927519 shadow=196807680595 off=288495093 processed=197107247546 cpu_processed=196797247546 572 0: 196797247546 573 1: 197107247546  的信息，google了下发现是时间同步的问题，用ntp协议同步时间即可解决这个问题。另外这里再给出一个最暴力的解决方法：在linux-xen源码的arch\/i386\/kernel\/time-xen.c文件中找到Time went backwards，把这行打印语句以及后面的循环打印删除，然后重新编译内核。x86_64体系结构也是修改这个文件。方法很暴力，也没真正解决问题，但是至少不影响我看\/var\/log\/messages的输出了。",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -48,9 +47,9 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2009",
-    "datePublished": "2009-07-07 00:00:00 &#43;0000 UTC",
-    "dateModified" : "2009-07-07 00:00:00 &#43;0000 UTC",
-    "url" : "https://blog.yxwang.me/2009/07/xen-time-went-backwards-solution/",
+    "datePublished": "2009-07-07 00:00:00 \x2b0000 UTC",
+    "dateModified" : "2009-07-07 00:00:00 \x2b0000 UTC",
+    "url" : "https:\/\/blog.yxwang.me\/2009\/07\/xen-time-went-backwards-solution\/",
     "wordCount" : "22",
     "keywords" : [ "C","Computer System","Xen","Blog" ]
 }

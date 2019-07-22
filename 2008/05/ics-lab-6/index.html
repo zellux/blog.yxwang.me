@@ -34,24 +34,12 @@
     "@type" : "BlogPosting",
     "mainEntityOfPage": {
          "@type": "WebPage",
-         "@id": "https://blog.yxwang.me/"
+         "@id": "https:\/\/blog.yxwang.me\/"
     },
     "articleSection" : "post",
     "name" : "ICS Lab 6",
     "headline" : "ICS Lab 6",
-    "description" : "重定向：
-主要用到open, close, read和write这几个函数，关于它们的使用方法可以使用 man 2 &lt;函数名&gt; 查看。
-这里简单介绍下： Linux内核为每个进程维护了一张已打开的文件的表格，用File Descriptor（整型，以下简写成fd）可以访问到这些文件。所以很容易理解tsh.c中的函数listjobs为什么需要一个output_fd的整型参数，注意它的后面有这么一行： if (writer(output_fd, buf, strlen(buf)) &lt; 0) …
-这一行就把前面构造好的buf字符串（包括当前进程的信息）输出到这个output_fd对应的文件中了。
-每个进程的值为0, 1, 2的fd都指向相同的文件，0对应标准输入（通常是键盘输入），1对应标准输出（通常为屏幕），2对应标准错误输出。
-可以看到在main方法的开头，有这么一句 dup2(1, 2);
-dup2的作用是把参数二指向的文件改成和参数一一样（如果之前打开了文件，则先关闭），这句话的作用就是把原来要输出到标准错误端(stderr)的内容 输出到标准输出端(stdout)，便于调试。
-理解了fd和dup2的作用后，重定向也就很容易实现了，一种最简单的方法就是先用open函数打开输出文件并得到对应的fd，然后用dup2把标准输出/输入端的指向改成文件的fd。
-另外注意用open创建输出重定向的文件的时候要加上S_IRUSR和S_IWUSR选项，否则创建后的文件没有读写权限。（不过好像这个lab的测试数据比较厚道，会事先touch一下，不加这两个选项应该也能通过测试）
-一些文档中未定义的行为： argv 假如我输入的命令是/bin/ls -l &gt; ls.txt，对应的argv应该包括哪些内容呢？ 一般的情况argv的内容应该是[&lsquo;/bin/ls&rsquo;, &lsquo;-l&rsquo;]，后面的重定向符是不包括的不过在这个lab中似乎没有这个限制，不去掉重定向和管道部分应该还是能通过测试的。
-Job ID的分配 如果现在1, 2, 4号子任务在后台运行，再新增一个进程的话应该给它分配多少呢？ 这个问题不需要处理，只要所有的jobs队列操作统一使用tsh.c中给出的几个函数就行。
-其他： 关于信号的转发、后台前台的转换等内容，文档和书上都说得很清楚了，这里不再赘述。
-P.S. 多进程程序的调试大家之前应该接触的比较少，其实这个lab大致的代码不难写，难点在于细节上的debug比较困难，调试过程对第八章的理解很有帮助。",
+    "description" : "重定向：\n主要用到open, close, read和write这几个函数，关于它们的使用方法可以使用 man 2 \x26lt;函数名\x26gt; 查看。\n这里简单介绍下： Linux内核为每个进程维护了一张已打开的文件的表格，用File Descriptor（整型，以下简写成fd）可以访问到这些文件。所以很容易理解tsh.c中的函数listjobs为什么需要一个output_fd的整型参数，注意它的后面有这么一行： if (writer(output_fd, buf, strlen(buf)) \x26lt; 0) …\n这一行就把前面构造好的buf字符串（包括当前进程的信息）输出到这个output_fd对应的文件中了。\n每个进程的值为0, 1, 2的fd都指向相同的文件，0对应标准输入（通常是键盘输入），1对应标准输出（通常为屏幕），2对应标准错误输出。\n可以看到在main方法的开头，有这么一句 dup2(1, 2);\ndup2的作用是把参数二指向的文件改成和参数一一样（如果之前打开了文件，则先关闭），这句话的作用就是把原来要输出到标准错误端(stderr)的内容 输出到标准输出端(stdout)，便于调试。\n理解了fd和dup2的作用后，重定向也就很容易实现了，一种最简单的方法就是先用open函数打开输出文件并得到对应的fd，然后用dup2把标准输出\/输入端的指向改成文件的fd。\n另外注意用open创建输出重定向的文件的时候要加上S_IRUSR和S_IWUSR选项，否则创建后的文件没有读写权限。（不过好像这个lab的测试数据比较厚道，会事先touch一下，不加这两个选项应该也能通过测试）\n一些文档中未定义的行为： argv 假如我输入的命令是\/bin\/ls -l \x26gt; ls.txt，对应的argv应该包括哪些内容呢？ 一般的情况argv的内容应该是[\x26lsquo;\/bin\/ls\x26rsquo;, \x26lsquo;-l\x26rsquo;]，后面的重定向符是不包括的不过在这个lab中似乎没有这个限制，不去掉重定向和管道部分应该还是能通过测试的。\nJob ID的分配 如果现在1, 2, 4号子任务在后台运行，再新增一个进程的话应该给它分配多少呢？ 这个问题不需要处理，只要所有的jobs队列操作统一使用tsh.c中给出的几个函数就行。\n其他： 关于信号的转发、后台前台的转换等内容，文档和书上都说得很清楚了，这里不再赘述。\nP.S. 多进程程序的调试大家之前应该接触的比较少，其实这个lab大致的代码不难写，难点在于细节上的debug比较困难，调试过程对第八章的理解很有帮助。",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -59,9 +47,9 @@ P.S. 多进程程序的调试大家之前应该接触的比较少，其实这个
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2008",
-    "datePublished": "2008-05-27 00:00:00 &#43;0000 UTC",
-    "dateModified" : "2008-05-27 00:00:00 &#43;0000 UTC",
-    "url" : "https://blog.yxwang.me/2008/05/ics-lab-6/",
+    "datePublished": "2008-05-27 00:00:00 \x2b0000 UTC",
+    "dateModified" : "2008-05-27 00:00:00 \x2b0000 UTC",
+    "url" : "https:\/\/blog.yxwang.me\/2008\/05\/ics-lab-6\/",
     "wordCount" : "47",
     "keywords" : [ "Courses","ICS","Lab","Blog" ]
 }

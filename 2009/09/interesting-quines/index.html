@@ -34,15 +34,12 @@
     "@type" : "BlogPosting",
     "mainEntityOfPage": {
          "@type": "WebPage",
-         "@id": "https://blog.yxwang.me/"
+         "@id": "https:\/\/blog.yxwang.me\/"
     },
     "articleSection" : "post",
     "name" : "几个有趣的 Quine 变种",
     "headline" : "几个有趣的 Quine 变种",
-    "description" : "Quine是指一类能生成自己的程序，例如下面这个C程序运行后就能把自己的源码完整的打印出来：
-char*f=&quot;char*f=%c%s%c;main() {printf(f,34,f,34,10);}%c&quot;; main(){printf(f,34,f,34,10);}  这类程序的构造方法计算理论导引或者其他相关的书籍中都有涉及，这里不再赘述。这个月看到几个Quine的变种，都挺有趣的。
-首先是sigfpe构造出来的三阶Quine，这是一个只有两行的Haskell程序：
-q a b c=putStrLn $ b ++ [toEnum 10,'q','('] ++ show b ++ [','] ++ show c ++ [','] ++ show a ++ [')'] main=q &quot;q a b c=putStrLn $ b ++ [toEnum 10,'q','('] ++ show b ++ [','] ++ show c ++ [','] ++ show a ++ [')']&quot; &quot;def q(a,b,c):print b+chr(10)+'q('+repr(b)+','+repr(c)+','+repr(a)+')'&quot; &quot;def e(x) return 34.chr+x+34.chr end;def q(a,b,c) print b+10.chr+'main=q '+e(b)+' '+e(c)+' '+e(a)+' '+10.",
+    "description" : "Quine是指一类能生成自己的程序，例如下面这个C程序运行后就能把自己的源码完整的打印出来：\nchar*f=\x26quot;char*f=%c%s%c;main() {printf(f,34,f,34,10);}%c\x26quot;; main(){printf(f,34,f,34,10);}  这类程序的构造方法计算理论导引或者其他相关的书籍中都有涉及，这里不再赘述。这个月看到几个Quine的变种，都挺有趣的。\n首先是sigfpe构造出来的三阶Quine，这是一个只有两行的Haskell程序：\nq a b c=putStrLn $ b \x2b\x2b [toEnum 10,\x27q\x27,\x27(\x27] \x2b\x2b show b \x2b\x2b [\x27,\x27] \x2b\x2b show c \x2b\x2b [\x27,\x27] \x2b\x2b show a \x2b\x2b [\x27)\x27] main=q \x26quot;q a b c=putStrLn $ b \x2b\x2b [toEnum 10,\x27q\x27,\x27(\x27] \x2b\x2b show b \x2b\x2b [\x27,\x27] \x2b\x2b show c \x2b\x2b [\x27,\x27] \x2b\x2b show a \x2b\x2b [\x27)\x27]\x26quot; \x26quot;def q(a,b,c):print b\x2bchr(10)\x2b\x27q(\x27\x2brepr(b)\x2b\x27,\x27\x2brepr(c)\x2b\x27,\x27\x2brepr(a)\x2b\x27)\x27\x26quot; \x26quot;def e(x) return 34.chr\x2bx\x2b34.chr end;def q(a,b,c) print b\x2b10.chr\x2b\x27main=q \x27\x2be(b)\x2b\x27 \x27\x2be(c)\x2b\x27 \x27\x2be(a)\x2b\x27 \x27\x2b10.",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -50,9 +47,9 @@ q a b c=putStrLn $ b ++ [toEnum 10,'q','('] ++ show b ++ [','] ++ show c ++ [','
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2009",
-    "datePublished": "2009-09-28 00:00:00 &#43;0000 UTC",
-    "dateModified" : "2009-09-28 00:00:00 &#43;0000 UTC",
-    "url" : "https://blog.yxwang.me/2009/09/interesting-quines/",
+    "datePublished": "2009-09-28 00:00:00 \x2b0000 UTC",
+    "dateModified" : "2009-09-28 00:00:00 \x2b0000 UTC",
+    "url" : "https:\/\/blog.yxwang.me\/2009\/09\/interesting-quines\/",
     "wordCount" : "83",
     "keywords" : [ "Algorithms","C","Quine","Blog" ]
 }

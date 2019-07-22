@@ -34,18 +34,12 @@
     "@type" : "BlogPosting",
     "mainEntityOfPage": {
          "@type": "WebPage",
-         "@id": "https://blog.yxwang.me/"
+         "@id": "https:\/\/blog.yxwang.me\/"
     },
     "articleSection" : "post",
     "name" : "gcc 中设置特定代码块的优化级别",
     "headline" : "gcc 中设置特定代码块的优化级别",
-    "description" : "今天碰到一个gcc优化相关的问题，为了让一个页变成脏页（页表中dirty位被置上），需要执行下面这段代码：
-uint32_t *page; // ... page[0] = page[0];  最后一行代码很有可能被gcc优化掉，因为这段代码看起来没有任何实际的作用。那么如何防止gcc对这段代码做优化呢？
-设置gcc编译时优化级别为-O0肯定是不合适的，这样对程序性能影响会比较大。stackoverflow上的Dietrich Epp给出了一个强制类型转换的方案：
-((unsigned char volatile *)page)[0] = page[0];  通过volatile关键字禁止gcc的优化，和我之前采用的方法类似。
-Plow同学给出了另一个利用gcc 4.4特性的方法：
-#pragma GCC push_options #pragma GCC optimize (&quot;O0&quot;) your code #pragma GCC pop_options  这里用到了gcc 4.4的特性Function Specific Option Pragmas，在特定代码前保存当前的编译选项，然后对特定的代码使用O0优化级别，最后再恢复之前保存的编译选项。
-俺觉得这个特性有些场合下挺好用的，在这里分享下，虽然因为编译器版本问题最后我还是用了前面一种方法。",
+    "description" : "今天碰到一个gcc优化相关的问题，为了让一个页变成脏页（页表中dirty位被置上），需要执行下面这段代码：\nuint32_t *page; \/\/ ... page[0] = page[0];  最后一行代码很有可能被gcc优化掉，因为这段代码看起来没有任何实际的作用。那么如何防止gcc对这段代码做优化呢？\n设置gcc编译时优化级别为-O0肯定是不合适的，这样对程序性能影响会比较大。stackoverflow上的Dietrich Epp给出了一个强制类型转换的方案：\n((unsigned char volatile *)page)[0] = page[0];  通过volatile关键字禁止gcc的优化，和我之前采用的方法类似。\nPlow同学给出了另一个利用gcc 4.4特性的方法：\n#pragma GCC push_options #pragma GCC optimize (\x26quot;O0\x26quot;) your code #pragma GCC pop_options  这里用到了gcc 4.4的特性Function Specific Option Pragmas，在特定代码前保存当前的编译选项，然后对特定的代码使用O0优化级别，最后再恢复之前保存的编译选项。\n俺觉得这个特性有些场合下挺好用的，在这里分享下，虽然因为编译器版本问题最后我还是用了前面一种方法。",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -53,9 +47,9 @@ Plow同学给出了另一个利用gcc 4.4特性的方法：
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2010",
-    "datePublished": "2010-02-08 00:00:00 &#43;0000 UTC",
-    "dateModified" : "2010-02-08 00:00:00 &#43;0000 UTC",
-    "url" : "https://blog.yxwang.me/2010/02/code-specific-optimizations-in-gcc/",
+    "datePublished": "2010-02-08 00:00:00 \x2b0000 UTC",
+    "dateModified" : "2010-02-08 00:00:00 \x2b0000 UTC",
+    "url" : "https:\/\/blog.yxwang.me\/2010\/02\/code-specific-optimizations-in-gcc\/",
     "wordCount" : "38",
     "keywords" : [ "GCC","Programming","gcc","Blog" ]
 }

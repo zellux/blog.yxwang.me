@@ -34,13 +34,12 @@
     "@type" : "BlogPosting",
     "mainEntityOfPage": {
          "@type": "WebPage",
-         "@id": "https://blog.yxwang.me/"
+         "@id": "https:\/\/blog.yxwang.me\/"
     },
     "articleSection" : "post",
     "name" : "Python函数属性",
     "headline" : "Python函数属性",
-    "description" : "定义一个简单的Python函数 def f(x, y = 10, z = 16): print z dir(f)可以看到函数的几个主要属性 &lsquo;func_closure&rsquo;, &lsquo;func_code&rsquo;, &lsquo;func_defaults&rsquo;, &lsquo;func_dict&rsquo;, &lsquo;func_doc&rsquo;, &lsquo;func_globals&rsquo;, &lsquo;func_name&rsquo;。在funcobject.c中对PyFunction_Type的定义中可以看到这些属性的来源：
-static PyMemberDef func_memberlist[] = { {&quot;func_closure&quot;, T_OBJECT, OFF(func_closure), RESTRICTED|READONLY}, {&quot;func_doc&quot;, T_OBJECT, OFF(func_doc), WRITE_RESTRICTED}, {&quot;__doc__&quot;, T_OBJECT, OFF(func_doc), WRITE_RESTRICTED}, {&quot;func_globals&quot;, T_OBJECT, OFF(func_globals), RESTRICTED|READONLY}, {&quot;__module__&quot;, T_OBJECT, OFF(func_module), WRITE_RESTRICTED}, {NULL} /* Sentinel */ };  static PyGetSetDef func_getsetlist[] = { {&quot;func_code&quot;, (getter)func_get_code, (setter)func_set_code}, {&quot;func_defaults&quot;, (getter)func_get_defaults, (setter)func_set_defaults}, {&quot;func_dict&quot;, (getter)func_get_dict, (setter)func_set_dict}, {&quot;__dict__&quot;, (getter)func_get_dict, (setter)func_set_dict}, {&quot;func_name&quot;, (getter)func_get_name, (setter)func_set_name}, {&quot;__name__&quot;, (getter)func_get_name, (setter)func_set_name}, {NULL} /* Sentinel */ };  f.",
+    "description" : "定义一个简单的Python函数 def f(x, y = 10, z = 16): print z dir(f)可以看到函数的几个主要属性 \x26lsquo;func_closure\x26rsquo;, \x26lsquo;func_code\x26rsquo;, \x26lsquo;func_defaults\x26rsquo;, \x26lsquo;func_dict\x26rsquo;, \x26lsquo;func_doc\x26rsquo;, \x26lsquo;func_globals\x26rsquo;, \x26lsquo;func_name\x26rsquo;。在funcobject.c中对PyFunction_Type的定义中可以看到这些属性的来源：\nstatic PyMemberDef func_memberlist[] = { {\x26quot;func_closure\x26quot;, T_OBJECT, OFF(func_closure), RESTRICTED|READONLY}, {\x26quot;func_doc\x26quot;, T_OBJECT, OFF(func_doc), WRITE_RESTRICTED}, {\x26quot;__doc__\x26quot;, T_OBJECT, OFF(func_doc), WRITE_RESTRICTED}, {\x26quot;func_globals\x26quot;, T_OBJECT, OFF(func_globals), RESTRICTED|READONLY}, {\x26quot;__module__\x26quot;, T_OBJECT, OFF(func_module), WRITE_RESTRICTED}, {NULL} \/* Sentinel *\/ };  static PyGetSetDef func_getsetlist[] = { {\x26quot;func_code\x26quot;, (getter)func_get_code, (setter)func_set_code}, {\x26quot;func_defaults\x26quot;, (getter)func_get_defaults, (setter)func_set_defaults}, {\x26quot;func_dict\x26quot;, (getter)func_get_dict, (setter)func_set_dict}, {\x26quot;__dict__\x26quot;, (getter)func_get_dict, (setter)func_set_dict}, {\x26quot;func_name\x26quot;, (getter)func_get_name, (setter)func_set_name}, {\x26quot;__name__\x26quot;, (getter)func_get_name, (setter)func_set_name}, {NULL} \/* Sentinel *\/ };  f.",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -48,9 +47,9 @@ static PyMemberDef func_memberlist[] = { {&quot;func_closure&quot;, T_OBJECT, OF
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2008",
-    "datePublished": "2008-10-24 00:00:00 &#43;0000 UTC",
-    "dateModified" : "2008-10-24 00:00:00 &#43;0000 UTC",
-    "url" : "https://blog.yxwang.me/2008/10/python-function/",
+    "datePublished": "2008-10-24 00:00:00 \x2b0000 UTC",
+    "dateModified" : "2008-10-24 00:00:00 \x2b0000 UTC",
+    "url" : "https:\/\/blog.yxwang.me\/2008\/10\/python-function\/",
     "wordCount" : "115",
     "keywords" : [ "Programming","Programming Languages","Python","Blog" ]
 }

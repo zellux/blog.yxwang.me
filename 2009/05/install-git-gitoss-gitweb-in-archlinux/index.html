@@ -34,23 +34,12 @@
     "@type" : "BlogPosting",
     "mainEntityOfPage": {
          "@type": "WebPage",
-         "@id": "https://blog.yxwang.me/"
+         "@id": "https:\/\/blog.yxwang.me\/"
     },
     "articleSection" : "post",
     "name" : "ArchLinux 下安装 git, gitosis, gitweb 服务",
     "headline" : "ArchLinux 下安装 git, gitosis, gitweb 服务",
-    "description" : "参考文章：
-[1] http://hokietux.net/blog/?p=58 [2] http://scie.nti.st/2007/11/14/hosting-git-repositories-the-easy-and-secure-way [3] http://www.nkuttler.de/2009/04/06/git-clone-ssh-could-not-resolve-hostname/
- git  很简单，直接用pacman安装即可 sudo pacman -S git
- gitosis  gitosis是一个方便管理git仓库的工具，安装方法：
-1) 从yaourt或者aur下载安装gitosis-git包 http://aur.archlinux.org/packages.php?ID=23419
-2) 新建git用户 sudo useradd &ndash;system &ndash;shell /bin/sh &ndash;comment &lsquo;git version control&rsquo;&ndash;user-group &ndash;home-dir /home/git/ git
-3) 将开发用户的rsa公钥导入gitosis，（没有公钥的话请先运行ssh-keygen -t rsa生成） sudo -H -u git gitosis-init &lt; ~/.ssh/id_rsa.pub
-4) 如果以上步骤没有问题，那么运行 git clone ssh://git@hostname/gitosis-admin.git 后应该就能看到gitosis-admin.git这个目录了
-5) 新建项目、添加用户等操作参见[2]，这里不再赘述
- gitweb  事实上ArchLinux中安装的git包自带了gitweb，可以用which gitweb搜到，一般默认在/usr/share/gitweb。下面假设我的http根目录为/home/httpd
-1) 将/usr/share/gitweb下的文件复制到/home/httpd/cgi-bin（其实似乎只要gitweb.cgi就够了）  sudo cp -R /usr/share/gitweb /home/httpd/cgi-bin/ 
-2) /usr/share/gitweb下的.",
+    "description" : "参考文章：\n[1] http:\/\/hokietux.net\/blog\/?p=58 [2] http:\/\/scie.nti.st\/2007\/11\/14\/hosting-git-repositories-the-easy-and-secure-way [3] http:\/\/www.nkuttler.de\/2009\/04\/06\/git-clone-ssh-could-not-resolve-hostname\/\n git  很简单，直接用pacman安装即可 sudo pacman -S git\n gitosis  gitosis是一个方便管理git仓库的工具，安装方法：\n1) 从yaourt或者aur下载安装gitosis-git包 http:\/\/aur.archlinux.org\/packages.php?ID=23419\n2) 新建git用户 sudo useradd \x26ndash;system \x26ndash;shell \/bin\/sh \x26ndash;comment \x26lsquo;git version control\x26rsquo;\x26ndash;user-group \x26ndash;home-dir \/home\/git\/ git\n3) 将开发用户的rsa公钥导入gitosis，（没有公钥的话请先运行ssh-keygen -t rsa生成） sudo -H -u git gitosis-init \x26lt; ~\/.ssh\/id_rsa.pub\n4) 如果以上步骤没有问题，那么运行 git clone ssh:\/\/git@hostname\/gitosis-admin.git 后应该就能看到gitosis-admin.git这个目录了\n5) 新建项目、添加用户等操作参见[2]，这里不再赘述\n gitweb  事实上ArchLinux中安装的git包自带了gitweb，可以用which gitweb搜到，一般默认在\/usr\/share\/gitweb。下面假设我的http根目录为\/home\/httpd\n1) 将\/usr\/share\/gitweb下的文件复制到\/home\/httpd\/cgi-bin（其实似乎只要gitweb.cgi就够了）  sudo cp -R \/usr\/share\/gitweb \/home\/httpd\/cgi-bin\/ \n2) \/usr\/share\/gitweb下的.",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -58,9 +47,9 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2009",
-    "datePublished": "2009-05-26 00:00:00 &#43;0000 UTC",
-    "dateModified" : "2009-05-26 00:00:00 &#43;0000 UTC",
-    "url" : "https://blog.yxwang.me/2009/05/install-git-gitoss-gitweb-in-archlinux/",
+    "datePublished": "2009-05-26 00:00:00 \x2b0000 UTC",
+    "dateModified" : "2009-05-26 00:00:00 \x2b0000 UTC",
+    "url" : "https:\/\/blog.yxwang.me\/2009\/05\/install-git-gitoss-gitweb-in-archlinux\/",
     "wordCount" : "159",
     "keywords" : [ "ArchLinux","Git","Server","Tooling","git","Blog" ]
 }

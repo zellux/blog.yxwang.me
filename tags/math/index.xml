@@ -17,8 +17,7 @@
       <pubDate>Sat, 14 Jul 2018 00:00:00 +0000</pubDate>
       
       <guid>https://blog.yxwang.me/2018/07/linear-algebra-notes/</guid>
-      <description>最近抽空把线性代数重新过了一遍，整理了一份概念笔记，希望对别人也有用。主要参考了同济大学的《线性代数》和 《Deep Learning》 的第二章。
-行列式  行列式 (determinant) 与它的转置行列式相等。\(D^T = D\) 余子式 (minor)：在 n 阶行列式中，把 \((i, j)\) 元 \(a_{ij}\) 所在的第 \(i\) 行和第 \(j\) 列划去后留下的 \(n - 1\) 阶行列式叫做 \((i, j)\) 元 \(a_{ij}\) 的余子式，记作 \(M_{ij}\) 代数余子式 (cofactor) \(A_{ij} = (-1)^{i+j}M_{ij}\) 行列式按行展开：\(D = a_{i1}A_{i1} + a_{i2}A_{i2} + \cdots + a_{in}A_{in}\) 行列式按列展开：\(D = a_{1j}A_{1j} + a_{2j}A_{2j} + \cdots + a_{nj}A_{nj}\) 克拉默法则 (Cramer’s rule)：如果线性方程组的系数行列式不等于零，那么方程组有唯一解 \(x_1 = \frac{D_1}{D}, x_2 = \frac{D_2}{D}, \cdots, x_n = \frac{D_n}{D}\)， 其中 \(D_j\) 是把系数行列式 D 中第 j 列的元素用方程组右端的常数项代替后得到的 n 阶行列式。  矩阵及其运算  伴随矩阵 (adjugate matrix) \[ adj(A) = \begin{bmatrix} A_{11} &amp;amp; A_{21} &amp;amp; \cdots &amp;amp; A_{n1} \\ A_{12} &amp;amp; A_{22} &amp;amp; \cdots &amp;amp; A_{n2} \\ \vdots &amp;amp; \vdots &amp;amp; \ddots &amp;amp; \vdots \\ A_{1n} &amp;amp; A_{2n} &amp;amp; \cdots &amp;amp; A_{nn} \\ \end{bmatrix} \]  其中 \(A_{ij}\) 为代数余子式</description>
+      <description>最近抽空把线性代数重新过了一遍，整理了一份概念笔记，希望对别人也有用。</description>
     </item>
     
   </channel>

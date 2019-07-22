@@ -34,15 +34,12 @@
     "@type" : "BlogPosting",
     "mainEntityOfPage": {
          "@type": "WebPage",
-         "@id": "https://blog.yxwang.me/"
+         "@id": "https:\/\/blog.yxwang.me\/"
     },
     "articleSection" : "post",
     "name" : "关于smalloc函数与malloc函数的区别",
     "headline" : "关于smalloc函数与malloc函数的区别",
-    "description" : "s前缀的malloc函数（包括smalloc、smemalign等）不记录分配块的大小，比较节省空间，但是要求用户在用sfree释放内存的时候指定被释放的内存块大小。
-malloc则和libc中的同名函数很相似。
-整个分配信息（包括哪些块已被使用）都记录在malloc_lmm这个全局变量中，内存被分为若干个region，每个region中有若干个nodes，这些信息可以通过lmm_dump查看（需要include ）。
-smemalign很适合分配需要页对齐的内存块，因为如果使用memalign分配的话，每个页面就需要多用8字节的空间来记录当前块的大小了（保存在每个内存块的前面），会产生大量内存碎片。",
+    "description" : "s前缀的malloc函数（包括smalloc、smemalign等）不记录分配块的大小，比较节省空间，但是要求用户在用sfree释放内存的时候指定被释放的内存块大小。\nmalloc则和libc中的同名函数很相似。\n整个分配信息（包括哪些块已被使用）都记录在malloc_lmm这个全局变量中，内存被分为若干个region，每个region中有若干个nodes，这些信息可以通过lmm_dump查看（需要include ）。\nsmemalign很适合分配需要页对齐的内存块，因为如果使用memalign分配的话，每个页面就需要多用8字节的空间来记录当前块的大小了（保存在每个内存块的前面），会产生大量内存碎片。",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -50,9 +47,9 @@ smemalign很适合分配需要页对齐的内存块，因为如果使用memalign
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2008",
-    "datePublished": "2008-08-24 00:00:00 &#43;0000 UTC",
-    "dateModified" : "2008-08-24 00:00:00 &#43;0000 UTC",
-    "url" : "https://blog.yxwang.me/2008/08/smalloc-vs-malloc/",
+    "datePublished": "2008-08-24 00:00:00 \x2b0000 UTC",
+    "dateModified" : "2008-08-24 00:00:00 \x2b0000 UTC",
+    "url" : "https:\/\/blog.yxwang.me\/2008\/08\/smalloc-vs-malloc\/",
     "wordCount" : "5",
     "keywords" : [ "Courses","Flux OSKit","Lab","OS","Blog" ]
 }

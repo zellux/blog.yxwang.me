@@ -34,16 +34,12 @@
     "@type" : "BlogPosting",
     "mainEntityOfPage": {
          "@type": "WebPage",
-         "@id": "https://blog.yxwang.me/"
+         "@id": "https:\/\/blog.yxwang.me\/"
     },
     "articleSection" : "post",
     "name" : "OS Lab 5 Debugging Notes",
     "headline" : "OS Lab 5 Debugging Notes",
-    "description" : "还算顺利，不过这个lab蛮无聊的，等有空了把syscall改成类似linux的做法，单一中断号+寄存器选择syscall。
- 最花时间的一个bug是ls返回值没有改成应用程序数，结果一开始一直以为是brk系统调用没写好，最后才发现问题出在这么小的地方。
- brk的逻辑还不是很清楚，尽管通过了简单的测试，但是debug输出的信息显示brk增长的很快，经常是一个页一个页涨的，看来还得查下brk的具体行为。
- 写了个比MAGIC_BREAK好用一点的宏，因为用户态的程序都是按二进制读入的，Simics无法得到函数信息（函数名、当前行数等），利用C99的宏写了个新的INFO_BREAK
-  #define INFO_BREAK \ do { \ lprintf_kern(&quot;break in %s:%d&quot;, __FUNCTION__, __LINE__); \ MAGIC_BREAK; \ } while (0) \  ",
+    "description" : "还算顺利，不过这个lab蛮无聊的，等有空了把syscall改成类似linux的做法，单一中断号\x2b寄存器选择syscall。\n 最花时间的一个bug是ls返回值没有改成应用程序数，结果一开始一直以为是brk系统调用没写好，最后才发现问题出在这么小的地方。\n brk的逻辑还不是很清楚，尽管通过了简单的测试，但是debug输出的信息显示brk增长的很快，经常是一个页一个页涨的，看来还得查下brk的具体行为。\n 写了个比MAGIC_BREAK好用一点的宏，因为用户态的程序都是按二进制读入的，Simics无法得到函数信息（函数名、当前行数等），利用C99的宏写了个新的INFO_BREAK\n  #define INFO_BREAK \\ do { \\ lprintf_kern(\x26quot;break in %s:%d\x26quot;, __FUNCTION__, __LINE__); \\ MAGIC_BREAK; \\ } while (0) \\  ",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -51,9 +47,9 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2008",
-    "datePublished": "2008-08-31 00:00:00 &#43;0000 UTC",
-    "dateModified" : "2008-08-31 00:00:00 &#43;0000 UTC",
-    "url" : "https://blog.yxwang.me/2008/08/os-lab5-debug-notes/",
+    "datePublished": "2008-08-31 00:00:00 \x2b0000 UTC",
+    "dateModified" : "2008-08-31 00:00:00 \x2b0000 UTC",
+    "url" : "https:\/\/blog.yxwang.me\/2008\/08\/os-lab5-debug-notes\/",
     "wordCount" : "22",
     "keywords" : [ "Courses","Lab","Notes","OS","Blog" ]
 }
