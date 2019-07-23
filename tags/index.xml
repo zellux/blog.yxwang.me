@@ -309,20 +309,20 @@
     </item>
     
     <item>
-      <title>Git</title>
-      <link>https://blog.yxwang.me/tags/git/</link>
-      <pubDate>Wed, 28 Mar 2012 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.yxwang.me/tags/git/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Shell</title>
       <link>https://blog.yxwang.me/tags/shell/</link>
       <pubDate>Wed, 28 Mar 2012 00:00:00 +0000</pubDate>
       
       <guid>https://blog.yxwang.me/tags/shell/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>git</title>
+      <link>https://blog.yxwang.me/tags/git/</link>
+      <pubDate>Wed, 28 Mar 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/tags/git/</guid>
       <description></description>
     </item>
     
