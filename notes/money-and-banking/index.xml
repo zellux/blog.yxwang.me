@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Economics of Money and Banking on Aiur · Zellux 的博客</title>
+    <link>https://blog.yxwang.me/notes/money-and-banking/</link>
+    <description>Recent content in Economics of Money and Banking on Aiur · Zellux 的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    
+	<atom:link href="https://blog.yxwang.me/notes/money-and-banking/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Economics of Money and Banking - Week 1</title>
+      <link>https://blog.yxwang.me/notes/money-and-banking/week1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/notes/money-and-banking/week1/</guid>
+      <description>Course Link: https://www.coursera.org/learn/money-banking/
+Week 1 What is a Bank, a Shadow Bank, a Central Bank? Banks   Assets (Liquidity) Liabilities (Solvency)    Loans Deposit accounts  Securities Other borrowing  Cash Reserves Net worth    Shadow Banks   Liquidity Solvency    RMBS (Residential Mortgage Backed Securities) Money Market Borrowing  IRS (Interest Rate Swaps) - RP (Repurchase Agreement)  CDS (Credit Default Swaps) - ED (Eurodollars)   - ABCP (Asset-Backed Commercial Paper)    The Four Prices of Money  Par, today Interest rate, future Exchange rate, foreign Price level, commodities  “All banking is a swap of IOUs”</description>
+    </item>
+    
+  </channel>
+</rss>
