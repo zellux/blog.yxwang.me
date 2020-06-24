@@ -11,6 +11,7 @@
     
 
     <title> OSDI 08 - CHESS &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -39,7 +40,7 @@
     "articleSection" : "post",
     "name" : "OSDI 08 - CHESS",
     "headline" : "OSDI 08 - CHESS",
-    "description" : "Finding and Reproducing Heisenbugs in Concurrent Programs\nOSDI \x26lsquo;08上微软研究院发的paper，针对并发编程中难以发现的bug问题。\npaper的内容主要分两大块。\n一是如何在发现bug的时候记录下线程的运行先后(thread interleaving)，途径是在线程API和用户程序多写一层wrapper functions，这里还有一些其他的问题，比如只记录下了thread interleaving的话出现data race怎么解决等。\n另外一块内容是如何遍历出给定程序运行后所能产生的结果的集合，加入这个能实现的话那就能把所有隐藏的bug都找出来了。但是这个搜索空间很大，是指数级的，的一个结论就是：给定一个程序有n个的线程，所有线程共完成k条指令，那么c次占先调度后线程的排列情况数的复杂度是$$k^{c}$$的，所以在实现遍历代码的时候必须有效的降低k和c的值。",
+    "description" : "Finding and Reproducing Heisenbugs in Concurrent ProgramsOSDI \u0026lsquo;08上微软研究院发的paper，针对并发编程中难以发现的bug问题。\npaper的内容主要分两大块。\n一是如何在发现bug的时候记录下线程的运行先后(thread interleaving)，途径是在线程API和用户程序多写一层wrapper functions，这里还有一些其他的问题，比如只记录下了thread interleaving的话出现data race怎么解决等。\n另外一块内容是如何遍历出给定程序运行后所能产生的结果的集合，加入这个能实现的话那就能把所有隐藏的bug都找出来了。但是这个搜索空间很大，是指数级的，的一个结论就是：给定一个程序有n个的线程，所有线程共完成k条指令，那么c次占先调度后线程的排列情况数的复杂度是$$k^{c}$$的，所以在实现遍历代码的时候必须有效的降低k和c的值。",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -47,10 +48,10 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2008",
-    "datePublished": "2008-11-30 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2008-11-30 00:00:00 \x2b0000 UTC",
+    "datePublished": "2008-11-30 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2008-11-30 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/2008\/11\/finding-and-reproducing-heisenbugs-in-concurrent-programs\/",
-    "wordCount" : "16",
+    "wordCount" : "15",
     "keywords" : [ "Computer System","Concurrency","OSDI","Paper","Research","Blog" ]
 }
 </script>
@@ -93,14 +94,10 @@
 </span>
 
     <div class="post-content">
-      <p><strong>Finding and Reproducing Heisenbugs in Concurrent Programs</strong></p>
-
+      <p><!-- raw HTML omitted -->Finding and Reproducing Heisenbugs in Concurrent Programs<!-- raw HTML omitted --></p>
 <p>OSDI &lsquo;08上微软研究院发的paper，针对并发编程中难以发现的bug问题。</p>
-
 <p>paper的内容主要分两大块。</p>
-
 <p>一是如何在发现bug的时候记录下线程的运行先后(thread interleaving)，途径是在线程API和用户程序多写一层wrapper functions，这里还有一些其他的问题，比如只记录下了thread interleaving的话出现data race怎么解决等。</p>
-
 <p>另外一块内容是如何遍历出给定程序运行后所能产生的结果的集合，加入这个能实现的话那就能把所有隐藏的bug都找出来了。但是这个搜索空间很大，是指数级的，的一个结论就是：给定一个程序有n个的线程，所有线程共完成k条指令，那么c次占先调度后线程的排列情况数的复杂度是$$k^{c}$$的，所以在实现遍历代码的时候必须有效的降低k和c的值。</p>
 
     </div>

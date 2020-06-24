@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Joke on Aiur · Zellux 的博客</title>
@@ -18,8 +18,8 @@
       
       <guid>https://blog.yxwang.me/2009/04/tuple-pronunciation/</guid>
       <description>水木上有个帖子讨论tuple这个词该怎么读，于是有人翻出来这个三年前的新闻组邮件
-http://coding.derkeiler.com/Archive/Python/comp.lang.python/2006-02/msg01915.html I used to pronounce it toople. But the people that taught me Python found it both comical and confusing. At first they thought I meant a 2 element tuple. So they wondered if a 3 element tuple was a threeple, etc. After much harrassing, I changed my wayward ways and pronounced it tuhple to fit in with the cool Python guys. ;-)
-Then we went to hear Guido speak about Python 2.</description>
+http://coding.derkeiler.com/Archive/Python/comp.lang.python/2006-02/msg01915.htmlThen we went to hear Guido speak about Python 2.2 at a ZPUG meeting in Washington, DC. When he said toople I almost fell out of my chair laughing, particularly because the people who taught me to say it the &amp;ldquo;right&amp;rdquo; way were with me. When I looked over, they just hung their head in shame.
+I work with Guido now and I&amp;rsquo;m conflicted. I&amp;rsquo;m still conditioned to say tuhple.</description>
     </item>
     
   </channel>

@@ -11,6 +11,7 @@
     
 
     <title> Xen 学习笔记 2009-02-10 &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -47,8 +48,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2009",
-    "datePublished": "2009-02-11 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2009-02-11 00:00:00 \x2b0000 UTC",
+    "datePublished": "2009-02-11 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2009-02-11 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/2009\/02\/2009-02-10-notes\/",
     "wordCount" : "379",
     "keywords" : [ "Computer System","Memory Management","Notes","Xen","virtualization","Blog" ]
@@ -96,72 +97,63 @@
       <ol>
 <li>x86_64上不支持segment机制，Xen是通过页表机制来控制访问权限的，Xen及其相关数据驻留在0xffff8000 00000000 - 0xffff87ff ffffffff，也就是在原来的kernel space的低地址部分，而x86_32上驻留在最上面的。</li>
 </ol>
-
-<pre><code class="language-c">[include/asm-x86/config.h]
-/*
- * Memory layout:
- *  0x0000000000000000 - 0x00007fffffffffff [128TB, 2^47 bytes, PML4:0-255]
- *    Guest-defined use (see below for compatibility mode guests).
- *  0x0000800000000000 - 0xffff7fffffffffff [16EB]
- *    Inaccessible: current arch only supports 48-bit sign-extended VAs.
- *  0xffff800000000000 - 0xffff803fffffffff [256GB, 2^38 bytes, PML4:256]
- *    Read-only machine-to-phys translation table (GUEST ACCESSIBLE).
- *  0xffff804000000000 - 0xffff807fffffffff [256GB, 2^38 bytes, PML4:256]
- *    Reserved for future shared info with the guest OS (GUEST ACCESSIBLE).
- *  0xffff808000000000 - 0xffff80ffffffffff [512GB, 2^39 bytes, PML4:257]
- *    Reserved for future use.
- *  0xffff810000000000 - 0xffff817fffffffff [512GB, 2^39 bytes, PML4:258]
- *    Guest linear page table.
- *  0xffff818000000000 - 0xffff81ffffffffff [512GB, 2^39 bytes, PML4:259]
- *    Shadow linear page table.
- *  0xffff820000000000 - 0xffff827fffffffff [512GB, 2^39 bytes, PML4:260]
- *    Per-domain mappings (e.g., GDT, LDT).
- *  0xffff828000000000 - 0xffff8283ffffffff [16GB,  2^34 bytes, PML4:261]
- *    Machine-to-phys translation table.
- *  0xffff828400000000 - 0xffff8287ffffffff [16GB,  2^34 bytes, PML4:261]
- *    Page-frame information array.
- *  0xffff828800000000 - 0xffff828bffffffff [16GB,  2^34 bytes, PML4:261]
- *    ioremap()/fixmap area.
- *  0xffff828c00000000 - 0xffff828c3fffffff [1GB,   2^30 bytes, PML4:261]
- *    Compatibility machine-to-phys translation table.
- *  0xffff828c40000000 - 0xffff828c7fffffff [1GB,   2^30 bytes, PML4:261]
- *    High read-only compatibility machine-to-phys translation table.
- *  0xffff828c80000000 - 0xffff828cbfffffff [1GB,   2^30 bytes, PML4:261]
- *    Xen text, static data, bss.
- *  0xffff828cc0000000 - 0xffff82ffffffffff [461GB,             PML4:261]
- *    Reserved for future use.
- *  0xffff830000000000 - 0xffff83ffffffffff [1TB,   2^40 bytes, PML4:262-263]
- *    1:1 direct mapping of all physical memory.
- *  0xffff840000000000 - 0xffff87ffffffffff [4TB,   2^42 bytes, PML4:264-271]
- *    Reserved for future use.
- *  0xffff880000000000 - 0xffffffffffffffff [120TB, PML4:272-511]
- *    Guest-defined use.
- */
-</code></pre>
-
-<p>2.shadow page table主要用在两个地方，一是full-virtualization下的页表维护，overhead很大，不过有了VT-x或者AMD-V的硬件支持后会在一定程度上减少这个代价；二是在guest os被live-migrate的时候，需要一个shadow page table来跟踪转移后被修改的页面。</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">[include<span style="color:#f92672">/</span><span style="color:#66d9ef">asm</span><span style="color:#f92672">-</span>x86<span style="color:#f92672">/</span>config.h]
+<span style="color:#75715e">/*
+</span><span style="color:#75715e"> * Memory layout:
+</span><span style="color:#75715e"> *  0x0000000000000000 - 0x00007fffffffffff [128TB, 2^47 bytes, PML4:0-255]
+</span><span style="color:#75715e"> *    Guest-defined use (see below for compatibility mode guests).
+</span><span style="color:#75715e"> *  0x0000800000000000 - 0xffff7fffffffffff [16EB]
+</span><span style="color:#75715e"> *    Inaccessible: current arch only supports 48-bit sign-extended VAs.
+</span><span style="color:#75715e"> *  0xffff800000000000 - 0xffff803fffffffff [256GB, 2^38 bytes, PML4:256]
+</span><span style="color:#75715e"> *    Read-only machine-to-phys translation table (GUEST ACCESSIBLE).
+</span><span style="color:#75715e"> *  0xffff804000000000 - 0xffff807fffffffff [256GB, 2^38 bytes, PML4:256]
+</span><span style="color:#75715e"> *    Reserved for future shared info with the guest OS (GUEST ACCESSIBLE).
+</span><span style="color:#75715e"> *  0xffff808000000000 - 0xffff80ffffffffff [512GB, 2^39 bytes, PML4:257]
+</span><span style="color:#75715e"> *    Reserved for future use.
+</span><span style="color:#75715e"> *  0xffff810000000000 - 0xffff817fffffffff [512GB, 2^39 bytes, PML4:258]
+</span><span style="color:#75715e"> *    Guest linear page table.
+</span><span style="color:#75715e"> *  0xffff818000000000 - 0xffff81ffffffffff [512GB, 2^39 bytes, PML4:259]
+</span><span style="color:#75715e"> *    Shadow linear page table.
+</span><span style="color:#75715e"> *  0xffff820000000000 - 0xffff827fffffffff [512GB, 2^39 bytes, PML4:260]
+</span><span style="color:#75715e"> *    Per-domain mappings (e.g., GDT, LDT).
+</span><span style="color:#75715e"> *  0xffff828000000000 - 0xffff8283ffffffff [16GB,  2^34 bytes, PML4:261]
+</span><span style="color:#75715e"> *    Machine-to-phys translation table.
+</span><span style="color:#75715e"> *  0xffff828400000000 - 0xffff8287ffffffff [16GB,  2^34 bytes, PML4:261]
+</span><span style="color:#75715e"> *    Page-frame information array.
+</span><span style="color:#75715e"> *  0xffff828800000000 - 0xffff828bffffffff [16GB,  2^34 bytes, PML4:261]
+</span><span style="color:#75715e"> *    ioremap()/fixmap area.
+</span><span style="color:#75715e"> *  0xffff828c00000000 - 0xffff828c3fffffff [1GB,   2^30 bytes, PML4:261]
+</span><span style="color:#75715e"> *    Compatibility machine-to-phys translation table.
+</span><span style="color:#75715e"> *  0xffff828c40000000 - 0xffff828c7fffffff [1GB,   2^30 bytes, PML4:261]
+</span><span style="color:#75715e"> *    High read-only compatibility machine-to-phys translation table.
+</span><span style="color:#75715e"> *  0xffff828c80000000 - 0xffff828cbfffffff [1GB,   2^30 bytes, PML4:261]
+</span><span style="color:#75715e"> *    Xen text, static data, bss.
+</span><span style="color:#75715e"> *  0xffff828cc0000000 - 0xffff82ffffffffff [461GB,             PML4:261]
+</span><span style="color:#75715e"> *    Reserved for future use.
+</span><span style="color:#75715e"> *  0xffff830000000000 - 0xffff83ffffffffff [1TB,   2^40 bytes, PML4:262-263]
+</span><span style="color:#75715e"> *    1:1 direct mapping of all physical memory.
+</span><span style="color:#75715e"> *  0xffff840000000000 - 0xffff87ffffffffff [4TB,   2^42 bytes, PML4:264-271]
+</span><span style="color:#75715e"> *    Reserved for future use.
+</span><span style="color:#75715e"> *  0xffff880000000000 - 0xffffffffffffffff [120TB, PML4:272-511]
+</span><span style="color:#75715e"> *    Guest-defined use.
+</span><span style="color:#75715e"> */</span>
+</code></pre></div><p>2.shadow page table主要用在两个地方，一是full-virtualization下的页表维护，overhead很大，不过有了VT-x或者AMD-V的硬件支持后会在一定程度上减少这个代价；二是在guest os被live-migrate的时候，需要一个shadow page table来跟踪转移后被修改的页面。</p>
 <p>今天还搞清楚了以前我一直模糊的一个概念。以前翻过一点那本The Definitive Guide to Xen Hypervisor，里面提到一个writable page table，然后我就把这个东西和后来看的那篇paper的shadow page table搞混了，其实是两个完全不一样的东西。shadow page table如前文所说，仅用于full-virtualization的情况，硬件访问到的是Xen维护的shadow page table而不是guest page table；而writable page table则是用在para-virtualization的场合，</p>
-
-<ol>
+<ol start="3">
 <li>arch/x86/traps.c::do_page_fault()-&gt;fixup_page_fault()</li>
 </ol>
-
 <p>当满足以下几个条件时，xen调用ptwr_do_page_fault()处理guest os更新页表的情况：
 (1) 不在irq中断过程中 且 中断未被禁用(eflags的if被置上)
 (2) 出错地址不属于hypervisor的保留地址
 (3) guest os处于kernel mode
 (4) error code的write位被置上，而reserved位未被置上</p>
-
 <p>接下来看这个关键性的ptwr_do_page_fault()，通过guest_get_eff_l1e获得被访问的virtual address对应的PTE，然后获得这个PTE对应的page，接下来确定当前的情况是guest os正在尝试修改一个PTE，要满足下面几个条件：
 (1) present位被置上，rw位没有被置上
 (2) mfn(machine frame number)正确，即小于最大值，检查的代码是!mfn_valid(l1e_get_pfn(pte))，这是由于是在pv模式下，mfn=pfn。
 (3) page的类型PGT_l1_page_table，即最下层的page table
 (4) page的引用计数不为0
 (5) page的owner为当前domain</p>
-
 <p>这些检查都通过后，调用x86_emulate()函数执行ptwr_emulate_ops代码。</p>
-
 <p>另外Xen 3.3.1这里似乎利用了reserved bit位，根据Intel手册的说法，When the PSE and PAE flags in control register CR4 are set, the processor generates a page fault if reserved bits are not set to 0. 以及The RSVD flag indicates that the processor detected 1s in reserved bits of the page directory, when the PSE or PAE flags in control register CR4 are set to 1。于是就可以在第一次guest os试图修改pte被xen截获后把这个reserved bit给置上，下次访问前还是会因为这个reserved bit而出page table，此时检查下guest os改的machine address是否正确，然后再把reserved bit给清零即可。</p>
 
     </div>

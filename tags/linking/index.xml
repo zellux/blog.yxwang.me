@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>linking on Aiur · Zellux 的博客</title>
@@ -19,7 +19,7 @@
       <guid>https://blog.yxwang.me/2010/01/force-int-0x80-for-syscall/</guid>
       <description>因为大多数情况下程序都是通过libc间接地发出系统调用的，所以只要编译一个只使用int 0x80的glibc库，然后在执行程序的时候用LD_LIBRARY_PATH或其他方法指定使用新编译的glibc库即可。
 以glibc-2.9, Linux i386为例，在sysdeps/unix/sysv/linux/i386/syscall.S中可以看到
-ENTRY (syscall) PUSHARGS_6 /* Save register contents. */ _DOARGS_6(44) /* Load arguments. */ movl 20(%esp), %eax /* Load syscall number into %eax. */ ENTER_KERNEL /* Do the system call. */ POPARGS_6 /* Restore register contents. */ cmpl $-4095, %eax /* Check %eax for error. */ jae SYSCALL_ERROR_LABEL /* Jump to error handler if error. */  这里使用了ENTER_KERNEL这个宏做系统调用，接下来在sysdeps/unix/sysv/linux/i386/sysdep.h里可以找到这个宏的定义
+ENTRY (syscall) PUSHARGS_6 /* Save register contents. */ _DOARGS_6(44) /* Load arguments. */ movl 20(%esp), %eax /* Load syscall number into %eax. */ ENTER_KERNEL /* Do the system call. */ POPARGS_6 /* Restore register contents. */ cmpl $-4095, %eax /* Check %eax for error. */ jae SYSCALL_ERROR_LABEL /* Jump to error handler if error. */ 这里使用了ENTER_KERNEL这个宏做系统调用，接下来在sysdeps/unix/sysv/linux/i386/sysdep.h里可以找到这个宏的定义
 /* The original calling convention for system calls on Linux/i386 is to use int $0x80.</description>
     </item>
     

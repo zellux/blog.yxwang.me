@@ -11,6 +11,7 @@
     
 
     <title> SICP 里提到的画图语言 &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -39,7 +40,7 @@
     "articleSection" : "post",
     "name" : "SICP 里提到的画图语言",
     "headline" : "SICP 里提到的画图语言",
-    "description" : "SICP第二章里提到了一种用来画图的Lisp方言，用来演示数据抽象和闭包的表达能力（见http:\/\/mitpress.mit.edu\/sicp\/full-text\/book\/book-Z-H-15.html#%_sec_2.2.4）。\n最近尝试了下，发现soegaard同学已经在PLT Scheme中实现了一个类似的库，可以很方便的在DrScheme上使用。\nsicp.plt包使用很简单，在Language-\x26gt;Choose Language中选择Module，然后在需要用到这个包的时候用\n(require (planet soegaard\/sicp:2:1\/sicp))  声明即可。第一次运行时DrScheme会自动下载这个包并安装，如果网络有限制可以先从http:\/\/planet.plt-scheme.org\/display.ss?package=sicp.plt\x26owner=soegaard下载然后在DrScheme中选择本地包安装。\n另外SICP上使用的两个painter（wave和rogers）没有在这个包里提供，取而代之是diagonal-shading和einstein。\n下面这个程序显示了一个简单的分形图像：\n#lang scheme (require (planet \x26quot;sicp.ss\x26quot; (\x26quot;soegaard\x26quot; \x26quot;sicp.plt\x26quot; 2 1))) (define (right-split painter n) (if (= n 0) painter (let ((smaller (right-split painter (- n 1)))) (beside painter (below smaller smaller))))) (define (up-split painter n) (if (= n 0) painter (let ((smaller (up-split painter (- n 1)))) (below painter (beside smaller smaller))))) (define (corner-split painter n) (if (= n 0) painter (let ((up (up-split painter (- n 1))) (right (right-split painter (- n 1)))) (let ((top-left (beside up up)) (bottom-right (below right right)) (corner (corner-split painter (- n 1)))) (beside (below painter top-left) (below bottom-right corner)))))) (paint (corner-split diagonal-shading 4))  程序输出：",
+    "description" : "SICP第二章里提到了一种用来画图的Lisp方言，用来演示数据抽象和闭包的表达能力（见http:\/\/mitpress.mit.edu\/sicp\/full-text\/book\/book-Z-H-15.html#%_sec_2.2.4）。\n最近尝试了下，发现soegaard同学已经在PLT Scheme中实现了一个类似的库，可以很方便的在DrScheme上使用。\nsicp.plt包使用很简单，在Language-\u0026gt;Choose Language中选择Module，然后在需要用到这个包的时候用\n(require (planet soegaard\/sicp:2:1\/sicp)) 声明即可。第一次运行时DrScheme会自动下载这个包并安装，如果网络有限制可以先从http:\/\/planet.plt-scheme.org\/display.ss?package=sicp.plt\u0026amp;owner=soegaard下载然后在DrScheme中选择本地包安装。\n另外SICP上使用的两个painter（wave和rogers）没有在这个包里提供，取而代之是diagonal-shading和einstein。\n下面这个程序显示了一个简单的分形图像：\n#lang scheme (require (planet \u0026#34;sicp.ss\u0026#34; (\u0026#34;soegaard\u0026#34; \u0026#34;sicp.plt\u0026#34; 2 1))) (define (right-split painter n) (if (= n 0) painter (let ((smaller (right-split painter (- n 1)))) (beside painter (below smaller smaller))))) (define (up-split painter n) (if (= n 0) painter (let ((smaller (up-split painter (- n 1)))) (below painter (beside smaller smaller))))) (define (corner-split painter n) (if (= n 0) painter (let ((up (up-split painter (- n 1))) (right (right-split painter (- n 1)))) (let ((top-left (beside up up)) (bottom-right (below right right)) (corner (corner-split painter (- n 1)))) (beside (below painter top-left) (below bottom-right corner)))))) (paint (corner-split diagonal-shading 4)) 程序输出：",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -47,8 +48,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2010",
-    "datePublished": "2010-02-24 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2010-02-24 00:00:00 \x2b0000 UTC",
+    "datePublished": "2010-02-24 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2010-02-24 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/2010\/02\/the-sicp-picture-language\/",
     "wordCount" : "111",
     "keywords" : [ "Lisp","Programming","Programming Languages","SICP","Scheme","Blog" ]
@@ -93,54 +94,43 @@
 </span>
 
     <div class="post-content">
-      <p>SICP第二章里提到了一种用来画图的Lisp方言，用来演示数据抽象和闭包的表达能力（见<a href="http://mitpress.mit.edu/sicp/full-text/book/book-Z-H-15.html#%_sec_2.2.4">http://mitpress.mit.edu/sicp/full-text/book/book-Z-H-15.html#%_sec_2.2.4</a>）。</p>
-
+      <p>SICP第二章里提到了一种用来画图的Lisp方言，用来演示数据抽象和闭包的表达能力（见<!-- raw HTML omitted --><a href="http://mitpress.mit.edu/sicp/full-text/book/book-Z-H-15.html#%25_sec_2.2.4">http://mitpress.mit.edu/sicp/full-text/book/book-Z-H-15.html#%_sec_2.2.4</a><!-- raw HTML omitted -->）。</p>
 <p>最近尝试了下，发现soegaard同学已经在PLT Scheme中实现了一个类似的库，可以很方便的在DrScheme上使用。</p>
-
 <p>sicp.plt包使用很简单，在Language-&gt;Choose Language中选择Module，然后在需要用到这个包的时候用</p>
-
-<pre><code class="language-lisp">(require (planet soegaard/sicp:2:1/sicp))
-</code></pre>
-
-<p>声明即可。第一次运行时DrScheme会自动下载这个包并安装，如果网络有限制可以先从<a href="http://planet.plt-scheme.org/display.ss?package=sicp.plt&owner=soegaard">http://planet.plt-scheme.org/display.ss?package=sicp.plt&owner=soegaard</a>下载然后在DrScheme中选择本地包安装。</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(<span style="color:#a6e22e">require</span> (planet soegaard/sicp:2:1/sicp))
+</code></pre></div><p>声明即可。第一次运行时DrScheme会自动下载这个包并安装，如果网络有限制可以先从<!-- raw HTML omitted --><a href="http://planet.plt-scheme.org/display.ss?package=sicp.plt&amp;owner=soegaard">http://planet.plt-scheme.org/display.ss?package=sicp.plt&amp;owner=soegaard</a><!-- raw HTML omitted -->下载然后在DrScheme中选择本地包安装。</p>
 <p>另外SICP上使用的两个painter（wave和rogers）没有在这个包里提供，取而代之是diagonal-shading和einstein。</p>
-
 <p>下面这个程序显示了一个简单的分形图像：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp"><span style="color:#960050;background-color:#1e0010">#</span>lang scheme
 
-<pre><code class="language-lisp">#lang scheme
-
-(require (planet &quot;sicp.ss&quot; (&quot;soegaard&quot; &quot;sicp.plt&quot; 2 1)))
+(<span style="color:#a6e22e">require</span> (planet <span style="color:#e6db74">&#34;sicp.ss&#34;</span> (<span style="color:#e6db74">&#34;soegaard&#34;</span> <span style="color:#e6db74">&#34;sicp.plt&#34;</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">1</span>)))
 
 (define (right-split painter n)
-  (if (= n 0)
+  (<span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">=</span> n <span style="color:#ae81ff">0</span>)
       painter
-      (let ((smaller (right-split painter (- n 1))))
+      (<span style="color:#66d9ef">let</span> ((smaller (right-split painter (<span style="color:#a6e22e">-</span> n <span style="color:#ae81ff">1</span>))))
         (beside painter (below smaller smaller)))))
 
 (define (up-split painter n)
-  (if (= n 0)
+  (<span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">=</span> n <span style="color:#ae81ff">0</span>)
       painter
-      (let ((smaller (up-split painter (- n 1))))
+      (<span style="color:#66d9ef">let</span> ((smaller (up-split painter (<span style="color:#a6e22e">-</span> n <span style="color:#ae81ff">1</span>))))
         (below painter (beside smaller smaller)))))
 
 (define (corner-split painter n)
-  (if (= n 0)
+  (<span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">=</span> n <span style="color:#ae81ff">0</span>)
       painter
-      (let ((up (up-split painter (- n 1)))
-            (right (right-split painter (- n 1))))
-        (let ((top-left (beside up up))
+      (<span style="color:#66d9ef">let</span> ((up (up-split painter (<span style="color:#a6e22e">-</span> n <span style="color:#ae81ff">1</span>)))
+            (right (right-split painter (<span style="color:#a6e22e">-</span> n <span style="color:#ae81ff">1</span>))))
+        (<span style="color:#66d9ef">let</span> ((top-left (beside up up))
               (bottom-right (below right right))
-              (corner (corner-split painter (- n 1))))
+              (corner (corner-split painter (<span style="color:#a6e22e">-</span> n <span style="color:#ae81ff">1</span>))))
           (beside (below painter top-left)
                   (below bottom-right corner))))))
 
-(paint (corner-split diagonal-shading 4))
-</code></pre>
-
-<p>程序输出：</p>
-
-<p><a href="/images/wp-uploads/2010/02/corner-split.png"><img class="alignnone size-full wp-image-62772" title="corner-split" src="/images/wp-uploads/2010/02/corner-split.png" alt="" width="128" height="128"></a></p>
+(paint (corner-split diagonal-shading <span style="color:#ae81ff">4</span>))
+</code></pre></div><p>程序输出：</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 
     </div>
         <div class="cc-license">

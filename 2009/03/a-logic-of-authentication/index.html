@@ -11,6 +11,7 @@
     
 
     <title> 安全方面的经典论文：A Logic of Authentication &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -39,7 +40,7 @@
     "articleSection" : "post",
     "name" : "安全方面的经典论文：A Logic of Authentication",
     "headline" : "安全方面的经典论文：A Logic of Authentication",
-    "description" : "最近有点忙，今天总算在某个课题deadline前把论文憋出来交上去了。跑这儿来推荐两篇上个月看到的比较有意思的paper，都比较偏理论，也很老。\n今天写介绍下第一篇，剑桥大学的A Logic of Authentication，中了SOSP \x26lsquo;89，整理后发在1990年的ACM Transactions on Computer Systems上。 http:\/\/www.csie.fju.edu.tw\/~yeh\/research\/papers\/os-reading-list\/burrows-tocs90-logic.pdf\n（另一篇是Safe Kernel Extensions Without Run-Time Checking，改天再写点介绍）\n这篇paper的主要工作是通过构造一种多种类的模态逻辑(many-sorted model logic)，来检查网络中验证协议的安全性。\n基础的逻辑分三部分： 原语，如验证双方A和B，以及服务器S，下文用P Q R泛指 密钥，如K_ab代表a和b之间的通讯密钥，K_a代表a的公钥，{K_a}^{-1}代表对应的私钥，下文用K泛指 公式（或者陈述），用N_a, N_b等表示，下文用X Y泛指\n接下来定义以下约定（constructs） P 信任 X: 原语P完全信任X P 看到 X: 有人发送了一条包含X的信息给P，P可以阅读它或者重复它（当然通常是在做了解密操作后） P 说了 X: 原语P发送过一条包含X的信息，同时也可以确定P是相信X的正确性的 P 控制 X: P可以判定X的正确与否。例如生成密钥的服务器通常被默认为拥有对密钥质量的审核权。 X 是新鲜的: 在此之前X没有被发送过。这个事实可以通过绑定一个时间戳或者其他只会使用一次的标记来证明。 P \x26lt;-K-\x26gt; Q: P和Q可以通过共享密钥K进行通讯，且这个K是好的，即不会被P Q不信任的原语知道。 K-\x26gt; P: P拥有K这么一个公钥，且它对应的解密密钥K^{-1}不会被其他不被P信任的原语知道。 P \x26lt;=X=\x26gt; Q: X是一个只被P和Q或者P和Q共同信任的原语知道的陈述，只有P和Q可以通过X来相互证明它们各自的身份，X的一个例子就是密码。 {X}_K: X是一个被K加密了的陈述 _Y: 陈述X被Y所绑定，Y可以用来证明发送X的人的身份\n好了，总算把这些约定列完了，然后来看看通过这些约定能推出一些什么东东： 如果 P 相信 (P \x26lt;-K-\x26gt; Q), 且 P 看到 {X}_K，那么 P 相信 Q 说了 X。 这个例子很简单，既然P Q有安全的密钥K，那么P看到通过K加密后的X肯定认为就是Q发出的。",
+    "description" : "最近有点忙，今天总算在某个课题deadline前把论文憋出来交上去了。跑这儿来推荐两篇上个月看到的比较有意思的paper，都比较偏理论，也很老。\n今天写介绍下第一篇，剑桥大学的A Logic of Authentication，中了SOSP \u0026lsquo;89，整理后发在1990年的ACM Transactions on Computer Systems上。 http:\/\/www.csie.fju.edu.tw\/~yeh\/research\/papers\/os-reading-list\/burrows-tocs90-logic.pdf\n（另一篇是Safe Kernel Extensions Without Run-Time Checking，改天再写点介绍）\n这篇paper的主要工作是通过构造一种多种类的模态逻辑(many-sorted model logic)，来检查网络中验证协议的安全性。\n基础的逻辑分三部分： 原语，如验证双方A和B，以及服务器S，下文用P Q R泛指 密钥，如K_ab代表a和b之间的通讯密钥，K_a代表a的公钥，{K_a}^{-1}代表对应的私钥，下文用K泛指 公式（或者陈述），用N_a, N_b等表示，下文用X Y泛指\n接下来定义以下约定（constructs） P 信任 X: 原语P完全信任X P 看到 X: 有人发送了一条包含X的信息给P，P可以阅读它或者重复它（当然通常是在做了解密操作后） P 说了 X: 原语P发送过一条包含X的信息，同时也可以确定P是相信X的正确性的 P 控制 X: P可以判定X的正确与否。例如生成密钥的服务器通常被默认为拥有对密钥质量的审核权。 X 是新鲜的: 在此之前X没有被发送过。这个事实可以通过绑定一个时间戳或者其他只会使用一次的标记来证明。 P \u0026lt;-K-\u0026gt; Q: P和Q可以通过共享密钥K进行通讯，且这个K是好的，即不会被P Q不信任的原语知道。 K-\u0026gt; P: P拥有K这么一个公钥，且它对应的解密密钥K^{-1}不会被其他不被P信任的原语知道。 P \u0026lt;=X=\u0026gt; Q: X是一个只被P和Q或者P和Q共同信任的原语知道的陈述，只有P和Q可以通过X来相互证明它们各自的身份，X的一个例子就是密码。 {X}_K: X是一个被K加密了的陈述 _Y: 陈述X被Y所绑定，Y可以用来证明发送X的人的身份\n好了，总算把这些约定列完了，然后来看看通过这些约定能推出一些什么东东： 如果 P 相信 (P \u0026lt;-K-\u0026gt; Q), 且 P 看到 {X}_K，那么 P 相信 Q 说了 X。这个例子很简单，既然P Q有安全的密钥K，那么P看到通过K加密后的X肯定认为就是Q发出的。",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -47,10 +48,10 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2009",
-    "datePublished": "2009-03-18 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2009-03-18 00:00:00 \x2b0000 UTC",
+    "datePublished": "2009-03-18 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2009-03-18 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/2009\/03\/a-logic-of-authentication\/",
-    "wordCount" : "158",
+    "wordCount" : "155",
     "keywords" : [ "Algorithms","Mathematics","Paper","SOSP","Security","Blog" ]
 }
 </script>
@@ -94,19 +95,14 @@
 
     <div class="post-content">
       <p>最近有点忙，今天总算在某个课题deadline前把论文憋出来交上去了。跑这儿来推荐两篇上个月看到的比较有意思的paper，都比较偏理论，也很老。</p>
-
 <p>今天写介绍下第一篇，剑桥大学的A Logic of Authentication，中了SOSP &lsquo;89，整理后发在1990年的ACM Transactions on Computer Systems上。
 <a href="http://www.csie.fju.edu.tw/~yeh/research/papers/os-reading-list/burrows-tocs90-logic.pdf">http://www.csie.fju.edu.tw/~yeh/research/papers/os-reading-list/burrows-tocs90-logic.pdf</a></p>
-
 <p>（另一篇是Safe Kernel Extensions Without Run-Time Checking，改天再写点介绍）</p>
-
 <p>这篇paper的主要工作是通过构造一种多种类的模态逻辑(many-sorted model logic)，来检查网络中验证协议的安全性。</p>
-
 <p>基础的逻辑分三部分：
 原语，如验证双方A和B，以及服务器S，下文用P Q R泛指
 密钥，如K_ab代表a和b之间的通讯密钥，K_a代表a的公钥，{K_a}^{-1}代表对应的私钥，下文用K泛指
 公式（或者陈述），用N_a, N_b等表示，下文用X Y泛指</p>
-
 <p>接下来定义以下约定（constructs）
 P 信任 X: 原语P完全信任X
 P 看到 X: 有人发送了一条包含X的信息给P，P可以阅读它或者重复它（当然通常是在做了解密操作后）
@@ -117,32 +113,24 @@ P &lt;-K-&gt; Q: P和Q可以通过共享密钥K进行通讯，且这个K是好�
 K-&gt; P: P拥有K这么一个公钥，且它对应的解密密钥K^{-1}不会被其他不被P信任的原语知道。
 P &lt;=X=&gt; Q: X是一个只被P和Q或者P和Q共同信任的原语知道的陈述，只有P和Q可以通过X来相互证明它们各自的身份，X的一个例子就是密码。
 {X}_K: X是一个被K加密了的陈述
-<X>_Y: 陈述X被Y所绑定，Y可以用来证明发送X的人的身份</p>
-
+<!-- raw HTML omitted -->_Y: 陈述X被Y所绑定，Y可以用来证明发送X的人的身份</p>
 <p>好了，总算把这些约定列完了，然后来看看通过这些约定能推出一些什么东东：
-<u>如果 P 相信 (P &lt;-K-&gt; Q), 且 P 看到 {X}_K，那么 P 相信 Q 说了 X。</u>
+<!-- raw HTML omitted -->如果 P 相信 (P &lt;-K-&gt; Q), 且 P 看到 {X}_K，那么 P 相信 Q 说了 X。<!-- raw HTML omitted -->
 这个例子很简单，既然P Q有安全的密钥K，那么P看到通过K加密后的X肯定认为就是Q发出的。</p>
-
 <p>又比如，
-<u>如果 P 相信 Q 控制 X，P 相信 (Q 相信 X)，那么 P 相信 X</u>
+<!-- raw HTML omitted -->如果 P 相信 Q 控制 X，P 相信 (Q 相信 X)，那么 P 相信 X<!-- raw HTML omitted -->
 也很容易理解，既然 P 相信 Q 的判断，那么 Q 相信什么 P 自然也就相信了。</p>
-
 <p>再举一个例子
-<u>如果 P 相信 Y 是新鲜的，那么 P 相信 (X, Y) 也是新鲜的。</u>
+<!-- raw HTML omitted -->如果 P 相信 Y 是新鲜的，那么 P 相信 (X, Y) 也是新鲜的。<!-- raw HTML omitted -->
 这里(X, Y)表示 X 和 Y 的简单拼接，也很容易理解，既然 Y 之前没出现过，那么 X 和 Y 的组合自然也没出现过。</p>
-
 <p>一个协议要被定义为安全，最起码要满足
 A 相信 A &lt;-K-&gt;B，B 相信 A &lt;-K-&gt;B
 即双方要互相信任密钥是安全的</p>
-
 <p>再健壮一点的协议，还要满足
 A 相信 (B 相信 (A 相信 A &lt;-K-&gt;B))，反之一样
 即A B不仅相信密钥，也相信对方相信自己对密钥的信任。</p>
-
 <p>有 了这些简单却强大的工具后，接下来这篇paper开始着手分析一些协议，包括Kerberos协议，Andrew Secure RPC 握手协议等，还指出了其中的一些问题和改进措施，例如CCITT X.509 协议中可以通过重复发送一条老的信息来模仿成加密双方中的一员。</p>
-
 <p>具体的分析不贴上来了，一方面对于我这个不熟悉TeX的人来说码公式实在麻烦，另一方面我实在困死了 =_=</p>
-
 <p>建议有兴趣的朋友好好看看这篇经典paper</p>
 
     </div>

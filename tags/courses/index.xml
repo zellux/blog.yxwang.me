@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Courses on Aiur · Zellux 的博客</title>
@@ -54,14 +54,14 @@
       
       <guid>https://blog.yxwang.me/2008/09/oslab-interrupt-handling/</guid>
       <description>1. 准备工作 在开始分析Support Code之前，先配置下我们的Source Insight，使它能够支持.s文件的搜索。
-在Options-&amp;gt;Document Options-&amp;gt;Document Types中选择x86 Asm Source File，在File fileter中增加一个.s，变成.asm;.inc;.s 然后在Project-&amp;gt;Add and Remove Project Files中重新将整个oslab的目录加入，这样以后进行文本搜索时.s文件也不会漏掉了。
+在Options-&amp;gt;Document Options-&amp;gt;Document Types中选择x86 Asm Source File，在File fileter中增加一个*.s，变成*.asm;*.inc;*.s 然后在Project-&amp;gt;Add and Remove Project Files中重新将整个oslab的目录加入，这样以后进行文本搜索时.s文件也不会漏掉了。
 2. Source Insight使用 接下来简单分析下内核启动的过程，在浏览代码的过程中可以迅速的掌握Source Insight的使用技巧。
 lib/multiboot /multiboot.s完成了初始化工作，可以看到其中一句call EXT(multiboot_main)调用了C函数multiboot_main，使用ctrl+/搜索包含multiboot_main的所有文件，最终base_multiboot_main.c中找到了它的定义。依次进行cpu、内存的初 始化，然后开启中断，跳转到kernel_main函数，也是Lab1中所要改写的函数之一。另外 在这里可以通过ctrl+单击或者ctrl+=跳转到相应的函数定义处，很方便。
 3. irq处理初始化工作 来看下Lab 1的重点之一，irq的处理。跟踪multiboot_main-&amp;gt;base_cpu_setup-&amp;gt;base_cp u_init-&amp;gt;base_irq_init，可以看到这行代码
-gate_init(base_idt, base_irq_inittab, KERNEL_CS);  继续使用ctrl+/找到base_irq_inittab的藏身之处：base_irq_inittab.s
+gate_init(base_idt, base_irq_inittab, KERNEL_CS); 继续使用ctrl+/找到base_irq_inittab的藏身之处：base_irq_inittab.s
 4. base_irq_inittab.s 这个汇编文件做了不少重复性工作，方便我们在c语言级别实现各种handler。
-GATE_INITTAB_BEGIN(base_irq_inittab) /* irq处理函数表的起始，还记得jump table 吗？ */ MASTER(0, 0) /* irq0 对应的函数 */  来看看这个MASTER(0, 0)宏展开后是什么样子：
-#define MASTER(irq, num) GATE_ENTRY(BASE_IRQ_MASTER_BASE + (num), 0f, ACC_PL_K|ACC_INTR_GATE) ; P2ALIGN(TEXT_ALIGN) ; 0: ; pushl $(irq) /* error code = irq vector */ ; pushl $BASE_IRQ_MASTER_BASE + (num) /* trap number */ ; pusha /* save general registers */ ; movl $(irq),%ecx /* irq vector number */ ; movb $1 &amp;lt;&amp;lt; num,%dl /* pic mask for this irq */ ; jmp master_ints  依次push irq号，trap号（0x20+irq号），通用寄存器（eax ecx等）入栈，把irq号保 存到ecx寄存器，然后跳转到master_ints，master_ints是所有master interrupts公用 的代码。</description>
+GATE_INITTAB_BEGIN(base_irq_inittab) /* irq处理函数表的起始，还记得jump table 吗？ */ MASTER(0, 0) /* irq0 对应的函数 */ 来看看这个MASTER(0, 0)宏展开后是什么样子：
+#define MASTER(irq, num) GATE_ENTRY(BASE_IRQ_MASTER_BASE + (num), 0f, ACC_PL_K|ACC_INTR_GATE) ; P2ALIGN(TEXT_ALIGN) ; 0: ; pushl $(irq) /* error code = irq vector */ ; pushl $BASE_IRQ_MASTER_BASE + (num) /* trap number */ ; pusha /* save general registers */ ; movl $(irq),%ecx /* irq vector number */ ; movb $1 &amp;lt;&amp;lt; num,%dl /* pic mask for this irq */ ; jmp master_ints 依次push irq号，trap号（0x20+irq号），通用寄存器（eax ecx等）入栈，把irq号保 存到ecx寄存器，然后跳转到master_ints，master_ints是所有master interrupts公用 的代码。</description>
     </item>
     
     <item>
@@ -71,10 +71,10 @@ GATE_INITTAB_BEGIN(base_irq_inittab) /* irq处理函数表的起始，还记得j
       
       <guid>https://blog.yxwang.me/2008/08/os-lab5-debug-notes/</guid>
       <description>还算顺利，不过这个lab蛮无聊的，等有空了把syscall改成类似linux的做法，单一中断号+寄存器选择syscall。
- 最花时间的一个bug是ls返回值没有改成应用程序数，结果一开始一直以为是brk系统调用没写好，最后才发现问题出在这么小的地方。
- brk的逻辑还不是很清楚，尽管通过了简单的测试，但是debug输出的信息显示brk增长的很快，经常是一个页一个页涨的，看来还得查下brk的具体行为。
- 写了个比MAGIC_BREAK好用一点的宏，因为用户态的程序都是按二进制读入的，Simics无法得到函数信息（函数名、当前行数等），利用C99的宏写了个新的INFO_BREAK
-  #define INFO_BREAK \ do { \ lprintf_kern(&amp;quot;break in %s:%d&amp;quot;, __FUNCTION__, __LINE__); \ MAGIC_BREAK; \ } while (0) \  </description>
+  最花时间的一个bug是ls返回值没有改成应用程序数，结果一开始一直以为是brk系统调用没写好，最后才发现问题出在这么小的地方。
+  brk的逻辑还不是很清楚，尽管通过了简单的测试，但是debug输出的信息显示brk增长的很快，经常是一个页一个页涨的，看来还得查下brk的具体行为。
+  写了个比MAGIC_BREAK好用一点的宏，因为用户态的程序都是按二进制读入的，Simics无法得到函数信息（函数名、当前行数等），利用C99的宏写了个新的INFO_BREAK
+  #define INFO_BREAK \ do { \ lprintf_kern(&amp;#34;break in %s:%d&amp;#34;, __FUNCTION__, __LINE__); \ MAGIC_BREAK; \ } while (0) \ </description>
     </item>
     
     <item>
@@ -85,7 +85,7 @@ GATE_INITTAB_BEGIN(base_irq_inittab) /* irq处理函数表的起始，还记得j
       <guid>https://blog.yxwang.me/2008/08/smalloc-vs-malloc/</guid>
       <description>s前缀的malloc函数（包括smalloc、smemalign等）不记录分配块的大小，比较节省空间，但是要求用户在用sfree释放内存的时候指定被释放的内存块大小。
 malloc则和libc中的同名函数很相似。
-整个分配信息（包括哪些块已被使用）都记录在malloc_lmm这个全局变量中，内存被分为若干个region，每个region中有若干个nodes，这些信息可以通过lmm_dump查看（需要include ）。
+整个分配信息（包括哪些块已被使用）都记录在malloc_lmm这个全局变量中，内存被分为若干个region，每个region中有若干个nodes，这些信息可以通过lmm_dump查看（需要include &amp;lt;lmm.public.h&amp;gt;）。
 smemalign很适合分配需要页对齐的内存块，因为如果使用memalign分配的话，每个页面就需要多用8字节的空间来记录当前块的大小了（保存在每个内存块的前面），会产生大量内存碎片。</description>
     </item>
     
@@ -95,10 +95,10 @@ smemalign很适合分配需要页对齐的内存块，因为如果使用memalign
       <pubDate>Fri, 22 Aug 2008 00:00:00 +0000</pubDate>
       
       <guid>https://blog.yxwang.me/2008/08/bugs-related-to-my-fork/</guid>
-      <description> 系统调用 fork() 用Simics跟踪一条条汇编分析页表映射、寄存器值还真是体力活啊。。
- 实现 Copy On Write 时，如果某一个用户态页面有多个进程共享，其中一个进程修改该页面时需要创建一个新的页面。一开始偶忘了把原来页面的内容复制到新的页面了 =_= 另外由于新的页面要代替老的页面，或者说它们的物理地址不同，但虚拟地址相同，我的方法是在内核态开辟一个大小为一个页面的空间作为中转。
- do_fork函数中，子进程复制父进程的页表的同时会把父进程页表项置为不可写，注意最后要flush tlb。因为一开始没有flush tlb，导致最后用户态fork返回以后读取的信息来自于tlb，直接改写了共享页面中fork的返回地址，导致切换到子进程时fork的返回地址丢失。这个bug让我郁闷了两三个小时。。
- 使用两次fork时，第二次fork返回的pid会被改掉。查了下发现为用户空间分配物理页面的代码里居然在分配好以后没有把对应的struct置为已使用，结果导致第二个子进程COW创建新页面时得到了原来的父进程页面，改写了父进程页面内容。
+      <description>系统调用 fork() 用Simics跟踪一条条汇编分析页表映射、寄存器值还真是体力活啊。。
+  实现 Copy On Write 时，如果某一个用户态页面有多个进程共享，其中一个进程修改该页面时需要创建一个新的页面。一开始偶忘了把原来页面的内容复制到新的页面了 =_= 另外由于新的页面要代替老的页面，或者说它们的物理地址不同，但虚拟地址相同，我的方法是在内核态开辟一个大小为一个页面的空间作为中转。
+  do_fork函数中，子进程复制父进程的页表的同时会把父进程页表项置为不可写，注意最后要flush tlb。因为一开始没有flush tlb，导致最后用户态fork返回以后读取的信息来自于tlb，直接改写了共享页面中fork的返回地址，导致切换到子进程时fork的返回地址丢失。这个bug让我郁闷了两三个小时。。
+  使用两次fork时，第二次fork返回的pid会被改掉。查了下发现为用户空间分配物理页面的代码里居然在分配好以后没有把对应的struct置为已使用，结果导致第二个子进程COW创建新页面时得到了原来的父进程页面，改写了父进程页面内容。
   系统调用 exec()  清空页表的用户空间映射的函数一开始写得yts，bug到处都是，比如free的时候没使用指向内存块首地址的指针，记录内存地址的变量没有累加。 exec传递给内核态的两个参数必须先在内核态保存一个副本，否则清空用户态页表后就无法得到这两个参数信息了。 分配给用户态的页面必须先清零，一方面考虑到安全性，另一方面不清零会隐藏一些潜在的bug。一开始我没有在内核执行exec的时候完整的复制所有的参数，而是直接指向了原进程的内存空间，由于清空页表后再次申请新页表时得到了原来的页面，结果正好原来那个保存参数的页面和新进程的该页面重合了 =_= 于是浪费了不少时间在这个bug上  </description>
     </item>
     
@@ -166,7 +166,7 @@ HTTPS的数据转发也和HTTP不一样，它需要客户端和服务器端多�
 dup2的作用是把参数二指向的文件改成和参数一一样（如果之前打开了文件，则先关闭），这句话的作用就是把原来要输出到标准错误端(stderr)的内容 输出到标准输出端(stdout)，便于调试。
 理解了fd和dup2的作用后，重定向也就很容易实现了，一种最简单的方法就是先用open函数打开输出文件并得到对应的fd，然后用dup2把标准输出/输入端的指向改成文件的fd。
 另外注意用open创建输出重定向的文件的时候要加上S_IRUSR和S_IWUSR选项，否则创建后的文件没有读写权限。（不过好像这个lab的测试数据比较厚道，会事先touch一下，不加这两个选项应该也能通过测试）
-一些文档中未定义的行为： argv 假如我输入的命令是/bin/ls -l &amp;gt; ls.txt，对应的argv应该包括哪些内容呢？ 一般的情况argv的内容应该是[&amp;lsquo;/bin/ls&amp;rsquo;, &amp;lsquo;-l&amp;rsquo;]，后面的重定向符是不包括的不过在这个lab中似乎没有这个限制，不去掉重定向和管道部分应该还是能通过测试的。
+一些文档中未定义的行为： argv 假如我输入的命令是/bin/ls -l &amp;gt; ls.txt，对应的argv应该包括哪些内容呢？ 一般的情况argv的内容应该是[&#39;/bin/ls&amp;rsquo;, &amp;lsquo;-l&amp;rsquo;]，后面的重定向符是不包括的不过在这个lab中似乎没有这个限制，不去掉重定向和管道部分应该还是能通过测试的。
 Job ID的分配 如果现在1, 2, 4号子任务在后台运行，再新增一个进程的话应该给它分配多少呢？ 这个问题不需要处理，只要所有的jobs队列操作统一使用tsh.c中给出的几个函数就行。
 其他： 关于信号的转发、后台前台的转换等内容，文档和书上都说得很清楚了，这里不再赘述。
 P.S. 多进程程序的调试大家之前应该接触的比较少，其实这个lab大致的代码不难写，难点在于细节上的debug比较困难，调试过程对第八章的理解很有帮助。</description>
@@ -198,12 +198,13 @@ jump: .long Loop1 .long Loop2 &amp;hellip;
       
       <guid>https://blog.yxwang.me/2008/03/ics-lab4/</guid>
       <description>编译 不安装图形界面： 修改sim/Makefile，把前三行非注释部分用#注释掉，变成
-# GUIMODE ... # TKLIB ... # TKINC ...  保存后运行 make
-图形界面 安装Tcl/Tk库  Redhat 9： 可以在Redhat菜单-&amp;gt;System Settings-&amp;gt;Add/Remove Applications中添加X Software Development，根据提示载入相关镜像文件。 然后在 sim 目录下运行 make
- Arch Linux： 有包管理机制的发行版直接用相关软件安装（比如 Arch 中 pacman -S tcl tk），注意安装好以后生成的动态链接库可能带有版本号（比如 libtcl8.5.so libtk8.5.so）
-  具体版本号通过 pacman -Ql tcl tk | grep &#39;.so&#39; 查得
+# GUIMODE ... # TKLIB ... # TKINC ... 保存后运行 make
+图形界面 安装Tcl/Tk库   Redhat 9： 可以在Redhat菜单-&amp;gt;System Settings-&amp;gt;Add/Remove Applications中添加X Software Development，根据提示载入相关镜像文件。 然后在 sim 目录下运行 make
+  Arch Linux： 有包管理机制的发行版直接用相关软件安装（比如 Arch 中 pacman -S tcl tk），注意安装好以后生成的动态链接库可能带有版本号（比如 libtcl8.5.so libtk8.5.so）
+具体版本号通过 pacman -Ql tcl tk | grep &#39;.so&#39; 查得
 接着只要修改Makefile中的TKLIBS参数，或者用ln建个链接即可
- Ubuntu 由于ubuntu默认没有lex词法分析工具，在编译时需要先安装flex：sudo apt-get install flex  图形界面和Arch类似 sudo apt-get install tcl8.5-dev tk8.5-dev tcl8.5 tk8.5
+  Ubuntu 由于ubuntu默认没有lex词法分析工具，在编译时需要先安装flex：sudo apt-get install flex
+  图形界面和Arch类似 sudo apt-get install tcl8.5-dev tk8.5-dev tcl8.5 tk8.5
 然后修改 Makefile</description>
     </item>
     
@@ -216,10 +217,10 @@ jump: .long Loop1 .long Loop2 &amp;hellip;
       <description>这个 Lab 应该比上一个 Lab 简单不少， Lab 的说明文档也差不多把基本的过关要点都提到了，所以这里主要介绍一下几个相关工具的使用，帮助大家进一步熟悉 Linux 命令行 ;-) 首先从主页上下载一个压缩包，最简单的方法是直接在命令行使用 wget 工具 wget http://10.132.143.100/lab2007/buflab-handout.tar
 顺便提一下 wget 的功能很强大，除了可以在后台运行，它还支持 ftp https http 等协议，提供整个网站下载的功能（类似于 Windows 下的 WebZIP ）
 接着使用 tar 命令解压这个文件
-tar xvf buflab-handout.tar  其中， x 参数表示解压工作， v 表示显示解压所得的文件列表， f 及其后面跟着的文件 名指定了待解压文件
+tar xvf buflab-handout.tar 其中， x 参数表示解压工作， v 表示显示解压所得的文件列表， f 及其后面跟着的文件 名指定了待解压文件
 这样在当前目录下就多出了三个文件： bufbomb, makecookie, sendstring
 接下来使用 makecookie 得到自己学号对应的 cookie 号，用法是 ./makecookie 学号
-这个 cookie 号在后面的几个关卡中都有可能会用到，同时 http://10.132.143.234/bufbombstatus.html 中可以通过自己的 cookie 号随时获得自己现在的过关情况。
+这个 cookie 号在后面的几个关卡中都有可能会用到，同时 http://10.132.143.234/bufbombstatus.html中可以通过自己的 cookie 号随时获得自己现在的过关情况。
 和上一个 Lab 一样，这里介绍一下怎么过 Level 0 。
 这个热身关和两个函数有关， test() 和 smoke() ，正常情况下 smoke 不会被任何函数调用，我们要做的就是输入一串特定的字符，使得 smoke 被调用。另外这个关卡简单之处在于 smoke 被调用后就直接退出程序，我们在破坏了栈的数据后不需要恢复原样。</description>
     </item>
@@ -237,9 +238,9 @@ tar xvf buflab-handout.tar  其中， x 参数表示解压工作， v 表示显
 在gdb中输入help break能够看到相关的信息。
 可以看到 break 允许我们使用行号、函数名或地址设置断点。
 按ctrl+z暂时挂起当前的gdb进程，运行 objdump –d bomb | more 查看反编译后的炸弹文件，可以看到里面有这么一行（开始的那个地址每个人都不同）：
-08049719 &amp;lt;explode_bomb&amp;gt;:  这个就是万恶的引爆炸弹的函数了，运行 fg 返回 gdb 环境，在这个函数设置断点：break explode_bomb （可以使用tab键自动补齐）
+08049719 &amp;lt;explode_bomb&amp;gt;: 这个就是万恶的引爆炸弹的函数了，运行 fg 返回 gdb 环境，在这个函数设置断点：break explode_bomb （可以使用tab键自动补齐）
 显示
-Breakpoint 1 at 0x8049707  接下来你可以喘口气，一般情况下炸弹是不会引爆的了
+Breakpoint 1 at 0x8049707 接下来你可以喘口气，一般情况下炸弹是不会引爆的了
 下面我们来拆第一个炸弹，首先同样是设置断点，bomb.c中给出了各个关卡的函数名，第一关就是phase_1，使用break phase_1在第一关设置断点
 接下来就开始运行吧，输入run
 我们已经设置了炸弹断点，这些恐吓可以直接无视。
@@ -251,8 +252,8 @@ Breakpoint 1 at 0x8049707  接下来你可以喘口气，一般情况下炸弹�
 估计这三行代码的意思就是比较两个字符串相等，不相等的话应该就会让炸弹爆炸了
 因为字符串很大，所以传递给这个比较函数的肯定是他们的地址，分别为0x80499b4和0x8(%ebp)
 我们先来看后者，使用p/x *(int*)($ebp + 8)查看字符串所在的地址
-$1 = 0x804a720 ​```` 继续使用`p/x *0x804a720`查看内存中这个地址的内容  $2 = 0x434241
- 连续的三个数，是不是想起什么了？把这三个数分别转换为十进制，就是67 66 65，分别为 CBA 的 ASCII 码，看来这里保存了我们输入的串。 接下来 0x80499b4 里肯定保存着过关的密码 `p/x *0x80499b4`  $3 = 0x62726556</description>
+$1 = 0x804a720 ​```` 继续使用`p/x *0x804a720`查看内存中这个地址的内容 $2 = 0x434241
+ 连续的三个数，是不是想起什么了？把这三个数分别转换为十进制，就是67 66 65，分别为 CBA 的 ASCII 码，看来这里保存了我们输入的串。 接下来 0x80499b4 里肯定保存着过关的密码 `p/x *0x80499b4` $3 = 0x62726556</description>
     </item>
     
   </channel>

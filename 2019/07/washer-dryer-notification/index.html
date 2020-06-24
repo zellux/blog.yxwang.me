@@ -11,6 +11,7 @@
     
 
     <title> DIY 洗衣机完成通知 &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -94,87 +95,70 @@
 
     <div class="post-content">
       <p>家里用的是三星的洗衣机和烘干机，买的时候为了完成时有提醒特地挑了带有「智能监控」功能的机型。然而对应的三星洗衣机的 app 几乎没法用，推送和状态更新都有问题。于是我打算自己实现一个类似的功能。</p>
-
 <p>因为洗衣机和烘干机用电量比较大，通过监控用电量很容易判断出设备当前的运行状态，于是我决定用智能插座来实现这个功能。现在很多智能插座都有电量检测的功能，选择的时候要注意插座支持的最大电量，我用了 TP-Link 的 <a href="https://amzn.to/2XWqSaT">HS110</a>，支持最多 1500 瓦的设备，对于一般的洗衣机和烘干机来说绰绰有余。和智能插座对接的系统依然是 Home Assistant，它对 HS110 的支持很好，可以方便地读出设备当前用电量。</p>
-
 <p>接下来是 Home Assistant 的配置部分，主要分状态定义和自动化脚本。</p>
-
 <p>为了简化我只用两种状态（空闲和运转）描述洗衣机和烘干机的状态（代码只给出了洗衣机部分，烘干机部分几乎一样）：</p>
-
-<pre><code class="language-yaml">input_select:
-  washer_status:
-    name: Washer Status
-    options:
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">input_select</span>:
+  <span style="color:#66d9ef">washer_status</span>:
+    <span style="color:#66d9ef">name</span>: Washer Status
+    <span style="color:#66d9ef">options</span>:
       - Idle
       - Running
-    initial: Idle
-</code></pre>
-
-<p>为什么要定义状态而不是直接通过用电量判断呢？因为这些机器运转过程里会有几次几乎不用电的阶段，如果只通过用电量很容易产生错误信号，用电量配合状态持续时间才能做出更精准的判断。</p>
-
+    <span style="color:#66d9ef">initial</span>: Idle
+</code></pre></div><p>为什么要定义状态而不是直接通过用电量判断呢？因为这些机器运转过程里会有几次几乎不用电的阶段，如果只通过用电量很容易产生错误信号，用电量配合状态持续时间才能做出更精准的判断。</p>
 <p>接下来定义虚拟的洗衣机传感器，我们会通过自动化脚本更新这个传感器的值：</p>
-
-<pre><code class="language-yaml">sensor:
-  - platform: template
-    sensors:
-      washer_status:
-        value_template: '{{ states.input_select.washer_status.state}}'
-        friendly_name: 'Washer Status'
-</code></pre>
-
-<p>自动化脚本分两块，一块是检测到电量后的更新洗衣机状态为运转。这里我用了 10 瓦作为运转开始的阈值。</p>
-
-<pre><code class="language-yaml">automation:
-  - alias: Set washer active when power detected
-    trigger:
-    - platform: numeric_state
-      entity_id: switch.hs110_washer
-      value_template: '{{ state.attributes.current_power_w }}'
-      above: 10
-    condition:
-      condition: or
-      conditions:
-        - condition: state
-          entity_id: sensor.washer_status
-          state: Idle
-    action:
-    - service: input_select.select_option
-      data:
-        entity_id: input_select.washer_status
-        option: Running
-</code></pre>
-
-<p>另一块是设备停止运转的检测，根据不同的设备可能要进行微调。我这里设置了洗衣机用电低于 3 瓦且超过 1 分钟以上后，把状态切换成空置并通过 Twilio 发送短信通知。</p>
-
-<pre><code class="language-yaml">automation:
-  - alias: Set washer inactive
-    trigger:
-    - platform: numeric_state
-      entity_id: switch.hs110_washer
-      value_template: '{{ state.attributes.current_power_w }}'
-      below: 3
-      for:
-        minutes: 1
-    condition:
-      condition: or
-      conditions:
-        - condition: state
-          entity_id: sensor.washer_status
-          state: Running
-    action:
-    - service: input_select.select_option
-      data:
-        entity_id: input_select.washer_status
-        option: Idle
-    - service: notify.twilio_sms
-      data:
-        message: Washer finished at {{ now() }}
-        target:
-          - 15555555555
-</code></pre>
-
-<p>这个脚本用了一个多月没出现误报，虽然一开始折腾一点，最后还是省了我们不少时间。</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">sensor</span>:
+  - <span style="color:#66d9ef">platform</span>: template
+    <span style="color:#66d9ef">sensors</span>:
+      <span style="color:#66d9ef">washer_status</span>:
+        <span style="color:#66d9ef">value_template</span>: <span style="color:#e6db74">&#39;{{ states.input_select.washer_status.state}}&#39;</span>
+        <span style="color:#66d9ef">friendly_name</span>: <span style="color:#e6db74">&#39;Washer Status&#39;</span>
+</code></pre></div><p>自动化脚本分两块，一块是检测到电量后的更新洗衣机状态为运转。这里我用了 10 瓦作为运转开始的阈值。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">automation</span>:
+  - <span style="color:#66d9ef">alias</span>: Set washer active when power detected
+    <span style="color:#66d9ef">trigger</span>:
+    - <span style="color:#66d9ef">platform</span>: numeric_state
+      <span style="color:#66d9ef">entity_id</span>: switch.hs110_washer
+      <span style="color:#66d9ef">value_template</span>: <span style="color:#e6db74">&#39;{{ state.attributes.current_power_w }}&#39;</span>
+      <span style="color:#66d9ef">above</span>: <span style="color:#ae81ff">10</span>
+    <span style="color:#66d9ef">condition</span>:
+      <span style="color:#66d9ef">condition</span>: or
+      <span style="color:#66d9ef">conditions</span>:
+        - <span style="color:#66d9ef">condition</span>: state
+          <span style="color:#66d9ef">entity_id</span>: sensor.washer_status
+          <span style="color:#66d9ef">state</span>: Idle
+    <span style="color:#66d9ef">action</span>:
+    - <span style="color:#66d9ef">service</span>: input_select.select_option
+      <span style="color:#66d9ef">data</span>:
+        <span style="color:#66d9ef">entity_id</span>: input_select.washer_status
+        <span style="color:#66d9ef">option</span>: Running
+</code></pre></div><p>另一块是设备停止运转的检测，根据不同的设备可能要进行微调。我这里设置了洗衣机用电低于 3 瓦且超过 1 分钟以上后，把状态切换成空置并通过 Twilio 发送短信通知。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">automation</span>:
+  - <span style="color:#66d9ef">alias</span>: Set washer inactive
+    <span style="color:#66d9ef">trigger</span>:
+    - <span style="color:#66d9ef">platform</span>: numeric_state
+      <span style="color:#66d9ef">entity_id</span>: switch.hs110_washer
+      <span style="color:#66d9ef">value_template</span>: <span style="color:#e6db74">&#39;{{ state.attributes.current_power_w }}&#39;</span>
+      <span style="color:#66d9ef">below</span>: <span style="color:#ae81ff">3</span>
+      <span style="color:#66d9ef">for</span>:
+        <span style="color:#66d9ef">minutes</span>: <span style="color:#ae81ff">1</span>
+    <span style="color:#66d9ef">condition</span>:
+      <span style="color:#66d9ef">condition</span>: or
+      <span style="color:#66d9ef">conditions</span>:
+        - <span style="color:#66d9ef">condition</span>: state
+          <span style="color:#66d9ef">entity_id</span>: sensor.washer_status
+          <span style="color:#66d9ef">state</span>: Running
+    <span style="color:#66d9ef">action</span>:
+    - <span style="color:#66d9ef">service</span>: input_select.select_option
+      <span style="color:#66d9ef">data</span>:
+        <span style="color:#66d9ef">entity_id</span>: input_select.washer_status
+        <span style="color:#66d9ef">option</span>: Idle
+    - <span style="color:#66d9ef">service</span>: notify.twilio_sms
+      <span style="color:#66d9ef">data</span>:
+        <span style="color:#66d9ef">message</span>: Washer finished at {{ now() }}
+        <span style="color:#66d9ef">target</span>:
+          - <span style="color:#ae81ff">15555555555</span>
+</code></pre></div><p>这个脚本用了一个多月没出现误报，虽然一开始折腾一点，最后还是省了我们不少时间。</p>
 <p>关于智能家居和 Home Assistant 的更多信息，可以参考我写的<a href="https://blog.yxwang.me/tags/smarthome/">其他文章</a>。</p>
 
     </div>

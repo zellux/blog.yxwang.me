@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 
   <head>
-	<meta name="generator" content="Hugo 0.55.6" />
+	<meta name="generator" content="Hugo 0.72.0" />
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <meta name="description" content="">
@@ -10,6 +10,7 @@
     
 
     <title> Aiur · Zellux 的博客</title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -17,7 +18,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -25,7 +26,7 @@
     <link rel="shortcut icon" href="/favicon.ico">
 
     
-    <link href="https://blog.yxwang.me/index.xml" rel="alternate" type="application/rss+xml" title="Aiur · Zellux 的博客" />
+    <link href="/index.xml" rel="alternate" type="application/rss+xml" title="Aiur · Zellux 的博客" />
     
 <script type="application/ld+json">
 {
@@ -95,10 +96,10 @@
 
       
       <div class="summary">
-        http://bc.tech.coop/blog/070713.html
-Joe Armstrong的原话 Live code upgrading is one of the things Erlang was designed for.
+        http://bc.tech.coop/blog/070713.htmlJoe Armstrong的原话 Live code upgrading is one of the things Erlang was designed for.
 一个最简单的例子
-loop(Fun, State) receive {From, {rpc, Tag, Q}} -&gt; {Reply, State1} = Fun(Q, State), From ! {Tag, Reply}, loop(Fun, State1); {code_upgrade, Fun1} -&gt; loop(Fun1, State) end.  使用时只要发送一个{code_update, Fun1}消息即可 在实际的项目中，live code update需要在一个进程的稳定状态中进行。好在有Erlang天生的分布式特性，结点i进行更新时其他结点可以接管这个结点的任务，直到结点i更新成功，再进行下一个结点的更新。这个形式和结点的crash处理有点类似。于是Erlang中live updating的实际难点在于 1. How to suspend the system and put it into a stable state 2. How to replicate the stable state 3. How to restart from a stable state 4.
+loop(Fun, State) receive {From, {rpc, Tag, Q}} -&gt; {Reply, State1} = Fun(Q, State), From ! {Tag, Reply}, loop(Fun, State1); {code_upgrade, Fun1} -&gt; loop(Fun1, State) end. 使用时只要发送一个{code_update, Fun1}消息即可 在实际的项目中，live code update需要在一个进程的稳定状态中进行。好在有Erlang天生的分布式特性，结点i进行更新时其他结点可以接管这个结点的任务，直到结点i更新成功，再进行下一个结点的更新。这个形式和结点的crash处理有点类似。于是Erlang中live updating的实际难点在于
+ How to suspend the system and put it into a stable state How to replicate the stable state How to restart from a stable state How to detect failure How to upgrade and downgrade the stable state  另外http://www.
 	<a class="read-more" href="/2008/10/live-code-update-in-erlang/">阅读全文 →</a>
       </div>
       
@@ -122,7 +123,7 @@ loop(Fun, State) receive {From, {rpc, Tag, Q}} -&gt; {Reply, State1} = Fun(Q, St
 查了下这个名字的读法，正确的读法应该是air-lang，这里元音a的发音和bang中的a一样。
 文章中的第一个程序就有点令人费解，主要原因在于Erlang的语法和一般的imperative language差别很大，和functional language比较类似，但是本质上也有很大的不同。
 以Java的一个计数程序为例
-// A shared counter. public class Sequence { private int nextVal = 0; // Retrieve counter and increment. public synchronized int getNext() { return nextVal++; } // Re-initialize counter to zero. public synchronized void reset() { nextVal = 0; } }  这个程序的功能不用多说了，一个同步的计数程序。它的Erlang翻译版的代码为
+// A shared counter. public class Sequence { private int nextVal = 0; // Retrieve counter and increment.  public synchronized int getNext() { return nextVal++; } // Re-initialize counter to zero.  public synchronized void reset() { nextVal = 0; } } 这个程序的功能不用多说了，一个同步的计数程序。它的Erlang翻译版的代码为
 -module(sequence1). -export([make_sequence/0, get_next/1, reset/1]). % Create a new shared counter. make_sequence() -&gt; spawn(fun() -&gt; sequence_loop(0) end). sequence_loop(N) -&gt; receive {From, get_next} -&gt; From !
 	<a class="read-more" href="/2008/10/erlang-hello-world/">阅读全文 →</a>
       </div>
@@ -144,8 +145,8 @@ loop(Fun, State) receive {From, {rpc, Tag, Q}} -&gt; {Reply, State1} = Fun(Q, St
       
       <div class="summary">
         The Definitive Guide to Xen Hypervisor 第二章的 Exercise，通过调用 hypercall page 中的 console_io 项输出Hello World。
-void start_kernel(start_info_t * start_info) { HYPERVISOR_console_io(CONSOLEIO_write,12,&quot;Hello Worldn&quot;); while(1); }  但是默认选项编译和启动的Xen是不会保留DomainU中输出的信息。参考 drivers/char/console.c，可以看到主要有两个选项控制了 DomainU 的 do_console_io 输出：
-#ifndef VERBOSE /* Only domain 0 may access the emergency console. */ if ( current-&gt;domain-&gt;domain_id != 0 ) return -EPERM; #endif  if ( opt_console_to_ring ) { for ( kptr = kbuf; *kptr != ''; kptr++ ) putchar_console_ring(*kptr); send_guest_global_virq(dom0, VIRQ_CON_RING); }  在编译 Xen 的时候开启 debug 选项即可置上 VERBOSE，而 opt_console_to_ring 则是一个启动选项，在 grub 的启动选项中增加 loglvl=all guest_loglvl=all console_to_ring 即可。
+void start_kernel(start_info_t * start_info) { HYPERVISOR_console_io(CONSOLEIO_write,12,&#34;Hello Worldn&#34;); while(1); } 但是默认选项编译和启动的Xen是不会保留DomainU中输出的信息。参考 drivers/char/console.c，可以看到主要有两个选项控制了 DomainU 的 do_console_io 输出：
+#ifndef VERBOSE  /* Only domain 0 may access the emergency console. */ if ( current-&gt;domain-&gt;domain_id != 0 ) return -EPERM; #endif if ( opt_console_to_ring ) { for ( kptr = kbuf; *kptr != &#39;&#39;; kptr++ ) putchar_console_ring(*kptr); send_guest_global_virq(dom0, VIRQ_CON_RING); } 在编译 Xen 的时候开启 debug 选项即可置上 VERBOSE，而 opt_console_to_ring 则是一个启动选项，在 grub 的启动选项中增加 loglvl=all guest_loglvl=all console_to_ring 即可。
 	<a class="read-more" href="/2008/09/calling-do_console_io-from-domainu/">阅读全文 →</a>
       </div>
       
@@ -166,8 +167,8 @@ void start_kernel(start_info_t * start_info) { HYPERVISOR_console_io(CONSOLEIO_w
       
       <div class="summary">
         The Definitive Guide to Xen Hypervisor 中第二章的例子，make 成功后运行 xen create domain_config，报错
-Error: (2, 'Invalid kernel', 'xc_dom_compat_check: guest type xen-3.0-x86_32 not supported by xen kernel, sorryn')  Google 之后发现是虚拟机类型设置的问题，运行 xm info 可以看到
-xen_caps : xen-3.0-x86_32p  末尾的 p 表示 Xen 内核开启了 PAE 模式，所以载入的 kernel 也必须开启 PAE，在bootstrap.x86_32.S 中加入 PAE=yes 选项即可。
+Error: (2, 'Invalid kernel', 'xc_dom_compat_check: guest type xen-3.0-x86_32 not supported by xen kernel, sorryn') Google 之后发现是虚拟机类型设置的问题，运行 xm info 可以看到
+xen_caps : xen-3.0-x86_32p 末尾的 p 表示 Xen 内核开启了 PAE 模式，所以载入的 kernel 也必须开启 PAE，在bootstrap.x86_32.S 中加入 PAE=yes 选项即可。
 	<a class="read-more" href="/2008/09/first-test-kernel-in-xen/">阅读全文 →</a>
       </div>
       
@@ -213,14 +214,14 @@ S1 * 2 = S2，可得非环部分长度 = n * 环长 - 弧A长
       
       <div class="summary">
         1. 准备工作 在开始分析Support Code之前，先配置下我们的Source Insight，使它能够支持.s文件的搜索。
-在Options-&gt;Document Options-&gt;Document Types中选择x86 Asm Source File，在File fileter中增加一个.s，变成.asm;.inc;.s 然后在Project-&gt;Add and Remove Project Files中重新将整个oslab的目录加入，这样以后进行文本搜索时.s文件也不会漏掉了。
+在Options-&gt;Document Options-&gt;Document Types中选择x86 Asm Source File，在File fileter中增加一个*.s，变成*.asm;*.inc;*.s 然后在Project-&gt;Add and Remove Project Files中重新将整个oslab的目录加入，这样以后进行文本搜索时.s文件也不会漏掉了。
 2. Source Insight使用 接下来简单分析下内核启动的过程，在浏览代码的过程中可以迅速的掌握Source Insight的使用技巧。
 lib/multiboot /multiboot.s完成了初始化工作，可以看到其中一句call EXT(multiboot_main)调用了C函数multiboot_main，使用ctrl+/搜索包含multiboot_main的所有文件，最终base_multiboot_main.c中找到了它的定义。依次进行cpu、内存的初 始化，然后开启中断，跳转到kernel_main函数，也是Lab1中所要改写的函数之一。另外 在这里可以通过ctrl+单击或者ctrl+=跳转到相应的函数定义处，很方便。
 3. irq处理初始化工作 来看下Lab 1的重点之一，irq的处理。跟踪multiboot_main-&gt;base_cpu_setup-&gt;base_cp u_init-&gt;base_irq_init，可以看到这行代码
-gate_init(base_idt, base_irq_inittab, KERNEL_CS);  继续使用ctrl+/找到base_irq_inittab的藏身之处：base_irq_inittab.s
+gate_init(base_idt, base_irq_inittab, KERNEL_CS); 继续使用ctrl+/找到base_irq_inittab的藏身之处：base_irq_inittab.s
 4. base_irq_inittab.s 这个汇编文件做了不少重复性工作，方便我们在c语言级别实现各种handler。
-GATE_INITTAB_BEGIN(base_irq_inittab) /* irq处理函数表的起始，还记得jump table 吗？ */ MASTER(0, 0) /* irq0 对应的函数 */  来看看这个MASTER(0, 0)宏展开后是什么样子：
-#define MASTER(irq, num) GATE_ENTRY(BASE_IRQ_MASTER_BASE + (num), 0f, ACC_PL_K|ACC_INTR_GATE) ; P2ALIGN(TEXT_ALIGN) ; 0: ; pushl $(irq) /* error code = irq vector */ ; pushl $BASE_IRQ_MASTER_BASE + (num) /* trap number */ ; pusha /* save general registers */ ; movl $(irq),%ecx /* irq vector number */ ; movb $1 &lt;&lt; num,%dl /* pic mask for this irq */ ; jmp master_ints  依次push irq号，trap号（0x20+irq号），通用寄存器（eax ecx等）入栈，把irq号保 存到ecx寄存器，然后跳转到master_ints，master_ints是所有master interrupts公用 的代码。
+GATE_INITTAB_BEGIN(base_irq_inittab) /* irq处理函数表的起始，还记得jump table 吗？ */ MASTER(0, 0) /* irq0 对应的函数 */ 来看看这个MASTER(0, 0)宏展开后是什么样子：
+#define MASTER(irq, num) GATE_ENTRY(BASE_IRQ_MASTER_BASE + (num), 0f, ACC_PL_K|ACC_INTR_GATE) ; P2ALIGN(TEXT_ALIGN) ; 0: ; pushl $(irq) /* error code = irq vector */ ; pushl $BASE_IRQ_MASTER_BASE + (num) /* trap number */ ; pusha /* save general registers */ ; movl $(irq),%ecx /* irq vector number */ ; movb $1 &lt;&lt; num,%dl /* pic mask for this irq */ ; jmp master_ints 依次push irq号，trap号（0x20+irq号），通用寄存器（eax ecx等）入栈，把irq号保 存到ecx寄存器，然后跳转到master_ints，master_ints是所有master interrupts公用 的代码。
 	<a class="read-more" href="/2008/09/oslab-interrupt-handling/">阅读全文 →</a>
       </div>
       
@@ -241,10 +242,10 @@ GATE_INITTAB_BEGIN(base_irq_inittab) /* irq处理函数表的起始，还记得j
       
       <div class="summary">
         还算顺利，不过这个lab蛮无聊的，等有空了把syscall改成类似linux的做法，单一中断号+寄存器选择syscall。
- 最花时间的一个bug是ls返回值没有改成应用程序数，结果一开始一直以为是brk系统调用没写好，最后才发现问题出在这么小的地方。
- brk的逻辑还不是很清楚，尽管通过了简单的测试，但是debug输出的信息显示brk增长的很快，经常是一个页一个页涨的，看来还得查下brk的具体行为。
- 写了个比MAGIC_BREAK好用一点的宏，因为用户态的程序都是按二进制读入的，Simics无法得到函数信息（函数名、当前行数等），利用C99的宏写了个新的INFO_BREAK
-  #define INFO_BREAK \ do { \ lprintf_kern(&quot;break in %s:%d&quot;, __FUNCTION__, __LINE__); \ MAGIC_BREAK; \ } while (0) \  
+  最花时间的一个bug是ls返回值没有改成应用程序数，结果一开始一直以为是brk系统调用没写好，最后才发现问题出在这么小的地方。
+  brk的逻辑还不是很清楚，尽管通过了简单的测试，但是debug输出的信息显示brk增长的很快，经常是一个页一个页涨的，看来还得查下brk的具体行为。
+  写了个比MAGIC_BREAK好用一点的宏，因为用户态的程序都是按二进制读入的，Simics无法得到函数信息（函数名、当前行数等），利用C99的宏写了个新的INFO_BREAK
+  #define INFO_BREAK \ do { \ lprintf_kern(&#34;break in %s:%d&#34;, __FUNCTION__, __LINE__); \ MAGIC_BREAK; \ } while (0) \ 
 	<a class="read-more" href="/2008/08/os-lab5-debug-notes/">阅读全文 →</a>
       </div>
       
@@ -266,7 +267,7 @@ GATE_INITTAB_BEGIN(base_irq_inittab) /* irq处理函数表的起始，还记得j
       <div class="summary">
         s前缀的malloc函数（包括smalloc、smemalign等）不记录分配块的大小，比较节省空间，但是要求用户在用sfree释放内存的时候指定被释放的内存块大小。
 malloc则和libc中的同名函数很相似。
-整个分配信息（包括哪些块已被使用）都记录在malloc_lmm这个全局变量中，内存被分为若干个region，每个region中有若干个nodes，这些信息可以通过lmm_dump查看（需要include ）。
+整个分配信息（包括哪些块已被使用）都记录在malloc_lmm这个全局变量中，内存被分为若干个region，每个region中有若干个nodes，这些信息可以通过lmm_dump查看（需要include &lt;lmm.public.h&gt;）。
 smemalign很适合分配需要页对齐的内存块，因为如果使用memalign分配的话，每个页面就需要多用8字节的空间来记录当前块的大小了（保存在每个内存块的前面），会产生大量内存碎片。
 	<a class="read-more" href="/2008/08/smalloc-vs-malloc/">阅读全文 →</a>
       </div>
@@ -287,10 +288,10 @@ smemalign很适合分配需要页对齐的内存块，因为如果使用memalign
 
       
       <div class="summary">
-         系统调用 fork() 用Simics跟踪一条条汇编分析页表映射、寄存器值还真是体力活啊。。
- 实现 Copy On Write 时，如果某一个用户态页面有多个进程共享，其中一个进程修改该页面时需要创建一个新的页面。一开始偶忘了把原来页面的内容复制到新的页面了 =_= 另外由于新的页面要代替老的页面，或者说它们的物理地址不同，但虚拟地址相同，我的方法是在内核态开辟一个大小为一个页面的空间作为中转。
- do_fork函数中，子进程复制父进程的页表的同时会把父进程页表项置为不可写，注意最后要flush tlb。因为一开始没有flush tlb，导致最后用户态fork返回以后读取的信息来自于tlb，直接改写了共享页面中fork的返回地址，导致切换到子进程时fork的返回地址丢失。这个bug让我郁闷了两三个小时。。
- 使用两次fork时，第二次fork返回的pid会被改掉。查了下发现为用户空间分配物理页面的代码里居然在分配好以后没有把对应的struct置为已使用，结果导致第二个子进程COW创建新页面时得到了原来的父进程页面，改写了父进程页面内容。
+        系统调用 fork() 用Simics跟踪一条条汇编分析页表映射、寄存器值还真是体力活啊。。
+  实现 Copy On Write 时，如果某一个用户态页面有多个进程共享，其中一个进程修改该页面时需要创建一个新的页面。一开始偶忘了把原来页面的内容复制到新的页面了 =_= 另外由于新的页面要代替老的页面，或者说它们的物理地址不同，但虚拟地址相同，我的方法是在内核态开辟一个大小为一个页面的空间作为中转。
+  do_fork函数中，子进程复制父进程的页表的同时会把父进程页表项置为不可写，注意最后要flush tlb。因为一开始没有flush tlb，导致最后用户态fork返回以后读取的信息来自于tlb，直接改写了共享页面中fork的返回地址，导致切换到子进程时fork的返回地址丢失。这个bug让我郁闷了两三个小时。。
+  使用两次fork时，第二次fork返回的pid会被改掉。查了下发现为用户空间分配物理页面的代码里居然在分配好以后没有把对应的struct置为已使用，结果导致第二个子进程COW创建新页面时得到了原来的父进程页面，改写了父进程页面内容。
   系统调用 exec()  清空页表的用户空间映射的函数一开始写得yts，bug到处都是，比如free的时候没使用指向内存块首地址的指针，记录内存地址的变量没有累加。 exec传递给内核态的两个参数必须先在内核态保存一个副本，否则清空用户态页表后就无法得到这两个参数信息了。 分配给用户态的页面必须先清零，一方面考虑到安全性，另一方面不清零会隐藏一些潜在的bug。一开始我没有在内核执行exec的时候完整的复制所有的参数，而是直接指向了原进程的内存空间，由于清空页表后再次申请新页表时得到了原来的页面，结果正好原来那个保存参数的页面和新进程的该页面重合了 =_= 于是浪费了不少时间在这个bug上  
 	<a class="read-more" href="/2008/08/bugs-related-to-my-fork/">阅读全文 →</a>
       </div>

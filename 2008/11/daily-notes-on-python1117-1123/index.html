@@ -11,6 +11,7 @@
     
 
     <title> Daily Notes on Python[11.17-11.23] &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -39,7 +40,7 @@
     "articleSection" : "post",
     "name" : "Daily Notes on Python[11.17-11.23]",
     "headline" : "Daily Notes on Python[11.17-11.23]",
-    "description" : "模块动态加载机制\n Advanced Python（某一期Google TechTalks的话题）上提到import指令本质是个语法糖，import sys等价于sys = import(\x26ldquo;sys\x26rdquo;)。解析import sys的bytecode可以看到四个指令（参数略）： LOAD_CONST LOAD_CONST IMPORT_NAME STORE_NAME  IMPORT_NAME把sys模块导入并保存到栈上，STORE_NAME把这个指针当作普通对象保存在sys这个变量中。\n2. IMPORT_NAME指令行为分析 将参数打包并用PyEval_CallObject()这个统一调用接口运行import方法，bltinmodule.c中的builtinimport函数包装了这个功能。help(import)显示的import方法的参数列表 import(\x26hellip;) import(name, globals={}, locals={}, fromlist=[], level=-1) -\x26gt; module\n对应于builtinimport中调用的另一层函数封装\nPyObject * PyImport_ImportModuleLevel(char *name, PyObject *globals, PyObject *locals, PyObject *fromlist, int level)  这个函数调用了真正干活的函数，import.c中的\nstatic PyObject * import_module_level(char *name, PyObject *globals, PyObject *locals, PyObject *fromlist, int level)  3. import_module_level函数 首先调用get_parent()得到import发生时的package对象，接下来多次调用load_next依次得到各级的包名，跟踪了下import xml.dom.minidom的行为，发现name的值依次是\x26rdquo;dom.minidom\x26rdquo;, \x26ldquo;minidom\x26rdquo;。最后根据import的形式是from \x26hellip; import \x26hellip;还是import \x26hellip;返回不同的处理结果。\n4. import_submodule函数 load_next函数中调用这个函数进行模块的查找和载入。主要分三步：find_module, load_module, add_submodule。\n5. from \x26hellip; import \x26hellip; ensure_fromlist处理了这个情况。另外对于from \x26hellip; import *的情况，会从module文件中读入一个all对象，从中知道module公开的符号信息。",
+    "description" : "模块动态加载机制 Advanced Python（某一期Google TechTalks的话题）上提到import指令本质是个语法糖，import sys等价于sys = import(\u0026ldquo;sys\u0026rdquo;)。解析import sys的bytecode可以看到四个指令（参数略）： LOAD_CONST LOAD_CONST IMPORT_NAME STORE_NAME  IMPORT_NAME把sys模块导入并保存到栈上，STORE_NAME把这个指针当作普通对象保存在sys这个变量中。\n2. IMPORT_NAME指令行为分析将参数打包并用PyEval_CallObject()这个统一调用接口运行__import__方法，bltinmodule.c中的builtin__import__函数包装了这个功能。help(import)显示的__import__方法的参数列表 import(\u0026hellip;) import(name, globals={}, locals={}, fromlist=[], level=-1) -\u0026gt; module\n对应于builtin__import__中调用的另一层函数封装\nPyObject * PyImport_ImportModuleLevel(char *name, PyObject *globals, PyObject *locals, PyObject *fromlist, int level) 这个函数调用了真正干活的函数，import.c中的\nstatic PyObject * import_module_level(char *name, PyObject *globals, PyObject *locals, PyObject *fromlist, int level) 3. import_module_level函数首先调用get_parent()得到import发生时的package对象，接下来多次调用load_next依次得到各级的包名，跟踪了下import xml.dom.minidom的行为，发现name的值依次是\u0026quot;dom.minidom\u0026rdquo;, \u0026ldquo;minidom\u0026rdquo;。最后根据import的形式是from \u0026hellip; import \u0026hellip;还是import \u0026hellip;返回不同的处理结果。\n4. import_submodule函数load_next函数中调用这个函数进行模块的查找和载入。主要分三步：find_module, load_module, add_submodule。\n5. from \u0026hellip; import \u0026hellip;ensure_fromlist处理了这个情况。另外对于from \u0026hellip; import *的情况，会从module文件中读入一个__all__对象，从中知道module公开的符号信息。",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -47,10 +48,10 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2008",
-    "datePublished": "2008-11-17 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2008-11-17 00:00:00 \x2b0000 UTC",
+    "datePublished": "2008-11-17 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2008-11-17 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/2008\/11\/daily-notes-on-python1117-1123\/",
-    "wordCount" : "161",
+    "wordCount" : "157",
     "keywords" : [ "Programming","Programming Languages","Python","Blog" ]
 }
 </script>
@@ -93,64 +94,49 @@
 </span>
 
     <div class="post-content">
-      <p><strong>模块动态加载机制</strong></p>
-
+      <p><!-- raw HTML omitted -->模块动态加载机制<!-- raw HTML omitted --></p>
 <ol>
-<li>Advanced Python（某一期Google TechTalks的话题）上提到import指令本质是个<strong>语法糖</strong>，import sys等价于sys = <strong>import</strong>(&ldquo;sys&rdquo;)。解析import sys的bytecode可以看到四个指令（参数略）：
+<li>Advanced Python（某一期Google TechTalks的话题）上提到import指令本质是个<!-- raw HTML omitted -->语法糖<!-- raw HTML omitted -->，import sys等价于sys = <strong>import</strong>(&ldquo;sys&rdquo;)。解析import sys的bytecode可以看到四个指令（参数略）：
 LOAD_CONST
 LOAD_CONST
 IMPORT_NAME
 STORE_NAME</li>
 </ol>
-
 <p>IMPORT_NAME把sys模块导入并保存到栈上，STORE_NAME把这个指针当作普通对象保存在sys这个变量中。</p>
-
-<p><strong>2. </strong><strong>IMPORT_NAME指令行为分析</strong>
-将参数打包并用PyEval_CallObject()这个统一调用接口运行<strong>import</strong>方法，bltinmodule.c中的builtin<strong>import</strong>函数包装了这个功能。help(<strong>import</strong>)显示的<strong>import</strong>方法的参数列表
+<p><!-- raw HTML omitted -->2. <!-- raw HTML omitted --><!-- raw HTML omitted -->IMPORT_NAME指令行为分析<!-- raw HTML omitted -->
+将参数打包并用PyEval_CallObject()这个统一调用接口运行__import__方法，bltinmodule.c中的builtin__import__函数包装了这个功能。help(<strong>import</strong>)显示的__import__方法的参数列表
 <strong>import</strong>(&hellip;)
 <strong>import</strong>(name, globals={}, locals={}, fromlist=[], level=-1) -&gt; module</p>
-
-<p>对应于builtin<strong>import</strong>中调用的另一层函数封装</p>
-
-<pre><code class="language-c">PyObject *
-PyImport_ImportModuleLevel(char *name, PyObject *globals, PyObject *locals,
-PyObject *fromlist, int level)
-</code></pre>
-
-<p>这个函数调用了真正干活的函数，import.c中的</p>
-
-<pre><code class="language-c">static PyObject *
-import_module_level(char *name, PyObject *globals, PyObject *locals,
-PyObject *fromlist, int level)
-</code></pre>
-
-<p><strong>3. import_module_level函数</strong>
-首先调用get_parent()得到import发生时的package对象，接下来多次调用load_next依次得到各级的包名，跟踪了下import xml.dom.minidom的行为，发现name的值依次是&rdquo;dom.minidom&rdquo;, &ldquo;minidom&rdquo;。最后根据import的形式是from &hellip; import &hellip;还是import &hellip;返回不同的处理结果。</p>
-
-<p><strong>4. import_submodule函数</strong>
+<p>对应于builtin__import__中调用的另一层函数封装</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">PyObject <span style="color:#f92672">*</span>
+PyImport_ImportModuleLevel(<span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>name, PyObject <span style="color:#f92672">*</span>globals, PyObject <span style="color:#f92672">*</span>locals,
+PyObject <span style="color:#f92672">*</span>fromlist, <span style="color:#66d9ef">int</span> level)
+</code></pre></div><p>这个函数调用了真正干活的函数，import.c中的</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">static</span> PyObject <span style="color:#f92672">*</span>
+import_module_level(<span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>name, PyObject <span style="color:#f92672">*</span>globals, PyObject <span style="color:#f92672">*</span>locals,
+PyObject <span style="color:#f92672">*</span>fromlist, <span style="color:#66d9ef">int</span> level)
+</code></pre></div><p><!-- raw HTML omitted -->3. import_module_level函数<!-- raw HTML omitted -->
+首先调用get_parent()得到import发生时的package对象，接下来多次调用load_next依次得到各级的包名，跟踪了下import xml.dom.minidom的行为，发现name的值依次是&quot;dom.minidom&rdquo;, &ldquo;minidom&rdquo;。最后根据import的形式是from &hellip; import &hellip;还是import &hellip;返回不同的处理结果。</p>
+<p><!-- raw HTML omitted -->4. import_submodule函数<!-- raw HTML omitted -->
 load_next函数中调用这个函数进行模块的查找和载入。主要分三步：find_module, load_module, add_submodule。</p>
-
-<p><strong>5. from &hellip; import &hellip;</strong>
-ensure_fromlist处理了这个情况。另外对于from &hellip; import *的情况，会从module文件中读入一个<strong>all</strong>对象，从中知道module公开的符号信息。</p>
-
+<p><!-- raw HTML omitted -->5. from &hellip; import &hellip;<!-- raw HTML omitted -->
+ensure_fromlist处理了这个情况。另外对于from &hellip; import *的情况，会从module文件中读入一个__all__对象，从中知道module公开的符号信息。</p>
 <p>几个以后可能用到的函数：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">[import.c]
+<span style="color:#75715e">/* Parse a source file and return the corresponding code object */</span>
+<span style="color:#66d9ef">static</span> PyCodeObject <span style="color:#f92672">*</span> parse_source_module(<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>pathname, FILE <span style="color:#f92672">*</span>fp);
 
-<pre><code class="language-c">[import.c]
-/* Parse a source file and return the corresponding code object */
-static PyCodeObject * parse_source_module(const char *pathname, FILE *fp);
-
-/* Execute a code object in a module and return the module object
- * WITH INCREMENTED REFERENCE COUNT.  If an error occurs, name is
- * removed from sys.modules, to avoid leaving damaged module objects
- * in sys.modules.  The caller may wish to restore the original
- * module object (if any) in this case; PyImport_ReloadModule is an
- * example.
- */
-PyObject * PyImport_ExecCodeModule(char *name, PyObject *co);
+<span style="color:#75715e">/* Execute a code object in a module and return the module object
+</span><span style="color:#75715e"> * WITH INCREMENTED REFERENCE COUNT.  If an error occurs, name is
+</span><span style="color:#75715e"> * removed from sys.modules, to avoid leaving damaged module objects
+</span><span style="color:#75715e"> * in sys.modules.  The caller may wish to restore the original
+</span><span style="color:#75715e"> * module object (if any) in this case; PyImport_ReloadModule is an
+</span><span style="color:#75715e"> * example.
+</span><span style="color:#75715e"> */</span>
+PyObject <span style="color:#f92672">*</span> <span style="color:#a6e22e">PyImport_ExecCodeModule</span>(<span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>name, PyObject <span style="color:#f92672">*</span>co);
 
 
-</code></pre>
-
+</code></pre></div>
     </div>
         <div class="cc-license">
       本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.zh">知识共享署名-非商业性使用 3.0 版本许可协议</a>进行许可，欢迎转载，演绎，但是必须保留本文的署名 <a href="https://blog.yxwang.me/2008/11/daily-notes-on-python1117-1123/">zellux</a>（包含链接），且不得用于商业目的。

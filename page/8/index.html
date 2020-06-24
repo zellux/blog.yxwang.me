@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 
   <head>
-	<meta name="generator" content="Hugo 0.55.6" />
+	<meta name="generator" content="Hugo 0.72.0" />
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <meta name="description" content="">
@@ -10,6 +10,7 @@
     
 
     <title> Aiur · Zellux 的博客</title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -17,7 +18,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -25,7 +26,7 @@
     <link rel="shortcut icon" href="/favicon.ico">
 
     
-    <link href="https://blog.yxwang.me/index.xml" rel="alternate" type="application/rss+xml" title="Aiur · Zellux 的博客" />
+    <link href="/index.xml" rel="alternate" type="application/rss+xml" title="Aiur · Zellux 的博客" />
     
 <script type="application/ld+json">
 {
@@ -125,7 +126,7 @@
       
       <div class="summary">
         前几天给测试Xen用的虚拟机挂了，只能用VMware的snapshot返回到之前的镜像，然后似乎因为时间问题启动Xen的时候总是会定时打印出类似
-571 Timer ISR/0: Time went backwards: delta=-11072481 delta_cpu=298927519 shadow=196807680595 off=288495093 processed=197107247546 cpu_processed=196797247546 572 0: 196797247546 573 1: 197107247546  的信息，google了下发现是时间同步的问题，用ntp协议同步时间即可解决这个问题。另外这里再给出一个最暴力的解决方法：在linux-xen源码的arch/i386/kernel/time-xen.c文件中找到Time went backwards，把这行打印语句以及后面的循环打印删除，然后重新编译内核。x86_64体系结构也是修改这个文件。方法很暴力，也没真正解决问题，但是至少不影响我看/var/log/messages的输出了。
+571 Timer ISR/0: Time went backwards: delta=-11072481 delta_cpu=298927519 shadow=196807680595 off=288495093 processed=197107247546 cpu_processed=196797247546 572 0: 196797247546 573 1: 197107247546 的信息，google了下发现是时间同步的问题，用ntp协议同步时间即可解决这个问题。另外这里再给出一个最暴力的解决方法：在linux-xen源码的arch/i386/kernel/time-xen.c文件中找到Time went backwards，把这行打印语句以及后面的循环打印删除，然后重新编译内核。x86_64体系结构也是修改这个文件。方法很暴力，也没真正解决问题，但是至少不影响我看/var/log/messages的输出了。
 	<a class="read-more" href="/2009/07/xen-time-went-backwards-solution/">阅读全文 →</a>
       </div>
       
@@ -146,8 +147,7 @@
       
       <div class="summary">
         记得以前用Firefox 3.0.x时把Tools -&gt; Options -&gt; Tabs -&gt; Always show the tab bar勾上就行了，升级到3.5以后就没用了，搜了下Knowledge Base，最后在
-https://support.mozilla.com/tiki-view_forum_thread.php?locale=zh-CN&comments_parentId=184680&forumId=1
-看到只要将about:config页中的browser.tabs.closeWindowWithLastTab项设为false即可
+https://support.mozilla.com/tiki-view_forum_thread.php?locale=zh-CN&amp;comments_parentId=184680&amp;forumId=1看到只要将about:config页中的browser.tabs.closeWindowWithLastTab项设为false即可
 	<a class="read-more" href="/2009/07/firefox-close-windows-with-last-tab/">阅读全文 →</a>
       </div>
       
@@ -169,8 +169,8 @@ https://support.mozilla.com/tiki-view_forum_thread.php?locale=zh-CN&comments_par
       <div class="summary">
         主要功能：开发人员执行svn commit后自动将开发人id、修订版本号和日志内容通过短信的方式通知所有人。
 首先修改svn服务器对应项目目录hook/post-commit文件
-#!/bin/bash export LANG=en_US.utf8 REPOS=&quot;$1&quot; REV=&quot;$2&quot; cd /home/svn/repositories/sebank/hooks ./sms.py commit $REPOS $REV  注意别忘了这里的export LANG，我一开始测试的时候发现中文一直有乱码，后来才意识到shell的环境变量里缺这个。 hook/sms.py
-#!/usr/bin/python # -*- coding: utf-8 -*- import sys, urllib, os from subprocess import * user = 'your mobile number' pword = 'fetion password' phone = [ '13764444444', '13813333333', ] repo = sys.argv[2] rev = sys.argv[3] cmdlog = 'svnlook log -r %s %s'%(rev, repo) cmdauthor = 'svnlook author -r %s %s'%(rev, repo) log = Popen(cmdlog, stdout=PIPE, shell=True).
+#!/bin/bash  export LANG=en_US.utf8 REPOS=&#34;$1&#34; REV=&#34;$2&#34; cd /home/svn/repositories/sebank/hooks ./sms.py commit $REPOS $REV 注意别忘了这里的export LANG，我一开始测试的时候发现中文一直有乱码，后来才意识到shell的环境变量里缺这个。 hook/sms.py
+#!/usr/bin/python # -*- coding: utf-8 -*- import sys, urllib, os from subprocess import * user = &#39;your mobile number&#39; pword = &#39;fetion password&#39; phone = [ &#39;13764444444&#39;, &#39;13813333333&#39;, ] repo = sys.argv[2] rev = sys.argv[3] cmdlog = &#39;svnlook log -r %s%s&#39;%(rev, repo) cmdauthor = &#39;svnlook author -r %s%s&#39;%(rev, repo) log = Popen(cmdlog, stdout=PIPE, shell=True).
 	<a class="read-more" href="/2009/06/svn-sms-notification/">阅读全文 →</a>
       </div>
       
@@ -195,9 +195,9 @@ https://support.mozilla.com/tiki-view_forum_thread.php?locale=zh-CN&comments_par
 虽然现在对云计算这个概念的炒作大于实际研究，以至于很多人听到云计算这个名词就想到忽悠，但这里面还是很多东西需要好好考虑和设计的。云计算和以前的 cluster computing 等概念虽有相同之处，区别也有不少，它涉及了经济学、虚拟化技术、安全等诸多领域的内容。
 何谓云计算？ 云计算包含两方面内容，一是在网络上提供的为计算服务的应用，例如以前被称为 SaaS(Software as a Service) 的那一类应用；二是提供这些服务的在数据中心的硬件和系统软件，这部分也就是我们通常所称呼为「云」的东西。
 云计算平台的优势 云计算带来了三个新颖的观点：
- 提供了看起来没有上限的可用计算资源，用户不需要提前考虑设备的需求量；
- 免去了云计算用户的前期投入，使得公司可以从一个规模较小的硬件资源起家，并根据自己的需要增加资源；
- 细粒度的计费手段，例如按每小时使用处理器数或者每天使用的存储空间计算，并在暂时不需要机器和存储空间时即时减免费用。
+  提供了看起来没有上限的可用计算资源，用户不需要提前考虑设备的需求量；
+  免去了云计算用户的前期投入，使得公司可以从一个规模较小的硬件资源起家，并根据自己的需要增加资源；
+  细粒度的计费手段，例如按每小时使用处理器数或者每天使用的存储空间计算，并在暂时不需要机器和存储空间时即时减免费用。
   云计算资源拥有很好的弹性，以 Amazon EC2 为例，用户可以在几分钟内完成硬件资源的添加或者减少操作，这在传统的应用程序部署中是很难做到的。文中提到了 Facebook 上的一个应用 Animoto，这个应用的资源需求在三天内从 50 台服务器上升到了 3500 台服务器。在传统的部署情景中，这样的需求是很难通过预先准备好硬件来满足的。另外还有一个问题，当资源需求下降时，传统方式部署的服务器资源就被闲置了，而通过云计算部署的资源则灵活很多，例如一个网站到了深夜访问量下降，此时就可以通过减少占用的计算资源从而降低支出。
 平台分类 现在的云计算平台提供了不同粒度的 API。Amazon EC2 是一个底层的极端，它提供了类似物理硬件的接口，用户可以几乎控制从内核开始的整个软件栈。通过虚拟技术提供的 CPU、块设备、IP 级别的连通技术使得开发人员几乎可以做任何事情。高度的灵活性带来的是可控性的损失，在自动伸缩性 (automatic scalability) 和容错转移 (failover) 方面，服务商就力不从心了。而 Google AppEngine 则提供了比较高层的 API，主要面向传统的 web 应用，在牺牲灵活性之后能很好的实现自动伸缩和转移，并对用户完全透明。而微软的 Azure 则介于这两者之间，提供了接近 CLR 字节码的接口，用户可以通过 .
 	<a class="read-more" href="/2009/06/above-the-clouds/">阅读全文 →</a>
@@ -222,9 +222,9 @@ https://support.mozilla.com/tiki-view_forum_thread.php?locale=zh-CN&comments_par
         Company的全写是complete everything，它只是一个补全的前端，会自动调用semantic等后端插件。
 新版的Company可以从它的官方主页(http://nschum.de/src/emacs/company-mode/)下载到，也可以从ELPA下载安装这个插件。
 使用这个插件时只要在.emacs中加入
-(add-to-list 'load-path &quot;/path/to/company&quot;) (autoload 'company-mode &quot;company&quot; nil t)  然后Emacs中使用M-x company-mode启动company模式即可。
+(add-to-list &#39;load-path &#34;/path/to/company&#34;) (autoload &#39;company-mode &#34;company&#34; nil t) 然后Emacs中使用M-x company-mode启动company模式即可。
 具体的按键可以在company.el中看到
-(defvar company-active-map (let ((keymap (make-sparse-keymap))) (define-key keymap &quot;\e\e\e&quot; 'company-abort) (define-key keymap &quot;\C-g&quot; 'company-abort) (define-key keymap (kbd &quot;M-n&quot;) 'company-select-next) (define-key keymap (kbd &quot;M-p&quot;) 'company-select-previous) (define-key keymap (kbd &quot;&quot;) 'company-select-next) (define-key keymap (kbd &quot;&quot;) 'company-select-previous) (define-key keymap [down-mouse-1] 'ignore) (define-key keymap [down-mouse-3] 'ignore) (define-key keymap [mouse-1] 'company-complete-mouse) (define-key keymap [mouse-3] 'company-select-mouse) (define-key keymap [up-mouse-1] 'ignore) (define-key keymap [up-mouse-3] 'ignore) (define-key keymap &quot;\C-m&quot; 'company-complete-selection) (define-key keymap &quot;\t&quot; 'company-complete-common) (define-key keymap (kbd &quot;&quot;) 'company-show-doc-buffer) (define-key keymap &quot;\C-w&quot; 'company-show-location) (define-key keymap &quot;\C-s&quot; 'company-search-candidates) (define-key keymap &quot;\C-\M-s&quot; 'company-filter-candidates) (dotimes (i 10) (define-key keymap (vector (+ (aref (kbd &quot;M-0&quot;) 0) i)) `(lambda () (interactive) (company-complete-number ,i)))) keymap) &quot;Keymap that is enabled during an active completion.
+(defvar company-active-map (let ((keymap (make-sparse-keymap))) (define-key keymap &#34;\e\e\e&#34; &#39;company-abort) (define-key keymap &#34;\C-g&#34; &#39;company-abort) (define-key keymap (kbd &#34;M-n&#34;) &#39;company-select-next) (define-key keymap (kbd &#34;M-p&#34;) &#39;company-select-previous) (define-key keymap (kbd &#34;&#34;) &#39;company-select-next) (define-key keymap (kbd &#34;&#34;) &#39;company-select-previous) (define-key keymap [down-mouse-1] &#39;ignore) (define-key keymap [down-mouse-3] &#39;ignore) (define-key keymap [mouse-1] &#39;company-complete-mouse) (define-key keymap [mouse-3] &#39;company-select-mouse) (define-key keymap [up-mouse-1] &#39;ignore) (define-key keymap [up-mouse-3] &#39;ignore) (define-key keymap &#34;\C-m&#34; &#39;company-complete-selection) (define-key keymap &#34;\t&#34; &#39;company-complete-common) (define-key keymap (kbd &#34;&#34;) &#39;company-show-doc-buffer) (define-key keymap &#34;\C-w&#34; &#39;company-show-location) (define-key keymap &#34;\C-s&#34; &#39;company-search-candidates) (define-key keymap &#34;\C-\M-s&#34; &#39;company-filter-candidates) (dotimes (i 10) (define-key keymap (vector (+ (aref (kbd &#34;M-0&#34;) 0) i)) `(lambda () (interactive) (company-complete-number ,i)))) keymap) &#34;Keymap that is enabled during an active completion.
 	<a class="read-more" href="/2009/06/emacs-company-mode/">阅读全文 →</a>
       </div>
       
@@ -244,12 +244,10 @@ https://support.mozilla.com/tiki-view_forum_thread.php?locale=zh-CN&comments_par
 
       
       <div class="summary">
-        <p><a href="http://stackoverflow.com/questions/731832/interview-question-ffn-n">http://stackoverflow.com/questions/731832/interview-question-ffn-n</a>
-<a href="http://stackoverflow.com/questions/731832/interview-question-ffn-n">
-<a href="http://stackoverflow.com/questions/732485/interview-question-ffx-1-x">http://stackoverflow.com/questions/732485/interview-question-ffx-1-x</a></a></p>
-
+        <p><!-- raw HTML omitted --><a href="http://stackoverflow.com/questions/731832/interview-question-ffn-n">http://stackoverflow.com/questions/731832/interview-question-ffn-n</a><!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<a href="http://stackoverflow.com/questions/732485/interview-question-ffx-1-x">http://stackoverflow.com/questions/732485/interview-question-ffx-1-x</a><!-- raw HTML omitted --></p>
 <p>问题描述很简单，第一个问题是实现一个函数f，参数为一个带符号的32位整型，使得f(f(x)) = -x，即调用两次后返回的结果为原来的相反数；另一个问题也是实现一个函数g，参数为一个32位浮点，最后使得g(g(x)) = 1/x。如果不能满足所有的情况，就满足尽可能多的情形。</p>
-
 <p>第二个问题比第一个问题简单一点，目前支持数最高的两个答案如下：</p>
 	<a class="read-more" href="/2009/06/two-function-related-interview-questions/">阅读全文 →</a>
       </div>
@@ -271,9 +269,9 @@ https://support.mozilla.com/tiki-view_forum_thread.php?locale=zh-CN&comments_par
       
       <div class="summary">
         VMware支持虚拟串口设备，对于调试内核或者虚拟机的帮助很大，具体设置如下（VMware Server 2, Xen 3.3）：
- VMware中为虚拟机增加串口设备 Add Hardware-&gt;Serial Port，然后在设置中将Connection模式设为File，指定相应的文件路径(如[standard] debian-xen/serial-port.log)
- 修改虚拟机的grub启动参数，以我的/boot/menu/lst为例
-  title Xen 3.3.0 / Debian GNU/Linux, kernel 2.6.18.8-xen root (hd0,0) kernel /boot/xen-3.3.0.gz com1=115200,8n1 loglvl=all guest_loglvl=all console_to_ring console=com1,vga sync_console module /boot/vmlinuz-2.6.18.8-xen root=/dev/sda1 ro console=tty0 savedefault   重启虚拟机，即可在之前指定的文件中(Host机上的/opt/vmware/Virtual Machines/debian-xen/serial-port.log)中看到虚拟机的输出信息了。  
+  VMware中为虚拟机增加串口设备 Add Hardware-&gt;Serial Port，然后在设置中将Connection模式设为File，指定相应的文件路径(如[standard] debian-xen/serial-port.log)
+  修改虚拟机的grub启动参数，以我的/boot/menu/lst为例
+  title Xen 3.3.0 / Debian GNU/Linux, kernel 2.6.18.8-xen root (hd0,0) kernel /boot/xen-3.3.0.gz com1=115200,8n1 loglvl=all guest_loglvl=all console_to_ring console=com1,vga sync_console module /boot/vmlinuz-2.6.18.8-xen root=/dev/sda1 ro console=tty0 savedefault 重启虚拟机，即可在之前指定的文件中(Host机上的/opt/vmware/Virtual Machines/debian-xen/serial-port.log)中看到虚拟机的输出信息了。  
 	<a class="read-more" href="/2009/05/debug-xen-with-vmware-serial-port/">阅读全文 →</a>
       </div>
       
@@ -294,17 +292,14 @@ https://support.mozilla.com/tiki-view_forum_thread.php?locale=zh-CN&comments_par
       
       <div class="summary">
         参考文章：
-[1] http://hokietux.net/blog/?p=58 [2] http://scie.nti.st/2007/11/14/hosting-git-repositories-the-easy-and-secure-way [3] http://www.nkuttler.de/2009/04/06/git-clone-ssh-could-not-resolve-hostname/
- git  很简单，直接用pacman安装即可 sudo pacman -S git
- gitosis  gitosis是一个方便管理git仓库的工具，安装方法：
-1) 从yaourt或者aur下载安装gitosis-git包 http://aur.archlinux.org/packages.php?ID=23419
-2) 新建git用户 sudo useradd &ndash;system &ndash;shell /bin/sh &ndash;comment &lsquo;git version control&rsquo;&ndash;user-group &ndash;home-dir /home/git/ git
-3) 将开发用户的rsa公钥导入gitosis，（没有公钥的话请先运行ssh-keygen -t rsa生成） sudo -H -u git gitosis-init &lt; ~/.ssh/id_rsa.pub
-4) 如果以上步骤没有问题，那么运行 git clone ssh://git@hostname/gitosis-admin.git 后应该就能看到gitosis-admin.git这个目录了
-5) 新建项目、添加用户等操作参见[2]，这里不再赘述
- gitweb  事实上ArchLinux中安装的git包自带了gitweb，可以用which gitweb搜到，一般默认在/usr/share/gitweb。下面假设我的http根目录为/home/httpd
-1) 将/usr/share/gitweb下的文件复制到/home/httpd/cgi-bin（其实似乎只要gitweb.cgi就够了）  sudo cp -R /usr/share/gitweb /home/httpd/cgi-bin/ 
-2) /usr/share/gitweb下的.
+[1] http://hokietux.net/blog/?p=58[2] http://scie.nti.st/2007/11/14/hosting-git-repositories-the-easy-and-secure-way[3] http://www.nkuttler.de/2009/04/06/git-clone-ssh-could-not-resolve-hostname/ git  很简单，直接用pacman安装即可 sudo pacman -S git
+gitosis  gitosis是一个方便管理git仓库的工具，安装方法：
+  从yaourt或者aur下载安装gitosis-git包 http://aur.archlinux.org/packages.php?ID=23419
+  新建git用户 sudo useradd &ndash;system &ndash;shell /bin/sh &ndash;comment &lsquo;git version control&rsquo;&ndash;user-group &ndash;home-dir /home/git/ git  将开发用户的rsa公钥导入gitosis，（没有公钥的话请先运行ssh-keygen -t rsa生成） sudo -H -u git gitosis-init &lt; ~/.ssh/id_rsa.pub  如果以上步骤没有问题，那么运行git clone ssh://git@hostname/gitosis-admin.git后应该就能看到gitosis-admin.git这个目录了
+  新建项目、添加用户等操作参见[2]，这里不再赘述
+  gitweb  事实上ArchLinux中安装的git包自带了gitweb，可以用which gitweb搜到，一般默认在/usr/share/gitweb。下面假设我的http根目录为/home/httpd
+  将/usr/share/gitweb下的文件复制到/home/httpd/cgi-bin（其实似乎只要gitweb.cgi就够了） sudo cp -R /usr/share/gitweb /home/httpd/cgi-bin/   /usr/share/gitweb下的.css和.png复制到/home/httpd/html/git/
+  修改或创建/etc/gitweb.
 	<a class="read-more" href="/2009/05/install-git-gitoss-gitweb-in-archlinux/">阅读全文 →</a>
       </div>
       
@@ -328,9 +323,9 @@ https://support.mozilla.com/tiki-view_forum_thread.php?locale=zh-CN&comments_par
 这篇paper针对以multi-execution这种模式运行的程序提出了一种新的cache手段。
 所谓multi-execution，指的是同时运行同一个程序的多个进程，而它们的输入数据又互不相同。这种模式在machine-learning领域比较常见，一些相对独立的learner可以以并行的方式被训练，而它们的结果可以通过一种叫做boosting的方式合并起来。给我的感觉似乎有点像mapreduce？
 然后呢，作者们发现以这种方式运行的程序进程的数据有很大一部分是相同的，在合并cache数据上可以做一下文章，节省cache的使用。
-于是这篇paper提出了一种叫做mergeable cache的架构，用于代替传统的L2 cache，L1 cache还是传统的cache架构。首先假设相同的数据的虚拟地址往往也是相同的（应该去掉了address space randomization的影响），以类似Page Coloring的策略进行物理页的分配，使得不同进程同一虚拟地址所对应的物理页都是相邻的。然后把虚拟地址的头9位作为cache tag，再为每个cache line记录一个bit vector用以表示某个processor的数据是否保存在这条cache line中。于是L2 cache hit当且仅当： 1. 虚拟地址的头9位等于cache line的tag 2. cache line中的bit vector的processor对应的位被置上
-另外为了简化cache策略，L1和L2的数据内容是互斥的，或者说一段被cache的数据要么在L1，要么在L2，不可能同时存在于两者中。这样一来L2就只有从L1淘汰出来的数据了，而L2中的数据修改分三步完成： 1. 把数据从L2中标记为不存在（对应processor的bit vector位置0） 2. 数据进入L1 3. 修改数据
-这就是这篇paper提出的cache架构的主要内容，后面的evaluation部分做的也很不错。从数据中可以看出合并的cache里面dirty cache占了比较大的比例，从而说明简单的copy-on-write策略的效果不会很好，因为copy-on-write只能合并clean cache。最后平均的speedup提升在2.5x左右，很不错。但是对于数据无关的并行程序运行，会产生一定的overhead，此时可以选择传统的L2 cache机制。
+于是这篇paper提出了一种叫做mergeable cache的架构，用于代替传统的L2 cache，L1 cache还是传统的cache架构。首先假设相同的数据的虚拟地址往往也是相同的（应该去掉了address space randomization的影响），以类似Page Coloring的策略进行物理页的分配，使得不同进程同一虚拟地址所对应的物理页都是相邻的。然后把虚拟地址的头9位作为cache tag，再为每个cache line记录一个bit vector用以表示某个processor的数据是否保存在这条cache line中。于是L2 cache hit当且仅当：
+ 虚拟地址的头9位等于cache line的tag cache line中的bit vector的processor对应的位被置上  另外为了简化cache策略，L1和L2的数据内容是互斥的，或者说一段被cache的数据要么在L1，要么在L2，不可能同时存在于两者中。这样一来L2就只有从L1淘汰出来的数据了，而L2中的数据修改分三步完成：
+ 把数据从L2中标记为不存在（对应processor的bit vector位置0） 数据进入L1 修改数据  这就是这篇paper提出的cache架构的主要内容，后面的evaluation部分做的也很不错。从数据中可以看出合并的cache里面dirty cache占了比较大的比例，从而说明简单的copy-on-write策略的效果不会很好，因为copy-on-write只能合并clean cache。最后平均的speedup提升在2.5x左右，很不错。但是对于数据无关的并行程序运行，会产生一定的overhead，此时可以选择传统的L2 cache机制。
 	<a class="read-more" href="/2009/05/isca-09-multi-execution/">阅读全文 →</a>
       </div>
       

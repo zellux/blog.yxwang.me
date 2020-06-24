@@ -11,6 +11,7 @@
     
 
     <title> DomainU 中调用 do_console_io &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -39,7 +40,7 @@
     "articleSection" : "post",
     "name" : "DomainU 中调用 do_console_io",
     "headline" : "DomainU 中调用 do_console_io",
-    "description" : "The Definitive Guide to Xen Hypervisor 第二章的 Exercise，通过调用 hypercall page 中的 console_io 项输出Hello World。\nvoid start_kernel(start_info_t * start_info) { HYPERVISOR_console_io(CONSOLEIO_write,12,\x26quot;Hello Worldn\x26quot;); while(1); }  但是默认选项编译和启动的Xen是不会保留DomainU中输出的信息。参考 drivers\/char\/console.c，可以看到主要有两个选项控制了 DomainU 的 do_console_io 输出：\n#ifndef VERBOSE \/* Only domain 0 may access the emergency console. *\/ if ( current-\x26gt;domain-\x26gt;domain_id != 0 ) return -EPERM; #endif  if ( opt_console_to_ring ) { for ( kptr = kbuf; *kptr != \x27\x27; kptr\x2b\x2b ) putchar_console_ring(*kptr); send_guest_global_virq(dom0, VIRQ_CON_RING); }  在编译 Xen 的时候开启 debug 选项即可置上 VERBOSE，而 opt_console_to_ring 则是一个启动选项，在 grub 的启动选项中增加 loglvl=all guest_loglvl=all console_to_ring 即可。",
+    "description" : "The Definitive Guide to Xen Hypervisor 第二章的 Exercise，通过调用 hypercall page 中的 console_io 项输出Hello World。\nvoid start_kernel(start_info_t * start_info) { HYPERVISOR_console_io(CONSOLEIO_write,12,\u0026#34;Hello Worldn\u0026#34;); while(1); } 但是默认选项编译和启动的Xen是不会保留DomainU中输出的信息。参考 drivers\/char\/console.c，可以看到主要有两个选项控制了 DomainU 的 do_console_io 输出：\n#ifndef VERBOSE  \/* Only domain 0 may access the emergency console. *\/ if ( current-\u0026gt;domain-\u0026gt;domain_id != 0 ) return -EPERM; #endif if ( opt_console_to_ring ) { for ( kptr = kbuf; *kptr != \u0026#39;\u0026#39;; kptr\u002b\u002b ) putchar_console_ring(*kptr); send_guest_global_virq(dom0, VIRQ_CON_RING); } 在编译 Xen 的时候开启 debug 选项即可置上 VERBOSE，而 opt_console_to_ring 则是一个启动选项，在 grub 的启动选项中增加 loglvl=all guest_loglvl=all console_to_ring 即可。",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -47,8 +48,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2008",
-    "datePublished": "2008-09-25 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2008-09-25 00:00:00 \x2b0000 UTC",
+    "datePublished": "2008-09-25 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2008-09-25 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/2008\/09\/calling-do_console_io-from-domainu\/",
     "wordCount" : "92",
     "keywords" : [ "Computer System","Xen","virtualization","Blog" ]
@@ -94,33 +95,24 @@
 
     <div class="post-content">
       <p><a href="http://www.amazon.com/Definitive-Guide-Xen-Hypervisor/dp/013234971X/ref=sr_1_1?ie=UTF8&amp;qid=1322806199&amp;sr=8-1">The Definitive Guide to Xen Hypervisor</a> 第二章的 Exercise，通过调用 hypercall page 中的 console_io 项输出Hello World。</p>
-
-<pre><code class="language-c">void start_kernel(start_info_t * start_info)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">start_kernel</span>(start_info_t <span style="color:#f92672">*</span> start_info)
 {
-    HYPERVISOR_console_io(CONSOLEIO_write,12,&quot;Hello Worldn&quot;);
-    while(1);
+    HYPERVISOR_console_io(CONSOLEIO_write,<span style="color:#ae81ff">12</span>,<span style="color:#e6db74">&#34;Hello Worldn&#34;</span>);
+    <span style="color:#66d9ef">while</span>(<span style="color:#ae81ff">1</span>);
 }
-</code></pre>
-
-<p>但是默认选项编译和启动的Xen是不会保留DomainU中输出的信息。参考 drivers/char/console.c，可以看到主要有两个选项控制了 DomainU 的 do_console_io 输出：</p>
-
-<pre><code class="language-c">#ifndef VERBOSE
-    /* Only domain 0 may access the emergency console. */
-    if ( current-&gt;domain-&gt;domain_id != 0 )
-        return -EPERM;
-#endif
-</code></pre>
-
-<pre><code class="language-c">if ( opt_console_to_ring )
+</code></pre></div><p>但是默认选项编译和启动的Xen是不会保留DomainU中输出的信息。参考 drivers/char/console.c，可以看到主要有两个选项控制了 DomainU 的 do_console_io 输出：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">#ifndef VERBOSE
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">/* Only domain 0 may access the emergency console. */</span>
+    <span style="color:#66d9ef">if</span> ( current<span style="color:#f92672">-&gt;</span>domain<span style="color:#f92672">-&gt;</span>domain_id <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span> )
+        <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span>EPERM;
+<span style="color:#75715e">#endif
+</span></code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">if</span> ( opt_console_to_ring )
 {
-    for ( kptr = kbuf; *kptr != ''; kptr++ )
-        putchar_console_ring(*kptr);
+    <span style="color:#66d9ef">for</span> ( kptr <span style="color:#f92672">=</span> kbuf; <span style="color:#f92672">*</span>kptr <span style="color:#f92672">!=</span> <span style="color:#960050;background-color:#1e0010">&#39;&#39;</span>; kptr<span style="color:#f92672">++</span> )
+        putchar_console_ring(<span style="color:#f92672">*</span>kptr);
     send_guest_global_virq(dom0, VIRQ_CON_RING);
 }
-</code></pre>
-
-<p>在编译 Xen 的时候开启 debug 选项即可置上 VERBOSE，而 opt_console_to_ring 则是一个启动选项，在 grub 的启动选项中增加 <code>loglvl=all guest_loglvl=all console_to_ring</code> 即可。</p>
-
+</code></pre></div><p>在编译 Xen 的时候开启 debug 选项即可置上 VERBOSE，而 opt_console_to_ring 则是一个启动选项，在 grub 的启动选项中增加 <code>loglvl=all guest_loglvl=all console_to_ring</code> 即可。</p>
 <p>重启 Xen 后就能通过 <code>xm dmesg</code> 看到 Hello World 了。</p>
 
     </div>

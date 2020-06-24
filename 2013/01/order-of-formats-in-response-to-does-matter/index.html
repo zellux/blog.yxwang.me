@@ -11,6 +11,7 @@
     
 
     <title> Rails 中关于 respond_to 不同格式的顺序 &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -39,7 +40,7 @@
     "articleSection" : "post",
     "name" : "Rails 中关于 respond_to 不同格式的顺序",
     "headline" : "Rails 中关于 respond_to 不同格式的顺序",
-    "description" : "\x3cp\x3e以前没注意过 Rails controller 中 respond_to 的格式顺序，后来碰到了一个诡异的 bug，才发现这里的顺序对程序行为是有影响的。bug 的现象是用某个应用商店桌面端浏览网站时，会出现返回 JSON 而不是网页的情况。由于当时报告错误的用户给出的 bug 描述是「点击链接后出现乱码」，导致 debug 一开始没找对方向，废了不少功夫才解决这个问题。\x3c\/p\x3e\n\n\x3cp\x3e问题就出在不同格式的声明先后上，有问题的代码是：\x3c\/p\x3e\n\n\x3cpre\x3e\x3ccode class=\x22language-ruby\x22\x3erespond_to do |format|\n  format.json { render json: @items }\n  format.html\nend\n\x3c\/code\x3e\x3c\/pre\x3e",
+    "description" : "\u003cp\u003e以前没注意过 Rails controller 中 respond_to 的格式顺序，后来碰到了一个诡异的 bug，才发现这里的顺序对程序行为是有影响的。bug 的现象是用某个应用商店桌面端浏览网站时，会出现返回 JSON 而不是网页的情况。由于当时报告错误的用户给出的 bug 描述是「点击链接后出现乱码」，导致 debug 一开始没找对方向，废了不少功夫才解决这个问题。\u003c\/p\u003e\n\u003cp\u003e问题就出在不同格式的声明先后上，有问题的代码是：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre style=\u0022color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4\u0022\u003e\u003ccode class=\u0022language-ruby\u0022 data-lang=\u0022ruby\u0022\u003erespond_to \u003cspan style=\u0022color:#66d9ef\u0022\u003edo\u003c\/span\u003e \u003cspan style=\u0022color:#f92672\u0022\u003e|\u003c\/span\u003eformat\u003cspan style=\u0022color:#f92672\u0022\u003e|\u003c\/span\u003e\n  format\u003cspan style=\u0022color:#f92672\u0022\u003e.\u003c\/span\u003ejson { render \u003cspan style=\u0022color:#e6db74\u0022\u003ejson\u003c\/span\u003e: @items }\n  format\u003cspan style=\u0022color:#f92672\u0022\u003e.\u003c\/span\u003ehtml\n\u003cspan style=\u0022color:#66d9ef\u0022\u003eend\u003c\/span\u003e\n\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -47,8 +48,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2013",
-    "datePublished": "2013-01-04 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2013-01-04 00:00:00 \x2b0000 UTC",
+    "datePublished": "2013-01-04 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2013-01-04 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/2013\/01\/order-of-formats-in-response-to-does-matter\/",
     "wordCount" : "50",
     "keywords" : [ "Programming","Rails","Blog" ]
@@ -94,17 +95,12 @@
 
     <div class="post-content">
       <p>以前没注意过 Rails controller 中 respond_to 的格式顺序，后来碰到了一个诡异的 bug，才发现这里的顺序对程序行为是有影响的。bug 的现象是用某个应用商店桌面端浏览网站时，会出现返回 JSON 而不是网页的情况。由于当时报告错误的用户给出的 bug 描述是「点击链接后出现乱码」，导致 debug 一开始没找对方向，废了不少功夫才解决这个问题。</p>
-
 <p>问题就出在不同格式的声明先后上，有问题的代码是：</p>
-
-<pre><code class="language-ruby">respond_to do |format|
-  format.json { render json: @items }
-  format.html
-end
-</code></pre>
-
-<p>有些浏览器或者内嵌了 WebKit 控件的程序，发送的 HTTP 请求头中，<code>Content-Type</code> 的值是 <code>*/*</code>。这就导致 JSON 的 MIME (application/json) 匹配成功后返回给了浏览器。自然用户看到的是 JSON 而不是一个完整的网页。所以从这个角度来说，把 format.html 放在第一位比较合适（不知道有什么例外情况吗？）。</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">respond_to <span style="color:#66d9ef">do</span> <span style="color:#f92672">|</span>format<span style="color:#f92672">|</span>
+  format<span style="color:#f92672">.</span>json { render <span style="color:#e6db74">json</span>: @items }
+  format<span style="color:#f92672">.</span>html
+<span style="color:#66d9ef">end</span>
+</code></pre></div><p>有些浏览器或者内嵌了 WebKit 控件的程序，发送的 HTTP 请求头中，<code>Content-Type</code> 的值是 <code>*/*</code>。这就导致 JSON 的 MIME (application/json) 匹配成功后返回给了浏览器。自然用户看到的是 JSON 而不是一个完整的网页。所以从这个角度来说，把 format.html 放在第一位比较合适（不知道有什么例外情况吗？）。</p>
 <p>当然这个 bug 也可以说是程序或者控件的行为引起的，因为浏览器需要的 HTML 而不是 JSON，不应该发送格式为 <code>*/*</code> 的请求。</p>
     </div>
         <div class="cc-license">

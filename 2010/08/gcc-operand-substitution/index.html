@@ -11,6 +11,7 @@
     
 
     <title> gcc 内联汇编中 %c 的用法 &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -39,7 +40,7 @@
     "articleSection" : "post",
     "name" : "gcc 内联汇编中 %c 的用法",
     "headline" : "gcc 内联汇编中 %c 的用法",
-    "description" : "这几天看KVM代码的时候看到里面有个内联汇编的语法很陌生（下面的代码截取了部分内联汇编片段）：\nasm ( \x26quot;mov %c[rax](%3), %%rax \\n\\t\x26quot; \x26quot;mov %c[rbx](%3), %%rbx \\n\\t\x26quot; \x26quot;mov %c[rdx](%3), %%rdx \\n\\t\x26quot; \x26quot;mov %c[rsi](%3), %%rsi \\n\\t\x26quot; \x26quot;mov %c[rdi](%3), %%rdi \\n\\t\x26quot; : \x26quot;=q\x26quot; (fail) : \x26quot;r\x26quot;(vcpu-\x26gt;launched), \x26quot;d\x26quot;((unsigned long)HOST_RSP), \x26quot;c\x26quot;(vcpu), [rax]\x26quot;i\x26quot;(offsetof(struct kvm_vcpu, regs[VCPU_REGS_RAX])), [rbx]\x26quot;i\x26quot;(offsetof(struct kvm_vcpu, regs[VCPU_REGS_RBX])), [rcx]\x26quot;i\x26quot;(offsetof(struct kvm_vcpu, regs[VCPU_REGS_RCX])) : \x26quot;cc\x26quot;, \x26quot;memory\x26quot; );  stackoverflow上问了下才知道这是gcc的operand substitution语法，%c后面跟上常量名，就能在内联汇编中使用这个常量了。\n以这段代码为例，vcpu是struct kvm_vcpu类型，[rax]\x26ldquo;i\x26rdquo;(offsetof(struct kvm_vcpu, regs[VCPU_REGS_RAX])这句话把vcpu-\x26gt;regs[VCPU_REGS_RAX]相对于vcpu的偏移赋值给了rax这一常量。接下来回到第一行mov %crax, %%eax，%c[rax]等于前面得到的偏移量，加上vcpu并取值后就是vcpu-\x26gt;regs[VCPU_REGS_RAX]中保存的值了，这个指令会把这个值保存在%rax寄存器中，从而完成了vcpu的rax寄存器恢复工作。",
+    "description" : "这几天看KVM代码的时候看到里面有个内联汇编的语法很陌生（下面的代码截取了部分内联汇编片段）：\nasm ( \u0026#34;mov %c[rax](%3), %%rax \\n\\t\u0026#34; \u0026#34;mov %c[rbx](%3), %%rbx \\n\\t\u0026#34; \u0026#34;mov %c[rdx](%3), %%rdx \\n\\t\u0026#34; \u0026#34;mov %c[rsi](%3), %%rsi \\n\\t\u0026#34; \u0026#34;mov %c[rdi](%3), %%rdi \\n\\t\u0026#34; : \u0026#34;=q\u0026#34; (fail) : \u0026#34;r\u0026#34;(vcpu-\u0026gt;launched), \u0026#34;d\u0026#34;((unsigned long)HOST_RSP), \u0026#34;c\u0026#34;(vcpu), [rax]\u0026#34;i\u0026#34;(offsetof(struct kvm_vcpu, regs[VCPU_REGS_RAX])), [rbx]\u0026#34;i\u0026#34;(offsetof(struct kvm_vcpu, regs[VCPU_REGS_RBX])), [rcx]\u0026#34;i\u0026#34;(offsetof(struct kvm_vcpu, regs[VCPU_REGS_RCX])) : \u0026#34;cc\u0026#34;, \u0026#34;memory\u0026#34; ); stackoverflow上问了下才知道这是gcc的operand substitution语法，%c后面跟上常量名，就能在内联汇编中使用这个常量了。\n以这段代码为例，vcpu是struct kvm_vcpu类型，[rax]\u0026ldquo;i\u0026rdquo;(offsetof(struct kvm_vcpu, regs[VCPU_REGS_RAX])这句话把vcpu-\u0026gt;regs[VCPU_REGS_RAX]相对于vcpu的偏移赋值给了rax这一常量。接下来回到第一行mov %crax, %%eax，%c[rax]等于前面得到的偏移量，加上vcpu并取值后就是vcpu-\u0026gt;regs[VCPU_REGS_RAX]中保存的值了，这个指令会把这个值保存在%rax寄存器中，从而完成了vcpu的rax寄存器恢复工作。",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -47,8 +48,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2010",
-    "datePublished": "2010-08-25 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2010-08-25 00:00:00 \x2b0000 UTC",
+    "datePublished": "2010-08-25 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2010-08-25 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/2010\/08\/gcc-operand-substitution\/",
     "wordCount" : "52",
     "keywords" : [ "Assembly","Computer Languages","GCC","Programming","gcc","Blog" ]
@@ -94,25 +95,21 @@
 
     <div class="post-content">
       <p>这几天看KVM代码的时候看到里面有个内联汇编的语法很陌生（下面的代码截取了部分内联汇编片段）：</p>
-
-<pre><code class="language-nasm">    asm (
-        &quot;mov %c[rax](%3), %%rax \n\t&quot;
-        &quot;mov %c[rbx](%3), %%rbx \n\t&quot;
-        &quot;mov %c[rdx](%3), %%rdx \n\t&quot;
-        &quot;mov %c[rsi](%3), %%rsi \n\t&quot;
-        &quot;mov %c[rdi](%3), %%rdi \n\t&quot;
-          : &quot;=q&quot; (fail)
-          : &quot;r&quot;(vcpu-&gt;launched), &quot;d&quot;((unsigned long)HOST_RSP),
-        &quot;c&quot;(vcpu),
-        [rax]&quot;i&quot;(offsetof(struct kvm_vcpu, regs[VCPU_REGS_RAX])),
-        [rbx]&quot;i&quot;(offsetof(struct kvm_vcpu, regs[VCPU_REGS_RBX])),
-        [rcx]&quot;i&quot;(offsetof(struct kvm_vcpu, regs[VCPU_REGS_RCX]))
-          : &quot;cc&quot;, &quot;memory&quot; );
-</code></pre>
-
-<p>stackoverflow上问了下才知道这是gcc的<a href="http://gcc.gnu.org/onlinedocs/gccint/Output-Template.html#Output-Template" target="_blank">operand substitution语法</a>，%c后面跟上常量名，就能在内联汇编中使用这个常量了。</p>
-
-<p>以这段代码为例，vcpu是struct kvm_vcpu类型，<u>[rax]&ldquo;i&rdquo;(offsetof(struct kvm_vcpu, regs[VCPU_REGS_RAX])</u>这句话把vcpu-&gt;regs[VCPU_REGS_RAX]相对于vcpu的偏移赋值给了rax这一常量。接下来回到第一行<u>mov %c<a href="%3">rax</a>, %%eax</u>，%c[rax]等于前面得到的偏移量，加上vcpu并取值后就是vcpu-&gt;regs[VCPU_REGS_RAX]中保存的值了，这个指令会把这个值保存在%rax寄存器中，从而完成了vcpu的rax寄存器恢复工作。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-nasm" data-lang="nasm">    <span style="color:#a6e22e">asm</span> (
+        <span style="color:#960050;background-color:#1e0010">&#34;</span><span style="color:#a6e22e">mov</span> <span style="color:#f92672">%</span>c[rax](<span style="color:#f92672">%</span><span style="color:#ae81ff">3</span>), <span style="color:#f92672">%%</span>rax <span style="color:#960050;background-color:#1e0010">\</span>n<span style="color:#960050;background-color:#1e0010">\</span>t<span style="color:#960050;background-color:#1e0010">&#34;</span>
+        <span style="color:#960050;background-color:#1e0010">&#34;</span><span style="color:#a6e22e">mov</span> <span style="color:#f92672">%</span>c[rbx](<span style="color:#f92672">%</span><span style="color:#ae81ff">3</span>), <span style="color:#f92672">%%</span>rbx <span style="color:#960050;background-color:#1e0010">\</span>n<span style="color:#960050;background-color:#1e0010">\</span>t<span style="color:#960050;background-color:#1e0010">&#34;</span>
+        <span style="color:#960050;background-color:#1e0010">&#34;</span><span style="color:#a6e22e">mov</span> <span style="color:#f92672">%</span>c[rdx](<span style="color:#f92672">%</span><span style="color:#ae81ff">3</span>), <span style="color:#f92672">%%</span>rdx <span style="color:#960050;background-color:#1e0010">\</span>n<span style="color:#960050;background-color:#1e0010">\</span>t<span style="color:#960050;background-color:#1e0010">&#34;</span>
+        <span style="color:#960050;background-color:#1e0010">&#34;</span><span style="color:#a6e22e">mov</span> <span style="color:#f92672">%</span>c[rsi](<span style="color:#f92672">%</span><span style="color:#ae81ff">3</span>), <span style="color:#f92672">%%</span>rsi <span style="color:#960050;background-color:#1e0010">\</span>n<span style="color:#960050;background-color:#1e0010">\</span>t<span style="color:#960050;background-color:#1e0010">&#34;</span>
+        <span style="color:#960050;background-color:#1e0010">&#34;</span><span style="color:#a6e22e">mov</span> <span style="color:#f92672">%</span>c[rdi](<span style="color:#f92672">%</span><span style="color:#ae81ff">3</span>), <span style="color:#f92672">%%</span>rdi <span style="color:#960050;background-color:#1e0010">\</span>n<span style="color:#960050;background-color:#1e0010">\</span>t<span style="color:#960050;background-color:#1e0010">&#34;</span>
+          <span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#960050;background-color:#1e0010">&#34;=</span><span style="color:#a6e22e">q</span><span style="color:#960050;background-color:#1e0010">&#34;</span> (fail)
+          <span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#960050;background-color:#1e0010">&#34;</span><span style="color:#a6e22e">r</span><span style="color:#e6db74">&#34;(vcpu-&gt;launched), &#34;</span>d<span style="color:#960050;background-color:#1e0010">&#34;</span>((unsigned long)HOST_RSP),
+        <span style="color:#960050;background-color:#1e0010">&#34;</span><span style="color:#a6e22e">c</span><span style="color:#960050;background-color:#1e0010">&#34;</span>(vcpu),
+        <span style="color:#960050;background-color:#1e0010">[</span><span style="color:#a6e22e">rax</span>]<span style="color:#e6db74">&#34;i&#34;</span>(offsetof(struct kvm_vcpu, regs[VCPU_REGS_RAX])),
+        <span style="color:#960050;background-color:#1e0010">[</span><span style="color:#a6e22e">rbx</span>]<span style="color:#e6db74">&#34;i&#34;</span>(offsetof(struct kvm_vcpu, regs[VCPU_REGS_RBX])),
+        <span style="color:#960050;background-color:#1e0010">[</span><span style="color:#a6e22e">rcx</span>]<span style="color:#e6db74">&#34;i&#34;</span>(offsetof(struct kvm_vcpu, regs[VCPU_REGS_RCX]))
+          <span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#960050;background-color:#1e0010">&#34;</span><span style="color:#a6e22e">cc</span><span style="color:#e6db74">&#34;, &#34;</span>memory<span style="color:#960050;background-color:#1e0010">&#34;</span> )<span style="color:#75715e">;</span>
+</code></pre></div><p>stackoverflow上问了下才知道这是gcc的<!-- raw HTML omitted -->operand substitution语法<!-- raw HTML omitted -->，%c后面跟上常量名，就能在内联汇编中使用这个常量了。</p>
+<p>以这段代码为例，vcpu是struct kvm_vcpu类型，<!-- raw HTML omitted -->[rax]&ldquo;i&rdquo;(offsetof(struct kvm_vcpu, regs[VCPU_REGS_RAX])<!-- raw HTML omitted -->这句话把vcpu-&gt;regs[VCPU_REGS_RAX]相对于vcpu的偏移赋值给了rax这一常量。接下来回到第一行<!-- raw HTML omitted -->mov %c<a href="%253">rax</a>, %%eax<!-- raw HTML omitted -->，%c[rax]等于前面得到的偏移量，加上vcpu并取值后就是vcpu-&gt;regs[VCPU_REGS_RAX]中保存的值了，这个指令会把这个值保存在%rax寄存器中，从而完成了vcpu的rax寄存器恢复工作。</p>
 
     </div>
         <div class="cc-license">

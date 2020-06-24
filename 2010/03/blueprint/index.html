@@ -11,6 +11,7 @@
     
 
     <title> 跨站脚本攻击和 BluePrint &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -39,7 +40,7 @@
     "articleSection" : "post",
     "name" : "跨站脚本攻击和 BluePrint",
     "headline" : "跨站脚本攻击和 BluePrint",
-    "description" : "Blueprint: Robust prevention of cross-site scripting attacks for existing browsers\n这篇论文提出了一种防范是跨站脚本攻击(XSS)的新的方法，发在IEEE S\x26amp;P 2009上，作者是UIUC的Mike Ter Louw。\n所谓跨站脚本攻击，简单地说就是在网页中注入非法的脚本代码，从而达到攻击的效果。比较著名的例子有当年在MySpace上泛滥的Samy蠕虫，通过特殊的脚本注入手段，每一位访问Samy主页的用户，他们的主页都会被修改加上一段Samy is my hero文字，并且他们的主页也会被植入攻击代码，从而把这段脚本扩散给更多的用户。\n通常防范跨站脚本攻击的方式有两种。一种做在服务器端，为每一段用户上传的内容做检查，并剔除恶意代码。但这种方式很难保证能过滤掉所有的恶意字符串，一方面攻击方法防不甚防，有兴趣的朋友可以参考下XSS Cheat Sheet，上面给出了很多一般人很难想到的攻击代码的组合方式。另一方面由于现在大多数论坛和博客都支持一些基本的文本修饰标签，所以简单的标签剔除或者重新编码都不可行。\n另一种方法是做在浏览器端，但是由于浏览器无法区分某一段脚本到底是来源于不可信的用户还是可信的站点，所以这种方法实现起来也有很大的困难。\n这里实现防范措施的一个难点在于，Web应用把生成HTML的返回给浏览器后，就不参与浏览器的HTML解析工作了。这样浏览器就不知道哪部分出现脚本是安全的，哪部分出现是不安全的。\nBluePrint就着眼于这个点，提出了一种让Web应用“参与”HTML解析工作的设计。下面通过论文里面的一个例子，简单介绍下它的防范机制。\n假如一位恶意的用户在一个博客上上传了这样一段含有恶意代码的留言：\n\x26lt;p\x26gt; Here is a page you might find \x26lt;b \x26quot;\x26quot;\x26quot;\x26gt;\x26lt;script\x26gt;doEvil(. . .)\x26lt;\/script\x26gt;\x26quot;\x26gt;very\x26lt;\/b\x26gt; interesting: \x26lt;a href=\x26quot; \x26amp;#14; javasc\x26amp;#x0A;ript:doEvil(. . .);\x26quot;\x26gt; Link\x26lt;\/a\x26gt; \x26lt;\/p\x26gt;\x26lt;p style=\x26quot;nop:expres\/*xss*\/sion(doEvil(. . .))\x26quot;\x26gt; Respectfully, Eve \x26lt;\/p\x26gt;  可以看到，这段代码里包含了很多可能引发脚本执行的代码，而要在服务器端把这些所有隐藏的攻击可能找出来是一件比较困难的事。那么BluePrint是怎么在不知道这段代码是否含有恶意代码的前提下处理的呢？\n首先，这种由用户上传的不可信的字符串会先在服务器端被解析成一棵树，就像HTML在浏览器中被解析一样，这棵HTML解析树可以用一些简单的DOM API来生成，例如appendChild, createElement等。这些描述如何生成HTML解析树的方法会和数据值（URL、标签属性等）一起，通过特殊的编码（Base64）传递给浏览器。例如上面这段代码，最后在浏览器接收到的HTML中，会变成这样：\n\x26lt;code style=\x26quot;display:none;\x26quot; id=\x26quot;__bp1\x26quot;\x26gt; =Enk\/sCkhlcmUgaXMgYSBwYWdlIHlvdSBta... =SkKICAgICI\x2bdmVyeQ===C\/k\/QIGhlbHBmd... =ECg===C\/Enk\/gCiAgUmVzcGVjdGZ1bGx5L... \x26lt;\/code\x26gt;\x26lt;script id=\x26quot;__bp1s\x26quot;\x26gt; __bp__.cxPCData(\x26quot;__bp1\x26quot;, \x26quot;__bp1s\x26quot;); \x26lt;\/script\x26gt;  在浏览器端，这段特殊的代码会被JS库解析成自定义的命令和数据格式，并由前面提到的DOM API动态生成这些HTML结点，从而达到和传统的方式一样的显示效果。当然可信的HTML代码，例如文章正文，还是按传统的方式传输的。",
+    "description" : "Blueprint: Robust prevention of cross-site scripting attacks for existing browsers\n这篇论文提出了一种防范是跨站脚本攻击(XSS)的新的方法，发在IEEE S\u0026amp;P 2009上，作者是UIUC的Mike Ter Louw。\n所谓跨站脚本攻击，简单地说就是在网页中注入非法的脚本代码，从而达到攻击的效果。比较著名的例子有当年在MySpace上泛滥的Samy蠕虫，通过特殊的脚本注入手段，每一位访问Samy主页的用户，他们的主页都会被修改加上一段Samy is my hero文字，并且他们的主页也会被植入攻击代码，从而把这段脚本扩散给更多的用户。\n通常防范跨站脚本攻击的方式有两种。一种做在服务器端，为每一段用户上传的内容做检查，并剔除恶意代码。但这种方式很难保证能过滤掉所有的恶意字符串，一方面攻击方法防不甚防，有兴趣的朋友可以参考下XSS Cheat Sheet，上面给出了很多一般人很难想到的攻击代码的组合方式。另一方面由于现在大多数论坛和博客都支持一些基本的文本修饰标签，所以简单的标签剔除或者重新编码都不可行。\n另一种方法是做在浏览器端，但是由于浏览器无法区分某一段脚本到底是来源于不可信的用户还是可信的站点，所以这种方法实现起来也有很大的困难。\n这里实现防范措施的一个难点在于，Web应用把生成HTML的返回给浏览器后，就不参与浏览器的HTML解析工作了。这样浏览器就不知道哪部分出现脚本是安全的，哪部分出现是不安全的。\nBluePrint就着眼于这个点，提出了一种让Web应用“参与”HTML解析工作的设计。下面通过论文里面的一个例子，简单介绍下它的防范机制。\n假如一位恶意的用户在一个博客上上传了这样一段含有恶意代码的留言：\n\u0026lt;p\u0026gt; Here is a page you might find \u0026lt;b \u0026#34;\u0026#34;\u0026#34;\u0026gt;\u0026lt;script\u0026gt;doEvil(. . .)\u0026lt;\/script\u0026gt;\u0026#34;\u0026gt;very\u0026lt;\/b\u0026gt; interesting: \u0026lt;a href=\u0026#34; \u0026amp;#14; javasc\u0026amp;#x0A;ript:doEvil(. . .);\u0026#34;\u0026gt; Link\u0026lt;\/a\u0026gt; \u0026lt;\/p\u0026gt;\u0026lt;p style=\u0026#34;nop:expres\/*xss*\/sion(doEvil(. . .))\u0026#34;\u0026gt; Respectfully, Eve \u0026lt;\/p\u0026gt; 可以看到，这段代码里包含了很多可能引发脚本执行的代码，而要在服务器端把这些所有隐藏的攻击可能找出来是一件比较困难的事。那么BluePrint是怎么在不知道这段代码是否含有恶意代码的前提下处理的呢？\n首先，这种由用户上传的不可信的字符串会先在服务器端被解析成一棵树，就像HTML在浏览器中被解析一样，这棵HTML解析树可以用一些简单的DOM API来生成，例如appendChild, createElement等。这些描述如何生成HTML解析树的方法会和数据值（URL、标签属性等）一起，通过特殊的编码（Base64）传递给浏览器。例如上面这段代码，最后在浏览器接收到的HTML中，会变成这样：\n\u0026lt;code style=\u0026#34;display:none;\u0026#34; id=\u0026#34;__bp1\u0026#34;\u0026gt; =Enk\/sCkhlcmUgaXMgYSBwYWdlIHlvdSBta... =SkKICAgICI\u002bdmVyeQ===C\/k\/QIGhlbHBmd... =ECg===C\/Enk\/gCiAgUmVzcGVjdGZ1bGx5L... \u0026lt;\/code\u0026gt;\u0026lt;script id=\u0026#34;__bp1s\u0026#34;\u0026gt; __bp__.cxPCData(\u0026#34;__bp1\u0026#34;, \u0026#34;__bp1s\u0026#34;); \u0026lt;\/script\u0026gt; 在浏览器端，这段特殊的代码会被JS库解析成自定义的命令和数据格式，并由前面提到的DOM API动态生成这些HTML结点，从而达到和传统的方式一样的显示效果。当然可信的HTML代码，例如文章正文，还是按传统的方式传输的。",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -47,11 +48,11 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2010",
-    "datePublished": "2010-03-03 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2010-03-03 00:00:00 \x2b0000 UTC",
+    "datePublished": "2010-03-03 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2010-03-03 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/2010\/03\/blueprint\/",
     "wordCount" : "106",
-    "keywords" : [ "Computer System","Paper","S\x26amp;P","Security","XSS","Blog" ]
+    "keywords" : [ "Computer System","Paper","S\u0026amp;P","Security","XSS","Blog" ]
 }
 </script>
 
@@ -94,73 +95,50 @@
 
     <div class="post-content">
       <p>Blueprint: Robust prevention of cross-site scripting attacks for existing browsers</p>
-
 <p>这篇论文提出了一种防范是跨站脚本攻击(XSS)的新的方法，发在IEEE S&amp;P 2009上，作者是UIUC的Mike Ter Louw。</p>
-
-<p>所谓跨站脚本攻击，简单地说就是在网页中注入非法的脚本代码，从而达到攻击的效果。比较著名的例子有当年在MySpace上泛滥的<a href="http://en.wikipedia.org/wiki/Samy_(XSS)" target="_blank">Samy蠕虫</a>，通过特殊的脚本注入手段，每一位访问Samy主页的用户，他们的主页都会被修改加上一段Samy is my hero文字，并且他们的主页也会被植入攻击代码，从而把这段脚本扩散给更多的用户。</p>
-
-<p>通常防范跨站脚本攻击的方式有两种。一种做在服务器端，为每一段用户上传的内容做检查，并剔除恶意代码。但这种方式很难保证能过滤掉所有的恶意字符串，一方面攻击方法防不甚防，有兴趣的朋友可以参考下<a href="http://ha.ckers.org/xss.html" target="_blank">XSS Cheat Sheet</a>，上面给出了很多一般人很难想到的攻击代码的组合方式。另一方面由于现在大多数论坛和博客都支持一些基本的文本修饰标签，所以简单的标签剔除或者重新编码都不可行。</p>
-
+<p>所谓跨站脚本攻击，简单地说就是在网页中注入非法的脚本代码，从而达到攻击的效果。比较著名的例子有当年在MySpace上泛滥的<!-- raw HTML omitted -->Samy蠕虫<!-- raw HTML omitted -->，通过特殊的脚本注入手段，每一位访问Samy主页的用户，他们的主页都会被修改加上一段Samy is my hero文字，并且他们的主页也会被植入攻击代码，从而把这段脚本扩散给更多的用户。</p>
+<p>通常防范跨站脚本攻击的方式有两种。一种做在服务器端，为每一段用户上传的内容做检查，并剔除恶意代码。但这种方式很难保证能过滤掉所有的恶意字符串，一方面攻击方法防不甚防，有兴趣的朋友可以参考下<!-- raw HTML omitted -->XSS Cheat Sheet<!-- raw HTML omitted -->，上面给出了很多一般人很难想到的攻击代码的组合方式。另一方面由于现在大多数论坛和博客都支持一些基本的文本修饰标签，所以简单的标签剔除或者重新编码都不可行。</p>
 <p>另一种方法是做在浏览器端，但是由于浏览器无法区分某一段脚本到底是来源于不可信的用户还是可信的站点，所以这种方法实现起来也有很大的困难。</p>
-
-<p>这里实现防范措施的一个难点在于，<strong>Web应用把生成HTML的返回给浏览器后，就不参与浏览器的HTML解析工作了</strong>。这样浏览器就不知道哪部分出现脚本是安全的，哪部分出现是不安全的。</p>
-
+<p>这里实现防范措施的一个难点在于，<!-- raw HTML omitted -->Web应用把生成HTML的返回给浏览器后，就不参与浏览器的HTML解析工作了<!-- raw HTML omitted -->。这样浏览器就不知道哪部分出现脚本是安全的，哪部分出现是不安全的。</p>
 <p>BluePrint就着眼于这个点，提出了一种让Web应用“参与”HTML解析工作的设计。下面通过论文里面的一个例子，简单介绍下它的防范机制。</p>
-
 <p>假如一位恶意的用户在一个博客上上传了这样一段含有恶意代码的留言：</p>
-
-<pre><code class="language-html">&lt;p&gt;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">p</span>&gt;
 Here is a page you might find
-&lt;b &quot;&quot;&quot;&gt;&lt;script&gt;doEvil(. . .)&lt;/script&gt;&quot;&gt;very&lt;/b&gt;
+&lt;<span style="color:#f92672">b</span> <span style="color:#960050;background-color:#1e0010">&#34;&#34;&#34;</span>&gt;&lt;<span style="color:#f92672">script</span>&gt;<span style="color:#a6e22e">doEvil</span>(. . .)&lt;/<span style="color:#f92672">script</span>&gt;&#34;&gt;very&lt;/<span style="color:#f92672">b</span>&gt;
 interesting:
-&lt;a href=&quot; &amp;#14; javasc&amp;#x0A;ript:doEvil(. . .);&quot;&gt;
-Link&lt;/a&gt;
-&lt;/p&gt;&lt;p style=&quot;nop:expres/*xss*/sion(doEvil(. . .))&quot;&gt;
+&lt;<span style="color:#f92672">a</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34; &amp;#14; javasc&amp;#x0A;ript:doEvil(. . .);&#34;</span>&gt;
+Link&lt;/<span style="color:#f92672">a</span>&gt;
+&lt;/<span style="color:#f92672">p</span>&gt;&lt;<span style="color:#f92672">p</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;nop:expres/*xss*/sion(doEvil(. . .))&#34;</span>&gt;
 Respectfully,
 Eve
-&lt;/p&gt;
-</code></pre>
-
-<p>可以看到，这段代码里包含了很多可能引发脚本执行的代码，而要在服务器端把这些所有隐藏的攻击可能找出来是一件比较困难的事。那么BluePrint是怎么在不知道这段代码是否含有恶意代码的前提下处理的呢？</p>
-
+&lt;/<span style="color:#f92672">p</span>&gt;
+</code></pre></div><p>可以看到，这段代码里包含了很多可能引发脚本执行的代码，而要在服务器端把这些所有隐藏的攻击可能找出来是一件比较困难的事。那么BluePrint是怎么在不知道这段代码是否含有恶意代码的前提下处理的呢？</p>
 <p>首先，这种由用户上传的不可信的字符串会先在服务器端被解析成一棵树，就像HTML在浏览器中被解析一样，这棵HTML解析树可以用一些简单的DOM API来生成，例如appendChild, createElement等。这些描述如何生成HTML解析树的方法会和数据值（URL、标签属性等）一起，通过特殊的编码（Base64）传递给浏览器。例如上面这段代码，最后在浏览器接收到的HTML中，会变成这样：</p>
-
-<pre><code class="language-html">&lt;code style=&quot;display:none;&quot; id=&quot;__bp1&quot;&gt;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">code</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;display:none;&#34;</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;__bp1&#34;</span>&gt;
 =Enk/sCkhlcmUgaXMgYSBwYWdlIHlvdSBta...
 =SkKICAgICI+dmVyeQ===C/k/QIGhlbHBmd...
 =ECg===C/Enk/gCiAgUmVzcGVjdGZ1bGx5L...
-&lt;/code&gt;&lt;script id=&quot;__bp1s&quot;&gt;
-__bp__.cxPCData(&quot;__bp1&quot;, &quot;__bp1s&quot;);
-&lt;/script&gt;
-</code></pre>
-
-<p>在浏览器端，这段特殊的代码会被JS库解析成自定义的命令和数据格式，并由前面提到的DOM API动态生成这些HTML结点，从而达到和传统的方式一样的显示效果。当然可信的HTML代码，例如文章正文，还是按传统的方式传输的。</p>
-
-<p>通过这种方式，<strong>BluePrint绕过了浏览器对不可信代码的解析，从而防止了不可信代码里内嵌的脚本的执行</strong>。</p>
-
+&lt;/<span style="color:#f92672">code</span>&gt;&lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;__bp1s&#34;</span>&gt;
+<span style="color:#a6e22e">__bp__</span>.<span style="color:#a6e22e">cxPCData</span>(<span style="color:#e6db74">&#34;__bp1&#34;</span>, <span style="color:#e6db74">&#34;__bp1s&#34;</span>);
+&lt;/<span style="color:#f92672">script</span>&gt;
+</code></pre></div><p>在浏览器端，这段特殊的代码会被JS库解析成自定义的命令和数据格式，并由前面提到的DOM API动态生成这些HTML结点，从而达到和传统的方式一样的显示效果。当然可信的HTML代码，例如文章正文，还是按传统的方式传输的。</p>
+<p>通过这种方式，<!-- raw HTML omitted -->BluePrint绕过了浏览器对不可信代码的解析，从而防止了不可信代码里内嵌的脚本的执行<!-- raw HTML omitted -->。</p>
 <p>此外还有一些细节的问题，例如为什么使用Base64编码来描述自定义的命令和数据，而不是常用的例如UTF-8呢？这是因为使用UTF-8的话攻击者就有可能通过构造一段特殊的字符串，而这段字符串对应的编码恰好能起到攻击作用。而使用Base64编码就不会有这个问题。</p>
-
 <p>攻击例子中的第5行和第7行还分别包括了通过恶意URL和CSS风格实现的代码，前面提到的措施还不足以防范这两种类型的攻击。论文里面也提到了相应的解决方案，这里不再赘述，有兴趣的朋友可以搜索论文阅读相关部分。</p>
-
 <p>把BluePrint整合到现有的应用程序里也不难，只要把包含不可信内容显示部分的代码重新加一层包装就行了，像这样：</p>
-
-<pre><code class="language-php">// Code for trusted blog content
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">// Code for trusted blog content
 // appears untransformed aboveˆˆ.
-&lt;?php foreach ($comments as $comment): ?&gt;
-    &lt;li&gt;
-        &lt;?php
-$model = Blueprint::cxPCData($comment);
-echo($model);
-        ?&gt;
-    &lt;/li&gt;
-&lt;?php endforeach; ?&gt;
-</code></pre>
-
-<p>在BluePrint的开销方面，包含25个用户评论的wordpress页面产生速度慢了55%，不过作者提到wordpress本身还有HTML解析和恶意代码检查过滤的功能，用了BluePrint后就不需要这些冗余的检查了，所以把这部分代码去掉会快不少。另外由于不可信内容都需要动态的被解码并创建相应的HTML结点，浏览器端的显示速度慢了很多，作者也解释到这种解析开销其实并不重要，因为通常看一篇博文的时候都是先看内容，由于文章内容本身是可信的，所以会以传统的方式传输并显示，若干秒后再显示评论也未必会对用户体验造成太大的影响。</p>
-
-<p>这篇论文给我的感觉是思路很清晰，抓住了主要的难点后用了对应的方法绕过了浏览器的HTML解析。不过应用面上还有一些局限，只能防止不可信代码中脚本的执行，对于需要执行脚本的情形（例如Blogger上的Gadget）就不适用了。MIT去年发在EuroSys &lsquo;09上的<a href="http://portal.acm.org/citation.cfm?id=1519091" target="_blank">BFlow</a>就是针对这样一种情形，通过类似于Flume的标签系统，使得不可信的脚本读取了隐私数据后就无法将它们传输给不可信的网站。</p>
-
-<p>用beamer做了slides，在这里可以下载到: <a href="http://zellux-notes.googlecode.com/hg/slides/blueprint/">http://zellux-notes.googlecode.com/hg/slides/blueprint/</a></p>
+<span style="color:#75715e">&lt;?php</span> <span style="color:#66d9ef">foreach</span> ($comments <span style="color:#66d9ef">as</span> $comment)<span style="color:#f92672">:</span> <span style="color:#75715e">?&gt;</span>
+    &lt;<span style="color:#f92672">li</span>&gt;
+        <span style="color:#75715e">&lt;?php</span>
+$model <span style="color:#f92672">=</span> <span style="color:#a6e22e">Blueprint</span><span style="color:#f92672">::</span><span style="color:#a6e22e">cxPCData</span>($comment);
+<span style="color:#66d9ef">echo</span>($model);
+        <span style="color:#75715e">?&gt;</span>
+    &lt;/<span style="color:#f92672">li</span>&gt;
+<span style="color:#75715e">&lt;?php</span> <span style="color:#66d9ef">endforeach</span>; <span style="color:#75715e">?&gt;</span>
+</code></pre></div><p>在BluePrint的开销方面，包含25个用户评论的wordpress页面产生速度慢了55%，不过作者提到wordpress本身还有HTML解析和恶意代码检查过滤的功能，用了BluePrint后就不需要这些冗余的检查了，所以把这部分代码去掉会快不少。另外由于不可信内容都需要动态的被解码并创建相应的HTML结点，浏览器端的显示速度慢了很多，作者也解释到这种解析开销其实并不重要，因为通常看一篇博文的时候都是先看内容，由于文章内容本身是可信的，所以会以传统的方式传输并显示，若干秒后再显示评论也未必会对用户体验造成太大的影响。</p>
+<p>这篇论文给我的感觉是思路很清晰，抓住了主要的难点后用了对应的方法绕过了浏览器的HTML解析。不过应用面上还有一些局限，只能防止不可信代码中脚本的执行，对于需要执行脚本的情形（例如Blogger上的Gadget）就不适用了。MIT去年发在EuroSys &lsquo;09上的<!-- raw HTML omitted -->BFlow<!-- raw HTML omitted -->就是针对这样一种情形，通过类似于Flume的标签系统，使得不可信的脚本读取了隐私数据后就无法将它们传输给不可信的网站。</p>
+<p>用beamer做了slides，在这里可以下载到: <!-- raw HTML omitted --><a href="http://zellux-notes.googlecode.com/hg/slides/blueprint/">http://zellux-notes.googlecode.com/hg/slides/blueprint/</a><!-- raw HTML omitted --></p>
 
     </div>
         <div class="cc-license">

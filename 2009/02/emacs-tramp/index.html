@@ -11,6 +11,7 @@
     
 
     <title> Emacs tramp &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -39,7 +40,7 @@
     "articleSection" : "post",
     "name" : "Emacs tramp",
     "headline" : "Emacs tramp",
-    "description" : "很好用的东东，可以方便的打开需要root权限或是远程服务器上的文件。\n统一的url格式是 \/method:usr@machine:port\/path\/to.file，这种方式需要在载入tramp前设置tramp-syntax\n(setq tramp-syntax \x27url) (require \x27tramp)  也可以用(setq tramp-default-method \x26ldquo;scp\x26rdquo;) 指定默认的访问方法，这样就不需要\/method:\/\/了\n以我现在的org日程管理为例，个人日程文件保存在机房的73号机上，实验室电脑和寝室电脑上的电脑只要通过tramp远程访问这个org文件即可：\n(setq org-agenda-files (list \x26quot;\/scp:wyx@10.132.140.73:\/home\/wyx\/notes\/lab.org\x26quot;))  ",
+    "description" : "很好用的东东，可以方便的打开需要root权限或是远程服务器上的文件。\n统一的url格式是 \/method:usr@machine:port\/path\/to.file，这种方式需要在载入tramp前设置tramp-syntax\n(setq tramp-syntax \u0026#39;url) (require \u0026#39;tramp) 也可以用(setq tramp-default-method \u0026ldquo;scp\u0026rdquo;) 指定默认的访问方法，这样就不需要\/method:\/\/了\n以我现在的org日程管理为例，个人日程文件保存在机房的73号机上，实验室电脑和寝室电脑上的电脑只要通过tramp远程访问这个org文件即可：\n(setq org-agenda-files (list \u0026#34;\/scp:wyx@10.132.140.73:\/home\/wyx\/notes\/lab.org\u0026#34;)) ",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -47,8 +48,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2009",
-    "datePublished": "2009-02-09 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2009-02-09 00:00:00 \x2b0000 UTC",
+    "datePublished": "2009-02-09 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2009-02-09 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/2009\/02\/emacs-tramp\/",
     "wordCount" : "17",
     "keywords" : [ "Emacs","TRAMP","Tooling","Blog" ]
@@ -94,20 +95,13 @@
 
     <div class="post-content">
       <p>很好用的东东，可以方便的打开需要root权限或是远程服务器上的文件。</p>
-
 <p>统一的url格式是 /method:usr@machine:port/path/to.file，这种方式需要在载入tramp前设置tramp-syntax</p>
-
-<pre><code class="language-text">(setq tramp-syntax 'url)
-(require 'tramp)
-</code></pre>
-
-<p>也可以用(setq tramp-default-method &ldquo;scp&rdquo;) 指定默认的访问方法，这样就不需要/method://了</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">(setq tramp-syntax &#39;url)
+(require &#39;tramp)
+</code></pre></div><p>也可以用(setq tramp-default-method &ldquo;scp&rdquo;) 指定默认的访问方法，这样就不需要/method://了</p>
 <p>以我现在的org日程管理为例，个人日程文件保存在机房的73号机上，实验室电脑和寝室电脑上的电脑只要通过tramp远程访问这个org文件即可：</p>
-
-<pre><code class="language-text">(setq org-agenda-files (list &quot;/scp:wyx@10.132.140.73:/home/wyx/notes/lab.org&quot;))
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">(setq org-agenda-files (list &#34;/scp:wyx@10.132.140.73:/home/wyx/notes/lab.org&#34;))
+</code></pre></div>
     </div>
         <div class="cc-license">
       本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.zh">知识共享署名-非商业性使用 3.0 版本许可协议</a>进行许可，欢迎转载，演绎，但是必须保留本文的署名 <a href="https://blog.yxwang.me/2009/02/emacs-tramp/">zellux</a>（包含链接），且不得用于商业目的。

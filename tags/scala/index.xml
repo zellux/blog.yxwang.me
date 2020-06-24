@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Scala on Aiur · Zellux 的博客</title>
@@ -18,18 +18,13 @@
       
       <guid>https://blog.yxwang.me/2012/06/variances-in-scala/</guid>
       <description>&lt;h2 id=&#34;java-数组&#34;&gt;Java 数组&lt;/h2&gt;
-
 &lt;p&gt;先来看一个 Java 中的例子，Java 中的数组是协变的。也就是说，一个 String 数组(String[])是可以被当成 Object 数组(Object[])处理的：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;String[] a1 = { &amp;quot;abc&amp;quot; };
-Object[] a2 = a1;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;这种协变虽然在读取数组内容时不会有问题（a1 数组中的 String 元素可以被当成 Object 使用），但是修改数组内容时就会出现无法在编译期检测出来的错误了：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;a2[0] = new Integer(17)
-String s  = a1[0]  // java.lang.ArrayStoreException
-&lt;/code&gt;&lt;/pre&gt;</description>
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;String&lt;span style=&#34;color:#f92672&#34;&gt;[]&lt;/span&gt; a1 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;abc&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;};&lt;/span&gt;
+Object&lt;span style=&#34;color:#f92672&#34;&gt;[]&lt;/span&gt; a2 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; a1&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这种协变虽然在读取数组内容时不会有问题（a1 数组中的 String 元素可以被当成 Object 使用），但是修改数组内容时就会出现无法在编译期检测出来的错误了：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;a2&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;0&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; Integer&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;17&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+String s  &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; a1&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;0&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;// java.lang.ArrayStoreException
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
     </item>
     
   </channel>

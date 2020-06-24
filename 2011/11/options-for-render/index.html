@@ -11,6 +11,7 @@
     
 
     <title> Rails 中 render 方法的可选参数 &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -39,7 +40,7 @@
     "articleSection" : "post",
     "name" : "Rails 中 render 方法的可选参数",
     "headline" : "Rails 中 render 方法的可选参数",
-    "description" : ":content_type 设置返回内容的 MIME 类型\nrender :file =\x26gt; filename, :content_type =\x26gt; \x27application\/rss\x27  :layout 指定 layout\n:status 指定返回的 HTTP 代码\n:location 指定 HTTP 头中的 Location 字段\nRails 生成的 controller 代码中，create.json 方法在生成对象后会将 Location 设置为新生成对象的 json 地址：\nrespond_to do |format| if @item.save format.html { redirect_to @item, notice: \x27Item was successfully created.\x27 } format.json { render json: @item, status: :created, location: @item } else format.html { render action: \x26quot;new\x26quot; } format.json { render json: @item.",
+    "description" : ":content_type 设置返回内容的 MIME 类型\nrender :file =\u0026gt; filename, :content_type =\u0026gt; \u0026#39;application\/rss\u0026#39; :layout 指定 layout\n:status 指定返回的 HTTP 代码\n:location 指定 HTTP 头中的 Location 字段\nRails 生成的 controller 代码中，create.json 方法在生成对象后会将 Location 设置为新生成对象的 json 地址：\nrespond_to do |format| if @item.save format.html { redirect_to @item, notice: \u0026#39;Item was successfully created.\u0026#39; } format.json { render json: @item, status: :created, location: @item } else format.html { render action: \u0026#34;new\u0026#34; } format.json { render json: @item.errors, status: :unprocessable_entity } end end 参考：http:\/\/guides.",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -47,8 +48,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2011",
-    "datePublished": "2011-11-20 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2011-11-20 00:00:00 \x2b0000 UTC",
+    "datePublished": "2011-11-20 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2011-11-20 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/2011\/11\/options-for-render\/",
     "wordCount" : "76",
     "keywords" : [ "Programming","Rails","Ruby","Ruby on Rails","Web Development","Blog" ]
@@ -94,30 +95,21 @@
 
     <div class="post-content">
       <p><code>:content_type</code> 设置返回内容的 MIME 类型</p>
-
-<pre><code class="language-ruby">render :file =&gt; filename, :content_type =&gt; 'application/rss'
-</code></pre>
-
-<p><code>:layout</code> 指定 layout</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">render <span style="color:#e6db74">:file</span> <span style="color:#f92672">=&gt;</span> filename, <span style="color:#e6db74">:content_type</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;application/rss&#39;</span>
+</code></pre></div><p><code>:layout</code> 指定 layout</p>
 <p><code>:status</code> 指定返回的 HTTP 代码</p>
-
 <p><code>:location</code> 指定 HTTP 头中的 Location 字段</p>
-
 <p>Rails 生成的 controller 代码中，<code>create.json</code> 方法在生成对象后会将 Location 设置为新生成对象的 json 地址：</p>
-
-<pre><code class="language-ruby">    respond_to do |format|
-      if @item.save
-        format.html { redirect_to @item, notice: 'Item was successfully created.' }
-        format.json { render json: @item, status: :created, location: @item }
-      else
-        format.html { render action: &quot;new&quot; }
-        format.json { render json: @item.errors, status: :unprocessable_entity }
-      end
-    end
-</code></pre>
-
-<p>参考：<a href="http://guides.rubyonrails.org/layouts_and_rendering.html#using-render">http://guides.rubyonrails.org/layouts_and_rendering.html#using-render</a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">    respond_to <span style="color:#66d9ef">do</span> <span style="color:#f92672">|</span>format<span style="color:#f92672">|</span>
+      <span style="color:#66d9ef">if</span> @item<span style="color:#f92672">.</span>save
+        format<span style="color:#f92672">.</span>html { redirect_to @item, <span style="color:#e6db74">notice</span>: <span style="color:#e6db74">&#39;Item was successfully created.&#39;</span> }
+        format<span style="color:#f92672">.</span>json { render <span style="color:#e6db74">json</span>: @item, <span style="color:#e6db74">status</span>: <span style="color:#e6db74">:created</span>, <span style="color:#e6db74">location</span>: @item }
+      <span style="color:#66d9ef">else</span>
+        format<span style="color:#f92672">.</span>html { render <span style="color:#e6db74">action</span>: <span style="color:#e6db74">&#34;new&#34;</span> }
+        format<span style="color:#f92672">.</span>json { render <span style="color:#e6db74">json</span>: @item<span style="color:#f92672">.</span>errors, <span style="color:#e6db74">status</span>: <span style="color:#e6db74">:unprocessable_entity</span> }
+      <span style="color:#66d9ef">end</span>
+    <span style="color:#66d9ef">end</span>
+</code></pre></div><p>参考：<a href="http://guides.rubyonrails.org/layouts_and_rendering.html#using-render">http://guides.rubyonrails.org/layouts_and_rendering.html#using-render</a></p>
 
     </div>
         <div class="cc-license">
@@ -126,8 +118,8 @@
 
   </div>
   <div class="pagination">
-    <a class="btn previous " href="https://blog.yxwang.me/2011/11/methods-in-restful-applications/"> Prev</a>  
-    <a class="btn next " href="https://blog.yxwang.me/2011/11/skip-specs-by-tags/"> Next</a> 
+    <a class="btn previous " href="https://blog.yxwang.me/2011/11/notes-on-active-record/"> Prev</a>  
+    <a class="btn next " href="https://blog.yxwang.me/2011/11/methods-in-restful-applications/"> Next</a> 
   </div>
 </div>
 

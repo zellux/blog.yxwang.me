@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 
   <head>
-	<meta name="generator" content="Hugo 0.55.6" />
+	<meta name="generator" content="Hugo 0.72.0" />
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <meta name="description" content="">
@@ -10,6 +10,7 @@
     
 
     <title> Aiur · Zellux 的博客</title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -17,7 +18,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -25,7 +26,7 @@
     <link rel="shortcut icon" href="/favicon.ico">
 
     
-    <link href="https://blog.yxwang.me/index.xml" rel="alternate" type="application/rss+xml" title="Aiur · Zellux 的博客" />
+    <link href="/index.xml" rel="alternate" type="application/rss+xml" title="Aiur · Zellux 的博客" />
     
 <script type="application/ld+json">
 {
@@ -123,7 +124,7 @@ flash存储单元分block和page，每个block有32/64个page，一个page有512
 为了提高用户体验，读取domainU的启动信息时我采用的方法是读一行输出一行，读到结尾登陆字符时通过超时设置退出循环，这样可能效率比较低，不过测试脚本也不care这个了
 实际使用时碰到了另一个问题，domainU执行完自动命令后命令行会出现很严重的对齐问题，最后发现登陆后运行一次reset就可以了。
 脚本如下
-#!/usr/bin/python # Automatic test script for Xen DomainU # Author: zellux import pexpect, os conf = { 'login_name' : 'm2-vm2', 'domainU_name' : 'R900-DomU0', 'domainU_conf' : '/home/wyx/domU1', 'domainU_id' : '2', 'domainU_user' : 'wyx', 'domainU_passwd' : 'wyx', } # Command to be executed after domainU starts cmd = &quot;&quot;&quot; cd m2 cd reg_test .
+#!/usr/bin/python # Automatic test script for Xen DomainU # Author: zellux import pexpect, os conf = { &#39;login_name&#39; : &#39;m2-vm2&#39;, &#39;domainU_name&#39; : &#39;R900-DomU0&#39;, &#39;domainU_conf&#39; : &#39;/home/wyx/domU1&#39;, &#39;domainU_id&#39; : &#39;2&#39;, &#39;domainU_user&#39; : &#39;wyx&#39;, &#39;domainU_passwd&#39; : &#39;wyx&#39;, } # Command to be executed after domainU starts cmd = &#34;&#34;&#34; cd m2 cd reg_test .
 	<a class="read-more" href="/2009/04/xen-test-script/">阅读全文 →</a>
       </div>
       
@@ -154,7 +155,7 @@ flash存储单元分block和page，每个block有32/64个page，一个page有512
 上网络课的时候有一次老师的问题就是既然OSI七层协议的上层（如transport层）已经做了校验措施，为什么下层（如data-link层）还会有“多余”的error detection呢？当时我想到的一个答案就是为了性能考虑，因为那会儿正好在读这篇paper ;-)
 但是并不是说把功能放到子系统里就一定能提高性能了。如果子系统里面塞满了各种并不是上层都必需的检验机制，整个系统的性能势必会受到影响。所以这个trade-off值得深思熟虑。Exokernel的论文就提出了传统的操作系统中存在的这样一个问题，底层内核过于冗余，影响了应用程序性能，也隐藏了一些对部分应用程序比较重要的信息（比如给数据库提供磁盘原生数据访问的API可以获得更优的性能，另外应用程序也应当能控制自己发生缺页错误时候的行为）。
 这里的“End”在不同的环境下会对应不同的模块。比如在网上聊天这个通信过程中，没有必要在底层做很多校验来保证数据包的完整性，这时候及时性更重要，当数据包丢失或者数据出错时，会有一个更常用的End-to-End的解决方案：没听清的那一方通过语音要求重述就行了，“我听不清，能再说一遍刚才的话吗？”，而此时的End自然是谈话双方。如果换一种情形，在语音留言系统中，就需要保证传输的正确性了，因为这时候数据的及时性变得很次要，而留言系统的特点要求用End-to-End的验证加上底层的措施来保证一方的语音信息尽可能忠实的保存到另一方的留言系统中。
-修改于 2010.2.16
+修改于 2010.
 	<a class="read-more" href="/2009/04/end-to-end-argument-in-system-design/">阅读全文 →</a>
       </div>
       
@@ -174,8 +175,7 @@ flash存储单元分block和page，每个block有32/64个page，一个page有512
 
       
       <div class="summary">
-        http://emacsbugs.donarmstrong.com/cgi-bin/bugreport.cgi?bug=2800
-Emacs在窗口过窄时使用minibuffer的auto-complete功能会挂掉，就把这bug报告上去了。负责人貌似是MIT的物理系毕业的博士？敬仰下。
+        http://emacsbugs.donarmstrong.com/cgi-bin/bugreport.cgi?bug=2800Emacs在窗口过窄时使用minibuffer的auto-complete功能会挂掉，就把这bug报告上去了。负责人貌似是MIT的物理系毕业的博士？敬仰下。
 从后面回复来看，似乎这个bug emacs22里也有，应该还是蛮常见的呀，为啥之前没人report呢@@
 不管怎么说，总算也给Emacs出了份力，嘿嘿。
 	<a class="read-more" href="/2009/04/emacs-bug-contribution/">阅读全文 →</a>
@@ -199,7 +199,7 @@ Emacs在窗口过窄时使用minibuffer的auto-complete功能会挂掉，就把�
       <div class="summary">
         在默认的基础上，把这几个都改成built-in (*)，通过Xen启动时就不需要额外加载initrd了
 2010.1.19更新：支持网络
-Device Drivers SCSI device support ---&gt; &lt;*&gt; SCSI disk support &lt;*&gt; SCSI generic support SCSI low-level drivers ---&gt; [*] LSI Logic New Generation RAID Device Drivers &lt;*&gt; Serial ATA (SATA) support &lt;*&gt; Intel PIIX/ICH SATA support Fusion MPT device support ---&gt; &lt;*&gt; Fusion MPT ScsiHost drivers for SPI &lt;*&gt; Fusion MPT ScsiHost drivers for FC &lt;*&gt; Fusion MPT ScsiHost drivers for SAS (128) Maximum number of scatter gather entries (16 - 128) &lt;*&gt; Fusion MPT misc device (ioctl) driver &lt;*&gt; Fusion MPT LAN driver Network device support ---&gt; Ethernet (10 or 100Mbit) ---&gt; [*] EISA, VLB, PCI and on board controllers &lt;*&gt; AMD PCnet32 PCI support  
+Device Drivers SCSI device support ---&gt; &lt;*&gt; SCSI disk support &lt;*&gt; SCSI generic support SCSI low-level drivers ---&gt; [*] LSI Logic New Generation RAID Device Drivers &lt;*&gt; Serial ATA (SATA) support &lt;*&gt; Intel PIIX/ICH SATA support Fusion MPT device support ---&gt; &lt;*&gt; Fusion MPT ScsiHost drivers for SPI &lt;*&gt; Fusion MPT ScsiHost drivers for FC &lt;*&gt; Fusion MPT ScsiHost drivers for SAS (128) Maximum number of scatter gather entries (16 - 128) &lt;*&gt; Fusion MPT misc device (ioctl) driver &lt;*&gt; Fusion MPT LAN driver Network device support ---&gt; Ethernet (10 or 100Mbit) ---&gt; [*] EISA, VLB, PCI and on board controllers &lt;*&gt; AMD PCnet32 PCI support 
 	<a class="read-more" href="/2009/04/vmware-linux-kernel-config/">阅读全文 →</a>
       </div>
       
@@ -225,7 +225,7 @@ Device Drivers SCSI device support ---&gt; &lt;*&gt; SCSI disk support &lt;*&gt;
 这篇paper的主要工作是通过构造一种多种类的模态逻辑(many-sorted model logic)，来检查网络中验证协议的安全性。
 基础的逻辑分三部分： 原语，如验证双方A和B，以及服务器S，下文用P Q R泛指 密钥，如K_ab代表a和b之间的通讯密钥，K_a代表a的公钥，{K_a}^{-1}代表对应的私钥，下文用K泛指 公式（或者陈述），用N_a, N_b等表示，下文用X Y泛指
 接下来定义以下约定（constructs） P 信任 X: 原语P完全信任X P 看到 X: 有人发送了一条包含X的信息给P，P可以阅读它或者重复它（当然通常是在做了解密操作后） P 说了 X: 原语P发送过一条包含X的信息，同时也可以确定P是相信X的正确性的 P 控制 X: P可以判定X的正确与否。例如生成密钥的服务器通常被默认为拥有对密钥质量的审核权。 X 是新鲜的: 在此之前X没有被发送过。这个事实可以通过绑定一个时间戳或者其他只会使用一次的标记来证明。 P &lt;-K-&gt; Q: P和Q可以通过共享密钥K进行通讯，且这个K是好的，即不会被P Q不信任的原语知道。 K-&gt; P: P拥有K这么一个公钥，且它对应的解密密钥K^{-1}不会被其他不被P信任的原语知道。 P &lt;=X=&gt; Q: X是一个只被P和Q或者P和Q共同信任的原语知道的陈述，只有P和Q可以通过X来相互证明它们各自的身份，X的一个例子就是密码。 {X}_K: X是一个被K加密了的陈述 _Y: 陈述X被Y所绑定，Y可以用来证明发送X的人的身份
-好了，总算把这些约定列完了，然后来看看通过这些约定能推出一些什么东东： 如果 P 相信 (P &lt;-K-&gt; Q), 且 P 看到 {X}_K，那么 P 相信 Q 说了 X。 这个例子很简单，既然P Q有安全的密钥K，那么P看到通过K加密后的X肯定认为就是Q发出的。
+好了，总算把这些约定列完了，然后来看看通过这些约定能推出一些什么东东： 如果 P 相信 (P &lt;-K-&gt; Q), 且 P 看到 {X}_K，那么 P 相信 Q 说了 X。这个例子很简单，既然P Q有安全的密钥K，那么P看到通过K加密后的X肯定认为就是Q发出的。
 	<a class="read-more" href="/2009/03/a-logic-of-authentication/">阅读全文 →</a>
       </div>
       
@@ -248,9 +248,9 @@ Device Drivers SCSI device support ---&gt; &lt;*&gt; SCSI disk support &lt;*&gt;
         今天下午真是惊悚，我想把机房的winxp分区删了，ftp上好放点美剧，结果winxp的那个分区是扩展分区，删掉后导致linux的几个分区都消失了。赶紧把硬盘拆下来装到实验室用Disk Genius修复了下，数据基本没什么损坏，分区表还是有点问题。差一点俺就见不到这个博客了 =_=
 然后把昨天折腾了一晚上没搞定的debian 4安装搞定了，关键在于netinst.iso的版本号要和hd-media的完全一致，4.0r7。
  编译xen/linux所需的包 apt-get install gettext zlib1g-dev python-dev libncurses-dev libssl-dev libx11-dev bridge-utils iproute gawk  另外 initrd文件的生成需要安装initrd-tools包
- kernel中memory barrier的实现很简单，barrier宏展开后就是 asm volatile(&ldquo;&rdquo; : : : &ldquo;memory&rdquo;) 这样就保证了在barrier()执行后，cpu不会直接读取寄存器中cache的内存值。
- 生成initrd mkinitramfs -o /boot/initrd-2.6.18.8-xen.img 2.6.18.8-xen
- syscall和m2_fastcall的性能测试 测的是getpid()函数，当然为了保证m2_fastcall不在运行逻辑上吃亏，它的对应功能仅仅是返回current-&gt;pid，第一次测出来的结果是syscall明显由于m2_fastcall。宋大牛指出很有可能是glibc做了缓存，果然，自己用汇编发软中断后的数据就正常了。
+ kernel中memory barrier的实现很简单，barrier宏展开后就是 asm volatile(&rdquo;&rdquo; : : : &ldquo;memory&rdquo;) 这样就保证了在barrier()执行后，cpu不会直接读取寄存器中cache的内存值。
+  生成initrd mkinitramfs -o /boot/initrd-2.6.18.8-xen.img 2.6.18.8-xen
+  syscall和m2_fastcall的性能测试 测的是getpid()函数，当然为了保证m2_fastcall不在运行逻辑上吃亏，它的对应功能仅仅是返回current-&gt;pid，第一次测出来的结果是syscall明显由于m2_fastcall。宋大牛指出很有可能是glibc做了缓存，果然，自己用汇编发软中断后的数据就正常了。
   
 	<a class="read-more" href="/2009/02/2009-02-19-notes/">阅读全文 →</a>
       </div>
@@ -272,9 +272,12 @@ Device Drivers SCSI device support ---&gt; &lt;*&gt; SCSI disk support &lt;*&gt;
       
       <div class="summary">
         Fishing reading Xen 内存管理综述 and have a superficial look on Xen source code.
- 在Debian x86-64上编译并安装了Xen 3.3.0，安装需要的几个包zlib1g-dev python-dev libncurses-dev libssl-dev libx11-dev bridge-utils iproute gawk gettext
+  在Debian x86-64上编译并安装了Xen 3.3.0，安装需要的几个包zlib1g-dev python-dev libncurses-dev libssl-dev libx11-dev bridge-utils iproute gawk gettext
   3.interrupt gate的注册
-[arch/x86/traps.c] set_swint_gate(TRAP_int3,&amp;int3); /* usable from all privileges */ set_swint_gate(TRAP_overflow,&amp;overflow); /* usable from all privileges */ set_intr_gate(TRAP_bounds,&amp;bounds); set_intr_gate(TRAP_invalid_op,&amp;invalid_op); set_intr_gate(TRAP_no_device,&amp;device_not_available); set_intr_gate(TRAP_copro_seg,&amp;coprocessor_segment_overrun); set_intr_gate(TRAP_invalid_tss,&amp;invalid_TSS);  以page_fault为例 [arch/x86/x86_64/entry.s] ENTRY(handle_exception) SAVE_ALL handle_exception_saved: testb $X86_EFLAGS_IF&gt;&gt;8,UREGS_eflags+1(%rsp) jz exception_with_ints_disabled sti 1: movq %rsp,%rdi movl UREGS_entry_vector(%rsp),%eax leaq exception_table(%rip),%rdx GET_CURRENT(%rbx) PERFC_INCR(PERFC_exceptions, %rax, %rbx) callq *(%rdx,%rax,8) testb $3,UREGS_cs(%rsp) jz restore_all_xen leaq VCPU_trap_bounce(%rbx),%rdx movq VCPU_domain(%rbx),%rax testb $1,DOMAIN_is_32bit_pv(%rax) jnz compat_post_handle_exception testb $TBF_EXCEPTION,TRAPBOUNCE_flags(%rdx) jz test_all_events call create_bounce_frame movb $0,TRAPBOUNCE_flags(%rdx) jmp test_all_events
+[arch/x86/traps.c] set_swint_gate(TRAP_int3,&amp;int3); /* usable from all privileges */ set_swint_gate(TRAP_overflow,&amp;overflow); /* usable from all privileges */ set_intr_gate(TRAP_bounds,&amp;bounds); set_intr_gate(TRAP_invalid_op,&amp;invalid_op); set_intr_gate(TRAP_no_device,&amp;device_not_available); set_intr_gate(TRAP_copro_seg,&amp;coprocessor_segment_overrun); set_intr_gate(TRAP_invalid_tss,&amp;invalid_TSS); 以page_fault为例
+SAVE_ALL负责把rsp以外的15个寄存器的值保存入栈，然后从exception table中读出对应的函数地址，并调用(do_page_fault)。
+新年第一次例会讲了两篇发在SOSP &lsquo;1967上的古董paper  Dijkstra的The structure of the “the”-multiprogramming system，第一次提出了操作系统的分层结构，从而可以运行多个任务，另外里面还提出了semaphore等用来解决concurrent问题的方案，以及类似virtual address的想法，如果这两个概念也是在这个paper第一次提出的话，我只能说Dijkstra是个神了 @.@
+第二篇是Peter Denning的The working set model for program behavior，里面用了大量的数学公式（主要是概率统计方面）推导得出了\tau和traverse time T的关系，这里的\tau是一个参数，某个页面在经过\tau时间没有被访问后即被认为是可以替换的，这样就不需要用LRU之类的算法花时间来寻找一个victim page了。paper后面还给出了调度和资源分配的算法。
 	<a class="read-more" href="/2009/02/2009-02-09-notes/">阅读全文 →</a>
       </div>
       
@@ -316,9 +319,9 @@ Device Drivers SCSI device support ---&gt; &lt;*&gt; SCSI disk support &lt;*&gt;
       <div class="summary">
         很好用的东东，可以方便的打开需要root权限或是远程服务器上的文件。
 统一的url格式是 /method:usr@machine:port/path/to.file，这种方式需要在载入tramp前设置tramp-syntax
-(setq tramp-syntax 'url) (require 'tramp)  也可以用(setq tramp-default-method &ldquo;scp&rdquo;) 指定默认的访问方法，这样就不需要/method://了
+(setq tramp-syntax &#39;url) (require &#39;tramp) 也可以用(setq tramp-default-method &ldquo;scp&rdquo;) 指定默认的访问方法，这样就不需要/method://了
 以我现在的org日程管理为例，个人日程文件保存在机房的73号机上，实验室电脑和寝室电脑上的电脑只要通过tramp远程访问这个org文件即可：
-(setq org-agenda-files (list &quot;/scp:wyx@10.132.140.73:/home/wyx/notes/lab.org&quot;))  
+(setq org-agenda-files (list &#34;/scp:wyx@10.132.140.73:/home/wyx/notes/lab.org&#34;)) 
 	<a class="read-more" href="/2009/02/emacs-tramp/">阅读全文 →</a>
       </div>
       

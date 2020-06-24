@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 
   <head>
-	<meta name="generator" content="Hugo 0.55.6" />
+	<meta name="generator" content="Hugo 0.72.0" />
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <meta name="description" content="">
@@ -10,6 +10,7 @@
     
 
     <title> Aiur · Zellux 的博客</title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -17,7 +18,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -25,7 +26,7 @@
     <link rel="shortcut icon" href="/favicon.ico">
 
     
-    <link href="https://blog.yxwang.me/index.xml" rel="alternate" type="application/rss+xml" title="Aiur · Zellux 的博客" />
+    <link href="/index.xml" rel="alternate" type="application/rss+xml" title="Aiur · Zellux 的博客" />
     
 <script type="application/ld+json">
 {
@@ -155,7 +156,7 @@
 
       
       <div class="summary">
-        <p><a data-fancybox="gallery"  href=/images/2013-07/maldives-tree.jpg ><img src=/images/2013-07/maldives-tree.jpg  width="560" /></a></p>
+        <p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 	<a class="read-more" href="/2013/07/dusit-thani-maldives/">阅读全文 →</a>
       </div>
       
@@ -176,10 +177,8 @@
       
       <div class="summary">
         <p><a href="http://daily.zhihu.com/">知乎日报</a>每天都会更新有意思的问答。我比较习惯用 Kindle 看这样的文章，就写了一个 calibre 的<a href="https://gist.github.com/zellux/5844688">插件</a>抓取每天的内容。</p>
-
-<p><a data-fancybox="gallery"  href=/images/2013-06/zhihu-kindle-1.jpg ><img src=/images/2013-06/zhihu-kindle-1.jpg  width="300" /></a></p>
-
-<p><a data-fancybox="gallery"  href=/images/2013-06/zhihu-kindle-2.jpg ><img src=/images/2013-06/zhihu-kindle-2.jpg  width="300" /></a></p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 	<a class="read-more" href="/2013/06/zhihu-daily-for-kindle/">阅读全文 →</a>
       </div>
       
@@ -200,7 +199,6 @@
       
       <div class="summary">
         <p>如果要查看 ActiveRecord 的 update_attribute 函数的源代码，一个比较常见的方法是直接在 Rails 源码中搜索 <code>def update_attribute</code>。博客 <a href="http://pragmaticstudio.com/blog">The Pragmatic Studio</a> 介绍了一个更方便的技巧，在 Ruby 命令行中就能启动编辑器直接访问。</p>
-
 <p>通过 <a href="http://rdoc.info/stdlib/core/Object:method">Object#method</a> 方法可以获得 update_attribute 方法的对象，而 <a href="http://rdoc.info/stdlib/core/Method:source_location">Method#source_location</a> 则返回这个方法定义的文件和位置。有了这个信息后，就能启动编辑器查看源代码了：</p>
 	<a class="read-more" href="/2013/02/view-ruby-source-in-shell/">阅读全文 →</a>
       </div>
@@ -222,9 +220,7 @@
       
       <div class="summary">
         <p>我用的 zsh 提示符是 <a href="https://github.com/robbyrussell/oh-my-zsh/">oh-my-zsh</a> 自带的 <a href="https://github.com/robbyrussell/oh-my-zsh/blob/master/themes/steeef.zsh-theme">steeef</a>。最近发现用这个主题时，有些 Rails 项目即使把所有改动都提交后，还是会有红色标记表示存在未追踪文件：</p>
-
-<p><img src="/images/2013-01/zsh-untracked-mark.png" alt="" /></p>
-
+<p><img src="/images/2013-01/zsh-untracked-mark.png" alt=""></p>
 <p>使用 <code>git status</code> 和 <code>git diff</code>，都看不到任何未提交的改动。一开始我以为是 zsh 或者 git 的 bug，把它们的版本都更新到最新版后还是有这个问题。于是看 steeef 主题的源码，发现了红色标记的判断依据：</p>
 	<a class="read-more" href="/2013/01/cleaning-zsh-vcs-status/">阅读全文 →</a>
       </div>
@@ -246,11 +242,10 @@
       
       <div class="summary">
         <p>Emacs 的 xcscope 插件默认不会扫描 Java 文件，另外 Android 源码里有不少 <a href="http://developer.android.com/guide/components/aidl.html">.aidl</a> 的文件，默认也不包含在 xcscope 的扫描范围里。解决这个问题的一个方法是在项目根目录下手动创建 cscope 索引：</p>
-
-<pre><code class="language-bash">$ find . -name &quot;*.java&quot; -or -name &quot;*.aidl&quot; -or -name &quot;*.cpp&quot; &gt; cscope.files
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ find . -name <span style="color:#e6db74">&#34;*.java&#34;</span> -or -name <span style="color:#e6db74">&#34;*.aidl&#34;</span> -or -name <span style="color:#e6db74">&#34;*.cpp&#34;</span> &gt; cscope.files
 
 $ cscope -b
-</code></pre>
+</code></pre></div>
 	<a class="read-more" href="/2013/01/java-and-aidl-support-in-emacs-cscope/">阅读全文 →</a>
       </div>
       
@@ -271,14 +266,12 @@ $ cscope -b
       
       <div class="summary">
         <p>以前没注意过 Rails controller 中 respond_to 的格式顺序，后来碰到了一个诡异的 bug，才发现这里的顺序对程序行为是有影响的。bug 的现象是用某个应用商店桌面端浏览网站时，会出现返回 JSON 而不是网页的情况。由于当时报告错误的用户给出的 bug 描述是「点击链接后出现乱码」，导致 debug 一开始没找对方向，废了不少功夫才解决这个问题。</p>
-
 <p>问题就出在不同格式的声明先后上，有问题的代码是：</p>
-
-<pre><code class="language-ruby">respond_to do |format|
-  format.json { render json: @items }
-  format.html
-end
-</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">respond_to <span style="color:#66d9ef">do</span> <span style="color:#f92672">|</span>format<span style="color:#f92672">|</span>
+  format<span style="color:#f92672">.</span>json { render <span style="color:#e6db74">json</span>: @items }
+  format<span style="color:#f92672">.</span>html
+<span style="color:#66d9ef">end</span>
+</code></pre></div>
 	<a class="read-more" href="/2013/01/order-of-formats-in-response-to-does-matter/">阅读全文 →</a>
       </div>
       
@@ -299,9 +292,7 @@ end
       
       <div class="summary">
         <p>博客最早用的是 wordpress，首页上提供的 Atom 源是 /feed/。迁移到 Octopress 后，Atom 源地址变成了 /atom.xml。在 Google Reader 里看到订阅 /feed/ 的读者还是有不少的，用默认的地址这些读者就收不到博客更新了。</p>
-
 <p>一个方法是改服务器的配置文件，以我之前使用的 nginx 为例，在相应站点的配置中增加一项 /feed/，把所有对它的访问重定向到 /atom.xml 即可：</p>
-
 <pre><code>location = /feed/ {
     rewrite ^(.*)$ http://blog.yxwang.me/atom.xml;
 }

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>ASPLOS on Aiur · Zellux 的博客</title>
@@ -31,8 +31,7 @@ flash存储单元分block和page，每个block有32/64个page，一个page有512
       <guid>https://blog.yxwang.me/2008/04/streamware/</guid>
       <description>Streamware: Programming General-Purpose Multicore Processors Using Streams
 Jayanth Gummaraju, Joel Coburn, Yoshio Turner, Mendel Rosenblum
-ASPLOS 08上的文章 http://portal.acm.org/citation.cfm?id=1353534.1346319
-提出了一个通用的多核平台，支持Cell CUDA Brook等多种体系结构，用户只需使用这个平台统一提供的API。
+ASPLOS 08上的文章 http://portal.acm.org/citation.cfm?id=1353534.1346319提出了一个通用的多核平台，支持Cell CUDA Brook等多种体系结构，用户只需使用这个平台统一提供的API。
 另外还加入了cache hierarchy的管理，能很好的安排各级cache保存的内容，以至于某个测试结果中单核的情况下用了Streamware的程序比不用的程序跑得还快。</description>
     </item>
     

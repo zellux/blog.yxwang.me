@@ -11,6 +11,7 @@
     
 
     <title> ecb 的简单配置和使用 &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -39,7 +40,7 @@
     "articleSection" : "post",
     "name" : "ecb 的简单配置和使用",
     "headline" : "ecb 的简单配置和使用",
-    "description" : "终端下的效果图（Windows 7下使用pietty远登）\n\n下载\nhttp:\/\/ecb.sourceforge.net\/downloads.html CVS或者压缩包都可以，当然也可以通过各发行版的包管理器安装。\n安装\n在.emacs中加入\n;; ECB configurations (add-to-list \x27load-path \x26quot;~\/emacs\/ecb-2.40\x26quot;) (add-to-list \x27load-path \x26quot;~\/emacs\/cedet-1.0pre6\/eieio\x26quot;) (add-to-list \x27load-path \x26quot;~\/emacs\/cedet-1.0pre6\/semantic\x26quot;) (add-to-list \x27load-path \x26quot;~\/emacs\/cedet-1.0pre6\/speedbar\x26quot;) (setq semantic-load-turn-everything-on t) (require \x27semantic-load) (require \x27ecb-autoloads)  运行Emacs后执行ecb-byte-compile，并重启Emacs（我这里不重启的话执行ecb-active后会报错）。\n使用\n第一次使用时先要设置项目目录，M-x customize-variable  ecb-source-path ，在这里加上你的项目根目录。\n接下来使用M-x ecb-active就能激活ECB了，成功激活后Emacs窗口会被切成左右两半。左边的几个窗口依次显示：目录，当前目录下的文件，当前文件中的函数\/全局变量等定义，文件浏览历史。如果打开了一个源文件后函数定义窗口里面是空的，有可能是因为这个项目过大cedet尚未完成对它的分析，闲置一段时间后就能看到文件里的定义。\nECB提供了方便在这些窗口间切换的快捷键：\n切换到目录窗口 Ctrl-c . g d 切换到函数\/方法窗口 Ctrl-c . g m 切换到文件窗口 Ctrl-c . g s 切换到历史窗口 Ctrl-c . g h 切换到上一个编辑窗口 Ctrl-c . g l\n最基本的使用就是这样，Ctrl-C . h可以看到更详细的帮助信息。",
+    "description" : "终端下的效果图（Windows 7下使用pietty远登）\n下载http:\/\/ecb.sourceforge.net\/downloads.htmlCVS或者压缩包都可以，当然也可以通过各发行版的包管理器安装。\n安装在.emacs中加入\n;; ECB configurations (add-to-list \u0026#39;load-path \u0026#34;~\/emacs\/ecb-2.40\u0026#34;) (add-to-list \u0026#39;load-path \u0026#34;~\/emacs\/cedet-1.0pre6\/eieio\u0026#34;) (add-to-list \u0026#39;load-path \u0026#34;~\/emacs\/cedet-1.0pre6\/semantic\u0026#34;) (add-to-list \u0026#39;load-path \u0026#34;~\/emacs\/cedet-1.0pre6\/speedbar\u0026#34;) (setq semantic-load-turn-everything-on t) (require \u0026#39;semantic-load) (require \u0026#39;ecb-autoloads) 运行Emacs后执行ecb-byte-compile，并重启Emacs（我这里不重启的话执行ecb-active后会报错）。\n使用第一次使用时先要设置项目目录，M-x customize-variable ecb-source-path ，在这里加上你的项目根目录。\n接下来使用M-x ecb-active就能激活ECB了，成功激活后Emacs窗口会被切成左右两半。左边的几个窗口依次显示：目录，当前目录下的文件，当前文件中的函数\/全局变量等定义，文件浏览历史。如果打开了一个源文件后函数定义窗口里面是空的，有可能是因为这个项目过大cedet尚未完成对它的分析，闲置一段时间后就能看到文件里的定义。\nECB提供了方便在这些窗口间切换的快捷键：\n切换到目录窗口 Ctrl-c . g d切换到函数\/方法窗口 Ctrl-c . g m切换到文件窗口 Ctrl-c . g s切换到历史窗口 Ctrl-c . g h切换到上一个编辑窗口 Ctrl-c . g l最基本的使用就是这样，Ctrl-C . h可以看到更详细的帮助信息。",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -47,10 +48,10 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2010",
-    "datePublished": "2010-02-02 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2010-02-02 00:00:00 \x2b0000 UTC",
+    "datePublished": "2010-02-02 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2010-02-02 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/2010\/02\/ecb-beginning\/",
-    "wordCount" : "66",
+    "wordCount" : "57",
     "keywords" : [ "ECB","Emacs","Tooling","Blog" ]
 }
 </script>
@@ -94,44 +95,30 @@
 
     <div class="post-content">
       <p>终端下的效果图（Windows 7下使用pietty远登）</p>
-
-<p><a href="/images/wp-uploads/2010/02/ecb.png"><img title="ecb" src="/images/wp-uploads/2010/02/ecb-300x179.png" alt="ECB Terminal" width="300" height="179"></a></p>
-
-<p><strong>下载</strong></p>
-
-<p><a href="http://ecb.sourceforge.net/downloads.html">http://ecb.sourceforge.net/downloads.html</a> CVS或者压缩包都可以，当然也可以通过各发行版的包管理器安装。</p>
-
-<p><strong>安装</strong></p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><!-- raw HTML omitted -->下载<!-- raw HTML omitted --></p>
+<p><!-- raw HTML omitted --><a href="http://ecb.sourceforge.net/downloads.html">http://ecb.sourceforge.net/downloads.html</a><!-- raw HTML omitted --> CVS或者压缩包都可以，当然也可以通过各发行版的包管理器安装。</p>
+<p><!-- raw HTML omitted -->安装<!-- raw HTML omitted --></p>
 <p>在.emacs中加入</p>
-
-<pre><code class="language-cl">;; ECB configurations
-(add-to-list 'load-path &quot;~/emacs/ecb-2.40&quot;)
-(add-to-list 'load-path &quot;~/emacs/cedet-1.0pre6/eieio&quot;)
-(add-to-list 'load-path &quot;~/emacs/cedet-1.0pre6/semantic&quot;)
-(add-to-list 'load-path &quot;~/emacs/cedet-1.0pre6/speedbar&quot;)
-(setq semantic-load-turn-everything-on t)
-(require 'semantic-load)
-(require 'ecb-autoloads)
-</code></pre>
-
-<p>运行Emacs后执行<code>ecb-byte-compile</code>，并重启Emacs（我这里不重启的话执行<code>ecb-active</code>后会报错）。</p>
-
-<p><strong>使用</strong></p>
-
-<p>第一次使用时先要设置项目目录，<code>M-x customize-variable <RET> ecb-source-path <RET></code>，在这里加上你的项目根目录。</p>
-
-<p>接下来使用<code>M-x ecb-active</code>就能激活ECB了，成功激活后Emacs窗口会被切成左右两半。左边的几个窗口依次显示：目录，当前目录下的文件，当前文件中的函数/全局变量等定义，文件浏览历史。如果打开了一个源文件后函数定义窗口里面是空的，有可能是因为这个项目过大cedet尚未完成对它的分析，闲置一段时间后就能看到文件里的定义。</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cl" data-lang="cl"><span style="color:#75715e">;; ECB configurations</span>
+(add-to-list <span style="color:#e6db74">&#39;load-path</span> <span style="color:#e6db74">&#34;~/emacs/ecb-2.40&#34;</span>)
+(add-to-list <span style="color:#e6db74">&#39;load-path</span> <span style="color:#e6db74">&#34;~/emacs/cedet-1.0pre6/eieio&#34;</span>)
+(add-to-list <span style="color:#e6db74">&#39;load-path</span> <span style="color:#e6db74">&#34;~/emacs/cedet-1.0pre6/semantic&#34;</span>)
+(add-to-list <span style="color:#e6db74">&#39;load-path</span> <span style="color:#e6db74">&#34;~/emacs/cedet-1.0pre6/speedbar&#34;</span>)
+(<span style="color:#66d9ef">setq</span> semantic-load-turn-everything-on <span style="color:#66d9ef">t</span>)
+(<span style="color:#a6e22e">require</span> <span style="color:#e6db74">&#39;semantic-load</span>)
+(<span style="color:#a6e22e">require</span> <span style="color:#e6db74">&#39;ecb-autoloads</span>)
+</code></pre></div><p>运行Emacs后执行<!-- raw HTML omitted -->ecb-byte-compile<!-- raw HTML omitted -->，并重启Emacs（我这里不重启的话执行<!-- raw HTML omitted -->ecb-active<!-- raw HTML omitted -->后会报错）。</p>
+<p><!-- raw HTML omitted -->使用<!-- raw HTML omitted --></p>
+<p>第一次使用时先要设置项目目录，<!-- raw HTML omitted -->M-x customize-variable <!-- raw HTML omitted --> ecb-source-path <!-- raw HTML omitted --><!-- raw HTML omitted -->，在这里加上你的项目根目录。</p>
+<p>接下来使用<!-- raw HTML omitted -->M-x ecb-active<!-- raw HTML omitted -->就能激活ECB了，成功激活后Emacs窗口会被切成左右两半。左边的几个窗口依次显示：目录，当前目录下的文件，当前文件中的函数/全局变量等定义，文件浏览历史。如果打开了一个源文件后函数定义窗口里面是空的，有可能是因为这个项目过大cedet尚未完成对它的分析，闲置一段时间后就能看到文件里的定义。</p>
 <p>ECB提供了方便在这些窗口间切换的快捷键：</p>
-
-<p>切换到目录窗口 <code>Ctrl-c . g d</code>
-切换到函数/方法窗口 <code>Ctrl-c . g m</code>
-切换到文件窗口 <code>Ctrl-c . g s</code>
-切换到历史窗口 <code>Ctrl-c . g h</code>
-切换到上一个编辑窗口 <code>Ctrl-c . g l</code></p>
-
-<p>最基本的使用就是这样，<code>Ctrl-C . h</code>可以看到更详细的帮助信息。</p>
+<p>切换到目录窗口 <!-- raw HTML omitted -->Ctrl-c . g d<!-- raw HTML omitted -->
+切换到函数/方法窗口 <!-- raw HTML omitted -->Ctrl-c . g m<!-- raw HTML omitted -->
+切换到文件窗口 <!-- raw HTML omitted -->Ctrl-c . g s<!-- raw HTML omitted -->
+切换到历史窗口 <!-- raw HTML omitted -->Ctrl-c . g h<!-- raw HTML omitted -->
+切换到上一个编辑窗口 <!-- raw HTML omitted -->Ctrl-c . g l<!-- raw HTML omitted --></p>
+<p>最基本的使用就是这样，<!-- raw HTML omitted -->Ctrl-C . h<!-- raw HTML omitted -->可以看到更详细的帮助信息。</p>
 
     </div>
         <div class="cc-license">

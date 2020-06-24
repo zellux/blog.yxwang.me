@@ -11,6 +11,7 @@
     
 
     <title> Chomp 游戏 &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -39,7 +40,7 @@
     "articleSection" : "post",
     "name" : "Chomp 游戏",
     "headline" : "Chomp 游戏",
-    "description" : "把一堆石子排成n行m列，两人轮流从里面取出石子，条件是取出一个石子后所有在它右边和上面的石子也要被取走。谁取走最后一个石子就算输。以3*5的棋盘举例来说，先手取了(2,5)，因此(3,5)也要被取走；后手取了(3,3)，同时也要取走(3,4)。现在棋盘的状态如下（O代表这个位子的石子还没被取走，x代表已经被取走）：\n3 O O x x x 2 O O O O x 1 O O O O O 1 2 3 4 5  接下来先手又取了(2,1)，于是第二排和第三排就一颗石子都不剩了\n3 x x x x x 2 x x x x x 1 O O O O O 1 2 3 4 5  后手取(1,2)\n3 x x x x x 2 x x x x x 1 O x x x x 1 2 3 4 5  接下来先手就只能取最后一个石子了，后手胜。",
+    "description" : "把一堆石子排成n行m列，两人轮流从里面取出石子，条件是取出一个石子后所有在它右边和上面的石子也要被取走。谁取走最后一个石子就算输。以3*5的棋盘举例来说，先手取了(2,5)，因此(3,5)也要被取走；后手取了(3,3)，同时也要取走(3,4)。现在棋盘的状态如下（O代表这个位子的石子还没被取走，x代表已经被取走）：\n3 O O x x x 2 O O O O x 1 O O O O O 1 2 3 4 5 接下来先手又取了(2,1)，于是第二排和第三排就一颗石子都不剩了\n3 x x x x x 2 x x x x x 1 O O O O O 1 2 3 4 5 后手取(1,2)\n3 x x x x x 2 x x x x x 1 O x x x x 1 2 3 4 5 接下来先手就只能取最后一个石子了，后手胜。",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -47,8 +48,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2009",
-    "datePublished": "2009-12-13 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2009-12-13 00:00:00 \x2b0000 UTC",
+    "datePublished": "2009-12-13 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2009-12-13 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/2009\/12\/chomp-game\/",
     "wordCount" : "89",
     "keywords" : [ "Algorithms","Game Theory","Blog" ]
@@ -94,43 +95,28 @@
 
     <div class="post-content">
       <p>把一堆石子排成n行m列，两人轮流从里面取出石子，条件是取出一个石子后所有在它右边和上面的石子也要被取走。谁取走最后一个石子就算输。以3*5的棋盘举例来说，先手取了(2,5)，因此(3,5)也要被取走；后手取了(3,3)，同时也要取走(3,4)。现在棋盘的状态如下（O代表这个位子的石子还没被取走，x代表已经被取走）：</p>
-
 <pre><code>3 O O x x x
 2 O O O O x
 1 O O O O O
   1 2 3 4 5
-</code></pre>
-
-<p>接下来先手又取了(2,1)，于是第二排和第三排就一颗石子都不剩了</p>
-
+</code></pre><p>接下来先手又取了(2,1)，于是第二排和第三排就一颗石子都不剩了</p>
 <pre><code>3 x x x x x
 2 x x x x x
 1 O O O O O
   1 2 3 4 5
-</code></pre>
-
-<p>后手取(1,2)</p>
-
+</code></pre><p>后手取(1,2)</p>
 <pre><code>3 x x x x x
 2 x x x x x
 1 O x x x x
   1 2 3 4 5
-</code></pre>
-
-<p>接下来先手就只能取最后一个石子了，后手胜。</p>
-
+</code></pre><p>接下来先手就只能取最后一个石子了，后手胜。</p>
 <p>这个游戏像是 Nim Game 的二维版本。于是问题也来了，能不能保证先手或者后手有必胜策略呢？</p>
-
 <p>答案是除了 1 * 1 的棋盘，对于其他大小的棋盘，先手总能赢。有一个很巧妙的证明可以保证先手存在必胜策略，可惜这个证明不是构造性的，也就是说没有给出先手怎么下才能赢。证明如下：</p>
-
-<p><span style="color: #efefef;">如果后手能赢，也就是说后手有必胜策略，使得无论先手第一次取哪个石子，后手都能获得最后的胜利。那么现在假设先手取最右上角的石子(n,m)，接下来后手通过某种取法使得自己进入必胜的局面。但事实上，先手在第一次取的时候就可以和后手这次取的一样，进入必胜局面了，与假设矛盾。</span></p>
-
+<p><!-- raw HTML omitted -->如果后手能赢，也就是说后手有必胜策略，使得无论先手第一次取哪个石子，后手都能获得最后的胜利。那么现在假设先手取最右上角的石子(n,m)，接下来后手通过某种取法使得自己进入必胜的局面。但事实上，先手在第一次取的时候就可以和后手这次取的一样，进入必胜局面了，与假设矛盾。<!-- raw HTML omitted --></p>
 <p>另外这个证明是基于 Zermelo&rsquo;s theory，这个理论保证在这样一种游戏中（两人博弈，信息完全公开，不存在偶然事件且能在有限步里面决出胜负），先手或后手肯定存在一种必胜策略。</p>
-
 <p>相关链接：</p>
-
 <ul>
-<li><a href="Zermelo's theorem">http://en.wikipedia.org/wiki/Zermelo&rsquo;s<em>theorem</em>(game_theory)</a></li>
+<li>[http://en.wikipedia.org/wiki/Zermelo&rsquo;s_theorem_(game_theory)](Zermelo&rsquo;s theorem)</li>
 <li><a href="http://www.win.tue.nl/~aeb/games/chomp.html">http://www.win.tue.nl/~aeb/games/chomp.html</a></li>
 </ul>
 

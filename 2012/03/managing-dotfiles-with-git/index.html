@@ -11,6 +11,7 @@
     
 
     <title> 用 Git 管理命令行配置 &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -39,7 +40,7 @@
     "articleSection" : "post",
     "name" : "用 Git 管理命令行配置",
     "headline" : "用 Git 管理命令行配置",
-    "description" : "\x3cp\x3e以前部署新机器时都要把一堆配置文件 scp 过去，今天折腾了下用 Git 统一管理这些配置文件。\x3c\/p\x3e\n\n\x3cp\x3e做起来很简单，创建一个 dotfiles 目录，把所有要同步的配置文件都放到这个目录下，并重命名去掉文件名开头的点，以免被 Git 忽略。写了一个脚本链接这些配置文件到 HOME 目录：\x3c\/p\x3e\n\n\x3cpre\x3e\x3ccode class=\x22language-ruby\x22\x3e#!\/usr\/bin\/env ruby\n\nsafe_mode = ARGV.include? \x27--safe\x27\n\nfiles = %w(zshrc tmux.conf gitconfig vimrc emacs gitignore_global LS_COLORS)\nfiles.each do |file|\n  unless safe_mode and File.exists?(\x26quot;#{ENV[\x27HOME\x27]}\/.#{file}\x26quot;)\n    %x(ln -s -i -v $PWD\/#{file} ~\/.#{file})\n    puts \x26quot;.#{file} linked\x26quot; if safe_mode\n  end\nend\n\x3c\/code\x3e\x3c\/pre\x3e",
+    "description" : "\u003cp\u003e以前部署新机器时都要把一堆配置文件 scp 过去，今天折腾了下用 Git 统一管理这些配置文件。\u003c\/p\u003e\n\u003cp\u003e做起来很简单，创建一个 dotfiles 目录，把所有要同步的配置文件都放到这个目录下，并重命名去掉文件名开头的点，以免被 Git 忽略。写了一个脚本链接这些配置文件到 HOME 目录：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre style=\u0022color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4\u0022\u003e\u003ccode class=\u0022language-ruby\u0022 data-lang=\u0022ruby\u0022\u003e\u003cspan style=\u0022color:#75715e\u0022\u003e#!\/usr\/bin\/env ruby\u003c\/span\u003e\n\nsafe_mode \u003cspan style=\u0022color:#f92672\u0022\u003e=\u003c\/span\u003e \u003cspan style=\u0022color:#66d9ef\u0022\u003eARGV\u003c\/span\u003e\u003cspan style=\u0022color:#f92672\u0022\u003e.\u003c\/span\u003einclude? \u003cspan style=\u0022color:#e6db74\u0022\u003e\u0026#39;--safe\u0026#39;\u003c\/span\u003e\n\nfiles \u003cspan style=\u0022color:#f92672\u0022\u003e=\u003c\/span\u003e \u003cspan style=\u0022color:#e6db74\u0022\u003e%w(zshrc tmux.conf gitconfig vimrc emacs gitignore_global LS_COLORS)\u003c\/span\u003e\nfiles\u003cspan style=\u0022color:#f92672\u0022\u003e.\u003c\/span\u003eeach \u003cspan style=\u0022color:#66d9ef\u0022\u003edo\u003c\/span\u003e \u003cspan style=\u0022color:#f92672\u0022\u003e|\u003c\/span\u003efile\u003cspan style=\u0022color:#f92672\u0022\u003e|\u003c\/span\u003e\n  \u003cspan style=\u0022color:#66d9ef\u0022\u003eunless\u003c\/span\u003e safe_mode \u003cspan style=\u0022color:#f92672\u0022\u003eand\u003c\/span\u003e \u003cspan style=\u0022color:#66d9ef\u0022\u003eFile\u003c\/span\u003e\u003cspan style=\u0022color:#f92672\u0022\u003e.\u003c\/span\u003eexists?(\u003cspan style=\u0022color:#e6db74\u0022\u003e\u0026#34;\u003c\/span\u003e\u003cspan style=\u0022color:#e6db74\u0022\u003e#{\u003c\/span\u003e\u003cspan style=\u0022color:#66d9ef\u0022\u003eENV\u003c\/span\u003e\u003cspan style=\u0022color:#f92672\u0022\u003e[\u003c\/span\u003e\u003cspan style=\u0022color:#e6db74\u0022\u003e\u0026#39;HOME\u0026#39;\u003c\/span\u003e\u003cspan style=\u0022color:#f92672\u0022\u003e]\u003c\/span\u003e\u003cspan style=\u0022color:#e6db74\u0022\u003e}\u003c\/span\u003e\u003cspan style=\u0022color:#e6db74\u0022\u003e\/.\u003c\/span\u003e\u003cspan style=\u0022color:#e6db74\u0022\u003e#{\u003c\/span\u003efile\u003cspan style=\u0022color:#e6db74\u0022\u003e}\u003c\/span\u003e\u003cspan style=\u0022color:#e6db74\u0022\u003e\u0026#34;\u003c\/span\u003e)\n    \u003cspan style=\u0022color:#e6db74\u0022\u003e%x(ln -s -i -v $PWD\/\u003c\/span\u003e\u003cspan style=\u0022color:#e6db74\u0022\u003e#{\u003c\/span\u003efile\u003cspan style=\u0022color:#e6db74\u0022\u003e}\u003c\/span\u003e\u003cspan style=\u0022color:#e6db74\u0022\u003e ~\/.\u003c\/span\u003e\u003cspan style=\u0022color:#e6db74\u0022\u003e#{\u003c\/span\u003efile\u003cspan style=\u0022color:#e6db74\u0022\u003e}\u003c\/span\u003e\u003cspan style=\u0022color:#e6db74\u0022\u003e)\u003c\/span\u003e\n    puts \u003cspan style=\u0022color:#e6db74\u0022\u003e\u0026#34;.\u003c\/span\u003e\u003cspan style=\u0022color:#e6db74\u0022\u003e#{\u003c\/span\u003efile\u003cspan style=\u0022color:#e6db74\u0022\u003e}\u003c\/span\u003e\u003cspan style=\u0022color:#e6db74\u0022\u003e linked\u0026#34;\u003c\/span\u003e \u003cspan style=\u0022color:#66d9ef\u0022\u003eif\u003c\/span\u003e safe_mode\n  \u003cspan style=\u0022color:#66d9ef\u0022\u003eend\u003c\/span\u003e\n\u003cspan style=\u0022color:#66d9ef\u0022\u003eend\u003c\/span\u003e\n\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -47,10 +48,10 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2012",
-    "datePublished": "2012-03-28 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2012-03-28 00:00:00 \x2b0000 UTC",
+    "datePublished": "2012-03-28 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2012-03-28 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/2012\/03\/managing-dotfiles-with-git\/",
-    "wordCount" : "87",
+    "wordCount" : "85",
     "keywords" : [ "Git","Shell","Tooling","Blog" ]
 }
 </script>
@@ -94,29 +95,22 @@
 
     <div class="post-content">
       <p>以前部署新机器时都要把一堆配置文件 scp 过去，今天折腾了下用 Git 统一管理这些配置文件。</p>
-
 <p>做起来很简单，创建一个 dotfiles 目录，把所有要同步的配置文件都放到这个目录下，并重命名去掉文件名开头的点，以免被 Git 忽略。写了一个脚本链接这些配置文件到 HOME 目录：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#75715e">#!/usr/bin/env ruby</span>
 
-<pre><code class="language-ruby">#!/usr/bin/env ruby
+safe_mode <span style="color:#f92672">=</span> <span style="color:#66d9ef">ARGV</span><span style="color:#f92672">.</span>include? <span style="color:#e6db74">&#39;--safe&#39;</span>
 
-safe_mode = ARGV.include? '--safe'
-
-files = %w(zshrc tmux.conf gitconfig vimrc emacs gitignore_global LS_COLORS)
-files.each do |file|
-  unless safe_mode and File.exists?(&quot;#{ENV['HOME']}/.#{file}&quot;)
-    %x(ln -s -i -v $PWD/#{file} ~/.#{file})
-    puts &quot;.#{file} linked&quot; if safe_mode
-  end
-end
-</code></pre>
-
-<p>为了方便同步脚本到 GitHub，我在 .zshrc 中定义了两个命令用来上传、下载最近的脚本配置：</p>
-
-<pre><code class="language-bash">alias pull-dotfiles='pushd $HOME/dotfiles &amp;&amp; git pull origin master &amp;&amp; ./link-files.rb --safe; popd'
-alias push-dotfiles='pushd $HOME/dotfiles &amp;&amp; git add -A &amp;&amp; git commit -m &quot;Update&quot; &amp;&amp; git push origin master; popd'
-</code></pre>
-
-<p><code>pull-dotfiles</code> 可以获取最新的配置，<code>push-dotfiles</code> 则是提交最近的改动到 Git 服务器。我的配置文件在 <a href="https://github.com/zellux/dotfiles">https://github.com/zellux/dotfiles</a>，希望对大家有用。</p>
+files <span style="color:#f92672">=</span> <span style="color:#e6db74">%w(zshrc tmux.conf gitconfig vimrc emacs gitignore_global LS_COLORS)</span>
+files<span style="color:#f92672">.</span>each <span style="color:#66d9ef">do</span> <span style="color:#f92672">|</span>file<span style="color:#f92672">|</span>
+  <span style="color:#66d9ef">unless</span> safe_mode <span style="color:#f92672">and</span> <span style="color:#66d9ef">File</span><span style="color:#f92672">.</span>exists?(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">#{</span><span style="color:#66d9ef">ENV</span><span style="color:#f92672">[</span><span style="color:#e6db74">&#39;HOME&#39;</span><span style="color:#f92672">]</span><span style="color:#e6db74">}</span><span style="color:#e6db74">/.</span><span style="color:#e6db74">#{</span>file<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+    <span style="color:#e6db74">%x(ln -s -i -v $PWD/</span><span style="color:#e6db74">#{</span>file<span style="color:#e6db74">}</span><span style="color:#e6db74"> ~/.</span><span style="color:#e6db74">#{</span>file<span style="color:#e6db74">}</span><span style="color:#e6db74">)</span>
+    puts <span style="color:#e6db74">&#34;.</span><span style="color:#e6db74">#{</span>file<span style="color:#e6db74">}</span><span style="color:#e6db74"> linked&#34;</span> <span style="color:#66d9ef">if</span> safe_mode
+  <span style="color:#66d9ef">end</span>
+<span style="color:#66d9ef">end</span>
+</code></pre></div><p>为了方便同步脚本到 GitHub，我在 .zshrc 中定义了两个命令用来上传、下载最近的脚本配置：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">alias pull-dotfiles<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;pushd $HOME/dotfiles &amp;&amp; git pull origin master &amp;&amp; ./link-files.rb --safe; popd&#39;</span>
+alias push-dotfiles<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;pushd $HOME/dotfiles &amp;&amp; git add -A &amp;&amp; git commit -m &#34;Update&#34; &amp;&amp; git push origin master; popd&#39;</span>
+</code></pre></div><p><code>pull-dotfiles</code> 可以获取最新的配置，<code>push-dotfiles</code> 则是提交最近的改动到 Git 服务器。我的配置文件在 <a href="https://github.com/zellux/dotfiles">https://github.com/zellux/dotfiles</a>，希望对大家有用。</p>
     </div>
         <div class="cc-license">
       本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.zh">知识共享署名-非商业性使用 3.0 版本许可协议</a>进行许可，欢迎转载，演绎，但是必须保留本文的署名 <a href="https://blog.yxwang.me/2012/03/managing-dotfiles-with-git/">zellux</a>（包含链接），且不得用于商业目的。

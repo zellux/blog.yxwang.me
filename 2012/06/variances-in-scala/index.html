@@ -11,6 +11,7 @@
     
 
     <title> Scala 中的协变和逆变 &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -39,7 +40,7 @@
     "articleSection" : "post",
     "name" : "Scala 中的协变和逆变",
     "headline" : "Scala 中的协变和逆变",
-    "description" : "\x3ch2 id=\x22java-数组\x22\x3eJava 数组\x3c\/h2\x3e\n\n\x3cp\x3e先来看一个 Java 中的例子，Java 中的数组是协变的。也就是说，一个 String 数组(String[])是可以被当成 Object 数组(Object[])处理的：\x3c\/p\x3e\n\n\x3cpre\x3e\x3ccode class=\x22language-java\x22\x3eString[] a1 = { \x26quot;abc\x26quot; };\nObject[] a2 = a1;\n\x3c\/code\x3e\x3c\/pre\x3e\n\n\x3cp\x3e这种协变虽然在读取数组内容时不会有问题（a1 数组中的 String 元素可以被当成 Object 使用），但是修改数组内容时就会出现无法在编译期检测出来的错误了：\x3c\/p\x3e\n\n\x3cpre\x3e\x3ccode class=\x22language-java\x22\x3ea2[0] = new Integer(17)\nString s  = a1[0]  \/\/ java.lang.ArrayStoreException\n\x3c\/code\x3e\x3c\/pre\x3e",
+    "description" : "\u003ch2 id=\u0022java-数组\u0022\u003eJava 数组\u003c\/h2\u003e\n\u003cp\u003e先来看一个 Java 中的例子，Java 中的数组是协变的。也就是说，一个 String 数组(String[])是可以被当成 Object 数组(Object[])处理的：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre style=\u0022color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4\u0022\u003e\u003ccode class=\u0022language-java\u0022 data-lang=\u0022java\u0022\u003eString\u003cspan style=\u0022color:#f92672\u0022\u003e[]\u003c\/span\u003e a1 \u003cspan style=\u0022color:#f92672\u0022\u003e=\u003c\/span\u003e \u003cspan style=\u0022color:#f92672\u0022\u003e{\u003c\/span\u003e \u003cspan style=\u0022color:#e6db74\u0022\u003e\u0026#34;abc\u0026#34;\u003c\/span\u003e \u003cspan style=\u0022color:#f92672\u0022\u003e};\u003c\/span\u003e\nObject\u003cspan style=\u0022color:#f92672\u0022\u003e[]\u003c\/span\u003e a2 \u003cspan style=\u0022color:#f92672\u0022\u003e=\u003c\/span\u003e a1\u003cspan style=\u0022color:#f92672\u0022\u003e;\u003c\/span\u003e\n\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cp\u003e这种协变虽然在读取数组内容时不会有问题（a1 数组中的 String 元素可以被当成 Object 使用），但是修改数组内容时就会出现无法在编译期检测出来的错误了：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre style=\u0022color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4\u0022\u003e\u003ccode class=\u0022language-java\u0022 data-lang=\u0022java\u0022\u003ea2\u003cspan style=\u0022color:#f92672\u0022\u003e[\u003c\/span\u003e0\u003cspan style=\u0022color:#f92672\u0022\u003e]\u003c\/span\u003e \u003cspan style=\u0022color:#f92672\u0022\u003e=\u003c\/span\u003e \u003cspan style=\u0022color:#66d9ef\u0022\u003enew\u003c\/span\u003e Integer\u003cspan style=\u0022color:#f92672\u0022\u003e(\u003c\/span\u003e17\u003cspan style=\u0022color:#f92672\u0022\u003e)\u003c\/span\u003e\nString s  \u003cspan style=\u0022color:#f92672\u0022\u003e=\u003c\/span\u003e a1\u003cspan style=\u0022color:#f92672\u0022\u003e[\u003c\/span\u003e0\u003cspan style=\u0022color:#f92672\u0022\u003e]\u003c\/span\u003e  \u003cspan style=\u0022color:#75715e\u0022\u003e\/\/ java.lang.ArrayStoreException\n\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -47,8 +48,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2012",
-    "datePublished": "2012-06-30 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2012-06-30 00:00:00 \x2b0000 UTC",
+    "datePublished": "2012-06-30 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2012-06-30 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/2012\/06\/variances-in-scala\/",
     "wordCount" : "250",
     "keywords" : [ "Programming","Scala","Blog" ]
@@ -94,75 +95,51 @@
 
     <div class="post-content">
       <h2 id="java-数组">Java 数组</h2>
-
 <p>先来看一个 Java 中的例子，Java 中的数组是协变的。也就是说，一个 String 数组(String[])是可以被当成 Object 数组(Object[])处理的：</p>
-
-<pre><code class="language-java">String[] a1 = { &quot;abc&quot; };
-Object[] a2 = a1;
-</code></pre>
-
-<p>这种协变虽然在读取数组内容时不会有问题（a1 数组中的 String 元素可以被当成 Object 使用），但是修改数组内容时就会出现无法在编译期检测出来的错误了：</p>
-
-<pre><code class="language-java">a2[0] = new Integer(17)
-String s  = a1[0]  // java.lang.ArrayStoreException
-</code></pre>
-
-<p>之所以要采用这种设计，Java 的发明者 James Gosling 曾解释说，这样做就能用一种简单通用的方式处理 Java 数组了。例如 java.util.Arrays 提供了sort 方法用于所有数组类型的排序，它的函数声明是 <code>sort(Object[] a, Comparator c)</code>，如果 Java 数组不支持协变，那么就很难简单的写出这样通用的排序方法了。</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">String<span style="color:#f92672">[]</span> a1 <span style="color:#f92672">=</span> <span style="color:#f92672">{</span> <span style="color:#e6db74">&#34;abc&#34;</span> <span style="color:#f92672">};</span>
+Object<span style="color:#f92672">[]</span> a2 <span style="color:#f92672">=</span> a1<span style="color:#f92672">;</span>
+</code></pre></div><p>这种协变虽然在读取数组内容时不会有问题（a1 数组中的 String 元素可以被当成 Object 使用），但是修改数组内容时就会出现无法在编译期检测出来的错误了：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">a2<span style="color:#f92672">[</span>0<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Integer<span style="color:#f92672">(</span>17<span style="color:#f92672">)</span>
+String s  <span style="color:#f92672">=</span> a1<span style="color:#f92672">[</span>0<span style="color:#f92672">]</span>  <span style="color:#75715e">// java.lang.ArrayStoreException
+</span></code></pre></div><p>之所以要采用这种设计，Java 的发明者 James Gosling 曾解释说，这样做就能用一种简单通用的方式处理 Java 数组了。例如 java.util.Arrays 提供了sort 方法用于所有数组类型的排序，它的函数声明是 <code>sort(Object[] a, Comparator c)</code>，如果 Java 数组不支持协变，那么就很难简单的写出这样通用的排序方法了。</p>
 <h2 id="scala-中的协变和逆变">Scala 中的协变和逆变</h2>
-
-<p>wikipedia 上关于[协变和逆变的解释](<a href="http://en.wikipedia.org/wiki/Covariance_and_contravariance_(computer_science)是：">http://en.wikipedia.org/wiki/Covariance_and_contravariance_(computer_science)是：</a></p>
-
+<p>wikipedia 上关于[协变和逆变的解释](<a href="http://en.wikipedia.org/wiki/Covariance_and_contravariance_(computer_science)">http://en.wikipedia.org/wiki/Covariance_and_contravariance_(computer_science)</a>是：</p>
 <blockquote>
 <p>Within the type system of a programming language, covariance and contravariance refers to the ordering of types from narrower to wider and their interchangeability or equivalence in certain situations (such as parameters, generics, and return types).</p>
 </blockquote>
-
 <p>简单来说，它们指定了不同类型相互之间的可转换性。协变类型可以从较普通的类（动物）转换到更精细的类（猫），而逆变则允许从较精细的类（三角形）转换到较普通的类（几何图形）。</p>
-
 <p>Scala 中默认的参数类型是不变（invariant）的，也就是说，下面代码中 Invariant[Object] 类和 Invariant[String] 类的实例，均无法转化成另外一种类型。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">scala<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Invariant</span><span style="color:#f92672">[</span><span style="color:#66d9ef">T</span><span style="color:#f92672">]</span>
+<span style="color:#a6e22e">defined</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Invariant</span>
 
-<pre><code class="language-scala">scala&gt; class Invariant[T]
-defined class Invariant
+scala<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">var</span> x<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Invariant</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Object</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Invariant</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Object</span><span style="color:#f92672">]</span>
+x<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Invariant</span><span style="color:#f92672">[</span><span style="color:#66d9ef">java.lang.Object</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Invariant</span><span style="color:#66d9ef">@</span><span style="color:#ae81ff">8</span>e43b44
 
-scala&gt; var x: Invariant[Object] = new Invariant[Object]
-x: Invariant[java.lang.Object] = Invariant@8e43b44
-
-scala&gt; var x: Invariant[Object] = new Invariant[String]
-&lt;console&gt;:8: error: type mismatch;
- found   : Invariant[String]
- required: Invariant[java.lang.Object]
+scala<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">var</span> x<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Invariant</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Object</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Invariant</span><span style="color:#f92672">[</span><span style="color:#66d9ef">String</span><span style="color:#f92672">]</span>
+<span style="color:#f92672">&lt;</span>console<span style="color:#66d9ef">&gt;:</span><span style="color:#ae81ff">8</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">error:</span> <span style="color:#66d9ef">type</span> <span style="color:#66d9ef">mismatch</span><span style="color:#f92672">;</span>
+ found   <span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Invariant</span><span style="color:#f92672">[</span><span style="color:#66d9ef">String</span><span style="color:#f92672">]</span>
+ required<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Invariant</span><span style="color:#f92672">[</span><span style="color:#66d9ef">java.lang.Object</span><span style="color:#f92672">]</span>
                                   
-scala&gt; var x: Invariant[String] = new Invariant[Object]
-&lt;console&gt;:8: error: type mismatch;
- found   : Invariant[java.lang.Object]
- required: Invariant[String]
-</code></pre>
+scala<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">var</span> x<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Invariant</span><span style="color:#f92672">[</span><span style="color:#66d9ef">String</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Invariant</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Object</span><span style="color:#f92672">]</span>
+<span style="color:#f92672">&lt;</span>console<span style="color:#66d9ef">&gt;:</span><span style="color:#ae81ff">8</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">error:</span> <span style="color:#66d9ef">type</span> <span style="color:#66d9ef">mismatch</span><span style="color:#f92672">;</span>
+ found   <span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Invariant</span><span style="color:#f92672">[</span><span style="color:#66d9ef">java.lang.Object</span><span style="color:#f92672">]</span>
+ required<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Invariant</span><span style="color:#f92672">[</span><span style="color:#66d9ef">String</span><span style="color:#f92672">]</span>
+</code></pre></div><p>在 Scala 中，如果要把某一参数类型 T 声明为协变，只需要在它的前面加上 + 号即可：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">scala<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Covariant</span><span style="color:#f92672">[</span><span style="color:#66d9ef">+T</span><span style="color:#f92672">]</span>
+<span style="color:#a6e22e">defined</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Covariant</span>
 
-<p>在 Scala 中，如果要把某一参数类型 T 声明为协变，只需要在它的前面加上 + 号即可：</p>
-
-<pre><code class="language-scala">scala&gt; class Covariant[+T]
-defined class Covariant
-
-scala&gt; var x: Covariant[Object] = new Covariant[String]
-x: Covariant[java.lang.Object] = Covariant@36527386
-</code></pre>
-
-<p>类似的，声明 T 为逆变的方式是在它前面加上 - 号。</p>
-
+scala<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">var</span> x<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Covariant</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Object</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Covariant</span><span style="color:#f92672">[</span><span style="color:#66d9ef">String</span><span style="color:#f92672">]</span>
+x<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Covariant</span><span style="color:#f92672">[</span><span style="color:#66d9ef">java.lang.Object</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Covariant</span><span style="color:#66d9ef">@</span><span style="color:#ae81ff">36527386</span>
+</code></pre></div><p>类似的，声明 T 为逆变的方式是在它前面加上 - 号。</p>
 <p>判断一个类型是逆变、协变还是不变的方法，被称为<strong>里氏替换原则</strong>(Liskov Substitution Principle)。LSP 指出，如果所有类型 U 出现的地方都能用类型 T 替换，那么 T 就可以被认为是 U 的一个子类型。</p>
-
 <p>协变和逆变有时候可以同时作用在一个类型上，比较经典的一个例子就是 Scala 中的 Function1。当出现类似 A =&gt; B 的 lambda 函数时，编译器会自动将它转成一个 Function1[A, B] 的定义。标准库中 Function1 的定义如下：</p>
-
 <p>{% codeblock lang:scala %}
 trait Function1[-S, +T] {
-  def apply(x: S): T
+def apply(x: S): T
 }
 {% endcodeblock %}</p>
-
 <p>这里 S 是函数参数，T 是函数的返回类型。不难理解，当一个函数 f 能替换另一个函数 g 时，f 接受的参数必须是 g 的父类，而 f 的返回结果必须是 g 的返回结果的子类。因此这里 S 是逆变的，而 T 则是协变的。</p>
-
 <p>参考：</p>
-
 <ul>
 <li><a href="http://www.amazon.com/Programming-Scala-Step---Step-ebook/dp/B004Z1FTXS/ref=sr_1_2?ie=UTF8&amp;qid=1342872487&amp;sr=8-2&amp;keywords=programming+in+scala">《Programming in Scala》</a></li>
 <li><a href="http://daily-scala.blogspot.com/2010/03/intra-and-co-variance-of-type.html">In- and Co- variance of type parameters</a></li>

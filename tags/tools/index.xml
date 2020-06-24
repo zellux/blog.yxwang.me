@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tools on Aiur · Zellux 的博客</title>
@@ -18,8 +18,8 @@
       
       <guid>https://blog.yxwang.me/2011/07/full-screen-emacs-in-lion/</guid>
       <description>前几天给我的 MacBook Pro 装上了 Lion，不过原来的 Emacs 并不支持在 Lion 下全屏运行。github 上搜了下发现已经有让 Emacs 支持全屏模式的补丁了，Homebrew 中这个补丁也已经被吸收。
-直接用 brew install emacs &amp;ndash;cocoa &amp;ndash;srgb 似乎会碰到编译错误：
-Finding pointers to doc strings... Finding pointers to doc strings...done Dumping under the name emacs unexec: cannot write section __data --- List of All Regions --- address size prot maxp --- List of Regions to be Dumped --- address size prot maxp --- Header Information --- Magic = 0xfeedfacf CPUType = 16777223 CPUSubType = -2147483645 FileType = 0x2 NCmds = 20 SizeOfCmds = 3464 Flags = 0x00200085 Highest address of load commands in input file: 0x5dd000 Lowest offset of all sections in __TEXT segment: 0x22f0 --- List of Load Commands in Input File ---  github issues 上已经有人报告这个问题了，解决方法也很简单，运行 brew edit emacs 打开 emacs 的安装脚本，在 def install 的后面加上两行：</description>
+直接用 brew install emacs &amp;ndash;cocoa &amp;ndash;srgb似乎会碰到编译错误：
+Finding pointers to doc strings... Finding pointers to doc strings...done Dumping under the name emacs unexec: cannot write section __data --- List of All Regions --- address size prot maxp --- List of Regions to be Dumped --- address size prot maxp --- Header Information --- Magic = 0xfeedfacf CPUType = 16777223 CPUSubType = -2147483645 FileType = 0x2 NCmds = 20 SizeOfCmds = 3464 Flags = 0x00200085 Highest address of load commands in input file: 0x5dd000 Lowest offset of all sections in __TEXT segment: 0x22f0 --- List of Load Commands in Input File --- github issues 上已经有人报告这个问题了，解决方法也很简单，运行 brew edit emacs打开 emacs 的安装脚本，在 def install的后面加上两行：</description>
     </item>
     
   </channel>

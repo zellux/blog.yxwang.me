@@ -11,6 +11,7 @@
     
 
     <title> Usenix 08 - LeakSurvivor &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -39,7 +40,7 @@
     "articleSection" : "post",
     "name" : "Usenix 08 - LeakSurvivor",
     "headline" : "Usenix 08 - LeakSurvivor",
-    "description" : "Paper: LeakSurvivor: Towards Safely Tolerating Memory Leaks for Garbage-Collected Languages\nhttp:\/\/www.usenix.org\/events\/usenix08\/tech\/tang.html\nYan Tang, Qi Gao, and Feng Qin, The Ohio State University\n三位作者好像都是中国人\n这篇paper针对支持垃圾收集的语言中内存泄露问题，提出了一种比较保守的“换出”策略，即把可疑的内存泄露的对象（这些对象通常都是长时间没有被访问的）从内存移动到硬盘上暂时保存，减小内存的压力；如果这些对象后来被再次访问（这种可能性很小），就把它们从硬盘上移回内存。",
+    "description" : "Paper: LeakSurvivor: Towards Safely Tolerating Memory Leaks for Garbage-Collected Languages\nhttp:\/\/www.usenix.org\/events\/usenix08\/tech\/tang.htmlYan Tang, Qi Gao, and Feng Qin, The Ohio State University三位作者好像都是中国人\n这篇paper针对支持垃圾收集的语言中内存泄露问题，提出了一种比较保守的“换出”策略，即把可疑的内存泄露的对象（这些对象通常都是长时间没有被访问的）从内存移动到硬盘上暂时保存，减小内存的压力；如果这些对象后来被再次访问（这种可能性很小），就把它们从硬盘上移回内存。",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -47,10 +48,10 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2008",
-    "datePublished": "2008-07-19 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2008-07-19 00:00:00 \x2b0000 UTC",
+    "datePublished": "2008-07-19 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2008-07-19 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/2008\/07\/leaksurvivor\/",
-    "wordCount" : "24",
+    "wordCount" : "22",
     "keywords" : [ "Computer System","Memory","Paper","Research","Usenix","Blog" ]
 }
 </script>
@@ -94,13 +95,9 @@
 
     <div class="post-content">
       <p>Paper: LeakSurvivor: Towards Safely Tolerating Memory Leaks for Garbage-Collected Languages</p>
-
-<p><a href="http://www.usenix.org/events/usenix08/tech/tang.html">http://www.usenix.org/events/usenix08/tech/tang.html</a></p>
-
-<p>Yan Tang,   Qi Gao, and Feng Qin, <em>The Ohio State University</em></p>
-
+<p><!-- raw HTML omitted --><a href="http://www.usenix.org/events/usenix08/tech/tang.html">http://www.usenix.org/events/usenix08/tech/tang.html</a><!-- raw HTML omitted --></p>
+<p>Yan Tang, 	Qi Gao, and Feng Qin, <!-- raw HTML omitted -->The Ohio State University<!-- raw HTML omitted --></p>
 <p>三位作者好像都是中国人</p>
-
 <p>这篇paper针对支持垃圾收集的语言中内存泄露问题，提出了一种比较保守的“换出”策略，即把可疑的内存泄露的对象（这些对象通常都是长时间没有被访问的）从内存移动到硬盘上暂时保存，减小内存的压力；如果这些对象后来被再次访问（这种可能性很小），就把它们从硬盘上移回内存。</p>
 
     </div>

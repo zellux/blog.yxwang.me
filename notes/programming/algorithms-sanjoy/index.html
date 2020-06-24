@@ -11,6 +11,7 @@
     
 
     <title> 《Algorithms》笔记 &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -39,7 +40,7 @@
     "articleSection" : "notes",
     "name" : "《Algorithms》笔记",
     "headline" : "《Algorithms》笔记",
-    "description" : "1. Algorithms with numbers 设计 Hash 函数一般要考虑两个因素，一是它的随机性，即保证数据分布均匀；二是它的一致性，即对于同一份数据每次都要获得相同的结果。\n2. Divide-and-conquer algorithms 多项式乘法 最普通的多项式乘法需要将两个多项式的不同系数一一相乘，算法复杂度是 \\(O(n^2)\\)。而如果采用点值表示法，即用多项式在 n \x2b 1 个不同的点上的取值来唯一的表示这个多项式的话，计算它们的乘积只需要两个多项式在 2n \x2b 1 个点的值就可以了（乘积的最高项次数为 2n），需要的时间是线性的。所以接下来的问题是如何在点值表示法和系数形式之间高效的转换。\n首先是求值，即给出 n 个系数和 n \x2b 1 组不同的取值，求出这些取值下的多项式的值。将奇数次幂的项的偶数次幂的项分开，则有 \\(A(x) = A_e(x^2) \x2b xA_o(x^2)\\)，这里 \\(A_e\\) 代表偶数次幂的项，\\(A_o\\) 代表奇数次幂的项。同时，考虑到 \\(A(x_i)\\) 和 \\(A(-x_i)\\) 的计算： \\[ \\begin{align*} A(x_i) = A_e(x_{i}^{2}) \x2b x_iA_o(x_{i}^{2}) \\\\ A(-x_i) = A_e(x_{i}^{2}) - x_iA_o(x_{i}^{2}) \\end{align*} \\]\n把计算任务减少到了项数低一半的 \\(A_e\\) 和 \\(A_o\\)，计算量减少了一半。接着通过引入复数，可以进一步二分计算 \\(A_e\\) 和 \\(A_o\\)，从而在 \\(O(log n)\\) 的时间内得出结果。\n3. Decompositions of graphs 强连通分量 DFS 其实并不需要从根节点开始搜素，因为当子节点先被遍历后，接下来自然会遍历它的父节点。",
+    "description" : "1. Algorithms with numbers 设计 Hash 函数一般要考虑两个因素，一是它的随机性，即保证数据分布均匀；二是它的一致性，即对于同一份数据每次都要获得相同的结果。\n2. Divide-and-conquer algorithms 多项式乘法 最普通的多项式乘法需要将两个多项式的不同系数一一相乘，算法复杂度是 \\(O(n^2)\\)。而如果采用点值表示法，即用多项式在 n \u002b 1 个不同的点上的取值来唯一的表示这个多项式的话，计算它们的乘积只需要两个多项式在 2n \u002b 1 个点的值就可以了（乘积的最高项次数为 2n），需要的时间是线性的。所以接下来的问题是如何在点值表示法和系数形式之间高效的转换。\n首先是求值，即给出 n 个系数和 n \u002b 1 组不同的取值，求出这些取值下的多项式的值。将奇数次幂的项的偶数次幂的项分开，则有 \\(A(x) = A_e(x^2) \u002b xA_o(x^2)\\)，这里 \\(A_e\\) 代表偶数次幂的项，\\(A_o\\) 代表奇数次幂的项。同时，考虑到 \\(A(x_i)\\) 和 \\(A(-x_i)\\) 的计算： \\[ \\begin{align*} A(x_i) = A_e(x_{i}^{2}) \u002b x_iA_o(x_{i}^{2}) \\\\ A(-x_i) = A_e(x_{i}^{2}) - x_iA_o(x_{i}^{2}) \\end{align*} \\]\n把计算任务减少到了项数低一半的 \\(A_e\\) 和 \\(A_o\\)，计算量减少了一半。接着通过引入复数，可以进一步二分计算 \\(A_e\\) 和 \\(A_o\\)，从而在 \\(O(log n)\\) 的时间内得出结果。\n3. Decompositions of graphs 强连通分量 DFS 其实并不需要从根节点开始搜素，因为当子节点先被遍历后，接下来自然会遍历它的父节点。",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -47,8 +48,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "0001",
-    "datePublished": "0001-01-01 00:00:00 \x2b0000 UTC",
-    "dateModified" : "0001-01-01 00:00:00 \x2b0000 UTC",
+    "datePublished": "0001-01-01 00:00:00 \u002b0000 UTC",
+    "dateModified" : "0001-01-01 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/notes\/programming\/algorithms-sanjoy\/",
     "wordCount" : "411",
     "keywords" : [ "Blog" ]

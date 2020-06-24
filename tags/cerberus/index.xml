@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Cerberus on Aiur · Zellux 的博客</title>
@@ -22,7 +22,7 @@
 为了提高用户体验，读取domainU的启动信息时我采用的方法是读一行输出一行，读到结尾登陆字符时通过超时设置退出循环，这样可能效率比较低，不过测试脚本也不care这个了
 实际使用时碰到了另一个问题，domainU执行完自动命令后命令行会出现很严重的对齐问题，最后发现登陆后运行一次reset就可以了。
 脚本如下
-#!/usr/bin/python # Automatic test script for Xen DomainU # Author: zellux import pexpect, os conf = { &#39;login_name&#39; : &#39;m2-vm2&#39;, &#39;domainU_name&#39; : &#39;R900-DomU0&#39;, &#39;domainU_conf&#39; : &#39;/home/wyx/domU1&#39;, &#39;domainU_id&#39; : &#39;2&#39;, &#39;domainU_user&#39; : &#39;wyx&#39;, &#39;domainU_passwd&#39; : &#39;wyx&#39;, } # Command to be executed after domainU starts cmd = &amp;quot;&amp;quot;&amp;quot; cd m2 cd reg_test .</description>
+#!/usr/bin/python # Automatic test script for Xen DomainU # Author: zellux import pexpect, os conf = { &amp;#39;login_name&amp;#39; : &amp;#39;m2-vm2&amp;#39;, &amp;#39;domainU_name&amp;#39; : &amp;#39;R900-DomU0&amp;#39;, &amp;#39;domainU_conf&amp;#39; : &amp;#39;/home/wyx/domU1&amp;#39;, &amp;#39;domainU_id&amp;#39; : &amp;#39;2&amp;#39;, &amp;#39;domainU_user&amp;#39; : &amp;#39;wyx&amp;#39;, &amp;#39;domainU_passwd&amp;#39; : &amp;#39;wyx&amp;#39;, } # Command to be executed after domainU starts cmd = &amp;#34;&amp;#34;&amp;#34; cd m2 cd reg_test .</description>
     </item>
     
   </channel>

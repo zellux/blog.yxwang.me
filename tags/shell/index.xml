@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Shell on Aiur · Zellux 的博客</title>
@@ -18,21 +18,19 @@
       
       <guid>https://blog.yxwang.me/2012/03/managing-dotfiles-with-git/</guid>
       <description>&lt;p&gt;以前部署新机器时都要把一堆配置文件 scp 过去，今天折腾了下用 Git 统一管理这些配置文件。&lt;/p&gt;
-
 &lt;p&gt;做起来很简单，创建一个 dotfiles 目录，把所有要同步的配置文件都放到这个目录下，并重命名去掉文件名开头的点，以免被 Git 忽略。写了一个脚本链接这些配置文件到 HOME 目录：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#!/usr/bin/env ruby&lt;/span&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;#!/usr/bin/env ruby
+safe_mode &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;ARGV&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;include? &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;--safe&amp;#39;&lt;/span&gt;
 
-safe_mode = ARGV.include? &#39;--safe&#39;
-
-files = %w(zshrc tmux.conf gitconfig vimrc emacs gitignore_global LS_COLORS)
-files.each do |file|
-  unless safe_mode and File.exists?(&amp;quot;#{ENV[&#39;HOME&#39;]}/.#{file}&amp;quot;)
-    %x(ln -s -i -v $PWD/#{file} ~/.#{file})
-    puts &amp;quot;.#{file} linked&amp;quot; if safe_mode
-  end
-end
-&lt;/code&gt;&lt;/pre&gt;</description>
+files &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;%w(zshrc tmux.conf gitconfig vimrc emacs gitignore_global LS_COLORS)&lt;/span&gt;
+files&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;each &lt;span style=&#34;color:#66d9ef&#34;&gt;do&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;file&lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;unless&lt;/span&gt; safe_mode &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;File&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;exists?(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;#{&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;ENV&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;HOME&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;/.&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;#{&lt;/span&gt;file&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+    &lt;span style=&#34;color:#e6db74&#34;&gt;%x(ln -s -i -v $PWD/&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;#{&lt;/span&gt;file&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; ~/.&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;#{&lt;/span&gt;file&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;)&lt;/span&gt;
+    puts &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;.&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;#{&lt;/span&gt;file&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; linked&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; safe_mode
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;end&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
     </item>
     
     <item>
@@ -43,7 +41,7 @@ end
       <guid>https://blog.yxwang.me/2010/03/keep-gnu-screen-history/</guid>
       <description>GNU screen中执行的历史命令保存在内存中，默认情况下并不会像在bash中直接执行的命令一样保存在.bash_history中，这在某些场合下带来了一定的不便。
 在superuser上看到一个解决方法，指定历史文件的读写方式为追加，并在每次命令行提示符显示的时候，自动更新bash的历史命令记录。要实现这个方法很简单，只要在.bashrc中加入下面两行代码即可
-shopt -s histappend export PROMPT_COMMAND=&amp;quot;history -a; history -n&amp;quot;  另外如果之前设置过PROMPT_COMMAND的话，只要在history -a前加入$PROMPT_COMMAND; 就行了。</description>
+shopt -s histappend export PROMPT_COMMAND=&amp;#34;history -a; history -n&amp;#34; 另外如果之前设置过PROMPT_COMMAND的话，只要在history -a前加入$PROMPT_COMMAND;就行了。</description>
     </item>
     
     <item>
@@ -53,7 +51,7 @@ shopt -s histappend export PROMPT_COMMAND=&amp;quot;history -a; history -n&amp;q
       
       <guid>https://blog.yxwang.me/2010/01/git-completion/</guid>
       <description>在Pro Git上看到的技巧，git的源代码包里的contrib/completion目录下有个git-completion.bash，把这个文件保存到~/.git-completion.bash，然后在.bashrc中加入一行
-source ~/.git-completion.bash  这样就能在bash下用tab自动补全git命令、branch等内容了。另外Debian/Ubuntu里有个包就叫git-completion，这个包安装完成后会自动把这个补全脚本放到/etc/bash_completion.d/下，由bash-compleletion载入执行。</description>
+source ~/.git-completion.bash 这样就能在bash下用tab自动补全git命令、branch等内容了。另外Debian/Ubuntu里有个包就叫git-completion，这个包安装完成后会自动把这个补全脚本放到/etc/bash_completion.d/下，由bash-compleletion载入执行。</description>
     </item>
     
     <item>
@@ -63,9 +61,9 @@ source ~/.git-completion.bash  这样就能在bash下用tab自动补全git命令
       
       <guid>https://blog.yxwang.me/2010/01/grep-trick/</guid>
       <description>使用grep在ps aux的输出结果中查找进程的时候经常会把grep进程本身也找出来，比如查找emacs进程：
-$ ps aux | grep emacs wyx 7090 0.0 0.0 3336 796 pts/2 S+ 04:49 0:00 grep emacs wyx 10128 0.1 4.9 66904 50388 pts/3 S+ Jan21 2:21 emacs  一个常见的防止grep进程出现的方法就是在后面再加一个grep -v grep：
-$ ps aux | grep emacs | grep -v grep wyx 10128 0.1 4.9 66904 50388 pts/3 S+ Jan21 2:21 emacs  今天在Santosa的博客上看到了另一个巧妙的做法，使用grep [e]macs来搜索emacs这个进程：
-$ ps aux | grep [e]macs wyx 10128 0.1 4.9 66904 50388 pts/3 S+ Jan21 2:21 emacs  为什么会有这样的效果，知道grep正则中[]的作用后想一想就能明白啦。很有意思的trick，虽然说它比| grep -v grep也未必方便多少，因为后者能通过alias简化输入。</description>
+$ ps aux | grep emacs wyx 7090 0.0 0.0 3336 796 pts/2 S+ 04:49 0:00 grep emacs wyx 10128 0.1 4.9 66904 50388 pts/3 S+ Jan21 2:21 emacs 一个常见的防止grep进程出现的方法就是在后面再加一个grep -v grep：
+$ ps aux | grep emacs | grep -v grep wyx 10128 0.1 4.9 66904 50388 pts/3 S+ Jan21 2:21 emacs 今天在Santosa的博客上看到了另一个巧妙的做法，使用grep [e]macs来搜索emacs这个进程：
+$ ps aux | grep [e]macs wyx 10128 0.1 4.9 66904 50388 pts/3 S+ Jan21 2:21 emacs 为什么会有这样的效果，知道grep正则中[]的作用后想一想就能明白啦。很有意思的trick，虽然说它比| grep -v grep也未必方便多少，因为后者能通过alias简化输入。</description>
     </item>
     
   </channel>

@@ -11,6 +11,7 @@
     
 
     <title> CGO 09 一篇关于 DCL 检测的论文 &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -39,7 +40,7 @@
     "articleSection" : "post",
     "name" : "CGO 09 一篇关于 DCL 检测的论文",
     "headline" : "CGO 09 一篇关于 DCL 检测的论文",
-    "description" : "Double-Checked Lock是一个常见的由于程序员把内存模型默认为sequential momery consistency导致的问题，具体见我去年写的一篇博文http:\/\/techblog.iamzellux.com\/2008\/07\/singleton-pattern-and-double-checked-lock\/\n虽然Java 5解决了这个问题，但是C\x2b\x2b等语言中这个问题依然存在，依然有很多因为程序员假设sequential consistency而编译器做了错误的指令调度后导致的bug，见http:\/\/www.newsmth.net\/bbscon.php?bid=335\x26amp;id=250203\nCGO 09的这篇paper Detecting and Eliminating Potential Violations of Sequential Consistency for Concurrent C\/C\x2b\x2b Programs针对这个问题进行了深入研究，通过加fence指令的方法解决了因编译器的指令调度造成的违背程序员原义的问题，可以在http:\/\/ppi.fudan.edu.cn\/yuelu_duan下载到。没有认真读过，俺在这里就不误人子弟了 O.O",
+    "description" : "Double-Checked Lock是一个常见的由于程序员把内存模型默认为sequential momery consistency导致的问题，具体见我去年写的一篇博文http:\/\/techblog.iamzellux.com\/2008\/07\/singleton-pattern-and-double-checked-lock\/虽然Java 5解决了这个问题，但是C\u002b\u002b等语言中这个问题依然存在，依然有很多因为程序员假设sequential consistency而编译器做了错误的指令调度后导致的bug，见http:\/\/www.newsmth.net\/bbscon.php?bid=335\u0026amp;id=250203CGO 09的这篇paper Detecting and Eliminating Potential Violations of Sequential Consistency for Concurrent C\/C\u002b\u002b Programs针对这个问题进行了深入研究，通过加fence指令的方法解决了因编译器的指令调度造成的违背程序员原义的问题，可以在http:\/\/ppi.fudan.edu.cn\/yuelu_duan下载到。没有认真读过，俺在这里就不误人子弟了 O.O",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -47,10 +48,10 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2009",
-    "datePublished": "2009-04-09 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2009-04-09 00:00:00 \x2b0000 UTC",
+    "datePublished": "2009-04-09 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2009-04-09 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/2009\/04\/cgo-09-multi-race\/",
-    "wordCount" : "22",
+    "wordCount" : "20",
     "keywords" : [ "CGO","Computer System","Concurrency","DCL","Paper","Research","Blog" ]
 }
 </script>
@@ -93,11 +94,9 @@
 </span>
 
     <div class="post-content">
-      <p>Double-Checked Lock是一个常见的由于程序员把内存模型默认为sequential momery consistency导致的问题，具体见我去年写的一篇博文<a href="http://techblog.iamzellux.com/2008/07/singleton-pattern-and-double-checked-lock/" target="_blank"><a href="http://techblog.iamzellux.com/2008/07/singleton-pattern-and-double-checked-lock/">http://techblog.iamzellux.com/2008/07/singleton-pattern-and-double-checked-lock/</a></a></p>
-
-<p>虽然Java 5解决了这个问题，但是C++等语言中这个问题依然存在，依然有很多因为程序员假设sequential consistency而编译器做了错误的指令调度后导致的bug，见<a href="http://www.newsmth.net/bbscon.php?bid=335&id=250203" target="_blank"><a href="http://www.newsmth.net/bbscon.php?bid=335&amp;id=250203">http://www.newsmth.net/bbscon.php?bid=335&amp;id=250203</a></a></p>
-
-<p>CGO 09的这篇paper Detecting and Eliminating Potential Violations of Sequential Consistency for Concurrent C/C++ Programs针对这个问题进行了深入研究，通过加fence指令的方法解决了因编译器的指令调度造成的违背程序员原义的问题，可以在<a href="http://ppi.fudan.edu.cn/yuelu_duan" target="_blank"><a href="http://ppi.fudan.edu.cn/yuelu_duan">http://ppi.fudan.edu.cn/yuelu_duan</a></a>下载到。没有认真读过，俺在这里就不误人子弟了 O.O</p>
+      <p>Double-Checked Lock是一个常见的由于程序员把内存模型默认为sequential momery consistency导致的问题，具体见我去年写的一篇博文<!-- raw HTML omitted --><a href="http://techblog.iamzellux.com/2008/07/singleton-pattern-and-double-checked-lock/">http://techblog.iamzellux.com/2008/07/singleton-pattern-and-double-checked-lock/</a><!-- raw HTML omitted --></p>
+<p>虽然Java 5解决了这个问题，但是C++等语言中这个问题依然存在，依然有很多因为程序员假设sequential consistency而编译器做了错误的指令调度后导致的bug，见<!-- raw HTML omitted --><a href="http://www.newsmth.net/bbscon.php?bid=335&amp;id=250203">http://www.newsmth.net/bbscon.php?bid=335&amp;id=250203</a><!-- raw HTML omitted --></p>
+<p>CGO 09的这篇paper Detecting and Eliminating Potential Violations of Sequential Consistency for Concurrent C/C++ Programs针对这个问题进行了深入研究，通过加fence指令的方法解决了因编译器的指令调度造成的违背程序员原义的问题，可以在<!-- raw HTML omitted --><a href="http://ppi.fudan.edu.cn/yuelu_duan">http://ppi.fudan.edu.cn/yuelu_duan</a><!-- raw HTML omitted -->下载到。没有认真读过，俺在这里就不误人子弟了 O.O</p>
 
     </div>
         <div class="cc-license">

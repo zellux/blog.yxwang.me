@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Assembly on Aiur · Zellux 的博客</title>
@@ -18,7 +18,7 @@
       
       <guid>https://blog.yxwang.me/2010/08/gcc-operand-substitution/</guid>
       <description>这几天看KVM代码的时候看到里面有个内联汇编的语法很陌生（下面的代码截取了部分内联汇编片段）：
-asm ( &amp;quot;mov %c[rax](%3), %%rax \n\t&amp;quot; &amp;quot;mov %c[rbx](%3), %%rbx \n\t&amp;quot; &amp;quot;mov %c[rdx](%3), %%rdx \n\t&amp;quot; &amp;quot;mov %c[rsi](%3), %%rsi \n\t&amp;quot; &amp;quot;mov %c[rdi](%3), %%rdi \n\t&amp;quot; : &amp;quot;=q&amp;quot; (fail) : &amp;quot;r&amp;quot;(vcpu-&amp;gt;launched), &amp;quot;d&amp;quot;((unsigned long)HOST_RSP), &amp;quot;c&amp;quot;(vcpu), [rax]&amp;quot;i&amp;quot;(offsetof(struct kvm_vcpu, regs[VCPU_REGS_RAX])), [rbx]&amp;quot;i&amp;quot;(offsetof(struct kvm_vcpu, regs[VCPU_REGS_RBX])), [rcx]&amp;quot;i&amp;quot;(offsetof(struct kvm_vcpu, regs[VCPU_REGS_RCX])) : &amp;quot;cc&amp;quot;, &amp;quot;memory&amp;quot; );  stackoverflow上问了下才知道这是gcc的operand substitution语法，%c后面跟上常量名，就能在内联汇编中使用这个常量了。
+asm ( &amp;#34;mov %c[rax](%3), %%rax \n\t&amp;#34; &amp;#34;mov %c[rbx](%3), %%rbx \n\t&amp;#34; &amp;#34;mov %c[rdx](%3), %%rdx \n\t&amp;#34; &amp;#34;mov %c[rsi](%3), %%rsi \n\t&amp;#34; &amp;#34;mov %c[rdi](%3), %%rdi \n\t&amp;#34; : &amp;#34;=q&amp;#34; (fail) : &amp;#34;r&amp;#34;(vcpu-&amp;gt;launched), &amp;#34;d&amp;#34;((unsigned long)HOST_RSP), &amp;#34;c&amp;#34;(vcpu), [rax]&amp;#34;i&amp;#34;(offsetof(struct kvm_vcpu, regs[VCPU_REGS_RAX])), [rbx]&amp;#34;i&amp;#34;(offsetof(struct kvm_vcpu, regs[VCPU_REGS_RBX])), [rcx]&amp;#34;i&amp;#34;(offsetof(struct kvm_vcpu, regs[VCPU_REGS_RCX])) : &amp;#34;cc&amp;#34;, &amp;#34;memory&amp;#34; ); stackoverflow上问了下才知道这是gcc的operand substitution语法，%c后面跟上常量名，就能在内联汇编中使用这个常量了。
 以这段代码为例，vcpu是struct kvm_vcpu类型，[rax]&amp;ldquo;i&amp;rdquo;(offsetof(struct kvm_vcpu, regs[VCPU_REGS_RAX])这句话把vcpu-&amp;gt;regs[VCPU_REGS_RAX]相对于vcpu的偏移赋值给了rax这一常量。接下来回到第一行mov %crax, %%eax，%c[rax]等于前面得到的偏移量，加上vcpu并取值后就是vcpu-&amp;gt;regs[VCPU_REGS_RAX]中保存的值了，这个指令会把这个值保存在%rax寄存器中，从而完成了vcpu的rax寄存器恢复工作。</description>
     </item>
     
@@ -30,7 +30,7 @@ asm ( &amp;quot;mov %c[rax](%3), %%rax \n\t&amp;quot; &amp;quot;mov %c[rbx](%3),
       <guid>https://blog.yxwang.me/2010/01/force-int-0x80-for-syscall/</guid>
       <description>因为大多数情况下程序都是通过libc间接地发出系统调用的，所以只要编译一个只使用int 0x80的glibc库，然后在执行程序的时候用LD_LIBRARY_PATH或其他方法指定使用新编译的glibc库即可。
 以glibc-2.9, Linux i386为例，在sysdeps/unix/sysv/linux/i386/syscall.S中可以看到
-ENTRY (syscall) PUSHARGS_6 /* Save register contents. */ _DOARGS_6(44) /* Load arguments. */ movl 20(%esp), %eax /* Load syscall number into %eax. */ ENTER_KERNEL /* Do the system call. */ POPARGS_6 /* Restore register contents. */ cmpl $-4095, %eax /* Check %eax for error. */ jae SYSCALL_ERROR_LABEL /* Jump to error handler if error. */  这里使用了ENTER_KERNEL这个宏做系统调用，接下来在sysdeps/unix/sysv/linux/i386/sysdep.h里可以找到这个宏的定义
+ENTRY (syscall) PUSHARGS_6 /* Save register contents. */ _DOARGS_6(44) /* Load arguments. */ movl 20(%esp), %eax /* Load syscall number into %eax. */ ENTER_KERNEL /* Do the system call. */ POPARGS_6 /* Restore register contents. */ cmpl $-4095, %eax /* Check %eax for error. */ jae SYSCALL_ERROR_LABEL /* Jump to error handler if error. */ 这里使用了ENTER_KERNEL这个宏做系统调用，接下来在sysdeps/unix/sysv/linux/i386/sysdep.h里可以找到这个宏的定义
 /* The original calling convention for system calls on Linux/i386 is to use int $0x80.</description>
     </item>
     
@@ -41,9 +41,9 @@ ENTRY (syscall) PUSHARGS_6 /* Save register contents. */ _DOARGS_6(44) /* Load a
       
       <guid>https://blog.yxwang.me/2008/08/export-symbols-in-asm/</guid>
       <description>Linux 2.4.18的linux/linkage.h文件定义了若干相关的宏
-#define SYMBOL_NAME(X) X #ifdef __STDC__ #define SYMBOL_NAME_LABEL(X) X##: #else #define SYMBOL_NAME_LABEL(X) X/**/: #endif #define __ALIGN .align 16,0x90 #define __ALIGN_STR &amp;quot;.align 16,0x90&amp;quot; #define ALIGN __ALIGN #define ALIGN_STR __ALIGN_STR #define ENTRY(name) .globl SYMBOL_NAME(name); ALIGN; SYMBOL_NAME_LABEL(name)  用ENTRY(name)就能定义函数了。后来发现Flux OSKit中本来就提供了类似功能的宏，定义在inc/asm.h中。
+#define SYMBOL_NAME(X) X #ifdef __STDC__ #define SYMBOL_NAME_LABEL(X) X##: #else #define SYMBOL_NAME_LABEL(X) X/**/: #endif  #define __ALIGN .align 16,0x90 #define __ALIGN_STR &amp;#34;.align 16,0x90&amp;#34;  #define ALIGN __ALIGN #define ALIGN_STR __ALIGN_STR  #define ENTRY(name)  .globl SYMBOL_NAME(name); ALIGN; SYMBOL_NAME_LABEL(name) 用ENTRY(name)就能定义函数了。后来发现Flux OSKit中本来就提供了类似功能的宏，定义在inc/asm.h中。
 使用的时候需要再写一个c语言的wrapper function（至少2.4.18里面是这么做的）
-asmlinkage void ret_from_fork(void) __asm__(&amp;quot;ret_from_fork&amp;quot;);  </description>
+asmlinkage void ret_from_fork(void) __asm__(&amp;#34;ret_from_fork&amp;#34;); </description>
     </item>
     
   </channel>

@@ -11,6 +11,7 @@
     
 
     <title> 让 Emacs 支持 Lion 的全屏模式 &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -39,7 +40,7 @@
     "articleSection" : "post",
     "name" : "让 Emacs 支持 Lion 的全屏模式",
     "headline" : "让 Emacs 支持 Lion 的全屏模式",
-    "description" : "前几天给我的 MacBook Pro 装上了 Lion，不过原来的 Emacs 并不支持在 Lion 下全屏运行。github 上搜了下发现已经有让 Emacs 支持全屏模式的补丁了，Homebrew 中这个补丁也已经被吸收。\n直接用 brew install emacs \x26ndash;cocoa \x26ndash;srgb 似乎会碰到编译错误：\nFinding pointers to doc strings... Finding pointers to doc strings...done Dumping under the name emacs unexec: cannot write section __data --- List of All Regions --- address size prot maxp --- List of Regions to be Dumped --- address size prot maxp --- Header Information --- Magic = 0xfeedfacf CPUType = 16777223 CPUSubType = -2147483645 FileType = 0x2 NCmds = 20 SizeOfCmds = 3464 Flags = 0x00200085 Highest address of load commands in input file: 0x5dd000 Lowest offset of all sections in __TEXT segment: 0x22f0 --- List of Load Commands in Input File ---  github issues 上已经有人报告这个问题了，解决方法也很简单，运行 brew edit emacs 打开 emacs 的安装脚本，在 def install 的后面加上两行：",
+    "description" : "前几天给我的 MacBook Pro 装上了 Lion，不过原来的 Emacs 并不支持在 Lion 下全屏运行。github 上搜了下发现已经有让 Emacs 支持全屏模式的补丁了，Homebrew 中这个补丁也已经被吸收。\n直接用 brew install emacs \u0026ndash;cocoa \u0026ndash;srgb似乎会碰到编译错误：\nFinding pointers to doc strings... Finding pointers to doc strings...done Dumping under the name emacs unexec: cannot write section __data --- List of All Regions --- address size prot maxp --- List of Regions to be Dumped --- address size prot maxp --- Header Information --- Magic = 0xfeedfacf CPUType = 16777223 CPUSubType = -2147483645 FileType = 0x2 NCmds = 20 SizeOfCmds = 3464 Flags = 0x00200085 Highest address of load commands in input file: 0x5dd000 Lowest offset of all sections in __TEXT segment: 0x22f0 --- List of Load Commands in Input File --- github issues 上已经有人报告这个问题了，解决方法也很简单，运行 brew edit emacs打开 emacs 的安装脚本，在 def install的后面加上两行：",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -47,10 +48,10 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2011",
-    "datePublished": "2011-07-28 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2011-07-28 00:00:00 \x2b0000 UTC",
+    "datePublished": "2011-07-28 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2011-07-28 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/2011\/07\/full-screen-emacs-in-lion\/",
-    "wordCount" : "149",
+    "wordCount" : "145",
     "keywords" : [ "Emacs","Lion","Mac OS X","Max OS X","Tooling","Tools","Blog" ]
 }
 </script>
@@ -93,11 +94,9 @@
 </span>
 
     <div class="post-content">
-      <p>前几天给我的 MacBook Pro 装上了 Lion，不过原来的 Emacs 并不支持在 Lion 下全屏运行。github 上搜了下发现已经有让 Emacs 支持全屏模式的<a title="补丁" href="https://gist.github.com/1096074">补丁</a>了，Homebrew 中这个补丁也已经<a title="被吸收" href="https://github.com/ColinHebert/homebrew/commit/cf59b2a1beb8bc4260ed1c63b3ceb1d50914f89e">被吸收</a>。</p>
-
-<p>直接用 <code>brew install emacs &ndash;cocoa &ndash;srgb</code> 似乎会碰到编译错误：</p>
-
-<pre><code class="language-text">Finding pointers to doc strings...
+      <p>前几天给我的 MacBook Pro 装上了 Lion，不过原来的 Emacs 并不支持在 Lion 下全屏运行。github 上搜了下发现已经有让 Emacs 支持全屏模式的<!-- raw HTML omitted -->补丁<!-- raw HTML omitted -->了，Homebrew 中这个补丁也已经<!-- raw HTML omitted -->被吸收<!-- raw HTML omitted -->。</p>
+<p>直接用 <!-- raw HTML omitted -->brew install emacs &ndash;cocoa &ndash;srgb<!-- raw HTML omitted --> 似乎会碰到编译错误：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Finding pointers to doc strings...
 Finding pointers to doc strings...done
 Dumping under the name emacs
 unexec: cannot write section __data
@@ -116,21 +115,16 @@ Flags = 0x00200085
 Highest address of load commands in input file: 0x5dd000
 Lowest offset of all sections in __TEXT segment:   0x22f0
 --- List of Load Commands in Input File ---
-</code></pre>
-
-<p>github issues 上已经有人<a title="报告这个问题" href="https://github.com/mxcl/homebrew/issues/6495">报告这个问题</a>了，解决方法也很简单，运行 <code>brew edit emacs</code> 打开 emacs 的安装脚本，在 <code>def install</code> 的后面加上两行：</p>
-
-<pre><code class="language-python">  def install
-    ENV['CFLAGS']='-fno-pie -O2'
-    ENV['LDFLAGS']='-fno-pie'
-    args = [&quot;--prefix=#{prefix}&quot;,
-            &quot;--without-dbus&quot;,
-            &quot;--enable-locallisppath=#{HOMEBREW_PREFIX}/share/emacs/site-lisp&quot;,
-            &quot;--infodir=#{info}/emacs&quot;]
-    # ...
-</code></pre>
-
-<p>再运行一次 <code>brew install emacs</code>，就能在 /usr/local/Cellar/emacs/23.3 下找到支持全屏模式的 Emacs.app 了。<code>M-x ns-toggle-fullscreen</code> 可以在全屏/非全屏模式之间切换。</p>
+</code></pre></div><p>github issues 上已经有人<!-- raw HTML omitted -->报告这个问题<!-- raw HTML omitted -->了，解决方法也很简单，运行 <!-- raw HTML omitted -->brew edit emacs<!-- raw HTML omitted --> 打开 emacs 的安装脚本，在 <!-- raw HTML omitted -->def install<!-- raw HTML omitted --> 的后面加上两行：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">install</span>
+    ENV[<span style="color:#e6db74">&#39;CFLAGS&#39;</span>]<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;-fno-pie -O2&#39;</span>
+    ENV[<span style="color:#e6db74">&#39;LDFLAGS&#39;</span>]<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;-fno-pie&#39;</span>
+    args <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;--prefix=#{prefix}&#34;</span>,
+            <span style="color:#e6db74">&#34;--without-dbus&#34;</span>,
+            <span style="color:#e6db74">&#34;--enable-locallisppath=#{HOMEBREW_PREFIX}/share/emacs/site-lisp&#34;</span>,
+            <span style="color:#e6db74">&#34;--infodir=#{info}/emacs&#34;</span>]
+    <span style="color:#75715e"># ...</span>
+</code></pre></div><p>再运行一次 <!-- raw HTML omitted -->brew install emacs<!-- raw HTML omitted -->，就能在 /usr/local/Cellar/emacs/23.3 下找到支持全屏模式的 Emacs.app 了。<!-- raw HTML omitted -->M-x ns-toggle-fullscreen<!-- raw HTML omitted --> 可以在全屏/非全屏模式之间切换。</p>
 
     </div>
         <div class="cc-license">

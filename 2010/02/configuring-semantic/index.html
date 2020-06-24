@@ -11,6 +11,7 @@
     
 
     <title> 为特定的项目配置 semantic &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -39,7 +40,7 @@
     "articleSection" : "post",
     "name" : "为特定的项目配置 semantic",
     "headline" : "为特定的项目配置 semantic",
-    "description" : "semantic是cedet的组件之一，它可以对程序做语义分析，结合company等其他插件，可以实现自动补全菜单等功能。\n之前用semantic\x2bcompany写MIT 6.828的lab时几乎不需要什么特殊的设置就能直接用，这次拿来改Xen的代码的时候却出现了semantic无法找到符号定义的问题，究其原因在于MIT 6.828的目录结构相对简单，头文件都在inc\/目录下，而Xen的头文件在多个目录下，而且做预处理时还要加上Makefile里定义的一些预定义宏。今天参考了Alex Ott的这篇文章终于成功地让semantic支持Xen的代码分析了：\n\n这里分享一下和项目相关的一些设置，semantic安装等问题请参考网上的其他文章。也可以参考我的配置文件http:\/\/code.google.com\/p\/zellux-emacs-conf\/source\/browse\/my-cc-mode.el，cscope ecb semantic和company等配置都在这个文件里了，不过有点混乱。\n;; Danimoth-specified configurations (add-to-list \x27semanticdb-project-roots \x26quot;~\/danimoth\/xen\x26quot;) (setq semanticdb-project-roots (list (expand-file-name \x26quot;\/\x26quot;))) (setq danimoth-base-dir \x26quot;\/home\/wyx\/danimoth\x26quot;) (add-to-list \x27auto-mode-alist (cons danimoth-base-dir \x27c\x2b\x2b-mode)) (add-to-list \x27auto-mode-alist (cons danimoth-base-dir \x27c-mode)) (add-to-list \x27semantic-lex-c-preprocessor-symbol-file (concat danimoth-base-dir \x26quot;\/xen\/include\/config.h\x26quot;)) (add-to-list \x27semantic-lex-c-preprocessor-symbol-file (concat danimoth-base-dir \x26quot;\/xen\/include\/asm-x86\/config.h\x26quot;)) (ede-cpp-root-project \x26quot;Danimoth\x26quot; :name \x26quot;Danimoth\x26quot; ;; Any file at root directory of the project :file \x26quot;~\/danimoth\/xen\/Makefile\x26quot; ;; Relative to the project\x27s root directory :include-path \x27(\x26quot;\/\x26quot; \x26quot;\/include\/asm-x86\x26quot; \x26quot;\/include\/xen\x26quot; \x26quot;\/include\/public\x26quot; \x26quot;\/include\/acpi\x26quot; \x26quot;\/arch\/x86\/cpu\/\x26quot; ) ;; Pre-definds macro for preprocessing :spp-table \x27((\x26quot;__XEN__\x26quot; .",
+    "description" : "semantic是cedet的组件之一，它可以对程序做语义分析，结合company等其他插件，可以实现自动补全菜单等功能。\n之前用semantic\u002bcompany写MIT 6.828的lab时几乎不需要什么特殊的设置就能直接用，这次拿来改Xen的代码的时候却出现了semantic无法找到符号定义的问题，究其原因在于MIT 6.828的目录结构相对简单，头文件都在inc\/目录下，而Xen的头文件在多个目录下，而且做预处理时还要加上Makefile里定义的一些预定义宏。今天参考了Alex Ott的这篇文章终于成功地让semantic支持Xen的代码分析了：\n这里分享一下和项目相关的一些设置，semantic安装等问题请参考网上的其他文章。也可以参考我的配置文件http:\/\/code.google.com\/p\/zellux-emacs-conf\/source\/browse\/my-cc-mode.el，cscope ecb semantic和company等配置都在这个文件里了，不过有点混乱。\n;; Danimoth-specified configurations (add-to-list \u0026#39;semanticdb-project-roots \u0026#34;~\/danimoth\/xen\u0026#34;) (setq semanticdb-project-roots (list (expand-file-name \u0026#34;\/\u0026#34;))) (setq danimoth-base-dir \u0026#34;\/home\/wyx\/danimoth\u0026#34;) (add-to-list \u0026#39;auto-mode-alist (cons danimoth-base-dir \u0026#39;c\u002b\u002b-mode)) (add-to-list \u0026#39;auto-mode-alist (cons danimoth-base-dir \u0026#39;c-mode)) (add-to-list \u0026#39;semantic-lex-c-preprocessor-symbol-file (concat danimoth-base-dir \u0026#34;\/xen\/include\/config.h\u0026#34;)) (add-to-list \u0026#39;semantic-lex-c-preprocessor-symbol-file (concat danimoth-base-dir \u0026#34;\/xen\/include\/asm-x86\/config.h\u0026#34;)) (ede-cpp-root-project \u0026#34;Danimoth\u0026#34; :name \u0026#34;Danimoth\u0026#34; ;; Any file at root directory of the project :file \u0026#34;~\/danimoth\/xen\/Makefile\u0026#34; ;; Relative to the project\u0026#39;s root directory :include-path \u0026#39;(\u0026#34;\/\u0026#34; \u0026#34;\/include\/asm-x86\u0026#34; \u0026#34;\/include\/xen\u0026#34; \u0026#34;\/include\/public\u0026#34; \u0026#34;\/include\/acpi\u0026#34; \u0026#34;\/arch\/x86\/cpu\/\u0026#34; ) ;; Pre-definds macro for preprocessing :spp-table \u0026#39;((\u0026#34;__XEN__\u0026#34; .",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -47,8 +48,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2010",
-    "datePublished": "2010-02-03 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2010-02-03 00:00:00 \x2b0000 UTC",
+    "datePublished": "2010-02-03 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2010-02-03 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/2010\/02\/configuring-semantic\/",
     "wordCount" : "92",
     "keywords" : [ "Emacs","Tooling","cedet","Blog" ]
@@ -93,54 +94,46 @@
 </span>
 
     <div class="post-content">
-      <p>semantic是<a href="http://cedet.sourceforge.net/" target="_blank">cedet</a>的组件之一，它可以对程序做语义分析，结合<a href="http://techblog.iamzellux.com/2009/06/emacs-company-mode/" target="_blank">company</a>等其他插件，可以实现自动补全菜单等功能。</p>
+      <p>semantic是<!-- raw HTML omitted -->cedet<!-- raw HTML omitted -->的组件之一，它可以对程序做语义分析，结合<!-- raw HTML omitted -->company<!-- raw HTML omitted -->等其他插件，可以实现自动补全菜单等功能。</p>
+<p>之前用semantic+company写MIT 6.828的lab时几乎不需要什么特殊的设置就能直接用，这次拿来改Xen的代码的时候却出现了semantic无法找到符号定义的问题，究其原因在于MIT 6.828的目录结构相对简单，头文件都在inc/目录下，而Xen的头文件在多个目录下，而且做预处理时还要加上Makefile里定义的一些预定义宏。今天参考了<!-- raw HTML omitted -->Alex Ott的这篇文章<!-- raw HTML omitted -->终于成功地让semantic支持Xen的代码分析了：</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p>这里分享一下和项目相关的一些设置，semantic安装等问题请参考网上的其他文章。也可以参考我的配置文件<!-- raw HTML omitted --><a href="http://code.google.com/p/zellux-emacs-conf/source/browse/my-cc-mode.el">http://code.google.com/p/zellux-emacs-conf/source/browse/my-cc-mode.el</a><!-- raw HTML omitted -->，cscope ecb semantic和company等配置都在这个文件里了，不过有点混乱。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cl" data-lang="cl"><span style="color:#75715e">;; Danimoth-specified configurations</span>
+(add-to-list <span style="color:#e6db74">&#39;semanticdb-project-roots</span> <span style="color:#e6db74">&#34;~/danimoth/xen&#34;</span>)
 
-<p>之前用semantic+company写MIT 6.828的lab时几乎不需要什么特殊的设置就能直接用，这次拿来改Xen的代码的时候却出现了semantic无法找到符号定义的问题，究其原因在于MIT 6.828的目录结构相对简单，头文件都在inc/目录下，而Xen的头文件在多个目录下，而且做预处理时还要加上Makefile里定义的一些预定义宏。今天参考了<a href="http://alexott.net/en/writings/emacs-devenv/EmacsCedet.html" target="_blank">Alex Ott的这篇文章</a>终于成功地让semantic支持Xen的代码分析了：</p>
+(<span style="color:#66d9ef">setq</span> semanticdb-project-roots
+      (<span style="color:#a6e22e">list</span>
+       (expand-file-name <span style="color:#e6db74">&#34;/&#34;</span>)))
 
-<p><a href="/images/wp-uploads/2010/02/semantic.png"><img title="semantic" src="/images/wp-uploads/2010/02/semantic-300x213.png" alt="" width="300" height="213"></a></p>
+(<span style="color:#66d9ef">setq</span> danimoth-base-dir <span style="color:#e6db74">&#34;/home/wyx/danimoth&#34;</span>)
 
-<p>这里分享一下和项目相关的一些设置，semantic安装等问题请参考网上的其他文章。也可以参考我的配置文件<a href="http://code.google.com/p/zellux-emacs-conf/source/browse/my-cc-mode.el">http://code.google.com/p/zellux-emacs-conf/source/browse/my-cc-mode.el</a>，cscope ecb semantic和company等配置都在这个文件里了，不过有点混乱。</p>
+(add-to-list <span style="color:#e6db74">&#39;auto-mode-alist</span> (<span style="color:#a6e22e">cons</span> danimoth-base-dir <span style="color:#e6db74">&#39;c++-mode</span>))
+(add-to-list <span style="color:#e6db74">&#39;auto-mode-alist</span> (<span style="color:#a6e22e">cons</span> danimoth-base-dir <span style="color:#e6db74">&#39;c-mode</span>))
 
-<pre><code class="language-cl">;; Danimoth-specified configurations
-(add-to-list 'semanticdb-project-roots &quot;~/danimoth/xen&quot;)
+(add-to-list <span style="color:#e6db74">&#39;semantic-lex-c-preprocessor-symbol-file</span> (concat danimoth-base-dir <span style="color:#e6db74">&#34;/xen/include/config.h&#34;</span>))
+(add-to-list <span style="color:#e6db74">&#39;semantic-lex-c-preprocessor-symbol-file</span> (concat danimoth-base-dir <span style="color:#e6db74">&#34;/xen/include/asm-x86/config.h&#34;</span>))
 
-(setq semanticdb-project-roots
-      (list
-       (expand-file-name &quot;/&quot;)))
-
-(setq danimoth-base-dir &quot;/home/wyx/danimoth&quot;)
-
-(add-to-list 'auto-mode-alist (cons danimoth-base-dir 'c++-mode))
-(add-to-list 'auto-mode-alist (cons danimoth-base-dir 'c-mode))
-
-(add-to-list 'semantic-lex-c-preprocessor-symbol-file (concat danimoth-base-dir &quot;/xen/include/config.h&quot;))
-(add-to-list 'semantic-lex-c-preprocessor-symbol-file (concat danimoth-base-dir &quot;/xen/include/asm-x86/config.h&quot;))
-
-(ede-cpp-root-project &quot;Danimoth&quot;
-                      :name &quot;Danimoth&quot;
-                      ;; Any file at root directory of the project
-                      :file &quot;~/danimoth/xen/Makefile&quot;
-                      ;; Relative to the project's root directory
-                      :include-path '(&quot;/&quot;
-                                      &quot;/include/asm-x86&quot;
-                                      &quot;/include/xen&quot;
-                                      &quot;/include/public&quot;
-                                      &quot;/include/acpi&quot;
-                                      &quot;/arch/x86/cpu/&quot;
+(ede-cpp-root-project <span style="color:#e6db74">&#34;Danimoth&#34;</span>
+                      <span style="color:#e6db74">:name</span> <span style="color:#e6db74">&#34;Danimoth&#34;</span>
+                      <span style="color:#75715e">;; Any file at root directory of the project</span>
+                      <span style="color:#e6db74">:file</span> <span style="color:#e6db74">&#34;~/danimoth/xen/Makefile&#34;</span>
+                      <span style="color:#75715e">;; Relative to the project&#39;s root directory</span>
+                      <span style="color:#e6db74">:include-path</span> <span style="color:#f92672">&#39;</span>(<span style="color:#e6db74">&#34;/&#34;</span>
+                                      <span style="color:#e6db74">&#34;/include/asm-x86&#34;</span>
+                                      <span style="color:#e6db74">&#34;/include/xen&#34;</span>
+                                      <span style="color:#e6db74">&#34;/include/public&#34;</span>
+                                      <span style="color:#e6db74">&#34;/include/acpi&#34;</span>
+                                      <span style="color:#e6db74">&#34;/arch/x86/cpu/&#34;</span>
                                       )
-                      ;; Pre-definds macro for preprocessing
-                      :spp-table '((&quot;__XEN__&quot; . &quot;&quot;)
+                      <span style="color:#75715e">;; Pre-definds macro for preprocessing</span>
+                      <span style="color:#e6db74">:spp-table</span> <span style="color:#f92672">&#39;</span>((<span style="color:#e6db74">&#34;__XEN__&#34;</span> <span style="color:#f92672">.</span> <span style="color:#e6db74">&#34;&#34;</span>)
                                    ))
-</code></pre>
-
-<p>其中，/home/wyx/danimoth/xen是项目的主目录，xen/include/config.h和xen/include/asm-x86/config.h里定义了一些基本的宏。</p>
-
+</code></pre></div><p>其中，/home/wyx/danimoth/xen是项目的主目录，xen/include/config.h和xen/include/asm-x86/config.h里定义了一些基本的宏。</p>
 <p>接下来，ede-cpp-root-project指定了这个项目的其他信息：
 :file 指向项目主目录下任一一个存在的文件
 :include-path 指定头文件的所在目录
-:spp-table 给出了预处理时的使用的宏，通常是在Makefile里使用-DXXX定义的宏，例如这里的<strong>XEN</strong>。</p>
-
-<p>配置好semantic后，可以用<code>M-x semantic-ia-complete-symbol</code>测试。如果Emacs能正确显示补全列表，这就说明semantic已经配置成功了。配合这个<a href="http://techblog.iamzellux.com/2009/06/emacs-company-mode/" target="_blank">简单的company设置</a>，就能用<code>Shift-Tab</code>显示类似图片中的自动补全菜单了。</p>
+:spp-table 给出了预处理时的使用的宏，通常是在Makefile里使用-DXXX定义的宏，例如这里的__XEN__。</p>
+<p>配置好semantic后，可以用<!-- raw HTML omitted -->M-x semantic-ia-complete-symbol<!-- raw HTML omitted -->测试。如果Emacs能正确显示补全列表，这就说明semantic已经配置成功了。配合这个<!-- raw HTML omitted -->简单的company设置<!-- raw HTML omitted -->，就能用<!-- raw HTML omitted -->Shift-Tab<!-- raw HTML omitted -->显示类似图片中的自动补全菜单了。</p>
 
     </div>
         <div class="cc-license">

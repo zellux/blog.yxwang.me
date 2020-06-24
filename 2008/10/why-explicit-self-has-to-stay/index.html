@@ -11,6 +11,7 @@
     
 
     <title> Why explicit self has to stay &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -39,7 +40,7 @@
     "articleSection" : "post",
     "name" : "Why explicit self has to stay",
     "headline" : "Why explicit self has to stay",
-    "description" : "Bruce Eckel的一篇日志建议把self从方法的参数列表中移除，并把它作为一个关键字使用。 http:\/\/www.artima.com\/weblogs\/viewpost.jsp?thread=239003\nGuido的这篇日志说明了self作为参数是必不可少的。 http:\/\/neopythonic.blogspot.com\/2008\/10\/why-explicit-self-has-to-stay.html\n第一个原因是保证foo.meth(arg)和C.meth(foo, arg)这两种方法调用的等价（foo是C的一个实例)，关于后者可以参见Python Reference Manual 3.4.2.3。这个原因理论上的意义比较大。\n第二个原因在于通过self参数我们可以动态修改一个类的行为：\n# Define an empty class: class C: pass # Define a global function: def meth(myself, arg): myself.val = arg return myself.val # Poke the method into the class: C.meth = meth  这样类C就新增了一个meth方法，并且所有C的实例都可以通过c.meth(newval)调用这个方法。\n前面两个原因或许都可以通过一些workaround使得不使用self参数时实现同样的效果，但是在存在decorator的代码中Bruce的方法存在致命的缺陷。(关于decorator的介绍可以参见http:\/\/www.python.org\/dev\/peps\/pep-0318\/)\n根据修饰对象，decorator分两种，类方法和静态方法。两者在语法上没有什么区别，但前者需要self参数，后者不需要。而Python在实现上也没有对这两种方法加以区分。Bruce日志评论中有一些试图解决decorator问题的方法，但这些方法都需要修改大量底层的实现。\n最后提到了另一种语法糖实现，新增一个名为classmethod的decorator，为每个方法加上一个self参数，当然这种实现也没必要把self作为关键字使用了。不过我觉得这么做还不如每次写类方法时手工加个self =_=",
+    "description" : "Bruce Eckel的一篇日志建议把self从方法的参数列表中移除，并把它作为一个关键字使用。 http:\/\/www.artima.com\/weblogs\/viewpost.jsp?thread=239003Guido的这篇日志说明了self作为参数是必不可少的。 http:\/\/neopythonic.blogspot.com\/2008\/10\/why-explicit-self-has-to-stay.html第一个原因是保证foo.meth(arg)和C.meth(foo, arg)这两种方法调用的等价（foo是C的一个实例)，关于后者可以参见Python Reference Manual 3.4.2.3。这个原因理论上的意义比较大。\n第二个原因在于通过self参数我们可以动态修改一个类的行为：\n# Define an empty class: class C: pass # Define a global function: def meth(myself, arg): myself.val = arg return myself.val # Poke the method into the class: C.meth = meth 这样类C就新增了一个meth方法，并且所有C的实例都可以通过c.meth(newval)调用这个方法。\n前面两个原因或许都可以通过一些workaround使得不使用self参数时实现同样的效果，但是在存在decorator的代码中Bruce的方法存在致命的缺陷。(关于decorator的介绍可以参见http:\/\/www.python.org\/dev\/peps\/pep-0318\/)\n根据修饰对象，decorator分两种，类方法和静态方法。两者在语法上没有什么区别，但前者需要self参数，后者不需要。而Python在实现上也没有对这两种方法加以区分。Bruce日志评论中有一些试图解决decorator问题的方法，但这些方法都需要修改大量底层的实现。\n最后提到了另一种语法糖实现，新增一个名为classmethod的decorator，为每个方法加上一个self参数，当然这种实现也没必要把self作为关键字使用了。不过我觉得这么做还不如每次写类方法时手工加个self =_=",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -47,10 +48,10 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2008",
-    "datePublished": "2008-10-27 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2008-10-27 00:00:00 \x2b0000 UTC",
+    "datePublished": "2008-10-27 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2008-10-27 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/2008\/10\/why-explicit-self-has-to-stay\/",
-    "wordCount" : "47",
+    "wordCount" : "45",
     "keywords" : [ "Programming","Programming Languages","Python","Blog" ]
 }
 </script>
@@ -94,34 +95,25 @@
 
     <div class="post-content">
       <p>Bruce Eckel的一篇日志建议把self从方法的参数列表中移除，并把它作为一个关键字使用。
-<a href="http://www.artima.com/weblogs/viewpost.jsp?thread=239003" target="_blank"><a href="http://www.artima.com/weblogs/viewpost.jsp?thread=239003">http://www.artima.com/weblogs/viewpost.jsp?thread=239003</a></a></p>
-
+<!-- raw HTML omitted --><a href="http://www.artima.com/weblogs/viewpost.jsp?thread=239003">http://www.artima.com/weblogs/viewpost.jsp?thread=239003</a><!-- raw HTML omitted --></p>
 <p>Guido的这篇日志说明了self作为参数是必不可少的。
-<a href="http://neopythonic.blogspot.com/2008/10/why-explicit-self-has-to-stay.html" target="_blank"><a href="http://neopythonic.blogspot.com/2008/10/why-explicit-self-has-to-stay.html">http://neopythonic.blogspot.com/2008/10/why-explicit-self-has-to-stay.html</a></a></p>
-
+<!-- raw HTML omitted --><a href="http://neopythonic.blogspot.com/2008/10/why-explicit-self-has-to-stay.html">http://neopythonic.blogspot.com/2008/10/why-explicit-self-has-to-stay.html</a><!-- raw HTML omitted --></p>
 <p>第一个原因是保证foo.meth(arg)和C.meth(foo, arg)这两种方法调用的等价（foo是C的一个实例)，关于后者可以参见Python Reference Manual 3.4.2.3。这个原因理论上的意义比较大。</p>
-
 <p>第二个原因在于通过self参数我们可以动态修改一个类的行为：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Define an empty class:</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">C</span>:
+<span style="color:#66d9ef">pass</span>
 
-<pre><code class="language-python"># Define an empty class:
-class C:
-pass
+<span style="color:#75715e"># Define a global function:</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">meth</span>(myself, arg):
+myself<span style="color:#f92672">.</span>val <span style="color:#f92672">=</span> arg
+<span style="color:#66d9ef">return</span> myself<span style="color:#f92672">.</span>val
 
-# Define a global function:
-def meth(myself, arg):
-myself.val = arg
-return myself.val
-
-# Poke the method into the class:
-C.meth = meth
-</code></pre>
-
-<p>这样类C就新增了一个meth方法，并且所有C的实例都可以通过c.meth(newval)调用这个方法。</p>
-
-<p>前面两个原因或许都可以通过一些workaround使得不使用self参数时实现同样的效果，但是在存在decorator的代码中Bruce的方法存在致命的缺陷。(关于decorator的介绍可以参见<a href="http://www.python.org/dev/peps/pep-0318/%EF%BC%89" target="_blank"><a href="http://www.python.org/dev/peps/pep-0318">http://www.python.org/dev/peps/pep-0318</a></a>/)</p>
-
+<span style="color:#75715e"># Poke the method into the class:</span>
+C<span style="color:#f92672">.</span>meth <span style="color:#f92672">=</span> meth
+</code></pre></div><p>这样类C就新增了一个meth方法，并且所有C的实例都可以通过c.meth(newval)调用这个方法。</p>
+<p>前面两个原因或许都可以通过一些workaround使得不使用self参数时实现同样的效果，但是在存在decorator的代码中Bruce的方法存在致命的缺陷。(关于decorator的介绍可以参见<!-- raw HTML omitted --><a href="http://www.python.org/dev/peps/pep-0318">http://www.python.org/dev/peps/pep-0318</a><!-- raw HTML omitted -->/)</p>
 <p>根据修饰对象，decorator分两种，类方法和静态方法。两者在语法上没有什么区别，但前者需要self参数，后者不需要。而Python在实现上也没有对这两种方法加以区分。Bruce日志评论中有一些试图解决decorator问题的方法，但这些方法都需要修改大量底层的实现。</p>
-
 <p>最后提到了另一种语法糖实现，新增一个名为classmethod的decorator，为每个方法加上一个self参数，当然这种实现也没必要把self作为关键字使用了。不过我觉得这么做还不如每次写类方法时手工加个self =_=</p>
 
     </div>

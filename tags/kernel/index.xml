@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Kernel on Aiur · Zellux 的博客</title>
@@ -33,7 +33,7 @@ Linear page table 很好的解决了这两个问题。它的实现很简单，�
       <guid>https://blog.yxwang.me/2009/04/vmware-linux-kernel-config/</guid>
       <description>在默认的基础上，把这几个都改成built-in (*)，通过Xen启动时就不需要额外加载initrd了
 2010.1.19更新：支持网络
-Device Drivers SCSI device support ---&amp;gt; &amp;lt;*&amp;gt; SCSI disk support &amp;lt;*&amp;gt; SCSI generic support SCSI low-level drivers ---&amp;gt; [*] LSI Logic New Generation RAID Device Drivers &amp;lt;*&amp;gt; Serial ATA (SATA) support &amp;lt;*&amp;gt; Intel PIIX/ICH SATA support Fusion MPT device support ---&amp;gt; &amp;lt;*&amp;gt; Fusion MPT ScsiHost drivers for SPI &amp;lt;*&amp;gt; Fusion MPT ScsiHost drivers for FC &amp;lt;*&amp;gt; Fusion MPT ScsiHost drivers for SAS (128) Maximum number of scatter gather entries (16 - 128) &amp;lt;*&amp;gt; Fusion MPT misc device (ioctl) driver &amp;lt;*&amp;gt; Fusion MPT LAN driver Network device support ---&amp;gt; Ethernet (10 or 100Mbit) ---&amp;gt; [*] EISA, VLB, PCI and on board controllers &amp;lt;*&amp;gt; AMD PCnet32 PCI support  </description>
+Device Drivers SCSI device support ---&amp;gt; &amp;lt;*&amp;gt; SCSI disk support &amp;lt;*&amp;gt; SCSI generic support SCSI low-level drivers ---&amp;gt; [*] LSI Logic New Generation RAID Device Drivers &amp;lt;*&amp;gt; Serial ATA (SATA) support &amp;lt;*&amp;gt; Intel PIIX/ICH SATA support Fusion MPT device support ---&amp;gt; &amp;lt;*&amp;gt; Fusion MPT ScsiHost drivers for SPI &amp;lt;*&amp;gt; Fusion MPT ScsiHost drivers for FC &amp;lt;*&amp;gt; Fusion MPT ScsiHost drivers for SAS (128) Maximum number of scatter gather entries (16 - 128) &amp;lt;*&amp;gt; Fusion MPT misc device (ioctl) driver &amp;lt;*&amp;gt; Fusion MPT LAN driver Network device support ---&amp;gt; Ethernet (10 or 100Mbit) ---&amp;gt; [*] EISA, VLB, PCI and on board controllers &amp;lt;*&amp;gt; AMD PCnet32 PCI support </description>
     </item>
     
   </channel>

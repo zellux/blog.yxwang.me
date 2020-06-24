@@ -11,6 +11,7 @@
     
 
     <title> CLRS Problem 11.1-4 &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -39,7 +40,7 @@
     "articleSection" : "post",
     "name" : "CLRS Problem 11.1-4",
     "headline" : "CLRS Problem 11.1-4",
-    "description" : "简单来说就是给定一个未初始化的巨大的数组，然后通过它实现一个字典。所谓未初始化是指一开始里面元素的值都是随机的，巨大是指可以假设数组长度范围很大，对这个数组做初始化工作（例如清零）的代价自然也是很大。现在的问题是，利用这个数组设计出来的字典，要求初始化、查找、插入、删除操作都能在O(1)时间内完成。\nIntructor\x26rsquo;s Manual 上的解答设计了一个很巧妙的验证策略。假设T为那个巨大的数组，S为辅助栈，那么对于一个键k，如果k存在于这个字典中，则T[k]保存的是 k在S中的位置j，而S[j]则保存了k值。即1 ≤ T[k] ≤ top[S], S[ T[k] ] = k, T [ S[j] ] = j，我们称这个条件为“验证环”。这个设计的关键在于T和S能够互相验证，从而排除了未初始化位置上随机值的干扰。\n还有一个问题就是，键k对应的值v应该怎么保存呢？其实只要维护另外一个和T或者S平行的数组就行了，既然S的元素个数远小于T，选择和S平行即可。\n根据这个验证策略，我们就能设计出词典的基本操作了： 初始化：建立一个大小为0的栈 查找：给定键k，检查 1 ≤ T [k] ≤ top[S] \x26amp;\x26amp; S[ T[k] ] = k，如果满足则返回对应值，否则返回NULL 插入：如果键已经存在则直接替换；否则将新的键值入栈，并且维护T[k] ← top[S] 删除：要确保两件事，一是验证环要被破坏，二是栈S的空洞要被填补。通过把栈顶的元素移动到要删除的元素位置，我们能同时确保这两点：\nS[ T[k] ] ← S[ top[S] ] S[ T[k] ] ← S [ top[S] ] T[ S[ T[k] ] ] ← T [k] T[k] ← 0 top[S] ← top[S] − 1  所有操作都能在O(1)时间内完成",
+    "description" : "简单来说就是给定一个未初始化的巨大的数组，然后通过它实现一个字典。所谓未初始化是指一开始里面元素的值都是随机的，巨大是指可以假设数组长度范围很大，对这个数组做初始化工作（例如清零）的代价自然也是很大。现在的问题是，利用这个数组设计出来的字典，要求初始化、查找、插入、删除操作都能在O(1)时间内完成。\nIntructor\u0026rsquo;s Manual 上的解答设计了一个很巧妙的验证策略。假设T为那个巨大的数组，S为辅助栈，那么对于一个键k，如果k存在于这个字典中，则T[k]保存的是 k在S中的位置j，而S[j]则保存了k值。即1 ≤ T[k] ≤ top[S], S[ T[k] ] = k, T [ S[j] ] = j，我们称这个条件为“验证环”。这个设计的关键在于T和S能够互相验证，从而排除了未初始化位置上随机值的干扰。\n还有一个问题就是，键k对应的值v应该怎么保存呢？其实只要维护另外一个和T或者S平行的数组就行了，既然S的元素个数远小于T，选择和S平行即可。\n根据这个验证策略，我们就能设计出词典的基本操作了： 初始化：建立一个大小为0的栈 查找：给定键k，检查 1 ≤ T [k] ≤ top[S] \u0026amp;\u0026amp; S[ T[k] ] = k，如果满足则返回对应值，否则返回NULL 插入：如果键已经存在则直接替换；否则将新的键值入栈，并且维护T[k] ← top[S] 删除：要确保两件事，一是验证环要被破坏，二是栈S的空洞要被填补。通过把栈顶的元素移动到要删除的元素位置，我们能同时确保这两点：\nS[ T[k] ] ← S[ top[S] ] S[ T[k] ] ← S [ top[S] ] T[ S[ T[k] ] ] ← T [k] T[k] ← 0 top[S] ← top[S] − 1 所有操作都能在O(1)时间内完成",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -47,8 +48,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2010",
-    "datePublished": "2010-02-04 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2010-02-04 00:00:00 \x2b0000 UTC",
+    "datePublished": "2010-02-04 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2010-02-04 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/2010\/02\/clrs-problem-111-4\/",
     "wordCount" : "179",
     "keywords" : [ "Algorithms","CLRS","Blog" ]
@@ -93,27 +94,20 @@
 </span>
 
     <div class="post-content">
-      <p>简单来说就是给定一个<strong>未初始化的巨大的</strong>数组，然后通过它实现一个字典。所谓未初始化是指一开始里面元素的值都是随机的，巨大是指可以假设数组长度范围很大，对这个数组做初始化工作（例如清零）的代价自然也是很大。现在的问题是，利用这个数组设计出来的字典，要求初始化、查找、插入、删除操作都能在O(1)时间内完成。</p>
-
-<p>Intructor&rsquo;s Manual 上的解答设计了一个很巧妙的验证策略。假设T为那个巨大的数组，S为辅助栈，那么对于一个键k，如果k存在于这个字典中，则T[k]保存的是 k在S中的位置j，而S[j]则保存了k值。即1 ≤ T[k] ≤ top[S], S[ T[k] ] = k, T [ S[j] ] = j，我们称这个条件为“<strong>验证环</strong>”。这个设计的关键在于T和S能够互相验证，从而排除了未初始化位置上随机值的干扰。</p>
-
+      <p>简单来说就是给定一个<!-- raw HTML omitted -->未初始化的巨大的<!-- raw HTML omitted -->数组，然后通过它实现一个字典。所谓未初始化是指一开始里面元素的值都是随机的，巨大是指可以假设数组长度范围很大，对这个数组做初始化工作（例如清零）的代价自然也是很大。现在的问题是，利用这个数组设计出来的字典，要求初始化、查找、插入、删除操作都能在O(1)时间内完成。</p>
+<p>Intructor&rsquo;s Manual 上的解答设计了一个很巧妙的验证策略。假设T为那个巨大的数组，S为辅助栈，那么对于一个键k，如果k存在于这个字典中，则T[k]保存的是 k在S中的位置j，而S[j]则保存了k值。即1 ≤ T[k] ≤ top[S], S[ T[k] ] = k, T [ S[j] ] = j，我们称这个条件为“<!-- raw HTML omitted -->验证环<!-- raw HTML omitted -->”。这个设计的关键在于T和S能够互相验证，从而排除了未初始化位置上随机值的干扰。</p>
 <p>还有一个问题就是，键k对应的值v应该怎么保存呢？其实只要维护另外一个和T或者S平行的数组就行了，既然S的元素个数远小于T，选择和S平行即可。</p>
-
 <p>根据这个验证策略，我们就能设计出词典的基本操作了：
 初始化：建立一个大小为0的栈
 查找：给定键k，检查 1 ≤ T [k] ≤ top[S] &amp;&amp; S[ T[k] ] = k，如果满足则返回对应值，否则返回NULL
 插入：如果键已经存在则直接替换；否则将新的键值入栈，并且维护T[k] ← top[S]
 删除：要确保两件事，一是验证环要被破坏，二是栈S的空洞要被填补。通过把栈顶的元素移动到要删除的元素位置，我们能同时确保这两点：</p>
-
-<pre><code class="language-text">S[ T[k] ] ← S[ top[S] ]
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">S[ T[k] ] ← S[ top[S] ]
 S[ T[k] ] ← S [ top[S] ]
 T[ S[ T[k] ] ] ← T [k]
 T[k] ← 0
 top[S] ← top[S] − 1
-</code></pre>
-
-<p>所有操作都能在O(1)时间内完成</p>
-
+</code></pre></div><p>所有操作都能在O(1)时间内完成</p>
 <p>原题：We wish to implement a dictionary by using direct addressing on a huge array. At the start, the array entries may contain garbage, and initializing the entire array is impractical because of its size. Describe a scheme for implementing a direct-address dictionary on a huge array. Each stored object should use O(1) space; the operations SEARCH, INSERT, and DELETE should take O(1) time each; and the initialization of the data structure should take O(1) time. (Hint: Use an additional stack, whose size is the number of keys actually stored in the dictionary, to help determine whether a given entry in the huge array is valid or not.)</p>
 
     </div>

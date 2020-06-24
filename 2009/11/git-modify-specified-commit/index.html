@@ -11,6 +11,7 @@
     
 
     <title> 在 Git 中修改之前提交的内容 &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -47,8 +48,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2009",
-    "datePublished": "2009-11-10 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2009-11-10 00:00:00 \x2b0000 UTC",
+    "datePublished": "2009-11-10 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2009-11-10 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/2009\/11\/git-modify-specified-commit\/",
     "wordCount" : "35",
     "keywords" : [ "Git","Tooling","git","Blog" ]
@@ -94,11 +95,8 @@
 
     <div class="post-content">
       <p>其实这个问题我以前在 Stackoverflow 上回答过别人（<a href="http://stackoverflow.com/questions/1186535/how-to-modify-a-specified-commit">链接</a>），不过现在自己反而忘了，还是贴在这下次查起来方便点</p>
-
 <p>先用 <code>git rebase bbc643cd^ --interactive</code> 退回到要修改的commit的前一个点，这里 bbc643cd 就是要修改的 commit，执行后 git 会调用默认的编辑器显示该次 commit 到最新 commit 的所有记录，在这里我们把要修改的那一项的行首的 pick 改成 edit。</p>
-
 <p>接下来运行 <code>git commit --amend</code>，使用默认编辑器修改这次 commit。</p>
-
 <p>最后执行 <code>git rebase --continue</code> 就能提交修改后的 commit 并且返回到原来的 commit 了。</p>
 
     </div>

@@ -11,6 +11,7 @@
     
 
     <title> 《编程之美》一个二进制趣题的讨论 &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -39,7 +40,7 @@
     "articleSection" : "post",
     "name" : "《编程之美》一个二进制趣题的讨论",
     "headline" : "《编程之美》一个二进制趣题的讨论",
-    "description" : "问题很简单，给定一个 8 位整型，要求写程序计算这个数的二进制表示中 1 的个数，要求算法的执行效率尽可能的高。\n先来看看样章上给出的几个算法：\n解法一，每次除二，看是否为奇数，是的话就累计加一，最后这个结果就是二进制表示中1的个数。\n解法二，同样用到一个循环，只是里面的操作用位移操作简化了。\nint Count(int v) { int num = 0; while (v) { num \x2b= v \x26amp; 0x01; v \x26gt;\x26gt;= 1; } return num; }  解法三，用到一个巧妙的与操作，v \x26amp; (v - 1) 每次能消去二进制表示中最后一位 1，利用这个技巧可以减少一定的循环次数。\n解法四，查表法，因为 8 位整型的范围是 0 - 255，可以直接把结果保存在一张表中，然后查表就行。书上强调这个算法的复杂度为 O(1)。\nint countTable[256] = { 0, 1, 1, 2, 1, ..., 7, 7, 8 }; int Count(int v) { return countTable[v]; }  好了，这就是样章上给出的四种方案，下面谈谈我的看法。\n首先是对算法的衡量上，复杂度真的是唯一的标准吗？尤其对于这种数据规模给定，而且很小的情况下，复杂度其实是个比较次要的因素。",
+    "description" : "问题很简单，给定一个 8 位整型，要求写程序计算这个数的二进制表示中 1 的个数，要求算法的执行效率尽可能的高。\n先来看看样章上给出的几个算法：\n解法一，每次除二，看是否为奇数，是的话就累计加一，最后这个结果就是二进制表示中1的个数。\n解法二，同样用到一个循环，只是里面的操作用位移操作简化了。\nint Count(int v) { int num = 0; while (v) { num \u002b= v \u0026amp; 0x01; v \u0026gt;\u0026gt;= 1; } return num; } 解法三，用到一个巧妙的与操作，v \u0026amp; (v - 1) 每次能消去二进制表示中最后一位 1，利用这个技巧可以减少一定的循环次数。\n解法四，查表法，因为 8 位整型的范围是 0 - 255，可以直接把结果保存在一张表中，然后查表就行。书上强调这个算法的复杂度为 O(1)。\nint countTable[256] = { 0, 1, 1, 2, 1, ..., 7, 7, 8 }; int Count(int v) { return countTable[v]; } 好了，这就是样章上给出的四种方案，下面谈谈我的看法。\n首先是对算法的衡量上，复杂度真的是唯一的标准吗？尤其对于这种数据规模给定，而且很小的情况下，复杂度其实是个比较次要的因素。\n查表法的复杂度为 O(1)，用解法一，循环次数不会超过 8 次，所以时间复杂度也是 O(1)。至于数据规模变大，例如变成 32 位整型，那查表法自然也不合适了。",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -47,10 +48,10 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2008",
-    "datePublished": "2008-04-15 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2008-04-15 00:00:00 \x2b0000 UTC",
+    "datePublished": "2008-04-15 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2008-04-15 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/2008\/04\/count-1-bits-in-an-int32\/",
-    "wordCount" : "248",
+    "wordCount" : "241",
     "keywords" : [ "Algorithms","Bit Hacking","Featured","Blog" ]
 }
 </script>
@@ -94,80 +95,55 @@
 
     <div class="post-content">
       <p>问题很简单，给定一个 8 位整型，要求写程序计算这个数的二进制表示中 1 的个数，要求算法的执行效率尽可能的高。</p>
-
 <p>先来看看样章上给出的几个算法：</p>
-
 <p>解法一，每次除二，看是否为奇数，是的话就累计加一，最后这个结果就是二进制表示中1的个数。</p>
-
 <p>解法二，同样用到一个循环，只是里面的操作用位移操作简化了。</p>
-
-<pre><code class="language-c">int Count(int v)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">Count</span>(<span style="color:#66d9ef">int</span> v)
 {
-    int num = 0;
-    while (v) {
-        num += v &amp; 0x01;
-        v &gt;&gt;= 1;
+    <span style="color:#66d9ef">int</span> num <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+    <span style="color:#66d9ef">while</span> (v) {
+        num <span style="color:#f92672">+=</span> v <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0x01</span>;
+        v <span style="color:#f92672">&gt;&gt;=</span> <span style="color:#ae81ff">1</span>;
     }
-    return num;
+    <span style="color:#66d9ef">return</span> num;
 }
-</code></pre>
-
-<p>解法三，用到一个巧妙的与操作，v &amp; (v - 1) 每次能消去二进制表示中最后一位 1，利用这个技巧可以减少一定的循环次数。</p>
-
+</code></pre></div><p>解法三，用到一个巧妙的与操作，v &amp; (v - 1) 每次能消去二进制表示中最后一位 1，利用这个技巧可以减少一定的循环次数。</p>
 <p>解法四，查表法，因为 8 位整型的范围是 0 - 255，可以直接把结果保存在一张表中，然后查表就行。书上强调这个算法的复杂度为 O(1)。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">int</span> countTable[<span style="color:#ae81ff">256</span>] <span style="color:#f92672">=</span> { <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">1</span>, ...,  <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">8</span> };
 
-<pre><code class="language-c">int countTable[256] = { 0, 1, 1, 2, 1, ...,  7, 7, 8 };
-
-int Count(int v) {
-    return countTable[v];
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">Count</span>(<span style="color:#66d9ef">int</span> v) {
+    <span style="color:#66d9ef">return</span> countTable[v];
 }
-</code></pre>
-
-<p>好了，这就是样章上给出的四种方案，下面谈谈我的看法。</p>
-
+</code></pre></div><p>好了，这就是样章上给出的四种方案，下面谈谈我的看法。</p>
 <p>首先是对算法的衡量上，复杂度真的是唯一的标准吗？尤其对于这种数据规模给定，而且很小的情况下，复杂度其实是个比较次要的因素。</p>
-
 <p>查表法的复杂度为 O(1)，用解法一，循环次数不会超过 8 次，所以时间复杂度也是 O(1)。至于数据规模变大，例如变成 32 位整型，那查表法自然也不合适了。</p>
-
 <p>其次，既然是一个执行时间很短的操作，衡量的尺度也必然要小，CPU 时钟周期可以作为参考单位。</p>
-
 <p>解法一里有若干次整数加法，若干次整数除法（一般的编译器都能把它优化成位移），还有几个循环分支判断，几个奇偶性判断（这个比较耗时间，根据 <a href="http://www.amazon.com/Computer-Systems-Programmers-Perspective-Edition/dp/0136108040/">CSAPP</a> 上的数据，一般一个 branch penalty 得耗掉 14 个左右的 cycle），加起来大概几十个 cycle 吧。</p>
-
 <p>再看解法四，查表法看似一次地址计算就能解决，但实际上它用到了查表访存操作，而访存的时候很有可能那个数组不在 cache 里，需要从内存重新读取。这样一个 cache  miss 导致的后果可能就是耗去几十甚至上百个 cycle（因为要访问内存）。所以实际情况中这个算法的性能是很差的。</p>
-
 <p>这里我再推荐几个解决这个问题的算法，以 32 位无符号整型为例。</p>
-
-<pre><code class="language-c">int Count(unsigned x) {
-    x = x - ((x &gt;&gt; 1) &amp; 0x55555555);
-    x = (x &amp; 0x33333333) + ((x &gt;&gt; 2) &amp; 0x33333333);
-    x = (x + (x &gt;&gt; 4)) &amp; 0x0F0F0F0F;
-    x = x + (x &gt;&gt; 8);
-    x = x + (x &gt;&gt; 16);
-    return x &amp; 0x0000003F;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">Count</span>(<span style="color:#66d9ef">unsigned</span> x) {
+    x <span style="color:#f92672">=</span> x <span style="color:#f92672">-</span> ((x <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0x55555555</span>);
+    x <span style="color:#f92672">=</span> (x <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0x33333333</span>) <span style="color:#f92672">+</span> ((x <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">2</span>) <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0x33333333</span>);
+    x <span style="color:#f92672">=</span> (x <span style="color:#f92672">+</span> (x <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">4</span>)) <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0x0F0F0F0F</span>;
+    x <span style="color:#f92672">=</span> x <span style="color:#f92672">+</span> (x <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">8</span>);
+    x <span style="color:#f92672">=</span> x <span style="color:#f92672">+</span> (x <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">16</span>);
+    <span style="color:#66d9ef">return</span> x <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0x0000003F</span>;
 }
-</code></pre>
-
-<p>这里用的是二分法，两两一组相加，之后四个四个一组相加，接着八个八个，最后就得到各位之和了。</p>
-
+</code></pre></div><p>这里用的是二分法，两两一组相加，之后四个四个一组相加，接着八个八个，最后就得到各位之和了。</p>
 <p>还有一个更巧妙的 HAKMEM 算法</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">Count</span>(<span style="color:#66d9ef">unsigned</span> x) {
+   <span style="color:#66d9ef">unsigned</span> n;
 
-<pre><code class="language-c">int Count(unsigned x) {
-   unsigned n;
-
-   n = (x &gt;&gt; 1) &amp; 033333333333;
-   x = x - n;
-   n = (n &gt;&gt; 1) &amp; 033333333333;
-   x = x - n;
-   x = (x + (x &gt;&gt; 3)) &amp; 030707070707;
-   x = x % 63;
-   return x;
+   n <span style="color:#f92672">=</span> (x <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">033333333333</span>;
+   x <span style="color:#f92672">=</span> x <span style="color:#f92672">-</span> n;
+   n <span style="color:#f92672">=</span> (n <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">033333333333</span>;
+   x <span style="color:#f92672">=</span> x <span style="color:#f92672">-</span> n;
+   x <span style="color:#f92672">=</span> (x <span style="color:#f92672">+</span> (x <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">3</span>)) <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">030707070707</span>;
+   x <span style="color:#f92672">=</span> x <span style="color:#f92672">%</span> <span style="color:#ae81ff">63</span>;
+   <span style="color:#66d9ef">return</span> x;
 }
-</code></pre>
-
-<p>用了二分法，先将二进制表示分组，每三位一组，并求出每组中 1 的个数。然后相邻两组归并，分组变成了每六位一组。最后除 63 取余得到结果。因为 2<sup>6</sup> = 64，也就是说 x<sub>0</sub> + x<sub>1</sub> * 64 + x<sub>2</sub> * 64 * 64 = x<sub>0</sub> + x<sub>1</sub> + x<sub>2</sub> (mod  63) （这里的等号表示同余）。</p>
-
+</code></pre></div><p>用了二分法，先将二进制表示分组，每三位一组，并求出每组中 1 的个数。然后相邻两组归并，分组变成了每六位一组。最后除 63 取余得到结果。因为 2<!-- raw HTML omitted -->6<!-- raw HTML omitted --> = 64，也就是说 x<!-- raw HTML omitted -->0<!-- raw HTML omitted --> + x<!-- raw HTML omitted -->1<!-- raw HTML omitted --> * 64 + x<!-- raw HTML omitted -->2<!-- raw HTML omitted --> * 64 * 64 = x<!-- raw HTML omitted -->0<!-- raw HTML omitted --> + x<!-- raw HTML omitted -->1<!-- raw HTML omitted --> + x<!-- raw HTML omitted -->2<!-- raw HTML omitted --> (mod  63) （这里的等号表示同余）。</p>
 <p>这个程序只需要十条左右指令，虽然有除法指令，但是由于不访存，速度还是会比较快。</p>
-
 <p>综上，衡量一个算法实际效果不单要看复杂度，还要结合其他情况具体分析。关于书后的两道扩展问题，问题一是问 32 位整型如何处理，这个上面已经讲了。问题二是给定两个整数 A 和 B，问 A 和 B 有多少位是不同的。这个问题可以规约到数 1 问题——只要先算出 A 和 B 的异或结果，然后求这个值中 1 的个数就行了。</p>
 
     </div>

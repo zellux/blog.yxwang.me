@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Rspec on Aiur · Zellux 的博客</title>
@@ -19,8 +19,8 @@
       <guid>https://blog.yxwang.me/2011/11/skip-specs-by-tags/</guid>
       <description>有些测试比较耗时间，而且很少被修改，如果能在测试的时候跳过它们就能让 spec 快不少。
 跳过测试的方法很简单，spec 的 describe 方法可以给对应的测试加上标签，例如
-describe SalesController, :slow =&amp;gt; true do # specs end  接下来只要在 spec/spec_helper.rb 中声明跳过这个标签即可：
-RSpec.configure do |config| config.filter_run_excluding :slow =&amp;gt; true end  与 filter_run_excluding 相反的是 filter_run，指定会被运行的标签，不包含在这个列表中的测试将被忽略。
+describe SalesController, :slow =&amp;gt; true do # specs end 接下来只要在 spec/spec_helper.rb 中声明跳过这个标签即可：
+RSpec.configure do |config| config.filter_run_excluding :slow =&amp;gt; true end 与 filter_run_excluding 相反的是 filter_run，指定会被运行的标签，不包含在这个列表中的测试将被忽略。
 参考：http://www.dixis.com/?p=283</description>
     </item>
     

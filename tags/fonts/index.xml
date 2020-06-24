@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Fonts on Aiur · Zellux 的博客</title>
@@ -19,9 +19,8 @@
       <guid>https://blog.yxwang.me/2010/02/gitk-font/</guid>
       <description>gitk是用Tcl/Tk写的工具，默认使用Tk 8.4，不支持抗锯齿，因此字体显示很难看。好在Tk 8.5支持了部分抗锯齿字体，修改gitk使用Tk 8.5后显示效果会好一点。
 以Ubuntu为例，安装tk8.5包后，编辑/usr/bin/gitk文件，把开头调用wish的那行
-exec /usr/bin/wish &amp;quot;$0&amp;quot; -- &amp;quot;$@&amp;quot;  改成
-exec /usr/bin/wish8.5 &amp;quot;$0&amp;quot; -- &amp;quot;$@&amp;quot;  这样就能在gitk中开启抗锯齿了，虽然效果还不是很好。另外qgit也是一个不错的选择。
-参考链接：http://navarra.ca/?p=44</description>
+exec /usr/bin/wish &amp;#34;$0&amp;#34; -- &amp;#34;$@&amp;#34; 改成
+exec /usr/bin/wish8.5 &amp;#34;$0&amp;#34; -- &amp;#34;$@&amp;#34; 这样就能在gitk中开启抗锯齿了，虽然效果还不是很好。另外qgit也是一个不错的选择。</description>
     </item>
     
   </channel>

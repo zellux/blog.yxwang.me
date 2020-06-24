@@ -11,6 +11,7 @@
     
 
     <title> 一个简单有效的 hash 算法 &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -39,7 +40,7 @@
     "articleSection" : "post",
     "name" : "一个简单有效的 hash 算法",
     "headline" : "一个简单有效的 hash 算法",
-    "description" : "最近要给某个类写一个 hash 方法，这个类包括一些整型和字符串属性，需要把它们都放到 hash 中。担心自己想出来的 hash 算法会造成比较严重的冲突，网上搜了一下，发现 Effective Java 中已经介绍过一种简单有效的算法了：  将任一非零常数赋值给 result 找到该类中所有需要包含在 hash 中的属性，并根据它们的类型进行计算 c  对于布尔类型，将它们转换为 0\/1 对于 byte, char, short, 和 int 类型，将它们转换为 int 对于长整型 long，计算高位和低位的异或结果 (int) (f ^ (f \x26gt;\x26gt;\x26gt; 32)) 对于 float 类型，采用它的二进制表示，在 Java 中为 Float.floatToIntBits，Ruby 中我估计用 Float.hash 也可以 对于 double 类型，调用 Double.doubleToIntBits 后再次用前面的方法处理得到的 long 类型 对于数组，利用方法 3 合并计算结果 对于其它的对象，递归调用该对象的 hash 方法  将计算结果合并到 result 变量：result = 37 * result \x2b c 返回 result  另外这个博客的域名已经改成了 blog.",
+    "description" : "最近要给某个类写一个 hash 方法，这个类包括一些整型和字符串属性，需要把它们都放到 hash 中。担心自己想出来的 hash 算法会造成比较严重的冲突，网上搜了一下，发现 Effective Java中已经介绍过一种简单有效的算法了：",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -47,10 +48,10 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2011",
-    "datePublished": "2011-09-17 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2011-09-17 00:00:00 \x2b0000 UTC",
+    "datePublished": "2011-09-17 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2011-09-17 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/2011\/09\/recipe-for-hashing\/",
-    "wordCount" : "71",
+    "wordCount" : "9",
     "keywords" : [ "Algorithms","Hash","Blog" ]
 }
 </script>
@@ -93,23 +94,8 @@
 </span>
 
     <div class="post-content">
-      <p>最近要给某个类写一个 hash 方法，这个类包括一些整型和字符串属性，需要把它们都放到 hash 中。担心自己想出来的 hash 算法会造成比较严重的冲突，网上搜了一下，发现 <a href="http://www.sixwhits.com/documentation/SuggsDocs/Java/Effective%20Java%20-%20Programming%20Language%20Guide.pdf">Effective Java</a> 中已经介绍过一种简单有效的算法了：
-<ol>
-<li>将任一非零常数赋值给 result</li>
-    <li>找到该类中所有需要包含在 hash 中的属性，并根据它们的类型进行计算 c</li>
-<ol>
-<li>对于布尔类型，将它们转换为 0/1</li>
-    <li>对于 byte, char, short, 和 int 类型，将它们转换为 int</li>
-    <li>对于长整型 long，计算高位和低位的异或结果 (int) (f ^ (f &gt;&gt;&gt; 32))</li>
-    <li>对于 float 类型，采用它的二进制表示，在 Java 中为 Float.floatToIntBits，Ruby 中我估计用 Float.hash 也可以</li>
-    <li>对于 double 类型，调用 Double.doubleToIntBits 后再次用前面的方法处理得到的 long 类型</li>
-    <li>对于数组，利用方法 3 合并计算结果</li>
-    <li>对于其它的对象，递归调用该对象的 hash 方法</li>
-</ol>
-<li>将计算结果合并到 result 变量：result = 37 * result + c</li>
-    <li>返回 result</li>
-</ol>
-另外这个博客的域名已经改成了 <a href="http://blog.yxwang.me">blog.yxwang.me</a>，原来的域名 <a href="http://techblog.iamzellux.com">techblog.iamzellux.com</a> 仍然可用，但会重定向到新的域名。</p>
+      <p>最近要给某个类写一个 hash 方法，这个类包括一些整型和字符串属性，需要把它们都放到 hash 中。担心自己想出来的 hash 算法会造成比较严重的冲突，网上搜了一下，发现 <!-- raw HTML omitted -->Effective Java<!-- raw HTML omitted --> 中已经介绍过一种简单有效的算法了：</p>
+<!-- raw HTML omitted -->
 
     </div>
         <div class="cc-license">

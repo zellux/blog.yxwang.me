@@ -11,6 +11,7 @@
     
 
     <title> Erlang的Hello World：一个计数程序 &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -39,7 +40,7 @@
     "articleSection" : "post",
     "name" : "Erlang的Hello World：一个计数程序",
     "headline" : "Erlang的Hello World：一个计数程序",
-    "description" : "acm queue 9月的杂志的主题是The Concurrency Problem，力推了Erlang这个语言，其中有篇文章简单的介绍了下这个message-oriented语言。\n查了下这个名字的读法，正确的读法应该是air-lang，这里元音a的发音和bang中的a一样。\n文章中的第一个程序就有点令人费解，主要原因在于Erlang的语法和一般的imperative language差别很大，和functional language比较类似，但是本质上也有很大的不同。\n以Java的一个计数程序为例\n\/\/ A shared counter. public class Sequence { private int nextVal = 0; \/\/ Retrieve counter and increment. public synchronized int getNext() { return nextVal\x2b\x2b; } \/\/ Re-initialize counter to zero. public synchronized void reset() { nextVal = 0; } }  这个程序的功能不用多说了，一个同步的计数程序。它的Erlang翻译版的代码为\n-module(sequence1). -export([make_sequence\/0, get_next\/1, reset\/1]). % Create a new shared counter. make_sequence() -\x26gt; spawn(fun() -\x26gt; sequence_loop(0) end). sequence_loop(N) -\x26gt; receive {From, get_next} -\x26gt; From !",
+    "description" : "acm queue 9月的杂志的主题是The Concurrency Problem，力推了Erlang这个语言，其中有篇文章简单的介绍了下这个message-oriented语言。\n查了下这个名字的读法，正确的读法应该是air-lang，这里元音a的发音和bang中的a一样。\n文章中的第一个程序就有点令人费解，主要原因在于Erlang的语法和一般的imperative language差别很大，和functional language比较类似，但是本质上也有很大的不同。\n以Java的一个计数程序为例\n\/\/ A shared counter. public class Sequence { private int nextVal = 0; \/\/ Retrieve counter and increment.  public synchronized int getNext() { return nextVal\u002b\u002b; } \/\/ Re-initialize counter to zero.  public synchronized void reset() { nextVal = 0; } } 这个程序的功能不用多说了，一个同步的计数程序。它的Erlang翻译版的代码为\n-module(sequence1). -export([make_sequence\/0, get_next\/1, reset\/1]). % Create a new shared counter. make_sequence() -\u0026gt; spawn(fun() -\u0026gt; sequence_loop(0) end). sequence_loop(N) -\u0026gt; receive {From, get_next} -\u0026gt; From !",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -47,10 +48,10 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2008",
-    "datePublished": "2008-10-13 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2008-10-13 00:00:00 \x2b0000 UTC",
+    "datePublished": "2008-10-13 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2008-10-13 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/2008\/10\/erlang-hello-world\/",
-    "wordCount" : "130",
+    "wordCount" : "129",
     "keywords" : [ "Distributed System","Erlang","Programming","acm queue","Blog" ]
 }
 </script>
@@ -94,73 +95,58 @@
 
     <div class="post-content">
       <p>acm queue 9月的杂志的主题是The Concurrency Problem，力推了Erlang这个语言，其中有篇文章简单的介绍了下这个message-oriented语言。</p>
-
 <p>查了下这个名字的读法，正确的读法应该是air-lang，这里元音a的发音和bang中的a一样。</p>
-
 <p>文章中的第一个程序就有点令人费解，主要原因在于Erlang的语法和一般的imperative language差别很大，和functional language比较类似，但是本质上也有很大的不同。</p>
-
 <p>以Java的一个计数程序为例</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75715e">// A shared counter.
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Sequence</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> nextVal <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
 
-<pre><code class="language-java">// A shared counter.
-public class Sequence {
-    private int nextVal = 0;
+    <span style="color:#75715e">// Retrieve counter and increment.
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">synchronized</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">getNext</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> nextVal<span style="color:#f92672">++;</span>
+    <span style="color:#f92672">}</span>
 
-    // Retrieve counter and increment.
-    public synchronized int getNext() {
-        return nextVal++;
-    }
-
-    // Re-initialize counter to zero.
-    public synchronized void reset() {
-        nextVal = 0;
-    }
-}
-</code></pre>
-
-<p>这个程序的功能不用多说了，一个同步的计数程序。它的Erlang翻译版的代码为</p>
-
-<pre><code class="language-erlang">
+    <span style="color:#75715e">// Re-initialize counter to zero.
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">synchronized</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">reset</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        nextVal <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>这个程序的功能不用多说了，一个同步的计数程序。它的Erlang翻译版的代码为</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-erlang" data-lang="erlang">
 -module(sequence1).
--export([make_sequence/0, get_next/1, reset/1]).
+-export([make_sequence<span style="color:#f92672">/</span><span style="color:#ae81ff">0</span>, get_next<span style="color:#f92672">/</span><span style="color:#ae81ff">1</span>, reset<span style="color:#f92672">/</span><span style="color:#ae81ff">1</span>]).
 
-% Create a new shared counter.
-make_sequence() -&gt;
-    spawn(fun() -&gt; sequence_loop(0) end).
+<span style="color:#75715e">% Create a new shared counter.
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">make_sequence</span>() <span style="color:#f92672">-&gt;</span>
+    spawn(<span style="color:#66d9ef">fun</span>() <span style="color:#f92672">-&gt;</span> sequence_loop(<span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">end</span>).
 
-sequence_loop(N) -&gt;
-    receive
-        {From, get_next} -&gt;
-            From ! {self(), N},
-            sequence_loop(N + 1);
-        reset -&gt;
-            sequence_loop(0)
-    end.
+<span style="color:#a6e22e">sequence_loop</span>(N) <span style="color:#f92672">-&gt;</span>
+    <span style="color:#66d9ef">receive</span>
+        {From, get_next} <span style="color:#f92672">-&gt;</span>
+            From <span style="color:#f92672">!</span> {self(), N},
+            sequence_loop(N <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+        reset <span style="color:#f92672">-&gt;</span>
+            sequence_loop(<span style="color:#ae81ff">0</span>)
+    <span style="color:#66d9ef">end</span>.
 
-% Retrieve counter and increment.
-get_next(Sequence) -&gt;
-    Sequence ! {self(), get_next},
-    receive
-        {Sequence, N} -&gt; N
-    end.
+<span style="color:#75715e">% Retrieve counter and increment.
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">get_next</span>(Sequence) <span style="color:#f92672">-&gt;</span>
+    Sequence <span style="color:#f92672">!</span> {self(), get_next},
+    <span style="color:#66d9ef">receive</span>
+        {Sequence, N} <span style="color:#f92672">-&gt;</span> N
+    <span style="color:#66d9ef">end</span>.
 
-% Re-initialize counter to zero.
-reset(Sequence) -&gt;
-    Sequence ! reset.
+<span style="color:#75715e">% Re-initialize counter to zero.
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">reset</span>(Sequence) <span style="color:#f92672">-&gt;</span>
+    Sequence <span style="color:#f92672">!</span> reset.
 
-</code></pre>
-
-<p>初看这个程序自然是一头雾水，不过程序的函数式风格味还是很浓的。</p>
-
-<p>前面提到，Erlang是基于message的，或者说message sending机制是包含在语言系统内部的，语法就是 <u>pid ! message</u></p>
-
+</code></pre></div><p>初看这个程序自然是一头雾水，不过程序的函数式风格味还是很浓的。</p>
+<p>前面提到，Erlang是基于message的，或者说message sending机制是包含在语言系统内部的，语法就是 <!-- raw HTML omitted -->pid ! message<!-- raw HTML omitted --></p>
 <p>接下来再来分析这个简单的程序。开头两行是模块和函数声明，略去。make_sequence开始这个进程，spawn/1内置函数创建一个新的进程，并返回pid到调用者。</p>
-
 <p>初始时运行的函数是sequence_loop(0)，这个函数接收两种信息，用receive表达式声明：如果收到形式是{From, get_next}的信息，就返回当前的N并调用sequence_loop(N+1)，这样下一次收到同样的信息时就能返回N+1了；reset则等价于Java版本中的n=0语句。</p>
-
 <p>get_next/1则是发送给pid为Sequence的进程 {self(), get_next} 这样一个信息，上面解释的sequence_loop/1函数收到这个信息后会返回一个 {self(), N} 的tuple给get_next/1，收到这个信息后get_next/1就能返回N这个值了。</p>
-
 <p>最后reset/1函数则是发送给Sequence一个reset信息。</p>
-
 <p>这个简单的程序里能大致窥见一些Erlang的特点，尤其是它基于信息发送的本质。</p>
 
     </div>

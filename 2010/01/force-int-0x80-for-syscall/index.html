@@ -11,6 +11,7 @@
     
 
     <title> 强制程序使用int 0x80做系统调用 &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -39,7 +40,7 @@
     "articleSection" : "post",
     "name" : "强制程序使用int 0x80做系统调用",
     "headline" : "强制程序使用int 0x80做系统调用",
-    "description" : "因为大多数情况下程序都是通过libc间接地发出系统调用的，所以只要编译一个只使用int 0x80的glibc库，然后在执行程序的时候用LD_LIBRARY_PATH或其他方法指定使用新编译的glibc库即可。\n以glibc-2.9, Linux i386为例，在sysdeps\/unix\/sysv\/linux\/i386\/syscall.S中可以看到\nENTRY (syscall) PUSHARGS_6 \/* Save register contents. *\/ _DOARGS_6(44) \/* Load arguments. *\/ movl 20(%esp), %eax \/* Load syscall number into %eax. *\/ ENTER_KERNEL \/* Do the system call. *\/ POPARGS_6 \/* Restore register contents. *\/ cmpl $-4095, %eax \/* Check %eax for error. *\/ jae SYSCALL_ERROR_LABEL \/* Jump to error handler if error. *\/  这里使用了ENTER_KERNEL这个宏做系统调用，接下来在sysdeps\/unix\/sysv\/linux\/i386\/sysdep.h里可以找到这个宏的定义\n\/* The original calling convention for system calls on Linux\/i386 is to use int $0x80.",
+    "description" : "因为大多数情况下程序都是通过libc间接地发出系统调用的，所以只要编译一个只使用int 0x80的glibc库，然后在执行程序的时候用LD_LIBRARY_PATH或其他方法指定使用新编译的glibc库即可。\n以glibc-2.9, Linux i386为例，在sysdeps\/unix\/sysv\/linux\/i386\/syscall.S中可以看到\nENTRY (syscall) PUSHARGS_6 \/* Save register contents. *\/ _DOARGS_6(44) \/* Load arguments. *\/ movl 20(%esp), %eax \/* Load syscall number into %eax. *\/ ENTER_KERNEL \/* Do the system call. *\/ POPARGS_6 \/* Restore register contents. *\/ cmpl $-4095, %eax \/* Check %eax for error. *\/ jae SYSCALL_ERROR_LABEL \/* Jump to error handler if error. *\/ 这里使用了ENTER_KERNEL这个宏做系统调用，接下来在sysdeps\/unix\/sysv\/linux\/i386\/sysdep.h里可以找到这个宏的定义\n\/* The original calling convention for system calls on Linux\/i386 is to use int $0x80.",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -47,8 +48,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2010",
-    "datePublished": "2010-01-26 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2010-01-26 00:00:00 \x2b0000 UTC",
+    "datePublished": "2010-01-26 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2010-01-26 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/2010\/01\/force-int-0x80-for-syscall\/",
     "wordCount" : "129",
     "keywords" : [ "Assembly","C","Computer System","linking","Blog" ]
@@ -94,52 +95,38 @@
 
     <div class="post-content">
       <p>因为大多数情况下程序都是通过libc间接地发出系统调用的，所以只要编译一个只使用int 0x80的glibc库，然后在执行程序的时候用LD_LIBRARY_PATH或其他方法指定使用新编译的glibc库即可。</p>
-
 <p>以glibc-2.9, Linux i386为例，在sysdeps/unix/sysv/linux/i386/syscall.S中可以看到</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"> ENTRY (syscall)
 
-<pre><code class="language-c"> ENTRY (syscall)
-
-     PUSHARGS_6      /* Save register contents.  */
-     _DOARGS_6(44)       /* Load arguments.  */
-     movl 20(%esp), %eax /* Load syscall number into %eax.  */
-     ENTER_KERNEL        /* Do the system call.  */
-     POPARGS_6       /* Restore register contents.  */
-     cmpl $-4095, %eax   /* Check %eax for error.  */
-     jae SYSCALL_ERROR_LABEL /* Jump to error handler if error.  */
-</code></pre>
-
-<p>这里使用了ENTER_KERNEL这个宏做系统调用，接下来在sysdeps/unix/sysv/linux/i386/sysdep.h里可以找到这个宏的定义</p>
-
-<pre><code class="language-c">/* The original calling convention for system calls on Linux/i386 is
-   to use int $0x80.  */
-#ifdef I386_USE_SYSENTER
-# ifdef SHARED
-#  define ENTER_KERNEL call *%gs:SYSINFO_OFFSET
-# else
-#  define ENTER_KERNEL call *_dl_sysinfo
-# endif
-#else
-# define ENTER_KERNEL int $0x80
-#endif
-</code></pre>
-
-<p>而I386_USE_SYSENTER这个宏也是在同一个头文件中定义的</p>
-
-<pre><code class="language-c">#if defined USE_DL_SYSINFO \
-    &amp;&amp; (!defined NOT_IN_libc || defined IS_IN_libpthread)
-# define I386_USE_SYSENTER   1
-#else
-# undef I386_USE_SYSENTER
-#endif
-</code></pre>
-
-<p>把这个条件宏改成</p>
-
-<pre><code class="language-c">#undef I386_USE_SYSENTER
-</code></pre>
-
-<p>就能强制glibc使用int 0x80了。</p>
-
+     PUSHARGS_6      <span style="color:#75715e">/* Save register contents.  */</span>
+     _DOARGS_6(<span style="color:#ae81ff">44</span>)       <span style="color:#75715e">/* Load arguments.  */</span>
+     movl <span style="color:#ae81ff">20</span>(<span style="color:#f92672">%</span>esp), <span style="color:#f92672">%</span>eax <span style="color:#75715e">/* Load syscall number into %eax.  */</span>
+     ENTER_KERNEL        <span style="color:#75715e">/* Do the system call.  */</span>
+     POPARGS_6       <span style="color:#75715e">/* Restore register contents.  */</span>
+     cmpl <span style="color:#960050;background-color:#1e0010">$</span><span style="color:#f92672">-</span><span style="color:#ae81ff">4095</span>, <span style="color:#f92672">%</span>eax   <span style="color:#75715e">/* Check %eax for error.  */</span>
+     jae SYSCALL_ERROR_LABEL <span style="color:#75715e">/* Jump to error handler if error.  */</span>
+</code></pre></div><p>这里使用了ENTER_KERNEL这个宏做系统调用，接下来在sysdeps/unix/sysv/linux/i386/sysdep.h里可以找到这个宏的定义</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">/* The original calling convention for system calls on Linux/i386 is
+</span><span style="color:#75715e">   to use int $0x80.  */</span>
+<span style="color:#75715e">#ifdef I386_USE_SYSENTER
+</span><span style="color:#75715e"># ifdef SHARED
+</span><span style="color:#75715e">#  define ENTER_KERNEL call *%gs:SYSINFO_OFFSET
+</span><span style="color:#75715e"># else
+</span><span style="color:#75715e">#  define ENTER_KERNEL call *_dl_sysinfo
+</span><span style="color:#75715e"># endif
+</span><span style="color:#75715e">#else
+</span><span style="color:#75715e"># define ENTER_KERNEL int $0x80
+</span><span style="color:#75715e">#endif
+</span></code></pre></div><p>而I386_USE_SYSENTER这个宏也是在同一个头文件中定义的</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">#if defined USE_DL_SYSINFO \
+</span><span style="color:#75715e">    &amp;&amp; (!defined NOT_IN_libc || defined IS_IN_libpthread)
+</span><span style="color:#75715e"># define I386_USE_SYSENTER   1
+</span><span style="color:#75715e">#else
+</span><span style="color:#75715e"># undef I386_USE_SYSENTER
+</span><span style="color:#75715e">#endif
+</span></code></pre></div><p>把这个条件宏改成</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">#undef I386_USE_SYSENTER
+</span></code></pre></div><p>就能强制glibc使用int 0x80了。</p>
 <p>这个方法只能过滤通过glibc做的系统调用。对于程序里写死使用sysenter的情况就要使用反汇编或者其他手段了。</p>
 
     </div>

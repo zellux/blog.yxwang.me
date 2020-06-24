@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>gdb on Aiur · Zellux 的博客</title>
@@ -24,9 +24,9 @@
 在gdb中输入help break能够看到相关的信息。
 可以看到 break 允许我们使用行号、函数名或地址设置断点。
 按ctrl+z暂时挂起当前的gdb进程，运行 objdump –d bomb | more 查看反编译后的炸弹文件，可以看到里面有这么一行（开始的那个地址每个人都不同）：
-08049719 &amp;lt;explode_bomb&amp;gt;:  这个就是万恶的引爆炸弹的函数了，运行 fg 返回 gdb 环境，在这个函数设置断点：break explode_bomb （可以使用tab键自动补齐）
+08049719 &amp;lt;explode_bomb&amp;gt;: 这个就是万恶的引爆炸弹的函数了，运行 fg 返回 gdb 环境，在这个函数设置断点：break explode_bomb （可以使用tab键自动补齐）
 显示
-Breakpoint 1 at 0x8049707  接下来你可以喘口气，一般情况下炸弹是不会引爆的了
+Breakpoint 1 at 0x8049707 接下来你可以喘口气，一般情况下炸弹是不会引爆的了
 下面我们来拆第一个炸弹，首先同样是设置断点，bomb.c中给出了各个关卡的函数名，第一关就是phase_1，使用break phase_1在第一关设置断点
 接下来就开始运行吧，输入run
 我们已经设置了炸弹断点，这些恐吓可以直接无视。
@@ -38,8 +38,8 @@ Breakpoint 1 at 0x8049707  接下来你可以喘口气，一般情况下炸弹�
 估计这三行代码的意思就是比较两个字符串相等，不相等的话应该就会让炸弹爆炸了
 因为字符串很大，所以传递给这个比较函数的肯定是他们的地址，分别为0x80499b4和0x8(%ebp)
 我们先来看后者，使用p/x *(int*)($ebp + 8)查看字符串所在的地址
-$1 = 0x804a720 ​```` 继续使用`p/x *0x804a720`查看内存中这个地址的内容  $2 = 0x434241
- 连续的三个数，是不是想起什么了？把这三个数分别转换为十进制，就是67 66 65，分别为 CBA 的 ASCII 码，看来这里保存了我们输入的串。 接下来 0x80499b4 里肯定保存着过关的密码 `p/x *0x80499b4`  $3 = 0x62726556</description>
+$1 = 0x804a720 ​```` 继续使用`p/x *0x804a720`查看内存中这个地址的内容 $2 = 0x434241
+ 连续的三个数，是不是想起什么了？把这三个数分别转换为十进制，就是67 66 65，分别为 CBA 的 ASCII 码，看来这里保存了我们输入的串。 接下来 0x80499b4 里肯定保存着过关的密码 `p/x *0x80499b4` $3 = 0x62726556</description>
     </item>
     
   </channel>

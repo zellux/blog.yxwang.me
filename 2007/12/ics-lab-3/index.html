@@ -11,6 +11,7 @@
     
 
     <title> ICS Lab3 简易攻略 &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -39,7 +40,7 @@
     "articleSection" : "post",
     "name" : "ICS Lab3 简易攻略",
     "headline" : "ICS Lab3 简易攻略",
-    "description" : "这个 Lab 应该比上一个 Lab 简单不少， Lab 的说明文档也差不多把基本的过关要点都提到了，所以这里主要介绍一下几个相关工具的使用，帮助大家进一步熟悉 Linux 命令行 ;-) 首先从主页上下载一个压缩包，最简单的方法是直接在命令行使用 wget 工具 wget http:\/\/10.132.143.100\/lab2007\/buflab-handout.tar\n顺便提一下 wget 的功能很强大，除了可以在后台运行，它还支持 ftp https http 等协议，提供整个网站下载的功能（类似于 Windows 下的 WebZIP ）\n接着使用 tar 命令解压这个文件\ntar xvf buflab-handout.tar  其中， x 参数表示解压工作， v 表示显示解压所得的文件列表， f 及其后面跟着的文件 名指定了待解压文件\n这样在当前目录下就多出了三个文件： bufbomb, makecookie, sendstring\n接下来使用 makecookie 得到自己学号对应的 cookie 号，用法是 .\/makecookie 学号\n这个 cookie 号在后面的几个关卡中都有可能会用到，同时 http:\/\/10.132.143.234\/bufbombstatus.html 中可以通过自己的 cookie 号随时获得自己现在的过关情况。\n和上一个 Lab 一样，这里介绍一下怎么过 Level 0 。\n这个热身关和两个函数有关， test() 和 smoke() ，正常情况下 smoke 不会被任何函数调用，我们要做的就是输入一串特定的字符，使得 smoke 被调用。另外这个关卡简单之处在于 smoke 被调用后就直接退出程序，我们在破坏了栈的数据后不需要恢复原样。",
+    "description" : "这个 Lab 应该比上一个 Lab 简单不少， Lab 的说明文档也差不多把基本的过关要点都提到了，所以这里主要介绍一下几个相关工具的使用，帮助大家进一步熟悉 Linux 命令行 ;-) 首先从主页上下载一个压缩包，最简单的方法是直接在命令行使用 wget 工具 wget http:\/\/10.132.143.100\/lab2007\/buflab-handout.tar\n顺便提一下 wget 的功能很强大，除了可以在后台运行，它还支持 ftp https http 等协议，提供整个网站下载的功能（类似于 Windows 下的 WebZIP ）\n接着使用 tar 命令解压这个文件\ntar xvf buflab-handout.tar 其中， x 参数表示解压工作， v 表示显示解压所得的文件列表， f 及其后面跟着的文件 名指定了待解压文件\n这样在当前目录下就多出了三个文件： bufbomb, makecookie, sendstring\n接下来使用 makecookie 得到自己学号对应的 cookie 号，用法是 .\/makecookie 学号\n这个 cookie 号在后面的几个关卡中都有可能会用到，同时 http:\/\/10.132.143.234\/bufbombstatus.html中可以通过自己的 cookie 号随时获得自己现在的过关情况。\n和上一个 Lab 一样，这里介绍一下怎么过 Level 0 。\n这个热身关和两个函数有关， test() 和 smoke() ，正常情况下 smoke 不会被任何函数调用，我们要做的就是输入一串特定的字符，使得 smoke 被调用。另外这个关卡简单之处在于 smoke 被调用后就直接退出程序，我们在破坏了栈的数据后不需要恢复原样。",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -47,10 +48,10 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2007",
-    "datePublished": "2007-12-15 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2007-12-15 00:00:00 \x2b0000 UTC",
+    "datePublished": "2007-12-15 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2007-12-15 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/2007\/12\/ics-lab-3\/",
-    "wordCount" : "293",
+    "wordCount" : "291",
     "keywords" : [ "Courses","ICS","Lab","Blog" ]
 }
 </script>
@@ -93,81 +94,45 @@
 </span>
 
     <div class="post-content">
-      
-
-<p>这个 Lab 应该比上一个 Lab 简单不少， Lab 的说明文档也差不多把基本的过关要点都提到了，所以这里主要介绍一下几个相关工具的使用，帮助大家进一步熟悉 Linux 命令行   ;-)
+      <p>这个 Lab 应该比上一个 Lab 简单不少， Lab 的说明文档也差不多把基本的过关要点都提到了，所以这里主要介绍一下几个相关工具的使用，帮助大家进一步熟悉 Linux 命令行   ;-)
 首先从主页上下载一个压缩包，最简单的方法是直接在命令行使用 wget 工具
- <code>wget http://10.132.143.100/lab2007/buflab-handout.tar</code></p>
-
+<code>wget http://10.132.143.100/lab2007/buflab-handout.tar</code></p>
 <p>顺便提一下 wget 的功能很强大，除了可以在后台运行，它还支持 ftp https http 等协议，提供整个网站下载的功能（类似于 Windows 下的 WebZIP ）</p>
-
 <p>接着使用 tar 命令解压这个文件</p>
-
-<pre><code class="language-bash">tar xvf  buflab-handout.tar
-</code></pre>
-
-<p>其中， x 参数表示解压工作， v 表示显示解压所得的文件列表， f 及其后面跟着的文件
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">tar xvf  buflab-handout.tar
+</code></pre></div><p>其中， x 参数表示解压工作， v 表示显示解压所得的文件列表， f 及其后面跟着的文件
 名指定了待解压文件</p>
-
 <p>这样在当前目录下就多出了三个文件： bufbomb, makecookie, sendstring</p>
-
 <p>接下来使用 makecookie 得到自己学号对应的 cookie 号，用法是
 <code>./makecookie 学号</code></p>
-
-<p>这个 cookie 号在后面的几个关卡中都有可能会用到，同时 <a href="http://10.132.143.234/bufbombstatus.html">http://10.132.143.234/bufbombstatus.html</a> 中可以通过自己的 cookie 号随时获得自己现在的过关情况。</p>
-
+<p>这个 cookie 号在后面的几个关卡中都有可能会用到，同时 <!-- raw HTML omitted -->http://10.132.143.234/bufbombstatus.html<!-- raw HTML omitted --> 中可以通过自己的 cookie 号随时获得自己现在的过关情况。</p>
 <p>和上一个 Lab 一样，这里介绍一下怎么过 Level 0 。</p>
-
 <p>这个热身关和两个函数有关， test() 和 smoke() ，正常情况下 smoke 不会被任何函数调用，我们要做的就是输入一串特定的字符，使得 smoke 被调用。另外这个关卡简单之处在于 smoke 被调用后就直接退出程序，我们在破坏了栈的数据后不需要恢复原样。</p>
-
 <p>注意到 test 中调用了 getbuf 函数，联系到 CS:APP Section 3.13 ，看来只要把 getbuf 的返回地址改成 smoke 的地址就行了。</p>
-
 <p>召唤 gdb 监视 bufbomb 的运行，设置断点在 getbuf ，使用 run -t 学号 运行，程序停在 getbuf 的第三行，使用 disas 查看当前函数 (getbuf) 的汇编代码</p>
-
-<pre><code class="language-nasm">0x08048ab3 :  lea    0xffffffe8(%ebp),%eax
-0x08048ab6 :  sub    $0x24,%esp
-0x08048ab9 :  push   %eax
-0x08048aba :  call   0x8048bbc
-0x08048abf :  mov    $0x1,%eax
-</code></pre>
-
-<p>看来这里的 %eax 保存了字符串的首字节地址，从第一句可以算出，它与 %ebp 指向的地址相差了 24 。</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-nasm" data-lang="nasm"><span style="color:#960050;background-color:#1e0010">0</span><span style="color:#a6e22e">x08048ab3</span> :  lea    <span style="color:#ae81ff">0xffffffe8</span>(<span style="color:#f92672">%</span>ebp),<span style="color:#f92672">%</span>eax
+<span style="color:#960050;background-color:#1e0010">0</span><span style="color:#a6e22e">x08048ab6</span> :  sub    <span style="color:#66d9ef">$</span><span style="color:#ae81ff">0x24</span>,<span style="color:#f92672">%</span>esp
+<span style="color:#960050;background-color:#1e0010">0</span><span style="color:#a6e22e">x08048ab9</span> :  push   <span style="color:#f92672">%</span>eax
+<span style="color:#960050;background-color:#1e0010">0</span><span style="color:#a6e22e">x08048aba</span> :  call   <span style="color:#ae81ff">0x8048bbc</span>
+<span style="color:#960050;background-color:#1e0010">0</span><span style="color:#a6e22e">x08048abf</span> :  mov    <span style="color:#66d9ef">$</span><span style="color:#ae81ff">0x1</span>,<span style="color:#f92672">%</span>eax
+</code></pre></div><p>看来这里的 %eax 保存了字符串的首字节地址，从第一句可以算出，它与 %ebp 指向的地址相差了 24 。</p>
 <p>也就是说我们输入 24 个字符后，接下来输入的 4 个字符会覆盖掉原来的帧指针，再之后的 4 个字符就会覆盖函数的返回地址。把这个地址覆盖成 smoke 的就行，用 disas smoke 得到 smoke 的地址为 0x08048964 。</p>
-
 <p>知道了这些后，我们就来构造这条特殊的字符串，新建一个文本文件（当然也可以在 sendstring 中键盘输入，不过调试起来比较麻烦），输入</p>
-
 <pre><code>00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 64 89 04 08
-</code></pre>
-
-<p>最后四个字节就是 smoke 的地址，注意是 little endian 约定。假设保存文件为 ans.txt</p>
-
+</code></pre><p>最后四个字节就是 smoke 的地址，注意是 little endian 约定。假设保存文件为 ans.txt</p>
 <p>但这只是文本格式的指令，需要把它转换为二进制值， sendstring 工具可以帮助我们生成二进制串：<code>cat ans.txt | ./sendstring &gt; raw.txt</code></p>
-
 <p>这行命令用到了 shell 的管道和重定向功能，它的作用是把 ans.txt 的内容放到 sendstring 中，把 sendstring 生成的内容放到 raw.txt 中。这样在 raw.txt 中包含了最后的二进制代码。</p>
-
 <p>回到 gdb ，使用 run -t 学号 &lt; raw.txt 运行程序，程序停在 getbuf 中的断点后，使用几个 ni 命令往下运行，等调用完 Gets 函数后（一般是在 0x08048abf ），查看当前的帧指针附近的信息：</p>
-
 <pre><code>(gdb) p/x *(int*) ebp@2
 $ 1 = {0x0, 0x8048964}
-</code></pre>
-
-<p>看来我们已经成功得把返回地址改掉了，使用 c(ontinue) 继续运行，就可以看到成功信息了。</p>
-
+</code></pre><p>看来我们已经成功得把返回地址改掉了，使用 c(ontinue) 继续运行，就可以看到成功信息了。</p>
 <p>后面几关（除了最后一个）和这个热身关差不多，只是返回地址需要指向 buf 数组，运行嵌在其中的代码再返回原来的地址，要获得嵌入的二进制代码，可以先写一个包含汇编指令的 .s 文件，使用 gcc -c 把这个文件编译成 relocatable object ，再用 objdump -d 得到这段二进制代码。大致思路 pdf 上已经写得很详细了，这里不再赘述。</p>
-
 <p>关于最后一关， CS:APP 书上有一个类似的题目 (3.38, P236) ，我记得我当时做的时候栈帧地址也是会跳动的，只是没有 Level 4 那个那么明显，有兴趣的同学可以试一下。</p>
-
-<p>程序的下载地址： <a href="http://10.132.141.124/study/ics/bufbomb.c">http://10.132.141.124/study/ics/bufbomb.c</a></p>
-
+<p>程序的下载地址： <!-- raw HTML omitted -->http://10.132.141.124/study/ics/bufbomb.c<!-- raw HTML omitted --></p>
 <h4 id="其他几个提示">其他几个提示</h4>
-
 <p>输入的文本格式的二进制代码计算字节数比较麻烦，可以每 10 个字节一行，写完后使用 vim 的 shift+j 快捷键把这几行都拼起来。</p>
-
 <p>本地过关后记得查看网站确定一下。</p>
-
 <p>gdb 的 run 命令会自动根据上一次的参数运行程序，所以第一次输入 run -t 学号 &lt; raw.txt 后，以后只要简单的使用 r 就可以了。</p>
-
 <p>建议开两个 PieTTY 窗口，一个 gdb 调试，一个修改、生成二进制文本，很方便。</p>
 
     </div>

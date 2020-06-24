@@ -11,6 +11,7 @@
     
 
     <title> OS Lab 5 Debugging Notes &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -39,7 +40,7 @@
     "articleSection" : "post",
     "name" : "OS Lab 5 Debugging Notes",
     "headline" : "OS Lab 5 Debugging Notes",
-    "description" : "还算顺利，不过这个lab蛮无聊的，等有空了把syscall改成类似linux的做法，单一中断号\x2b寄存器选择syscall。\n 最花时间的一个bug是ls返回值没有改成应用程序数，结果一开始一直以为是brk系统调用没写好，最后才发现问题出在这么小的地方。\n brk的逻辑还不是很清楚，尽管通过了简单的测试，但是debug输出的信息显示brk增长的很快，经常是一个页一个页涨的，看来还得查下brk的具体行为。\n 写了个比MAGIC_BREAK好用一点的宏，因为用户态的程序都是按二进制读入的，Simics无法得到函数信息（函数名、当前行数等），利用C99的宏写了个新的INFO_BREAK\n  #define INFO_BREAK \\ do { \\ lprintf_kern(\x26quot;break in %s:%d\x26quot;, __FUNCTION__, __LINE__); \\ MAGIC_BREAK; \\ } while (0) \\  ",
+    "description" : "还算顺利，不过这个lab蛮无聊的，等有空了把syscall改成类似linux的做法，单一中断号\u002b寄存器选择syscall。\n  最花时间的一个bug是ls返回值没有改成应用程序数，结果一开始一直以为是brk系统调用没写好，最后才发现问题出在这么小的地方。\n  brk的逻辑还不是很清楚，尽管通过了简单的测试，但是debug输出的信息显示brk增长的很快，经常是一个页一个页涨的，看来还得查下brk的具体行为。\n  写了个比MAGIC_BREAK好用一点的宏，因为用户态的程序都是按二进制读入的，Simics无法得到函数信息（函数名、当前行数等），利用C99的宏写了个新的INFO_BREAK\n  #define INFO_BREAK \\ do { \\ lprintf_kern(\u0026#34;break in %s:%d\u0026#34;, __FUNCTION__, __LINE__); \\ MAGIC_BREAK; \\ } while (0) \\ ",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -47,8 +48,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2008",
-    "datePublished": "2008-08-31 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2008-08-31 00:00:00 \x2b0000 UTC",
+    "datePublished": "2008-08-31 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2008-08-31 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/2008\/08\/os-lab5-debug-notes\/",
     "wordCount" : "22",
     "keywords" : [ "Courses","Lab","Notes","OS","Blog" ]
@@ -94,22 +95,23 @@
 
     <div class="post-content">
       <p>还算顺利，不过这个lab蛮无聊的，等有空了把syscall改成类似linux的做法，单一中断号+寄存器选择syscall。</p>
-
 <ol>
-<li><p>最花时间的一个bug是ls返回值没有改成应用程序数，结果一开始一直以为是brk系统调用没写好，最后才发现问题出在这么小的地方。</p></li>
-
-<li><p>brk的逻辑还不是很清楚，尽管通过了简单的测试，但是debug输出的信息显示brk增长的很快，经常是一个页一个页涨的，看来还得查下brk的具体行为。</p></li>
-
-<li><p>写了个比MAGIC_BREAK好用一点的宏，因为用户态的程序都是按二进制读入的，Simics无法得到函数信息（函数名、当前行数等），利用C99的宏写了个新的INFO_BREAK</p></li>
+<li>
+<p>最花时间的一个bug是ls返回值没有改成应用程序数，结果一开始一直以为是brk系统调用没写好，最后才发现问题出在这么小的地方。</p>
+</li>
+<li>
+<p>brk的逻辑还不是很清楚，尽管通过了简单的测试，但是debug输出的信息显示brk增长的很快，经常是一个页一个页涨的，看来还得查下brk的具体行为。</p>
+</li>
+<li>
+<p>写了个比MAGIC_BREAK好用一点的宏，因为用户态的程序都是按二进制读入的，Simics无法得到函数信息（函数名、当前行数等），利用C99的宏写了个新的INFO_BREAK</p>
+</li>
 </ol>
-
-<pre><code class="language-c">#define INFO_BREAK \
-    do {  \
-        lprintf_kern(&quot;break in %s:%d&quot;, __FUNCTION__, __LINE__); \
-        MAGIC_BREAK; \
-    } while (0) \
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">#define INFO_BREAK \
+</span><span style="color:#75715e">    do {  \
+</span><span style="color:#75715e">        lprintf_kern(&#34;break in %s:%d&#34;, __FUNCTION__, __LINE__); \
+</span><span style="color:#75715e">        MAGIC_BREAK; \
+</span><span style="color:#75715e">    } while (0) \
+</span></code></pre></div>
     </div>
         <div class="cc-license">
       本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.zh">知识共享署名-非商业性使用 3.0 版本许可协议</a>进行许可，欢迎转载，演绎，但是必须保留本文的署名 <a href="https://blog.yxwang.me/2008/08/os-lab5-debug-notes/">zellux</a>（包含链接），且不得用于商业目的。

@@ -11,6 +11,7 @@
     
 
     <title> NoteExpress and BibTex &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -39,7 +40,7 @@
     "articleSection" : "post",
     "name" : "NoteExpress and BibTex",
     "headline" : "NoteExpress and BibTex",
-    "description" : "最近写了篇survey，分享下用NoteExpress一些经验\n bibtex 关键字设置：  工具-\x26gt;样式-\x26gt;选择当前输出样式，选择BibTex，然后就能在题录的字段中找到bibtex 关键字一项了\n 导出bibtex时选择ANSI编码，如果设置为UTF-8貌似编译latex时会给出类似You\x26rsquo;re missing an entry type\x26mdash;line 1 of file xxx.bib的提示。\n 导出引用的网页：我的解决方法是在BibTex样式-\x26gt;题录-\x26gt;模版里新增一个网页模版，然后右键编辑区选择从模版通用复制，并在里面增加一条***Howpublished = {\\url{链接}}, 这样就能使用howpublished字段导出网页链接了。不过好像这样网页地址不会换行，于是我最后还是用手动断行改了下.bib。\n 另外提下，把png\/jpg转成eps，我用的是sam2p，aur上就有。\n  ",
+    "description" : "最近写了篇survey，分享下用NoteExpress一些经验\n bibtex 关键字设置：  工具-\u0026gt;样式-\u0026gt;选择当前输出样式，选择BibTex，然后就能在题录的字段中找到bibtex 关键字一项了\n 导出bibtex时选择ANSI编码，如果设置为UTF-8貌似编译latex时会给出类似You\u0026rsquo;re missing an entry type\u0026mdash;line 1 of file xxx.bib的提示。\n  导出引用的网页：我的解决方法是在BibTex样式-\u0026gt;题录-\u0026gt;模版里新增一个网页模版，然后右键编辑区选择从模版通用复制，并在里面增加一条***Howpublished = {\\url{链接}}, 这样就能使用howpublished字段导出网页链接了。不过好像这样网页地址不会换行，于是我最后还是用手动断行改了下.bib。\n  另外提下，把png\/jpg转成eps，我用的是sam2p，aur上就有。\n  ",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -47,8 +48,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2009",
-    "datePublished": "2009-11-30 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2009-11-30 00:00:00 \x2b0000 UTC",
+    "datePublished": "2009-11-30 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2009-11-30 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/2009\/11\/noteexpress-and-bibtex\/",
     "wordCount" : "19",
     "keywords" : [ "LaTeX","Tooling","Blog" ]
@@ -94,19 +95,20 @@
 
     <div class="post-content">
       <p>最近写了篇survey，分享下用NoteExpress一些经验</p>
-
 <ol>
 <li>bibtex 关键字设置：</li>
 </ol>
-
 <p>工具-&gt;样式-&gt;选择当前输出样式，选择BibTex，然后就能在题录的字段中找到bibtex 关键字一项了</p>
-
-<ol>
-<li><p>导出bibtex时选择ANSI编码，如果设置为UTF-8貌似编译latex时会给出类似You&rsquo;re missing an entry type&mdash;line 1 of file xxx.bib的提示。</p></li>
-
-<li><p>导出引用的网页：我的解决方法是在BibTex样式-&gt;题录-&gt;模版里新增一个网页模版，然后右键编辑区选择从模版通用复制，并在里面增加一条<code>***</code>Howpublished = {\url{<code>链接</code>}}, 这样就能使用howpublished字段导出网页链接了。不过好像这样网页地址不会换行，于是我最后还是用手动断行改了下.bib。</p></li>
-
-<li><p>另外提下，把png/jpg转成eps，我用的是sam2p，aur上就有。</p></li>
+<ol start="2">
+<li>
+<p>导出bibtex时选择ANSI编码，如果设置为UTF-8貌似编译latex时会给出类似You&rsquo;re missing an entry type&mdash;line 1 of file xxx.bib的提示。</p>
+</li>
+<li>
+<p>导出引用的网页：我的解决方法是在BibTex样式-&gt;题录-&gt;模版里新增一个网页模版，然后右键编辑区选择从模版通用复制，并在里面增加一条<code>***</code>Howpublished = {\url{<code>链接</code>}}, 这样就能使用howpublished字段导出网页链接了。不过好像这样网页地址不会换行，于是我最后还是用手动断行改了下.bib。</p>
+</li>
+<li>
+<p>另外提下，把png/jpg转成eps，我用的是sam2p，aur上就有。</p>
+</li>
 </ol>
 
     </div>

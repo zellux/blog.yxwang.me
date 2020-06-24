@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Research on Aiur · Zellux 的博客</title>
@@ -49,9 +49,9 @@
 虽然现在对云计算这个概念的炒作大于实际研究，以至于很多人听到云计算这个名词就想到忽悠，但这里面还是很多东西需要好好考虑和设计的。云计算和以前的 cluster computing 等概念虽有相同之处，区别也有不少，它涉及了经济学、虚拟化技术、安全等诸多领域的内容。
 何谓云计算？ 云计算包含两方面内容，一是在网络上提供的为计算服务的应用，例如以前被称为 SaaS(Software as a Service) 的那一类应用；二是提供这些服务的在数据中心的硬件和系统软件，这部分也就是我们通常所称呼为「云」的东西。
 云计算平台的优势 云计算带来了三个新颖的观点：
- 提供了看起来没有上限的可用计算资源，用户不需要提前考虑设备的需求量；
- 免去了云计算用户的前期投入，使得公司可以从一个规模较小的硬件资源起家，并根据自己的需要增加资源；
- 细粒度的计费手段，例如按每小时使用处理器数或者每天使用的存储空间计算，并在暂时不需要机器和存储空间时即时减免费用。
+  提供了看起来没有上限的可用计算资源，用户不需要提前考虑设备的需求量；
+  免去了云计算用户的前期投入，使得公司可以从一个规模较小的硬件资源起家，并根据自己的需要增加资源；
+  细粒度的计费手段，例如按每小时使用处理器数或者每天使用的存储空间计算，并在暂时不需要机器和存储空间时即时减免费用。
   云计算资源拥有很好的弹性，以 Amazon EC2 为例，用户可以在几分钟内完成硬件资源的添加或者减少操作，这在传统的应用程序部署中是很难做到的。文中提到了 Facebook 上的一个应用 Animoto，这个应用的资源需求在三天内从 50 台服务器上升到了 3500 台服务器。在传统的部署情景中，这样的需求是很难通过预先准备好硬件来满足的。另外还有一个问题，当资源需求下降时，传统方式部署的服务器资源就被闲置了，而通过云计算部署的资源则灵活很多，例如一个网站到了深夜访问量下降，此时就可以通过减少占用的计算资源从而降低支出。
 平台分类 现在的云计算平台提供了不同粒度的 API。Amazon EC2 是一个底层的极端，它提供了类似物理硬件的接口，用户可以几乎控制从内核开始的整个软件栈。通过虚拟技术提供的 CPU、块设备、IP 级别的连通技术使得开发人员几乎可以做任何事情。高度的灵活性带来的是可控性的损失，在自动伸缩性 (automatic scalability) 和容错转移 (failover) 方面，服务商就力不从心了。而 Google AppEngine 则提供了比较高层的 API，主要面向传统的 web 应用，在牺牲灵活性之后能很好的实现自动伸缩和转移，并对用户完全透明。而微软的 Azure 则介于这两者之间，提供了接近 CLR 字节码的接口，用户可以通过 .</description>
     </item>
@@ -62,9 +62,7 @@
       <pubDate>Thu, 09 Apr 2009 00:00:00 +0000</pubDate>
       
       <guid>https://blog.yxwang.me/2009/04/cgo-09-multi-race/</guid>
-      <description>Double-Checked Lock是一个常见的由于程序员把内存模型默认为sequential momery consistency导致的问题，具体见我去年写的一篇博文http://techblog.iamzellux.com/2008/07/singleton-pattern-and-double-checked-lock/
-虽然Java 5解决了这个问题，但是C++等语言中这个问题依然存在，依然有很多因为程序员假设sequential consistency而编译器做了错误的指令调度后导致的bug，见http://www.newsmth.net/bbscon.php?bid=335&amp;amp;id=250203
-CGO 09的这篇paper Detecting and Eliminating Potential Violations of Sequential Consistency for Concurrent C/C++ Programs针对这个问题进行了深入研究，通过加fence指令的方法解决了因编译器的指令调度造成的违背程序员原义的问题，可以在http://ppi.fudan.edu.cn/yuelu_duan下载到。没有认真读过，俺在这里就不误人子弟了 O.O</description>
+      <description>Double-Checked Lock是一个常见的由于程序员把内存模型默认为sequential momery consistency导致的问题，具体见我去年写的一篇博文http://techblog.iamzellux.com/2008/07/singleton-pattern-and-double-checked-lock/虽然Java 5解决了这个问题，但是C++等语言中这个问题依然存在，依然有很多因为程序员假设sequential consistency而编译器做了错误的指令调度后导致的bug，见http://www.newsmth.net/bbscon.php?bid=335&amp;amp;id=250203CGO 09的这篇paper Detecting and Eliminating Potential Violations of Sequential Consistency for Concurrent C/C++ Programs针对这个问题进行了深入研究，通过加fence指令的方法解决了因编译器的指令调度造成的违背程序员原义的问题，可以在http://ppi.fudan.edu.cn/yuelu_duan下载到。没有认真读过，俺在这里就不误人子弟了 O.O</description>
     </item>
     
     <item>
@@ -84,7 +82,8 @@ Disco为每个虚拟CPU记录了一个类似于传统操作系统中process tabl
 为了方便计算TLB地址，Disco为每个虚拟机记录了一个pmap数据结构，每个pmap结构对应着虚拟机的一个物理页。pmap包含了一个指向 机器内存的引用，以及指向虚拟地址的映射（虚拟地址可能有多个，原文中用了复数形式），这主要用于页面被VMM回收时TLB的重置。另外MIPS处理器为 每个TLB记录标记了一个地址空间标识符（ASID, address space identifier），用来防止context switch时不必要的TLB刷新。Disco为了简单化处理，就在物理CPU被调度为另一个虚拟CPU时刷新TLB，这样ASID就能直接使用虚拟机提 供的了。
 这样的处理带来了性能问题，由于TLB在虚拟CPU切换时会被刷新，带来了额外的TLB miss，而TLB miss由于需要被模拟，它的代价很大。为了减少这种性能影响，Disco维持了一个virtual-to-machine的二级软TLB，TLB miss发生的时候首先查看软TLB有没有相关的记录，如果找不到再交给虚拟机上的操作系统去处理。这种处理的影响就是虚拟机所看到的TLB会比实际 CPU的TLB大很多。
 3. NUMA 内存管理 不怎么熟悉NUMA，这部分先粗读了，大致思想是通过动态的页面转移和复制维持locality，从而避免remote cache miss。
-4. 虚拟IO设备 增加特殊的设备驱动是最清晰的实现方法，每个Disco设备都定义了一个monitor call，供设备驱动传参调用。对于支持DMA操作的设备，Disco也需要截获这些DMA请求并转换为相应的machine address。对于仅有一个虚拟机访问的设备，Disco只要保证访问的排外性并翻译DMA请求即可，而不需要虚拟IO资源。截获所有DMA操作的一个 好处是Disco可以在虚拟机间共享磁盘和内存资源。</description>
+4. 虚拟IO设备 增加特殊的设备驱动是最清晰的实现方法，每个Disco设备都定义了一个monitor call，供设备驱动传参调用。对于支持DMA操作的设备，Disco也需要截获这些DMA请求并转换为相应的machine address。对于仅有一个虚拟机访问的设备，Disco只要保证访问的排外性并翻译DMA请求即可，而不需要虚拟IO资源。截获所有DMA操作的一个 好处是Disco可以在虚拟机间共享磁盘和内存资源。
+5. Copy-on-write disks DMA请求被截获时，如果请求的磁盘块已经在内存里了，就不需要再访问磁盘。如果请求的大小正好是虚拟机页面大小的整数倍，直接把对应的物理页映射 到虚拟机里就行，另外考虑到以后可能会修改这部分内存，需要将那些页面设为read-only，从而实现copy-on-write，同时这些处理对虚拟 机完全透明的。</description>
     </item>
     
     <item>
@@ -105,8 +104,7 @@ flash存储单元分block和page，每个block有32/64个page，一个page有512
       <pubDate>Sun, 30 Nov 2008 00:00:00 +0000</pubDate>
       
       <guid>https://blog.yxwang.me/2008/11/finding-and-reproducing-heisenbugs-in-concurrent-programs/</guid>
-      <description>Finding and Reproducing Heisenbugs in Concurrent Programs
-OSDI &amp;lsquo;08上微软研究院发的paper，针对并发编程中难以发现的bug问题。
+      <description>Finding and Reproducing Heisenbugs in Concurrent ProgramsOSDI &amp;lsquo;08上微软研究院发的paper，针对并发编程中难以发现的bug问题。
 paper的内容主要分两大块。
 一是如何在发现bug的时候记录下线程的运行先后(thread interleaving)，途径是在线程API和用户程序多写一层wrapper functions，这里还有一些其他的问题，比如只记录下了thread interleaving的话出现data race怎么解决等。
 另外一块内容是如何遍历出给定程序运行后所能产生的结果的集合，加入这个能实现的话那就能把所有隐藏的bug都找出来了。但是这个搜索空间很大，是指数级的，的一个结论就是：给定一个程序有n个的线程，所有线程共完成k条指令，那么c次占先调度后线程的排列情况数的复杂度是$$k^{c}$$的，所以在实现遍历代码的时候必须有效的降低k和c的值。</description>
@@ -119,9 +117,7 @@ paper的内容主要分两大块。
       
       <guid>https://blog.yxwang.me/2008/07/leaksurvivor/</guid>
       <description>Paper: LeakSurvivor: Towards Safely Tolerating Memory Leaks for Garbage-Collected Languages
-http://www.usenix.org/events/usenix08/tech/tang.html
-Yan Tang, Qi Gao, and Feng Qin, The Ohio State University
-三位作者好像都是中国人
+http://www.usenix.org/events/usenix08/tech/tang.htmlYan Tang, Qi Gao, and Feng Qin, The Ohio State University三位作者好像都是中国人
 这篇paper针对支持垃圾收集的语言中内存泄露问题，提出了一种比较保守的“换出”策略，即把可疑的内存泄露的对象（这些对象通常都是长时间没有被访问的）从内存移动到硬盘上暂时保存，减小内存的压力；如果这些对象后来被再次访问（这种可能性很小），就把它们从硬盘上移回内存。</description>
     </item>
     
@@ -131,11 +127,8 @@ Yan Tang, Qi Gao, and Feng Qin, The Ohio State University
       <pubDate>Wed, 28 May 2008 00:00:00 +0000</pubDate>
       
       <guid>https://blog.yxwang.me/2008/05/application-level-isolation-and-recovery-with-solitude/</guid>
-      <description>Application-Level Isolation and Recovery with Solitude
-Shvetank Jain, Fareha Shafique, Vladan Djeric, Ashvin Goel
-Department of Electrical and Computer Engineering, University of Toronto
-http://portal.acm.org/citation.cfm?id=1357010.1352603
-引入一个新的文件系统层(Isolation File System)将安全可信的基础文件系统和不可信的环境（如网上下载的文件等）隔离开来，并对不可信的环境中做出的改动加以记录，一旦发现问题就能即使恢复。</description>
+      <description>Application-Level Isolation and Recovery with SolitudeShvetank Jain, Fareha Shafique, Vladan Djeric, Ashvin Goel
+Department of Electrical and Computer Engineering, University of Torontohttp://portal.acm.org/citation.cfm?id=1357010.1352603引入一个新的文件系统层(Isolation File System)将安全可信的基础文件系统和不可信的环境（如网上下载的文件等）隔离开来，并对不可信的环境中做出的改动加以记录，一旦发现问题就能即使恢复。</description>
     </item>
     
     <item>
@@ -144,7 +137,26 @@ http://portal.acm.org/citation.cfm?id=1357010.1352603
       <pubDate>Mon, 05 May 2008 00:00:00 +0000</pubDate>
       
       <guid>https://blog.yxwang.me/2008/05/subvirt-implementing-malware-with-virtual-machines/</guid>
-      <description>http://ieeexplore.ieee.org/xpl/freeabs_all.jsp?arnumber=1624022&amp;fromcon Proceedings of the 2006 IEEE Symposium on Security and Privacy 作者来自密西根大学和微软研究部门 一个利用虚拟机进行攻击的rootkit。 1. Introduction 传统的攻击程序通常和安全工具（杀毒软件等）在同一个级别上（kernel mode），两者间没有绝对优势可言，因此有很大的限制，比如强大的功能和良好的隐蔽性不能兼得。而虚拟机的出现则可以解决这个问题，通过把恶意程序放在虚拟机上，可以做到对目标机(guest os)的完全监控，同时目标机完全不会知情。这种程序称为VMBR(virtual-machine based rootkit)。 2. Virtual machines VMM(virtual-machine monitor)这里就不多介绍了。VMM上跑着一些其他服务进程，主要用于操作系统的debug，运行中的虚拟机的迁移等功能。这些服务的主要面临的一个问题是理解对应的guest os状态和事件。因为在VMM和虚拟机处在不同的抽象级别，前者只能看到磁盘块(disk blocks)，网络包(network packets)，以及内存；而后者则把这些东西抽象为例如文件、TCP连接、变量等概念，这种差异称为语义差异(semantic gap)。 于是有了Virutal-machine introspection(VMI)，它包含了一系列让VMM上的服务了解并修改guest os的技术。 3. Virtual-machine based rootkit design and implementation 3.1 Installation VMBR的安装和一般病毒程序类似，通过欺骗有管理员权限的用户执行安装程序实现。 当目标机是WinXP时，VMBR被安装在第一个活动分区的开始部分；目标机是Linux时，安装程序会禁止swap分区，把VMBR放在swap分区上（够狠的。。。） 修改系统引导信息的时候还有一个细节，直接修改容易被安全检查程序发现。WinXP上的一种解决方案就是尽可能的在所有程序退出之后再修改（通过注册一个LastChanceShutdownNotification事件处理器），并且使用底层的磁盘驱动进行VMBR启动代码的复制，这样可以绕过文件系统层，而大多数反病毒软件都跑在文件系统层上。Linux上，通过修改关机脚本来保证安装程序在其他程序退出后执行。 安装完成后，目标系统的内容就被保存到了一个虚拟磁盘上。重启后就由VMM控制最底层，它把目标机的对虚拟磁盘的访问转换为对应的物理磁盘的访问。 3.2 Malicious services VMBR使用一个独立的系统执行各种攻击程序，这样目标机就无法察觉到了。对目标系统的攻击主要分三种： 一种是不需要和目标系统进行交互的恶意服务，例如垃圾电子邮件的发送(spam relays)，DDoS攻击，网络钓鱼(phishing web servers)。 第二种恶意服务需要监视目标系统的数据和事件。通过修改VMM的设备模拟软件就能记录下所有硬件级的数据（比如按键信息、网络包等），而这个过程不需要修改guest os，所以目标系统完全不知情。 VMBR还可以用VMI帮助理解目标系统软件级的抽象信息，VMI可以中断目标系统的任意指令，并重新组织数据。例如一个目标应用程序将要使用一个加密的socket发送信息，攻击者可以截获所有的SSL write函数调用并且在明文被加密前得到它。同样这个过程对目标系统完全透明，因为攻击程序跑在它的外层，或者说是“上帝”层 ;-) 第三种攻击是恶意修改目标系统的执行。例如篡改网络通讯，删除email，改变目标应用程序的行为。 3.3 Example malicious services 下面介绍这篇paper提到的4个恶意程序 最简单的，开了个thttpd web服务器进行网络钓鱼，任何发送到8080端口的TCP请求都会被这个服务器截获。 然后是一个按键记录程序，号称只用了60行代码就搞定了这个模块，然后写了一个254行的带图形界面的程序来分析日志并显示。 一个扫描目标机文件系统的程序，这是一个24小时运行的perl脚本，会把诸如/etc/shadow, user_home/.ssh/id_dsa之类的机密信息保存下来。 最后是防止VMM被目标机侦测到的一个服务。paper中提到了一种叫做redpill的虚拟机侦测手段，通过使用sidt指令。这个指令会读出处理器的中断列表(interrupt descritor table)，在VMM上跑的系统和普通的操作系统读出来的结果不一样，当这个指令在内核态被执行时，VMM会模拟这个指令的执行；但是用户态却不会被截获（考虑到性能因素）。所以redpill通过用户态执行sidt来判断当前系统是否运行在虚拟机上。这篇paper提到的针对redpill的解决方案是在每个可执行文件的sidt指令前设置一个断点，截获这个指令后就模拟这个指令，以此绕过redpill检测。但是这种方法不适合于在程序运行期动态生成二进制的sidt指令的程序（想到我的lab4了，呵呵）。道高一丈魔高一尺（原文是Continuing the arms race，军备战争），通过二进制转换(binary translation)，动态生成的sidt同样可以被截获，但是这种方法的overhead会很大。 3.</description>
+      <description>Proceedings of the 2006 IEEE Symposium on Security and Privacy
+作者来自密西根大学和微软研究部门
+一个利用虚拟机进行攻击的rootkit。
+1. Introduction传统的攻击程序通常和安全工具（杀毒软件等）在同一个级别上（kernel mode），两者间没有绝对优势可言，因此有很大的限制，比如强大的功能和良好的隐蔽性不能兼得。而虚拟机的出现则可以解决这个问题，通过把恶意程序放在虚拟机上，可以做到对目标机(guest os)的完全监控，同时目标机完全不会知情。这种程序称为VMBR(virtual-machine based rootkit)。
+2. Virtual machinesVMM(virtual-machine monitor)这里就不多介绍了。VMM上跑着一些其他服务进程，主要用于操作系统的debug，运行中的虚拟机的迁移等功能。这些服务的主要面临的一个问题是理解对应的guest os状态和事件。因为在VMM和虚拟机处在不同的抽象级别，前者只能看到磁盘块(disk blocks)，网络包(network packets)，以及内存；而后者则把这些东西抽象为例如文件、TCP连接、变量等概念，这种差异称为语义差异(semantic gap)。
+于是有了Virutal-machine introspection(VMI)，它包含了一系列让VMM上的服务了解并修改guest os的技术。
+3. Virtual-machine based rootkit design and implementation 3.1 Installation VMBR的安装和一般病毒程序类似，通过欺骗有管理员权限的用户执行安装程序实现。
+当目标机是WinXP时，VMBR被安装在第一个活动分区的开始部分；目标机是Linux时，安装程序会禁止swap分区，把VMBR放在swap分区上（够狠的。。。）
+修改系统引导信息的时候还有一个细节，直接修改容易被安全检查程序发现。WinXP上的一种解决方案就是尽可能的在所有程序退出之后再修改（通过注册一个LastChanceShutdownNotification事件处理器），并且使用底层的磁盘驱动进行VMBR启动代码的复制，这样可以绕过文件系统层，而大多数反病毒软件都跑在文件系统层上。Linux上，通过修改关机脚本来保证安装程序在其他程序退出后执行。
+安装完成后，目标系统的内容就被保存到了一个虚拟磁盘上。重启后就由VMM控制最底层，它把目标机的对虚拟磁盘的访问转换为对应的物理磁盘的访问。
+3.2 Malicious servicesVMBR使用一个独立的系统执行各种攻击程序，这样目标机就无法察觉到了。对目标系统的攻击主要分三种：
+一种是不需要和目标系统进行交互的恶意服务，例如垃圾电子邮件的发送(spam relays)，DDoS攻击，网络钓鱼(phishing web servers)。
+第二种恶意服务需要监视目标系统的数据和事件。通过修改VMM的设备模拟软件就能记录下所有硬件级的数据（比如按键信息、网络包等），而这个过程不需要修改guest os，所以目标系统完全不知情。
+VMBR还可以用VMI帮助理解目标系统软件级的抽象信息，VMI可以中断目标系统的任意指令，并重新组织数据。例如一个目标应用程序将要使用一个加密的socket发送信息，攻击者可以截获所有的SSL write函数调用并且在明文被加密前得到它。同样这个过程对目标系统完全透明，因为攻击程序跑在它的外层，或者说是“上帝”层 ;-)
+第三种攻击是恶意修改目标系统的执行。例如篡改网络通讯，删除email，改变目标应用程序的行为。最简单的，开了个thttpd web服务器进行网络钓鱼，任何发送到8080端口的TCP请求都会被这个服务器截获。
+然后是一个按键记录程序，号称只用了60行代码就搞定了这个模块，然后写了一个254行的带图形界面的程序来分析日志并显示。
+一个扫描目标机文件系统的程序，这是一个24小时运行的perl脚本，会把诸如/etc/shadow, user_home/.ssh/id_dsa之类的机密信息保存下来。
+最后是防止VMM被目标机侦测到的一个服务。paper中提到了一种叫做redpill的虚拟机侦测手段，通过使用sidt指令。这个指令会读出处理器的中断列表(interrupt descritor table)，在VMM上跑的系统和普通的操作系统读出来的结果不一样，当这个指令在内核态被执行时，VMM会模拟这个指令的执行；但是用户态却不会被截获（考虑到性能因素）。所以redpill通过用户态执行sidt来判断当前系统是否运行在虚拟机上。这篇paper提到的针对redpill的解决方案是在每个可执行文件的sidt指令前设置一个断点，截获这个指令后就模拟这个指令，以此绕过redpill检测。但是这种方法不适合于在程序运行期动态生成二进制的sidt指令的程序（想到我的lab4了，呵呵）。道高一丈魔高一尺（原文是Continuing the arms race，军备战争），通过二进制转换(binary translation)，动态生成的sidt同样可以被截获，但是这种方法的overhead会很大。
+3.4 Maintaining Control这块主要讲了对系统重启、关闭的处理。
+系统要求重启时，VMBR总是尽可能的通过重启guest os来完成，这样就能最大化的掌握控制权。</description>
     </item>
     
   </channel>

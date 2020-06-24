@@ -11,6 +11,7 @@
     
 
     <title> PPoPP 08 - FastForward &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -39,7 +40,7 @@
     "articleSection" : "post",
     "name" : "PPoPP 08 - FastForward",
     "headline" : "PPoPP 08 - FastForward",
-    "description" : "FastForward for Efficient Pipeline Parallelism http:\/\/systems.cs.colorado.edu\/~moseleyt\/publications\/giacomoni-2008-ppopp-ff.pdf\n这篇paper介绍了一种针对多核访问优化的队列， 主要的特点： 1. Lock-free 2. Single-producer\/single-consumer 3. Cache-optimized\n经典的Lamport的lock-free的队列实现可以用下面的伪代码来表述（同样只适用于单一生产者\/单一消费者的情形）：\nenqueue_nonblock(data) { if (NEXT(head) == tail) { return EWOULDBLOCK; } buffer[head] = data; head = NEXT(head); return 0; } dequeue_nonblock(data) { (head == tail) { return EWOULDBLOCK; } data = buffer[tail]; tail = NEXT(tail); return 0; }  这种实现尽管做到了lock-free，但是存在几个问题，首先是它只适用于sequential consistency内存模型，在relaxed consistency的内存模型里可能会出现类似于Double-Checked Lock(http:\/\/techblog.zellux.czm.cn\/?p=30)的问题，当然这个问题可以通过插fence指令来解决；第二个问题是这篇paper着重解决的，就是enqueue和dequeue这两个操作都用到了tail和head这两个全局变量，导致多核在读取\/修改这两个变量时的为了保证cache coherency会频繁的进行cache的更新，从而导致cache line threading，降低了效率。\n接下来看FastForward的实现：\nenqueue_nonblock(data) { if (NULL != buffer[head]) { return EWOULDBLOCK; } buffer[head] = data; head = NEXT(head); return 0; } dequeue_nonblock(data) { data = buffer[tail]; if (NULL == data) { return EWOULDBLOCK; } buffer[tail] = NULL; tail = NEXT(tail); return 0; }  这个版本的队列实现粗看和Lamport的那个区别很小，而实际上这里解决了一个重要的问题：解除了head和tail的共享问题。dequeue操作只需要关心tail，enqueue操作只关心head，这样两个变量就变成CPU本地的资源了，不需要做任何同步。当然这个实现同样局限于sequential consistency，不过加fence保证顺序的overhead不大。最后测试中这个版本的单次操作比Lamport的快3.",
+    "description" : "FastForward for Efficient Pipeline Parallelism http:\/\/systems.cs.colorado.edu\/~moseleyt\/publications\/giacomoni-2008-ppopp-ff.pdf这篇paper介绍了一种针对多核访问优化的队列， 主要的特点：\n Lock-free Single-producer\/single-consumer Cache-optimized  经典的Lamport的lock-free的队列实现可以用下面的伪代码来表述（同样只适用于单一生产者\/单一消费者的情形）：\nenqueue_nonblock(data) { if (NEXT(head) == tail) { return EWOULDBLOCK; } buffer[head] = data; head = NEXT(head); return 0; } dequeue_nonblock(data) { (head == tail) { return EWOULDBLOCK; } data = buffer[tail]; tail = NEXT(tail); return 0; } 这种实现尽管做到了lock-free，但是存在几个问题，首先是它只适用于sequential consistency内存模型，在relaxed consistency的内存模型里可能会出现类似于Double-Checked Lock(http:\/\/techblog.zellux.czm.cn\/?p=30)的问题，当然这个问题可以通过插fence指令来解决；第二个问题是这篇paper着重解决的，就是enqueue和dequeue这两个操作都用到了tail和head这两个全局变量，导致多核在读取\/修改这两个变量时的为了保证cache coherency会频繁的进行cache的更新，从而导致cache line threading，降低了效率。\n接下来看FastForward的实现：\nenqueue_nonblock(data) { if (NULL != buffer[head]) { return EWOULDBLOCK; } buffer[head] = data; head = NEXT(head); return 0; } dequeue_nonblock(data) { data = buffer[tail]; if (NULL == data) { return EWOULDBLOCK; } buffer[tail] = NULL; tail = NEXT(tail); return 0; } 这个版本的队列实现粗看和Lamport的那个区别很小，而实际上这里解决了一个重要的问题：解除了head和tail的共享问题。dequeue操作只需要关心tail，enqueue操作只关心head，这样两个变量就变成CPU本地的资源了，不需要做任何同步。当然这个实现同样局限于sequential consistency，不过加fence保证顺序的overhead不大。最后测试中这个版本的单次操作比Lamport的快3.",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -47,10 +48,10 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2009",
-    "datePublished": "2009-04-20 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2009-04-20 00:00:00 \x2b0000 UTC",
+    "datePublished": "2009-04-20 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2009-04-20 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/2009\/04\/ppopp-08-fastforward\/",
-    "wordCount" : "104",
+    "wordCount" : "100",
     "keywords" : [ "Computer System","Concurrency","Data Structure","PPoPP","Paper","Blog" ]
 }
 </script>
@@ -94,59 +95,51 @@
 
     <div class="post-content">
       <p>FastForward for Efficient Pipeline Parallelism
-<a href="http://systems.cs.colorado.edu/~moseleyt/publications/giacomoni-2008-ppopp-ff.pdf" target="_blank"><a href="http://systems.cs.colorado.edu/~moseleyt/publications/giacomoni-2008-ppopp-ff.pdf">http://systems.cs.colorado.edu/~moseleyt/publications/giacomoni-2008-ppopp-ff.pdf</a></a></p>
-
-<p>这篇paper介绍了一种针对多核访问优化的队列， 主要的特点：
-1. Lock-free
-2. Single-producer/single-consumer
-3. Cache-optimized</p>
-
+<!-- raw HTML omitted --><a href="http://systems.cs.colorado.edu/~moseleyt/publications/giacomoni-2008-ppopp-ff.pdf">http://systems.cs.colorado.edu/~moseleyt/publications/giacomoni-2008-ppopp-ff.pdf</a><!-- raw HTML omitted --></p>
+<p>这篇paper介绍了一种针对多核访问优化的队列， 主要的特点：</p>
+<ol>
+<li>Lock-free</li>
+<li>Single-producer/single-consumer</li>
+<li>Cache-optimized</li>
+</ol>
 <p>经典的Lamport的lock-free的队列实现可以用下面的伪代码来表述（同样只适用于单一生产者/单一消费者的情形）：</p>
-
-<pre><code class="language-c">enqueue_nonblock(data) {
-    if (NEXT(head) == tail) {
-        return EWOULDBLOCK;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">enqueue_nonblock(data) {
+    <span style="color:#66d9ef">if</span> (NEXT(head) <span style="color:#f92672">==</span> tail) {
+        <span style="color:#66d9ef">return</span> EWOULDBLOCK;
     }
-    buffer[head] = data;
-    head = NEXT(head);
-    return 0;
+    buffer[head] <span style="color:#f92672">=</span> data;
+    head <span style="color:#f92672">=</span> NEXT(head);
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 }
 dequeue_nonblock(data) {
-    (head == tail) {
-        return EWOULDBLOCK;
+    (head <span style="color:#f92672">==</span> tail) {
+        <span style="color:#66d9ef">return</span> EWOULDBLOCK;
     }
-    data = buffer[tail];
-    tail = NEXT(tail);
-    return 0;
+    data <span style="color:#f92672">=</span> buffer[tail];
+    tail <span style="color:#f92672">=</span> NEXT(tail);
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 }
-</code></pre>
-
-<p>这种实现尽管做到了lock-free，但是存在几个问题，首先是它只适用于sequential consistency内存模型，在relaxed consistency的内存模型里可能会出现类似于Double-Checked Lock(<a href="http://techblog.zellux.czm.cn/?p=30" target="_blank"><a href="http://techblog.zellux.czm.cn/?p=30">http://techblog.zellux.czm.cn/?p=30</a></a>)的问题，当然这个问题可以通过插fence指令来解决；第二个问题是这篇paper着重解决的，就是enqueue和dequeue这两个操作都用到了tail和head这两个全局变量，导致多核在读取/修改这两个变量时的为了保证cache coherency会频繁的进行cache的更新，从而导致cache line threading，降低了效率。</p>
-
+</code></pre></div><p>这种实现尽管做到了lock-free，但是存在几个问题，首先是它只适用于sequential consistency内存模型，在relaxed consistency的内存模型里可能会出现类似于Double-Checked Lock(<!-- raw HTML omitted --><a href="http://techblog.zellux.czm.cn/?p=30">http://techblog.zellux.czm.cn/?p=30</a><!-- raw HTML omitted -->)的问题，当然这个问题可以通过插fence指令来解决；第二个问题是这篇paper着重解决的，就是enqueue和dequeue这两个操作都用到了tail和head这两个全局变量，导致多核在读取/修改这两个变量时的为了保证cache coherency会频繁的进行cache的更新，从而导致cache line threading，降低了效率。</p>
 <p>接下来看FastForward的实现：</p>
-
-<pre><code class="language-c">enqueue_nonblock(data) {
-    if (NULL != buffer[head]) {
-        return EWOULDBLOCK;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">enqueue_nonblock(data) {
+    <span style="color:#66d9ef">if</span> (NULL <span style="color:#f92672">!=</span> buffer[head]) {
+        <span style="color:#66d9ef">return</span> EWOULDBLOCK;
     }
-    buffer[head] = data;
-    head = NEXT(head);
-    return 0;
+    buffer[head] <span style="color:#f92672">=</span> data;
+    head <span style="color:#f92672">=</span> NEXT(head);
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 }
 
 dequeue_nonblock(data) {
-    data = buffer[tail];
-    if (NULL == data) {
-        return EWOULDBLOCK;
+    data <span style="color:#f92672">=</span> buffer[tail];
+    <span style="color:#66d9ef">if</span> (NULL <span style="color:#f92672">==</span> data) {
+        <span style="color:#66d9ef">return</span> EWOULDBLOCK;
     }
-    buffer[tail] = NULL;
-    tail = NEXT(tail);
-    return 0;
+    buffer[tail] <span style="color:#f92672">=</span> NULL;
+    tail <span style="color:#f92672">=</span> NEXT(tail);
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 }
-</code></pre>
-
-<p>这个版本的队列实现粗看和Lamport的那个区别很小，而实际上这里解决了一个重要的问题：解除了head和tail的共享问题。dequeue操作只需要关心tail，enqueue操作只关心head，这样两个变量就变成CPU本地的资源了，不需要做任何同步。当然这个实现同样局限于sequential consistency，不过加fence保证顺序的overhead不大。最后测试中这个版本的单次操作比Lamport的快3.7倍左右，可见这样一个小小的改动对性能的提升起了举足轻重的作用。</p>
-
+</code></pre></div><p>这个版本的队列实现粗看和Lamport的那个区别很小，而实际上这里解决了一个重要的问题：解除了head和tail的共享问题。dequeue操作只需要关心tail，enqueue操作只关心head，这样两个变量就变成CPU本地的资源了，不需要做任何同步。当然这个实现同样局限于sequential consistency，不过加fence保证顺序的overhead不大。最后测试中这个版本的单次操作比Lamport的快3.7倍左右，可见这样一个小小的改动对性能的提升起了举足轻重的作用。</p>
 <p>paper后面还严格的证明了这种队列实现的正确性，即保证了消费者读出的数据的顺序和它们在生产者写入时的顺序一致，此处略去。</p>
 
     </div>

@@ -11,6 +11,7 @@
     
 
     <title> 《Metaprogramming Ruby》笔记 &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -39,7 +40,7 @@
     "articleSection" : "notes",
     "name" : "《Metaprogramming Ruby》笔记",
     "headline" : "《Metaprogramming Ruby》笔记",
-    "description" : "Ruby 元编程 一、Ruby 对象模型 class MyClass; end obj1 = MyClass.new  这段代码中 obj1 和 MyClass 都是引用，唯一的区别在于前者是一个变量，后者是一个常量。\nRuby 对象由两部分组成：实例变量和指向类的引用。\n在类中包含一个模块时，Ruby 会在继承链中插入一个匿名类，这个匿名类包含了该模块所有方法：\nclass A; include Math; end A.ancestors # =\x26gt; [A, Math, Object, Kernel, BasicObject]  正因为这种机制，puts 方法才可以在一个普通类中使用。因为 Object 包含了 Kernel 模块，所以 Kernel 模块的方法会包含在每一个普通类的继承链中，其中包括了 puts 方法，当你在其他类中调用 puts 方法输出时，其实是调用了 Kernel 的 puts 方法。\nRuby 中私有方法的限制很简单，即不能为私有方法指定一个显式的接收者（例如 abc.method 中 abc 就是显式的接收者） 。也就是说，私有方法只能只能在隐式的接收者（即 self）上调用。\n二、方法 动态定义方法  Module#define_method BasicObject#method_missing 此外 Module#const_missing 可以用来定义常量  Blank Slate 某些情况下需要覆盖类中已经存在的方法（如 jbuilder ）。使用 undef_method 可以取消类中已经存在的函数，但仍需保留 instance_eval 以及 __ 开头的方法。这种特殊的状态被称为 Blank Slate。",
+    "description" : "Ruby 元编程 一、Ruby 对象模型 class MyClass; end obj1 = MyClass.new 这段代码中 obj1 和 MyClass 都是引用，唯一的区别在于前者是一个变量，后者是一个常量。\nRuby 对象由两部分组成：实例变量和指向类的引用。\n在类中包含一个模块时，Ruby 会在继承链中插入一个匿名类，这个匿名类包含了该模块所有方法：\nclass A; include Math; end A.ancestors # =\u0026gt; [A, Math, Object, Kernel, BasicObject] 正因为这种机制，puts 方法才可以在一个普通类中使用。因为 Object 包含了 Kernel 模块，所以 Kernel 模块的方法会包含在每一个普通类的继承链中，其中包括了 puts 方法，当你在其他类中调用 puts 方法输出时，其实是调用了 Kernel 的 puts 方法。\nRuby 中私有方法的限制很简单，即不能为私有方法指定一个显式的接收者（例如 abc.method 中 abc 就是显式的接收者） 。也就是说，私有方法只能只能在隐式的接收者（即 self）上调用。\n二、方法 动态定义方法  Module#define_method BasicObject#method_missing 此外 Module#const_missing 可以用来定义常量  Blank Slate 某些情况下需要覆盖类中已经存在的方法（如 jbuilder ）。使用 undef_method 可以取消类中已经存在的函数，但仍需保留 instance_eval 以及 __ 开头的方法。这种特殊的状态被称为 Blank Slate。",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -47,8 +48,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "0001",
-    "datePublished": "0001-01-01 00:00:00 \x2b0000 UTC",
-    "dateModified" : "0001-01-01 00:00:00 \x2b0000 UTC",
+    "datePublished": "0001-01-01 00:00:00 \u002b0000 UTC",
+    "dateModified" : "0001-01-01 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/notes\/programming\/metaprogramming-ruby\/",
     "wordCount" : "316",
     "keywords" : [ "Blog" ]
@@ -84,117 +85,78 @@
     <div class="post">
       <h1 class="post-title"><a href="https://blog.yxwang.me/notes/programming/metaprogramming-ruby/">《Metaprogramming Ruby》笔记</a></h1>
       <div class="post-content">
-        
-
-<h1 id="ruby-元编程">Ruby 元编程</h1>
-
-<h2 id="一-ruby-对象模型">一、Ruby 对象模型</h2>
-
-<pre><code class="language-ruby">class MyClass; end
-obj1 = MyClass.new
-</code></pre>
-
-<p>这段代码中 obj1 和 MyClass 都是引用，唯一的区别在于前者是一个变量，后者是一个常量。</p>
-
+        <h1 id="ruby-元编程">Ruby 元编程</h1>
+<h2 id="一ruby-对象模型">一、Ruby 对象模型</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyClass</span>; <span style="color:#66d9ef">end</span>
+obj1 <span style="color:#f92672">=</span> <span style="color:#66d9ef">MyClass</span><span style="color:#f92672">.</span>new
+</code></pre></div><p>这段代码中 obj1 和 MyClass 都是引用，唯一的区别在于前者是一个变量，后者是一个常量。</p>
 <p>Ruby 对象由两部分组成：实例变量和指向类的引用。</p>
-
 <p>在类中包含一个模块时，Ruby 会在继承链中插入一个匿名类，这个匿名类包含了该模块所有方法：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">A</span>; <span style="color:#66d9ef">include</span> <span style="color:#66d9ef">Math</span>; <span style="color:#66d9ef">end</span>
 
-<pre><code class="language-ruby">class A; include Math; end
-
-A.ancestors # =&gt; [A, Math, Object, Kernel, BasicObject]
-</code></pre>
-
-<p>正因为这种机制，<code>puts</code> 方法才可以在一个普通类中使用。因为 Object 包含了 Kernel 模块，所以 Kernel 模块的方法会包含在每一个普通类的继承链中，其中包括了 <a href="http://apidock.com/ruby/Kernel/puts">puts</a> 方法，当你在其他类中调用 <code>puts</code> 方法输出时，其实是调用了 Kernel 的 <code>puts</code> 方法。</p>
-
+A<span style="color:#f92672">.</span>ancestors <span style="color:#75715e"># =&gt; [A, Math, Object, Kernel, BasicObject]</span>
+</code></pre></div><p>正因为这种机制，<code>puts</code> 方法才可以在一个普通类中使用。因为 Object 包含了 Kernel 模块，所以 Kernel 模块的方法会包含在每一个普通类的继承链中，其中包括了 <a href="http://apidock.com/ruby/Kernel/puts">puts</a> 方法，当你在其他类中调用 <code>puts</code> 方法输出时，其实是调用了 Kernel 的 <code>puts</code> 方法。</p>
 <p>Ruby 中私有方法的限制很简单，即不能为私有方法指定一个显式的接收者（例如 <code>abc.method</code> 中 <code>abc</code> 就是显式的接收者） 。也就是说，私有方法只能只能在隐式的接收者（即 <code>self</code>）上调用。</p>
-
-<h2 id="二-方法">二、方法</h2>
-
+<h2 id="二方法">二、方法</h2>
 <h3 id="动态定义方法">动态定义方法</h3>
-
 <ul>
 <li><a href="http://apidock.com/ruby/Module/define_method">Module#define_method</a></li>
 <li><a href="http://apidock.com/ruby/BasicObject/method_missing">BasicObject#method_missing</a></li>
 <li>此外 <a href="http://apidock.com/ruby/Module/const_missing">Module#const_missing</a> 可以用来定义常量</li>
 </ul>
-
 <h3 id="blank-slate">Blank Slate</h3>
-
 <p>某些情况下需要覆盖类中已经存在的方法（如 <a href="https://github.com/rails/jbuilder">jbuilder</a> ）。使用 undef_method 可以取消类中已经存在的函数，但仍需保留 <code>instance_eval</code> 以及 <code>__</code> 开头的方法。这种特殊的状态被称为 Blank Slate。</p>
-
 <p><a href="https://github.com/masover/blankslate">blankslate</a> 提供了一个现成的 Blank Slate 基类。此外 Ruby 1.9 中 BasicObject 也有类似的作用。</p>
-
-<h2 id="三-block">三、Block</h2>
-
+<h2 id="三block">三、Block</h2>
 <h3 id="scope-gate">Scope Gate</h3>
-
 <p>Scope Gate 指程序中创建新的作用域的地方，Ruby 中 class module 和 def 三个关键字有 Scope Gate 的作用。</p>
-
 <p>如果要在定义类/方法的同时避免产生新的作用域，可以用 Class.new() 和 Module#define_method() 代替 class 和 def。这种技巧被称为 nested lexical scope，也有人称它为 flat scope。</p>
-
-<h3 id="符号">&amp; 符号</h3>
-
+<h3 id="-符号">&amp; 符号</h3>
 <p>&amp; 符号的作用是使 Proc 和 block 相互转换，例如：</p>
-
-<pre><code class="language-ruby">def my_method(&amp;the_proc)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">my_method</span>(<span style="color:#f92672">&amp;</span>the_proc)
   the_proc
-end
+<span style="color:#66d9ef">end</span>
 
-p = my_method { |name| &quot;Hello, #{name}!&quot; }
-puts p.class # =&gt; Proc
-puts p.call('Bill') # =&gt; Hello, Bill!
-</code></pre>
-
-<h3 id="block-proc-lambda-和-method">Block、Proc、Lambda 和 Method</h3>
-
+p <span style="color:#f92672">=</span> my_method { <span style="color:#f92672">|</span>name<span style="color:#f92672">|</span> <span style="color:#e6db74">&#34;Hello, </span><span style="color:#e6db74">#{</span>name<span style="color:#e6db74">}</span><span style="color:#e6db74">!&#34;</span> }
+puts p<span style="color:#f92672">.</span>class <span style="color:#75715e"># =&gt; Proc</span>
+puts p<span style="color:#f92672">.</span>call(<span style="color:#e6db74">&#39;Bill&#39;</span>) <span style="color:#75715e"># =&gt; Hello, Bill!</span>
+</code></pre></div><h3 id="blockproclambda-和-method">Block、Proc、Lambda 和 Method</h3>
 <ul>
-<li><p>Block 并不是真正的对象，虽然它们也可以被调用。Block 在定义的上下文中执行。</p></li>
-
-<li><p>Proc 是实际的对象，也在定义的上下文中执行。</p></li>
-
-<li><p>Lambda 对象和 Proc 对象有一些细微的差别（return 的行为和参数的检查上，Lambda 更像 Method），在定义的上下文中执行。</p></li>
-
-<li><p>Method 被绑定在某个对象上，在该对象的作用域中执行。</p></li>
+<li>
+<p>Block 并不是真正的对象，虽然它们也可以被调用。Block 在定义的上下文中执行。</p>
+</li>
+<li>
+<p>Proc 是实际的对象，也在定义的上下文中执行。</p>
+</li>
+<li>
+<p>Lambda 对象和 Proc 对象有一些细微的差别（return 的行为和参数的检查上，Lambda 更像 Method），在定义的上下文中执行。</p>
+</li>
+<li>
+<p>Method 被绑定在某个对象上，在该对象的作用域中执行。</p>
+</li>
 </ul>
-
-<h2 id="四-类定义">四、类定义</h2>
-
+<h2 id="四类定义">四、类定义</h2>
 <h3 id="self">self</h3>
-
 <p>类定义中的 <code>self</code> 指向当前类本身：</p>
-
-<pre><code class="language-ruby">result = class MyClass
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">result <span style="color:#f92672">=</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyClass</span>
   self
-end
+<span style="color:#66d9ef">end</span>
 
-result # =&gt; MyClass
-</code></pre>
-
-<h3 id="类变量">类变量</h3>
-
+result <span style="color:#75715e"># =&gt; MyClass</span>
+</code></pre></div><h3 id="类变量">类变量</h3>
 <p>在类定义中以 <code>@@</code> 前缀开始的变量就是类变量，与类的实例变量不同的是，他们可以被子类和实例方法访问到。类变量同时属于所有的子类，任何一个子类对它的修改都会对父类起作用，这会导致一些难以发现的问题。因此现在更推荐用类的实例变量代替类变量。</p>
-
 <h3 id="eigenclass">eigenclass</h3>
-
 <p>Ruby 中每一个对象都有一个属于自己的隐藏的类，这个类就被称为 eigenclass。使用 <code>class &lt;&lt; obj</code> 语法可以访问该对象的 eigenclass。</p>
-
-<pre><code class="language-ruby">obj = Object.new
-eigenclass = class &lt;&lt; obj
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">obj <span style="color:#f92672">=</span> <span style="color:#66d9ef">Object</span><span style="color:#f92672">.</span>new
+eigenclass <span style="color:#f92672">=</span> <span style="color:#66d9ef">class</span> <span style="color:#f92672">&lt;&lt;</span> obj
   self
-end
+<span style="color:#66d9ef">end</span>
 
-eigenclass =&gt; #&lt;Class:#&lt;Object:0x000001022097b8&gt;&gt;
-</code></pre>
-
-<p>事实上 instance_eval 也会修改类对象，只是它修改的是接收者的 eigenclass。</p>
-
+eigenclass <span style="color:#f92672">=&gt;</span> <span style="color:#75715e">#&lt;Class:#&lt;Object:0x000001022097b8&gt;&gt;</span>
+</code></pre></div><p>事实上 instance_eval 也会修改类对象，只是它修改的是接收者的 eigenclass。</p>
 <p>extend 方法可以把一个模块中的方法添加到接收者的 eigenclass 中。</p>
-
 <h3 id="ruby-对象模型">Ruby 对象模型</h3>
-
 <p>以下七条规则描述了 Ruby 的对象模型：</p>
-
 <ol>
 <li>对象只有一种，不管是标准类还是模块；</li>
 <li>模块只有一种，不管是标准的模块，类，eigenclass，或是代理类；</li>
@@ -204,33 +166,19 @@ eigenclass =&gt; #&lt;Class:#&lt;Object:0x000001022097b8&gt;&gt;
 <li>一个对象的 eigenclass 的父类是这个对象的类。一个类的 eigenclass 父类是这个类的父类的 eigenclass。听起来很绕口，但这句话是 Ruby 对象模型的核心之一，参考<a href="http://www.madebydna.com/all/code/2011/06/24/eigenclasses-demystified.html">这篇文章</a>的最后的一幅图可以帮助理解；</li>
 <li>当方法被调用时，解释器首先在接收者的 eigenclass 中查找该方法，如果找不到，则沿着继承链一路网上找。</li>
 </ol>
-
 <h3 id="方法重命名">方法重命名</h3>
-
 <p>当一个方法被重定义时，它本身没有被修改，只是原来的名字绑定了一个新方法。因此只要有指向原来的方法的引用，该方法仍然能被调用到。</p>
-
 <p>RubyGems 库就是这么处理 require 的，新定义的 require 方法先调用原来的 require，如果发生异常，则在 gems 库中再查找一次需要的包，找到了就调用原来的 require 把这个包加载进来。具体可以看 <a href="https://github.com/rubygems/rubygems/blob/master/lib/rubygems/custom_require.rb">custom_require.rb</a>。</p>
-
-<h2 id="五-编写代码的代码">五、编写代码的代码</h2>
-
+<h2 id="五编写代码的代码">五、编写代码的代码</h2>
 <h3 id="binding-对象">Binding 对象</h3>
-
 <p>在 Ruby 中可以把整个作用域打包成一个 Binding 对象，配合 eval() 相关的一系列方法可以在这些作用域中执行代码。</p>
-
 <h3 id="taint-tracking">Taint Tracking</h3>
-
 <p>Ruby 里也有类似 taint tracking 的机制，来自外部的输入会被加上 tainted 标记，用 <code>tainted?</code> 方法可以查看某个实例是否来自不可信的内容。</p>
-
 <p>为了保证 eval() 方法安全性，Ruby 中还有一个名为 <code>$SAFE</code> 的全局变量控制 eval 的安全级别。当它为 0 时不做任何安全检查；当它为 4 时安全级别最高，程序甚至无法随意地退出。</p>
-
 <h3 id="hooks">Hooks</h3>
-
 <p><code>Class#inhertied()</code>、<code>Module#included()</code>、<code>Module#method_added()</code> 等都是 Ruby 提供的 hook 方法。它们会分别在类被继承、模块被引用和方法被添加时执行。</p>
-
 <h2 id="代码分析">代码分析</h2>
-
 <p>下半部分主要结合 Rails 2.3 的源代码，分析了 Rails 中用到的和 Ruby 元编程相关的特性：</p>
-
 <ul>
 <li><a href="https://github.com/rails/rails/blob/2-3-stable/activerecord/lib/active_record/validations.rb">ActiveRecord:Validations</a></li>
 <li><a href="https://github.com/rails/rails/blob/2-3-stable/activesupport/lib/active_support/core_ext/module/aliasing.rb">alias_method_chain()</a></li>

@@ -11,6 +11,7 @@
     
 
     <title> ICS Lab2 &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -39,7 +40,7 @@
     "articleSection" : "post",
     "name" : "ICS Lab2",
     "headline" : "ICS Lab2",
-    "description" : "这个lab主要考察gdb的使用和对汇编代码的理解。后者在平时的作业中涉及得较多，这里不再赘述，主要介绍一下gdb。其实偶对这个也不是很熟，有错误请指正。\n简单的说，gdb是一款强大的调试工具，尽管它只有文本界面（需要图形界面可以使用ddd，不过区别不大），但是功能却比eclipse等调试环境强很多。\n接下来看看怎样让它为lab2拆炸弹服务，在命令行下运行gdb bomb就能开始调试这个炸弹程序，提高警惕，恩。\n首先最重要的，就是如何阻止炸弹的引爆，gdb自然提供了一般调试工具都包括的断点功能——break命令。\n在gdb中输入help break能够看到相关的信息。\n可以看到 break 允许我们使用行号、函数名或地址设置断点。\n按ctrl\x2bz暂时挂起当前的gdb进程，运行 objdump –d bomb | more 查看反编译后的炸弹文件，可以看到里面有这么一行（开始的那个地址每个人都不同）：\n08049719 \x26lt;explode_bomb\x26gt;:  这个就是万恶的引爆炸弹的函数了，运行 fg 返回 gdb 环境，在这个函数设置断点：break explode_bomb （可以使用tab键自动补齐）\n显示\nBreakpoint 1 at 0x8049707  接下来你可以喘口气，一般情况下炸弹是不会引爆的了\n下面我们来拆第一个炸弹，首先同样是设置断点，bomb.c中给出了各个关卡的函数名，第一关就是phase_1，使用break phase_1在第一关设置断点\n接下来就开始运行吧，输入run\n我们已经设置了炸弹断点，这些恐吓可以直接无视。\n输入ABC继续（输入这个是为了方便在后面的测试中找到自己的输入串地址）\n提示Breakpoint 2, 0x08048c2e in phase_1 ()，说明现在程序已经停在第一个关了\n接下来就是分析汇编代码，使用disassemble phase_1显示这个函数的汇编代码\n注意其中关键的几行：\n这个lab很厚道的一点就是函数名很明确地说明了函数的功能 ^_^\n估计这三行代码的意思就是比较两个字符串相等，不相等的话应该就会让炸弹爆炸了\n因为字符串很大，所以传递给这个比较函数的肯定是他们的地址，分别为0x80499b4和0x8(%ebp)\n我们先来看后者，使用p\/x *(int*)($ebp \x2b 8)查看字符串所在的地址\n$1 = 0x804a720 ​```` 继续使用`p\/x *0x804a720`查看内存中这个地址的内容  $2 = 0x434241\n 连续的三个数，是不是想起什么了？把这三个数分别转换为十进制，就是67 66 65，分别为 CBA 的 ASCII 码，看来这里保存了我们输入的串。 接下来 0x80499b4 里肯定保存着过关的密码 `p\/x *0x80499b4`  $3 = 0x62726556",
+    "description" : "这个lab主要考察gdb的使用和对汇编代码的理解。后者在平时的作业中涉及得较多，这里不再赘述，主要介绍一下gdb。其实偶对这个也不是很熟，有错误请指正。\n简单的说，gdb是一款强大的调试工具，尽管它只有文本界面（需要图形界面可以使用ddd，不过区别不大），但是功能却比eclipse等调试环境强很多。\n接下来看看怎样让它为lab2拆炸弹服务，在命令行下运行gdb bomb就能开始调试这个炸弹程序，提高警惕，恩。\n首先最重要的，就是如何阻止炸弹的引爆，gdb自然提供了一般调试工具都包括的断点功能——break命令。\n在gdb中输入help break能够看到相关的信息。\n可以看到 break 允许我们使用行号、函数名或地址设置断点。\n按ctrl\u002bz暂时挂起当前的gdb进程，运行 objdump –d bomb | more 查看反编译后的炸弹文件，可以看到里面有这么一行（开始的那个地址每个人都不同）：\n08049719 \u0026lt;explode_bomb\u0026gt;: 这个就是万恶的引爆炸弹的函数了，运行 fg 返回 gdb 环境，在这个函数设置断点：break explode_bomb （可以使用tab键自动补齐）\n显示\nBreakpoint 1 at 0x8049707 接下来你可以喘口气，一般情况下炸弹是不会引爆的了\n下面我们来拆第一个炸弹，首先同样是设置断点，bomb.c中给出了各个关卡的函数名，第一关就是phase_1，使用break phase_1在第一关设置断点\n接下来就开始运行吧，输入run\n我们已经设置了炸弹断点，这些恐吓可以直接无视。\n输入ABC继续（输入这个是为了方便在后面的测试中找到自己的输入串地址）\n提示Breakpoint 2, 0x08048c2e in phase_1 ()，说明现在程序已经停在第一个关了\n接下来就是分析汇编代码，使用disassemble phase_1显示这个函数的汇编代码\n注意其中关键的几行：\n这个lab很厚道的一点就是函数名很明确地说明了函数的功能 ^_^\n估计这三行代码的意思就是比较两个字符串相等，不相等的话应该就会让炸弹爆炸了\n因为字符串很大，所以传递给这个比较函数的肯定是他们的地址，分别为0x80499b4和0x8(%ebp)\n我们先来看后者，使用p\/x *(int*)($ebp \u002b 8)查看字符串所在的地址\n$1 = 0x804a720 ​```` 继续使用`p\/x *0x804a720`查看内存中这个地址的内容 $2 = 0x434241\n 连续的三个数，是不是想起什么了？把这三个数分别转换为十进制，就是67 66 65，分别为 CBA 的 ASCII 码，看来这里保存了我们输入的串。 接下来 0x80499b4 里肯定保存着过关的密码 `p\/x *0x80499b4` $3 = 0x62726556",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -47,8 +48,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2007",
-    "datePublished": "2007-11-20 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2007-11-20 00:00:00 \x2b0000 UTC",
+    "datePublished": "2007-11-20 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2007-11-20 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/2007\/11\/ics-lab2\/",
     "wordCount" : "156",
     "keywords" : [ "C","Courses","ICS","Lab","gdb","Blog" ]
@@ -94,91 +95,54 @@
 
     <div class="post-content">
       <p>这个lab主要考察gdb的使用和对汇编代码的理解。后者在平时的作业中涉及得较多，这里不再赘述，主要介绍一下gdb。其实偶对这个也不是很熟，有错误请指正。</p>
-
 <p>简单的说，gdb是一款强大的调试工具，尽管它只有文本界面（需要图形界面可以使用ddd，不过区别不大），但是功能却比eclipse等调试环境强很多。</p>
-
 <p>接下来看看怎样让它为lab2拆炸弹服务，在命令行下运行gdb bomb就能开始调试这个炸弹程序，提高警惕，恩。</p>
-
 <p>首先最重要的，就是如何阻止炸弹的引爆，gdb自然提供了一般调试工具都包括的断点功能——break命令。</p>
-
 <p>在gdb中输入help break能够看到相关的信息。</p>
-
 <p>可以看到 break 允许我们使用行号、函数名或地址设置断点。</p>
-
 <p>按<code>ctrl+z</code>暂时挂起当前的gdb进程，运行 <code>objdump –d bomb | more</code> 查看反编译后的炸弹文件，可以看到里面有这么一行（开始的那个地址每个人都不同）：</p>
-
 <pre><code>08049719 &lt;explode_bomb&gt;:
-</code></pre>
-
-<p>这个就是万恶的引爆炸弹的函数了，运行 fg 返回 gdb 环境，在这个函数设置断点：<code>break explode_bomb</code> （可以使用tab键自动补齐）</p>
-
+</code></pre><p>这个就是万恶的引爆炸弹的函数了，运行 fg 返回 gdb 环境，在这个函数设置断点：<code>break explode_bomb</code> （可以使用tab键自动补齐）</p>
 <p>显示</p>
-
 <pre><code>Breakpoint 1 at 0x8049707
-</code></pre>
-
-<p>接下来你可以喘口气，一般情况下炸弹是不会引爆的了</p>
-
+</code></pre><p>接下来你可以喘口气，一般情况下炸弹是不会引爆的了</p>
 <p>下面我们来拆第一个炸弹，首先同样是设置断点，bomb.c中给出了各个关卡的函数名，第一关就是phase_1，使用<code>break phase_1</code>在第一关设置断点</p>
-
 <p>接下来就开始运行吧，输入<code>run</code></p>
-
 <p>我们已经设置了炸弹断点，这些恐吓可以直接无视。</p>
-
 <p>输入<code>ABC</code>继续（输入这个是为了方便在后面的测试中找到自己的输入串地址）</p>
-
 <p>提示<code>Breakpoint 2, 0x08048c2e in phase_1 ()</code>，说明现在程序已经停在第一个关了</p>
-
 <p>接下来就是分析汇编代码，使用<code>disassemble phase_1</code>显示这个函数的汇编代码</p>
-
 <p>注意其中关键的几行：</p>
-
 <p>这个lab很厚道的一点就是函数名很明确地说明了函数的功能 ^_^</p>
-
 <p>估计这三行代码的意思就是比较两个字符串相等，不相等的话应该就会让炸弹爆炸了</p>
-
 <p>因为字符串很大，所以传递给这个比较函数的肯定是他们的地址，分别为0x80499b4和0x8(%ebp)</p>
-
 <p>我们先来看后者，使用<code>p/x *(int*)($ebp + 8)</code>查看字符串所在的地址</p>
-
 <pre><code>$1 = 0x804a720
 ​````
 
 继续使用`p/x *0x804a720`查看内存中这个地址的内容
 
-</code></pre>
-
-<p>$2 = 0x434241</p>
-
+</code></pre><p>$2 = 0x434241</p>
 <pre><code>
 连续的三个数，是不是想起什么了？把这三个数分别转换为十进制，就是67 66 65，分别为 CBA 的 ASCII 码，看来这里保存了我们输入的串。
 
 接下来 0x80499b4 里肯定保存着过关的密码 `p/x *0x80499b4`
 
-</code></pre>
-
-<p>$3 = 0x62726556</p>
-
+</code></pre><p>$3 = 0x62726556</p>
 <pre><code>
 c中的字符串是以0结尾的，看来这个字符串还不止这个长度，继续使用
 
 `p/x *0x80499b4@10` 查看这个地址及其后面36个字节的内容，终于在第二行中出现了终结符”0x0”（不一定是四个字节）
 
-</code></pre>
-
-<p>$4 = {0x62726556, 0x7469736f, 0x656c2079, 0x20736461, 0x75206f74, 0x656c636e, 0x202c7261, 0x72616e69,
+</code></pre><p>$4 = {0x62726556, 0x7469736f, 0x656c2079, 0x20736461, 0x75206f74, 0x656c636e, 0x202c7261, 0x72616e69,
 0x75636974, 0x6574616c, 0x69687420, 0x2e73676e, 0x0, 0x21776f57, 0x756f5920, 0x20657627, 0x75666564,
 0x20646573, 0x20656874, 0x72636573}</p>
-
 <pre><code>
 把开头到0x0的所有信息字节下来，通过手算或者自己写程序得出最后的密码串（注意little endian中字符的排列方式！）
 
 输入run重新运行，输入刚才得出的密码串，如果前面的计算正确的话，就会提示
 
-</code></pre>
-
-<p>Phase 1 defused. How about the next one?</p>
-
+</code></pre><p>Phase 1 defused. How about the next one?</p>
 <pre><code>
 关于这个lab的一些其他心得：
 
@@ -206,15 +170,11 @@ ICSLab:
 
 然后GDB run 的时候用`gdb bomb`
 
-</code></pre>
-
-<p>(gdb) b &hellip; &hellip;
+</code></pre><p>(gdb) b &hellip; &hellip;
 (gdb) r password.txt</p>
-
 <pre><code>这样bomb就会自动从password.txt中读入之前的密码直到到达最后一个空行处，如Lab2的说明文档中所述。
 
 </code></pre>
-
     </div>
         <div class="cc-license">
       本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.zh">知识共享署名-非商业性使用 3.0 版本许可协议</a>进行许可，欢迎转载，演绎，但是必须保留本文的署名 <a href="https://blog.yxwang.me/2007/11/ics-lab2/">zellux</a>（包含链接），且不得用于商业目的。

@@ -11,6 +11,7 @@
     
 
     <title> Xen DomainU 自动测试脚本 &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -39,7 +40,7 @@
     "articleSection" : "post",
     "name" : "Xen DomainU 自动测试脚本",
     "headline" : "Xen DomainU 自动测试脚本",
-    "description" : "写完代码测试时重复的最多的步骤就是\n 编译，复制vmlinuz和xen.gz 重启VMware虚拟机 启动domainU xm create domU.conf 4. 开一个screen窗口attach到domainU的console xm console #domid 5. 在domainU中运行测试程序  于是写了个自动执行3 4 5的脚步，主要用到了熊熊推荐的pexpect，这东东很赞啊\n为了提高用户体验，读取domainU的启动信息时我采用的方法是读一行输出一行，读到结尾登陆字符时通过超时设置退出循环，这样可能效率比较低，不过测试脚本也不care这个了\n实际使用时碰到了另一个问题，domainU执行完自动命令后命令行会出现很严重的对齐问题，最后发现登陆后运行一次reset就可以了。\n脚本如下\n#!\/usr\/bin\/python # Automatic test script for Xen DomainU # Author: zellux import pexpect, os conf = { \x27login_name\x27 : \x27m2-vm2\x27, \x27domainU_name\x27 : \x27R900-DomU0\x27, \x27domainU_conf\x27 : \x27\/home\/wyx\/domU1\x27, \x27domainU_id\x27 : \x272\x27, \x27domainU_user\x27 : \x27wyx\x27, \x27domainU_passwd\x27 : \x27wyx\x27, } # Command to be executed after domainU starts cmd = \x26quot;\x26quot;\x26quot; cd m2 cd reg_test .",
+    "description" : "写完代码测试时重复的最多的步骤就是\n 编译，复制vmlinuz和xen.gz 重启VMware虚拟机 启动domainU xm create domU.conf 4. 开一个screen窗口attach到domainU的console xm console #domid 5. 在domainU中运行测试程序  于是写了个自动执行3 4 5的脚步，主要用到了熊熊推荐的pexpect，这东东很赞啊\n为了提高用户体验，读取domainU的启动信息时我采用的方法是读一行输出一行，读到结尾登陆字符时通过超时设置退出循环，这样可能效率比较低，不过测试脚本也不care这个了\n实际使用时碰到了另一个问题，domainU执行完自动命令后命令行会出现很严重的对齐问题，最后发现登陆后运行一次reset就可以了。\n脚本如下\n#!\/usr\/bin\/python # Automatic test script for Xen DomainU # Author: zellux import pexpect, os conf = { \u0026#39;login_name\u0026#39; : \u0026#39;m2-vm2\u0026#39;, \u0026#39;domainU_name\u0026#39; : \u0026#39;R900-DomU0\u0026#39;, \u0026#39;domainU_conf\u0026#39; : \u0026#39;\/home\/wyx\/domU1\u0026#39;, \u0026#39;domainU_id\u0026#39; : \u0026#39;2\u0026#39;, \u0026#39;domainU_user\u0026#39; : \u0026#39;wyx\u0026#39;, \u0026#39;domainU_passwd\u0026#39; : \u0026#39;wyx\u0026#39;, } # Command to be executed after domainU starts cmd = \u0026#34;\u0026#34;\u0026#34; cd m2 cd reg_test .",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -47,10 +48,10 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2009",
-    "datePublished": "2009-04-07 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2009-04-07 00:00:00 \x2b0000 UTC",
+    "datePublished": "2009-04-07 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2009-04-07 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/2009\/04\/xen-test-script\/",
-    "wordCount" : "170",
+    "wordCount" : "169",
     "keywords" : [ "Cerberus","Computer System","Python","Xen","Blog" ]
 }
 </script>
@@ -94,86 +95,79 @@
 
     <div class="post-content">
       <p>写完代码测试时重复的最多的步骤就是</p>
-
 <ol>
 <li>编译，复制vmlinuz和xen.gz</li>
 <li>重启VMware虚拟机</li>
-<li>启动domainU <u>xm create domU.conf
-</u>4. 开一个screen窗口attach到domainU的console <u>xm console #domid
-</u>5. 在domainU中运行测试程序</li>
+<li>启动domainU <!-- raw HTML omitted -->xm create domU.conf
+<!-- raw HTML omitted -->4. 开一个screen窗口attach到domainU的console <!-- raw HTML omitted -->xm console #domid
+<!-- raw HTML omitted -->5. 在domainU中运行测试程序</li>
 </ol>
-
 <p>于是写了个自动执行3 4 5的脚步，主要用到了熊熊推荐的pexpect，这东东很赞啊</p>
-
 <p>为了提高用户体验，读取domainU的启动信息时我采用的方法是读一行输出一行，读到结尾登陆字符时通过超时设置退出循环，这样可能效率比较低，不过测试脚本也不care这个了</p>
-
 <p>实际使用时碰到了另一个问题，domainU执行完自动命令后命令行会出现很严重的对齐问题，最后发现登陆后运行一次reset就可以了。</p>
-
 <p>脚本如下</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#!/usr/bin/python</span>
 
-<pre><code class="language-python">#!/usr/bin/python
+<span style="color:#75715e"># Automatic test script for Xen DomainU</span>
+<span style="color:#75715e"># Author: zellux</span>
 
-# Automatic test script for Xen DomainU
-# Author: zellux
+<span style="color:#f92672">import</span> pexpect<span style="color:#f92672">,</span> os
 
-import pexpect, os
-
-conf = {
-    'login_name'     : 'm2-vm2',
-    'domainU_name'   : 'R900-DomU0',
-    'domainU_conf'   : '/home/wyx/domU1',
-    'domainU_id'     : '2',
-    'domainU_user'   : 'wyx',
-    'domainU_passwd' : 'wyx',
+conf <span style="color:#f92672">=</span> {
+    <span style="color:#e6db74">&#39;login_name&#39;</span>     : <span style="color:#e6db74">&#39;m2-vm2&#39;</span>,
+    <span style="color:#e6db74">&#39;domainU_name&#39;</span>   : <span style="color:#e6db74">&#39;R900-DomU0&#39;</span>,
+    <span style="color:#e6db74">&#39;domainU_conf&#39;</span>   : <span style="color:#e6db74">&#39;/home/wyx/domU1&#39;</span>,
+    <span style="color:#e6db74">&#39;domainU_id&#39;</span>     : <span style="color:#e6db74">&#39;2&#39;</span>,
+    <span style="color:#e6db74">&#39;domainU_user&#39;</span>   : <span style="color:#e6db74">&#39;wyx&#39;</span>,
+    <span style="color:#e6db74">&#39;domainU_passwd&#39;</span> : <span style="color:#e6db74">&#39;wyx&#39;</span>,
     }
 
-# Command to be executed after domainU starts
-cmd = &quot;&quot;&quot;
-cd m2
-cd reg_test
-./base_test -t affinity
-&quot;&quot;&quot;
+<span style="color:#75715e"># Command to be executed after domainU starts</span>
+cmd <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">cd m2
+</span><span style="color:#e6db74">cd reg_test
+</span><span style="color:#e6db74">./base_test -t affinity
+</span><span style="color:#e6db74">&#34;&#34;&#34;</span>
 
-# Create domainU
-print '[M2 Test] Starting domainU ...',
-pexpect.run('xm create %(domainU_conf)s' % conf)
-print 'done'
+<span style="color:#75715e"># Create domainU</span>
+<span style="color:#66d9ef">print</span> <span style="color:#e6db74">&#39;[M2 Test] Starting domainU ...&#39;</span>,
+pexpect<span style="color:#f92672">.</span>run(<span style="color:#e6db74">&#39;xm create </span><span style="color:#e6db74">%(domainU_conf)s</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span> conf)
+<span style="color:#66d9ef">print</span> <span style="color:#e6db74">&#39;done&#39;</span>
 
-# Get domainU id
-print '[M2 Test] SGetting domainU id ...',
-ret = pexpect.run('xm list')
-for line in ret.split('\n')[1:]:
-    part = line.split()
-    if part[0] == conf['domainU_name']:
-        conf['domainU_id'] = part[1]
-        break
-print 'done'
+<span style="color:#75715e"># Get domainU id</span>
+<span style="color:#66d9ef">print</span> <span style="color:#e6db74">&#39;[M2 Test] SGetting domainU id ...&#39;</span>,
+ret <span style="color:#f92672">=</span> pexpect<span style="color:#f92672">.</span>run(<span style="color:#e6db74">&#39;xm list&#39;</span>)
+<span style="color:#66d9ef">for</span> line <span style="color:#f92672">in</span> ret<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>)[<span style="color:#ae81ff">1</span>:]:
+    part <span style="color:#f92672">=</span> line<span style="color:#f92672">.</span>split()
+    <span style="color:#66d9ef">if</span> part[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">==</span> conf[<span style="color:#e6db74">&#39;domainU_name&#39;</span>]:
+        conf[<span style="color:#e6db74">&#39;domainU_id&#39;</span>] <span style="color:#f92672">=</span> part[<span style="color:#ae81ff">1</span>]
+        <span style="color:#66d9ef">break</span>
+<span style="color:#66d9ef">print</span> <span style="color:#e6db74">&#39;done&#39;</span>
 
-# Run domainU commands
-child = pexpect.spawn('xm console %(domainU_id)s' % conf)
-print '[M2 Test] SReading from domainU console...'
-try:
-    while True:
-        child.expect('\n', timeout=1, )
-        print child.before.split['\n'][-1]
-except:
-    pass
+<span style="color:#75715e"># Run domainU commands</span>
+child <span style="color:#f92672">=</span> pexpect<span style="color:#f92672">.</span>spawn(<span style="color:#e6db74">&#39;xm console </span><span style="color:#e6db74">%(domainU_id)s</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span> conf)
+<span style="color:#66d9ef">print</span> <span style="color:#e6db74">&#39;[M2 Test] SReading from domainU console...&#39;</span>
+<span style="color:#66d9ef">try</span>:
+    <span style="color:#66d9ef">while</span> True:
+        child<span style="color:#f92672">.</span>expect(<span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>, timeout<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, )
+        <span style="color:#66d9ef">print</span> child<span style="color:#f92672">.</span>before<span style="color:#f92672">.</span>split[<span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>][<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]
+<span style="color:#66d9ef">except</span>:
+    <span style="color:#66d9ef">pass</span>
 
-child.expect('%(login_name)s login:' % conf)
-child.sendline(conf['domainU_user'])
-child.sendline(conf['domainU_passwd'])
+child<span style="color:#f92672">.</span>expect(<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%(login_name)s</span><span style="color:#e6db74"> login:&#39;</span> <span style="color:#f92672">%</span> conf)
+child<span style="color:#f92672">.</span>sendline(conf[<span style="color:#e6db74">&#39;domainU_user&#39;</span>])
+child<span style="color:#f92672">.</span>sendline(conf[<span style="color:#e6db74">&#39;domainU_passwd&#39;</span>])
 
-for line in cmd.split('\n'):
-    child.sendline(line)
+<span style="color:#66d9ef">for</span> line <span style="color:#f92672">in</span> cmd<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>):
+    child<span style="color:#f92672">.</span>sendline(line)
 
-try:
-    child.expect(pexpect.EOF, timeout=1)
-except:
-    pass
-print child.before
-child.interact()
-</code></pre>
-
+<span style="color:#66d9ef">try</span>:
+    child<span style="color:#f92672">.</span>expect(pexpect<span style="color:#f92672">.</span>EOF, timeout<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+<span style="color:#66d9ef">except</span>:
+    <span style="color:#66d9ef">pass</span>
+<span style="color:#66d9ef">print</span> child<span style="color:#f92672">.</span>before
+child<span style="color:#f92672">.</span>interact()
+</code></pre></div>
     </div>
         <div class="cc-license">
       本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.zh">知识共享署名-非商业性使用 3.0 版本许可协议</a>进行许可，欢迎转载，演绎，但是必须保留本文的署名 <a href="https://blog.yxwang.me/2009/04/xen-test-script/">zellux</a>（包含链接），且不得用于商业目的。

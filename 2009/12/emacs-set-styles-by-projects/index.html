@@ -11,6 +11,7 @@
     
 
     <title> Emacs 中对不同项目指定不同的风格 &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -39,7 +40,7 @@
     "articleSection" : "post",
     "name" : "Emacs 中对不同项目指定不同的风格",
     "headline" : "Emacs 中对不同项目指定不同的风格",
-    "description" : "我的Emacs配置里C语言默认的缩进风格是用4个空格，最近要修改Chromium的代码，而Google的C\/C\x2b\x2b风格统一为2个空格缩进，所以改代码的时候要把c-basic-offset设置为2。这样在不同项目间切换的时候很不方便。\n在stackoverflow上发帖求助后发现了Emacs 23.1一个很好用的新功能，Per-Directory Local Variables，只需要在项目主目录下放一个.dir-locals.el文件，里面设置该项目特有的变量值，就能应用到整个项目了。\n以我的Chromium为例，Google已经提供了一份C\/C\x2b\x2b风格的配置，只需要在~\/chromius\/src\/.dir-locals.el里把google-c-style常量粘贴进去即可。另外我不知道为啥加上c-offsets-alist那段后Emacs缩进会变得很奇怪，所以我把它删了。附修改后的.dir-locals.el\n((c\x2b\x2b-mode . ((c-recognize-knr-p . nil) (c-enable-xemacs-performance-kludge-p . t) ; speed up indentation in XEmacs (c-basic-offset . 2) (indent-tabs-mode . nil) (c-comment-only-line-offset . 0) (c-hanging-braces-alist . ((defun-open after) (defun-close before after) (class-open after) (class-close before after) (namespace-open after) (inline-open after) (inline-close before after) (block-open after) (block-close . c-snug-do-while) (extern-lang-open after) (extern-lang-close after) (statement-case-open after) (substatement-open after))) (c-hanging-colons-alist . ((case-label) (label after) (access-label after) (member-init-intro before) (inher-intro))) (c-hanging-semi\x26amp;comma-criteria .",
+    "description" : "我的Emacs配置里C语言默认的缩进风格是用4个空格，最近要修改Chromium的代码，而Google的C\/C\u002b\u002b风格统一为2个空格缩进，所以改代码的时候要把c-basic-offset设置为2。这样在不同项目间切换的时候很不方便。\n在stackoverflow上发帖求助后发现了Emacs 23.1一个很好用的新功能，Per-Directory Local Variables，只需要在项目主目录下放一个.dir-locals.el文件，里面设置该项目特有的变量值，就能应用到整个项目了。\n以我的Chromium为例，Google已经提供了一份C\/C\u002b\u002b风格的配置，只需要在~\/chromius\/src\/.dir-locals.el里把google-c-style常量粘贴进去即可。另外我不知道为啥加上c-offsets-alist那段后Emacs缩进会变得很奇怪，所以我把它删了。附修改后的.dir-locals.el\n((c\u002b\u002b-mode . ((c-recognize-knr-p . nil) (c-enable-xemacs-performance-kludge-p . t) ; speed up indentation in XEmacs (c-basic-offset . 2) (indent-tabs-mode . nil) (c-comment-only-line-offset . 0) (c-hanging-braces-alist . ((defun-open after) (defun-close before after) (class-open after) (class-close before after) (namespace-open after) (inline-open after) (inline-close before after) (block-open after) (block-close . c-snug-do-while) (extern-lang-open after) (extern-lang-close after) (statement-case-open after) (substatement-open after))) (c-hanging-colons-alist . ((case-label) (label after) (access-label after) (member-init-intro before) (inher-intro))) (c-hanging-semi\u0026amp;comma-criteria .",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -47,8 +48,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2009",
-    "datePublished": "2009-12-01 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2009-12-01 00:00:00 \x2b0000 UTC",
+    "datePublished": "2009-12-01 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2009-12-01 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/2009\/12\/emacs-set-styles-by-projects\/",
     "wordCount" : "91",
     "keywords" : [ "C","Emacs","Tooling","Blog" ]
@@ -94,49 +95,45 @@
 
     <div class="post-content">
       <p>我的Emacs配置里C语言默认的缩进风格是用4个空格，最近要修改Chromium的代码，而Google的C/C++风格统一为2个空格缩进，所以改代码的时候要把c-basic-offset设置为2。这样在不同项目间切换的时候很不方便。</p>
-
-<p>在<a href="http://stackoverflow.com/questions/1824256/setting-different-c-basic-offs-for-different-projects" target="_blank">stackoverflow</a>上发帖求助后发现了Emacs 23.1一个很好用的新功能，<a href="http://www.gnu.org/software/emacs/manual/html_node/emacs/Directory-Variables.html">Per-Directory Local Variables</a>，只需要在项目主目录下放一个.dir-locals.el文件，里面设置该项目特有的变量值，就能应用到整个项目了。</p>
-
-<p>以我的Chromium为例，Google已经提供了一份C/C++风格的<a href="http://google-styleguide.googlecode.com/svn/trunk/google-c-style.el" target="_blank">配置</a>，只需要在~/chromius/src/.dir-locals.el里把google-c-style常量粘贴进去即可。另外我不知道为啥加上c-offsets-alist那段后Emacs缩进会变得很奇怪，所以我把它删了。附修改后的.dir-locals.el</p>
-
-<pre><code class="language-c">((c++-mode . ((c-recognize-knr-p . nil)
-              (c-enable-xemacs-performance-kludge-p . t) ; speed up indentation in XEmacs
-              (c-basic-offset . 2)
-              (indent-tabs-mode . nil)
-              (c-comment-only-line-offset . 0)
-              (c-hanging-braces-alist . ((defun-open after)
-                                         (defun-close before after)
-                                         (class-open after)
-                                         (class-close before after)
-                                         (namespace-open after)
-                                         (inline-open after)
-                                         (inline-close before after)
-                                         (block-open after)
-                                         (block-close . c-snug-do-while)
-                                         (extern-lang-open after)
-                                         (extern-lang-close after)
-                                         (statement-case-open after)
-                                         (substatement-open after)))
-              (c-hanging-colons-alist . ((case-label)
+<p>在<!-- raw HTML omitted -->stackoverflow<!-- raw HTML omitted -->上发帖求助后发现了Emacs 23.1一个很好用的新功能，<!-- raw HTML omitted -->Per-Directory Local Variables<!-- raw HTML omitted -->，只需要在项目主目录下放一个.dir-locals.el文件，里面设置该项目特有的变量值，就能应用到整个项目了。</p>
+<p>以我的Chromium为例，Google已经提供了一份C/C++风格的<!-- raw HTML omitted -->配置<!-- raw HTML omitted -->，只需要在~/chromius/src/.dir-locals.el里把google-c-style常量粘贴进去即可。另外我不知道为啥加上c-offsets-alist那段后Emacs缩进会变得很奇怪，所以我把它删了。附修改后的.dir-locals.el</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">((c<span style="color:#f92672">++-</span>mode . ((c<span style="color:#f92672">-</span>recognize<span style="color:#f92672">-</span>knr<span style="color:#f92672">-</span>p . nil)
+              (c<span style="color:#f92672">-</span>enable<span style="color:#f92672">-</span>xemacs<span style="color:#f92672">-</span>performance<span style="color:#f92672">-</span>kludge<span style="color:#f92672">-</span>p . t) ; speed up indentation in XEmacs
+              (c<span style="color:#f92672">-</span>basic<span style="color:#f92672">-</span>offset . <span style="color:#ae81ff">2</span>)
+              (indent<span style="color:#f92672">-</span>tabs<span style="color:#f92672">-</span>mode . nil)
+              (c<span style="color:#f92672">-</span>comment<span style="color:#f92672">-</span>only<span style="color:#f92672">-</span>line<span style="color:#f92672">-</span>offset . <span style="color:#ae81ff">0</span>)
+              (c<span style="color:#f92672">-</span>hanging<span style="color:#f92672">-</span>braces<span style="color:#f92672">-</span>alist . ((defun<span style="color:#f92672">-</span>open after)
+                                         (defun<span style="color:#f92672">-</span>close before after)
+                                         (class<span style="color:#f92672">-</span>open after)
+                                         (class<span style="color:#f92672">-</span>close before after)
+                                         (namespace<span style="color:#f92672">-</span>open after)
+                                         (<span style="color:#66d9ef">inline</span><span style="color:#f92672">-</span>open after)
+                                         (<span style="color:#66d9ef">inline</span><span style="color:#f92672">-</span>close before after)
+                                         (block<span style="color:#f92672">-</span>open after)
+                                         (block<span style="color:#f92672">-</span>close . c<span style="color:#f92672">-</span>snug<span style="color:#f92672">-</span><span style="color:#66d9ef">do</span><span style="color:#f92672">-</span><span style="color:#66d9ef">while</span>)
+                                         (<span style="color:#66d9ef">extern</span><span style="color:#f92672">-</span>lang<span style="color:#f92672">-</span>open after)
+                                         (<span style="color:#66d9ef">extern</span><span style="color:#f92672">-</span>lang<span style="color:#f92672">-</span>close after)
+                                         (statement<span style="color:#f92672">-</span><span style="color:#66d9ef">case</span><span style="color:#f92672">-</span>open after)
+                                         (substatement<span style="color:#f92672">-</span>open after)))
+              (c<span style="color:#f92672">-</span>hanging<span style="color:#f92672">-</span>colons<span style="color:#f92672">-</span>alist . ((<span style="color:#66d9ef">case</span><span style="color:#f92672">-</span>label)
                                          (label after)
-                                         (access-label after)
-                                         (member-init-intro before)
-                                         (inher-intro)))
-              (c-hanging-semi&amp;comma-criteria
-                . (c-semi&amp;comma-no-newlines-for-oneline-inliners
-                    c-semi&amp;comma-inside-parenlist
-                    c-semi&amp;comma-no-newlines-before-nonblanks))
-              (c-indent-comments-syntactically-p . nil)
-              (comment-column . 40)
-              (c-cleanup-list . (brace-else-brace
-                                  brace-elseif-brace
-                                  brace-catch-brace
-                                  empty-defun-braces
-                                  defun-close-semi
-                                  list-close-comma
-                                  scope-operator)))))
-</code></pre>
-
+                                         (access<span style="color:#f92672">-</span>label after)
+                                         (member<span style="color:#f92672">-</span>init<span style="color:#f92672">-</span>intro before)
+                                         (inher<span style="color:#f92672">-</span>intro)))
+              (c<span style="color:#f92672">-</span>hanging<span style="color:#f92672">-</span>semi<span style="color:#f92672">&amp;</span>comma<span style="color:#f92672">-</span>criteria
+                . (c<span style="color:#f92672">-</span>semi<span style="color:#f92672">&amp;</span>comma<span style="color:#f92672">-</span>no<span style="color:#f92672">-</span>newlines<span style="color:#f92672">-</span><span style="color:#66d9ef">for</span><span style="color:#f92672">-</span>oneline<span style="color:#f92672">-</span>inliners
+                    c<span style="color:#f92672">-</span>semi<span style="color:#f92672">&amp;</span>comma<span style="color:#f92672">-</span>inside<span style="color:#f92672">-</span>parenlist
+                    c<span style="color:#f92672">-</span>semi<span style="color:#f92672">&amp;</span>comma<span style="color:#f92672">-</span>no<span style="color:#f92672">-</span>newlines<span style="color:#f92672">-</span>before<span style="color:#f92672">-</span>nonblanks))
+              (c<span style="color:#f92672">-</span>indent<span style="color:#f92672">-</span>comments<span style="color:#f92672">-</span>syntactically<span style="color:#f92672">-</span>p . nil)
+              (comment<span style="color:#f92672">-</span>column . <span style="color:#ae81ff">40</span>)
+              (c<span style="color:#f92672">-</span>cleanup<span style="color:#f92672">-</span>list . (brace<span style="color:#f92672">-</span><span style="color:#66d9ef">else</span><span style="color:#f92672">-</span>brace
+                                  brace<span style="color:#f92672">-</span>elseif<span style="color:#f92672">-</span>brace
+                                  brace<span style="color:#f92672">-</span>catch<span style="color:#f92672">-</span>brace
+                                  empty<span style="color:#f92672">-</span>defun<span style="color:#f92672">-</span>braces
+                                  defun<span style="color:#f92672">-</span>close<span style="color:#f92672">-</span>semi
+                                  list<span style="color:#f92672">-</span>close<span style="color:#f92672">-</span>comma
+                                  scope<span style="color:#f92672">-</span>operator)))))
+</code></pre></div>
     </div>
         <div class="cc-license">
       本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.zh">知识共享署名-非商业性使用 3.0 版本许可协议</a>进行许可，欢迎转载，演绎，但是必须保留本文的署名 <a href="https://blog.yxwang.me/2009/12/emacs-set-styles-by-projects/">zellux</a>（包含链接），且不得用于商业目的。

@@ -9,6 +9,7 @@
     
 
     <title> Posts &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -16,7 +17,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -24,7 +25,7 @@
     <link rel="shortcut icon" href="/favicon.ico">
 
     
-    <link href="https://blog.yxwang.me/post/index.xml" rel="alternate" type="application/rss+xml" title="Aiur · Zellux 的博客" />
+    <link href="/post/index.xml" rel="alternate" type="application/rss+xml" title="Aiur · Zellux 的博客" />
     
 <script type="application/ld+json">
 {
@@ -100,9 +101,7 @@
       
       <div class="summary">
 	<p><a href="https://www.usenix.org/comment/260">Revisiting Storage for Smartphones</a> 是今年 FAST 会议上的最佳论文，这篇论文提出了一个违背直觉的观点，很有意思。这里简单介绍一下这篇论文的内容，有兴趣的朋友可以直接访问前面的链接下载原文或是观看现场录像。</p>
-
-<p><a data-fancybox="gallery"  data-caption="移动存储性能" href=/images/2012-06/mobile-flash-throughtput.png ><img src=/images/2012-06/mobile-flash-throughtput.png  /></a></p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <p>传统的观点认为，移动应用性能的主要瓶颈在网络和 CPU，而闪存的读写速率明显高于网络传输速度，不会成为性能的瓶颈。然而，根据上图作者给出的关于移动存储性能的图例（纵坐标单位为 Mbps，本文图片均来自演讲 slides 和原论文），我们可以看到，虽然移动存储顺序读写的性能明显高于 wifi 和 3G，但是随机写的性能却比它们差很多，因此移动存储成为应用性能瓶颈是完全有可能的。</p>
 	<a class="read-more" href="/2012/06/revisiting-storage-for-smartphones/">阅读全文 →</a>
       </div>
@@ -127,21 +126,19 @@
       
       <div class="summary">
 	<p>以前部署新机器时都要把一堆配置文件 scp 过去，今天折腾了下用 Git 统一管理这些配置文件。</p>
-
 <p>做起来很简单，创建一个 dotfiles 目录，把所有要同步的配置文件都放到这个目录下，并重命名去掉文件名开头的点，以免被 Git 忽略。写了一个脚本链接这些配置文件到 HOME 目录：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#75715e">#!/usr/bin/env ruby</span>
 
-<pre><code class="language-ruby">#!/usr/bin/env ruby
+safe_mode <span style="color:#f92672">=</span> <span style="color:#66d9ef">ARGV</span><span style="color:#f92672">.</span>include? <span style="color:#e6db74">&#39;--safe&#39;</span>
 
-safe_mode = ARGV.include? '--safe'
-
-files = %w(zshrc tmux.conf gitconfig vimrc emacs gitignore_global LS_COLORS)
-files.each do |file|
-  unless safe_mode and File.exists?(&quot;#{ENV['HOME']}/.#{file}&quot;)
-    %x(ln -s -i -v $PWD/#{file} ~/.#{file})
-    puts &quot;.#{file} linked&quot; if safe_mode
-  end
-end
-</code></pre>
+files <span style="color:#f92672">=</span> <span style="color:#e6db74">%w(zshrc tmux.conf gitconfig vimrc emacs gitignore_global LS_COLORS)</span>
+files<span style="color:#f92672">.</span>each <span style="color:#66d9ef">do</span> <span style="color:#f92672">|</span>file<span style="color:#f92672">|</span>
+  <span style="color:#66d9ef">unless</span> safe_mode <span style="color:#f92672">and</span> <span style="color:#66d9ef">File</span><span style="color:#f92672">.</span>exists?(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">#{</span><span style="color:#66d9ef">ENV</span><span style="color:#f92672">[</span><span style="color:#e6db74">&#39;HOME&#39;</span><span style="color:#f92672">]</span><span style="color:#e6db74">}</span><span style="color:#e6db74">/.</span><span style="color:#e6db74">#{</span>file<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+    <span style="color:#e6db74">%x(ln -s -i -v $PWD/</span><span style="color:#e6db74">#{</span>file<span style="color:#e6db74">}</span><span style="color:#e6db74"> ~/.</span><span style="color:#e6db74">#{</span>file<span style="color:#e6db74">}</span><span style="color:#e6db74">)</span>
+    puts <span style="color:#e6db74">&#34;.</span><span style="color:#e6db74">#{</span>file<span style="color:#e6db74">}</span><span style="color:#e6db74"> linked&#34;</span> <span style="color:#66d9ef">if</span> safe_mode
+  <span style="color:#66d9ef">end</span>
+<span style="color:#66d9ef">end</span>
+</code></pre></div>
 	<a class="read-more" href="/2012/03/managing-dotfiles-with-git/">阅读全文 →</a>
       </div>
       
@@ -165,17 +162,16 @@ end
       
       <div class="summary">
 	<p>ETag 是 HTTP 协议的一部分，可以用来检测客户端的缓存是否仍然有效。不少网站都实现了对 ETag 的支持，在 HTTP 响应头中加入当前传送内容的 ETag。以 heroku.com 为例：</p>
-
-<pre><code class="language-bash">$ curl -I www.heroku.com
-HTTP/1.1 200 OK
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ curl -I www.heroku.com
+HTTP/1.1 <span style="color:#ae81ff">200</span> OK
 Server: nginx
-Date: Fri, 17 Feb 2012 17:36:44 GMT
-Content-Type: text/html; charset=utf-8
+Date: Fri, <span style="color:#ae81ff">17</span> Feb <span style="color:#ae81ff">2012</span> 17:36:44 GMT
+Content-Type: text/html; charset<span style="color:#f92672">=</span>utf-8
 Connection: keep-alive
-Etag: &quot;f74bb78aa48d36e6a0b2072a131b20b9&quot;
-Cache-Control: public, max-age=300
-Content-Length: 15481
-</code></pre>
+Etag: <span style="color:#e6db74">&#34;f74bb78aa48d36e6a0b2072a131b20b9&#34;</span>
+Cache-Control: public, max-age<span style="color:#f92672">=</span><span style="color:#ae81ff">300</span>
+Content-Length: <span style="color:#ae81ff">15481</span>
+</code></pre></div>
 	<a class="read-more" href="/2012/02/etags-in-rails/">阅读全文 →</a>
       </div>
       
@@ -199,7 +195,6 @@ Content-Length: 15481
       
       <div class="summary">
 	<p>Windows 7 及 Visio 2010 下验证可行：</p>
-
 <ul>
 <li>添加本地打印机，类型选择 Generic -&gt; MS Publisher Color Printer</li>
 <li>在 Visio 中打印，选择新添加的打印机，选中 Print to file，点 Properties -&gt; Advanced</li>
@@ -253,13 +248,13 @@ Content-Length: 15481
       <div class="summary">
 	jekyll 是一个静态博客生成工具，可配置性很强。但是它的配置对于初学者不是很友好，没有现成的模版，需要自己从头搭一个。octopress 大大简化了这一配置过程，在 jekyll 的基础上提供了一个默认主题，以及一些常用的插件。
 Why 在 github 上捣鼓了一阵子 octopress 后，决定把原来的 wordpress 博客的数据转移到这个 octopress 博客上了。相对于 wordpress，octopress 的优点在于：
- 支持 Markdown 语法。Markdown 是 github、stackoverflow 上的默认标记语言，写笔记我也一直用这个。Mac 平台上有不少好用的 Markdown 编辑器，例如收费的 Byword，免费的 Mou，这些工具都增加了写日志时的愉悦感。
- 静态。对主页空间没有要求，甚至放到 github pages 上都可以。静态页面如果要加评论，可以考虑 disqus 等第三方 JS 工具。
- 对内嵌代码支持很好。内置了 pygments ，这里有一份支持语言的列表。值得一提的是 octopress 还支持内嵌 Gist。
- 日志文件都在本地，而且是纯文本，管理很方便（可以用 git），也不用担心租用的服务器数据丢失等问题。
- rake new_post; rake gen_deploy 这样写博客很过瘾 :)
+  支持 Markdown 语法。Markdown 是 github、stackoverflow 上的默认标记语言，写笔记我也一直用这个。Mac 平台上有不少好用的 Markdown 编辑器，例如收费的 Byword，免费的 Mou，这些工具都增加了写日志时的愉悦感。
+  静态。对主页空间没有要求，甚至放到 github pages 上都可以。静态页面如果要加评论，可以考虑 disqus 等第三方 JS 工具。
+  对内嵌代码支持很好。内置了 pygments ，这里有一份支持语言的列表。值得一提的是 octopress 还支持内嵌 Gist。
+  日志文件都在本地，而且是纯文本，管理很方便（可以用 git），也不用担心租用的服务器数据丢失等问题。
+  rake new_post; rake gen_deploy 这样写博客很过瘾 :)
   How 关于 wordpress 到 octopress 的数据转移，本文结尾的两篇参考文章已经说得很详细了，这里再补充几点：
- 编码：jekyll 的 wordpressdotcom.rb 用了 yaml 库生成博客文章的 meta 信息，碰到中文标题会出现乱码，换用 ya2yaml 后问题解决。
+  编码：jekyll 的 wordpressdotcom.
 	<a class="read-more" href="/2011/11/migrated-to-octopress/">阅读全文 →</a>
       </div>
       
@@ -283,13 +278,45 @@ Why 在 github 上捣鼓了一阵子 octopress 后，决定把原来的 wordpres
       
       <div class="summary">
 	对象属性 ActiveRecord 对象在数据库中的属性并不是以实体变量的方式保存的，如果要为一个属性设置默认值的话，
-class Item &lt; ActiveRecord::Base def category @category || 'n/a' end end  这样的实现是不可行的。读取和修改这些属性时应该使用 read_attribute 和 write_attribute：
-class Item &lt; ActiveRecord::Base def category read_attribute(:category) || 'n/a' end end  Hash 和相等性 ActiveRecord 的 hash 值是根据主键的值计算出来的，这就意味着未保存对象的 hash 值是不可靠的。同样两个 model 对象的相等比较（即==操作符）也是基于主键的，所以两个 model 对象即使它们的其他属性不一样，仍有可能被当作相等。
+class Item &lt; ActiveRecord::Base def category @category || &#39;n/a&#39; end end 这样的实现是不可行的。读取和修改这些属性时应该使用 read_attribute 和 write_attribute：
+class Item &lt; ActiveRecord::Base def category read_attribute(:category) || &#39;n/a&#39; end end Hash 和相等性 ActiveRecord 的 hash 值是根据主键的值计算出来的，这就意味着未保存对象的 hash 值是不可靠的。同样两个 model 对象的相等比较（即==操作符）也是基于主键的，所以两个 model 对象即使它们的其他属性不一样，仍有可能被当作相等。
 查找 find_by_attribute 方法后面加个 ! 号，即使用 find_by_attribute!，就能在找不到对象的时候触发一个 RecordNotFound 异常，而不是返回 nil。
 find_or_initialize_by 和 find_or_create_by 也是两个好用的方法，它们在找不到对象时分别使用 new 和 create 新建一个，并用查找的属性初始化新建的对象。
 手写 SQL 不得不手写 SQL 同时又要防止注入攻击的一个比较简洁的写法是
-Order.where(&quot;name = :name and pay_type = :pay_type&quot;, params[:order])  回调函数 出于性能考虑，after_find 和 after_initialize 只能通过函数声明的方式定义，即不能用类似 before_validation :normalize_fields 这样的形式。
+Order.where(&#34;name = :name and pay_type = :pay_type&#34;, params[:order]) 回调函数 出于性能考虑，after_find 和 after_initialize 只能通过函数声明的方式定义，即不能用类似 before_validation :normalize_fields 这样的形式。
 	<a class="read-more" href="/2011/11/notes-on-active-record/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2011/11/options-for-render/">Rails 中 render 方法的可选参数</a></h2>
+      <span class="post-date">Nov 20, 2011</span>
+      
+      <span class="post-tags">
+	
+	#<a href="https://blog.yxwang.me/tags/programming">Programming</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/rails">Rails</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/ruby">Ruby</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/ruby-on-rails">Ruby on Rails</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/web-development">Web Development</a>&nbsp;
+	
+      </span>
+      
+      
+      
+      <div class="summary">
+	:content_type 设置返回内容的 MIME 类型
+render :file =&gt; filename, :content_type =&gt; &#39;application/rss&#39; :layout 指定 layout
+:status 指定返回的 HTTP 代码
+:location 指定 HTTP 头中的 Location 字段
+Rails 生成的 controller 代码中，create.json 方法在生成对象后会将 Location 设置为新生成对象的 json 地址：
+respond_to do |format| if @item.save format.html { redirect_to @item, notice: &#39;Item was successfully created.&#39; } format.json { render json: @item, status: :created, location: @item } else format.html { render action: &#34;new&#34; } format.json { render json: @item.errors, status: :unprocessable_entity } end end 参考：http://guides.
+	<a class="read-more" href="/2011/11/options-for-render/">阅读全文 →</a>
       </div>
       
     </div>
@@ -323,38 +350,6 @@ OPTIONS 用来查看客户端对某个资源有那些可用的操作。
     </div>
     
     <div class="post">
-      <h2 class="post-title"><a href="https://blog.yxwang.me/2011/11/options-for-render/">Rails 中 render 方法的可选参数</a></h2>
-      <span class="post-date">Nov 20, 2011</span>
-      
-      <span class="post-tags">
-	
-	#<a href="https://blog.yxwang.me/tags/programming">Programming</a>&nbsp;
-	
-	#<a href="https://blog.yxwang.me/tags/rails">Rails</a>&nbsp;
-	
-	#<a href="https://blog.yxwang.me/tags/ruby">Ruby</a>&nbsp;
-	
-	#<a href="https://blog.yxwang.me/tags/ruby-on-rails">Ruby on Rails</a>&nbsp;
-	
-	#<a href="https://blog.yxwang.me/tags/web-development">Web Development</a>&nbsp;
-	
-      </span>
-      
-      
-      
-      <div class="summary">
-	:content_type 设置返回内容的 MIME 类型
-render :file =&gt; filename, :content_type =&gt; 'application/rss'  :layout 指定 layout
-:status 指定返回的 HTTP 代码
-:location 指定 HTTP 头中的 Location 字段
-Rails 生成的 controller 代码中，create.json 方法在生成对象后会将 Location 设置为新生成对象的 json 地址：
-respond_to do |format| if @item.save format.html { redirect_to @item, notice: 'Item was successfully created.' } format.json { render json: @item, status: :created, location: @item } else format.html { render action: &quot;new&quot; } format.json { render json: @item.
-	<a class="read-more" href="/2011/11/options-for-render/">阅读全文 →</a>
-      </div>
-      
-    </div>
-    
-    <div class="post">
       <h2 class="post-title"><a href="https://blog.yxwang.me/2011/11/skip-specs-by-tags/">rspec 跳过指定测试</a></h2>
       <span class="post-date">Nov 20, 2011</span>
       
@@ -379,8 +374,8 @@ respond_to do |format| if @item.save format.html { redirect_to @item, notice: 'I
       <div class="summary">
 	有些测试比较耗时间，而且很少被修改，如果能在测试的时候跳过它们就能让 spec 快不少。
 跳过测试的方法很简单，spec 的 describe 方法可以给对应的测试加上标签，例如
-describe SalesController, :slow =&gt; true do # specs end  接下来只要在 spec/spec_helper.rb 中声明跳过这个标签即可：
-RSpec.configure do |config| config.filter_run_excluding :slow =&gt; true end  与 filter_run_excluding 相反的是 filter_run，指定会被运行的标签，不包含在这个列表中的测试将被忽略。
+describe SalesController, :slow =&gt; true do # specs end 接下来只要在 spec/spec_helper.rb 中声明跳过这个标签即可：
+RSpec.configure do |config| config.filter_run_excluding :slow =&gt; true end 与 filter_run_excluding 相反的是 filter_run，指定会被运行的标签，不包含在这个列表中的测试将被忽略。
 参考：http://www.dixis.com/?p=283
 	<a class="read-more" href="/2011/11/skip-specs-by-tags/">阅读全文 →</a>
       </div>

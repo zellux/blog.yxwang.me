@@ -11,6 +11,7 @@
     
 
     <title> rspec 跳过指定测试 &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -39,7 +40,7 @@
     "articleSection" : "post",
     "name" : "rspec 跳过指定测试",
     "headline" : "rspec 跳过指定测试",
-    "description" : "有些测试比较耗时间，而且很少被修改，如果能在测试的时候跳过它们就能让 spec 快不少。\n跳过测试的方法很简单，spec 的 describe 方法可以给对应的测试加上标签，例如\ndescribe SalesController, :slow =\x26gt; true do # specs end  接下来只要在 spec\/spec_helper.rb 中声明跳过这个标签即可：\nRSpec.configure do |config| config.filter_run_excluding :slow =\x26gt; true end  与 filter_run_excluding 相反的是 filter_run，指定会被运行的标签，不包含在这个列表中的测试将被忽略。\n参考：http:\/\/www.dixis.com\/?p=283",
+    "description" : "有些测试比较耗时间，而且很少被修改，如果能在测试的时候跳过它们就能让 spec 快不少。\n跳过测试的方法很简单，spec 的 describe 方法可以给对应的测试加上标签，例如\ndescribe SalesController, :slow =\u0026gt; true do # specs end 接下来只要在 spec\/spec_helper.rb 中声明跳过这个标签即可：\nRSpec.configure do |config| config.filter_run_excluding :slow =\u0026gt; true end 与 filter_run_excluding 相反的是 filter_run，指定会被运行的标签，不包含在这个列表中的测试将被忽略。\n参考：http:\/\/www.dixis.com\/?p=283",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -47,8 +48,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2011",
-    "datePublished": "2011-11-20 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2011-11-20 00:00:00 \x2b0000 UTC",
+    "datePublished": "2011-11-20 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2011-11-20 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/2011\/11\/skip-specs-by-tags\/",
     "wordCount" : "32",
     "keywords" : [ "Programming","Rails","Rspec","Ruby","Ruby on Rails","Web Development","Blog" ]
@@ -94,23 +95,15 @@
 
     <div class="post-content">
       <p>有些测试比较耗时间，而且很少被修改，如果能在测试的时候跳过它们就能让 spec 快不少。</p>
-
 <p>跳过测试的方法很简单，spec 的 describe 方法可以给对应的测试加上标签，例如</p>
-
-<pre><code class="language-ruby">describe SalesController, :slow =&gt; true do
-    # specs
-end
-</code></pre>
-
-<p>接下来只要在 spec/spec_helper.rb 中声明跳过这个标签即可：</p>
-
-<pre><code class="language-ruby">RSpec.configure do |config|
-  config.filter_run_excluding :slow =&gt; true
-end
-</code></pre>
-
-<p>与 filter_run_excluding 相反的是 filter_run，指定会被运行的标签，不包含在这个列表中的测试将被忽略。</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">describe <span style="color:#66d9ef">SalesController</span>, <span style="color:#e6db74">:slow</span> <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">true</span> <span style="color:#66d9ef">do</span>
+    <span style="color:#75715e"># specs</span>
+<span style="color:#66d9ef">end</span>
+</code></pre></div><p>接下来只要在 spec/spec_helper.rb 中声明跳过这个标签即可：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#66d9ef">RSpec</span><span style="color:#f92672">.</span>configure <span style="color:#66d9ef">do</span> <span style="color:#f92672">|</span>config<span style="color:#f92672">|</span>
+  config<span style="color:#f92672">.</span>filter_run_excluding <span style="color:#e6db74">:slow</span> <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">true</span>
+<span style="color:#66d9ef">end</span>
+</code></pre></div><p>与 filter_run_excluding 相反的是 filter_run，指定会被运行的标签，不包含在这个列表中的测试将被忽略。</p>
 <p>参考：<a href="http://www.dixis.com/?p=283">http://www.dixis.com/?p=283</a></p>
 
     </div>
@@ -120,7 +113,7 @@ end
 
   </div>
   <div class="pagination">
-    <a class="btn previous " href="https://blog.yxwang.me/2011/11/options-for-render/"> Prev</a>  
+    <a class="btn previous " href="https://blog.yxwang.me/2011/11/methods-in-restful-applications/"> Prev</a>  
     <a class="btn next " href="https://blog.yxwang.me/2011/09/recipe-for-hashing/"> Next</a> 
   </div>
 </div>

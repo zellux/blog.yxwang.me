@@ -11,6 +11,7 @@
     
 
     <title> 利用 VMware 的虚拟串口调试 Xen &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -39,7 +40,7 @@
     "articleSection" : "post",
     "name" : "利用 VMware 的虚拟串口调试 Xen",
     "headline" : "利用 VMware 的虚拟串口调试 Xen",
-    "description" : "VMware支持虚拟串口设备，对于调试内核或者虚拟机的帮助很大，具体设置如下（VMware Server 2, Xen 3.3）：\n VMware中为虚拟机增加串口设备 Add Hardware-\x26gt;Serial Port，然后在设置中将Connection模式设为File，指定相应的文件路径(如[standard] debian-xen\/serial-port.log)\n 修改虚拟机的grub启动参数，以我的\/boot\/menu\/lst为例\n  title Xen 3.3.0 \/ Debian GNU\/Linux, kernel 2.6.18.8-xen root (hd0,0) kernel \/boot\/xen-3.3.0.gz com1=115200,8n1 loglvl=all guest_loglvl=all console_to_ring console=com1,vga sync_console module \/boot\/vmlinuz-2.6.18.8-xen root=\/dev\/sda1 ro console=tty0 savedefault   重启虚拟机，即可在之前指定的文件中(Host机上的\/opt\/vmware\/Virtual Machines\/debian-xen\/serial-port.log)中看到虚拟机的输出信息了。  ",
+    "description" : "VMware支持虚拟串口设备，对于调试内核或者虚拟机的帮助很大，具体设置如下（VMware Server 2, Xen 3.3）：\n  VMware中为虚拟机增加串口设备 Add Hardware-\u0026gt;Serial Port，然后在设置中将Connection模式设为File，指定相应的文件路径(如[standard] debian-xen\/serial-port.log)\n  修改虚拟机的grub启动参数，以我的\/boot\/menu\/lst为例\n  title Xen 3.3.0 \/ Debian GNU\/Linux, kernel 2.6.18.8-xen root (hd0,0) kernel \/boot\/xen-3.3.0.gz com1=115200,8n1 loglvl=all guest_loglvl=all console_to_ring console=com1,vga sync_console module \/boot\/vmlinuz-2.6.18.8-xen root=\/dev\/sda1 ro console=tty0 savedefault 重启虚拟机，即可在之前指定的文件中(Host机上的\/opt\/vmware\/Virtual Machines\/debian-xen\/serial-port.log)中看到虚拟机的输出信息了。  ",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -47,8 +48,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2009",
-    "datePublished": "2009-05-27 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2009-05-27 00:00:00 \x2b0000 UTC",
+    "datePublished": "2009-05-27 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2009-05-27 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/2009\/05\/debug-xen-with-vmware-serial-port\/",
     "wordCount" : "37",
     "keywords" : [ "Computer System","Debugging","VMware","Xen","Blog" ]
@@ -94,22 +95,21 @@
 
     <div class="post-content">
       <p>VMware支持虚拟串口设备，对于调试内核或者虚拟机的帮助很大，具体设置如下（VMware Server 2, Xen 3.3）：</p>
-
 <ol>
-<li><p>VMware中为虚拟机增加串口设备
-Add Hardware-&gt;Serial Port，然后在设置中将Connection模式设为File，指定相应的文件路径(如[standard] debian-xen/serial-port.log)</p></li>
-
-<li><p>修改虚拟机的grub启动参数，以我的/boot/menu/lst为例</p></li>
+<li>
+<p>VMware中为虚拟机增加串口设备
+Add Hardware-&gt;Serial Port，然后在设置中将Connection模式设为File，指定相应的文件路径(如[standard] debian-xen/serial-port.log)</p>
+</li>
+<li>
+<p>修改虚拟机的grub启动参数，以我的/boot/menu/lst为例</p>
+</li>
 </ol>
-
-<pre><code class="language-text">title           Xen 3.3.0 / Debian GNU/Linux, kernel 2.6.18.8-xen
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">title           Xen 3.3.0 / Debian GNU/Linux, kernel 2.6.18.8-xen
 root            (hd0,0)
 kernel          /boot/xen-3.3.0.gz com1=115200,8n1 loglvl=all guest_loglvl=all console_to_ring console=com1,vga sync_console
 module          /boot/vmlinuz-2.6.18.8-xen root=/dev/sda1 ro console=tty0
 savedefault
-</code></pre>
-
-<ol>
+</code></pre></div><ol start="3">
 <li>重启虚拟机，即可在之前指定的文件中(Host机上的/opt/vmware/Virtual Machines/debian-xen/serial-port.log)中看到虚拟机的输出信息了。</li>
 </ol>
 

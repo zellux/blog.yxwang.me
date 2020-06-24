@@ -11,6 +11,7 @@
     
 
     <title> Flux OSKit 中 trap_state 的存放位置 &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -47,8 +48,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2008",
-    "datePublished": "2008-08-20 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2008-08-20 00:00:00 \x2b0000 UTC",
+    "datePublished": "2008-08-20 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2008-08-20 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/2008\/08\/trap_state-in-flux-oskit\/",
     "wordCount" : "180",
     "keywords" : [ "Courses","Flux OSKit","Lab","OS","Blog" ]
@@ -94,56 +95,52 @@
 
     <div class="post-content">
       <p>写fork函数的时候发现实际传给trap handler的ts地址和用<code>(struct trap_state *) (KSTACK_TOP(old))) - 1</code></p>
-
 <p>计算出来的结果不一样，后者比前者小0x10。另外ts的实际地址加上ts的大小(92个字节)后就超出了内核栈的范围。</p>
-
-<pre><code class="language-c">/*
- * This structure corresponds to the state of user registers
- * as saved upon kernel trap/interrupt entry.
- * As always, it is only a default implementation;
- * a well-optimized kernel will probably want to override it
- * with something that allows better optimization.
- */
-struct trap_state
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">/*
+</span><span style="color:#75715e"> * This structure corresponds to the state of user registers
+</span><span style="color:#75715e"> * as saved upon kernel trap/interrupt entry.
+</span><span style="color:#75715e"> * As always, it is only a default implementation;
+</span><span style="color:#75715e"> * a well-optimized kernel will probably want to override it
+</span><span style="color:#75715e"> * with something that allows better optimization.
+</span><span style="color:#75715e"> */</span>
+<span style="color:#66d9ef">struct</span> trap_state
 {
-	/* Saved segment registers */
-	unsigned int	gs;
-	unsigned int	fs;
-	unsigned int	es;
-	unsigned int	ds;
+	<span style="color:#75715e">/* Saved segment registers */</span>
+	<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span>	gs;
+	<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span>	fs;
+	<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span>	es;
+	<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span>	ds;
 
-	/* PUSHA register state frame */
-	unsigned int	edi;
-	unsigned int	esi;
-	unsigned int	ebp;
-	unsigned int	cr2;	/* we save cr2 over esp for page faults */
-	unsigned int	ebx;
-	unsigned int	edx;
-	unsigned int	ecx;
-	unsigned int	eax;
+	<span style="color:#75715e">/* PUSHA register state frame */</span>
+	<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span>	edi;
+	<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span>	esi;
+	<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span>	ebp;
+	<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span>	cr2;	<span style="color:#75715e">/* we save cr2 over esp for page faults */</span>
+	<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span>	ebx;
+	<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span>	edx;
+	<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span>	ecx;
+	<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span>	eax;
 
-	/* Processor trap number, 0-31.  */
-	unsigned int	trapno;
+	<span style="color:#75715e">/* Processor trap number, 0-31.  */</span>
+	<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span>	trapno;
 
-	/* Error code pushed by the processor, 0 if none.  */
-	unsigned int	err;
+	<span style="color:#75715e">/* Error code pushed by the processor, 0 if none.  */</span>
+	<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span>	err;
 
-	/* Processor state frame */
-	unsigned int	eip;
-	unsigned int	cs;
-	unsigned int	eflags;
-	unsigned int	esp;
-	unsigned int	ss;
+	<span style="color:#75715e">/* Processor state frame */</span>
+	<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span>	eip;
+	<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span>	cs;
+	<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span>	eflags;
+	<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span>	esp;
+	<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span>	ss;
 
-	/* Virtual 8086 segment registers */
-	unsigned int	v86_es;
-	unsigned int	v86_ds;
-	unsigned int	v86_fs;
-	unsigned int	v86_gs;
+	<span style="color:#75715e">/* Virtual 8086 segment registers */</span>
+	<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span>	v86_es;
+	<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span>	v86_ds;
+	<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span>	v86_fs;
+	<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span>	v86_gs;
 };
-</code></pre>
-
-<p>可以看到在trap发生时硬件自动push的eip cs eflags esp ss后还有四个v86的数据，而通常的trap过程中这些数据是不会被push到内核栈的，而这四个数据的长度正好是0x10，也就解释了为什么计算出来的地址和实际的地址有偏差。</p>
+</code></pre></div><p>可以看到在trap发生时硬件自动push的eip cs eflags esp ss后还有四个v86的数据，而通常的trap过程中这些数据是不会被push到内核栈的，而这四个数据的长度正好是0x10，也就解释了为什么计算出来的地址和实际的地址有偏差。</p>
 
     </div>
         <div class="cc-license">

@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 
   <head>
-	<meta name="generator" content="Hugo 0.55.6" />
+	<meta name="generator" content="Hugo 0.72.0" />
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <meta name="description" content="">
@@ -10,6 +10,7 @@
     
 
     <title> Aiur · Zellux 的博客</title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -17,7 +18,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -25,7 +26,7 @@
     <link rel="shortcut icon" href="/favicon.ico">
 
     
-    <link href="https://blog.yxwang.me/index.xml" rel="alternate" type="application/rss+xml" title="Aiur · Zellux 的博客" />
+    <link href="/index.xml" rel="alternate" type="application/rss+xml" title="Aiur · Zellux 的博客" />
     
 <script type="application/ld+json">
 {
@@ -98,10 +99,10 @@
         SICP第二章里提到了一种用来画图的Lisp方言，用来演示数据抽象和闭包的表达能力（见http://mitpress.mit.edu/sicp/full-text/book/book-Z-H-15.html#%_sec_2.2.4）。
 最近尝试了下，发现soegaard同学已经在PLT Scheme中实现了一个类似的库，可以很方便的在DrScheme上使用。
 sicp.plt包使用很简单，在Language-&gt;Choose Language中选择Module，然后在需要用到这个包的时候用
-(require (planet soegaard/sicp:2:1/sicp))  声明即可。第一次运行时DrScheme会自动下载这个包并安装，如果网络有限制可以先从http://planet.plt-scheme.org/display.ss?package=sicp.plt&owner=soegaard下载然后在DrScheme中选择本地包安装。
+(require (planet soegaard/sicp:2:1/sicp)) 声明即可。第一次运行时DrScheme会自动下载这个包并安装，如果网络有限制可以先从http://planet.plt-scheme.org/display.ss?package=sicp.plt&amp;owner=soegaard下载然后在DrScheme中选择本地包安装。
 另外SICP上使用的两个painter（wave和rogers）没有在这个包里提供，取而代之是diagonal-shading和einstein。
 下面这个程序显示了一个简单的分形图像：
-#lang scheme (require (planet &quot;sicp.ss&quot; (&quot;soegaard&quot; &quot;sicp.plt&quot; 2 1))) (define (right-split painter n) (if (= n 0) painter (let ((smaller (right-split painter (- n 1)))) (beside painter (below smaller smaller))))) (define (up-split painter n) (if (= n 0) painter (let ((smaller (up-split painter (- n 1)))) (below painter (beside smaller smaller))))) (define (corner-split painter n) (if (= n 0) painter (let ((up (up-split painter (- n 1))) (right (right-split painter (- n 1)))) (let ((top-left (beside up up)) (bottom-right (below right right)) (corner (corner-split painter (- n 1)))) (beside (below painter top-left) (below bottom-right corner)))))) (paint (corner-split diagonal-shading 4))  程序输出：
+#lang scheme (require (planet &#34;sicp.ss&#34; (&#34;soegaard&#34; &#34;sicp.plt&#34; 2 1))) (define (right-split painter n) (if (= n 0) painter (let ((smaller (right-split painter (- n 1)))) (beside painter (below smaller smaller))))) (define (up-split painter n) (if (= n 0) painter (let ((smaller (up-split painter (- n 1)))) (below painter (beside smaller smaller))))) (define (corner-split painter n) (if (= n 0) painter (let ((up (up-split painter (- n 1))) (right (right-split painter (- n 1)))) (let ((top-left (beside up up)) (bottom-right (below right right)) (corner (corner-split painter (- n 1)))) (beside (below painter top-left) (below bottom-right corner)))))) (paint (corner-split diagonal-shading 4)) 程序输出：
 	<a class="read-more" href="/2010/02/the-sicp-picture-language/">阅读全文 →</a>
       </div>
       
@@ -123,9 +124,8 @@ sicp.plt包使用很简单，在Language-&gt;Choose Language中选择Module，�
       <div class="summary">
         gitk是用Tcl/Tk写的工具，默认使用Tk 8.4，不支持抗锯齿，因此字体显示很难看。好在Tk 8.5支持了部分抗锯齿字体，修改gitk使用Tk 8.5后显示效果会好一点。
 以Ubuntu为例，安装tk8.5包后，编辑/usr/bin/gitk文件，把开头调用wish的那行
-exec /usr/bin/wish &quot;$0&quot; -- &quot;$@&quot;  改成
-exec /usr/bin/wish8.5 &quot;$0&quot; -- &quot;$@&quot;  这样就能在gitk中开启抗锯齿了，虽然效果还不是很好。另外qgit也是一个不错的选择。
-参考链接：http://navarra.ca/?p=44
+exec /usr/bin/wish &#34;$0&#34; -- &#34;$@&#34; 改成
+exec /usr/bin/wish8.5 &#34;$0&#34; -- &#34;$@&#34; 这样就能在gitk中开启抗锯齿了，虽然效果还不是很好。另外qgit也是一个不错的选择。
 	<a class="read-more" href="/2010/02/gitk-font/">阅读全文 →</a>
       </div>
       
@@ -171,11 +171,11 @@ Linear page table 很好的解决了这两个问题。它的实现很简单，�
       
       <div class="summary">
         今天碰到一个gcc优化相关的问题，为了让一个页变成脏页（页表中dirty位被置上），需要执行下面这段代码：
-uint32_t *page; // ... page[0] = page[0];  最后一行代码很有可能被gcc优化掉，因为这段代码看起来没有任何实际的作用。那么如何防止gcc对这段代码做优化呢？
+uint32_t *page; // ... page[0] = page[0]; 最后一行代码很有可能被gcc优化掉，因为这段代码看起来没有任何实际的作用。那么如何防止gcc对这段代码做优化呢？
 设置gcc编译时优化级别为-O0肯定是不合适的，这样对程序性能影响会比较大。stackoverflow上的Dietrich Epp给出了一个强制类型转换的方案：
-((unsigned char volatile *)page)[0] = page[0];  通过volatile关键字禁止gcc的优化，和我之前采用的方法类似。
+((unsigned char volatile *)page)[0] = page[0]; 通过volatile关键字禁止gcc的优化，和我之前采用的方法类似。
 Plow同学给出了另一个利用gcc 4.4特性的方法：
-#pragma GCC push_options #pragma GCC optimize (&quot;O0&quot;) your code #pragma GCC pop_options  这里用到了gcc 4.4的特性Function Specific Option Pragmas，在特定代码前保存当前的编译选项，然后对特定的代码使用O0优化级别，最后再恢复之前保存的编译选项。
+#pragma GCC push_options #pragma GCC optimize (&#34;O0&#34;)  your code #pragma GCC pop_options 这里用到了gcc 4.4的特性Function Specific Option Pragmas，在特定代码前保存当前的编译选项，然后对特定的代码使用O0优化级别，最后再恢复之前保存的编译选项。
 俺觉得这个特性有些场合下挺好用的，在这里分享下，虽然因为编译器版本问题最后我还是用了前面一种方法。
 	<a class="read-more" href="/2010/02/code-specific-optimizations-in-gcc/">阅读全文 →</a>
       </div>
@@ -198,11 +198,10 @@ Plow同学给出了另一个利用gcc 4.4特性的方法：
       <div class="summary">
         前几天试用了下ECB，非常喜欢它的定义列表和文件浏览历史的功能。但是却发现了另外一个问题：使用ECB之前我把整个窗口分成左右两块，左边是代码，右边是cscope的查找结果，现在开启ECB之后就不能再切一块窗口给cscope用了。
 感谢stackoverflow上的sanitynic，给出了自定义ECB窗口的参考。现在俺终于能把cscope窗口绑定到屏幕左下角啦。
-
 自定义ECB layout其实也挺方便的，上图对应的配置为
-(ecb-layout-define &quot;my-cscope-layout&quot; left nil (ecb-set-methods-buffer) (ecb-split-ver 0.5 t) (other-window 1) (ecb-set-history-buffer) (ecb-split-ver 0.25 t) (other-window 1) (ecb-set-cscope-buffer)) (defecb-window-dedicator ecb-set-cscope-buffer &quot; *ECB cscope-buf*&quot; (switch-to-buffer &quot;*cscope*&quot;)) (setq ecb-layout-name &quot;my-cscope-layout&quot;) ;; Disable buckets so that history buffer can display more entries (setq ecb-history-make-buckets 'never)  my-cscope-layout这个layout左边窗口分为三部分，最上面的函数列表占一半高度，中间为历史文件列表，下面为cscope的查找结果，它们各占四分之一的高度。
+(ecb-layout-define &#34;my-cscope-layout&#34; left nil (ecb-set-methods-buffer) (ecb-split-ver 0.5 t) (other-window 1) (ecb-set-history-buffer) (ecb-split-ver 0.25 t) (other-window 1) (ecb-set-cscope-buffer)) (defecb-window-dedicator ecb-set-cscope-buffer &#34; *ECB cscope-buf*&#34; (switch-to-buffer &#34;*cscope*&#34;)) (setq ecb-layout-name &#34;my-cscope-layout&#34;) ;; Disable buckets so that history buffer can display more entries (setq ecb-history-make-buckets &#39;never) my-cscope-layout这个layout左边窗口分为三部分，最上面的函数列表占一半高度，中间为历史文件列表，下面为cscope的查找结果，它们各占四分之一的高度。
 另外再简单提下cscope插件的安装和配置，使用前需确认当前系统已经安装了cscope，另外要有cscope-indexer这个脚本。在cscope/contrib目录下找到一个xcscope.el，复制到Emacs的插件目录中，并在Emacs初始化文件中加入
-(require 'xcscope)  即可。某些发行版的包里面似乎没有cscope-indexer和xcscope.el，直接从网上下一个好了。
+(require &#39;xcscope) 即可。某些发行版的包里面似乎没有cscope-indexer和xcscope.el，直接从网上下一个好了。
 几个常用的快捷键：
  C-c s I 建立cscope索引 C-c s a 设置搜索目录 C-c s d 查找定义 C-c s s 查找字符串 C-c s c 查找调用者 C-c s n 下一个查找结果 C-c s p 上一个查找结果  更多的快捷键可以在 C-h b 跳转的帮助页面的 cscope-minor-mode 区找到。
 	<a class="read-more" href="/2010/02/bind-cscope-to-ecb/">阅读全文 →</a>
@@ -228,7 +227,7 @@ Plow同学给出了另一个利用gcc 4.4特性的方法：
 Intructor&rsquo;s Manual 上的解答设计了一个很巧妙的验证策略。假设T为那个巨大的数组，S为辅助栈，那么对于一个键k，如果k存在于这个字典中，则T[k]保存的是 k在S中的位置j，而S[j]则保存了k值。即1 ≤ T[k] ≤ top[S], S[ T[k] ] = k, T [ S[j] ] = j，我们称这个条件为“验证环”。这个设计的关键在于T和S能够互相验证，从而排除了未初始化位置上随机值的干扰。
 还有一个问题就是，键k对应的值v应该怎么保存呢？其实只要维护另外一个和T或者S平行的数组就行了，既然S的元素个数远小于T，选择和S平行即可。
 根据这个验证策略，我们就能设计出词典的基本操作了： 初始化：建立一个大小为0的栈 查找：给定键k，检查 1 ≤ T [k] ≤ top[S] &amp;&amp; S[ T[k] ] = k，如果满足则返回对应值，否则返回NULL 插入：如果键已经存在则直接替换；否则将新的键值入栈，并且维护T[k] ← top[S] 删除：要确保两件事，一是验证环要被破坏，二是栈S的空洞要被填补。通过把栈顶的元素移动到要删除的元素位置，我们能同时确保这两点：
-S[ T[k] ] ← S[ top[S] ] S[ T[k] ] ← S [ top[S] ] T[ S[ T[k] ] ] ← T [k] T[k] ← 0 top[S] ← top[S] − 1  所有操作都能在O(1)时间内完成
+S[ T[k] ] ← S[ top[S] ] S[ T[k] ] ← S [ top[S] ] T[ S[ T[k] ] ] ← T [k] T[k] ← 0 top[S] ← top[S] − 1 所有操作都能在O(1)时间内完成
 	<a class="read-more" href="/2010/02/clrs-problem-111-4/">阅读全文 →</a>
       </div>
       
@@ -250,9 +249,8 @@ S[ T[k] ] ← S[ top[S] ] S[ T[k] ] ← S [ top[S] ] T[ S[ T[k] ] ] ← T [k] T[
       <div class="summary">
         semantic是cedet的组件之一，它可以对程序做语义分析，结合company等其他插件，可以实现自动补全菜单等功能。
 之前用semantic+company写MIT 6.828的lab时几乎不需要什么特殊的设置就能直接用，这次拿来改Xen的代码的时候却出现了semantic无法找到符号定义的问题，究其原因在于MIT 6.828的目录结构相对简单，头文件都在inc/目录下，而Xen的头文件在多个目录下，而且做预处理时还要加上Makefile里定义的一些预定义宏。今天参考了Alex Ott的这篇文章终于成功地让semantic支持Xen的代码分析了：
-
 这里分享一下和项目相关的一些设置，semantic安装等问题请参考网上的其他文章。也可以参考我的配置文件http://code.google.com/p/zellux-emacs-conf/source/browse/my-cc-mode.el，cscope ecb semantic和company等配置都在这个文件里了，不过有点混乱。
-;; Danimoth-specified configurations (add-to-list 'semanticdb-project-roots &quot;~/danimoth/xen&quot;) (setq semanticdb-project-roots (list (expand-file-name &quot;/&quot;))) (setq danimoth-base-dir &quot;/home/wyx/danimoth&quot;) (add-to-list 'auto-mode-alist (cons danimoth-base-dir 'c++-mode)) (add-to-list 'auto-mode-alist (cons danimoth-base-dir 'c-mode)) (add-to-list 'semantic-lex-c-preprocessor-symbol-file (concat danimoth-base-dir &quot;/xen/include/config.h&quot;)) (add-to-list 'semantic-lex-c-preprocessor-symbol-file (concat danimoth-base-dir &quot;/xen/include/asm-x86/config.h&quot;)) (ede-cpp-root-project &quot;Danimoth&quot; :name &quot;Danimoth&quot; ;; Any file at root directory of the project :file &quot;~/danimoth/xen/Makefile&quot; ;; Relative to the project's root directory :include-path '(&quot;/&quot; &quot;/include/asm-x86&quot; &quot;/include/xen&quot; &quot;/include/public&quot; &quot;/include/acpi&quot; &quot;/arch/x86/cpu/&quot; ) ;; Pre-definds macro for preprocessing :spp-table '((&quot;__XEN__&quot; .
+;; Danimoth-specified configurations (add-to-list &#39;semanticdb-project-roots &#34;~/danimoth/xen&#34;) (setq semanticdb-project-roots (list (expand-file-name &#34;/&#34;))) (setq danimoth-base-dir &#34;/home/wyx/danimoth&#34;) (add-to-list &#39;auto-mode-alist (cons danimoth-base-dir &#39;c++-mode)) (add-to-list &#39;auto-mode-alist (cons danimoth-base-dir &#39;c-mode)) (add-to-list &#39;semantic-lex-c-preprocessor-symbol-file (concat danimoth-base-dir &#34;/xen/include/config.h&#34;)) (add-to-list &#39;semantic-lex-c-preprocessor-symbol-file (concat danimoth-base-dir &#34;/xen/include/asm-x86/config.h&#34;)) (ede-cpp-root-project &#34;Danimoth&#34; :name &#34;Danimoth&#34; ;; Any file at root directory of the project :file &#34;~/danimoth/xen/Makefile&#34; ;; Relative to the project&#39;s root directory :include-path &#39;(&#34;/&#34; &#34;/include/asm-x86&#34; &#34;/include/xen&#34; &#34;/include/public&#34; &#34;/include/acpi&#34; &#34;/arch/x86/cpu/&#34; ) ;; Pre-definds macro for preprocessing :spp-table &#39;((&#34;__XEN__&#34; .
 	<a class="read-more" href="/2010/02/configuring-semantic/">阅读全文 →</a>
       </div>
       
@@ -273,18 +271,13 @@ S[ T[k] ] ← S[ top[S] ] S[ T[k] ] ← S [ top[S] ] T[ S[ T[k] ] ] ← T [k] T[
       
       <div class="summary">
         终端下的效果图（Windows 7下使用pietty远登）
-
-下载
-http://ecb.sourceforge.net/downloads.html CVS或者压缩包都可以，当然也可以通过各发行版的包管理器安装。
-安装
-在.emacs中加入
-;; ECB configurations (add-to-list 'load-path &quot;~/emacs/ecb-2.40&quot;) (add-to-list 'load-path &quot;~/emacs/cedet-1.0pre6/eieio&quot;) (add-to-list 'load-path &quot;~/emacs/cedet-1.0pre6/semantic&quot;) (add-to-list 'load-path &quot;~/emacs/cedet-1.0pre6/speedbar&quot;) (setq semantic-load-turn-everything-on t) (require 'semantic-load) (require 'ecb-autoloads)  运行Emacs后执行ecb-byte-compile，并重启Emacs（我这里不重启的话执行ecb-active后会报错）。
-使用
-第一次使用时先要设置项目目录，M-x customize-variable  ecb-source-path ，在这里加上你的项目根目录。
+下载http://ecb.sourceforge.net/downloads.htmlCVS或者压缩包都可以，当然也可以通过各发行版的包管理器安装。
+安装在.emacs中加入
+;; ECB configurations (add-to-list &#39;load-path &#34;~/emacs/ecb-2.40&#34;) (add-to-list &#39;load-path &#34;~/emacs/cedet-1.0pre6/eieio&#34;) (add-to-list &#39;load-path &#34;~/emacs/cedet-1.0pre6/semantic&#34;) (add-to-list &#39;load-path &#34;~/emacs/cedet-1.0pre6/speedbar&#34;) (setq semantic-load-turn-everything-on t) (require &#39;semantic-load) (require &#39;ecb-autoloads) 运行Emacs后执行ecb-byte-compile，并重启Emacs（我这里不重启的话执行ecb-active后会报错）。
+使用第一次使用时先要设置项目目录，M-x customize-variable ecb-source-path ，在这里加上你的项目根目录。
 接下来使用M-x ecb-active就能激活ECB了，成功激活后Emacs窗口会被切成左右两半。左边的几个窗口依次显示：目录，当前目录下的文件，当前文件中的函数/全局变量等定义，文件浏览历史。如果打开了一个源文件后函数定义窗口里面是空的，有可能是因为这个项目过大cedet尚未完成对它的分析，闲置一段时间后就能看到文件里的定义。
 ECB提供了方便在这些窗口间切换的快捷键：
-切换到目录窗口 Ctrl-c . g d 切换到函数/方法窗口 Ctrl-c . g m 切换到文件窗口 Ctrl-c . g s 切换到历史窗口 Ctrl-c . g h 切换到上一个编辑窗口 Ctrl-c . g l
-最基本的使用就是这样，Ctrl-C . h可以看到更详细的帮助信息。
+切换到目录窗口 Ctrl-c . g d切换到函数/方法窗口 Ctrl-c . g m切换到文件窗口 Ctrl-c . g s切换到历史窗口 Ctrl-c . g h切换到上一个编辑窗口 Ctrl-c . g l最基本的使用就是这样，Ctrl-C . h可以看到更详细的帮助信息。
 	<a class="read-more" href="/2010/02/ecb-beginning/">阅读全文 →</a>
       </div>
       
@@ -305,9 +298,9 @@ ECB提供了方便在这些窗口间切换的快捷键：
       
       <div class="summary">
         reddit programming版面最近的热帖，下面这个程序输出的结果是一个近似的圆周率(3.156)。
-#define _ F--&gt;00 || F-OO--; long F=00,OO=00; main(){F_OO();printf(&quot;%1.3f\n&quot;, 4.*-F/OO/OO);}F_OO() { _-_-_-_ _-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_ _-_-_-_ }  乍看下这个程序有点莫名其妙，分析一下宏后就知道它的方法了。两个全局变量F和OO分别记录 圆的面积和直径 的相反数，根据4*面积/直径/直径就能得到近似的圆周率了。
+#define _ F--&gt;00 || F-OO--; long F=00,OO=00; main(){F_OO();printf(&#34;%1.3f\n&#34;, 4.*-F/OO/OO);}F_OO() { _-_-_-_ _-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_ _-_-_-_ } 乍看下这个程序有点莫名其妙，分析一下宏后就知道它的方法了。两个全局变量F和OO分别记录 圆的面积和直径 的相反数，根据4*面积/直径/直径就能得到近似的圆周率了。
 至于面积和直径的计算，F在会在每一个_展开的地方减一，这样就得到了圆的面积。直径的计算要展开几行代码才能看得更清楚：
-F--&gt;00 || F-OO--; -F--&gt;00 || F-OO--; -F--&gt;00 || F-OO--; -F--&gt;00 || F-OO--; F--&gt;00 || F-OO--; -F--&gt;00 || F-OO--; -F--&gt;00 || F-OO--; -F--&gt;00 || F-OO--; -F--&gt;00 || F-OO--; -F--&gt;00 || F-OO--; -F--&gt;00 || F-OO--; -F--&gt;00 || F-OO--; -F--&gt;00 || F-OO--;  这是用cpp展开圆形前两行代码的结果，因为或运算的特殊性，F- OO- -只会在每一段的第一行执行，所以OO- -执行的次数就等于圆的直径了。
+F--&gt;00 || F-OO--; -F--&gt;00 || F-OO--; -F--&gt;00 || F-OO--; -F--&gt;00 || F-OO--; F--&gt;00 || F-OO--; -F--&gt;00 || F-OO--; -F--&gt;00 || F-OO--; -F--&gt;00 || F-OO--; -F--&gt;00 || F-OO--; -F--&gt;00 || F-OO--; -F--&gt;00 || F-OO--; -F--&gt;00 || F-OO--; -F--&gt;00 || F-OO--; 这是用cpp展开圆形前两行代码的结果，因为或运算的特殊性，F- OO- -只会在每一段的第一行执行，所以OO- -执行的次数就等于圆的直径了。
 	<a class="read-more" href="/2010/01/obfuscated-c/">阅读全文 →</a>
       </div>
       
@@ -329,7 +322,7 @@ F--&gt;00 || F-OO--; -F--&gt;00 || F-OO--; -F--&gt;00 || F-OO--; -F--&gt;00 || F
       <div class="summary">
         因为大多数情况下程序都是通过libc间接地发出系统调用的，所以只要编译一个只使用int 0x80的glibc库，然后在执行程序的时候用LD_LIBRARY_PATH或其他方法指定使用新编译的glibc库即可。
 以glibc-2.9, Linux i386为例，在sysdeps/unix/sysv/linux/i386/syscall.S中可以看到
-ENTRY (syscall) PUSHARGS_6 /* Save register contents. */ _DOARGS_6(44) /* Load arguments. */ movl 20(%esp), %eax /* Load syscall number into %eax. */ ENTER_KERNEL /* Do the system call. */ POPARGS_6 /* Restore register contents. */ cmpl $-4095, %eax /* Check %eax for error. */ jae SYSCALL_ERROR_LABEL /* Jump to error handler if error. */  这里使用了ENTER_KERNEL这个宏做系统调用，接下来在sysdeps/unix/sysv/linux/i386/sysdep.h里可以找到这个宏的定义
+ENTRY (syscall) PUSHARGS_6 /* Save register contents. */ _DOARGS_6(44) /* Load arguments. */ movl 20(%esp), %eax /* Load syscall number into %eax. */ ENTER_KERNEL /* Do the system call. */ POPARGS_6 /* Restore register contents. */ cmpl $-4095, %eax /* Check %eax for error. */ jae SYSCALL_ERROR_LABEL /* Jump to error handler if error. */ 这里使用了ENTER_KERNEL这个宏做系统调用，接下来在sysdeps/unix/sysv/linux/i386/sysdep.h里可以找到这个宏的定义
 /* The original calling convention for system calls on Linux/i386 is to use int $0x80.
 	<a class="read-more" href="/2010/01/force-int-0x80-for-syscall/">阅读全文 →</a>
       </div>

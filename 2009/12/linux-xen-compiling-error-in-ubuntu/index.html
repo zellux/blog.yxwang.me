@@ -11,6 +11,7 @@
     
 
     <title> Ubuntu 下编译 Linux-xen 的问题 &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -39,7 +40,7 @@
     "articleSection" : "post",
     "name" : "Ubuntu 下编译 Linux-xen 的问题",
     "headline" : "Ubuntu 下编译 Linux-xen 的问题",
-    "description" : "在Ubuntu下编译Linux-xen时碰到arch\/i386\/kernel\/head-xen.o无法找到的问题，而该目录下有head-xen.S这个文件，说明make之前的的工作并没有把这个.S文件编译成.o。而同样的代码，在ArchLinux和Fedora上svn checkout后编译没有任何问题。\n最后发现问题在于Ubuntu默认会把\/bin\/sh指向\/bin\/dash，在scripts\/Makefile.build里面加上一行SHELL=\/bin\/bash指定$(shell)使用bash即可。后来还搜了一下为什么Ubuntu使用dash而不是bash，其理由是dash的执行效率更高，但不可否认的是这个改动也导致了一些项目无法成功编译，虽然无法成功编译的原因可能是Makefile里使用了一些bash的特性而非POSIX shell所提供的那些。\n另外在debug过程中在网上找到了一些debug Makefile的技巧：\nmake -n 可以仅仅打印出将要被执行的命令，而不去实际执行\nmake -np 可以打印出更多的信息（使用的规则和变量），并执行每一条命令\nremake也是个不错的选择：“remake is a patched and modernized version of GNU make utility that adds improved error reporting, the ability to trace execution in a comprehensible way, and a debugger.”\n在检查shell命令的时候，可以使用set -x使得所有shell命令在执行前都能被输出。",
+    "description" : "在Ubuntu下编译Linux-xen时碰到arch\/i386\/kernel\/head-xen.o无法找到的问题，而该目录下有head-xen.S这个文件，说明make之前的的工作并没有把这个.S文件编译成.o。而同样的代码，在ArchLinux和Fedora上svn checkout后编译没有任何问题。\n最后发现问题在于Ubuntu默认会把\/bin\/sh指向\/bin\/dash，在scripts\/Makefile.build里面加上一行SHELL=\/bin\/bash指定$(shell)使用bash即可。后来还搜了一下为什么Ubuntu使用dash而不是bash，其理由是dash的执行效率更高，但不可否认的是这个改动也导致了一些项目无法成功编译，虽然无法成功编译的原因可能是Makefile里使用了一些bash的特性而非POSIX shell所提供的那些。\n另外在debug过程中在网上找到了一些debug Makefile的技巧：\nmake -n 可以仅仅打印出将要被执行的命令，而不去实际执行\nmake -np 可以打印出更多的信息（使用的规则和变量），并执行每一条命令\nremake也是个不错的选择：“remakeis a patched and modernized version of GNU make utility that adds improved error reporting, the ability to trace execution in a comprehensible way, and a debugger.”\n在检查shell命令的时候，可以使用set -x使得所有shell命令在执行前都能被输出。",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -47,10 +48,10 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2009",
-    "datePublished": "2009-12-17 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2009-12-17 00:00:00 \x2b0000 UTC",
+    "datePublished": "2009-12-17 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2009-12-17 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/2009\/12\/linux-xen-compiling-error-in-ubuntu\/",
-    "wordCount" : "42",
+    "wordCount" : "41",
     "keywords" : [ "Computer System","Debug","Makefile","Ubuntu","Xen","Blog" ]
 }
 </script>
@@ -94,17 +95,11 @@
 
     <div class="post-content">
       <p>在Ubuntu下编译Linux-xen时碰到arch/i386/kernel/head-xen.o无法找到的问题，而该目录下有head-xen.S这个文件，说明make之前的的工作并没有把这个.S文件编译成.o。而同样的代码，在ArchLinux和Fedora上svn checkout后编译没有任何问题。</p>
-
-<p>最后发现问题在于Ubuntu默认会把/bin/sh指向/bin/dash，在scripts/Makefile.build里面加上一行SHELL=/bin/bash指定$(shell)使用bash即可。后来还搜了一下为什么Ubuntu使用dash而不是bash，其理由是dash的<a href="https://wiki.ubuntu.com/DashAsBinSh" target="_blank">执行效率更高</a>，但不可否认的是这个改动也导致了一些<a href="https://bugs.launchpad.net/ubuntu/+source/dash/+bug/61463" target="_blank">项目无法成功编译</a>，虽然无法成功编译的原因可能是Makefile里使用了一些bash的特性而非POSIX shell所提供的那些。</p>
-
+<p>最后发现问题在于Ubuntu默认会把/bin/sh指向/bin/dash，在scripts/Makefile.build里面加上一行SHELL=/bin/bash指定$(shell)使用bash即可。后来还搜了一下为什么Ubuntu使用dash而不是bash，其理由是dash的<!-- raw HTML omitted -->执行效率更高<!-- raw HTML omitted -->，但不可否认的是这个改动也导致了一些<!-- raw HTML omitted -->项目无法成功编译<!-- raw HTML omitted -->，虽然无法成功编译的原因可能是Makefile里使用了一些bash的特性而非POSIX shell所提供的那些。</p>
 <p>另外在debug过程中在网上找到了一些debug Makefile的技巧：</p>
-
 <p>make -n 可以仅仅打印出将要被执行的命令，而不去实际执行</p>
-
 <p>make -np 可以打印出更多的信息（使用的规则和变量），并执行每一条命令</p>
-
-<p><a href="http://bashdb.sourceforge.net/remake/" target="_blank">remake</a>也是个不错的选择：“<tt>remake</tt> is a patched and modernized version of GNU make utility that adds improved error reporting, the ability to trace execution in a comprehensible way, and a debugger.”</p>
-
+<p><!-- raw HTML omitted -->remake<!-- raw HTML omitted -->也是个不错的选择：“<!-- raw HTML omitted -->remake<!-- raw HTML omitted --> is a patched and modernized version of GNU make utility that adds improved error reporting, the ability to trace execution in a comprehensible way, and a debugger.”</p>
 <p>在检查shell命令的时候，可以使用set -x使得所有shell命令在执行前都能被输出。</p>
 
     </div>

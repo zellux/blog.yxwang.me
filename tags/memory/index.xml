@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Memory on Aiur · Zellux 的博客</title>
@@ -18,9 +18,7 @@
       
       <guid>https://blog.yxwang.me/2008/07/leaksurvivor/</guid>
       <description>Paper: LeakSurvivor: Towards Safely Tolerating Memory Leaks for Garbage-Collected Languages
-http://www.usenix.org/events/usenix08/tech/tang.html
-Yan Tang, Qi Gao, and Feng Qin, The Ohio State University
-三位作者好像都是中国人
+http://www.usenix.org/events/usenix08/tech/tang.htmlYan Tang, Qi Gao, and Feng Qin, The Ohio State University三位作者好像都是中国人
 这篇paper针对支持垃圾收集的语言中内存泄露问题，提出了一种比较保守的“换出”策略，即把可疑的内存泄露的对象（这些对象通常都是长时间没有被访问的）从内存移动到硬盘上暂时保存，减小内存的压力；如果这些对象后来被再次访问（这种可能性很小），就把它们从硬盘上移回内存。</description>
     </item>
     

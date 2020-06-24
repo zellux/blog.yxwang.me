@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Rails on Aiur · Zellux 的博客</title>
@@ -18,14 +18,12 @@
       
       <guid>https://blog.yxwang.me/2013/01/order-of-formats-in-response-to-does-matter/</guid>
       <description>&lt;p&gt;以前没注意过 Rails controller 中 respond_to 的格式顺序，后来碰到了一个诡异的 bug，才发现这里的顺序对程序行为是有影响的。bug 的现象是用某个应用商店桌面端浏览网站时，会出现返回 JSON 而不是网页的情况。由于当时报告错误的用户给出的 bug 描述是「点击链接后出现乱码」，导致 debug 一开始没找对方向，废了不少功夫才解决这个问题。&lt;/p&gt;
-
 &lt;p&gt;问题就出在不同格式的声明先后上，有问题的代码是：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;respond_to do |format|
-  format.json { render json: @items }
-  format.html
-end
-&lt;/code&gt;&lt;/pre&gt;</description>
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;respond_to &lt;span style=&#34;color:#66d9ef&#34;&gt;do&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;format&lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;
+  format&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;json { render &lt;span style=&#34;color:#e6db74&#34;&gt;json&lt;/span&gt;: @items }
+  format&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;html
+&lt;span style=&#34;color:#66d9ef&#34;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
     </item>
     
     <item>
@@ -35,11 +33,11 @@ end
       
       <guid>https://blog.yxwang.me/2011/11/options-for-render/</guid>
       <description>:content_type 设置返回内容的 MIME 类型
-render :file =&amp;gt; filename, :content_type =&amp;gt; &#39;application/rss&#39;  :layout 指定 layout
+render :file =&amp;gt; filename, :content_type =&amp;gt; &amp;#39;application/rss&amp;#39; :layout 指定 layout
 :status 指定返回的 HTTP 代码
 :location 指定 HTTP 头中的 Location 字段
 Rails 生成的 controller 代码中，create.json 方法在生成对象后会将 Location 设置为新生成对象的 json 地址：
-respond_to do |format| if @item.save format.html { redirect_to @item, notice: &#39;Item was successfully created.&#39; } format.json { render json: @item, status: :created, location: @item } else format.html { render action: &amp;quot;new&amp;quot; } format.json { render json: @item.</description>
+respond_to do |format| if @item.save format.html { redirect_to @item, notice: &amp;#39;Item was successfully created.&amp;#39; } format.json { render json: @item, status: :created, location: @item } else format.html { render action: &amp;#34;new&amp;#34; } format.json { render json: @item.errors, status: :unprocessable_entity } end end 参考：http://guides.</description>
     </item>
     
     <item>
@@ -50,8 +48,8 @@ respond_to do |format| if @item.save format.html { redirect_to @item, notice: &#
       <guid>https://blog.yxwang.me/2011/11/skip-specs-by-tags/</guid>
       <description>有些测试比较耗时间，而且很少被修改，如果能在测试的时候跳过它们就能让 spec 快不少。
 跳过测试的方法很简单，spec 的 describe 方法可以给对应的测试加上标签，例如
-describe SalesController, :slow =&amp;gt; true do # specs end  接下来只要在 spec/spec_helper.rb 中声明跳过这个标签即可：
-RSpec.configure do |config| config.filter_run_excluding :slow =&amp;gt; true end  与 filter_run_excluding 相反的是 filter_run，指定会被运行的标签，不包含在这个列表中的测试将被忽略。
+describe SalesController, :slow =&amp;gt; true do # specs end 接下来只要在 spec/spec_helper.rb 中声明跳过这个标签即可：
+RSpec.configure do |config| config.filter_run_excluding :slow =&amp;gt; true end 与 filter_run_excluding 相反的是 filter_run，指定会被运行的标签，不包含在这个列表中的测试将被忽略。
 参考：http://www.dixis.com/?p=283</description>
     </item>
     

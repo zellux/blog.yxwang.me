@@ -11,6 +11,7 @@
     
 
     <title> Sorting Networks &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -39,7 +40,7 @@
     "articleSection" : "post",
     "name" : "Sorting Networks",
     "headline" : "Sorting Networks",
-    "description" : "算法导论第27章，在并行处理的条件下效率很高的排序算法。\n介绍 如下面左图所示，每条横线(wire)代表一个待 比较的数值，竖线(comparator)表示连接的两条横线要做一次比较，并将较小的值放在输出横线的上方，较大的放在下面。排序过程就是从左往右依次 调用各个comparator（在同一位置上的comparator可以同时做） 有图表示了四个数字3, 2, 4, 1在经过这个Sorting Network时的行为。（由于背景为深色，建议点击图片查看）\n\n下图是一个冒泡排序的Sorting Network表示\n\n可以看到所有的比较都没有并行，效率很低。接下来先介绍一个0-1原理，然后利用它来构造一些比较高效的网络。\n性质 首先是引理27.1： 对 于输入数据A = ，如果某个比较网络(comparison network)的输出是B = ，那么对于任一单调递增的函数f，这个网络能把输入数据f(A) = 变为f(B) = 这个引理的证明很简单，关键在于min(f(x), f(y)) = f(min(x,y))\n接下来就是0-1原理： 一个有n个输入数据的比较网络，如果它能将仅由0和1组成的序列正确的排序（这种输入共有2^n种可能），那么它也能正确的将任意数字组成的序列排序。 证明也不难，利用前面的引理反正即可得到这个定理。\n双调排序 接 下来先考虑双调序列(bitonic sequence)这种特殊情况，所谓双调序列就是先单调递增，后单调递减，或者可以通过环形旋转变化出上述特性的序列，比如和都满足条件（对于后面一种序列，只要把最后的3, 5移到序列开头就行了）。 双调排序(bitonic sorter)有若干步骤，其中有一步叫做half-cleaner，每一次half-cleaner讲数据放到一个深度为1的排序网络中，第i行和第i\x2bn\/2行比较(i=1,2,..,n\/2)\n\n引理27.3： 做完上述的half-cleaner后，输出的上半部分和下半部分都保持双调的特点，而且上半部分的每个元素都不大于下半部分的任一元素。 分四种情况讨论即可。\n通过递归调用half-cleaner即可完成双调队列的排序。要对n个元素进行双调排序Bitonic-Sorter(n)，首先调用Half-Cleaner(n)，将元素分成上下两部分，接着依次对这两部分执行Bitonic-Sorter(n\/2)即可。 调用的深度D(n) = lgn\n归并网络 书上只给出了对0-1序列排序的算法，任意数字的排序算法留作了习题。 合并网络基于这样一个事实：对于两个已经排序了的序列X = 00000111，Y = 00001111，将Y倒过来后和X拼接的结果是一个双调序列。对这个双调序列再做一次Bitonic-Sorter就能有序。 通 过修改Bitonic-Sorter方法的第一步就能实现Merger，关键在于隐式的反转输入的下半部分。Half-Cleaner方法中比较了第i和 第i\x2bn\/2两个元素，如果下半部分反转的话就相当于比较第i和第n-i\x2b1个元素。直接继续执行Bitonic-Sorter方法即可，如下图所示。\n\n排序网络 我们已经有了构造一个排序网络所需的工具，接下来介绍一种利用归并网络进行排序的并行版本。 大致方法和传统的归并排序类似，从最小的颗粒开始二分增长，直到整个序列有序。 这样，一共需要lg(n)次Merger，每次归并中需要做lg(i)次Sorter，排序的总深度 D(n) = 0 (n = 1) D(n\/2) \x2b lg(n) (n = 2^k且 k\x26gt;=1) 由Master Method可推出D(n) = big-omega(lg^2(n)) 也就是说理想的并行环境中，n个数可以在O(lg^2(n))时间内完成排序。",
+    "description" : "算法导论第27章，在并行处理的条件下效率很高的排序算法。\n介绍如下面左图所示，每条横线(wire)代表一个待 比较的数值，竖线(comparator)表示连接的两条横线要做一次比较，并将较小的值放在输出横线的上方，较大的放在下面。排序过程就是从左往右依次 调用各个comparator（在同一位置上的comparator可以同时做） 有图表示了四个数字3, 2, 4, 1在经过这个Sorting Network时的行为。（由于背景为深色，建议点击图片查看）\n下图是一个冒泡排序的Sorting Network表示\n可以看到所有的比较都没有并行，效率很低。接下来先介绍一个0-1原理，然后利用它来构造一些比较高效的网络。\n性质首先是引理27.1： 对 于输入数据A = \u0026lt;a_1, a_2, .., a_n\u0026gt;，如果某个比较网络(comparison network)的输出是B = \u0026lt;b_1, b_2, \u0026hellip;, b_n\u0026gt;，那么对于任一单调递增的函数f，这个网络能把输入数据f(A) = \u0026lt;f(a_1), f(a_2), \u0026hellip;, f(a_n)\u0026gt;变为f(B) = \u0026lt;f(b_1), f(b_2), \u0026hellip;f(b_3)\u0026gt;\n这个引理的证明很简单，关键在于min(f(x), f(y)) = f(min(x,y))\n接下来就是0-1原理： 一个有n个输入数据的比较网络，如果它能将仅由0和1组成的序列正确的排序（这种输入共有2^n种可能），那么它也能正确的将任意数字组成的序列排序。 证明也不难，利用前面的引理反正即可得到这个定理。\n双调排序接 下来先考虑双调序列(bitonic sequence)这种特殊情况，所谓双调序列就是先单调递增，后单调递减，或者可以通过环形旋转变化出上述特性的序列，比如\u0026lt;1, 4, 6, 8, 3, 2\u0026gt;和\u0026lt;6, 9, 4, 2, 3, 5\u0026gt;都满足条件（对于后面一种序列，只要把最后的3, 5移到序列开头就行了）。 双调排序(bitonic sorter)有若干步骤，其中有一步叫做half-cleaner，每一次half-cleaner讲数据放到一个深度为1的排序网络中，第i行和第i\u002bn\/2行比较(i=1,2,..,n\/2)\n引理27.3： 做完上述的half-cleaner后，输出的上半部分和下半部分都保持双调的特点，而且上半部分的每个元素都不大于下半部分的任一元素。 分四种情况讨论即可。\n通过递归调用half-cleaner即可完成双调队列的排序。要对n个元素进行双调排序Bitonic-Sorter(n)，首先调用Half-Cleaner(n)，将元素分成上下两部分，接着依次对这两部分执行Bitonic-Sorter(n\/2)即可。 调用的深度D(n) = lgn\n归并网络 书上只给出了对0-1序列排序的算法，任意数字的排序算法留作了习题。 合并网络基于这样一个事实：对于两个已经排序了的序列X = 00000111，Y = 00001111，将Y倒过来后和X拼接的结果是一个双调序列。对这个双调序列再做一次Bitonic-Sorter就能有序。 通 过修改Bitonic-Sorter方法的第一步就能实现Merger，关键在于隐式的反转输入的下半部分。Half-Cleaner方法中比较了第i和 第i\u002bn\/2两个元素，如果下半部分反转的话就相当于比较第i和第n-i\u002b1个元素。直接继续执行Bitonic-Sorter方法即可，如下图所示。",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -47,10 +48,10 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2008",
-    "datePublished": "2008-04-23 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2008-04-23 00:00:00 \x2b0000 UTC",
+    "datePublished": "2008-04-23 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2008-04-23 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/2008\/04\/sorting-networks\/",
-    "wordCount" : "82",
+    "wordCount" : "99",
     "keywords" : [ "Algorithms","Parallel Computing","TCS","Blog" ]
 }
 </script>
@@ -94,50 +95,35 @@
 
     <div class="post-content">
       <p>算法导论第27章，在并行处理的条件下效率很高的排序算法。</p>
-
-<p><strong>介绍</strong>
+<p><!-- raw HTML omitted -->介绍<!-- raw HTML omitted -->
 如下面左图所示，每条横线(wire)代表一个待 比较的数值，竖线(comparator)表示连接的两条横线要做一次比较，并将较小的值放在输出横线的上方，较大的放在下面。排序过程就是从左往右依次 调用各个comparator（在同一位置上的comparator可以同时做）
 有图表示了四个数字3, 2, 4, 1在经过这个Sorting Network时的行为。（由于背景为深色，建议点击图片查看）</p>
-
-<p><a href="/images/wp-uploads/2010/01/650px-SimpleSortingNetworkFullOperation.svg_.png"><img class="alignnone size-full wp-image-62471" title="650px-SimpleSortingNetworkFullOperation.svg" src="/images/wp-uploads/2010/01/650px-SimpleSortingNetworkFullOperation.svg_.png" alt="" width="650" height="203"></a></p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <p>下图是一个冒泡排序的Sorting Network表示</p>
-
-<p><a href="/images/wp-uploads/2010/01/200px-Six-wire-bubble-sorting-network.svg_.png"><img class="alignnone size-full wp-image-62469" title="200px-Six-wire-bubble-sorting-network.svg" src="/images/wp-uploads/2010/01/200px-Six-wire-bubble-sorting-network.svg_.png" alt="" width="200" height="187"></a></p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <p>可以看到所有的比较都没有并行，效率很低。接下来先介绍一个0-1原理，然后利用它来构造一些比较高效的网络。</p>
-
-<p><strong>性质</strong>
+<p><!-- raw HTML omitted -->性质<!-- raw HTML omitted -->
 首先是引理27.1：
-对 于输入数据A = <a_1, a_2, .., a_n>，如果某个比较网络(comparison network)的输出是B = <b_1, b_2, ..., b_n>，那么对于任一单调递增的函数f，这个网络能把输入数据f(A) = <f(a_1), f(a_2), ..., f(a_n)>变为f(B) = <f(b_1), f(b_2), ...f(b_3)></p>
-
+对 于输入数据A = &lt;a_1, a_2, .., a_n&gt;，如果某个比较网络(comparison network)的输出是B = &lt;b_1, b_2, &hellip;, b_n&gt;，那么对于任一单调递增的函数f，这个网络能把输入数据f(A) = &lt;f(a_1), f(a_2), &hellip;, f(a_n)&gt;变为f(B) = &lt;f(b_1), f(b_2), &hellip;f(b_3)&gt;</p>
 <p>这个引理的证明很简单，关键在于min(f(x), f(y)) = f(min(x,y))</p>
-
 <p>接下来就是0-1原理：
 一个有n个输入数据的比较网络，如果它能将仅由0和1组成的序列正确的排序（这种输入共有2^n种可能），那么它也能正确的将任意数字组成的序列排序。
 证明也不难，利用前面的引理反正即可得到这个定理。</p>
-
-<p><strong>双调排序</strong>
-接 下来先考虑双调序列(bitonic sequence)这种特殊情况，所谓双调序列就是先单调递增，后单调递减，或者可以通过环形旋转变化出上述特性的序列，比如<1, 4, 6, 8, 3, 2>和<6, 9, 4, 2, 3, 5>都满足条件（对于后面一种序列，只要把最后的3, 5移到序列开头就行了）。
+<p><!-- raw HTML omitted -->双调排序<!-- raw HTML omitted -->
+接 下来先考虑双调序列(bitonic sequence)这种特殊情况，所谓双调序列就是先单调递增，后单调递减，或者可以通过环形旋转变化出上述特性的序列，比如&lt;1, 4, 6, 8, 3, 2&gt;和&lt;6, 9, 4, 2, 3, 5&gt;都满足条件（对于后面一种序列，只要把最后的3, 5移到序列开头就行了）。
 双调排序(bitonic sorter)有若干步骤，其中有一步叫做half-cleaner，每一次half-cleaner讲数据放到一个深度为1的排序网络中，第i行和第i+n/2行比较(i=1,2,..,n/2)</p>
-
-<p><a href="/images/wp-uploads/2010/01/bito8.gif"><img class="alignnone size-full wp-image-62472" title="bito8" src="/images/wp-uploads/2010/01/bito8.gif" alt="" width="102" height="150"></a></p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <p>引理27.3：
 做完上述的half-cleaner后，输出的上半部分和下半部分都保持双调的特点，而且上半部分的每个元素都不大于下半部分的任一元素。
 分四种情况讨论即可。</p>
-
 <p>通过递归调用half-cleaner即可完成双调队列的排序。要对n个元素进行双调排序Bitonic-Sorter(n)，首先调用Half-Cleaner(n)，将元素分成上下两部分，接着依次对这两部分执行Bitonic-Sorter(n/2)即可。
 调用的深度D(n) = lgn</p>
-
-<p><strong>归并网络
-</strong>书上只给出了对0-1序列排序的算法，任意数字的排序算法留作了习题。
+<p><!-- raw HTML omitted -->归并网络
+<!-- raw HTML omitted -->书上只给出了对0-1序列排序的算法，任意数字的排序算法留作了习题。
 合并网络基于这样一个事实：对于两个已经排序了的序列X = 00000111，Y = 00001111，将Y倒过来后和X拼接的结果是一个双调序列。对这个双调序列再做一次Bitonic-Sorter就能有序。
 通 过修改Bitonic-Sorter方法的第一步就能实现Merger，关键在于隐式的反转输入的下半部分。Half-Cleaner方法中比较了第i和 第i+n/2两个元素，如果下半部分反转的话就相当于比较第i和第n-i+1个元素。直接继续执行Bitonic-Sorter方法即可，如下图所示。</p>
-
-<p><a href="/images/wp-uploads/2010/01/sortnetwork.jpg"><img class="alignnone size-full wp-image-62473" title="sortnetwork" src="/images/wp-uploads/2010/01/sortnetwork.jpg" alt="" width="479" height="141"></a></p>
-
-<p><strong>排序网络</strong>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><!-- raw HTML omitted -->排序网络<!-- raw HTML omitted -->
 我们已经有了构造一个排序网络所需的工具，接下来介绍一种利用归并网络进行排序的并行版本。
 大致方法和传统的归并排序类似，从最小的颗粒开始二分增长，直到整个序列有序。
 这样，一共需要lg(n)次Merger，每次归并中需要做lg(i)次Sorter，排序的总深度
@@ -146,9 +132,7 @@ D(n) =
 D(n/2) + lg(n)  (n = 2^k且 k&gt;=1)
 由Master Method可推出D(n) = big-omega(lg^2(n))
 也就是说理想的并行环境中，n个数可以在O(lg^2(n))时间内完成排序。</p>
-
-<p>Bitonic Sorter <a href="http://www.iti.fh-flensburg.de/lang/algorithmen/sortieren/bitonic/bitonicen.htm">http://www.iti.fh-flensburg.de/lang/algorithmen/sortieren/bitonic/bitonicen.htm</a></p>
-
+<p>Bitonic Sorter <!-- raw HTML omitted --><a href="http://www.iti.fh-flensburg.de/lang/algorithmen/sortieren/bitonic/bitonicen.htm">http://www.iti.fh-flensburg.de/lang/algorithmen/sortieren/bitonic/bitonicen.htm</a><!-- raw HTML omitted --></p>
 <p>图片来自于Wikipedia以及算法导论附图</p>
 
     </div>

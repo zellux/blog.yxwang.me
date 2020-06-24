@@ -11,6 +11,7 @@
     
 
     <title> 良性代码，恶意利用：浅谈 Return-Oriented 攻击（二） &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -39,7 +40,7 @@
     "articleSection" : "post",
     "name" : "良性代码，恶意利用：浅谈 Return-Oriented 攻击（二）",
     "headline" : "良性代码，恶意利用：浅谈 Return-Oriented 攻击（二）",
-    "description" : "在上一篇文章中我们介绍了 return-oriented 这种攻击手段，它的强大之处在于攻击者不需要插入恶意代码，通过构造特殊的函数返回栈利用程序中原有的代码即可达到攻击者的目地。\n北卡州立大学的学者们提出了一种防止 return-oriented 攻击的思路，思路很简单，一句话概括，就是去掉代码里所有的 ret 指令！\n思路很简单，真正做起来还是很复杂的。x86 中的 ret 指令只有一个字节，即 0xc3。要去掉所有的 0xc3，不仅要修改原来代码中的 ret 指令，还要移除其他指令片段中的 0xc3（例如 movl $0xc3, %rax）。接下来我们来看看 EuroSys 10 上的这篇文章是怎么解决这些问题的。\n首先是原来就作为 ret 指令用的 0xc3 代码。注意 return-oriented 之所以成功一大原因就是 ret 指令在返回时不会检查栈上的返回地址是否正确。要保证这一点，需要引入一个间接跳转层。传统的调用过程是调用者把返回地址压入栈上，然后被调用函数返回时从栈上得到返回地址并返回。现在我们加入一个新的跳转表，这张表里记录了所有的返回地址，而且它不在栈上，因此不能被攻击者修改。当调用者调用函数时，把返回地址在表中的序号压入栈上；函数返回时，从栈上读出地址序号，再查表得到实际地址，然后返回。通过引入这样一层额外的地址转换机制，攻击者就不能通过修改栈上返回地址让函数返回到任意地址了。\n接下来我们要解决其他指令引入的 0xc3，这里面也分几类情况。首先是由于寄存器分配引起的。例如 movl %rax, %rbx 对应的机器码是 48 89 c3，这边就有个 0xc3。对于这一类代码，只需要在编译器做寄存器分配时把有可能产生 0xc3 的情况排除掉即可。\n另一类是代码中直接使用了 0xc3 作为直接数。这种情况需要对代码进行适当的修补，以 cmp $0xc3, %ecx 为例，0xc3 这个直接数可以通过 0xc4 - 1 得到，于是这条指令可以被修改为：\nmov $0xc4, %reg dec %reg cmp %reg, %ecx  到这里所有包含 0xc3 的代码都已经被修改成具有同等功能的不包含 0xc3 的版本了，也就彻底杜绝了 ret 指令被用来做 return-oriented 攻击的可能。对具体实现细节有兴趣的同学可以读一下这篇论文，作者借助 LLVM 生成了一个没有 0xc3 的 FreeBSD 内核。",
+    "description" : "在上一篇文章中我们介绍了 return-oriented 这种攻击手段，它的强大之处在于攻击者不需要插入恶意代码，通过构造特殊的函数返回栈利用程序中原有的代码即可达到攻击者的目地。\n北卡州立大学的学者们提出了一种防止 return-oriented 攻击的思路，思路很简单，一句话概括，就是去掉代码里所有的 ret 指令！\n思路很简单，真正做起来还是很复杂的。x86 中的 ret 指令只有一个字节，即 0xc3。要去掉所有的 0xc3，不仅要修改原来代码中的 ret 指令，还要移除其他指令片段中的 0xc3（例如 movl $0xc3, %rax）。接下来我们来看看 EuroSys 10 上的这篇文章是怎么解决这些问题的。\n首先是原来就作为 ret 指令用的 0xc3 代码。注意 return-oriented 之所以成功一大原因就是 ret 指令在返回时不会检查栈上的返回地址是否正确。要保证这一点，需要引入一个间接跳转层。传统的调用过程是调用者把返回地址压入栈上，然后被调用函数返回时从栈上得到返回地址并返回。现在我们加入一个新的跳转表，这张表里记录了所有的返回地址，而且它不在栈上，因此不能被攻击者修改。当调用者调用函数时，把返回地址在表中的序号压入栈上；函数返回时，从栈上读出地址序号，再查表得到实际地址，然后返回。通过引入这样一层额外的地址转换机制，攻击者就不能通过修改栈上返回地址让函数返回到任意地址了。\n接下来我们要解决其他指令引入的 0xc3，这里面也分几类情况。首先是由于寄存器分配引起的。例如 movl %rax, %rbx 对应的机器码是 48 89 c3，这边就有个 0xc3。对于这一类代码，只需要在编译器做寄存器分配时把有可能产生 0xc3 的情况排除掉即可。\n另一类是代码中直接使用了 0xc3 作为直接数。这种情况需要对代码进行适当的修补，以 cmp $0xc3, %ecx 为例，0xc3 这个直接数可以通过 0xc4 - 1 得到，于是这条指令可以被修改为：\nmov $0xc4, %reg dec %reg cmp %reg, %ecx 到这里所有包含 0xc3 的代码都已经被修改成具有同等功能的不包含 0xc3 的版本了，也就彻底杜绝了 ret 指令被用来做 return-oriented 攻击的可能。对具体实现细节有兴趣的同学可以读一下这篇论文，作者借助 LLVM 生成了一个没有 0xc3 的 FreeBSD 内核。",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -47,8 +48,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2011",
-    "datePublished": "2011-01-16 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2011-01-16 00:00:00 \x2b0000 UTC",
+    "datePublished": "2011-01-16 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2011-01-16 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/2011\/01\/return-oriented-intro-2\/",
     "wordCount" : "83",
     "keywords" : [ "Computer System","EuroSys","LLVM","Return-oriented","Security","Blog" ]
@@ -93,26 +94,17 @@
 </span>
 
     <div class="post-content">
-      <p>在上一篇文章中我们介绍了 <a href="http://techblog.iamzellux.com/2010/11/return-oriented-intro-1/">return-oriented 这种攻击手段</a>，它的强大之处在于攻击者不需要插入恶意代码，通过构造特殊的函数返回栈利用程序中原有的代码即可达到攻击者的目地。</p>
-
+      <p>在上一篇文章中我们介绍了 <!-- raw HTML omitted -->return-oriented 这种攻击手段<!-- raw HTML omitted -->，它的强大之处在于攻击者不需要插入恶意代码，通过构造特殊的函数返回栈利用程序中原有的代码即可达到攻击者的目地。</p>
 <p>北卡州立大学的学者们提出了一种防止 return-oriented 攻击的思路，思路很简单，一句话概括，就是去掉代码里所有的 ret 指令！</p>
-
 <p>思路很简单，真正做起来还是很复杂的。x86 中的 ret 指令只有一个字节，即 0xc3。要去掉所有的 0xc3，不仅要修改原来代码中的 ret 指令，还要移除其他指令片段中的 0xc3（例如 movl $0xc3, %rax）。接下来我们来看看 EuroSys 10 上的这篇文章是怎么解决这些问题的。</p>
-
-<p>首先是原来就作为 ret 指令用的 0xc3 代码。注意 return-oriented 之所以成功一大原因就是 <strong>ret 指令在返回时不会检查栈上的返回地址是否正确。</strong>要保证这一点，需要引入一个间接跳转层。传统的调用过程是调用者把返回地址压入栈上，然后被调用函数返回时从栈上得到返回地址并返回。现在我们加入一个新的跳转表，这张表里记录了所有的返回地址，而且它不在栈上，因此不能被攻击者修改。当调用者调用函数时，把返回地址在表中的序号压入栈上；函数返回时，从栈上读出地址序号，再查表得到实际地址，然后返回。通过引入这样一层额外的地址转换机制，攻击者就不能通过修改栈上返回地址让函数返回到任意地址了。</p>
-
+<p>首先是原来就作为 ret 指令用的 0xc3 代码。注意 return-oriented 之所以成功一大原因就是 <!-- raw HTML omitted -->ret 指令在返回时不会检查栈上的返回地址是否正确。<!-- raw HTML omitted -->要保证这一点，需要引入一个间接跳转层。传统的调用过程是调用者把返回地址压入栈上，然后被调用函数返回时从栈上得到返回地址并返回。现在我们加入一个新的跳转表，这张表里记录了所有的返回地址，而且它不在栈上，因此不能被攻击者修改。当调用者调用函数时，把返回地址在表中的序号压入栈上；函数返回时，从栈上读出地址序号，再查表得到实际地址，然后返回。通过引入这样一层额外的地址转换机制，攻击者就不能通过修改栈上返回地址让函数返回到任意地址了。</p>
 <p>接下来我们要解决其他指令引入的 0xc3，这里面也分几类情况。首先是由于寄存器分配引起的。例如 movl %rax, %rbx 对应的机器码是 48 89 c3，这边就有个 0xc3。对于这一类代码，只需要在编译器做寄存器分配时把有可能产生 0xc3 的情况排除掉即可。</p>
-
 <p>另一类是代码中直接使用了 0xc3 作为直接数。这种情况需要对代码进行适当的修补，以 cmp $0xc3, %ecx 为例，0xc3 这个直接数可以通过 0xc4 - 1 得到，于是这条指令可以被修改为：</p>
-
-<pre><code class="language-nasm">mov $0xc4, %reg
-dec %reg
-cmp %reg, %ecx
-</code></pre>
-
-<p>到这里所有包含 0xc3 的代码都已经被修改成具有同等功能的不包含 0xc3 的版本了，也就彻底杜绝了 ret 指令被用来做 return-oriented 攻击的可能。对具体实现细节有兴趣的同学可以读一下<a href="http://www.csc.ncsu.edu/faculty/jiang/pubs/EUROSYS10.pdf" target="_blank">这篇论文</a>，作者借助 LLVM 生成了一个没有 0xc3 的 FreeBSD 内核。</p>
-
-<p><span id="annotationID_1" class="annotation">如果一个程序没有 0xc3，是不是意味着 return-oriented 攻击也从根本上被阻止了呢？</span></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-nasm" data-lang="nasm"><span style="color:#a6e22e">mov</span> <span style="color:#66d9ef">$</span><span style="color:#ae81ff">0xc4</span>, <span style="color:#f92672">%</span>reg
+<span style="color:#a6e22e">dec</span> <span style="color:#f92672">%</span>reg
+<span style="color:#a6e22e">cmp</span> <span style="color:#f92672">%</span>reg, <span style="color:#f92672">%</span>ecx
+</code></pre></div><p>到这里所有包含 0xc3 的代码都已经被修改成具有同等功能的不包含 0xc3 的版本了，也就彻底杜绝了 ret 指令被用来做 return-oriented 攻击的可能。对具体实现细节有兴趣的同学可以读一下<!-- raw HTML omitted -->这篇论文<!-- raw HTML omitted -->，作者借助 LLVM 生成了一个没有 0xc3 的 FreeBSD 内核。</p>
+<p><!-- raw HTML omitted -->如果一个程序没有 0xc3，是不是意味着 return-oriented 攻击也从根本上被阻止了呢？<!-- raw HTML omitted --></p>
 
     </div>
         <div class="cc-license">

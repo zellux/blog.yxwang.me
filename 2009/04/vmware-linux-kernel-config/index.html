@@ -11,6 +11,7 @@
     
 
     <title> VMware上能跑起来的Linux Kernel配置 &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -39,7 +40,7 @@
     "articleSection" : "post",
     "name" : "VMware上能跑起来的Linux Kernel配置",
     "headline" : "VMware上能跑起来的Linux Kernel配置",
-    "description" : "在默认的基础上，把这几个都改成built-in (*)，通过Xen启动时就不需要额外加载initrd了\n2010.1.19更新：支持网络\nDevice Drivers SCSI device support ---\x26gt; \x26lt;*\x26gt; SCSI disk support \x26lt;*\x26gt; SCSI generic support SCSI low-level drivers ---\x26gt; [*] LSI Logic New Generation RAID Device Drivers \x26lt;*\x26gt; Serial ATA (SATA) support \x26lt;*\x26gt; Intel PIIX\/ICH SATA support Fusion MPT device support ---\x26gt; \x26lt;*\x26gt; Fusion MPT ScsiHost drivers for SPI \x26lt;*\x26gt; Fusion MPT ScsiHost drivers for FC \x26lt;*\x26gt; Fusion MPT ScsiHost drivers for SAS (128) Maximum number of scatter gather entries (16 - 128) \x26lt;*\x26gt; Fusion MPT misc device (ioctl) driver \x26lt;*\x26gt; Fusion MPT LAN driver Network device support ---\x26gt; Ethernet (10 or 100Mbit) ---\x26gt; [*] EISA, VLB, PCI and on board controllers \x26lt;*\x26gt; AMD PCnet32 PCI support  ",
+    "description" : "在默认的基础上，把这几个都改成built-in (*)，通过Xen启动时就不需要额外加载initrd了\n2010.1.19更新：支持网络\nDevice Drivers SCSI device support ---\u0026gt; \u0026lt;*\u0026gt; SCSI disk support \u0026lt;*\u0026gt; SCSI generic support SCSI low-level drivers ---\u0026gt; [*] LSI Logic New Generation RAID Device Drivers \u0026lt;*\u0026gt; Serial ATA (SATA) support \u0026lt;*\u0026gt; Intel PIIX\/ICH SATA support Fusion MPT device support ---\u0026gt; \u0026lt;*\u0026gt; Fusion MPT ScsiHost drivers for SPI \u0026lt;*\u0026gt; Fusion MPT ScsiHost drivers for FC \u0026lt;*\u0026gt; Fusion MPT ScsiHost drivers for SAS (128) Maximum number of scatter gather entries (16 - 128) \u0026lt;*\u0026gt; Fusion MPT misc device (ioctl) driver \u0026lt;*\u0026gt; Fusion MPT LAN driver Network device support ---\u0026gt; Ethernet (10 or 100Mbit) ---\u0026gt; [*] EISA, VLB, PCI and on board controllers \u0026lt;*\u0026gt; AMD PCnet32 PCI support ",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -47,8 +48,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2009",
-    "datePublished": "2009-04-03 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2009-04-03 00:00:00 \x2b0000 UTC",
+    "datePublished": "2009-04-03 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2009-04-03 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/2009\/04\/vmware-linux-kernel-config\/",
     "wordCount" : "109",
     "keywords" : [ "Computer System","Kernel","VMware","Xen","Blog" ]
@@ -94,10 +95,8 @@
 
     <div class="post-content">
       <p>在默认的基础上，把这几个都改成built-in (*)，通过Xen启动时就不需要额外加载initrd了</p>
-
 <p>2010.1.19更新：支持网络</p>
-
-<pre><code class="language-text">Device Drivers
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Device Drivers
 	SCSI device support  ---&gt;
 		&lt;*&gt;   SCSI disk support
 		&lt;*&gt;   SCSI generic support
@@ -116,8 +115,7 @@
 		Ethernet (10 or 100Mbit)  ---&gt;
 			[*] EISA, VLB, PCI and on board controllers
                         &lt;*&gt;   AMD PCnet32 PCI support
-</code></pre>
-
+</code></pre></div>
     </div>
         <div class="cc-license">
       本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.zh">知识共享署名-非商业性使用 3.0 版本许可协议</a>进行许可，欢迎转载，演绎，但是必须保留本文的署名 <a href="https://blog.yxwang.me/2009/04/vmware-linux-kernel-config/">zellux</a>（包含链接），且不得用于商业目的。

@@ -11,6 +11,7 @@
     
 
     <title> 第一个 testkernel 在 Xen 中的载入 &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -39,7 +40,7 @@
     "articleSection" : "post",
     "name" : "第一个 testkernel 在 Xen 中的载入",
     "headline" : "第一个 testkernel 在 Xen 中的载入",
-    "description" : "The Definitive Guide to Xen Hypervisor 中第二章的例子，make 成功后运行 xen create domain_config，报错\nError: (2, \x27Invalid kernel\x27, \x27xc_dom_compat_check: guest type xen-3.0-x86_32 not supported by xen kernel, sorryn\x27)  Google 之后发现是虚拟机类型设置的问题，运行 xm info 可以看到\nxen_caps : xen-3.0-x86_32p  末尾的 p 表示 Xen 内核开启了 PAE 模式，所以载入的 kernel 也必须开启 PAE，在bootstrap.x86_32.S 中加入 PAE=yes 选项即可。",
+    "description" : "The Definitive Guide to Xen Hypervisor 中第二章的例子，make 成功后运行 xen create domain_config，报错\nError: (2, \u0027Invalid kernel\u0027, \u0027xc_dom_compat_check: guest type xen-3.0-x86_32 not supported by xen kernel, sorryn\u0027) Google 之后发现是虚拟机类型设置的问题，运行 xm info 可以看到\nxen_caps : xen-3.0-x86_32p 末尾的 p 表示 Xen 内核开启了 PAE 模式，所以载入的 kernel 也必须开启 PAE，在bootstrap.x86_32.S 中加入 PAE=yes 选项即可。",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -47,8 +48,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2008",
-    "datePublished": "2008-09-18 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2008-09-18 00:00:00 \x2b0000 UTC",
+    "datePublished": "2008-09-18 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2008-09-18 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/2008\/09\/first-test-kernel-in-xen\/",
     "wordCount" : "46",
     "keywords" : [ "Computer System","Xen","virtualization","Blog" ]
@@ -94,16 +95,10 @@
 
     <div class="post-content">
       <p><a href="http://www.amazon.com/Definitive-Guide-Xen-Hypervisor/dp/013234971X/ref=sr_1_1?ie=UTF8&amp;qid=1322806199&amp;sr=8-1">The Definitive Guide to Xen Hypervisor</a> 中第二章的例子，<code>make</code> 成功后运行 <code>xen create domain_config</code>，报错</p>
-
 <pre><code>Error: (2, 'Invalid kernel', 'xc_dom_compat_check: guest type xen-3.0-x86_32 not supported by xen kernel, sorryn')
-</code></pre>
-
-<p>Google 之后发现是虚拟机类型设置的问题，运行 <code>xm info</code> 可以看到</p>
-
+</code></pre><p>Google 之后发现是虚拟机类型设置的问题，运行 <code>xm info</code> 可以看到</p>
 <pre><code>xen_caps               : xen-3.0-x86_32p
-</code></pre>
-
-<p>末尾的 p 表示 Xen 内核开启了 PAE 模式，所以载入的 kernel 也必须开启 PAE，在bootstrap.x86_32.S 中加入 PAE=yes 选项即可。</p>
+</code></pre><p>末尾的 p 表示 Xen 内核开启了 PAE 模式，所以载入的 kernel 也必须开启 PAE，在bootstrap.x86_32.S 中加入 PAE=yes 选项即可。</p>
 
     </div>
         <div class="cc-license">

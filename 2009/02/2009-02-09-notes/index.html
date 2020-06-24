@@ -11,6 +11,7 @@
     
 
     <title> Xen 学习笔记 2009-02-09 &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -39,7 +40,7 @@
     "articleSection" : "post",
     "name" : "Xen 学习笔记 2009-02-09",
     "headline" : "Xen 学习笔记 2009-02-09",
-    "description" : "Fishing reading Xen 内存管理综述 and have a superficial look on Xen source code.\n 在Debian x86-64上编译并安装了Xen 3.3.0，安装需要的几个包zlib1g-dev python-dev libncurses-dev libssl-dev libx11-dev bridge-utils iproute gawk gettext\n  3.interrupt gate的注册\n[arch\/x86\/traps.c] set_swint_gate(TRAP_int3,\x26amp;int3); \/* usable from all privileges *\/ set_swint_gate(TRAP_overflow,\x26amp;overflow); \/* usable from all privileges *\/ set_intr_gate(TRAP_bounds,\x26amp;bounds); set_intr_gate(TRAP_invalid_op,\x26amp;invalid_op); set_intr_gate(TRAP_no_device,\x26amp;device_not_available); set_intr_gate(TRAP_copro_seg,\x26amp;coprocessor_segment_overrun); set_intr_gate(TRAP_invalid_tss,\x26amp;invalid_TSS);  以page_fault为例 [arch\/x86\/x86_64\/entry.s] ENTRY(handle_exception) SAVE_ALL handle_exception_saved: testb $X86_EFLAGS_IF\x26gt;\x26gt;8,UREGS_eflags\x2b1(%rsp) jz exception_with_ints_disabled sti 1: movq %rsp,%rdi movl UREGS_entry_vector(%rsp),%eax leaq exception_table(%rip),%rdx GET_CURRENT(%rbx) PERFC_INCR(PERFC_exceptions, %rax, %rbx) callq *(%rdx,%rax,8) testb $3,UREGS_cs(%rsp) jz restore_all_xen leaq VCPU_trap_bounce(%rbx),%rdx movq VCPU_domain(%rbx),%rax testb $1,DOMAIN_is_32bit_pv(%rax) jnz compat_post_handle_exception testb $TBF_EXCEPTION,TRAPBOUNCE_flags(%rdx) jz test_all_events call create_bounce_frame movb $0,TRAPBOUNCE_flags(%rdx) jmp test_all_events",
+    "description" : "Fishing reading Xen 内存管理综述 and have a superficial look on Xen source code.\n  在Debian x86-64上编译并安装了Xen 3.3.0，安装需要的几个包zlib1g-dev python-dev libncurses-dev libssl-dev libx11-dev bridge-utils iproute gawk gettext\n  3.interrupt gate的注册\n[arch\/x86\/traps.c] set_swint_gate(TRAP_int3,\u0026amp;int3); \/* usable from all privileges *\/ set_swint_gate(TRAP_overflow,\u0026amp;overflow); \/* usable from all privileges *\/ set_intr_gate(TRAP_bounds,\u0026amp;bounds); set_intr_gate(TRAP_invalid_op,\u0026amp;invalid_op); set_intr_gate(TRAP_no_device,\u0026amp;device_not_available); set_intr_gate(TRAP_copro_seg,\u0026amp;coprocessor_segment_overrun); set_intr_gate(TRAP_invalid_tss,\u0026amp;invalid_TSS); 以page_fault为例\nSAVE_ALL负责把rsp以外的15个寄存器的值保存入栈，然后从exception table中读出对应的函数地址，并调用(do_page_fault)。\n新年第一次例会讲了两篇发在SOSP \u0026lsquo;1967上的古董paper  Dijkstra的The structure of the “the”-multiprogramming system，第一次提出了操作系统的分层结构，从而可以运行多个任务，另外里面还提出了semaphore等用来解决concurrent问题的方案，以及类似virtual address的想法，如果这两个概念也是在这个paper第一次提出的话，我只能说Dijkstra是个神了 @.@\n第二篇是Peter Denning的The working set model for program behavior，里面用了大量的数学公式（主要是概率统计方面）推导得出了\\tau和traverse time T的关系，这里的\\tau是一个参数，某个页面在经过\\tau时间没有被访问后即被认为是可以替换的，这样就不需要用LRU之类的算法花时间来寻找一个victim page了。paper后面还给出了调度和资源分配的算法。",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -47,10 +48,10 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2009",
-    "datePublished": "2009-02-11 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2009-02-11 00:00:00 \x2b0000 UTC",
+    "datePublished": "2009-02-11 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2009-02-11 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/2009\/02\/2009-02-09-notes\/",
-    "wordCount" : "119",
+    "wordCount" : "70",
     "keywords" : [ "Computer System","Xen","virtualization","Blog" ]
 }
 </script>
@@ -94,61 +95,31 @@
 
     <div class="post-content">
       <ol>
-<li><p>Fishing reading Xen 内存管理综述 and have a superficial look on Xen source code.</p></li>
-
-<li><p>在Debian x86-64上编译并安装了Xen 3.3.0，安装需要的几个包zlib1g-dev python-dev libncurses-dev libssl-dev libx11-dev bridge-utils iproute gawk gettext</p></li>
+<li>
+<p>Fishing reading Xen 内存管理综述 and have a superficial look on Xen source code.</p>
+</li>
+<li>
+<p>在Debian x86-64上编译并安装了Xen 3.3.0，安装需要的几个包zlib1g-dev python-dev libncurses-dev libssl-dev libx11-dev bridge-utils iproute gawk gettext</p>
+</li>
 </ol>
-
 <p>3.interrupt gate的注册</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">[arch<span style="color:#f92672">/</span>x86<span style="color:#f92672">/</span>traps.c]
+    set_swint_gate(TRAP_int3,<span style="color:#f92672">&amp;</span>int3);         <span style="color:#75715e">/* usable from all privileges */</span>
+    set_swint_gate(TRAP_overflow,<span style="color:#f92672">&amp;</span>overflow); <span style="color:#75715e">/* usable from all privileges */</span>
+    set_intr_gate(TRAP_bounds,<span style="color:#f92672">&amp;</span>bounds);
+    set_intr_gate(TRAP_invalid_op,<span style="color:#f92672">&amp;</span>invalid_op);
+    set_intr_gate(TRAP_no_device,<span style="color:#f92672">&amp;</span>device_not_available);
+    set_intr_gate(TRAP_copro_seg,<span style="color:#f92672">&amp;</span>coprocessor_segment_overrun);
+    set_intr_gate(TRAP_invalid_tss,<span style="color:#f92672">&amp;</span>invalid_TSS);
 
-<pre><code class="language-c">[arch/x86/traps.c]
-    set_swint_gate(TRAP_int3,&amp;int3);         /* usable from all privileges */
-    set_swint_gate(TRAP_overflow,&amp;overflow); /* usable from all privileges */
-    set_intr_gate(TRAP_bounds,&amp;bounds);
-    set_intr_gate(TRAP_invalid_op,&amp;invalid_op);
-    set_intr_gate(TRAP_no_device,&amp;device_not_available);
-    set_intr_gate(TRAP_copro_seg,&amp;coprocessor_segment_overrun);
-    set_intr_gate(TRAP_invalid_tss,&amp;invalid_TSS);
-
-</code></pre>
-
-<p>以page_fault为例
-<pre lang="asm" name="code" class="asm">[arch/x86/x86_64/entry.s]
-ENTRY(handle_exception)
-        SAVE_ALL
-handle_exception_saved:
-        testb $X86_EFLAGS_IF&gt;&gt;8,UREGS_eflags+1(%rsp)
-        jz    exception_with_ints_disabled
-        sti
-1:      movq  %rsp,%rdi
-        movl  UREGS_entry_vector(%rsp),%eax
-        leaq  exception_table(%rip),%rdx
-        GET_CURRENT(%rbx)
-        PERFC_INCR(PERFC_exceptions, %rax, %rbx)
-        callq *(%rdx,%rax,8)
-        testb $3,UREGS_cs(%rsp)
-        jz    restore_all_xen
-        leaq  VCPU_trap_bounce(%rbx),%rdx
-        movq  VCPU_domain(%rbx),%rax
-        testb $1,DOMAIN_is_32bit_pv(%rax)
-        jnz   compat_post_handle_exception
-        testb $TBF_EXCEPTION,TRAPBOUNCE_flags(%rdx)
-        jz    test_all_events
-        call  create_bounce_frame
-        movb  $0,TRAPBOUNCE_flags(%rdx)
-        jmp   test_all_events</p>
-
-<p>ENTRY(page_fault)
-        movl  $TRAP_page_fault,4(%rsp)
-        jmp   handle_exception</pre>
-SAVE_ALL负责把rsp以外的15个寄存器的值保存入栈，然后从exception table中读出对应的函数地址，并调用(do_page_fault)。</p>
-
-<ol>
+</code></pre></div><p>以page_fault为例</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>SAVE_ALL负责把rsp以外的15个寄存器的值保存入栈，然后从exception table中读出对应的函数地址，并调用(do_page_fault)。</p>
+<ol start="4">
 <li>新年第一次例会讲了两篇发在SOSP &lsquo;1967上的古董paper</li>
 </ol>
-
 <p>Dijkstra的The structure of the “the”-multiprogramming system，第一次提出了操作系统的分层结构，从而可以运行多个任务，另外里面还提出了semaphore等用来解决concurrent问题的方案，以及类似virtual address的想法，如果这两个概念也是在这个paper第一次提出的话，我只能说Dijkstra是个神了 @.@</p>
-
 <p>第二篇是Peter Denning的The working set model for program behavior，里面用了大量的数学公式（主要是概率统计方面）推导得出了\tau和traverse time T的关系，这里的\tau是一个参数，某个页面在经过\tau时间没有被访问后即被认为是可以替换的，这样就不需要用LRU之类的算法花时间来寻找一个victim page了。paper后面还给出了调度和资源分配的算法。</p>
 
     </div>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Xen on Aiur · Zellux 的博客</title>
@@ -22,7 +22,7 @@
 另外在debug过程中在网上找到了一些debug Makefile的技巧：
 make -n 可以仅仅打印出将要被执行的命令，而不去实际执行
 make -np 可以打印出更多的信息（使用的规则和变量），并执行每一条命令
-remake也是个不错的选择：“remake is a patched and modernized version of GNU make utility that adds improved error reporting, the ability to trace execution in a comprehensible way, and a debugger.”
+remake也是个不错的选择：“remakeis a patched and modernized version of GNU make utility that adds improved error reporting, the ability to trace execution in a comprehensible way, and a debugger.”
 在检查shell命令的时候，可以使用set -x使得所有shell命令在执行前都能被输出。</description>
     </item>
     
@@ -33,7 +33,7 @@ remake也是个不错的选择：“remake is a patched and modernized version o
       
       <guid>https://blog.yxwang.me/2009/07/xen-time-went-backwards-solution/</guid>
       <description>前几天给测试Xen用的虚拟机挂了，只能用VMware的snapshot返回到之前的镜像，然后似乎因为时间问题启动Xen的时候总是会定时打印出类似
-571 Timer ISR/0: Time went backwards: delta=-11072481 delta_cpu=298927519 shadow=196807680595 off=288495093 processed=197107247546 cpu_processed=196797247546 572 0: 196797247546 573 1: 197107247546  的信息，google了下发现是时间同步的问题，用ntp协议同步时间即可解决这个问题。另外这里再给出一个最暴力的解决方法：在linux-xen源码的arch/i386/kernel/time-xen.c文件中找到Time went backwards，把这行打印语句以及后面的循环打印删除，然后重新编译内核。x86_64体系结构也是修改这个文件。方法很暴力，也没真正解决问题，但是至少不影响我看/var/log/messages的输出了。</description>
+571 Timer ISR/0: Time went backwards: delta=-11072481 delta_cpu=298927519 shadow=196807680595 off=288495093 processed=197107247546 cpu_processed=196797247546 572 0: 196797247546 573 1: 197107247546 的信息，google了下发现是时间同步的问题，用ntp协议同步时间即可解决这个问题。另外这里再给出一个最暴力的解决方法：在linux-xen源码的arch/i386/kernel/time-xen.c文件中找到Time went backwards，把这行打印语句以及后面的循环打印删除，然后重新编译内核。x86_64体系结构也是修改这个文件。方法很暴力，也没真正解决问题，但是至少不影响我看/var/log/messages的输出了。</description>
     </item>
     
     <item>
@@ -43,9 +43,9 @@ remake也是个不错的选择：“remake is a patched and modernized version o
       
       <guid>https://blog.yxwang.me/2009/05/debug-xen-with-vmware-serial-port/</guid>
       <description>VMware支持虚拟串口设备，对于调试内核或者虚拟机的帮助很大，具体设置如下（VMware Server 2, Xen 3.3）：
- VMware中为虚拟机增加串口设备 Add Hardware-&amp;gt;Serial Port，然后在设置中将Connection模式设为File，指定相应的文件路径(如[standard] debian-xen/serial-port.log)
- 修改虚拟机的grub启动参数，以我的/boot/menu/lst为例
-  title Xen 3.3.0 / Debian GNU/Linux, kernel 2.6.18.8-xen root (hd0,0) kernel /boot/xen-3.3.0.gz com1=115200,8n1 loglvl=all guest_loglvl=all console_to_ring console=com1,vga sync_console module /boot/vmlinuz-2.6.18.8-xen root=/dev/sda1 ro console=tty0 savedefault   重启虚拟机，即可在之前指定的文件中(Host机上的/opt/vmware/Virtual Machines/debian-xen/serial-port.log)中看到虚拟机的输出信息了。  </description>
+  VMware中为虚拟机增加串口设备 Add Hardware-&amp;gt;Serial Port，然后在设置中将Connection模式设为File，指定相应的文件路径(如[standard] debian-xen/serial-port.log)
+  修改虚拟机的grub启动参数，以我的/boot/menu/lst为例
+  title Xen 3.3.0 / Debian GNU/Linux, kernel 2.6.18.8-xen root (hd0,0) kernel /boot/xen-3.3.0.gz com1=115200,8n1 loglvl=all guest_loglvl=all console_to_ring console=com1,vga sync_console module /boot/vmlinuz-2.6.18.8-xen root=/dev/sda1 ro console=tty0 savedefault 重启虚拟机，即可在之前指定的文件中(Host机上的/opt/vmware/Virtual Machines/debian-xen/serial-port.log)中看到虚拟机的输出信息了。  </description>
     </item>
     
     <item>
@@ -59,7 +59,7 @@ remake也是个不错的选择：“remake is a patched and modernized version o
 为了提高用户体验，读取domainU的启动信息时我采用的方法是读一行输出一行，读到结尾登陆字符时通过超时设置退出循环，这样可能效率比较低，不过测试脚本也不care这个了
 实际使用时碰到了另一个问题，domainU执行完自动命令后命令行会出现很严重的对齐问题，最后发现登陆后运行一次reset就可以了。
 脚本如下
-#!/usr/bin/python # Automatic test script for Xen DomainU # Author: zellux import pexpect, os conf = { &#39;login_name&#39; : &#39;m2-vm2&#39;, &#39;domainU_name&#39; : &#39;R900-DomU0&#39;, &#39;domainU_conf&#39; : &#39;/home/wyx/domU1&#39;, &#39;domainU_id&#39; : &#39;2&#39;, &#39;domainU_user&#39; : &#39;wyx&#39;, &#39;domainU_passwd&#39; : &#39;wyx&#39;, } # Command to be executed after domainU starts cmd = &amp;quot;&amp;quot;&amp;quot; cd m2 cd reg_test .</description>
+#!/usr/bin/python # Automatic test script for Xen DomainU # Author: zellux import pexpect, os conf = { &amp;#39;login_name&amp;#39; : &amp;#39;m2-vm2&amp;#39;, &amp;#39;domainU_name&amp;#39; : &amp;#39;R900-DomU0&amp;#39;, &amp;#39;domainU_conf&amp;#39; : &amp;#39;/home/wyx/domU1&amp;#39;, &amp;#39;domainU_id&amp;#39; : &amp;#39;2&amp;#39;, &amp;#39;domainU_user&amp;#39; : &amp;#39;wyx&amp;#39;, &amp;#39;domainU_passwd&amp;#39; : &amp;#39;wyx&amp;#39;, } # Command to be executed after domainU starts cmd = &amp;#34;&amp;#34;&amp;#34; cd m2 cd reg_test .</description>
     </item>
     
     <item>
@@ -70,7 +70,7 @@ remake也是个不错的选择：“remake is a patched and modernized version o
       <guid>https://blog.yxwang.me/2009/04/vmware-linux-kernel-config/</guid>
       <description>在默认的基础上，把这几个都改成built-in (*)，通过Xen启动时就不需要额外加载initrd了
 2010.1.19更新：支持网络
-Device Drivers SCSI device support ---&amp;gt; &amp;lt;*&amp;gt; SCSI disk support &amp;lt;*&amp;gt; SCSI generic support SCSI low-level drivers ---&amp;gt; [*] LSI Logic New Generation RAID Device Drivers &amp;lt;*&amp;gt; Serial ATA (SATA) support &amp;lt;*&amp;gt; Intel PIIX/ICH SATA support Fusion MPT device support ---&amp;gt; &amp;lt;*&amp;gt; Fusion MPT ScsiHost drivers for SPI &amp;lt;*&amp;gt; Fusion MPT ScsiHost drivers for FC &amp;lt;*&amp;gt; Fusion MPT ScsiHost drivers for SAS (128) Maximum number of scatter gather entries (16 - 128) &amp;lt;*&amp;gt; Fusion MPT misc device (ioctl) driver &amp;lt;*&amp;gt; Fusion MPT LAN driver Network device support ---&amp;gt; Ethernet (10 or 100Mbit) ---&amp;gt; [*] EISA, VLB, PCI and on board controllers &amp;lt;*&amp;gt; AMD PCnet32 PCI support  </description>
+Device Drivers SCSI device support ---&amp;gt; &amp;lt;*&amp;gt; SCSI disk support &amp;lt;*&amp;gt; SCSI generic support SCSI low-level drivers ---&amp;gt; [*] LSI Logic New Generation RAID Device Drivers &amp;lt;*&amp;gt; Serial ATA (SATA) support &amp;lt;*&amp;gt; Intel PIIX/ICH SATA support Fusion MPT device support ---&amp;gt; &amp;lt;*&amp;gt; Fusion MPT ScsiHost drivers for SPI &amp;lt;*&amp;gt; Fusion MPT ScsiHost drivers for FC &amp;lt;*&amp;gt; Fusion MPT ScsiHost drivers for SAS (128) Maximum number of scatter gather entries (16 - 128) &amp;lt;*&amp;gt; Fusion MPT misc device (ioctl) driver &amp;lt;*&amp;gt; Fusion MPT LAN driver Network device support ---&amp;gt; Ethernet (10 or 100Mbit) ---&amp;gt; [*] EISA, VLB, PCI and on board controllers &amp;lt;*&amp;gt; AMD PCnet32 PCI support </description>
     </item>
     
     <item>
@@ -82,9 +82,9 @@ Device Drivers SCSI device support ---&amp;gt; &amp;lt;*&amp;gt; SCSI disk suppo
       <description>今天下午真是惊悚，我想把机房的winxp分区删了，ftp上好放点美剧，结果winxp的那个分区是扩展分区，删掉后导致linux的几个分区都消失了。赶紧把硬盘拆下来装到实验室用Disk Genius修复了下，数据基本没什么损坏，分区表还是有点问题。差一点俺就见不到这个博客了 =_=
 然后把昨天折腾了一晚上没搞定的debian 4安装搞定了，关键在于netinst.iso的版本号要和hd-media的完全一致，4.0r7。
  编译xen/linux所需的包 apt-get install gettext zlib1g-dev python-dev libncurses-dev libssl-dev libx11-dev bridge-utils iproute gawk  另外 initrd文件的生成需要安装initrd-tools包
- kernel中memory barrier的实现很简单，barrier宏展开后就是 asm volatile(&amp;ldquo;&amp;rdquo; : : : &amp;ldquo;memory&amp;rdquo;) 这样就保证了在barrier()执行后，cpu不会直接读取寄存器中cache的内存值。
- 生成initrd mkinitramfs -o /boot/initrd-2.6.18.8-xen.img 2.6.18.8-xen
- syscall和m2_fastcall的性能测试 测的是getpid()函数，当然为了保证m2_fastcall不在运行逻辑上吃亏，它的对应功能仅仅是返回current-&amp;gt;pid，第一次测出来的结果是syscall明显由于m2_fastcall。宋大牛指出很有可能是glibc做了缓存，果然，自己用汇编发软中断后的数据就正常了。
+ kernel中memory barrier的实现很简单，barrier宏展开后就是 asm volatile(&amp;rdquo;&amp;rdquo; : : : &amp;ldquo;memory&amp;rdquo;) 这样就保证了在barrier()执行后，cpu不会直接读取寄存器中cache的内存值。
+  生成initrd mkinitramfs -o /boot/initrd-2.6.18.8-xen.img 2.6.18.8-xen
+  syscall和m2_fastcall的性能测试 测的是getpid()函数，当然为了保证m2_fastcall不在运行逻辑上吃亏，它的对应功能仅仅是返回current-&amp;gt;pid，第一次测出来的结果是syscall明显由于m2_fastcall。宋大牛指出很有可能是glibc做了缓存，果然，自己用汇编发软中断后的数据就正常了。
   </description>
     </item>
     
@@ -95,9 +95,12 @@ Device Drivers SCSI device support ---&amp;gt; &amp;lt;*&amp;gt; SCSI disk suppo
       
       <guid>https://blog.yxwang.me/2009/02/2009-02-09-notes/</guid>
       <description>Fishing reading Xen 内存管理综述 and have a superficial look on Xen source code.
- 在Debian x86-64上编译并安装了Xen 3.3.0，安装需要的几个包zlib1g-dev python-dev libncurses-dev libssl-dev libx11-dev bridge-utils iproute gawk gettext
+  在Debian x86-64上编译并安装了Xen 3.3.0，安装需要的几个包zlib1g-dev python-dev libncurses-dev libssl-dev libx11-dev bridge-utils iproute gawk gettext
   3.interrupt gate的注册
-[arch/x86/traps.c] set_swint_gate(TRAP_int3,&amp;amp;int3); /* usable from all privileges */ set_swint_gate(TRAP_overflow,&amp;amp;overflow); /* usable from all privileges */ set_intr_gate(TRAP_bounds,&amp;amp;bounds); set_intr_gate(TRAP_invalid_op,&amp;amp;invalid_op); set_intr_gate(TRAP_no_device,&amp;amp;device_not_available); set_intr_gate(TRAP_copro_seg,&amp;amp;coprocessor_segment_overrun); set_intr_gate(TRAP_invalid_tss,&amp;amp;invalid_TSS);  以page_fault为例 [arch/x86/x86_64/entry.s] ENTRY(handle_exception) SAVE_ALL handle_exception_saved: testb $X86_EFLAGS_IF&amp;gt;&amp;gt;8,UREGS_eflags+1(%rsp) jz exception_with_ints_disabled sti 1: movq %rsp,%rdi movl UREGS_entry_vector(%rsp),%eax leaq exception_table(%rip),%rdx GET_CURRENT(%rbx) PERFC_INCR(PERFC_exceptions, %rax, %rbx) callq *(%rdx,%rax,8) testb $3,UREGS_cs(%rsp) jz restore_all_xen leaq VCPU_trap_bounce(%rbx),%rdx movq VCPU_domain(%rbx),%rax testb $1,DOMAIN_is_32bit_pv(%rax) jnz compat_post_handle_exception testb $TBF_EXCEPTION,TRAPBOUNCE_flags(%rdx) jz test_all_events call create_bounce_frame movb $0,TRAPBOUNCE_flags(%rdx) jmp test_all_events</description>
+[arch/x86/traps.c] set_swint_gate(TRAP_int3,&amp;amp;int3); /* usable from all privileges */ set_swint_gate(TRAP_overflow,&amp;amp;overflow); /* usable from all privileges */ set_intr_gate(TRAP_bounds,&amp;amp;bounds); set_intr_gate(TRAP_invalid_op,&amp;amp;invalid_op); set_intr_gate(TRAP_no_device,&amp;amp;device_not_available); set_intr_gate(TRAP_copro_seg,&amp;amp;coprocessor_segment_overrun); set_intr_gate(TRAP_invalid_tss,&amp;amp;invalid_TSS); 以page_fault为例
+SAVE_ALL负责把rsp以外的15个寄存器的值保存入栈，然后从exception table中读出对应的函数地址，并调用(do_page_fault)。
+新年第一次例会讲了两篇发在SOSP &amp;lsquo;1967上的古董paper  Dijkstra的The structure of the “the”-multiprogramming system，第一次提出了操作系统的分层结构，从而可以运行多个任务，另外里面还提出了semaphore等用来解决concurrent问题的方案，以及类似virtual address的想法，如果这两个概念也是在这个paper第一次提出的话，我只能说Dijkstra是个神了 @.@
+第二篇是Peter Denning的The working set model for program behavior，里面用了大量的数学公式（主要是概率统计方面）推导得出了\tau和traverse time T的关系，这里的\tau是一个参数，某个页面在经过\tau时间没有被访问后即被认为是可以替换的，这样就不需要用LRU之类的算法花时间来寻找一个victim page了。paper后面还给出了调度和资源分配的算法。</description>
     </item>
     
     <item>
@@ -116,8 +119,8 @@ Device Drivers SCSI device support ---&amp;gt; &amp;lt;*&amp;gt; SCSI disk suppo
       
       <guid>https://blog.yxwang.me/2008/09/calling-do_console_io-from-domainu/</guid>
       <description>The Definitive Guide to Xen Hypervisor 第二章的 Exercise，通过调用 hypercall page 中的 console_io 项输出Hello World。
-void start_kernel(start_info_t * start_info) { HYPERVISOR_console_io(CONSOLEIO_write,12,&amp;quot;Hello Worldn&amp;quot;); while(1); }  但是默认选项编译和启动的Xen是不会保留DomainU中输出的信息。参考 drivers/char/console.c，可以看到主要有两个选项控制了 DomainU 的 do_console_io 输出：
-#ifndef VERBOSE /* Only domain 0 may access the emergency console. */ if ( current-&amp;gt;domain-&amp;gt;domain_id != 0 ) return -EPERM; #endif  if ( opt_console_to_ring ) { for ( kptr = kbuf; *kptr != &#39;&#39;; kptr++ ) putchar_console_ring(*kptr); send_guest_global_virq(dom0, VIRQ_CON_RING); }  在编译 Xen 的时候开启 debug 选项即可置上 VERBOSE，而 opt_console_to_ring 则是一个启动选项，在 grub 的启动选项中增加 loglvl=all guest_loglvl=all console_to_ring 即可。</description>
+void start_kernel(start_info_t * start_info) { HYPERVISOR_console_io(CONSOLEIO_write,12,&amp;#34;Hello Worldn&amp;#34;); while(1); } 但是默认选项编译和启动的Xen是不会保留DomainU中输出的信息。参考 drivers/char/console.c，可以看到主要有两个选项控制了 DomainU 的 do_console_io 输出：
+#ifndef VERBOSE  /* Only domain 0 may access the emergency console. */ if ( current-&amp;gt;domain-&amp;gt;domain_id != 0 ) return -EPERM; #endif if ( opt_console_to_ring ) { for ( kptr = kbuf; *kptr != &amp;#39;&amp;#39;; kptr++ ) putchar_console_ring(*kptr); send_guest_global_virq(dom0, VIRQ_CON_RING); } 在编译 Xen 的时候开启 debug 选项即可置上 VERBOSE，而 opt_console_to_ring 则是一个启动选项，在 grub 的启动选项中增加 loglvl=all guest_loglvl=all console_to_ring 即可。</description>
     </item>
     
     <item>
@@ -127,8 +130,8 @@ void start_kernel(start_info_t * start_info) { HYPERVISOR_console_io(CONSOLEIO_w
       
       <guid>https://blog.yxwang.me/2008/09/first-test-kernel-in-xen/</guid>
       <description>The Definitive Guide to Xen Hypervisor 中第二章的例子，make 成功后运行 xen create domain_config，报错
-Error: (2, &#39;Invalid kernel&#39;, &#39;xc_dom_compat_check: guest type xen-3.0-x86_32 not supported by xen kernel, sorryn&#39;)  Google 之后发现是虚拟机类型设置的问题，运行 xm info 可以看到
-xen_caps : xen-3.0-x86_32p  末尾的 p 表示 Xen 内核开启了 PAE 模式，所以载入的 kernel 也必须开启 PAE，在bootstrap.x86_32.S 中加入 PAE=yes 选项即可。</description>
+Error: (2, &#39;Invalid kernel&#39;, &#39;xc_dom_compat_check: guest type xen-3.0-x86_32 not supported by xen kernel, sorryn&#39;) Google 之后发现是虚拟机类型设置的问题，运行 xm info 可以看到
+xen_caps : xen-3.0-x86_32p 末尾的 p 表示 Xen 内核开启了 PAE 模式，所以载入的 kernel 也必须开启 PAE，在bootstrap.x86_32.S 中加入 PAE=yes 选项即可。</description>
     </item>
     
   </channel>

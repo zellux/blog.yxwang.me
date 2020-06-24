@@ -11,6 +11,7 @@
     
 
     <title> 利用 ETag 优化 Rails 应用 &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -39,7 +40,7 @@
     "articleSection" : "post",
     "name" : "利用 ETag 优化 Rails 应用",
     "headline" : "利用 ETag 优化 Rails 应用",
-    "description" : "\x3cp\x3eETag 是 HTTP 协议的一部分，可以用来检测客户端的缓存是否仍然有效。不少网站都实现了对 ETag 的支持，在 HTTP 响应头中加入当前传送内容的 ETag。以 heroku.com 为例：\x3c\/p\x3e\n\n\x3cpre\x3e\x3ccode class=\x22language-bash\x22\x3e$ curl -I www.heroku.com\nHTTP\/1.1 200 OK\nServer: nginx\nDate: Fri, 17 Feb 2012 17:36:44 GMT\nContent-Type: text\/html; charset=utf-8\nConnection: keep-alive\nEtag: \x26quot;f74bb78aa48d36e6a0b2072a131b20b9\x26quot;\nCache-Control: public, max-age=300\nContent-Length: 15481\n\x3c\/code\x3e\x3c\/pre\x3e",
+    "description" : "\u003cp\u003eETag 是 HTTP 协议的一部分，可以用来检测客户端的缓存是否仍然有效。不少网站都实现了对 ETag 的支持，在 HTTP 响应头中加入当前传送内容的 ETag。以 heroku.com 为例：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre style=\u0022color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4\u0022\u003e\u003ccode class=\u0022language-bash\u0022 data-lang=\u0022bash\u0022\u003e$ curl -I www.heroku.com\nHTTP\/1.1 \u003cspan style=\u0022color:#ae81ff\u0022\u003e200\u003c\/span\u003e OK\nServer: nginx\nDate: Fri, \u003cspan style=\u0022color:#ae81ff\u0022\u003e17\u003c\/span\u003e Feb \u003cspan style=\u0022color:#ae81ff\u0022\u003e2012\u003c\/span\u003e 17:36:44 GMT\nContent-Type: text\/html; charset\u003cspan style=\u0022color:#f92672\u0022\u003e=\u003c\/span\u003eutf-8\nConnection: keep-alive\nEtag: \u003cspan style=\u0022color:#e6db74\u0022\u003e\u0026#34;f74bb78aa48d36e6a0b2072a131b20b9\u0026#34;\u003c\/span\u003e\nCache-Control: public, max-age\u003cspan style=\u0022color:#f92672\u0022\u003e=\u003c\/span\u003e\u003cspan style=\u0022color:#ae81ff\u0022\u003e300\u003c\/span\u003e\nContent-Length: \u003cspan style=\u0022color:#ae81ff\u0022\u003e15481\u003c\/span\u003e\n\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -47,8 +48,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2012",
-    "datePublished": "2012-02-18 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2012-02-18 00:00:00 \x2b0000 UTC",
+    "datePublished": "2012-02-18 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2012-02-18 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/2012\/02\/etags-in-rails\/",
     "wordCount" : "143",
     "keywords" : [ "Programming","Ruby on Rails","Web Development","Blog" ]
@@ -94,48 +95,37 @@
 
     <div class="post-content">
       <p>ETag 是 HTTP 协议的一部分，可以用来检测客户端的缓存是否仍然有效。不少网站都实现了对 ETag 的支持，在 HTTP 响应头中加入当前传送内容的 ETag。以 heroku.com 为例：</p>
-
-<pre><code class="language-bash">$ curl -I www.heroku.com
-HTTP/1.1 200 OK
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ curl -I www.heroku.com
+HTTP/1.1 <span style="color:#ae81ff">200</span> OK
 Server: nginx
-Date: Fri, 17 Feb 2012 17:36:44 GMT
-Content-Type: text/html; charset=utf-8
+Date: Fri, <span style="color:#ae81ff">17</span> Feb <span style="color:#ae81ff">2012</span> 17:36:44 GMT
+Content-Type: text/html; charset<span style="color:#f92672">=</span>utf-8
 Connection: keep-alive
-Etag: &quot;f74bb78aa48d36e6a0b2072a131b20b9&quot;
-Cache-Control: public, max-age=300
-Content-Length: 15481
-</code></pre>
-
-<p>可以看到响应头中给出了请求内容的 ETag 为 f74&hellip;b9。接下来我们再次向服务器发起请求，并通过 If-None-Match 字段告之服务器我们已经获得过一份 ETag 为 f74&hellip;b9 的内容。服务器收到请求并生成页面后，如果发现页面的 ETag 不变，就会返回 304，声明缓存有效：</p>
-
-<pre><code class="language-bash">$ curl -I -H 'If-None-Match: &quot;f74bb78aa48d36e6a0b2072a131b20b9&quot;' www.heroku.com
-HTTP/1.1 304 Not Modified
+Etag: <span style="color:#e6db74">&#34;f74bb78aa48d36e6a0b2072a131b20b9&#34;</span>
+Cache-Control: public, max-age<span style="color:#f92672">=</span><span style="color:#ae81ff">300</span>
+Content-Length: <span style="color:#ae81ff">15481</span>
+</code></pre></div><p>可以看到响应头中给出了请求内容的 ETag 为 f74&hellip;b9。接下来我们再次向服务器发起请求，并通过 If-None-Match 字段告之服务器我们已经获得过一份 ETag 为 f74&hellip;b9 的内容。服务器收到请求并生成页面后，如果发现页面的 ETag 不变，就会返回 304，声明缓存有效：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ curl -I -H <span style="color:#e6db74">&#39;If-None-Match: &#34;f74bb78aa48d36e6a0b2072a131b20b9&#34;&#39;</span> www.heroku.com
+HTTP/1.1 <span style="color:#ae81ff">304</span> Not Modified
 Server: nginx
-Date: Fri, 17 Feb 2012 17:37:03 GMT
+Date: Fri, <span style="color:#ae81ff">17</span> Feb <span style="color:#ae81ff">2012</span> 17:37:03 GMT
 Connection: keep-alive
-Last-Modified: Fri, 17 Feb 2012 17:34:00 GMT
-Cache-Control: public, max-age=300
-ETag: &quot;f74bb78aa48d36e6a0b2072a131b20b9&quot;
-</code></pre>
-
-<p>浏览器在访问网页时，记录下上一次服务器返回的 ETag，在下一次访问该网页时发送这个 ETag，这样就能有效的利用本地缓存，减少不必要的网络传输了。</p>
-
+Last-Modified: Fri, <span style="color:#ae81ff">17</span> Feb <span style="color:#ae81ff">2012</span> 17:34:00 GMT
+Cache-Control: public, max-age<span style="color:#f92672">=</span><span style="color:#ae81ff">300</span>
+ETag: <span style="color:#e6db74">&#34;f74bb78aa48d36e6a0b2072a131b20b9&#34;</span>
+</code></pre></div><p>浏览器在访问网页时，记录下上一次服务器返回的 ETag，在下一次访问该网页时发送这个 ETag，这样就能有效的利用本地缓存，减少不必要的网络传输了。</p>
 <p>Nginx 和 Apache 都很好的支持了 ETag 功能，它们会为静态资源计算 Hash，并将它作为 ETag 返回给客户端。 而对于 CPU 负载较高的应用，还有一个可以优化的空间。Web 服务器在处理客户端请求时，通常的过程是从数据库读取所需数据，交给模版引擎生成 HTML，计算该页面的 ETag，再回复客户端。事实上所需的数据读取完成后，就足以判断缓存是否有效了。</p>
-
 <p>Rails 早在版本 2.2 就加入了 stale? 方法方便开放人员自定义 ETag。以一个博客文章页面为例，页面内容由文章和评论内容生成，如果这两份内容都没有变化，就可以认为客户端缓存依然有效了：</p>
-
-<pre><code class="language-ruby">def show
-  @article = Article.find(params[:id])
-  @comments = @article.comments.all
-  if stale?(:etag =&gt; [@article, @comments])
-    respond_to do |format|
-      # ...
-    end
-  end
-end
-</code></pre>
-
-<p>除此之外，还可以通过 Last Modified 字段控制缓存有效性，Rails 也同样提供了很方便的支持。但是ETag 方法控制缓存更为精确，而且在服务器时间变化时用 Last Modified 容易出错，因此 ETag 往往是更被推荐的方案。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">show</span>
+  @article <span style="color:#f92672">=</span> <span style="color:#66d9ef">Article</span><span style="color:#f92672">.</span>find(params<span style="color:#f92672">[</span><span style="color:#e6db74">:id</span><span style="color:#f92672">]</span>)
+  @comments <span style="color:#f92672">=</span> @article<span style="color:#f92672">.</span>comments<span style="color:#f92672">.</span>all
+  <span style="color:#66d9ef">if</span> stale?(<span style="color:#e6db74">:etag</span> <span style="color:#f92672">=&gt;</span> <span style="color:#f92672">[</span>@article, @comments<span style="color:#f92672">]</span>)
+    respond_to <span style="color:#66d9ef">do</span> <span style="color:#f92672">|</span>format<span style="color:#f92672">|</span>
+      <span style="color:#75715e"># ...</span>
+    <span style="color:#66d9ef">end</span>
+  <span style="color:#66d9ef">end</span>
+<span style="color:#66d9ef">end</span>
+</code></pre></div><p>除此之外，还可以通过 Last Modified 字段控制缓存有效性，Rails 也同样提供了很方便的支持。但是ETag 方法控制缓存更为精确，而且在服务器时间变化时用 Last Modified 容易出错，因此 ETag 往往是更被推荐的方案。</p>
     </div>
         <div class="cc-license">
       本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.zh">知识共享署名-非商业性使用 3.0 版本许可协议</a>进行许可，欢迎转载，演绎，但是必须保留本文的署名 <a href="https://blog.yxwang.me/2012/02/etags-in-rails/">zellux</a>（包含链接），且不得用于商业目的。

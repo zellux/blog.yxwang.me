@@ -11,6 +11,7 @@
     
 
     <title> REST 服务的方法 &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -47,8 +48,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2011",
-    "datePublished": "2011-11-20 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2011-11-20 00:00:00 \x2b0000 UTC",
+    "datePublished": "2011-11-20 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2011-11-20 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/2011\/11\/methods-in-restful-applications\/",
     "wordCount" : "32",
     "keywords" : [ "Programming","REST","Web Development","Blog" ]
@@ -94,20 +95,14 @@
 
     <div class="post-content">
       <p>HEAD 方法和 GET 方法比较像，但是它不返回对象的实际表示，只返回一个 HTTP 头。HEAD 可以用来查看对象修改时间、大小等信息，Amazon S3 的客户端就用它来读取文件元信息。</p>
-
 <p>用 PUT 和 POST 创建对象时的一个区别在于，使用前者时客户端知道被创建对象的 URL（例如 <code>/items/3</code>），而后者则不需要客户端了解（例如 <code>/items/new</code>）。</p>
-
 <p>OPTIONS 用来查看客户端对某个资源有那些可用的操作。</p>
-
 <p>正确的设计应当保证：</p>
-
 <ul>
 <li>GET 和 HEAD 是安全的，即不会修改任何对象状态。多次调用它们的结果应当和只调用一次甚至不调用一样。</li>
 <li>GET、HEAD、PUT 和 DELETE 方法是幂等（idempotent）的。多次调用它们的结果应当和只调用一次一样。</li>
 </ul>
-
 <p>这两点保证了在一个不可靠的网络中，客户端仍能进行有效的操作。</p>
-
 <p>参考：<a href="http://www.amazon.com/Restful-Web-Services-Leonard-Richardson/dp/0596529260/ref=sr_1_1?ie=UTF8&amp;qid=1321795517&amp;sr=8-1">Restful Web Services</a></p>
 
     </div>
@@ -117,8 +112,8 @@
 
   </div>
   <div class="pagination">
-    <a class="btn previous " href="https://blog.yxwang.me/2011/11/notes-on-active-record/"> Prev</a>  
-    <a class="btn next " href="https://blog.yxwang.me/2011/11/options-for-render/"> Next</a> 
+    <a class="btn previous " href="https://blog.yxwang.me/2011/11/options-for-render/"> Prev</a>  
+    <a class="btn next " href="https://blog.yxwang.me/2011/11/skip-specs-by-tags/"> Next</a> 
   </div>
 </div>
 

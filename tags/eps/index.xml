@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>EPS on Aiur · Zellux 的博客</title>
@@ -18,7 +18,6 @@
       
       <guid>https://blog.yxwang.me/2012/01/visio-export-to-eps/</guid>
       <description>&lt;p&gt;Windows 7 及 Visio 2010 下验证可行：&lt;/p&gt;
-
 &lt;ul&gt;
 &lt;li&gt;添加本地打印机，类型选择 Generic -&amp;gt; MS Publisher Color Printer&lt;/li&gt;
 &lt;li&gt;在 Visio 中打印，选择新添加的打印机，选中 Print to file，点 Properties -&amp;gt; Advanced&lt;/li&gt;

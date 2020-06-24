@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tooling on Aiur · Zellux 的博客</title>
@@ -18,9 +18,7 @@
       
       <guid>https://blog.yxwang.me/2014/02/local-markdown-wiki/</guid>
       <description>&lt;p&gt;最近一直用 &lt;a href=&#34;http://www.iawriter.com/mac/&#34;&gt;iA Writer&lt;/a&gt; 做笔记，用不同的文件保存不同的主题，由于 iA Writer 并没有很好的管理和浏览功能，于是就想做个 Web 工具方便浏览和管理。&lt;/p&gt;
-
 &lt;p&gt;&lt;a href=&#34;https://github.com/zellux/markdown-wiki&#34;&gt;markdown-wiki&lt;/a&gt; 是我用 Sinatra 做的一个简单的预览工具，它可以把某个目录下的 Markdown 文件以 Wiki 的形式呈现出来。界面上借用了 &lt;a href=&#34;http://ghost.io/&#34;&gt;Ghost&lt;/a&gt; 的 CSS，可以在 &lt;a href=&#34;http://markdown-wiki-demo.herokuapp.com/&#34;&gt;http://markdown-wiki-demo.herokuapp.com/&lt;/a&gt; 预览（因为是非本地的内容，上方的 Edit 按钮没有作用）。&lt;/p&gt;
-
 &lt;p&gt;Markdown 语法方面，由于用了 &lt;a href=&#34;https://github.com/vmg/redcarpet&#34;&gt;redcarpet&lt;/a&gt; 所以有不少语法扩展，包括代码块、删除线、下划线、上标等，另外包含了 Wiki 内部链接支持。&lt;/p&gt;</description>
     </item>
     
@@ -40,10 +38,8 @@
       
       <guid>https://blog.yxwang.me/2013/06/zhihu-daily-for-kindle/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;http://daily.zhihu.com/&#34;&gt;知乎日报&lt;/a&gt;每天都会更新有意思的问答。我比较习惯用 Kindle 看这样的文章，就写了一个 calibre 的&lt;a href=&#34;https://gist.github.com/zellux/5844688&#34;&gt;插件&lt;/a&gt;抓取每天的内容。&lt;/p&gt;
-
-&lt;p&gt;&lt;a data-fancybox=&#34;gallery&#34;  href=https://blog.yxwang.me/images/2013-06/zhihu-kindle-1.jpg &gt;&lt;img src=https://blog.yxwang.me/images/2013-06/zhihu-kindle-1.jpg  width=&#34;300&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a data-fancybox=&#34;gallery&#34;  href=https://blog.yxwang.me/images/2013-06/zhihu-kindle-2.jpg &gt;&lt;img src=https://blog.yxwang.me/images/2013-06/zhihu-kindle-2.jpg  width=&#34;300&#34; /&gt;&lt;/a&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -53,9 +49,7 @@
       
       <guid>https://blog.yxwang.me/2013/01/cleaning-zsh-vcs-status/</guid>
       <description>&lt;p&gt;我用的 zsh 提示符是 &lt;a href=&#34;https://github.com/robbyrussell/oh-my-zsh/&#34;&gt;oh-my-zsh&lt;/a&gt; 自带的 &lt;a href=&#34;https://github.com/robbyrussell/oh-my-zsh/blob/master/themes/steeef.zsh-theme&#34;&gt;steeef&lt;/a&gt;。最近发现用这个主题时，有些 Rails 项目即使把所有改动都提交后，还是会有红色标记表示存在未追踪文件：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://blog.yxwang.me/images/2013-01/zsh-untracked-mark.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;img src=&#34;https://blog.yxwang.me/images/2013-01/zsh-untracked-mark.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;使用 &lt;code&gt;git status&lt;/code&gt; 和 &lt;code&gt;git diff&lt;/code&gt;，都看不到任何未提交的改动。一开始我以为是 zsh 或者 git 的 bug，把它们的版本都更新到最新版后还是有这个问题。于是看 steeef 主题的源码，发现了红色标记的判断依据：&lt;/p&gt;</description>
     </item>
     
@@ -66,11 +60,10 @@
       
       <guid>https://blog.yxwang.me/2013/01/java-and-aidl-support-in-emacs-cscope/</guid>
       <description>&lt;p&gt;Emacs 的 xcscope 插件默认不会扫描 Java 文件，另外 Android 源码里有不少 &lt;a href=&#34;http://developer.android.com/guide/components/aidl.html&#34;&gt;.aidl&lt;/a&gt; 的文件，默认也不包含在 xcscope 的扫描范围里。解决这个问题的一个方法是在项目根目录下手动创建 cscope 索引：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ find . -name &amp;quot;*.java&amp;quot; -or -name &amp;quot;*.aidl&amp;quot; -or -name &amp;quot;*.cpp&amp;quot; &amp;gt; cscope.files
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ find . -name &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;*.java&amp;#34;&lt;/span&gt; -or -name &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;*.aidl&amp;#34;&lt;/span&gt; -or -name &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;*.cpp&amp;#34;&lt;/span&gt; &amp;gt; cscope.files
 
 $ cscope -b
-&lt;/code&gt;&lt;/pre&gt;</description>
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
     </item>
     
     <item>
@@ -81,7 +74,7 @@ $ cscope -b
       <guid>https://blog.yxwang.me/2012/08/fix-things-cloud/</guid>
       <description>Things Cloud for iOS 的同步功能出来后一直不能正常使用，必须得先翻墙才行。用代理截了下请求后发现 Things Cloud 用的同步服务器是 multithreaded.thingscloud.appspot.com，难怪一直没法访问。
 好在 Things Cloud 同步走的是 HTTPS 协议，所以恢复方法也很简单，换用一个没有被污染的 DNS 服务器就好。对于越狱了的机器，也可以直接修改 iOS 上的 /etc/hosts 文件，在里面添加下面两行地址。
-203.208.46.161 multithreaded.thingscloud.appspot.com 203.208.46.161 thingscloud.appspot.com  </description>
+203.208.46.161 multithreaded.thingscloud.appspot.com 203.208.46.161 thingscloud.appspot.com </description>
     </item>
     
     <item>
@@ -91,21 +84,19 @@ $ cscope -b
       
       <guid>https://blog.yxwang.me/2012/03/managing-dotfiles-with-git/</guid>
       <description>&lt;p&gt;以前部署新机器时都要把一堆配置文件 scp 过去，今天折腾了下用 Git 统一管理这些配置文件。&lt;/p&gt;
-
 &lt;p&gt;做起来很简单，创建一个 dotfiles 目录，把所有要同步的配置文件都放到这个目录下，并重命名去掉文件名开头的点，以免被 Git 忽略。写了一个脚本链接这些配置文件到 HOME 目录：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#!/usr/bin/env ruby&lt;/span&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;#!/usr/bin/env ruby
+safe_mode &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;ARGV&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;include? &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;--safe&amp;#39;&lt;/span&gt;
 
-safe_mode = ARGV.include? &#39;--safe&#39;
-
-files = %w(zshrc tmux.conf gitconfig vimrc emacs gitignore_global LS_COLORS)
-files.each do |file|
-  unless safe_mode and File.exists?(&amp;quot;#{ENV[&#39;HOME&#39;]}/.#{file}&amp;quot;)
-    %x(ln -s -i -v $PWD/#{file} ~/.#{file})
-    puts &amp;quot;.#{file} linked&amp;quot; if safe_mode
-  end
-end
-&lt;/code&gt;&lt;/pre&gt;</description>
+files &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;%w(zshrc tmux.conf gitconfig vimrc emacs gitignore_global LS_COLORS)&lt;/span&gt;
+files&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;each &lt;span style=&#34;color:#66d9ef&#34;&gt;do&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;file&lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;unless&lt;/span&gt; safe_mode &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;File&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;exists?(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;#{&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;ENV&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;HOME&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;/.&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;#{&lt;/span&gt;file&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+    &lt;span style=&#34;color:#e6db74&#34;&gt;%x(ln -s -i -v $PWD/&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;#{&lt;/span&gt;file&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; ~/.&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;#{&lt;/span&gt;file&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;)&lt;/span&gt;
+    puts &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;.&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;#{&lt;/span&gt;file&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; linked&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; safe_mode
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;end&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
     </item>
     
     <item>
@@ -115,7 +106,6 @@ end
       
       <guid>https://blog.yxwang.me/2012/01/visio-export-to-eps/</guid>
       <description>&lt;p&gt;Windows 7 及 Visio 2010 下验证可行：&lt;/p&gt;
-
 &lt;ul&gt;
 &lt;li&gt;添加本地打印机，类型选择 Generic -&amp;gt; MS Publisher Color Printer&lt;/li&gt;
 &lt;li&gt;在 Visio 中打印，选择新添加的打印机，选中 Print to file，点 Properties -&amp;gt; Advanced&lt;/li&gt;
@@ -131,8 +121,8 @@ end
       
       <guid>https://blog.yxwang.me/2011/07/full-screen-emacs-in-lion/</guid>
       <description>前几天给我的 MacBook Pro 装上了 Lion，不过原来的 Emacs 并不支持在 Lion 下全屏运行。github 上搜了下发现已经有让 Emacs 支持全屏模式的补丁了，Homebrew 中这个补丁也已经被吸收。
-直接用 brew install emacs &amp;ndash;cocoa &amp;ndash;srgb 似乎会碰到编译错误：
-Finding pointers to doc strings... Finding pointers to doc strings...done Dumping under the name emacs unexec: cannot write section __data --- List of All Regions --- address size prot maxp --- List of Regions to be Dumped --- address size prot maxp --- Header Information --- Magic = 0xfeedfacf CPUType = 16777223 CPUSubType = -2147483645 FileType = 0x2 NCmds = 20 SizeOfCmds = 3464 Flags = 0x00200085 Highest address of load commands in input file: 0x5dd000 Lowest offset of all sections in __TEXT segment: 0x22f0 --- List of Load Commands in Input File ---  github issues 上已经有人报告这个问题了，解决方法也很简单，运行 brew edit emacs 打开 emacs 的安装脚本，在 def install 的后面加上两行：</description>
+直接用 brew install emacs &amp;ndash;cocoa &amp;ndash;srgb似乎会碰到编译错误：
+Finding pointers to doc strings... Finding pointers to doc strings...done Dumping under the name emacs unexec: cannot write section __data --- List of All Regions --- address size prot maxp --- List of Regions to be Dumped --- address size prot maxp --- Header Information --- Magic = 0xfeedfacf CPUType = 16777223 CPUSubType = -2147483645 FileType = 0x2 NCmds = 20 SizeOfCmds = 3464 Flags = 0x00200085 Highest address of load commands in input file: 0x5dd000 Lowest offset of all sections in __TEXT segment: 0x22f0 --- List of Load Commands in Input File --- github issues 上已经有人报告这个问题了，解决方法也很简单，运行 brew edit emacs打开 emacs 的安装脚本，在 def install的后面加上两行：</description>
     </item>
     
     <item>
@@ -142,9 +132,8 @@ Finding pointers to doc strings... Finding pointers to doc strings...done Dumpin
       
       <guid>https://blog.yxwang.me/2011/03/send-notifications-with-netgrowl/</guid>
       <description>我平时用的系统是 Windows 7 和 Mac OS X，实验室项目一般都是 ssh 远登到 Ubuntu 和 Linux 上开发的。有时碰到内核和虚拟机等项目编译比较耗时，编译开始后要时不时的看一下编译任务是否完成，或者有没有中途出错，这时候如果有个通知系统就比较方便了。
-Google 了一把找到了 netgrowl 这个好东东，它是一个开源的 Python 模块，实现了 Growl 协议，可以向 Mac 或 Windows 上的 Growl 服务发送通知。使用也非常方便，先用 GrowlRegistrationPacket 函数注册一个应用，接着就可以用 GrowlNotificationPacket 发送通知了：
-notify.py
-#!/usr/bin/python from netgrowl import * import sys title = &amp;quot;Notification from Ubuntu&amp;quot; desc = &amp;quot;&amp;quot; if len(sys.argv) &amp;gt; 2: title = sys.argv[1] desc = sys.argv[2] addr = (&amp;quot;10.131.251.101&amp;quot;, GROWL_UDP_PORT) s = socket(AF_INET,SOCK_DGRAM) p = GrowlRegistrationPacket(application=&amp;quot;Ubuntu&amp;quot;, password=&amp;quot;i&amp;quot;) p.addNotification(&amp;quot;Ubuntu Notifications&amp;quot;, enabled=True) s.</description>
+Google 了一把找到了 netgrowl这个好东东，它是一个开源的 Python 模块，实现了 Growl 协议，可以向 Mac 或 Windows 上的 Growl 服务发送通知。使用也非常方便，先用 GrowlRegistrationPacket 函数注册一个应用，接着就可以用 GrowlNotificationPacket 发送通知了：
+notify.py#!/usr/bin/python from netgrowl import * import sys title = &amp;#34;Notification from Ubuntu&amp;#34; desc = &amp;#34;&amp;#34; if len(sys.argv) &amp;gt; 2: title = sys.argv[1] desc = sys.argv[2] addr = (&amp;#34;10.131.251.101&amp;#34;, GROWL_UDP_PORT) s = socket(AF_INET,SOCK_DGRAM) p = GrowlRegistrationPacket(application=&amp;#34;Ubuntu&amp;#34;, password=&amp;#34;i&amp;#34;) p.addNotification(&amp;#34;Ubuntu Notifications&amp;#34;, enabled=True) s.sendto(p.payload(), addr) p = GrowlNotificationPacket(application=&amp;#34;Ubuntu&amp;#34;, notification=&amp;#34;Ubuntu Notifications&amp;#34;, title=title, description=desc, priority=1, sticky=True, password=&amp;#34;i&amp;#34;) s.</description>
     </item>
     
     <item>
@@ -156,8 +145,8 @@ notify.py
       <description>我经常使用的几台电脑中的Caps Lock 键都被我改成了 Ctrl 键，这样修改以后用起 Emacs 来就顺手多了。
 最近在 Windows 上用 VMware Remote Control 远登虚拟机调试内核的时候，问题就出来了：可能是这个浏览器插件的 bug，有时键盘的 Caps Lock 会被莫名打开。然后我的这个键盘键位又比较少，不想再让 Caps Lock 键替换另一个用得更少的按键了，于是想到了软件关闭的方法。
 搜了下 Stackoverflow 找到个很好用的 Python 库SendKeys，只要两行代码就能在 Windows 下模拟 Caps Lock 按键了：
-import SendKeys SendKeys.SendKeys(&amp;quot;{CAPSLOCK}&amp;quot;)  另外在 Linux 要模拟按键，可以直接访问 /dev/console：
-import fcntl import os KDSETLED = 0x4B32 console_fd = os.open(&#39;/dev/console&#39;, os.O_NOCTTY) # Turn on caps lock fcntl.ioctl(console_fd, KDSETLED, 0x04) # Turn off caps lock fcntl.ioctl(console_fd, KDSETLED, 0)  原问题地址</description>
+import SendKeys SendKeys.SendKeys(&amp;#34;{CAPSLOCK}&amp;#34;) 另外在 Linux 要模拟按键，可以直接访问 /dev/console：
+import fcntl import os KDSETLED = 0x4B32 console_fd = os.open(&amp;#39;/dev/console&amp;#39;, os.O_NOCTTY) # Turn on caps lock fcntl.ioctl(console_fd, KDSETLED, 0x04) # Turn off caps lock fcntl.ioctl(console_fd, KDSETLED, 0) 原问题地址</description>
     </item>
     
     <item>
@@ -168,7 +157,7 @@ import fcntl import os KDSETLED = 0x4B32 console_fd = os.open(&#39;/dev/console&
       <guid>https://blog.yxwang.me/2010/05/git-through-https-proxy/</guid>
       <description>网上找了不少设置方法，终于翻出来一个可行的，和大家分享下。
 1. 安装 corkscrew ArchLinux 和 Ubuntu 的源里就有，也可以从 http://www.agroman.net/corkscrew/ 下载源码编译一个。
-2. 修改 ~/.ssh/config Host gitproxy User git Hostname ssh.github.com Port 443 ProxyCommand corkscrew proxy.example.com 3128 %h %p IdentityFile /home/username/.ssh/id_rsa  修改其中的 proxy.example.com 和 3128 为代理 IP 和端口，如果代理需要帐号密码，就在 ProxyCommand 这一行的最后加上密码文件，内容为*用户名:密码*。
+2. 修改 ~/.ssh/config Host gitproxy User git Hostname ssh.github.com Port 443 ProxyCommand corkscrew proxy.example.com 3128 %h %p IdentityFile /home/username/.ssh/id_rsa 修改其中的 proxy.example.com 和 3128 为代理 IP 和端口，如果代理需要帐号密码，就在 ProxyCommand 这一行的最后加上密码文件，内容为用户名:密码。
 参数 IdentitiFile 指定相应帐号的私钥文件地址。
 另外 @cyfdecyf 同学指出只要把这里的 Host 改成 github.com，就可以直接用 git@github.com:user/repository 访问 GitHub 了。
 3. 使用 git@gitproxy 访问 GitHub 例如要把 foo/bar.git 拖下来，执行 git clone git@gitproxy:foo/bar.git 即可。
@@ -184,7 +173,7 @@ import fcntl import os KDSETLED = 0x4B32 console_fd = os.open(&#39;/dev/console&
       <guid>https://blog.yxwang.me/2010/03/keep-gnu-screen-history/</guid>
       <description>GNU screen中执行的历史命令保存在内存中，默认情况下并不会像在bash中直接执行的命令一样保存在.bash_history中，这在某些场合下带来了一定的不便。
 在superuser上看到一个解决方法，指定历史文件的读写方式为追加，并在每次命令行提示符显示的时候，自动更新bash的历史命令记录。要实现这个方法很简单，只要在.bashrc中加入下面两行代码即可
-shopt -s histappend export PROMPT_COMMAND=&amp;quot;history -a; history -n&amp;quot;  另外如果之前设置过PROMPT_COMMAND的话，只要在history -a前加入$PROMPT_COMMAND; 就行了。</description>
+shopt -s histappend export PROMPT_COMMAND=&amp;#34;history -a; history -n&amp;#34; 另外如果之前设置过PROMPT_COMMAND的话，只要在history -a前加入$PROMPT_COMMAND;就行了。</description>
     </item>
     
     <item>
@@ -195,9 +184,8 @@ shopt -s histappend export PROMPT_COMMAND=&amp;quot;history -a; history -n&amp;q
       <guid>https://blog.yxwang.me/2010/02/gitk-font/</guid>
       <description>gitk是用Tcl/Tk写的工具，默认使用Tk 8.4，不支持抗锯齿，因此字体显示很难看。好在Tk 8.5支持了部分抗锯齿字体，修改gitk使用Tk 8.5后显示效果会好一点。
 以Ubuntu为例，安装tk8.5包后，编辑/usr/bin/gitk文件，把开头调用wish的那行
-exec /usr/bin/wish &amp;quot;$0&amp;quot; -- &amp;quot;$@&amp;quot;  改成
-exec /usr/bin/wish8.5 &amp;quot;$0&amp;quot; -- &amp;quot;$@&amp;quot;  这样就能在gitk中开启抗锯齿了，虽然效果还不是很好。另外qgit也是一个不错的选择。
-参考链接：http://navarra.ca/?p=44</description>
+exec /usr/bin/wish &amp;#34;$0&amp;#34; -- &amp;#34;$@&amp;#34; 改成
+exec /usr/bin/wish8.5 &amp;#34;$0&amp;#34; -- &amp;#34;$@&amp;#34; 这样就能在gitk中开启抗锯齿了，虽然效果还不是很好。另外qgit也是一个不错的选择。</description>
     </item>
     
     <item>
@@ -208,11 +196,10 @@ exec /usr/bin/wish8.5 &amp;quot;$0&amp;quot; -- &amp;quot;$@&amp;quot;  这样�
       <guid>https://blog.yxwang.me/2010/02/bind-cscope-to-ecb/</guid>
       <description>前几天试用了下ECB，非常喜欢它的定义列表和文件浏览历史的功能。但是却发现了另外一个问题：使用ECB之前我把整个窗口分成左右两块，左边是代码，右边是cscope的查找结果，现在开启ECB之后就不能再切一块窗口给cscope用了。
 感谢stackoverflow上的sanitynic，给出了自定义ECB窗口的参考。现在俺终于能把cscope窗口绑定到屏幕左下角啦。
-
 自定义ECB layout其实也挺方便的，上图对应的配置为
-(ecb-layout-define &amp;quot;my-cscope-layout&amp;quot; left nil (ecb-set-methods-buffer) (ecb-split-ver 0.5 t) (other-window 1) (ecb-set-history-buffer) (ecb-split-ver 0.25 t) (other-window 1) (ecb-set-cscope-buffer)) (defecb-window-dedicator ecb-set-cscope-buffer &amp;quot; *ECB cscope-buf*&amp;quot; (switch-to-buffer &amp;quot;*cscope*&amp;quot;)) (setq ecb-layout-name &amp;quot;my-cscope-layout&amp;quot;) ;; Disable buckets so that history buffer can display more entries (setq ecb-history-make-buckets &#39;never)  my-cscope-layout这个layout左边窗口分为三部分，最上面的函数列表占一半高度，中间为历史文件列表，下面为cscope的查找结果，它们各占四分之一的高度。
+(ecb-layout-define &amp;#34;my-cscope-layout&amp;#34; left nil (ecb-set-methods-buffer) (ecb-split-ver 0.5 t) (other-window 1) (ecb-set-history-buffer) (ecb-split-ver 0.25 t) (other-window 1) (ecb-set-cscope-buffer)) (defecb-window-dedicator ecb-set-cscope-buffer &amp;#34; *ECB cscope-buf*&amp;#34; (switch-to-buffer &amp;#34;*cscope*&amp;#34;)) (setq ecb-layout-name &amp;#34;my-cscope-layout&amp;#34;) ;; Disable buckets so that history buffer can display more entries (setq ecb-history-make-buckets &amp;#39;never) my-cscope-layout这个layout左边窗口分为三部分，最上面的函数列表占一半高度，中间为历史文件列表，下面为cscope的查找结果，它们各占四分之一的高度。
 另外再简单提下cscope插件的安装和配置，使用前需确认当前系统已经安装了cscope，另外要有cscope-indexer这个脚本。在cscope/contrib目录下找到一个xcscope.el，复制到Emacs的插件目录中，并在Emacs初始化文件中加入
-(require &#39;xcscope)  即可。某些发行版的包里面似乎没有cscope-indexer和xcscope.el，直接从网上下一个好了。
+(require &amp;#39;xcscope) 即可。某些发行版的包里面似乎没有cscope-indexer和xcscope.el，直接从网上下一个好了。
 几个常用的快捷键：
  C-c s I 建立cscope索引 C-c s a 设置搜索目录 C-c s d 查找定义 C-c s s 查找字符串 C-c s c 查找调用者 C-c s n 下一个查找结果 C-c s p 上一个查找结果  更多的快捷键可以在 C-h b 跳转的帮助页面的 cscope-minor-mode 区找到。</description>
     </item>
@@ -225,9 +212,8 @@ exec /usr/bin/wish8.5 &amp;quot;$0&amp;quot; -- &amp;quot;$@&amp;quot;  这样�
       <guid>https://blog.yxwang.me/2010/02/configuring-semantic/</guid>
       <description>semantic是cedet的组件之一，它可以对程序做语义分析，结合company等其他插件，可以实现自动补全菜单等功能。
 之前用semantic+company写MIT 6.828的lab时几乎不需要什么特殊的设置就能直接用，这次拿来改Xen的代码的时候却出现了semantic无法找到符号定义的问题，究其原因在于MIT 6.828的目录结构相对简单，头文件都在inc/目录下，而Xen的头文件在多个目录下，而且做预处理时还要加上Makefile里定义的一些预定义宏。今天参考了Alex Ott的这篇文章终于成功地让semantic支持Xen的代码分析了：
-
 这里分享一下和项目相关的一些设置，semantic安装等问题请参考网上的其他文章。也可以参考我的配置文件http://code.google.com/p/zellux-emacs-conf/source/browse/my-cc-mode.el，cscope ecb semantic和company等配置都在这个文件里了，不过有点混乱。
-;; Danimoth-specified configurations (add-to-list &#39;semanticdb-project-roots &amp;quot;~/danimoth/xen&amp;quot;) (setq semanticdb-project-roots (list (expand-file-name &amp;quot;/&amp;quot;))) (setq danimoth-base-dir &amp;quot;/home/wyx/danimoth&amp;quot;) (add-to-list &#39;auto-mode-alist (cons danimoth-base-dir &#39;c++-mode)) (add-to-list &#39;auto-mode-alist (cons danimoth-base-dir &#39;c-mode)) (add-to-list &#39;semantic-lex-c-preprocessor-symbol-file (concat danimoth-base-dir &amp;quot;/xen/include/config.h&amp;quot;)) (add-to-list &#39;semantic-lex-c-preprocessor-symbol-file (concat danimoth-base-dir &amp;quot;/xen/include/asm-x86/config.h&amp;quot;)) (ede-cpp-root-project &amp;quot;Danimoth&amp;quot; :name &amp;quot;Danimoth&amp;quot; ;; Any file at root directory of the project :file &amp;quot;~/danimoth/xen/Makefile&amp;quot; ;; Relative to the project&#39;s root directory :include-path &#39;(&amp;quot;/&amp;quot; &amp;quot;/include/asm-x86&amp;quot; &amp;quot;/include/xen&amp;quot; &amp;quot;/include/public&amp;quot; &amp;quot;/include/acpi&amp;quot; &amp;quot;/arch/x86/cpu/&amp;quot; ) ;; Pre-definds macro for preprocessing :spp-table &#39;((&amp;quot;__XEN__&amp;quot; .</description>
+;; Danimoth-specified configurations (add-to-list &amp;#39;semanticdb-project-roots &amp;#34;~/danimoth/xen&amp;#34;) (setq semanticdb-project-roots (list (expand-file-name &amp;#34;/&amp;#34;))) (setq danimoth-base-dir &amp;#34;/home/wyx/danimoth&amp;#34;) (add-to-list &amp;#39;auto-mode-alist (cons danimoth-base-dir &amp;#39;c++-mode)) (add-to-list &amp;#39;auto-mode-alist (cons danimoth-base-dir &amp;#39;c-mode)) (add-to-list &amp;#39;semantic-lex-c-preprocessor-symbol-file (concat danimoth-base-dir &amp;#34;/xen/include/config.h&amp;#34;)) (add-to-list &amp;#39;semantic-lex-c-preprocessor-symbol-file (concat danimoth-base-dir &amp;#34;/xen/include/asm-x86/config.h&amp;#34;)) (ede-cpp-root-project &amp;#34;Danimoth&amp;#34; :name &amp;#34;Danimoth&amp;#34; ;; Any file at root directory of the project :file &amp;#34;~/danimoth/xen/Makefile&amp;#34; ;; Relative to the project&amp;#39;s root directory :include-path &amp;#39;(&amp;#34;/&amp;#34; &amp;#34;/include/asm-x86&amp;#34; &amp;#34;/include/xen&amp;#34; &amp;#34;/include/public&amp;#34; &amp;#34;/include/acpi&amp;#34; &amp;#34;/arch/x86/cpu/&amp;#34; ) ;; Pre-definds macro for preprocessing :spp-table &amp;#39;((&amp;#34;__XEN__&amp;#34; .</description>
     </item>
     
     <item>
@@ -237,18 +223,13 @@ exec /usr/bin/wish8.5 &amp;quot;$0&amp;quot; -- &amp;quot;$@&amp;quot;  这样�
       
       <guid>https://blog.yxwang.me/2010/02/ecb-beginning/</guid>
       <description>终端下的效果图（Windows 7下使用pietty远登）
-
-下载
-http://ecb.sourceforge.net/downloads.html CVS或者压缩包都可以，当然也可以通过各发行版的包管理器安装。
-安装
-在.emacs中加入
-;; ECB configurations (add-to-list &#39;load-path &amp;quot;~/emacs/ecb-2.40&amp;quot;) (add-to-list &#39;load-path &amp;quot;~/emacs/cedet-1.0pre6/eieio&amp;quot;) (add-to-list &#39;load-path &amp;quot;~/emacs/cedet-1.0pre6/semantic&amp;quot;) (add-to-list &#39;load-path &amp;quot;~/emacs/cedet-1.0pre6/speedbar&amp;quot;) (setq semantic-load-turn-everything-on t) (require &#39;semantic-load) (require &#39;ecb-autoloads)  运行Emacs后执行ecb-byte-compile，并重启Emacs（我这里不重启的话执行ecb-active后会报错）。
-使用
-第一次使用时先要设置项目目录，M-x customize-variable  ecb-source-path ，在这里加上你的项目根目录。
+下载http://ecb.sourceforge.net/downloads.htmlCVS或者压缩包都可以，当然也可以通过各发行版的包管理器安装。
+安装在.emacs中加入
+;; ECB configurations (add-to-list &amp;#39;load-path &amp;#34;~/emacs/ecb-2.40&amp;#34;) (add-to-list &amp;#39;load-path &amp;#34;~/emacs/cedet-1.0pre6/eieio&amp;#34;) (add-to-list &amp;#39;load-path &amp;#34;~/emacs/cedet-1.0pre6/semantic&amp;#34;) (add-to-list &amp;#39;load-path &amp;#34;~/emacs/cedet-1.0pre6/speedbar&amp;#34;) (setq semantic-load-turn-everything-on t) (require &amp;#39;semantic-load) (require &amp;#39;ecb-autoloads) 运行Emacs后执行ecb-byte-compile，并重启Emacs（我这里不重启的话执行ecb-active后会报错）。
+使用第一次使用时先要设置项目目录，M-x customize-variable ecb-source-path ，在这里加上你的项目根目录。
 接下来使用M-x ecb-active就能激活ECB了，成功激活后Emacs窗口会被切成左右两半。左边的几个窗口依次显示：目录，当前目录下的文件，当前文件中的函数/全局变量等定义，文件浏览历史。如果打开了一个源文件后函数定义窗口里面是空的，有可能是因为这个项目过大cedet尚未完成对它的分析，闲置一段时间后就能看到文件里的定义。
 ECB提供了方便在这些窗口间切换的快捷键：
-切换到目录窗口 Ctrl-c . g d 切换到函数/方法窗口 Ctrl-c . g m 切换到文件窗口 Ctrl-c . g s 切换到历史窗口 Ctrl-c . g h 切换到上一个编辑窗口 Ctrl-c . g l
-最基本的使用就是这样，Ctrl-C . h可以看到更详细的帮助信息。</description>
+切换到目录窗口 Ctrl-c . g d切换到函数/方法窗口 Ctrl-c . g m切换到文件窗口 Ctrl-c . g s切换到历史窗口 Ctrl-c . g h切换到上一个编辑窗口 Ctrl-c . g l最基本的使用就是这样，Ctrl-C . h可以看到更详细的帮助信息。</description>
     </item>
     
     <item>
@@ -258,7 +239,7 @@ ECB提供了方便在这些窗口间切换的快捷键：
       
       <guid>https://blog.yxwang.me/2010/01/git-completion/</guid>
       <description>在Pro Git上看到的技巧，git的源代码包里的contrib/completion目录下有个git-completion.bash，把这个文件保存到~/.git-completion.bash，然后在.bashrc中加入一行
-source ~/.git-completion.bash  这样就能在bash下用tab自动补全git命令、branch等内容了。另外Debian/Ubuntu里有个包就叫git-completion，这个包安装完成后会自动把这个补全脚本放到/etc/bash_completion.d/下，由bash-compleletion载入执行。</description>
+source ~/.git-completion.bash 这样就能在bash下用tab自动补全git命令、branch等内容了。另外Debian/Ubuntu里有个包就叫git-completion，这个包安装完成后会自动把这个补全脚本放到/etc/bash_completion.d/下，由bash-compleletion载入执行。</description>
     </item>
     
     <item>
@@ -268,9 +249,9 @@ source ~/.git-completion.bash  这样就能在bash下用tab自动补全git命令
       
       <guid>https://blog.yxwang.me/2010/01/grep-trick/</guid>
       <description>使用grep在ps aux的输出结果中查找进程的时候经常会把grep进程本身也找出来，比如查找emacs进程：
-$ ps aux | grep emacs wyx 7090 0.0 0.0 3336 796 pts/2 S+ 04:49 0:00 grep emacs wyx 10128 0.1 4.9 66904 50388 pts/3 S+ Jan21 2:21 emacs  一个常见的防止grep进程出现的方法就是在后面再加一个grep -v grep：
-$ ps aux | grep emacs | grep -v grep wyx 10128 0.1 4.9 66904 50388 pts/3 S+ Jan21 2:21 emacs  今天在Santosa的博客上看到了另一个巧妙的做法，使用grep [e]macs来搜索emacs这个进程：
-$ ps aux | grep [e]macs wyx 10128 0.1 4.9 66904 50388 pts/3 S+ Jan21 2:21 emacs  为什么会有这样的效果，知道grep正则中[]的作用后想一想就能明白啦。很有意思的trick，虽然说它比| grep -v grep也未必方便多少，因为后者能通过alias简化输入。</description>
+$ ps aux | grep emacs wyx 7090 0.0 0.0 3336 796 pts/2 S+ 04:49 0:00 grep emacs wyx 10128 0.1 4.9 66904 50388 pts/3 S+ Jan21 2:21 emacs 一个常见的防止grep进程出现的方法就是在后面再加一个grep -v grep：
+$ ps aux | grep emacs | grep -v grep wyx 10128 0.1 4.9 66904 50388 pts/3 S+ Jan21 2:21 emacs 今天在Santosa的博客上看到了另一个巧妙的做法，使用grep [e]macs来搜索emacs这个进程：
+$ ps aux | grep [e]macs wyx 10128 0.1 4.9 66904 50388 pts/3 S+ Jan21 2:21 emacs 为什么会有这样的效果，知道grep正则中[]的作用后想一想就能明白啦。很有意思的trick，虽然说它比| grep -v grep也未必方便多少，因为后者能通过alias简化输入。</description>
     </item>
     
     <item>
@@ -294,8 +275,8 @@ $ ps aux | grep [e]macs wyx 10128 0.1 4.9 66904 50388 pts/3 S+ Jan21 2:21 emacs 
       <description>最近写了篇survey，分享下用NoteExpress一些经验
  bibtex 关键字设置：  工具-&amp;gt;样式-&amp;gt;选择当前输出样式，选择BibTex，然后就能在题录的字段中找到bibtex 关键字一项了
  导出bibtex时选择ANSI编码，如果设置为UTF-8貌似编译latex时会给出类似You&amp;rsquo;re missing an entry type&amp;mdash;line 1 of file xxx.bib的提示。
- 导出引用的网页：我的解决方法是在BibTex样式-&amp;gt;题录-&amp;gt;模版里新增一个网页模版，然后右键编辑区选择从模版通用复制，并在里面增加一条***Howpublished = {\url{链接}}, 这样就能使用howpublished字段导出网页链接了。不过好像这样网页地址不会换行，于是我最后还是用手动断行改了下.bib。
- 另外提下，把png/jpg转成eps，我用的是sam2p，aur上就有。
+  导出引用的网页：我的解决方法是在BibTex样式-&amp;gt;题录-&amp;gt;模版里新增一个网页模版，然后右键编辑区选择从模版通用复制，并在里面增加一条***Howpublished = {\url{链接}}, 这样就能使用howpublished字段导出网页链接了。不过好像这样网页地址不会换行，于是我最后还是用手动断行改了下.bib。
+  另外提下，把png/jpg转成eps，我用的是sam2p，aur上就有。
   </description>
     </item>
     
@@ -318,8 +299,7 @@ $ ps aux | grep [e]macs wyx 10128 0.1 4.9 66904 50388 pts/3 S+ Jan21 2:21 emacs 
       
       <guid>https://blog.yxwang.me/2009/10/only-31m-disk-space-detected/</guid>
       <description>这周买了块西数的1T硬盘，用来放各种美剧/高清电影。装好进入Win7后提示检测到新硬盘，然后进入磁盘管理一看发现磁盘大小只有31兆，重启进入BIOS看到的磁盘容量是0MB。换了一台电脑问题依然存在。
-于是求助superuser，发现了这篇文章http://www.pcstats.com/articleview.cfm?articleid=1139&amp;amp;page=12，貌似是LBA(Logical Block Addressing)相关的问题，下载了个HDD Capacity Restore Tool修复后问题解决。
-附该软件下载地址：http://hdd-tools.com/products/cr/download/crsetup.exe</description>
+于是求助superuser，发现了这篇文章http://www.pcstats.com/articleview.cfm?articleid=1139&amp;amp;page=12，貌似是LBA(Logical Block Addressing)相关的问题，下载了个HDD Capacity Restore Tool修复后问题解决。</description>
     </item>
     
     <item>
@@ -329,17 +309,14 @@ $ ps aux | grep [e]macs wyx 10128 0.1 4.9 66904 50388 pts/3 S+ Jan21 2:21 emacs 
       
       <guid>https://blog.yxwang.me/2009/09/compile-php5-on-dreamhost/</guid>
       <description>Dreamhost提供的php有不少限制，昨天折腾了一个晚上终于成功地在自己的虚拟主机上编译了php5。
-Why 
-用下来，发现使用自己编译的php5有这么几个好处：
- 可以自定义内存分配上限，默认只有32M，通过wordpress安装插件的时候经常出现内存不够的问题。
- 上传文件大小限制也能改，默认只有2M，基本没法通过wordpress传音乐之类的比较大的文件。
- 使用自己的php后解释执行的进程uid也是自己了，这样就避免了很多nobody用户访问/修改/增加文件所带来的问题。
-  How to compile 
-编译和安装的大部分步骤可以参考http://wiki.dreamhost.com/index.php/Installing_PHP5，这里补充一点我碰到的问题和解决方法。
+Why用下来，发现使用自己编译的php5有这么几个好处：
+  可以自定义内存分配上限，默认只有32M，通过wordpress安装插件的时候经常出现内存不够的问题。
+  上传文件大小限制也能改，默认只有2M，基本没法通过wordpress传音乐之类的比较大的文件。
+  使用自己的php后解释执行的进程uid也是自己了，这样就避免了很多nobody用户访问/修改/增加文件所带来的问题。
+  How to compile 编译和安装的大部分步骤可以参考http://wiki.dreamhost.com/index.php/Installing_PHP5，这里补充一点我碰到的问题和解决方法。
 因为我这台dreamhost虚拟主机用的是x86_64，而通过下载的php5的configure文件默认查找的是/usr/lib/下面的共享库，通过&amp;ndash;with-libdir=lib64设置查找路径后却无法找到openssl库了，于是我用了个很山寨的方法，把configure脚本里查找libmysqlclient时的路径临时改成了/usr/lib64，然后再改回/usr/lib。
 安装脚本开头定义的几个包的名字可能也要修改下，如果下载出现错误的话去上级目录看下最新的包的名字是什么就行了。另外脚本中解压.Z和.tar.gz文件用的是uncompress命令，似乎在我的这个主机上没有安装，改成tar zxf就行了。
-How to use
-最后说下编译成功后怎么使用，具体方法那个网页上也讲过了，只要把编译后的php.cgi放到/cgi-bin/下然后改下.htaccess即可。
+How to use最后说下编译成功后怎么使用，具体方法那个网页上也讲过了，只要把编译后的php.cgi放到/cgi-bin/下然后改下.htaccess即可。
 对于子域名，比如我这个techblog.iamzellux.com，参照网页上的说明把整个cgi-bin用符号链接的方式link到子域名的根目录下是最方便的方案，当然别忘了修改.htaccess。</description>
     </item>
     
@@ -350,8 +327,7 @@ How to use
       
       <guid>https://blog.yxwang.me/2009/07/firefox-close-windows-with-last-tab/</guid>
       <description>记得以前用Firefox 3.0.x时把Tools -&amp;gt; Options -&amp;gt; Tabs -&amp;gt; Always show the tab bar勾上就行了，升级到3.5以后就没用了，搜了下Knowledge Base，最后在
-https://support.mozilla.com/tiki-view_forum_thread.php?locale=zh-CN&amp;comments_parentId=184680&amp;forumId=1
-看到只要将about:config页中的browser.tabs.closeWindowWithLastTab项设为false即可</description>
+https://support.mozilla.com/tiki-view_forum_thread.php?locale=zh-CN&amp;amp;comments_parentId=184680&amp;amp;forumId=1看到只要将about:config页中的browser.tabs.closeWindowWithLastTab项设为false即可</description>
     </item>
     
     <item>
@@ -362,8 +338,8 @@ https://support.mozilla.com/tiki-view_forum_thread.php?locale=zh-CN&amp;comments
       <guid>https://blog.yxwang.me/2009/06/svn-sms-notification/</guid>
       <description>主要功能：开发人员执行svn commit后自动将开发人id、修订版本号和日志内容通过短信的方式通知所有人。
 首先修改svn服务器对应项目目录hook/post-commit文件
-#!/bin/bash export LANG=en_US.utf8 REPOS=&amp;quot;$1&amp;quot; REV=&amp;quot;$2&amp;quot; cd /home/svn/repositories/sebank/hooks ./sms.py commit $REPOS $REV  注意别忘了这里的export LANG，我一开始测试的时候发现中文一直有乱码，后来才意识到shell的环境变量里缺这个。 hook/sms.py
-#!/usr/bin/python # -*- coding: utf-8 -*- import sys, urllib, os from subprocess import * user = &#39;your mobile number&#39; pword = &#39;fetion password&#39; phone = [ &#39;13764444444&#39;, &#39;13813333333&#39;, ] repo = sys.argv[2] rev = sys.argv[3] cmdlog = &#39;svnlook log -r %s %s&#39;%(rev, repo) cmdauthor = &#39;svnlook author -r %s %s&#39;%(rev, repo) log = Popen(cmdlog, stdout=PIPE, shell=True).</description>
+#!/bin/bash  export LANG=en_US.utf8 REPOS=&amp;#34;$1&amp;#34; REV=&amp;#34;$2&amp;#34; cd /home/svn/repositories/sebank/hooks ./sms.py commit $REPOS $REV 注意别忘了这里的export LANG，我一开始测试的时候发现中文一直有乱码，后来才意识到shell的环境变量里缺这个。 hook/sms.py
+#!/usr/bin/python # -*- coding: utf-8 -*- import sys, urllib, os from subprocess import * user = &amp;#39;your mobile number&amp;#39; pword = &amp;#39;fetion password&amp;#39; phone = [ &amp;#39;13764444444&amp;#39;, &amp;#39;13813333333&amp;#39;, ] repo = sys.argv[2] rev = sys.argv[3] cmdlog = &amp;#39;svnlook log -r %s%s&amp;#39;%(rev, repo) cmdauthor = &amp;#39;svnlook author -r %s%s&amp;#39;%(rev, repo) log = Popen(cmdlog, stdout=PIPE, shell=True).</description>
     </item>
     
     <item>
@@ -375,9 +351,9 @@ https://support.mozilla.com/tiki-view_forum_thread.php?locale=zh-CN&amp;comments
       <description>Company的全写是complete everything，它只是一个补全的前端，会自动调用semantic等后端插件。
 新版的Company可以从它的官方主页(http://nschum.de/src/emacs/company-mode/)下载到，也可以从ELPA下载安装这个插件。
 使用这个插件时只要在.emacs中加入
-(add-to-list &#39;load-path &amp;quot;/path/to/company&amp;quot;) (autoload &#39;company-mode &amp;quot;company&amp;quot; nil t)  然后Emacs中使用M-x company-mode启动company模式即可。
+(add-to-list &amp;#39;load-path &amp;#34;/path/to/company&amp;#34;) (autoload &amp;#39;company-mode &amp;#34;company&amp;#34; nil t) 然后Emacs中使用M-x company-mode启动company模式即可。
 具体的按键可以在company.el中看到
-(defvar company-active-map (let ((keymap (make-sparse-keymap))) (define-key keymap &amp;quot;\e\e\e&amp;quot; &#39;company-abort) (define-key keymap &amp;quot;\C-g&amp;quot; &#39;company-abort) (define-key keymap (kbd &amp;quot;M-n&amp;quot;) &#39;company-select-next) (define-key keymap (kbd &amp;quot;M-p&amp;quot;) &#39;company-select-previous) (define-key keymap (kbd &amp;quot;&amp;quot;) &#39;company-select-next) (define-key keymap (kbd &amp;quot;&amp;quot;) &#39;company-select-previous) (define-key keymap [down-mouse-1] &#39;ignore) (define-key keymap [down-mouse-3] &#39;ignore) (define-key keymap [mouse-1] &#39;company-complete-mouse) (define-key keymap [mouse-3] &#39;company-select-mouse) (define-key keymap [up-mouse-1] &#39;ignore) (define-key keymap [up-mouse-3] &#39;ignore) (define-key keymap &amp;quot;\C-m&amp;quot; &#39;company-complete-selection) (define-key keymap &amp;quot;\t&amp;quot; &#39;company-complete-common) (define-key keymap (kbd &amp;quot;&amp;quot;) &#39;company-show-doc-buffer) (define-key keymap &amp;quot;\C-w&amp;quot; &#39;company-show-location) (define-key keymap &amp;quot;\C-s&amp;quot; &#39;company-search-candidates) (define-key keymap &amp;quot;\C-\M-s&amp;quot; &#39;company-filter-candidates) (dotimes (i 10) (define-key keymap (vector (+ (aref (kbd &amp;quot;M-0&amp;quot;) 0) i)) `(lambda () (interactive) (company-complete-number ,i)))) keymap) &amp;quot;Keymap that is enabled during an active completion.</description>
+(defvar company-active-map (let ((keymap (make-sparse-keymap))) (define-key keymap &amp;#34;\e\e\e&amp;#34; &amp;#39;company-abort) (define-key keymap &amp;#34;\C-g&amp;#34; &amp;#39;company-abort) (define-key keymap (kbd &amp;#34;M-n&amp;#34;) &amp;#39;company-select-next) (define-key keymap (kbd &amp;#34;M-p&amp;#34;) &amp;#39;company-select-previous) (define-key keymap (kbd &amp;#34;&amp;#34;) &amp;#39;company-select-next) (define-key keymap (kbd &amp;#34;&amp;#34;) &amp;#39;company-select-previous) (define-key keymap [down-mouse-1] &amp;#39;ignore) (define-key keymap [down-mouse-3] &amp;#39;ignore) (define-key keymap [mouse-1] &amp;#39;company-complete-mouse) (define-key keymap [mouse-3] &amp;#39;company-select-mouse) (define-key keymap [up-mouse-1] &amp;#39;ignore) (define-key keymap [up-mouse-3] &amp;#39;ignore) (define-key keymap &amp;#34;\C-m&amp;#34; &amp;#39;company-complete-selection) (define-key keymap &amp;#34;\t&amp;#34; &amp;#39;company-complete-common) (define-key keymap (kbd &amp;#34;&amp;#34;) &amp;#39;company-show-doc-buffer) (define-key keymap &amp;#34;\C-w&amp;#34; &amp;#39;company-show-location) (define-key keymap &amp;#34;\C-s&amp;#34; &amp;#39;company-search-candidates) (define-key keymap &amp;#34;\C-\M-s&amp;#34; &amp;#39;company-filter-candidates) (dotimes (i 10) (define-key keymap (vector (+ (aref (kbd &amp;#34;M-0&amp;#34;) 0) i)) `(lambda () (interactive) (company-complete-number ,i)))) keymap) &amp;#34;Keymap that is enabled during an active completion.</description>
     </item>
     
     <item>
@@ -387,17 +363,14 @@ https://support.mozilla.com/tiki-view_forum_thread.php?locale=zh-CN&amp;comments
       
       <guid>https://blog.yxwang.me/2009/05/install-git-gitoss-gitweb-in-archlinux/</guid>
       <description>参考文章：
-[1] http://hokietux.net/blog/?p=58 [2] http://scie.nti.st/2007/11/14/hosting-git-repositories-the-easy-and-secure-way [3] http://www.nkuttler.de/2009/04/06/git-clone-ssh-could-not-resolve-hostname/
- git  很简单，直接用pacman安装即可 sudo pacman -S git
- gitosis  gitosis是一个方便管理git仓库的工具，安装方法：
-1) 从yaourt或者aur下载安装gitosis-git包 http://aur.archlinux.org/packages.php?ID=23419
-2) 新建git用户 sudo useradd &amp;ndash;system &amp;ndash;shell /bin/sh &amp;ndash;comment &amp;lsquo;git version control&amp;rsquo;&amp;ndash;user-group &amp;ndash;home-dir /home/git/ git
-3) 将开发用户的rsa公钥导入gitosis，（没有公钥的话请先运行ssh-keygen -t rsa生成） sudo -H -u git gitosis-init &amp;lt; ~/.ssh/id_rsa.pub
-4) 如果以上步骤没有问题，那么运行 git clone ssh://git@hostname/gitosis-admin.git 后应该就能看到gitosis-admin.git这个目录了
-5) 新建项目、添加用户等操作参见[2]，这里不再赘述
- gitweb  事实上ArchLinux中安装的git包自带了gitweb，可以用which gitweb搜到，一般默认在/usr/share/gitweb。下面假设我的http根目录为/home/httpd
-1) 将/usr/share/gitweb下的文件复制到/home/httpd/cgi-bin（其实似乎只要gitweb.cgi就够了）  sudo cp -R /usr/share/gitweb /home/httpd/cgi-bin/ 
-2) /usr/share/gitweb下的.</description>
+[1] http://hokietux.net/blog/?p=58[2] http://scie.nti.st/2007/11/14/hosting-git-repositories-the-easy-and-secure-way[3] http://www.nkuttler.de/2009/04/06/git-clone-ssh-could-not-resolve-hostname/ git  很简单，直接用pacman安装即可 sudo pacman -S git
+gitosis  gitosis是一个方便管理git仓库的工具，安装方法：
+  从yaourt或者aur下载安装gitosis-git包 http://aur.archlinux.org/packages.php?ID=23419
+  新建git用户 sudo useradd &amp;ndash;system &amp;ndash;shell /bin/sh &amp;ndash;comment &amp;lsquo;git version control&amp;rsquo;&amp;ndash;user-group &amp;ndash;home-dir /home/git/ git  将开发用户的rsa公钥导入gitosis，（没有公钥的话请先运行ssh-keygen -t rsa生成） sudo -H -u git gitosis-init &amp;lt; ~/.ssh/id_rsa.pub  如果以上步骤没有问题，那么运行git clone ssh://git@hostname/gitosis-admin.git后应该就能看到gitosis-admin.git这个目录了
+  新建项目、添加用户等操作参见[2]，这里不再赘述
+  gitweb  事实上ArchLinux中安装的git包自带了gitweb，可以用which gitweb搜到，一般默认在/usr/share/gitweb。下面假设我的http根目录为/home/httpd
+  将/usr/share/gitweb下的文件复制到/home/httpd/cgi-bin（其实似乎只要gitweb.cgi就够了） sudo cp -R /usr/share/gitweb /home/httpd/cgi-bin/   /usr/share/gitweb下的.css和.png复制到/home/httpd/html/git/
+  修改或创建/etc/gitweb.</description>
     </item>
     
     <item>
@@ -410,11 +383,10 @@ https://support.mozilla.com/tiki-view_forum_thread.php?locale=zh-CN&amp;comments
 Windows下有个很方便的改键工具 remapkey，xp安装盘自带。
 Mac OS X系统中改键也很方便，10.4以上版本的OSX中可以直接在Keyboard Preference里找到修改键位映射的选项。
 Linux下的改键我知道两种方法，一种是修改xorg.conf文件，把里面的键盘设备设置改成
-Section &amp;quot;InputDevice&amp;quot; Identifier &amp;quot;Generic Keyboard&amp;quot; Driver &amp;quot;kbd&amp;quot; Option &amp;quot;CoreKeyboard&amp;quot; Option &amp;quot;XkbRules&amp;quot; &amp;quot;xorg&amp;quot; Option &amp;quot;XkbModel&amp;quot; &amp;quot;pc104&amp;quot; Option &amp;quot;XkbLayout&amp;quot; &amp;quot;us&amp;quot; Option &amp;quot;XkbOptions&amp;quot; &amp;quot;ctrl:swapcaps&amp;quot; EndSection  另一种是使用xmodmap这个工具，具体可以参见这篇文章 Changing your caps lock into Ctrl in X，这里简单介绍下
-修改前记得先备份当前的键位映射，xmodmap -pke &amp;gt; xmodmap.backup
-接下来运行
-xmodmap -e &#39;keycode 66 = Control_L&#39; xmodmap -e &#39;clear Lock&#39; xmodmap -e &#39;add Control = Control_L&#39;  这样就修改了Caps Lock的键位映射而不需要重启x，如果要在每次启动时自动修改Caps Lock键的映射，可以新建/修改一个.Xmodmap或者.xmodmap的文件，在里面加入
-keycode 66 = Control_L clear Lock add Control = Control_L    </description>
+Section &amp;#34;InputDevice&amp;#34; Identifier &amp;#34;Generic Keyboard&amp;#34; Driver &amp;#34;kbd&amp;#34; Option &amp;#34;CoreKeyboard&amp;#34; Option &amp;#34;XkbRules&amp;#34; &amp;#34;xorg&amp;#34; Option &amp;#34;XkbModel&amp;#34; &amp;#34;pc104&amp;#34; Option &amp;#34;XkbLayout&amp;#34; &amp;#34;us&amp;#34; Option &amp;#34;XkbOptions&amp;#34; &amp;#34;ctrl:swapcaps&amp;#34; EndSection 另一种是使用xmodmap这个工具，具体可以参见这篇文章 Changing your caps lock into Ctrl in X，这里简单介绍下
+修改前记得先备份当前的键位映射，xmodmap -pke &amp;gt; xmodmap.backup接下来运行
+xmodmap -e &amp;#39;keycode 66 = Control_L&amp;#39; xmodmap -e &amp;#39;clear Lock&amp;#39; xmodmap -e &amp;#39;add Control = Control_L&amp;#39; 这样就修改了Caps Lock的键位映射而不需要重启x，如果要在每次启动时自动修改Caps Lock键的映射，可以新建/修改一个.Xmodmap或者.xmodmap的文件，在里面加入
+keycode 66 = Control_L clear Lock add Control = Control_L </description>
     </item>
     
     <item>
@@ -423,9 +395,8 @@ keycode 66 = Control_L clear Lock add Control = Control_L    </description>
       <pubDate>Wed, 29 Apr 2009 00:00:00 +0000</pubDate>
       
       <guid>https://blog.yxwang.me/2009/04/using-mouse-in-emacs-within-terminal/</guid>
-      <description>http://linux.about.com/od/emacs_doc/a/emacsdoc567.htm
-M-x xterm-mouse-mode 开启鼠标支持，操作的时候按住shift能恢复到之前的xterm鼠标模式
-M-x mouse-wheel-mode 开启滚轮支持
+      <description>http://linux.about.com/od/emacs_doc/a/emacsdoc567.htmM-x xterm-mouse-mode开启鼠标支持，操作的时候按住shift能恢复到之前的xterm鼠标模式
+M-x mouse-wheel-mode开启滚轮支持
 一些相关的参数： mouse-drag-copy-region 选中后自动复制 mouse-wheel-scroll-amount 每次滚动的行数 mouse-wheel-follow-mouse 滚动位置 mouse-wheel-progressive-speed 滚动速度</description>
     </item>
     
@@ -435,8 +406,7 @@ M-x mouse-wheel-mode 开启滚轮支持
       <pubDate>Sat, 04 Apr 2009 00:00:00 +0000</pubDate>
       
       <guid>https://blog.yxwang.me/2009/04/emacs-bug-contribution/</guid>
-      <description>http://emacsbugs.donarmstrong.com/cgi-bin/bugreport.cgi?bug=2800
-Emacs在窗口过窄时使用minibuffer的auto-complete功能会挂掉，就把这bug报告上去了。负责人貌似是MIT的物理系毕业的博士？敬仰下。
+      <description>http://emacsbugs.donarmstrong.com/cgi-bin/bugreport.cgi?bug=2800Emacs在窗口过窄时使用minibuffer的auto-complete功能会挂掉，就把这bug报告上去了。负责人貌似是MIT的物理系毕业的博士？敬仰下。
 从后面回复来看，似乎这个bug emacs22里也有，应该还是蛮常见的呀，为啥之前没人report呢@@
 不管怎么说，总算也给Emacs出了份力，嘿嘿。</description>
     </item>
@@ -449,9 +419,9 @@ Emacs在窗口过窄时使用minibuffer的auto-complete功能会挂掉，就把�
       <guid>https://blog.yxwang.me/2009/02/emacs-tramp/</guid>
       <description>很好用的东东，可以方便的打开需要root权限或是远程服务器上的文件。
 统一的url格式是 /method:usr@machine:port/path/to.file，这种方式需要在载入tramp前设置tramp-syntax
-(setq tramp-syntax &#39;url) (require &#39;tramp)  也可以用(setq tramp-default-method &amp;ldquo;scp&amp;rdquo;) 指定默认的访问方法，这样就不需要/method://了
+(setq tramp-syntax &amp;#39;url) (require &amp;#39;tramp) 也可以用(setq tramp-default-method &amp;ldquo;scp&amp;rdquo;) 指定默认的访问方法，这样就不需要/method://了
 以我现在的org日程管理为例，个人日程文件保存在机房的73号机上，实验室电脑和寝室电脑上的电脑只要通过tramp远程访问这个org文件即可：
-(setq org-agenda-files (list &amp;quot;/scp:wyx@10.132.140.73:/home/wyx/notes/lab.org&amp;quot;))  </description>
+(setq org-agenda-files (list &amp;#34;/scp:wyx@10.132.140.73:/home/wyx/notes/lab.org&amp;#34;)) </description>
     </item>
     
     <item>
@@ -474,11 +444,8 @@ stty -ixoff -ixon
       
       <guid>https://blog.yxwang.me/2008/10/sync-between-zotero-and-endnote/</guid>
       <description>&lt;p&gt;两者配合，更完美的知识管理方案&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://hi.baidu.com/qq303520912/blog/item/de5cba082db83e36e924889e.html&#34; target=&#34;_blank&#34;&gt;&lt;a href=&#34;http://hi.baidu.com/qq303520912/blog/item/de5cba082db83e36e924889e.html&#34;&gt;http://hi.baidu.com/qq303520912/blog/item/de5cba082db83e36e924889e.html&lt;/a&gt;&lt;/a&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;a href=&#34;http://hi.baidu.com/qq303520912/blog/item/de5cba082db83e36e924889e.html&#34;&gt;http://hi.baidu.com/qq303520912/blog/item/de5cba082db83e36e924889e.html&lt;/a&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
 &lt;p&gt;Endnote是目前国内科研人员使用最多的文献管理软件，功能最完备，各数据库或大学图书馆等和它的兼容也是最好。它的Filter和style也最为丰富，而且可以自己创建修改。看看周围的人，大部分都是Endnote的用户。 　　Zotero作为一个新的文件管理系统，与Endnote相比还是稚嫩了些，特别对于国内数据库的支持不佳，更是限制了它的应用。&lt;/p&gt;
-
 &lt;p&gt;不过，Zotero作为Firefox浏览器的插件，还是有一些特别之处。&lt;/p&gt;</description>
     </item>
     

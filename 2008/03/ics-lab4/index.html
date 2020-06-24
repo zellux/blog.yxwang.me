@@ -11,6 +11,7 @@
     
 
     <title> ICS Lab4 经验 &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -39,7 +40,7 @@
     "articleSection" : "post",
     "name" : "ICS Lab4 经验",
     "headline" : "ICS Lab4 经验",
-    "description" : "编译 不安装图形界面： 修改sim\/Makefile，把前三行非注释部分用#注释掉，变成\n# GUIMODE ... # TKLIB ... # TKINC ...  保存后运行 make\n图形界面 安装Tcl\/Tk库  Redhat 9： 可以在Redhat菜单-\x26gt;System Settings-\x26gt;Add\/Remove Applications中添加X Software Development，根据提示载入相关镜像文件。 然后在 sim 目录下运行 make\n Arch Linux： 有包管理机制的发行版直接用相关软件安装（比如 Arch 中 pacman -S tcl tk），注意安装好以后生成的动态链接库可能带有版本号（比如 libtcl8.5.so libtk8.5.so）\n  具体版本号通过 pacman -Ql tcl tk | grep \x27.so\x27 查得\n接着只要修改Makefile中的TKLIBS参数，或者用ln建个链接即可\n Ubuntu 由于ubuntu默认没有lex词法分析工具，在编译时需要先安装flex：sudo apt-get install flex  图形界面和Arch类似 sudo apt-get install tcl8.5-dev tk8.5-dev tcl8.5 tk8.5\n然后修改 Makefile",
+    "description" : "编译 不安装图形界面： 修改sim\/Makefile，把前三行非注释部分用#注释掉，变成\n# GUIMODE ... # TKLIB ... # TKINC ... 保存后运行 make\n图形界面 安装Tcl\/Tk库   Redhat 9： 可以在Redhat菜单-\u0026gt;System Settings-\u0026gt;Add\/Remove Applications中添加X Software Development，根据提示载入相关镜像文件。 然后在 sim 目录下运行 make\n  Arch Linux： 有包管理机制的发行版直接用相关软件安装（比如 Arch 中 pacman -S tcl tk），注意安装好以后生成的动态链接库可能带有版本号（比如 libtcl8.5.so libtk8.5.so）\n具体版本号通过 pacman -Ql tcl tk | grep \u0027.so\u0027 查得\n接着只要修改Makefile中的TKLIBS参数，或者用ln建个链接即可\n  Ubuntu 由于ubuntu默认没有lex词法分析工具，在编译时需要先安装flex：sudo apt-get install flex\n  图形界面和Arch类似 sudo apt-get install tcl8.5-dev tk8.5-dev tcl8.5 tk8.5\n然后修改 Makefile",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -47,8 +48,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2008",
-    "datePublished": "2008-03-16 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2008-03-16 00:00:00 \x2b0000 UTC",
+    "datePublished": "2008-03-16 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2008-03-16 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/2008\/03\/ics-lab4\/",
     "wordCount" : "163",
     "keywords" : [ "Courses","ICS","Lab","Blog" ]
@@ -93,113 +94,78 @@
 </span>
 
     <div class="post-content">
-      
-
-<h3 id="编译">编译</h3>
-
+      <h3 id="编译">编译</h3>
 <p>不安装图形界面：
 修改sim/Makefile，把前三行非注释部分用#注释掉，变成</p>
-
 <pre><code># GUIMODE ...
 # TKLIB ...
 # TKINC ...
-</code></pre>
-
-<p>保存后运行 <code>make</code></p>
-
+</code></pre><p>保存后运行 <code>make</code></p>
 <h3 id="图形界面">图形界面</h3>
-
-<h4 id="安装tcl-tk库">安装Tcl/Tk库</h4>
-
+<h4 id="安装tcltk库">安装Tcl/Tk库</h4>
 <ul>
-<li><p>Redhat 9：
+<li>
+<p>Redhat 9：
 可以在Redhat菜单-&gt;System Settings-&gt;Add/Remove Applications中添加X Software Development，根据提示载入相关镜像文件。
-然后在 sim 目录下运行 <code>make</code></p></li>
-
-<li><p>Arch Linux：
-有包管理机制的发行版直接用相关软件安装（比如 Arch 中 <code>pacman -S tcl tk</code>），注意安装好以后生成的动态链接库可能带有版本号（比如 libtcl8.5.so libtk8.5.so）</p></li>
-</ul>
-
+然后在 sim 目录下运行 <code>make</code></p>
+</li>
+<li>
+<p>Arch Linux：
+有包管理机制的发行版直接用相关软件安装（比如 Arch 中 <code>pacman -S tcl tk</code>），注意安装好以后生成的动态链接库可能带有版本号（比如 libtcl8.5.so libtk8.5.so）</p>
 <p>具体版本号通过 <code>pacman -Ql tcl tk | grep '.so'</code> 查得</p>
-
 <p>接着只要修改Makefile中的TKLIBS参数，或者用ln建个链接即可</p>
-
-<ul>
-<li>Ubuntu
-由于ubuntu默认没有lex词法分析工具，在编译时需要先安装flex：<code>sudo apt-get install flex</code></li>
+</li>
+<li>
+<p>Ubuntu
+由于ubuntu默认没有lex词法分析工具，在编译时需要先安装flex：<code>sudo apt-get install flex</code></p>
+</li>
 </ul>
-
 <p>图形界面和Arch类似
-  <code>sudo apt-get install tcl8.5-dev tk8.5-dev tcl8.5 tk8.5</code></p>
-
+<code>sudo apt-get install tcl8.5-dev tk8.5-dev tcl8.5 tk8.5</code></p>
 <p>然后修改 Makefile</p>
-
-<pre><code>  ltcl-&gt;ltcl8.5
-  ltk-&gt;ltk8.5
-  /usr/local/lib/.. -&gt; /usr/lib/..
-  /usr/local/include/ -&gt; /usr/lib/tcl8.5/include/
-</code></pre>
-
-<h3 id="part-a">Part A</h3>
-
+<pre><code>ltcl-&gt;ltcl8.5
+ltk-&gt;ltk8.5
+/usr/local/lib/.. -&gt; /usr/lib/..
+/usr/local/include/ -&gt; /usr/lib/tcl8.5/include/
+</code></pre><h3 id="part-a">Part A</h3>
 <p>用y86写三个小程序，基本上仿照seq/asum.ys写就行了。装了图形界面的模拟器的话调试起来也很方便。</p>
-
 <p>相关命令（假设在seq目录下）：</p>
-
 <ul>
 <li>编译 <code>make asum.yo</code></li>
 <li>运行 <code>../misc/yis asum.yo</code></li>
 <li>调试 <code>./ssim -g asum.yo</code></li>
 </ul>
-
 <h3 id="part-b">Part B</h3>
-
 <p>同样不需要花多少力气，把Homework 16的答案写成HCL语言就行，可以参照opl, irmovl, popl这三个指令的写法。</p>
-
 <p>通过ICS主页上的Lab4.pdf中的几个测试命令即可。</p>
-
 <h3 id="part-c">Part C</h3>
-
 <p>通过修改HCL和y86代码优化程序，最麻烦的一块。</p>
-
 <p>在pipe目录下运行./benchmark.pl -f ncopy.ys，这个脚本就会自动运行一系列测试程序并计时，最后一行显示了平均所需的时间。</p>
-
 <p>优化方法很多，系版的精华区的讨论帖里就有不少。</p>
-
 <p>另外可以看看pipe/README这个文件，里面也说了几种方法。</p>
-
 <p>最简单的就是实现iaddl指令，用它替换部分语句缩短时间；还有一个比较重要的就是loop unrolling，所谓loop unrolling就是把一个循环中的语句合并，减少循环次数。
 用C语言简单的举一个例子。</p>
-
-<pre><code class="language-c">for (int i = 0; i &lt; 10; i++)
-    dst[i] = src[i];
-</code></pre>
-
-<p>把相邻两个循环合并起来，变成</p>
-
-<pre><code class="language-c">for (int i = 0; i &lt; 10; i += 2) {
-    dst[i] = src[i];
-    dst[i + 1] = src[i + 1];
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">10</span>; i<span style="color:#f92672">++</span>)
+    dst[i] <span style="color:#f92672">=</span> src[i];
+</code></pre></div><p>把相邻两个循环合并起来，变成</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">10</span>; i <span style="color:#f92672">+=</span> <span style="color:#ae81ff">2</span>) {
+    dst[i] <span style="color:#f92672">=</span> src[i];
+    dst[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> src[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>];
 }
-</code></pre>
-
-<p>这样增加i的值的语句就从原来的10个减少到了现在的5个。</p>
-
+</code></pre></div><p>这样增加i的值的语句就从原来的10个减少到了现在的5个。</p>
 <p>另外这里还有一个潜在的好处，<code>dst[i] = src[i]</code> 在执行的时候有个Load/Use Data Hazards，会产生一个bubble，如果先读出src[i]，再读出src[i+1]，然后依次写入dst[i]，dst[i+1]，这样就可以消去这个bubble，从而为每个元素节约一个左右的时钟数。</p>
-
 <p>测试方法：</p>
-
 <p>先保证pipe-full.hcl中的iaddl语句的正确，make以后在ptest目录下运行
 <code>make SIM=../pipe/psim TFLAGS=-i TFLAGS=-i</code></p>
-
 <p>之后在pipe目录下运行<code>./correctness.pl -f ncopy.ys</code>测试样例程序，通过以后再运行<code>./benchmark.pl -f ncopy.ys</code>就能看到这个程序的性能了。</p>
-
 <h3 id="其他一些补充">其他一些补充</h3>
-
 <ol>
-<li><p>correctness.pl这个脚本测试时报的错误可能会和实际不一致，比如Bad count和Incorrect copying貌似会混淆。</p></li>
-
-<li><p>unrolling的时候建议写个专门生成相关代码片段的脚本，否则改起来太麻烦了。</p></li>
+<li>
+<p>correctness.pl这个脚本测试时报的错误可能会和实际不一致，比如Bad count和Incorrect copying貌似会混淆。</p>
+</li>
+<li>
+<p>unrolling的时候建议写个专门生成相关代码片段的脚本，否则改起来太麻烦了。</p>
+</li>
 </ol>
 
     </div>

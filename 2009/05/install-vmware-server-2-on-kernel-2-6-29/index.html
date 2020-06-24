@@ -11,6 +11,7 @@
     
 
     <title> 在 Linux Kernel 2.6.29 上安装 VMware Server 2 &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -47,10 +48,10 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2009",
-    "datePublished": "2009-05-05 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2009-05-05 00:00:00 \x2b0000 UTC",
+    "datePublished": "2009-05-05 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2009-05-05 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/2009\/05\/install-vmware-server-2-on-kernel-2-6-29\/",
-    "wordCount" : "114",
+    "wordCount" : "113",
     "keywords" : [ "Computer System","Installation","VMware","Blog" ]
 }
 </script>
@@ -94,8 +95,7 @@
 
     <div class="post-content">
       <p>在kernel 2.6.29上编译vmware modules时报错了</p>
-
-<pre><code class="language-text">/usr/src/linux-2.6.29/arch/x86/include/asm/apicdef.h:132:1: warning: this is the location of the previous definition
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">/usr/src/linux-2.6.29/arch/x86/include/asm/apicdef.h:132:1: warning: this is the location of the previous definition
 /tmp/vmware-config0/vmmon-only/linux/driver.c: In function ‘LinuxDriverSyncCallOnEachCPU’:
 /tmp/vmware-config0/vmmon-only/linux/driver.c:1423: error: too many arguments to function ‘smp_call_function’
 /tmp/vmware-config0/vmmon-only/linux/driver.c: In function ‘LinuxDriver_Ioctl’:
@@ -108,9 +108,7 @@
 /tmp/vmware-config0/vmmon-only/linux/driver.c:1990: error: ‘struct task_struct’ has no member named ‘fsgid’
 /tmp/vmware-config0/vmmon-only/linux/driver.c:1990: error: ‘struct task_struct’ has no member named ‘gid’
 /tmp/vmware-config0/vmmon-only/linux/driver.c:2007: error: too many arguments to function ‘smp_call_function’
-</code></pre>
-
-<p>貌似是2.6.29的task_struct有了改动导致的，网上搜到一堆vmware workstation在kernel 2.6.29上的补丁，都不好用，最后在<a href="http://www.saarlinux.de/blog/?p=5" target="_blank"><a href="http://www.saarlinux.de/blog/?p=5">http://www.saarlinux.de/blog/?p=5</a></a> 翻到一个已经打了补丁的vmware modules包，解压到/usr/lib/vmware/modules/source覆盖原来的几个.tar文件再运行vmware-config.pl就可以了</p>
+</code></pre></div><p>貌似是2.6.29的task_struct有了改动导致的，网上搜到一堆vmware workstation在kernel 2.6.29上的补丁，都不好用，最后在<!-- raw HTML omitted --><a href="http://www.saarlinux.de/blog/?p=5">http://www.saarlinux.de/blog/?p=5</a><!-- raw HTML omitted --> 翻到一个已经打了补丁的vmware modules包，解压到/usr/lib/vmware/modules/source覆盖原来的几个.tar文件再运行vmware-config.pl就可以了</p>
 
     </div>
         <div class="cc-license">

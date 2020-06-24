@@ -11,6 +11,7 @@
     
 
     <title> Company-mode: Emacs 自动补全 &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -39,7 +40,7 @@
     "articleSection" : "post",
     "name" : "Company-mode: Emacs 自动补全",
     "headline" : "Company-mode: Emacs 自动补全",
-    "description" : "Company的全写是complete everything，它只是一个补全的前端，会自动调用semantic等后端插件。\n新版的Company可以从它的官方主页(http:\/\/nschum.de\/src\/emacs\/company-mode\/)下载到，也可以从ELPA下载安装这个插件。\n使用这个插件时只要在.emacs中加入\n(add-to-list \x27load-path \x26quot;\/path\/to\/company\x26quot;) (autoload \x27company-mode \x26quot;company\x26quot; nil t)  然后Emacs中使用M-x company-mode启动company模式即可。\n具体的按键可以在company.el中看到\n(defvar company-active-map (let ((keymap (make-sparse-keymap))) (define-key keymap \x26quot;\\e\\e\\e\x26quot; \x27company-abort) (define-key keymap \x26quot;\\C-g\x26quot; \x27company-abort) (define-key keymap (kbd \x26quot;M-n\x26quot;) \x27company-select-next) (define-key keymap (kbd \x26quot;M-p\x26quot;) \x27company-select-previous) (define-key keymap (kbd \x26quot;\x26quot;) \x27company-select-next) (define-key keymap (kbd \x26quot;\x26quot;) \x27company-select-previous) (define-key keymap [down-mouse-1] \x27ignore) (define-key keymap [down-mouse-3] \x27ignore) (define-key keymap [mouse-1] \x27company-complete-mouse) (define-key keymap [mouse-3] \x27company-select-mouse) (define-key keymap [up-mouse-1] \x27ignore) (define-key keymap [up-mouse-3] \x27ignore) (define-key keymap \x26quot;\\C-m\x26quot; \x27company-complete-selection) (define-key keymap \x26quot;\\t\x26quot; \x27company-complete-common) (define-key keymap (kbd \x26quot;\x26quot;) \x27company-show-doc-buffer) (define-key keymap \x26quot;\\C-w\x26quot; \x27company-show-location) (define-key keymap \x26quot;\\C-s\x26quot; \x27company-search-candidates) (define-key keymap \x26quot;\\C-\\M-s\x26quot; \x27company-filter-candidates) (dotimes (i 10) (define-key keymap (vector (\x2b (aref (kbd \x26quot;M-0\x26quot;) 0) i)) `(lambda () (interactive) (company-complete-number ,i)))) keymap) \x26quot;Keymap that is enabled during an active completion.",
+    "description" : "Company的全写是complete everything，它只是一个补全的前端，会自动调用semantic等后端插件。\n新版的Company可以从它的官方主页(http:\/\/nschum.de\/src\/emacs\/company-mode\/)下载到，也可以从ELPA下载安装这个插件。\n使用这个插件时只要在.emacs中加入\n(add-to-list \u0026#39;load-path \u0026#34;\/path\/to\/company\u0026#34;) (autoload \u0026#39;company-mode \u0026#34;company\u0026#34; nil t) 然后Emacs中使用M-x company-mode启动company模式即可。\n具体的按键可以在company.el中看到\n(defvar company-active-map (let ((keymap (make-sparse-keymap))) (define-key keymap \u0026#34;\\e\\e\\e\u0026#34; \u0026#39;company-abort) (define-key keymap \u0026#34;\\C-g\u0026#34; \u0026#39;company-abort) (define-key keymap (kbd \u0026#34;M-n\u0026#34;) \u0026#39;company-select-next) (define-key keymap (kbd \u0026#34;M-p\u0026#34;) \u0026#39;company-select-previous) (define-key keymap (kbd \u0026#34;\u0026#34;) \u0026#39;company-select-next) (define-key keymap (kbd \u0026#34;\u0026#34;) \u0026#39;company-select-previous) (define-key keymap [down-mouse-1] \u0026#39;ignore) (define-key keymap [down-mouse-3] \u0026#39;ignore) (define-key keymap [mouse-1] \u0026#39;company-complete-mouse) (define-key keymap [mouse-3] \u0026#39;company-select-mouse) (define-key keymap [up-mouse-1] \u0026#39;ignore) (define-key keymap [up-mouse-3] \u0026#39;ignore) (define-key keymap \u0026#34;\\C-m\u0026#34; \u0026#39;company-complete-selection) (define-key keymap \u0026#34;\\t\u0026#34; \u0026#39;company-complete-common) (define-key keymap (kbd \u0026#34;\u0026#34;) \u0026#39;company-show-doc-buffer) (define-key keymap \u0026#34;\\C-w\u0026#34; \u0026#39;company-show-location) (define-key keymap \u0026#34;\\C-s\u0026#34; \u0026#39;company-search-candidates) (define-key keymap \u0026#34;\\C-\\M-s\u0026#34; \u0026#39;company-filter-candidates) (dotimes (i 10) (define-key keymap (vector (\u002b (aref (kbd \u0026#34;M-0\u0026#34;) 0) i)) `(lambda () (interactive) (company-complete-number ,i)))) keymap) \u0026#34;Keymap that is enabled during an active completion.",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -47,8 +48,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2009",
-    "datePublished": "2009-06-02 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2009-06-02 00:00:00 \x2b0000 UTC",
+    "datePublished": "2009-06-02 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2009-06-02 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/2009\/06\/emacs-company-mode\/",
     "wordCount" : "134",
     "keywords" : [ "Emacs","Tooling","Blog" ]
@@ -94,56 +95,43 @@
 
     <div class="post-content">
       <p>Company的全写是complete everything，它只是一个补全的前端，会自动调用semantic等后端插件。</p>
-
-<p>新版的Company可以从它的官方主页(<a href="http://nschum.de/src/emacs/company-mode/" target="_blank"><a href="http://nschum.de/src/emacs/company-mode/">http://nschum.de/src/emacs/company-mode/</a></a>)下载到，也可以从<a href="http://techblog.iamzellux.com.cn/2009/04/elpa-emacs-lisp-package-archive/" target="_blank">ELPA</a>下载安装这个插件。</p>
-
+<p>新版的Company可以从它的官方主页(<!-- raw HTML omitted --><a href="http://nschum.de/src/emacs/company-mode/">http://nschum.de/src/emacs/company-mode/</a><!-- raw HTML omitted -->)下载到，也可以从<!-- raw HTML omitted -->ELPA<!-- raw HTML omitted -->下载安装这个插件。</p>
 <p>使用这个插件时只要在.emacs中加入</p>
-
-<pre><code class="language-cl">(add-to-list 'load-path &quot;/path/to/company&quot;)
-(autoload 'company-mode &quot;company&quot; nil t)
-</code></pre>
-
-<p>然后Emacs中使用M-x company-mode启动company模式即可。</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cl" data-lang="cl">(add-to-list <span style="color:#e6db74">&#39;load-path</span> <span style="color:#e6db74">&#34;/path/to/company&#34;</span>)
+(autoload <span style="color:#e6db74">&#39;company-mode</span> <span style="color:#e6db74">&#34;company&#34;</span> <span style="color:#66d9ef">nil</span> <span style="color:#66d9ef">t</span>)
+</code></pre></div><p>然后Emacs中使用M-x company-mode启动company模式即可。</p>
 <p>具体的按键可以在company.el中看到</p>
-
-<pre><code class="language-cl">(defvar company-active-map
-  (let ((keymap (make-sparse-keymap)))
-    (define-key keymap &quot;\e\e\e&quot; 'company-abort)
-    (define-key keymap &quot;\C-g&quot; 'company-abort)
-    (define-key keymap (kbd &quot;M-n&quot;) 'company-select-next)
-    (define-key keymap (kbd &quot;M-p&quot;) 'company-select-previous)
-    (define-key keymap (kbd &quot;&quot;) 'company-select-next)
-    (define-key keymap (kbd &quot;&quot;) 'company-select-previous)
-    (define-key keymap [down-mouse-1] 'ignore)
-    (define-key keymap [down-mouse-3] 'ignore)
-    (define-key keymap [mouse-1] 'company-complete-mouse)
-    (define-key keymap [mouse-3] 'company-select-mouse)
-    (define-key keymap [up-mouse-1] 'ignore)
-    (define-key keymap [up-mouse-3] 'ignore)
-    (define-key keymap &quot;\C-m&quot; 'company-complete-selection)
-    (define-key keymap &quot;\t&quot; 'company-complete-common)
-    (define-key keymap (kbd &quot;&quot;) 'company-show-doc-buffer)
-    (define-key keymap &quot;\C-w&quot; 'company-show-location)
-    (define-key keymap &quot;\C-s&quot; 'company-search-candidates)
-    (define-key keymap &quot;\C-\M-s&quot; 'company-filter-candidates)
-    (dotimes (i 10)
-      (define-key keymap (vector (+ (aref (kbd &quot;M-0&quot;) 0) i))
-        `(lambda () (interactive) (company-complete-number ,i))))
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cl" data-lang="cl">(defvar company-active-map
+  (<span style="color:#66d9ef">let</span> ((keymap (make-sparse-keymap)))
+    (define-key keymap <span style="color:#e6db74">&#34;\e\e\e&#34;</span> <span style="color:#e6db74">&#39;company-abort</span>)
+    (define-key keymap <span style="color:#e6db74">&#34;\C-g&#34;</span> <span style="color:#e6db74">&#39;company-abort</span>)
+    (define-key keymap (kbd <span style="color:#e6db74">&#34;M-n&#34;</span>) <span style="color:#e6db74">&#39;company-select-next</span>)
+    (define-key keymap (kbd <span style="color:#e6db74">&#34;M-p&#34;</span>) <span style="color:#e6db74">&#39;company-select-previous</span>)
+    (define-key keymap (kbd <span style="color:#e6db74">&#34;&#34;</span>) <span style="color:#e6db74">&#39;company-select-next</span>)
+    (define-key keymap (kbd <span style="color:#e6db74">&#34;&#34;</span>) <span style="color:#e6db74">&#39;company-select-previous</span>)
+    (define-key keymap [down-mouse-1] <span style="color:#e6db74">&#39;ignore</span>)
+    (define-key keymap [down-mouse-3] <span style="color:#e6db74">&#39;ignore</span>)
+    (define-key keymap [mouse-1] <span style="color:#e6db74">&#39;company-complete-mouse</span>)
+    (define-key keymap [mouse-3] <span style="color:#e6db74">&#39;company-select-mouse</span>)
+    (define-key keymap [up-mouse-1] <span style="color:#e6db74">&#39;ignore</span>)
+    (define-key keymap [up-mouse-3] <span style="color:#e6db74">&#39;ignore</span>)
+    (define-key keymap <span style="color:#e6db74">&#34;\C-m&#34;</span> <span style="color:#e6db74">&#39;company-complete-selection</span>)
+    (define-key keymap <span style="color:#e6db74">&#34;\t&#34;</span> <span style="color:#e6db74">&#39;company-complete-common</span>)
+    (define-key keymap (kbd <span style="color:#e6db74">&#34;&#34;</span>) <span style="color:#e6db74">&#39;company-show-doc-buffer</span>)
+    (define-key keymap <span style="color:#e6db74">&#34;\C-w&#34;</span> <span style="color:#e6db74">&#39;company-show-location</span>)
+    (define-key keymap <span style="color:#e6db74">&#34;\C-s&#34;</span> <span style="color:#e6db74">&#39;company-search-candidates</span>)
+    (define-key keymap <span style="color:#e6db74">&#34;\C-\M-s&#34;</span> <span style="color:#e6db74">&#39;company-filter-candidates</span>)
+    (dotimes (i <span style="color:#ae81ff">10</span>)
+      (define-key keymap (<span style="color:#a6e22e">vector</span> (<span style="color:#a6e22e">+</span> (<span style="color:#a6e22e">aref</span> (kbd <span style="color:#e6db74">&#34;M-0&#34;</span>) <span style="color:#ae81ff">0</span>) i))
+        <span style="color:#f92672">`</span>(lambda () (interactive) (company-complete-number <span style="color:#f92672">,</span>i))))
 
     keymap)
-  &quot;Keymap that is enabled during an active completion.&quot;)
-</code></pre>
-
-<p>这里默认的补全按键是<code>Tab</code>，由于已经把它绑定到了yasnippet，我用了<code>Shift-Tab</code>替代(<code>Ctrl-Tab</code>似乎在terminal下没法用，不知道哪位能解决这个问题)</p>
-
-<pre><code class="language-cl">(define-key company-mode-map &quot;\t&quot; nil)
-(define-key company-mode-map [(backtab)] 'company-complete-common)
-</code></pre>
-
-<p><code>如果按了Shift-Tab</code>没有任何反应，请确认你的后端插件已经配置正确，可以参考<a href="http://techblog.iamzellux.com/2010/02/configuring-semantic/" target="_blank">这篇博文</a>。</p>
-
-<p>另外这里还有个视频，不喜欢看文字的话看一下这个就知道company怎么用了。<a href="http://nschum.de/src/emacs/company-mode/screencast/">http://nschum.de/src/emacs/company-mode/screencast/</a></p>
+  <span style="color:#e6db74">&#34;Keymap that is enabled during an active completion.&#34;</span>)
+</code></pre></div><p>这里默认的补全按键是<!-- raw HTML omitted -->Tab<!-- raw HTML omitted -->，由于已经把它绑定到了yasnippet，我用了<!-- raw HTML omitted -->Shift-Tab<!-- raw HTML omitted -->替代(<!-- raw HTML omitted -->Ctrl-Tab<!-- raw HTML omitted -->似乎在terminal下没法用，不知道哪位能解决这个问题)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cl" data-lang="cl">(define-key company-mode-map <span style="color:#e6db74">&#34;\t&#34;</span> <span style="color:#66d9ef">nil</span>)
+(define-key company-mode-map [(backtab)] <span style="color:#e6db74">&#39;company-complete-common</span>)
+</code></pre></div><p><!-- raw HTML omitted -->如果按了Shift-Tab<!-- raw HTML omitted -->没有任何反应，请确认你的后端插件已经配置正确，可以参考<!-- raw HTML omitted -->这篇博文<!-- raw HTML omitted -->。</p>
+<p>另外这里还有个视频，不喜欢看文字的话看一下这个就知道company怎么用了。<!-- raw HTML omitted --><a href="http://nschum.de/src/emacs/company-mode/screencast/">http://nschum.de/src/emacs/company-mode/screencast/</a><!-- raw HTML omitted --></p>
 
     </div>
         <div class="cc-license">

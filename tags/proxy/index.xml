@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Proxy on Aiur · Zellux 的博客</title>
@@ -19,7 +19,7 @@
       <guid>https://blog.yxwang.me/2010/05/git-through-https-proxy/</guid>
       <description>网上找了不少设置方法，终于翻出来一个可行的，和大家分享下。
 1. 安装 corkscrew ArchLinux 和 Ubuntu 的源里就有，也可以从 http://www.agroman.net/corkscrew/ 下载源码编译一个。
-2. 修改 ~/.ssh/config Host gitproxy User git Hostname ssh.github.com Port 443 ProxyCommand corkscrew proxy.example.com 3128 %h %p IdentityFile /home/username/.ssh/id_rsa  修改其中的 proxy.example.com 和 3128 为代理 IP 和端口，如果代理需要帐号密码，就在 ProxyCommand 这一行的最后加上密码文件，内容为*用户名:密码*。
+2. 修改 ~/.ssh/config Host gitproxy User git Hostname ssh.github.com Port 443 ProxyCommand corkscrew proxy.example.com 3128 %h %p IdentityFile /home/username/.ssh/id_rsa 修改其中的 proxy.example.com 和 3128 为代理 IP 和端口，如果代理需要帐号密码，就在 ProxyCommand 这一行的最后加上密码文件，内容为用户名:密码。
 参数 IdentitiFile 指定相应帐号的私钥文件地址。
 另外 @cyfdecyf 同学指出只要把这里的 Host 改成 github.com，就可以直接用 git@github.com:user/repository 访问 GitHub 了。
 3. 使用 git@gitproxy 访问 GitHub 例如要把 foo/bar.git 拖下来，执行 git clone git@gitproxy:foo/bar.git 即可。

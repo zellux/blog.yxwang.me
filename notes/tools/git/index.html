@@ -11,6 +11,7 @@
     
 
     <title> Git &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -39,7 +40,7 @@
     "articleSection" : "notes",
     "name" : "Git",
     "headline" : "Git",
-    "description" : "功能 修改之前提交的内容 http:\/\/blog.yxwang.me\/2009\/11\/git-modify-specified-commit\/\n函数 将当前分支并入其他分支 [alias] merge-to = \x26quot;!gitmergeto() { export tmp_branch=`git branch | grep \x27* \x27 | tr -d \x27* \x27` \x26amp;\x26amp; git checkout $1 \x26amp;\x26amp; git merge $tmp_branch \x26amp;\x26amp; git checkout $tmp_branch; unset tmp_branch; }; gitmergeto\x26quot;  使用方法：要把当前分支合并到 develop，运行 $ git merge-to develop 即可。\n（来源：http:\/\/stackoverflow.com\/a\/7801982\/111896）\nGitHub 选择部分 commit 发起 pull request 在目的分支基础上新开一个分支，cherry-pick 需要的 commit，从这个分支发起 pull request。",
+    "description" : "功能 修改之前提交的内容 http:\/\/blog.yxwang.me\/2009\/11\/git-modify-specified-commit\/\n函数 将当前分支并入其他分支 [alias] merge-to = \u0026#34;!gitmergeto() { export tmp_branch=`git branch | grep \u0026#39;* \u0026#39; | tr -d \u0026#39;* \u0026#39;` \u0026amp;\u0026amp; git checkout $1\u0026amp;\u0026amp; git merge $tmp_branch\u0026amp;\u0026amp; git checkout $tmp_branch; unset tmp_branch; }; gitmergeto\u0026#34; 使用方法：要把当前分支合并到 develop，运行 $ git merge-to develop 即可。\n（来源：http:\/\/stackoverflow.com\/a\/7801982\/111896）\nGitHub 选择部分 commit 发起 pull request 在目的分支基础上新开一个分支，cherry-pick 需要的 commit，从这个分支发起 pull request。",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -47,10 +48,10 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "0001",
-    "datePublished": "0001-01-01 00:00:00 \x2b0000 UTC",
-    "dateModified" : "0001-01-01 00:00:00 \x2b0000 UTC",
+    "datePublished": "0001-01-01 00:00:00 \u002b0000 UTC",
+    "dateModified" : "0001-01-01 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/notes\/tools\/git\/",
-    "wordCount" : "57",
+    "wordCount" : "55",
     "keywords" : [ "Blog" ]
 }
 </script>
@@ -84,30 +85,17 @@
     <div class="post">
       <h1 class="post-title"><a href="https://blog.yxwang.me/notes/tools/git/">Git</a></h1>
       <div class="post-content">
-        
-
-<h2 id="功能">功能</h2>
-
+        <h2 id="功能">功能</h2>
 <h3 id="修改之前提交的内容">修改之前提交的内容</h3>
-
 <p><a href="http://blog.yxwang.me/2009/11/git-modify-specified-commit/">http://blog.yxwang.me/2009/11/git-modify-specified-commit/</a></p>
-
 <h2 id="函数">函数</h2>
-
 <h3 id="将当前分支并入其他分支">将当前分支并入其他分支</h3>
-
-<pre><code class="language-bash">[alias]
-  merge-to = &quot;!gitmergeto() { export tmp_branch=`git branch | grep '* ' | tr -d '* '` &amp;&amp; git checkout $1 &amp;&amp; git merge $tmp_branch &amp;&amp; git checkout $tmp_branch; unset tmp_branch; }; gitmergeto&quot;
-</code></pre>
-
-<p>使用方法：要把当前分支合并到 develop，运行 <code>$ git merge-to develop</code> 即可。</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[</span>alias<span style="color:#f92672">]</span>
+  merge-to <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;!gitmergeto() { export tmp_branch=`git branch | grep &#39;* &#39; | tr -d &#39;* &#39;` &amp;&amp; git checkout </span>$1<span style="color:#e6db74"> &amp;&amp; git merge </span>$tmp_branch<span style="color:#e6db74"> &amp;&amp; git checkout </span>$tmp_branch<span style="color:#e6db74">; unset tmp_branch; }; gitmergeto&#34;</span>
+</code></pre></div><p>使用方法：要把当前分支合并到 develop，运行 <code>$ git merge-to develop</code> 即可。</p>
 <p>（来源：<a href="http://stackoverflow.com/a/7801982/111896">http://stackoverflow.com/a/7801982/111896</a>）</p>
-
 <h2 id="github">GitHub</h2>
-
 <h3 id="选择部分-commit-发起-pull-request">选择部分 commit 发起 pull request</h3>
-
 <p>在目的分支基础上新开一个分支，cherry-pick 需要的 commit，从这个分支发起 pull request。</p>
 
       </div>

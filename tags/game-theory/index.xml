@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Game Theory on Aiur · Zellux 的博客</title>
@@ -18,9 +18,9 @@
       
       <guid>https://blog.yxwang.me/2009/12/chomp-game/</guid>
       <description>把一堆石子排成n行m列，两人轮流从里面取出石子，条件是取出一个石子后所有在它右边和上面的石子也要被取走。谁取走最后一个石子就算输。以3*5的棋盘举例来说，先手取了(2,5)，因此(3,5)也要被取走；后手取了(3,3)，同时也要取走(3,4)。现在棋盘的状态如下（O代表这个位子的石子还没被取走，x代表已经被取走）：
-3 O O x x x 2 O O O O x 1 O O O O O 1 2 3 4 5  接下来先手又取了(2,1)，于是第二排和第三排就一颗石子都不剩了
-3 x x x x x 2 x x x x x 1 O O O O O 1 2 3 4 5  后手取(1,2)
-3 x x x x x 2 x x x x x 1 O x x x x 1 2 3 4 5  接下来先手就只能取最后一个石子了，后手胜。</description>
+3 O O x x x 2 O O O O x 1 O O O O O 1 2 3 4 5 接下来先手又取了(2,1)，于是第二排和第三排就一颗石子都不剩了
+3 x x x x x 2 x x x x x 1 O O O O O 1 2 3 4 5 后手取(1,2)
+3 x x x x x 2 x x x x x 1 O x x x x 1 2 3 4 5 接下来先手就只能取最后一个石子了，后手胜。</description>
     </item>
     
   </channel>

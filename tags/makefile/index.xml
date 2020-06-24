@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Makefile on Aiur · Zellux 的博客</title>
@@ -22,7 +22,7 @@
 另外在debug过程中在网上找到了一些debug Makefile的技巧：
 make -n 可以仅仅打印出将要被执行的命令，而不去实际执行
 make -np 可以打印出更多的信息（使用的规则和变量），并执行每一条命令
-remake也是个不错的选择：“remake is a patched and modernized version of GNU make utility that adds improved error reporting, the ability to trace execution in a comprehensible way, and a debugger.”
+remake也是个不错的选择：“remakeis a patched and modernized version of GNU make utility that adds improved error reporting, the ability to trace execution in a comprehensible way, and a debugger.”
 在检查shell命令的时候，可以使用set -x使得所有shell命令在执行前都能被输出。</description>
     </item>
     

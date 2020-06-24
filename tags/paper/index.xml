@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Paper on Aiur · Zellux 的博客</title>
@@ -27,9 +27,7 @@
       
       <guid>https://blog.yxwang.me/2012/06/revisiting-storage-for-smartphones/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;https://www.usenix.org/comment/260&#34;&gt;Revisiting Storage for Smartphones&lt;/a&gt; 是今年 FAST 会议上的最佳论文，这篇论文提出了一个违背直觉的观点，很有意思。这里简单介绍一下这篇论文的内容，有兴趣的朋友可以直接访问前面的链接下载原文或是观看现场录像。&lt;/p&gt;
-
-&lt;p&gt;&lt;a data-fancybox=&#34;gallery&#34;  data-caption=&#34;移动存储性能&#34; href=https://blog.yxwang.me/images/2012-06/mobile-flash-throughtput.png &gt;&lt;img src=https://blog.yxwang.me/images/2012-06/mobile-flash-throughtput.png  /&gt;&lt;/a&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
 &lt;p&gt;传统的观点认为，移动应用性能的主要瓶颈在网络和 CPU，而闪存的读写速率明显高于网络传输速度，不会成为性能的瓶颈。然而，根据上图作者给出的关于移动存储性能的图例（纵坐标单位为 Mbps，本文图片均来自演讲 slides 和原论文），我们可以看到，虽然移动存储顺序读写的性能明显高于 wifi 和 3G，但是随机写的性能却比它们差很多，因此移动存储成为应用性能瓶颈是完全有可能的。&lt;/p&gt;</description>
     </item>
     
@@ -47,9 +45,9 @@
 这里实现防范措施的一个难点在于，Web应用把生成HTML的返回给浏览器后，就不参与浏览器的HTML解析工作了。这样浏览器就不知道哪部分出现脚本是安全的，哪部分出现是不安全的。
 BluePrint就着眼于这个点，提出了一种让Web应用“参与”HTML解析工作的设计。下面通过论文里面的一个例子，简单介绍下它的防范机制。
 假如一位恶意的用户在一个博客上上传了这样一段含有恶意代码的留言：
-&amp;lt;p&amp;gt; Here is a page you might find &amp;lt;b &amp;quot;&amp;quot;&amp;quot;&amp;gt;&amp;lt;script&amp;gt;doEvil(. . .)&amp;lt;/script&amp;gt;&amp;quot;&amp;gt;very&amp;lt;/b&amp;gt; interesting: &amp;lt;a href=&amp;quot; &amp;amp;#14; javasc&amp;amp;#x0A;ript:doEvil(. . .);&amp;quot;&amp;gt; Link&amp;lt;/a&amp;gt; &amp;lt;/p&amp;gt;&amp;lt;p style=&amp;quot;nop:expres/*xss*/sion(doEvil(. . .))&amp;quot;&amp;gt; Respectfully, Eve &amp;lt;/p&amp;gt;  可以看到，这段代码里包含了很多可能引发脚本执行的代码，而要在服务器端把这些所有隐藏的攻击可能找出来是一件比较困难的事。那么BluePrint是怎么在不知道这段代码是否含有恶意代码的前提下处理的呢？
+&amp;lt;p&amp;gt; Here is a page you might find &amp;lt;b &amp;#34;&amp;#34;&amp;#34;&amp;gt;&amp;lt;script&amp;gt;doEvil(. . .)&amp;lt;/script&amp;gt;&amp;#34;&amp;gt;very&amp;lt;/b&amp;gt; interesting: &amp;lt;a href=&amp;#34; &amp;amp;#14; javasc&amp;amp;#x0A;ript:doEvil(. . .);&amp;#34;&amp;gt; Link&amp;lt;/a&amp;gt; &amp;lt;/p&amp;gt;&amp;lt;p style=&amp;#34;nop:expres/*xss*/sion(doEvil(. . .))&amp;#34;&amp;gt; Respectfully, Eve &amp;lt;/p&amp;gt; 可以看到，这段代码里包含了很多可能引发脚本执行的代码，而要在服务器端把这些所有隐藏的攻击可能找出来是一件比较困难的事。那么BluePrint是怎么在不知道这段代码是否含有恶意代码的前提下处理的呢？
 首先，这种由用户上传的不可信的字符串会先在服务器端被解析成一棵树，就像HTML在浏览器中被解析一样，这棵HTML解析树可以用一些简单的DOM API来生成，例如appendChild, createElement等。这些描述如何生成HTML解析树的方法会和数据值（URL、标签属性等）一起，通过特殊的编码（Base64）传递给浏览器。例如上面这段代码，最后在浏览器接收到的HTML中，会变成这样：
-&amp;lt;code style=&amp;quot;display:none;&amp;quot; id=&amp;quot;__bp1&amp;quot;&amp;gt; =Enk/sCkhlcmUgaXMgYSBwYWdlIHlvdSBta... =SkKICAgICI+dmVyeQ===C/k/QIGhlbHBmd... =ECg===C/Enk/gCiAgUmVzcGVjdGZ1bGx5L... &amp;lt;/code&amp;gt;&amp;lt;script id=&amp;quot;__bp1s&amp;quot;&amp;gt; __bp__.cxPCData(&amp;quot;__bp1&amp;quot;, &amp;quot;__bp1s&amp;quot;); &amp;lt;/script&amp;gt;  在浏览器端，这段特殊的代码会被JS库解析成自定义的命令和数据格式，并由前面提到的DOM API动态生成这些HTML结点，从而达到和传统的方式一样的显示效果。当然可信的HTML代码，例如文章正文，还是按传统的方式传输的。</description>
+&amp;lt;code style=&amp;#34;display:none;&amp;#34; id=&amp;#34;__bp1&amp;#34;&amp;gt; =Enk/sCkhlcmUgaXMgYSBwYWdlIHlvdSBta... =SkKICAgICI+dmVyeQ===C/k/QIGhlbHBmd... =ECg===C/Enk/gCiAgUmVzcGVjdGZ1bGx5L... &amp;lt;/code&amp;gt;&amp;lt;script id=&amp;#34;__bp1s&amp;#34;&amp;gt; __bp__.cxPCData(&amp;#34;__bp1&amp;#34;, &amp;#34;__bp1s&amp;#34;); &amp;lt;/script&amp;gt; 在浏览器端，这段特殊的代码会被JS库解析成自定义的命令和数据格式，并由前面提到的DOM API动态生成这些HTML结点，从而达到和传统的方式一样的显示效果。当然可信的HTML代码，例如文章正文，还是按传统的方式传输的。</description>
     </item>
     
     <item>
@@ -63,9 +61,9 @@ BluePrint就着眼于这个点，提出了一种让Web应用“参与”HTML解�
 虽然现在对云计算这个概念的炒作大于实际研究，以至于很多人听到云计算这个名词就想到忽悠，但这里面还是很多东西需要好好考虑和设计的。云计算和以前的 cluster computing 等概念虽有相同之处，区别也有不少，它涉及了经济学、虚拟化技术、安全等诸多领域的内容。
 何谓云计算？ 云计算包含两方面内容，一是在网络上提供的为计算服务的应用，例如以前被称为 SaaS(Software as a Service) 的那一类应用；二是提供这些服务的在数据中心的硬件和系统软件，这部分也就是我们通常所称呼为「云」的东西。
 云计算平台的优势 云计算带来了三个新颖的观点：
- 提供了看起来没有上限的可用计算资源，用户不需要提前考虑设备的需求量；
- 免去了云计算用户的前期投入，使得公司可以从一个规模较小的硬件资源起家，并根据自己的需要增加资源；
- 细粒度的计费手段，例如按每小时使用处理器数或者每天使用的存储空间计算，并在暂时不需要机器和存储空间时即时减免费用。
+  提供了看起来没有上限的可用计算资源，用户不需要提前考虑设备的需求量；
+  免去了云计算用户的前期投入，使得公司可以从一个规模较小的硬件资源起家，并根据自己的需要增加资源；
+  细粒度的计费手段，例如按每小时使用处理器数或者每天使用的存储空间计算，并在暂时不需要机器和存储空间时即时减免费用。
   云计算资源拥有很好的弹性，以 Amazon EC2 为例，用户可以在几分钟内完成硬件资源的添加或者减少操作，这在传统的应用程序部署中是很难做到的。文中提到了 Facebook 上的一个应用 Animoto，这个应用的资源需求在三天内从 50 台服务器上升到了 3500 台服务器。在传统的部署情景中，这样的需求是很难通过预先准备好硬件来满足的。另外还有一个问题，当资源需求下降时，传统方式部署的服务器资源就被闲置了，而通过云计算部署的资源则灵活很多，例如一个网站到了深夜访问量下降，此时就可以通过减少占用的计算资源从而降低支出。
 平台分类 现在的云计算平台提供了不同粒度的 API。Amazon EC2 是一个底层的极端，它提供了类似物理硬件的接口，用户可以几乎控制从内核开始的整个软件栈。通过虚拟技术提供的 CPU、块设备、IP 级别的连通技术使得开发人员几乎可以做任何事情。高度的灵活性带来的是可控性的损失，在自动伸缩性 (automatic scalability) 和容错转移 (failover) 方面，服务商就力不从心了。而 Google AppEngine 则提供了比较高层的 API，主要面向传统的 web 应用，在牺牲灵活性之后能很好的实现自动伸缩和转移，并对用户完全透明。而微软的 Azure 则介于这两者之间，提供了接近 CLR 字节码的接口，用户可以通过 .</description>
     </item>
@@ -80,9 +78,9 @@ BluePrint就着眼于这个点，提出了一种让Web应用“参与”HTML解�
 这篇paper针对以multi-execution这种模式运行的程序提出了一种新的cache手段。
 所谓multi-execution，指的是同时运行同一个程序的多个进程，而它们的输入数据又互不相同。这种模式在machine-learning领域比较常见，一些相对独立的learner可以以并行的方式被训练，而它们的结果可以通过一种叫做boosting的方式合并起来。给我的感觉似乎有点像mapreduce？
 然后呢，作者们发现以这种方式运行的程序进程的数据有很大一部分是相同的，在合并cache数据上可以做一下文章，节省cache的使用。
-于是这篇paper提出了一种叫做mergeable cache的架构，用于代替传统的L2 cache，L1 cache还是传统的cache架构。首先假设相同的数据的虚拟地址往往也是相同的（应该去掉了address space randomization的影响），以类似Page Coloring的策略进行物理页的分配，使得不同进程同一虚拟地址所对应的物理页都是相邻的。然后把虚拟地址的头9位作为cache tag，再为每个cache line记录一个bit vector用以表示某个processor的数据是否保存在这条cache line中。于是L2 cache hit当且仅当： 1. 虚拟地址的头9位等于cache line的tag 2. cache line中的bit vector的processor对应的位被置上
-另外为了简化cache策略，L1和L2的数据内容是互斥的，或者说一段被cache的数据要么在L1，要么在L2，不可能同时存在于两者中。这样一来L2就只有从L1淘汰出来的数据了，而L2中的数据修改分三步完成： 1. 把数据从L2中标记为不存在（对应processor的bit vector位置0） 2. 数据进入L1 3. 修改数据
-这就是这篇paper提出的cache架构的主要内容，后面的evaluation部分做的也很不错。从数据中可以看出合并的cache里面dirty cache占了比较大的比例，从而说明简单的copy-on-write策略的效果不会很好，因为copy-on-write只能合并clean cache。最后平均的speedup提升在2.5x左右，很不错。但是对于数据无关的并行程序运行，会产生一定的overhead，此时可以选择传统的L2 cache机制。</description>
+于是这篇paper提出了一种叫做mergeable cache的架构，用于代替传统的L2 cache，L1 cache还是传统的cache架构。首先假设相同的数据的虚拟地址往往也是相同的（应该去掉了address space randomization的影响），以类似Page Coloring的策略进行物理页的分配，使得不同进程同一虚拟地址所对应的物理页都是相邻的。然后把虚拟地址的头9位作为cache tag，再为每个cache line记录一个bit vector用以表示某个processor的数据是否保存在这条cache line中。于是L2 cache hit当且仅当：
+ 虚拟地址的头9位等于cache line的tag cache line中的bit vector的processor对应的位被置上  另外为了简化cache策略，L1和L2的数据内容是互斥的，或者说一段被cache的数据要么在L1，要么在L2，不可能同时存在于两者中。这样一来L2就只有从L1淘汰出来的数据了，而L2中的数据修改分三步完成：
+ 把数据从L2中标记为不存在（对应processor的bit vector位置0） 数据进入L1 修改数据  这就是这篇paper提出的cache架构的主要内容，后面的evaluation部分做的也很不错。从数据中可以看出合并的cache里面dirty cache占了比较大的比例，从而说明简单的copy-on-write策略的效果不会很好，因为copy-on-write只能合并clean cache。最后平均的speedup提升在2.5x左右，很不错。但是对于数据无关的并行程序运行，会产生一定的overhead，此时可以选择传统的L2 cache机制。</description>
     </item>
     
     <item>
@@ -106,12 +104,11 @@ BluePrint就着眼于这个点，提出了一种让Web应用“参与”HTML解�
       <pubDate>Mon, 20 Apr 2009 00:00:00 +0000</pubDate>
       
       <guid>https://blog.yxwang.me/2009/04/ppopp-08-fastforward/</guid>
-      <description>FastForward for Efficient Pipeline Parallelism http://systems.cs.colorado.edu/~moseleyt/publications/giacomoni-2008-ppopp-ff.pdf
-这篇paper介绍了一种针对多核访问优化的队列， 主要的特点： 1. Lock-free 2. Single-producer/single-consumer 3. Cache-optimized
-经典的Lamport的lock-free的队列实现可以用下面的伪代码来表述（同样只适用于单一生产者/单一消费者的情形）：
-enqueue_nonblock(data) { if (NEXT(head) == tail) { return EWOULDBLOCK; } buffer[head] = data; head = NEXT(head); return 0; } dequeue_nonblock(data) { (head == tail) { return EWOULDBLOCK; } data = buffer[tail]; tail = NEXT(tail); return 0; }  这种实现尽管做到了lock-free，但是存在几个问题，首先是它只适用于sequential consistency内存模型，在relaxed consistency的内存模型里可能会出现类似于Double-Checked Lock(http://techblog.zellux.czm.cn/?p=30)的问题，当然这个问题可以通过插fence指令来解决；第二个问题是这篇paper着重解决的，就是enqueue和dequeue这两个操作都用到了tail和head这两个全局变量，导致多核在读取/修改这两个变量时的为了保证cache coherency会频繁的进行cache的更新，从而导致cache line threading，降低了效率。
+      <description>FastForward for Efficient Pipeline Parallelism http://systems.cs.colorado.edu/~moseleyt/publications/giacomoni-2008-ppopp-ff.pdf这篇paper介绍了一种针对多核访问优化的队列， 主要的特点：
+ Lock-free Single-producer/single-consumer Cache-optimized  经典的Lamport的lock-free的队列实现可以用下面的伪代码来表述（同样只适用于单一生产者/单一消费者的情形）：
+enqueue_nonblock(data) { if (NEXT(head) == tail) { return EWOULDBLOCK; } buffer[head] = data; head = NEXT(head); return 0; } dequeue_nonblock(data) { (head == tail) { return EWOULDBLOCK; } data = buffer[tail]; tail = NEXT(tail); return 0; } 这种实现尽管做到了lock-free，但是存在几个问题，首先是它只适用于sequential consistency内存模型，在relaxed consistency的内存模型里可能会出现类似于Double-Checked Lock(http://techblog.zellux.czm.cn/?p=30)的问题，当然这个问题可以通过插fence指令来解决；第二个问题是这篇paper着重解决的，就是enqueue和dequeue这两个操作都用到了tail和head这两个全局变量，导致多核在读取/修改这两个变量时的为了保证cache coherency会频繁的进行cache的更新，从而导致cache line threading，降低了效率。
 接下来看FastForward的实现：
-enqueue_nonblock(data) { if (NULL != buffer[head]) { return EWOULDBLOCK; } buffer[head] = data; head = NEXT(head); return 0; } dequeue_nonblock(data) { data = buffer[tail]; if (NULL == data) { return EWOULDBLOCK; } buffer[tail] = NULL; tail = NEXT(tail); return 0; }  这个版本的队列实现粗看和Lamport的那个区别很小，而实际上这里解决了一个重要的问题：解除了head和tail的共享问题。dequeue操作只需要关心tail，enqueue操作只关心head，这样两个变量就变成CPU本地的资源了，不需要做任何同步。当然这个实现同样局限于sequential consistency，不过加fence保证顺序的overhead不大。最后测试中这个版本的单次操作比Lamport的快3.</description>
+enqueue_nonblock(data) { if (NULL != buffer[head]) { return EWOULDBLOCK; } buffer[head] = data; head = NEXT(head); return 0; } dequeue_nonblock(data) { data = buffer[tail]; if (NULL == data) { return EWOULDBLOCK; } buffer[tail] = NULL; tail = NEXT(tail); return 0; } 这个版本的队列实现粗看和Lamport的那个区别很小，而实际上这里解决了一个重要的问题：解除了head和tail的共享问题。dequeue操作只需要关心tail，enqueue操作只关心head，这样两个变量就变成CPU本地的资源了，不需要做任何同步。当然这个实现同样局限于sequential consistency，不过加fence保证顺序的overhead不大。最后测试中这个版本的单次操作比Lamport的快3.</description>
     </item>
     
     <item>
@@ -120,9 +117,7 @@ enqueue_nonblock(data) { if (NULL != buffer[head]) { return EWOULDBLOCK; } buffe
       <pubDate>Thu, 09 Apr 2009 00:00:00 +0000</pubDate>
       
       <guid>https://blog.yxwang.me/2009/04/cgo-09-multi-race/</guid>
-      <description>Double-Checked Lock是一个常见的由于程序员把内存模型默认为sequential momery consistency导致的问题，具体见我去年写的一篇博文http://techblog.iamzellux.com/2008/07/singleton-pattern-and-double-checked-lock/
-虽然Java 5解决了这个问题，但是C++等语言中这个问题依然存在，依然有很多因为程序员假设sequential consistency而编译器做了错误的指令调度后导致的bug，见http://www.newsmth.net/bbscon.php?bid=335&amp;amp;id=250203
-CGO 09的这篇paper Detecting and Eliminating Potential Violations of Sequential Consistency for Concurrent C/C++ Programs针对这个问题进行了深入研究，通过加fence指令的方法解决了因编译器的指令调度造成的违背程序员原义的问题，可以在http://ppi.fudan.edu.cn/yuelu_duan下载到。没有认真读过，俺在这里就不误人子弟了 O.O</description>
+      <description>Double-Checked Lock是一个常见的由于程序员把内存模型默认为sequential momery consistency导致的问题，具体见我去年写的一篇博文http://techblog.iamzellux.com/2008/07/singleton-pattern-and-double-checked-lock/虽然Java 5解决了这个问题，但是C++等语言中这个问题依然存在，依然有很多因为程序员假设sequential consistency而编译器做了错误的指令调度后导致的bug，见http://www.newsmth.net/bbscon.php?bid=335&amp;amp;id=250203CGO 09的这篇paper Detecting and Eliminating Potential Violations of Sequential Consistency for Concurrent C/C++ Programs针对这个问题进行了深入研究，通过加fence指令的方法解决了因编译器的指令调度造成的违背程序员原义的问题，可以在http://ppi.fudan.edu.cn/yuelu_duan下载到。没有认真读过，俺在这里就不误人子弟了 O.O</description>
     </item>
     
     <item>
@@ -142,7 +137,8 @@ Disco为每个虚拟CPU记录了一个类似于传统操作系统中process tabl
 为了方便计算TLB地址，Disco为每个虚拟机记录了一个pmap数据结构，每个pmap结构对应着虚拟机的一个物理页。pmap包含了一个指向 机器内存的引用，以及指向虚拟地址的映射（虚拟地址可能有多个，原文中用了复数形式），这主要用于页面被VMM回收时TLB的重置。另外MIPS处理器为 每个TLB记录标记了一个地址空间标识符（ASID, address space identifier），用来防止context switch时不必要的TLB刷新。Disco为了简单化处理，就在物理CPU被调度为另一个虚拟CPU时刷新TLB，这样ASID就能直接使用虚拟机提 供的了。
 这样的处理带来了性能问题，由于TLB在虚拟CPU切换时会被刷新，带来了额外的TLB miss，而TLB miss由于需要被模拟，它的代价很大。为了减少这种性能影响，Disco维持了一个virtual-to-machine的二级软TLB，TLB miss发生的时候首先查看软TLB有没有相关的记录，如果找不到再交给虚拟机上的操作系统去处理。这种处理的影响就是虚拟机所看到的TLB会比实际 CPU的TLB大很多。
 3. NUMA 内存管理 不怎么熟悉NUMA，这部分先粗读了，大致思想是通过动态的页面转移和复制维持locality，从而避免remote cache miss。
-4. 虚拟IO设备 增加特殊的设备驱动是最清晰的实现方法，每个Disco设备都定义了一个monitor call，供设备驱动传参调用。对于支持DMA操作的设备，Disco也需要截获这些DMA请求并转换为相应的machine address。对于仅有一个虚拟机访问的设备，Disco只要保证访问的排外性并翻译DMA请求即可，而不需要虚拟IO资源。截获所有DMA操作的一个 好处是Disco可以在虚拟机间共享磁盘和内存资源。</description>
+4. 虚拟IO设备 增加特殊的设备驱动是最清晰的实现方法，每个Disco设备都定义了一个monitor call，供设备驱动传参调用。对于支持DMA操作的设备，Disco也需要截获这些DMA请求并转换为相应的machine address。对于仅有一个虚拟机访问的设备，Disco只要保证访问的排外性并翻译DMA请求即可，而不需要虚拟IO资源。截获所有DMA操作的一个 好处是Disco可以在虚拟机间共享磁盘和内存资源。
+5. Copy-on-write disks DMA请求被截获时，如果请求的磁盘块已经在内存里了，就不需要再访问磁盘。如果请求的大小正好是虚拟机页面大小的整数倍，直接把对应的物理页映射 到虚拟机里就行，另外考虑到以后可能会修改这部分内存，需要将那些页面设为read-only，从而实现copy-on-write，同时这些处理对虚拟 机完全透明的。</description>
     </item>
     
     <item>
@@ -152,12 +148,9 @@ Disco为每个虚拟CPU记录了一个类似于传统操作系统中process tabl
       
       <guid>https://blog.yxwang.me/2009/04/sosp-99-cellular-disco/</guid>
       <description>同样是今年寒假读的
- 两年前的paper的升级版，这次是利用Disco在一个多核电脑上跑多个操作系统并虚拟成一个cluster。主要解决了两个问题，一是容错性，当硬件错误发生时如何把影响缩小到一个单元里；二是资源的管理，如何高效地在虚拟机间动态的分配物理CPU和内存。
 容错和动态资源管理在某种程度上相互矛盾的。因此在分配资源的时候，要尽可能的减少一个虚拟机使用的cell数。这里的cell是指相对独立的容错 单元，后面还提到一个node的概念，Origin 2000上每个node含两个CPU。CD还提供了两种快速的进程间通讯的primitive，RPC和message。
 关于容错，有这么个问题，Disco在操作系统和硬件之间多弄了这么一层虚拟层，某个虚拟的操作系统出问题时可以不影响到其他操作系统，可是操作系 统不也是保证了进程间的互相独立，当一个进程异常时不影响另一个进程吗？多设立一层Disco对容错有什么帮助吗？这个问题的答案在于，VMM的代码量很 小，可以看作是一个可信的系统软件层(trusted system software layer)，因为当VMM的代码行数少于五万行时，它的复杂度就和其他可信的层（如cache coherence protocol)差不多了，这个复杂度比现代操作系统的复杂度差不多要低两个等级。
-传统操作系统通常使用一个全局的run queue来管理和分配进程在多个CPU上的运行，这种实现不适合CD的容错要求，也带来了更多的contention。所以CD为每个VCPU维护了一 个run queue，同时引入了VCPU migration的机制来平衡VCPU的负载，按颗粒度分三级，intra-node intra-cell inter-cell。内存管理方面，CD实现了memory borrowing机制，使得一个cell可以暂时的从其他cell里获得内存，如果这种借用受限于容错性，就只能使用原来的paging机制了。 CPU管理 CD有两个CPU平衡策略，一个在处理器空闲时发生，另一个定期平衡VCPU的负载。空闲调度时要同时考虑gang scheduling的限制以及因转移破坏的cache/node affinity。而定期的调度则是通过一棵全局的load tree的辅助来实现的。此外还需要一个scalable gang scheduler来保证效率，CD的调度器总是选择优先度最高的gang-runnable VCPU（等待时间最多），然后通过低开销的RPC通知那些拥有(和这个VCPU同属于一个虚拟机的VCPU)的处理器，这些处理器在收到消息后，立即停 止当前正在运行的VCPU，服从同一调度策略。通过这种方式实现的调度就不需要一个全局的管理器了。
-内存管理 每个cell都维护了自己的freelist，每次接收请求时都优先分配本地node上的资源。内存借用也很直接，需要借用内存的cell向有空闲内存的cell发个RPC即可，RPC的返回结果是一个machine page的list。
-测试结果 测试中CD是作为kernel process跑在IRIX 6.4上的，也就是说VMM的下面还有一层操作系统，主要是为了利用IRIX提供的设备驱动。CD在每个CPU上跑一个线程，完全占有整个CPU，IRIX只在需要设备驱动时才被激活。
+传统操作系统通常使用一个全局的run queue来管理和分配进程在多个CPU上的运行，这种实现不适合CD的容错要求，也带来了更多的contention。所以CD为每个VCPU维护了一 个run queue，同时引入了VCPU migration的机制来平衡VCPU的负载，按颗粒度分三级，intra-node intra-cell inter-cell。内存管理方面，CD实现了memory borrowing机制，使得一个cell可以暂时的从其他cell里获得内存，如果这种借用受限于容错性，就只能使用原来的paging机制了。
 测试比较了两个测试环境，跑在真机上的IRIX 6.4（增加了多核支持），和跑在CD上的IRIX 6.2。最后的结果显示大部分情况下（单核、8核、32核）后者和前者的差距在10%以内，最差情况下也只有20%的overhead。接下来的容错机制 的overhead同样很小，不高于2%。</description>
     </item>
     
@@ -190,7 +183,7 @@ flash存储单元分block和page，每个block有32/64个page，一个page有512
 上网络课的时候有一次老师的问题就是既然OSI七层协议的上层（如transport层）已经做了校验措施，为什么下层（如data-link层）还会有“多余”的error detection呢？当时我想到的一个答案就是为了性能考虑，因为那会儿正好在读这篇paper ;-)
 但是并不是说把功能放到子系统里就一定能提高性能了。如果子系统里面塞满了各种并不是上层都必需的检验机制，整个系统的性能势必会受到影响。所以这个trade-off值得深思熟虑。Exokernel的论文就提出了传统的操作系统中存在的这样一个问题，底层内核过于冗余，影响了应用程序性能，也隐藏了一些对部分应用程序比较重要的信息（比如给数据库提供磁盘原生数据访问的API可以获得更优的性能，另外应用程序也应当能控制自己发生缺页错误时候的行为）。
 这里的“End”在不同的环境下会对应不同的模块。比如在网上聊天这个通信过程中，没有必要在底层做很多校验来保证数据包的完整性，这时候及时性更重要，当数据包丢失或者数据出错时，会有一个更常用的End-to-End的解决方案：没听清的那一方通过语音要求重述就行了，“我听不清，能再说一遍刚才的话吗？”，而此时的End自然是谈话双方。如果换一种情形，在语音留言系统中，就需要保证传输的正确性了，因为这时候数据的及时性变得很次要，而留言系统的特点要求用End-to-End的验证加上底层的措施来保证一方的语音信息尽可能忠实的保存到另一方的留言系统中。
-修改于 2010.2.16</description>
+修改于 2010.</description>
     </item>
     
     <item>
@@ -205,7 +198,7 @@ flash存储单元分block和page，每个block有32/64个page，一个page有512
 这篇paper的主要工作是通过构造一种多种类的模态逻辑(many-sorted model logic)，来检查网络中验证协议的安全性。
 基础的逻辑分三部分： 原语，如验证双方A和B，以及服务器S，下文用P Q R泛指 密钥，如K_ab代表a和b之间的通讯密钥，K_a代表a的公钥，{K_a}^{-1}代表对应的私钥，下文用K泛指 公式（或者陈述），用N_a, N_b等表示，下文用X Y泛指
 接下来定义以下约定（constructs） P 信任 X: 原语P完全信任X P 看到 X: 有人发送了一条包含X的信息给P，P可以阅读它或者重复它（当然通常是在做了解密操作后） P 说了 X: 原语P发送过一条包含X的信息，同时也可以确定P是相信X的正确性的 P 控制 X: P可以判定X的正确与否。例如生成密钥的服务器通常被默认为拥有对密钥质量的审核权。 X 是新鲜的: 在此之前X没有被发送过。这个事实可以通过绑定一个时间戳或者其他只会使用一次的标记来证明。 P &amp;lt;-K-&amp;gt; Q: P和Q可以通过共享密钥K进行通讯，且这个K是好的，即不会被P Q不信任的原语知道。 K-&amp;gt; P: P拥有K这么一个公钥，且它对应的解密密钥K^{-1}不会被其他不被P信任的原语知道。 P &amp;lt;=X=&amp;gt; Q: X是一个只被P和Q或者P和Q共同信任的原语知道的陈述，只有P和Q可以通过X来相互证明它们各自的身份，X的一个例子就是密码。 {X}_K: X是一个被K加密了的陈述 _Y: 陈述X被Y所绑定，Y可以用来证明发送X的人的身份
-好了，总算把这些约定列完了，然后来看看通过这些约定能推出一些什么东东： 如果 P 相信 (P &amp;lt;-K-&amp;gt; Q), 且 P 看到 {X}_K，那么 P 相信 Q 说了 X。 这个例子很简单，既然P Q有安全的密钥K，那么P看到通过K加密后的X肯定认为就是Q发出的。</description>
+好了，总算把这些约定列完了，然后来看看通过这些约定能推出一些什么东东： 如果 P 相信 (P &amp;lt;-K-&amp;gt; Q), 且 P 看到 {X}_K，那么 P 相信 Q 说了 X。这个例子很简单，既然P Q有安全的密钥K，那么P看到通过K加密后的X肯定认为就是Q发出的。</description>
     </item>
     
     <item>
@@ -214,8 +207,7 @@ flash存储单元分block和page，每个block有32/64个page，一个page有512
       <pubDate>Sun, 30 Nov 2008 00:00:00 +0000</pubDate>
       
       <guid>https://blog.yxwang.me/2008/11/finding-and-reproducing-heisenbugs-in-concurrent-programs/</guid>
-      <description>Finding and Reproducing Heisenbugs in Concurrent Programs
-OSDI &amp;lsquo;08上微软研究院发的paper，针对并发编程中难以发现的bug问题。
+      <description>Finding and Reproducing Heisenbugs in Concurrent ProgramsOSDI &amp;lsquo;08上微软研究院发的paper，针对并发编程中难以发现的bug问题。
 paper的内容主要分两大块。
 一是如何在发现bug的时候记录下线程的运行先后(thread interleaving)，途径是在线程API和用户程序多写一层wrapper functions，这里还有一些其他的问题，比如只记录下了thread interleaving的话出现data race怎么解决等。
 另外一块内容是如何遍历出给定程序运行后所能产生的结果的集合，加入这个能实现的话那就能把所有隐藏的bug都找出来了。但是这个搜索空间很大，是指数级的，的一个结论就是：给定一个程序有n个的线程，所有线程共完成k条指令，那么c次占先调度后线程的排列情况数的复杂度是$$k^{c}$$的，所以在实现遍历代码的时候必须有效的降低k和c的值。</description>
@@ -228,9 +220,7 @@ paper的内容主要分两大块。
       
       <guid>https://blog.yxwang.me/2008/07/leaksurvivor/</guid>
       <description>Paper: LeakSurvivor: Towards Safely Tolerating Memory Leaks for Garbage-Collected Languages
-http://www.usenix.org/events/usenix08/tech/tang.html
-Yan Tang, Qi Gao, and Feng Qin, The Ohio State University
-三位作者好像都是中国人
+http://www.usenix.org/events/usenix08/tech/tang.htmlYan Tang, Qi Gao, and Feng Qin, The Ohio State University三位作者好像都是中国人
 这篇paper针对支持垃圾收集的语言中内存泄露问题，提出了一种比较保守的“换出”策略，即把可疑的内存泄露的对象（这些对象通常都是长时间没有被访问的）从内存移动到硬盘上暂时保存，减小内存的压力；如果这些对象后来被再次访问（这种可能性很小），就把它们从硬盘上移回内存。</description>
     </item>
     
@@ -240,11 +230,8 @@ Yan Tang, Qi Gao, and Feng Qin, The Ohio State University
       <pubDate>Wed, 28 May 2008 00:00:00 +0000</pubDate>
       
       <guid>https://blog.yxwang.me/2008/05/application-level-isolation-and-recovery-with-solitude/</guid>
-      <description>Application-Level Isolation and Recovery with Solitude
-Shvetank Jain, Fareha Shafique, Vladan Djeric, Ashvin Goel
-Department of Electrical and Computer Engineering, University of Toronto
-http://portal.acm.org/citation.cfm?id=1357010.1352603
-引入一个新的文件系统层(Isolation File System)将安全可信的基础文件系统和不可信的环境（如网上下载的文件等）隔离开来，并对不可信的环境中做出的改动加以记录，一旦发现问题就能即使恢复。</description>
+      <description>Application-Level Isolation and Recovery with SolitudeShvetank Jain, Fareha Shafique, Vladan Djeric, Ashvin Goel
+Department of Electrical and Computer Engineering, University of Torontohttp://portal.acm.org/citation.cfm?id=1357010.1352603引入一个新的文件系统层(Isolation File System)将安全可信的基础文件系统和不可信的环境（如网上下载的文件等）隔离开来，并对不可信的环境中做出的改动加以记录，一旦发现问题就能即使恢复。</description>
     </item>
     
     <item>
@@ -253,7 +240,26 @@ http://portal.acm.org/citation.cfm?id=1357010.1352603
       <pubDate>Mon, 05 May 2008 00:00:00 +0000</pubDate>
       
       <guid>https://blog.yxwang.me/2008/05/subvirt-implementing-malware-with-virtual-machines/</guid>
-      <description>http://ieeexplore.ieee.org/xpl/freeabs_all.jsp?arnumber=1624022&amp;fromcon Proceedings of the 2006 IEEE Symposium on Security and Privacy 作者来自密西根大学和微软研究部门 一个利用虚拟机进行攻击的rootkit。 1. Introduction 传统的攻击程序通常和安全工具（杀毒软件等）在同一个级别上（kernel mode），两者间没有绝对优势可言，因此有很大的限制，比如强大的功能和良好的隐蔽性不能兼得。而虚拟机的出现则可以解决这个问题，通过把恶意程序放在虚拟机上，可以做到对目标机(guest os)的完全监控，同时目标机完全不会知情。这种程序称为VMBR(virtual-machine based rootkit)。 2. Virtual machines VMM(virtual-machine monitor)这里就不多介绍了。VMM上跑着一些其他服务进程，主要用于操作系统的debug，运行中的虚拟机的迁移等功能。这些服务的主要面临的一个问题是理解对应的guest os状态和事件。因为在VMM和虚拟机处在不同的抽象级别，前者只能看到磁盘块(disk blocks)，网络包(network packets)，以及内存；而后者则把这些东西抽象为例如文件、TCP连接、变量等概念，这种差异称为语义差异(semantic gap)。 于是有了Virutal-machine introspection(VMI)，它包含了一系列让VMM上的服务了解并修改guest os的技术。 3. Virtual-machine based rootkit design and implementation 3.1 Installation VMBR的安装和一般病毒程序类似，通过欺骗有管理员权限的用户执行安装程序实现。 当目标机是WinXP时，VMBR被安装在第一个活动分区的开始部分；目标机是Linux时，安装程序会禁止swap分区，把VMBR放在swap分区上（够狠的。。。） 修改系统引导信息的时候还有一个细节，直接修改容易被安全检查程序发现。WinXP上的一种解决方案就是尽可能的在所有程序退出之后再修改（通过注册一个LastChanceShutdownNotification事件处理器），并且使用底层的磁盘驱动进行VMBR启动代码的复制，这样可以绕过文件系统层，而大多数反病毒软件都跑在文件系统层上。Linux上，通过修改关机脚本来保证安装程序在其他程序退出后执行。 安装完成后，目标系统的内容就被保存到了一个虚拟磁盘上。重启后就由VMM控制最底层，它把目标机的对虚拟磁盘的访问转换为对应的物理磁盘的访问。 3.2 Malicious services VMBR使用一个独立的系统执行各种攻击程序，这样目标机就无法察觉到了。对目标系统的攻击主要分三种： 一种是不需要和目标系统进行交互的恶意服务，例如垃圾电子邮件的发送(spam relays)，DDoS攻击，网络钓鱼(phishing web servers)。 第二种恶意服务需要监视目标系统的数据和事件。通过修改VMM的设备模拟软件就能记录下所有硬件级的数据（比如按键信息、网络包等），而这个过程不需要修改guest os，所以目标系统完全不知情。 VMBR还可以用VMI帮助理解目标系统软件级的抽象信息，VMI可以中断目标系统的任意指令，并重新组织数据。例如一个目标应用程序将要使用一个加密的socket发送信息，攻击者可以截获所有的SSL write函数调用并且在明文被加密前得到它。同样这个过程对目标系统完全透明，因为攻击程序跑在它的外层，或者说是“上帝”层 ;-) 第三种攻击是恶意修改目标系统的执行。例如篡改网络通讯，删除email，改变目标应用程序的行为。 3.3 Example malicious services 下面介绍这篇paper提到的4个恶意程序 最简单的，开了个thttpd web服务器进行网络钓鱼，任何发送到8080端口的TCP请求都会被这个服务器截获。 然后是一个按键记录程序，号称只用了60行代码就搞定了这个模块，然后写了一个254行的带图形界面的程序来分析日志并显示。 一个扫描目标机文件系统的程序，这是一个24小时运行的perl脚本，会把诸如/etc/shadow, user_home/.ssh/id_dsa之类的机密信息保存下来。 最后是防止VMM被目标机侦测到的一个服务。paper中提到了一种叫做redpill的虚拟机侦测手段，通过使用sidt指令。这个指令会读出处理器的中断列表(interrupt descritor table)，在VMM上跑的系统和普通的操作系统读出来的结果不一样，当这个指令在内核态被执行时，VMM会模拟这个指令的执行；但是用户态却不会被截获（考虑到性能因素）。所以redpill通过用户态执行sidt来判断当前系统是否运行在虚拟机上。这篇paper提到的针对redpill的解决方案是在每个可执行文件的sidt指令前设置一个断点，截获这个指令后就模拟这个指令，以此绕过redpill检测。但是这种方法不适合于在程序运行期动态生成二进制的sidt指令的程序（想到我的lab4了，呵呵）。道高一丈魔高一尺（原文是Continuing the arms race，军备战争），通过二进制转换(binary translation)，动态生成的sidt同样可以被截获，但是这种方法的overhead会很大。 3.</description>
+      <description>Proceedings of the 2006 IEEE Symposium on Security and Privacy
+作者来自密西根大学和微软研究部门
+一个利用虚拟机进行攻击的rootkit。
+1. Introduction传统的攻击程序通常和安全工具（杀毒软件等）在同一个级别上（kernel mode），两者间没有绝对优势可言，因此有很大的限制，比如强大的功能和良好的隐蔽性不能兼得。而虚拟机的出现则可以解决这个问题，通过把恶意程序放在虚拟机上，可以做到对目标机(guest os)的完全监控，同时目标机完全不会知情。这种程序称为VMBR(virtual-machine based rootkit)。
+2. Virtual machinesVMM(virtual-machine monitor)这里就不多介绍了。VMM上跑着一些其他服务进程，主要用于操作系统的debug，运行中的虚拟机的迁移等功能。这些服务的主要面临的一个问题是理解对应的guest os状态和事件。因为在VMM和虚拟机处在不同的抽象级别，前者只能看到磁盘块(disk blocks)，网络包(network packets)，以及内存；而后者则把这些东西抽象为例如文件、TCP连接、变量等概念，这种差异称为语义差异(semantic gap)。
+于是有了Virutal-machine introspection(VMI)，它包含了一系列让VMM上的服务了解并修改guest os的技术。
+3. Virtual-machine based rootkit design and implementation 3.1 Installation VMBR的安装和一般病毒程序类似，通过欺骗有管理员权限的用户执行安装程序实现。
+当目标机是WinXP时，VMBR被安装在第一个活动分区的开始部分；目标机是Linux时，安装程序会禁止swap分区，把VMBR放在swap分区上（够狠的。。。）
+修改系统引导信息的时候还有一个细节，直接修改容易被安全检查程序发现。WinXP上的一种解决方案就是尽可能的在所有程序退出之后再修改（通过注册一个LastChanceShutdownNotification事件处理器），并且使用底层的磁盘驱动进行VMBR启动代码的复制，这样可以绕过文件系统层，而大多数反病毒软件都跑在文件系统层上。Linux上，通过修改关机脚本来保证安装程序在其他程序退出后执行。
+安装完成后，目标系统的内容就被保存到了一个虚拟磁盘上。重启后就由VMM控制最底层，它把目标机的对虚拟磁盘的访问转换为对应的物理磁盘的访问。
+3.2 Malicious servicesVMBR使用一个独立的系统执行各种攻击程序，这样目标机就无法察觉到了。对目标系统的攻击主要分三种：
+一种是不需要和目标系统进行交互的恶意服务，例如垃圾电子邮件的发送(spam relays)，DDoS攻击，网络钓鱼(phishing web servers)。
+第二种恶意服务需要监视目标系统的数据和事件。通过修改VMM的设备模拟软件就能记录下所有硬件级的数据（比如按键信息、网络包等），而这个过程不需要修改guest os，所以目标系统完全不知情。
+VMBR还可以用VMI帮助理解目标系统软件级的抽象信息，VMI可以中断目标系统的任意指令，并重新组织数据。例如一个目标应用程序将要使用一个加密的socket发送信息，攻击者可以截获所有的SSL write函数调用并且在明文被加密前得到它。同样这个过程对目标系统完全透明，因为攻击程序跑在它的外层，或者说是“上帝”层 ;-)
+第三种攻击是恶意修改目标系统的执行。例如篡改网络通讯，删除email，改变目标应用程序的行为。最简单的，开了个thttpd web服务器进行网络钓鱼，任何发送到8080端口的TCP请求都会被这个服务器截获。
+然后是一个按键记录程序，号称只用了60行代码就搞定了这个模块，然后写了一个254行的带图形界面的程序来分析日志并显示。
+一个扫描目标机文件系统的程序，这是一个24小时运行的perl脚本，会把诸如/etc/shadow, user_home/.ssh/id_dsa之类的机密信息保存下来。
+最后是防止VMM被目标机侦测到的一个服务。paper中提到了一种叫做redpill的虚拟机侦测手段，通过使用sidt指令。这个指令会读出处理器的中断列表(interrupt descritor table)，在VMM上跑的系统和普通的操作系统读出来的结果不一样，当这个指令在内核态被执行时，VMM会模拟这个指令的执行；但是用户态却不会被截获（考虑到性能因素）。所以redpill通过用户态执行sidt来判断当前系统是否运行在虚拟机上。这篇paper提到的针对redpill的解决方案是在每个可执行文件的sidt指令前设置一个断点，截获这个指令后就模拟这个指令，以此绕过redpill检测。但是这种方法不适合于在程序运行期动态生成二进制的sidt指令的程序（想到我的lab4了，呵呵）。道高一丈魔高一尺（原文是Continuing the arms race，军备战争），通过二进制转换(binary translation)，动态生成的sidt同样可以被截获，但是这种方法的overhead会很大。
+3.4 Maintaining Control这块主要讲了对系统重启、关闭的处理。
+系统要求重启时，VMBR总是尽可能的通过重启guest os来完成，这样就能最大化的掌握控制权。</description>
     </item>
     
     <item>
@@ -264,8 +270,7 @@ http://portal.acm.org/citation.cfm?id=1357010.1352603
       <guid>https://blog.yxwang.me/2008/04/streamware/</guid>
       <description>Streamware: Programming General-Purpose Multicore Processors Using Streams
 Jayanth Gummaraju, Joel Coburn, Yoshio Turner, Mendel Rosenblum
-ASPLOS 08上的文章 http://portal.acm.org/citation.cfm?id=1353534.1346319
-提出了一个通用的多核平台，支持Cell CUDA Brook等多种体系结构，用户只需使用这个平台统一提供的API。
+ASPLOS 08上的文章 http://portal.acm.org/citation.cfm?id=1353534.1346319提出了一个通用的多核平台，支持Cell CUDA Brook等多种体系结构，用户只需使用这个平台统一提供的API。
 另外还加入了cache hierarchy的管理，能很好的安排各级cache保存的内容，以至于某个测试结果中单核的情况下用了Streamware的程序比不用的程序跑得还快。</description>
     </item>
     

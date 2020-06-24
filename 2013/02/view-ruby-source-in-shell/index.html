@@ -11,6 +11,7 @@
     
 
     <title> Ruby 命令行中快速查看函数源码 &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -39,7 +40,7 @@
     "articleSection" : "post",
     "name" : "Ruby 命令行中快速查看函数源码",
     "headline" : "Ruby 命令行中快速查看函数源码",
-    "description" : "\x3cp\x3e如果要查看 ActiveRecord 的 update_attribute 函数的源代码，一个比较常见的方法是直接在 Rails 源码中搜索 \x3ccode\x3edef update_attribute\x3c\/code\x3e。博客 \x3ca href=\x22http:\/\/pragmaticstudio.com\/blog\x22\x3eThe Pragmatic Studio\x3c\/a\x3e 介绍了一个更方便的技巧，在 Ruby 命令行中就能启动编辑器直接访问。\x3c\/p\x3e\n\n\x3cp\x3e通过 \x3ca href=\x22http:\/\/rdoc.info\/stdlib\/core\/Object:method\x22\x3eObject#method\x3c\/a\x3e 方法可以获得 update_attribute 方法的对象，而 \x3ca href=\x22http:\/\/rdoc.info\/stdlib\/core\/Method:source_location\x22\x3eMethod#source_location\x3c\/a\x3e 则返回这个方法定义的文件和位置。有了这个信息后，就能启动编辑器查看源代码了：\x3c\/p\x3e",
+    "description" : "\u003cp\u003e如果要查看 ActiveRecord 的 update_attribute 函数的源代码，一个比较常见的方法是直接在 Rails 源码中搜索 \u003ccode\u003edef update_attribute\u003c\/code\u003e。博客 \u003ca href=\u0022http:\/\/pragmaticstudio.com\/blog\u0022\u003eThe Pragmatic Studio\u003c\/a\u003e 介绍了一个更方便的技巧，在 Ruby 命令行中就能启动编辑器直接访问。\u003c\/p\u003e\n\u003cp\u003e通过 \u003ca href=\u0022http:\/\/rdoc.info\/stdlib\/core\/Object:method\u0022\u003eObject#method\u003c\/a\u003e 方法可以获得 update_attribute 方法的对象，而 \u003ca href=\u0022http:\/\/rdoc.info\/stdlib\/core\/Method:source_location\u0022\u003eMethod#source_location\u003c\/a\u003e 则返回这个方法定义的文件和位置。有了这个信息后，就能启动编辑器查看源代码了：\u003c\/p\u003e",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -47,8 +48,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2013",
-    "datePublished": "2013-02-14 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2013-02-14 00:00:00 \x2b0000 UTC",
+    "datePublished": "2013-02-14 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2013-02-14 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/2013\/02\/view-ruby-source-in-shell\/",
     "wordCount" : "102",
     "keywords" : [ "Programming","Ruby","Blog" ]
@@ -94,48 +95,35 @@
 
     <div class="post-content">
       <p>如果要查看 ActiveRecord 的 update_attribute 函数的源代码，一个比较常见的方法是直接在 Rails 源码中搜索 <code>def update_attribute</code>。博客 <a href="http://pragmaticstudio.com/blog">The Pragmatic Studio</a> 介绍了一个更方便的技巧，在 Ruby 命令行中就能启动编辑器直接访问。</p>
-
 <p>通过 <a href="http://rdoc.info/stdlib/core/Object:method">Object#method</a> 方法可以获得 update_attribute 方法的对象，而 <a href="http://rdoc.info/stdlib/core/Method:source_location">Method#source_location</a> 则返回这个方法定义的文件和位置。有了这个信息后，就能启动编辑器查看源代码了：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#f92672">&gt;</span> method <span style="color:#f92672">=</span> <span style="color:#66d9ef">User</span><span style="color:#f92672">.</span>first<span style="color:#f92672">.</span>method(<span style="color:#e6db74">:update_attribute</span>)
+  <span style="color:#66d9ef">User</span> <span style="color:#66d9ef">Load</span> (<span style="color:#ae81ff">0</span><span style="color:#f92672">.</span><span style="color:#ae81ff">5</span>ms)  <span style="color:#66d9ef">SELECT</span> <span style="color:#e6db74">`users`</span><span style="color:#f92672">.</span>* <span style="color:#66d9ef">FROM</span> <span style="color:#e6db74">`users`</span> <span style="color:#66d9ef">LIMIT</span> <span style="color:#ae81ff">1</span>
+<span style="color:#f92672">=&gt;</span> <span style="color:#75715e">#&lt;Method: User(ActiveRecord::Persistence)#update_attribute&gt;</span>
 
-<pre><code class="language-ruby">&gt; method = User.first.method(:update_attribute)
-  User Load (0.5ms)  SELECT `users`.* FROM `users` LIMIT 1
-=&gt; #&lt;Method: User(ActiveRecord::Persistence)#update_attribute&gt;
+<span style="color:#f92672">&gt;</span> location <span style="color:#f92672">=</span> method<span style="color:#f92672">.</span>source_location
+<span style="color:#f92672">=&gt;</span> <span style="color:#f92672">[</span><span style="color:#e6db74">&#34;/Users/wyx/.rvm/gems/ruby-1.9.2-p180/gems/activerecord-3.2.11/lib/active_record/persistence.rb&#34;</span>,
+ <span style="color:#ae81ff">177</span><span style="color:#f92672">]</span>
 
-&gt; location = method.source_location
-=&gt; [&quot;/Users/wyx/.rvm/gems/ruby-1.9.2-p180/gems/activerecord-3.2.11/lib/active_record/persistence.rb&quot;,
- 177]
-
-&gt; `subl #{location[0]}:#{location[1]}`
-=&gt; &quot;&quot;
-</code></pre>
-
-<p>把这段代码封装成函数，加到 .pryrc 或者 .irbrc 中：</p>
-
-<pre><code class="language-ruby">def source_for(object, method)
-  location = object.method(method).source_location
-  `subl #{location[0]}:#{location[1]}` if location &amp;&amp; location[0] != '(eval)'
+<span style="color:#f92672">&gt;</span> <span style="color:#e6db74">`subl </span><span style="color:#e6db74">#{</span>location<span style="color:#f92672">[</span><span style="color:#ae81ff">0</span><span style="color:#f92672">]</span><span style="color:#e6db74">}</span><span style="color:#e6db74">:</span><span style="color:#e6db74">#{</span>location<span style="color:#f92672">[</span><span style="color:#ae81ff">1</span><span style="color:#f92672">]</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>
+<span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#34;&#34;</span>
+</code></pre></div><p>把这段代码封装成函数，加到 .pryrc 或者 .irbrc 中：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">source_for</span>(object, method)
+  location <span style="color:#f92672">=</span> object<span style="color:#f92672">.</span>method(method)<span style="color:#f92672">.</span>source_location
+  <span style="color:#e6db74">`subl </span><span style="color:#e6db74">#{</span>location<span style="color:#f92672">[</span><span style="color:#ae81ff">0</span><span style="color:#f92672">]</span><span style="color:#e6db74">}</span><span style="color:#e6db74">:</span><span style="color:#e6db74">#{</span>location<span style="color:#f92672">[</span><span style="color:#ae81ff">1</span><span style="color:#f92672">]</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span> <span style="color:#66d9ef">if</span> location <span style="color:#f92672">&amp;&amp;</span> location<span style="color:#f92672">[</span><span style="color:#ae81ff">0</span><span style="color:#f92672">]</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;(eval)&#39;</span>
   location
-end
-</code></pre>
-
-<p>如果要查看 User 的实例方法 update_attribute，可以直接在 pry / irb 中调用</p>
-
+<span style="color:#66d9ef">end</span>
+</code></pre></div><p>如果要查看 User 的实例方法 update_attribute，可以直接在 pry / irb 中调用</p>
 <pre><code>source_for(User.first, :update_attribute)
-</code></pre>
+</code></pre><p>如果要使用其他编辑器，得把 <code>subl #{location[0]}:#{location[1]}</code> 换成这个编辑器对应的命令行：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#75715e"># TextMate</span>
+mate <span style="color:#75715e">#{location[0]} -l #{location[1]}</span>
 
-<p>如果要使用其他编辑器，得把 <code>subl #{location[0]}:#{location[1]}</code> 换成这个编辑器对应的命令行：</p>
+<span style="color:#75715e"># MacVim</span>
+mvim <span style="color:#75715e">#{location[0]} +#{location[1]}</span>
 
-<pre><code class="language-ruby"># TextMate
-mate #{location[0]} -l #{location[1]}
-
-# MacVim
-mvim #{location[0]} +#{location[1]}
-
-# Emacs
-emacs {location[0]} +#{location[1]}
-</code></pre>
-
-<p>原文链接：<a href="http://pragmaticstudio.com/blog/2013/2/13/view-source-ruby-methods">http://pragmaticstudio.com/blog/2013/2/13/view-source-ruby-methods</a></p>
+<span style="color:#75715e"># Emacs</span>
+emacs {location<span style="color:#f92672">[</span><span style="color:#ae81ff">0</span><span style="color:#f92672">]</span>} <span style="color:#f92672">+</span><span style="color:#75715e">#{location[1]}</span>
+</code></pre></div><p>原文链接：<a href="http://pragmaticstudio.com/blog/2013/2/13/view-source-ruby-methods">http://pragmaticstudio.com/blog/2013/2/13/view-source-ruby-methods</a></p>
     </div>
         <div class="cc-license">
       本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.zh">知识共享署名-非商业性使用 3.0 版本许可协议</a>进行许可，欢迎转载，演绎，但是必须保留本文的署名 <a href="https://blog.yxwang.me/2013/02/view-ruby-source-in-shell/">zellux</a>（包含链接），且不得用于商业目的。

@@ -11,6 +11,7 @@
     
 
     <title> OSLab 之中断处理 &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -39,7 +40,7 @@
     "articleSection" : "post",
     "name" : "OSLab 之中断处理",
     "headline" : "OSLab 之中断处理",
-    "description" : "1. 准备工作 在开始分析Support Code之前，先配置下我们的Source Insight，使它能够支持.s文件的搜索。\n在Options-\x26gt;Document Options-\x26gt;Document Types中选择x86 Asm Source File，在File fileter中增加一个.s，变成.asm;.inc;.s 然后在Project-\x26gt;Add and Remove Project Files中重新将整个oslab的目录加入，这样以后进行文本搜索时.s文件也不会漏掉了。\n2. Source Insight使用 接下来简单分析下内核启动的过程，在浏览代码的过程中可以迅速的掌握Source Insight的使用技巧。\nlib\/multiboot \/multiboot.s完成了初始化工作，可以看到其中一句call EXT(multiboot_main)调用了C函数multiboot_main，使用ctrl\x2b\/搜索包含multiboot_main的所有文件，最终base_multiboot_main.c中找到了它的定义。依次进行cpu、内存的初 始化，然后开启中断，跳转到kernel_main函数，也是Lab1中所要改写的函数之一。另外 在这里可以通过ctrl\x2b单击或者ctrl\x2b=跳转到相应的函数定义处，很方便。\n3. irq处理初始化工作 来看下Lab 1的重点之一，irq的处理。跟踪multiboot_main-\x26gt;base_cpu_setup-\x26gt;base_cp u_init-\x26gt;base_irq_init，可以看到这行代码\ngate_init(base_idt, base_irq_inittab, KERNEL_CS);  继续使用ctrl\x2b\/找到base_irq_inittab的藏身之处：base_irq_inittab.s\n4. base_irq_inittab.s 这个汇编文件做了不少重复性工作，方便我们在c语言级别实现各种handler。\nGATE_INITTAB_BEGIN(base_irq_inittab) \/* irq处理函数表的起始，还记得jump table 吗？ *\/ MASTER(0, 0) \/* irq0 对应的函数 *\/  来看看这个MASTER(0, 0)宏展开后是什么样子：\n#define MASTER(irq, num) GATE_ENTRY(BASE_IRQ_MASTER_BASE \x2b (num), 0f, ACC_PL_K|ACC_INTR_GATE) ; P2ALIGN(TEXT_ALIGN) ; 0: ; pushl $(irq) \/* error code = irq vector *\/ ; pushl $BASE_IRQ_MASTER_BASE \x2b (num) \/* trap number *\/ ; pusha \/* save general registers *\/ ; movl $(irq),%ecx \/* irq vector number *\/ ; movb $1 \x26lt;\x26lt; num,%dl \/* pic mask for this irq *\/ ; jmp master_ints  依次push irq号，trap号（0x20\x2birq号），通用寄存器（eax ecx等）入栈，把irq号保 存到ecx寄存器，然后跳转到master_ints，master_ints是所有master interrupts公用 的代码。",
+    "description" : "1. 准备工作 在开始分析Support Code之前，先配置下我们的Source Insight，使它能够支持.s文件的搜索。\n在Options-\u0026gt;Document Options-\u0026gt;Document Types中选择x86 Asm Source File，在File fileter中增加一个*.s，变成*.asm;*.inc;*.s 然后在Project-\u0026gt;Add and Remove Project Files中重新将整个oslab的目录加入，这样以后进行文本搜索时.s文件也不会漏掉了。\n2. Source Insight使用 接下来简单分析下内核启动的过程，在浏览代码的过程中可以迅速的掌握Source Insight的使用技巧。\nlib\/multiboot \/multiboot.s完成了初始化工作，可以看到其中一句call EXT(multiboot_main)调用了C函数multiboot_main，使用ctrl\u002b\/搜索包含multiboot_main的所有文件，最终base_multiboot_main.c中找到了它的定义。依次进行cpu、内存的初 始化，然后开启中断，跳转到kernel_main函数，也是Lab1中所要改写的函数之一。另外 在这里可以通过ctrl\u002b单击或者ctrl\u002b=跳转到相应的函数定义处，很方便。\n3. irq处理初始化工作 来看下Lab 1的重点之一，irq的处理。跟踪multiboot_main-\u0026gt;base_cpu_setup-\u0026gt;base_cp u_init-\u0026gt;base_irq_init，可以看到这行代码\ngate_init(base_idt, base_irq_inittab, KERNEL_CS); 继续使用ctrl\u002b\/找到base_irq_inittab的藏身之处：base_irq_inittab.s\n4. base_irq_inittab.s 这个汇编文件做了不少重复性工作，方便我们在c语言级别实现各种handler。\nGATE_INITTAB_BEGIN(base_irq_inittab) \/* irq处理函数表的起始，还记得jump table 吗？ *\/ MASTER(0, 0) \/* irq0 对应的函数 *\/ 来看看这个MASTER(0, 0)宏展开后是什么样子：\n#define MASTER(irq, num) GATE_ENTRY(BASE_IRQ_MASTER_BASE \u002b (num), 0f, ACC_PL_K|ACC_INTR_GATE) ; P2ALIGN(TEXT_ALIGN) ; 0: ; pushl $(irq) \/* error code = irq vector *\/ ; pushl $BASE_IRQ_MASTER_BASE \u002b (num) \/* trap number *\/ ; pusha \/* save general registers *\/ ; movl $(irq),%ecx \/* irq vector number *\/ ; movb $1 \u0026lt;\u0026lt; num,%dl \/* pic mask for this irq *\/ ; jmp master_ints 依次push irq号，trap号（0x20\u002birq号），通用寄存器（eax ecx等）入栈，把irq号保 存到ecx寄存器，然后跳转到master_ints，master_ints是所有master interrupts公用 的代码。",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -47,8 +48,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2008",
-    "datePublished": "2008-09-01 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2008-09-01 00:00:00 \x2b0000 UTC",
+    "datePublished": "2008-09-01 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2008-09-01 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/2008\/09\/oslab-interrupt-handling\/",
     "wordCount" : "450",
     "keywords" : [ "Courses","Lab","OS","Blog" ]
@@ -93,202 +94,149 @@
 </span>
 
     <div class="post-content">
-      
-
-<h2 id="1-准备工作">1. 准备工作</h2>
-
+      <h2 id="1-准备工作">1. 准备工作</h2>
 <p>在开始分析Support Code之前，先配置下我们的Source  Insight，使它能够支持.s文件的搜索。</p>
-
-<p>在Options-&gt;Document Options-&gt;Document  Types中选择x86 Asm Source File，在File fileter中增加一个<em>.s，变成</em>.asm;<em>.inc;</em>.s  然后在Project-&gt;Add and Remove
+<p>在Options-&gt;Document Options-&gt;Document  Types中选择x86 Asm Source File，在File fileter中增加一个*.s，变成*.asm;*.inc;*.s  然后在Project-&gt;Add and Remove
 Project  Files中重新将整个oslab的目录加入，这样以后进行文本搜索时.s文件也不会漏掉了。</p>
-
-<h2 id="2-source-insight使用">2. Source  Insight使用</h2>
-
+<h2 id="2-source--insight使用">2. Source  Insight使用</h2>
 <p>接下来简单分析下内核启动的过程，在浏览代码的过程中可以迅速的掌握Source  Insight的使用技巧。</p>
-
 <p>lib/multiboot /multiboot.s完成了初始化工作，可以看到其中一句call
 EXT(multiboot_main)调用了C函数multiboot_main，使用ctrl+/搜索包含multiboot_main的所有文件，最终base_multiboot_main.c中找到了它的定义。依次进行cpu、内存的初
 始化，然后开启中断，跳转到kernel_main函数，也是Lab1中所要改写的函数之一。另外
 在这里可以通过ctrl+单击或者ctrl+=跳转到相应的函数定义处，很方便。</p>
-
-<h2 id="3-irq处理初始化工作">3.  irq处理初始化工作</h2>
-
+<h2 id="3--irq处理初始化工作">3.  irq处理初始化工作</h2>
 <p>来看下Lab  1的重点之一，irq的处理。跟踪multiboot_main-&gt;base_cpu_setup-&gt;base_cp
 u_init-&gt;base_irq_init，可以看到这行代码</p>
-
-<pre><code class="language-c">gate_init(base_idt,  base_irq_inittab,  KERNEL_CS);
-</code></pre>
-
-<p>继续使用ctrl+/找到base_irq_inittab的藏身之处：base_irq_inittab.s</p>
-
-<h2 id="4-base-irq-inittab-s">4.  base_irq_inittab.s</h2>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">gate_init(base_idt,  base_irq_inittab,  KERNEL_CS);
+</code></pre></div><p>继续使用ctrl+/找到base_irq_inittab的藏身之处：base_irq_inittab.s</p>
+<h2 id="4--base_irq_inittabs">4.  base_irq_inittab.s</h2>
 <p>这个汇编文件做了不少重复性工作，方便我们在c语言级别实现各种handler。</p>
-
-<pre><code class="language-c">GATE_INITTAB_BEGIN(base_irq_inittab)  /* irq处理函数表的起始，还记得jump
-table 吗？ */
-MASTER(0, 0) /* irq0 对应的函数  */
-</code></pre>
-
-<p>来看看这个MASTER(0, 0)宏展开后是什么样子：</p>
-
-<pre><code class="language-nasm">#define MASTER(irq, num)
-GATE_ENTRY(BASE_IRQ_MASTER_BASE + (num), 0f, ACC_PL_K|ACC_INTR_GATE)  ;
-P2ALIGN(TEXT_ALIGN) ;
-0: ;
-pushl $(irq) /* error code = irq vector  */ ;
-pushl $BASE_IRQ_MASTER_BASE + (num) /* trap number */ ;
-pusha /*  save general registers */ ;
-movl $(irq),%ecx /* irq vector number */  ;
-movb $1 &lt;&lt; num,%dl /* pic mask for this irq */ ;
-jmp  master_ints
-</code></pre>
-
-<p>依次push irq号，trap号（0x20+irq号），通用寄存器（eax  ecx等）入栈，把irq号保
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">GATE_INITTAB_BEGIN(base_irq_inittab)  <span style="color:#75715e">/* irq处理函数表的起始，还记得jump
+</span><span style="color:#75715e">table 吗？ */</span>
+MASTER(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>) <span style="color:#75715e">/* irq0 对应的函数  */</span>
+</code></pre></div><p>来看看这个MASTER(0, 0)宏展开后是什么样子：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-nasm" data-lang="nasm"><span style="color:#960050;background-color:#1e0010">#</span><span style="color:#a6e22e">define</span> MASTER(irq, num)
+<span style="color:#a6e22e">GATE_ENTRY</span>(BASE_IRQ_MASTER_BASE <span style="color:#f92672">+</span> (num), <span style="color:#ae81ff">0</span>f, ACC_PL_K<span style="color:#f92672">|</span>ACC_INTR_GATE)  <span style="color:#75715e">;</span>
+<span style="color:#a6e22e">P2ALIGN</span>(TEXT_ALIGN) <span style="color:#75715e">;</span>
+<span style="color:#960050;background-color:#1e0010">0:</span> <span style="color:#75715e">;</span>
+<span style="color:#a6e22e">pushl</span> <span style="color:#66d9ef">$</span>(irq) <span style="color:#f92672">/*</span> error code <span style="color:#960050;background-color:#1e0010">=</span> irq vector  <span style="color:#f92672">*/</span> <span style="color:#75715e">;</span>
+<span style="color:#a6e22e">pushl</span> <span style="color:#66d9ef">$</span>BASE_IRQ_MASTER_BASE <span style="color:#f92672">+</span> (num) <span style="color:#f92672">/*</span> trap number <span style="color:#f92672">*/</span> <span style="color:#75715e">;</span>
+<span style="color:#a6e22e">pusha</span> <span style="color:#f92672">/*</span>  save general registers <span style="color:#f92672">*/</span> <span style="color:#75715e">;</span>
+<span style="color:#a6e22e">movl</span> <span style="color:#66d9ef">$</span>(irq),<span style="color:#f92672">%</span>ecx <span style="color:#f92672">/*</span> irq vector number <span style="color:#f92672">*/</span>  <span style="color:#75715e">;</span>
+<span style="color:#a6e22e">movb</span> <span style="color:#66d9ef">$</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> num,<span style="color:#f92672">%</span>dl <span style="color:#f92672">/*</span> pic mask for this irq <span style="color:#f92672">*/</span> <span style="color:#75715e">;</span>
+<span style="color:#a6e22e">jmp</span>  master_ints
+</code></pre></div><p>依次push irq号，trap号（0x20+irq号），通用寄存器（eax  ecx等）入栈，把irq号保
 存到ecx寄存器，然后跳转到master_ints，master_ints是所有master  interrupts公用
 的代码。</p>
-
 <p>跳过master_ints的前几行，从第七行开始</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-nasm" data-lang="nasm"><span style="color:#960050;background-color:#1e0010">/*</span> <span style="color:#a6e22e">Acknowledge</span> the  interrupt <span style="color:#f92672">*/</span>
+<span style="color:#a6e22e">movb</span> <span style="color:#66d9ef">$</span><span style="color:#ae81ff">0x20</span>,<span style="color:#f92672">%</span>al
+<span style="color:#a6e22e">outb</span> <span style="color:#f92672">%</span>al,<span style="color:#66d9ef">$</span><span style="color:#ae81ff">0x20</span>
 
-<pre><code class="language-nasm">/* Acknowledge the  interrupt */
-movb $0x20,%al
-outb %al,$0x20
+<span style="color:#960050;background-color:#1e0010">/*</span> <span style="color:#a6e22e">Save</span> the rest of the  standard trap frame (oskit<span style="color:#f92672">/</span>x86<span style="color:#f92672">/</span>base_trap.h). <span style="color:#f92672">*/</span>
+<span style="color:#a6e22e">pushl</span> <span style="color:#f92672">%</span>ds
+<span style="color:#a6e22e">pushl</span>  <span style="color:#f92672">%</span>es
+<span style="color:#a6e22e">pushl</span> <span style="color:#f92672">%</span>fs
+<span style="color:#a6e22e">pushl</span> <span style="color:#f92672">%</span>gs
 
-/* Save the rest of the  standard trap frame (oskit/x86/base_trap.h). */
-pushl %ds
-pushl  %es
-pushl %fs
-pushl %gs
+<span style="color:#960050;background-color:#1e0010">/*</span> <span style="color:#a6e22e">Load</span> the kernel<span style="color:#960050;background-color:#1e0010">&#39;</span>s <span style="color:#f92672">seg</span>ment registers.  <span style="color:#f92672">*/</span>
+<span style="color:#a6e22e">movw</span> <span style="color:#f92672">%</span>ss,<span style="color:#f92672">%</span>dx
+<span style="color:#a6e22e">movw</span> <span style="color:#f92672">%</span>dx,<span style="color:#f92672">%</span>ds
+<span style="color:#a6e22e">movw</span> <span style="color:#f92672">%</span>dx,<span style="color:#f92672">%</span>es
 
-/* Load the kernel's segment registers.  */
-movw %ss,%dx
-movw %dx,%ds
-movw %dx,%es
+<span style="color:#960050;background-color:#1e0010">/*</span> <span style="color:#a6e22e">Increment</span> the  hardware interrupt nesting counter <span style="color:#f92672">*/</span>
+<span style="color:#a6e22e">incb</span> EXT(base_irq_nest)
 
-/* Increment the  hardware interrupt nesting counter */
-incb EXT(base_irq_nest)
-
-/* Load  the handler vector */
-movl  EXT(base_irq_handlers)(,%ecx,4),%esi
-</code></pre>
-
-<p>注释写得很详细，首先发送0x20到0x20端口，也就是Lab1文档上所说的发送INT_CTL_DON
+<span style="color:#960050;background-color:#1e0010">/*</span> <span style="color:#a6e22e">Load</span>  the handler vector <span style="color:#f92672">*/</span>
+<span style="color:#a6e22e">movl</span>  EXT(base_irq_handlers)(,<span style="color:#f92672">%</span>ecx,<span style="color:#ae81ff">4</span>),<span style="color:#f92672">%</span>esi
+</code></pre></div><p>注释写得很详细，首先发送0x20到0x20端口，也就是Lab1文档上所说的发送INT_CTL_DON
 E到INT_CTL_REG，看来这一步support  code已经替我们完成了。接下来保存四个段寄存
 器ds es fs  gs，并读入kernel态的段寄存器信息。</p>
-
 <p>最后一句很关键，把base_irq_handlers + %ecx *  4这个值保存到了esi寄存器中，%ecx
 中保存了irq号，而*4则是一个函数指针的大小，那么base_irq_handlers是什么呢？继
 续用ctrl+/搜索，可以在base_irq.c中找到这个数组的定义
 unsigned  int (*base_irq_handlers[BASE_IRQ_COUNT])(struct trap_state  *ts)
 且初始时这个数组的每一项都是base_irq_default_handler</p>
-
 <p>看来这句汇编代码的功能是把处理irq对应的函数地址保存到了esi寄存器中。
 为了证实这一点，继续看base_irq_inittab.s的代码：</p>
-
-<pre><code class="language-nasm">#else
-/*  Call the interrupt handler with the trap frame as a parameter */
-pushl  %esp
-call *%esi
-popl  %edx
-#endif
-</code></pre>
-
-<p>果然，在保存了esp值后，紧接着就调用了esi指向的那个函数。而从那个函数返回后，
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-nasm" data-lang="nasm"><span style="color:#960050;background-color:#1e0010">#</span><span style="color:#a6e22e">else</span>
+<span style="color:#960050;background-color:#1e0010">/*</span>  <span style="color:#a6e22e">Call</span> the interrupt handler with the trap frame as a parameter <span style="color:#f92672">*/</span>
+<span style="color:#a6e22e">pushl</span>  <span style="color:#f92672">%</span>esp
+<span style="color:#a6e22e">call</span> <span style="color:#f92672">*%</span>esi
+<span style="color:#a6e22e">popl</span>  <span style="color:#f92672">%</span>edx
+<span style="color:#960050;background-color:#1e0010">#</span><span style="color:#a6e22e">endif</span>
+</code></pre></div><p>果然，在保存了esp值后，紧接着就调用了esi指向的那个函数。而从那个函数返回后，
 之前在栈上保存的相关信息都被恢复了：</p>
-
-<pre><code class="language-nasm">/*  blah blah blah */
-/* Return from the interrupt */
-popl %gs
-popl  %fs
-popl %es
-popl %ds
-popa
-addl $4*2,%esp /* Pop trap number and  error code  */
-iret
-</code></pre>
-
-<p>这样就恢复到了进入这个irq处理单元前的状态，文档中所要求的保存通用寄存器这一步
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-nasm" data-lang="nasm"><span style="color:#960050;background-color:#1e0010">/*</span>  <span style="color:#a6e22e">blah</span> blah blah <span style="color:#f92672">*/</span>
+<span style="color:#960050;background-color:#1e0010">/*</span> <span style="color:#a6e22e">Return</span> from the interrupt <span style="color:#f92672">*/</span>
+<span style="color:#a6e22e">popl</span> <span style="color:#f92672">%</span>gs
+<span style="color:#a6e22e">popl</span>  <span style="color:#f92672">%</span>fs
+<span style="color:#a6e22e">popl</span> <span style="color:#f92672">%</span>es
+<span style="color:#a6e22e">popl</span> <span style="color:#f92672">%</span>ds
+<span style="color:#a6e22e">popa</span>
+<span style="color:#a6e22e">addl</span> <span style="color:#66d9ef">$</span><span style="color:#ae81ff">4</span><span style="color:#f92672">*</span><span style="color:#ae81ff">2</span>,<span style="color:#f92672">%</span>esp <span style="color:#f92672">/*</span> Pop trap number and  error code  <span style="color:#f92672">*/</span>
+<span style="color:#a6e22e">iret</span>
+</code></pre></div><p>这样就恢复到了进入这个irq处理单元前的状态，文档中所要求的保存通用寄存器这一步
 其实在这里也已经完成了，不需要我们自己写代码。</p>
-
 <p>好了，这样一分析后，我们要做的事情就很简单，就是把base_irq_handlers数组中的对
 应项改成相应的handler函数就行了。
 注意index是相应的idt_entry号减去BASE_IRQ_SLAVE_BASE，或者直接使用IRQ号。</p>
-
 <p>另外这个数组的初始值都是base_irq_default_handler，用ctrl+左键跳到这个函数的定
 义，可以看到这个函数只有一句简单的输出语句：
 printf(&ldquo;Unexpected  interrupt %dn&rdquo;, ts-&gt;err);
 而这就是没有注册handler前我们所看到的那句Unexpected interrupt  0的来源了。</p>
-
-<h2 id="5-struct-trap-state-ts">5. struct trap_state *ts</h2>
-
+<h2 id="5-struct-trap_state-ts">5. struct trap_state *ts</h2>
 <p>所有的handler函数的参数都是一个struct trap_state  *ts，这个参数是哪来的呢？
 注意call *%esi的前一行</p>
-
-<pre><code class="language-nasm">/* Call the interrupt handler with the  trap frame as a parameter */
-pushl  %esp
-</code></pre>
-
-<p>这里把当前的esp当作指向ts的指针传给了handler，列一下从esp指向的地址开始的内容
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-nasm" data-lang="nasm"><span style="color:#960050;background-color:#1e0010">/*</span> <span style="color:#a6e22e">Call</span> the interrupt handler with the  trap frame as a parameter <span style="color:#f92672">*/</span>
+<span style="color:#a6e22e">pushl</span>  <span style="color:#f92672">%</span>esp
+</code></pre></div><p>这里把当前的esp当作指向ts的指针传给了handler，列一下从esp指向的地址开始的内容
 ，也就是在此之前push入栈的内容：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-nasm" data-lang="nasm"><span style="color:#a6e22e">pushl</span> <span style="color:#66d9ef">$</span>(irq) <span style="color:#f92672">/*</span> error code <span style="color:#960050;background-color:#1e0010">=</span> irq vector <span style="color:#f92672">*/</span> <span style="color:#75715e">;</span>
+<span style="color:#a6e22e">pushl</span>  <span style="color:#66d9ef">$</span>BASE_IRQ_MASTER_BASE <span style="color:#f92672">+</span> (num) <span style="color:#f92672">/*</span> trap number <span style="color:#f92672">*/</span> <span style="color:#75715e">;</span>
+<span style="color:#a6e22e">pusha</span> <span style="color:#f92672">/*</span> save general  registers <span style="color:#f92672">*/</span> <span style="color:#75715e">;</span>
+<span style="color:#a6e22e">pushl</span> <span style="color:#f92672">%</span>ds
+<span style="color:#a6e22e">pushl</span> <span style="color:#f92672">%</span>es
+<span style="color:#a6e22e">pushl</span> <span style="color:#f92672">%</span>fs
+<span style="color:#a6e22e">pushl</span> <span style="color:#f92672">%</span>gs
+</code></pre></div><p>再看一下trap_state的定义，你会发现正好和push的顺序相反：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">/* Saved segment registers  */</span>
+<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span> gs;
+<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span> fs;
+<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span> es;
+<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span>  ds;
 
-<pre><code class="language-nasm">pushl $(irq) /* error code = irq vector */ ;
-pushl  $BASE_IRQ_MASTER_BASE + (num) /* trap number */ ;
-pusha /* save general  registers */ ;
-pushl %ds
-pushl %es
-pushl %fs
-pushl %gs
-</code></pre>
+<span style="color:#75715e">/* PUSHA register state frame */</span>
+<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span> edi;
+<span style="color:#66d9ef">unsigned</span>  <span style="color:#66d9ef">int</span> esi;
+<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span> ebp;
+<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span> cr2; <span style="color:#75715e">/* we save cr2 over esp for  page faults */</span>
+<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span> ebx;
+<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span> edx;
+<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span>  ecx;
+<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span> eax;
 
-<p>再看一下trap_state的定义，你会发现正好和push的顺序相反：</p>
+<span style="color:#75715e">/* Processor trap number, 0-31. */</span>
+<span style="color:#66d9ef">unsigned</span>  <span style="color:#66d9ef">int</span> trapno;
 
-<pre><code class="language-c">/* Saved segment registers  */
-unsigned int gs;
-unsigned int fs;
-unsigned int es;
-unsigned int  ds;
-
-/* PUSHA register state frame */
-unsigned int edi;
-unsigned  int esi;
-unsigned int ebp;
-unsigned int cr2; /* we save cr2 over esp for  page faults */
-unsigned int ebx;
-unsigned int edx;
-unsigned int  ecx;
-unsigned int eax;
-
-/* Processor trap number, 0-31. */
-unsigned  int trapno;
-
-/* Error code pushed by the processor, 0 if none.  */
-unsigned int err;
-</code></pre>
-
-<p>而这个定义后面的</p>
-
-<pre><code class="language-c">/* Processor state frame  */
-unsigned int eip;
-unsigned int cs;
-unsigned int eflags;
-unsigned  int esp;
-unsigned int ss;
-</code></pre>
-
-<p>则是发生interrupt时硬件自动push的五个数据（参见Understand the  Linux Kernel）</p>
-
+<span style="color:#75715e">/* Error code pushed by the processor, 0 if none.  */</span>
+<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span> err;
+</code></pre></div><p>而这个定义后面的</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">/* Processor state frame  */</span>
+<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span> eip;
+<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span> cs;
+<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span> eflags;
+<span style="color:#66d9ef">unsigned</span>  <span style="color:#66d9ef">int</span> esp;
+<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span> ss;
+</code></pre></div><p>则是发生interrupt时硬件自动push的五个数据（参见Understand the  Linux Kernel）</p>
 <p>也就是说，ts指针指向的是调用当前handler前的寄存器状态，也是当前handler结束后
 用来恢复的寄存器状态，了解这一点对以后的几个lab帮助很大。</p>
-
 <p>p.s.  另外提一句和这个lab无关的话，非vm86模式下栈上是不会有v86_es等四个寄存器
 信息的，所以以后根据task_struct指针计算*ts的地址时使用的偏移量不应该是sizeof(
 struct  trap_state)</p>
-
 <h2 id="6-the-end">6. The End</h2>
-
 <p>这样差不多就把support  code中处理interrupt的方法过了一遍（另外还有base_trap_in
 ittab.s，不过和irq的处理很相似）</p>
-
 <p>了解这些后Lab1就比较简单了，不需要任何内嵌汇编代码即可完成。</p>
 
     </div>

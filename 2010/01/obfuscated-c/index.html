@@ -11,6 +11,7 @@
     
 
     <title> 这样也能算圆周率 &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -39,7 +40,7 @@
     "articleSection" : "post",
     "name" : "这样也能算圆周率",
     "headline" : "这样也能算圆周率",
-    "description" : "reddit programming版面最近的热帖，下面这个程序输出的结果是一个近似的圆周率(3.156)。\n#define _ F--\x26gt;00 || F-OO--; long F=00,OO=00; main(){F_OO();printf(\x26quot;%1.3f\\n\x26quot;, 4.*-F\/OO\/OO);}F_OO() { _-_-_-_ _-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_ _-_-_-_ }  乍看下这个程序有点莫名其妙，分析一下宏后就知道它的方法了。两个全局变量F和OO分别记录 圆的面积和直径 的相反数，根据4*面积\/直径\/直径就能得到近似的圆周率了。\n至于面积和直径的计算，F在会在每一个_展开的地方减一，这样就得到了圆的面积。直径的计算要展开几行代码才能看得更清楚：\nF--\x26gt;00 || F-OO--; -F--\x26gt;00 || F-OO--; -F--\x26gt;00 || F-OO--; -F--\x26gt;00 || F-OO--; F--\x26gt;00 || F-OO--; -F--\x26gt;00 || F-OO--; -F--\x26gt;00 || F-OO--; -F--\x26gt;00 || F-OO--; -F--\x26gt;00 || F-OO--; -F--\x26gt;00 || F-OO--; -F--\x26gt;00 || F-OO--; -F--\x26gt;00 || F-OO--; -F--\x26gt;00 || F-OO--;  这是用cpp展开圆形前两行代码的结果，因为或运算的特殊性，F- OO- -只会在每一段的第一行执行，所以OO- -执行的次数就等于圆的直径了。",
+    "description" : "reddit programming版面最近的热帖，下面这个程序输出的结果是一个近似的圆周率(3.156)。\n#define _ F--\u0026gt;00 || F-OO--; long F=00,OO=00; main(){F_OO();printf(\u0026#34;%1.3f\\n\u0026#34;, 4.*-F\/OO\/OO);}F_OO() { _-_-_-_ _-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_ _-_-_-_ } 乍看下这个程序有点莫名其妙，分析一下宏后就知道它的方法了。两个全局变量F和OO分别记录 圆的面积和直径 的相反数，根据4*面积\/直径\/直径就能得到近似的圆周率了。\n至于面积和直径的计算，F在会在每一个_展开的地方减一，这样就得到了圆的面积。直径的计算要展开几行代码才能看得更清楚：\nF--\u0026gt;00 || F-OO--; -F--\u0026gt;00 || F-OO--; -F--\u0026gt;00 || F-OO--; -F--\u0026gt;00 || F-OO--; F--\u0026gt;00 || F-OO--; -F--\u0026gt;00 || F-OO--; -F--\u0026gt;00 || F-OO--; -F--\u0026gt;00 || F-OO--; -F--\u0026gt;00 || F-OO--; -F--\u0026gt;00 || F-OO--; -F--\u0026gt;00 || F-OO--; -F--\u0026gt;00 || F-OO--; -F--\u0026gt;00 || F-OO--; 这是用cpp展开圆形前两行代码的结果，因为或运算的特殊性，F- OO- -只会在每一段的第一行执行，所以OO- -执行的次数就等于圆的直径了。",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -47,8 +48,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2010",
-    "datePublished": "2010-01-28 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2010-01-28 00:00:00 \x2b0000 UTC",
+    "datePublished": "2010-01-28 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2010-01-28 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/2010\/01\/obfuscated-c\/",
     "wordCount" : "76",
     "keywords" : [ "C","Programming","Blog" ]
@@ -93,52 +94,45 @@
 </span>
 
     <div class="post-content">
-      <p><a href="http://www.reddit.com/r/programming/comments/auqpc/the_sickest_obfuscated_and_the_most_beautiful_way/" target="_blank">reddit programming版面最近的热帖</a>，下面这个程序输出的结果是一个近似的圆周率(3.156)。</p>
-
-<pre><code class="language-c">#define _ F--&gt;00 || F-OO--;
-long F=00,OO=00;
-main(){F_OO();printf(&quot;%1.3f\n&quot;, 4.*-F/OO/OO);}F_OO()
+      <p><!-- raw HTML omitted -->reddit programming版面最近的热帖<!-- raw HTML omitted -->，下面这个程序输出的结果是一个近似的圆周率(3.156)。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">#define _ F--&gt;00 || F-OO--;
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">long</span> F<span style="color:#f92672">=</span><span style="color:#ae81ff">00</span>,OO<span style="color:#f92672">=</span><span style="color:#ae81ff">00</span>;
+main(){F_OO();printf(<span style="color:#e6db74">&#34;%1.3f</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, <span style="color:#ae81ff">4.</span><span style="color:#f92672">*-</span>F<span style="color:#f92672">/</span>OO<span style="color:#f92672">/</span>OO);}F_OO()
 {
-            _-_-_-_
-       _-_-_-_-_-_-_-_-_
-    _-_-_-_-_-_-_-_-_-_-_-_
-  _-_-_-_-_-_-_-_-_-_-_-_-_-_
- _-_-_-_-_-_-_-_-_-_-_-_-_-_-_
- _-_-_-_-_-_-_-_-_-_-_-_-_-_-_
-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
- _-_-_-_-_-_-_-_-_-_-_-_-_-_-_
- _-_-_-_-_-_-_-_-_-_-_-_-_-_-_
-  _-_-_-_-_-_-_-_-_-_-_-_-_-_
-    _-_-_-_-_-_-_-_-_-_-_-_
-       _-_-_-_-_-_-_-_-_
-            _-_-_-_
+            _<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_
+       _<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_
+    _<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_
+  _<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_
+ _<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_
+ _<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_
+_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_
+_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_
+_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_
+_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_
+ _<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_
+ _<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_
+  _<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_
+    _<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_
+       _<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_
+            _<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_<span style="color:#f92672">-</span>_
 }
-</code></pre>
-
-<p>乍看下这个程序有点莫名其妙，分析一下宏后就知道它的方法了。两个全局变量F和OO分别记录 圆的面积和直径 的相反数，根据4*面积/直径/直径就能得到近似的圆周率了。</p>
-
+</code></pre></div><p>乍看下这个程序有点莫名其妙，分析一下宏后就知道它的方法了。两个全局变量F和OO分别记录 圆的面积和直径 的相反数，根据4*面积/直径/直径就能得到近似的圆周率了。</p>
 <p>至于面积和直径的计算，F在会在每一个_展开的地方减一，这样就得到了圆的面积。直径的计算要展开几行代码才能看得更清楚：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">F<span style="color:#f92672">--&gt;</span><span style="color:#ae81ff">00</span> <span style="color:#f92672">||</span> F<span style="color:#f92672">-</span>OO<span style="color:#f92672">--</span>;
+<span style="color:#f92672">-</span>F<span style="color:#f92672">--&gt;</span><span style="color:#ae81ff">00</span> <span style="color:#f92672">||</span> F<span style="color:#f92672">-</span>OO<span style="color:#f92672">--</span>;
+<span style="color:#f92672">-</span>F<span style="color:#f92672">--&gt;</span><span style="color:#ae81ff">00</span> <span style="color:#f92672">||</span> F<span style="color:#f92672">-</span>OO<span style="color:#f92672">--</span>;
+<span style="color:#f92672">-</span>F<span style="color:#f92672">--&gt;</span><span style="color:#ae81ff">00</span> <span style="color:#f92672">||</span> F<span style="color:#f92672">-</span>OO<span style="color:#f92672">--</span>;
 
-<pre><code class="language-c">F--&gt;00 || F-OO--;
--F--&gt;00 || F-OO--;
--F--&gt;00 || F-OO--;
--F--&gt;00 || F-OO--;
-
-F--&gt;00 || F-OO--;
--F--&gt;00 || F-OO--;
--F--&gt;00 || F-OO--;
--F--&gt;00 || F-OO--;
--F--&gt;00 || F-OO--;
--F--&gt;00 || F-OO--;
--F--&gt;00 || F-OO--;
--F--&gt;00 || F-OO--;
--F--&gt;00 || F-OO--;
-</code></pre>
-
-<p>这是用cpp展开圆形前两行代码的结果，因为或运算的特殊性，F- OO- -只会在每一段的第一行执行，所以OO- -执行的次数就等于圆的直径了。</p>
+F<span style="color:#f92672">--&gt;</span><span style="color:#ae81ff">00</span> <span style="color:#f92672">||</span> F<span style="color:#f92672">-</span>OO<span style="color:#f92672">--</span>;
+<span style="color:#f92672">-</span>F<span style="color:#f92672">--&gt;</span><span style="color:#ae81ff">00</span> <span style="color:#f92672">||</span> F<span style="color:#f92672">-</span>OO<span style="color:#f92672">--</span>;
+<span style="color:#f92672">-</span>F<span style="color:#f92672">--&gt;</span><span style="color:#ae81ff">00</span> <span style="color:#f92672">||</span> F<span style="color:#f92672">-</span>OO<span style="color:#f92672">--</span>;
+<span style="color:#f92672">-</span>F<span style="color:#f92672">--&gt;</span><span style="color:#ae81ff">00</span> <span style="color:#f92672">||</span> F<span style="color:#f92672">-</span>OO<span style="color:#f92672">--</span>;
+<span style="color:#f92672">-</span>F<span style="color:#f92672">--&gt;</span><span style="color:#ae81ff">00</span> <span style="color:#f92672">||</span> F<span style="color:#f92672">-</span>OO<span style="color:#f92672">--</span>;
+<span style="color:#f92672">-</span>F<span style="color:#f92672">--&gt;</span><span style="color:#ae81ff">00</span> <span style="color:#f92672">||</span> F<span style="color:#f92672">-</span>OO<span style="color:#f92672">--</span>;
+<span style="color:#f92672">-</span>F<span style="color:#f92672">--&gt;</span><span style="color:#ae81ff">00</span> <span style="color:#f92672">||</span> F<span style="color:#f92672">-</span>OO<span style="color:#f92672">--</span>;
+<span style="color:#f92672">-</span>F<span style="color:#f92672">--&gt;</span><span style="color:#ae81ff">00</span> <span style="color:#f92672">||</span> F<span style="color:#f92672">-</span>OO<span style="color:#f92672">--</span>;
+<span style="color:#f92672">-</span>F<span style="color:#f92672">--&gt;</span><span style="color:#ae81ff">00</span> <span style="color:#f92672">||</span> F<span style="color:#f92672">-</span>OO<span style="color:#f92672">--</span>;
+</code></pre></div><p>这是用cpp展开圆形前两行代码的结果，因为或运算的特殊性，F- OO- -只会在每一段的第一行执行，所以OO- -执行的次数就等于圆的直径了。</p>
 
     </div>
         <div class="cc-license">

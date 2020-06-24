@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Distributed System on Aiur · Zellux 的博客</title>
@@ -21,7 +21,7 @@
 查了下这个名字的读法，正确的读法应该是air-lang，这里元音a的发音和bang中的a一样。
 文章中的第一个程序就有点令人费解，主要原因在于Erlang的语法和一般的imperative language差别很大，和functional language比较类似，但是本质上也有很大的不同。
 以Java的一个计数程序为例
-// A shared counter. public class Sequence { private int nextVal = 0; // Retrieve counter and increment. public synchronized int getNext() { return nextVal++; } // Re-initialize counter to zero. public synchronized void reset() { nextVal = 0; } }  这个程序的功能不用多说了，一个同步的计数程序。它的Erlang翻译版的代码为
+// A shared counter. public class Sequence { private int nextVal = 0; // Retrieve counter and increment.  public synchronized int getNext() { return nextVal++; } // Re-initialize counter to zero.  public synchronized void reset() { nextVal = 0; } } 这个程序的功能不用多说了，一个同步的计数程序。它的Erlang翻译版的代码为
 -module(sequence1). -export([make_sequence/0, get_next/1, reset/1]). % Create a new shared counter. make_sequence() -&amp;gt; spawn(fun() -&amp;gt; sequence_loop(0) end). sequence_loop(N) -&amp;gt; receive {From, get_next} -&amp;gt; From !</description>
     </item>
     

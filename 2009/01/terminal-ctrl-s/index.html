@@ -11,6 +11,7 @@
     
 
     <title> PieTTY 中按 Ctrl&#43;S 导致挂起的问题解决 &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -37,8 +38,8 @@
          "@id": "https:\/\/blog.yxwang.me\/"
     },
     "articleSection" : "post",
-    "name" : "PieTTY 中按 Ctrl\x2bS 导致挂起的问题解决",
-    "headline" : "PieTTY 中按 Ctrl\x2bS 导致挂起的问题解决",
+    "name" : "PieTTY 中按 Ctrl\u002bS 导致挂起的问题解决",
+    "headline" : "PieTTY 中按 Ctrl\u002bS 导致挂起的问题解决",
     "description" : "以前碰到这个问题都得先重启PieTTY然后用screen -x恢复到原来的工作界面，今天不知怎么的emacs里C-x C-s按了就挂起，只能google。\n传说中，早期的终端会遇到显示字符的速度慢于接收字符的速度，为了解决这个问题，C-s用于先挂起当前终端，在数据传输之后用C-q恢复显示。所以最简单的解决方法就是在挂起后按C-q。\n不过我的WinXP中C-q已经和快速启动工具（寝室里是Turbo Launcher，实验室的是Launchy）绑定了，也懒得为了这么个问题改操作习惯，于是再次google，终于找到一个一劳永逸的方法，以bash为例，在~\/.bashrc中加入一行\nstty -ixoff -ixon\n即可。另外这样设置后似乎恢复了C-s在bash中正向增量查找的功能。恩。",
     "inLanguage" : "en-US",
     "author" : "zellux",
@@ -47,8 +48,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2009",
-    "datePublished": "2009-01-08 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2009-01-08 00:00:00 \x2b0000 UTC",
+    "datePublished": "2009-01-08 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2009-01-08 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/2009\/01\/terminal-ctrl-s\/",
     "wordCount" : "10",
     "keywords" : [ "Tooling","faq","terminal","Blog" ]
@@ -94,13 +95,9 @@
 
     <div class="post-content">
       <p>以前碰到这个问题都得先重启PieTTY然后用screen -x恢复到原来的工作界面，今天不知怎么的emacs里C-x C-s按了就挂起，只能google。</p>
-
 <p>传说中，早期的终端会遇到显示字符的速度慢于接收字符的速度，为了解决这个问题，C-s用于先挂起当前终端，在数据传输之后用C-q恢复显示。所以最简单的解决方法就是在挂起后按C-q。</p>
-
 <p>不过我的WinXP中C-q已经和快速启动工具（寝室里是Turbo Launcher，实验室的是Launchy）绑定了，也懒得为了这么个问题改操作习惯，于是再次google，终于找到一个一劳永逸的方法，以bash为例，在~/.bashrc中加入一行</p>
-
 <p>stty -ixoff -ixon</p>
-
 <p>即可。另外这样设置后似乎恢复了C-s在bash中正向增量查找的功能。恩。</p>
 
     </div>

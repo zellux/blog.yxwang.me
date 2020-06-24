@@ -11,6 +11,7 @@
     
 
     <title> 清除 zsh steeef 主题的未追踪标记 &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -39,7 +40,7 @@
     "articleSection" : "post",
     "name" : "清除 zsh steeef 主题的未追踪标记",
     "headline" : "清除 zsh steeef 主题的未追踪标记",
-    "description" : "\x3cp\x3e我用的 zsh 提示符是 \x3ca href=\x22https:\/\/github.com\/robbyrussell\/oh-my-zsh\/\x22\x3eoh-my-zsh\x3c\/a\x3e 自带的 \x3ca href=\x22https:\/\/github.com\/robbyrussell\/oh-my-zsh\/blob\/master\/themes\/steeef.zsh-theme\x22\x3esteeef\x3c\/a\x3e。最近发现用这个主题时，有些 Rails 项目即使把所有改动都提交后，还是会有红色标记表示存在未追踪文件：\x3c\/p\x3e\n\n\x3cp\x3e\x3cimg src=\x22\/images\/2013-01\/zsh-untracked-mark.png\x22 alt=\x22\x22 \/\x3e\x3c\/p\x3e\n\n\x3cp\x3e使用 \x3ccode\x3egit status\x3c\/code\x3e 和 \x3ccode\x3egit diff\x3c\/code\x3e，都看不到任何未提交的改动。一开始我以为是 zsh 或者 git 的 bug，把它们的版本都更新到最新版后还是有这个问题。于是看 steeef 主题的源码，发现了红色标记的判断依据：\x3c\/p\x3e",
+    "description" : "\u003cp\u003e我用的 zsh 提示符是 \u003ca href=\u0022https:\/\/github.com\/robbyrussell\/oh-my-zsh\/\u0022\u003eoh-my-zsh\u003c\/a\u003e 自带的 \u003ca href=\u0022https:\/\/github.com\/robbyrussell\/oh-my-zsh\/blob\/master\/themes\/steeef.zsh-theme\u0022\u003esteeef\u003c\/a\u003e。最近发现用这个主题时，有些 Rails 项目即使把所有改动都提交后，还是会有红色标记表示存在未追踪文件：\u003c\/p\u003e\n\u003cp\u003e\u003cimg src=\u0022\/images\/2013-01\/zsh-untracked-mark.png\u0022 alt=\u0022\u0022\u003e\u003c\/p\u003e\n\u003cp\u003e使用 \u003ccode\u003egit status\u003c\/code\u003e 和 \u003ccode\u003egit diff\u003c\/code\u003e，都看不到任何未提交的改动。一开始我以为是 zsh 或者 git 的 bug，把它们的版本都更新到最新版后还是有这个问题。于是看 steeef 主题的源码，发现了红色标记的判断依据：\u003c\/p\u003e",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -47,8 +48,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2013",
-    "datePublished": "2013-01-24 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2013-01-24 00:00:00 \x2b0000 UTC",
+    "datePublished": "2013-01-24 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2013-01-24 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/2013\/01\/cleaning-zsh-vcs-status\/",
     "wordCount" : "96",
     "keywords" : [ "Tooling","zsh","Blog" ]
@@ -94,36 +95,25 @@
 
     <div class="post-content">
       <p>我用的 zsh 提示符是 <a href="https://github.com/robbyrussell/oh-my-zsh/">oh-my-zsh</a> 自带的 <a href="https://github.com/robbyrussell/oh-my-zsh/blob/master/themes/steeef.zsh-theme">steeef</a>。最近发现用这个主题时，有些 Rails 项目即使把所有改动都提交后，还是会有红色标记表示存在未追踪文件：</p>
-
-<p><img src="/images/2013-01/zsh-untracked-mark.png" alt="" /></p>
-
+<p><img src="/images/2013-01/zsh-untracked-mark.png" alt=""></p>
 <p>使用 <code>git status</code> 和 <code>git diff</code>，都看不到任何未提交的改动。一开始我以为是 zsh 或者 git 的 bug，把它们的版本都更新到最新版后还是有这个问题。于是看 steeef 主题的源码，发现了红色标记的判断依据：</p>
-
-<pre><code class="language-bash"># check for untracked files or updated submodules, since vcs_info doesn't
-if git ls-files --other --exclude-standard --directory 2&gt; /dev/null | grep -q &quot;.&quot;; then
-    PR_GIT_UPDATE=1
-    FMT_BRANCH=&quot;(%{$turquoise%}%b%u%c%{$hotpink%}●${PR_RST})&quot;
-else
-    FMT_BRANCH=&quot;(%{$turquoise%}%b%u%c${PR_RST})&quot;
-fi
-</code></pre>
-
-<p>因为 vcs_info 没有提供未追踪文件或模块的方法，作者在这里用了 <code>git ls-files --other --exclude-standard --directory</code> 检测当前项目是否包含未追踪的文件，而在我的项目根目录下运行这个命令后，可以看到有三个目录未被追踪：</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># check for untracked files or updated submodules, since vcs_info doesn&#39;t</span>
+<span style="color:#66d9ef">if</span> git ls-files --other --exclude-standard --directory 2&gt; /dev/null | grep -q <span style="color:#e6db74">&#34;.&#34;</span>; <span style="color:#66d9ef">then</span>
+    PR_GIT_UPDATE<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
+    FMT_BRANCH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;(%{</span>$turquoise<span style="color:#e6db74">%}%b%u%c%{</span>$hotpink<span style="color:#e6db74">%}●</span><span style="color:#e6db74">${</span>PR_RST<span style="color:#e6db74">}</span><span style="color:#e6db74">)&#34;</span>
+<span style="color:#66d9ef">else</span>
+    FMT_BRANCH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;(%{</span>$turquoise<span style="color:#e6db74">%}%b%u%c</span><span style="color:#e6db74">${</span>PR_RST<span style="color:#e6db74">}</span><span style="color:#e6db74">)&#34;</span>
+<span style="color:#66d9ef">fi</span>
+</code></pre></div><p>因为 vcs_info 没有提供未追踪文件或模块的方法，作者在这里用了 <code>git ls-files --other --exclude-standard --directory</code> 检测当前项目是否包含未追踪的文件，而在我的项目根目录下运行这个命令后，可以看到有三个目录未被追踪：</p>
 <pre><code>$ git ls-files --others --exclude-standard --directory
 log/
 public/system/
 tmp/
-</code></pre>
-
-<p>这几个目录在 .gitignore 中都有声明，当时项目刚创建时借用了 <a href="https://github.com/github/gitignore/blob/master/Rails.gitignore">gitignore</a> 中的模版，相关的声明是：</p>
-
+</code></pre><p>这几个目录在 .gitignore 中都有声明，当时项目刚创建时借用了 <a href="https://github.com/github/gitignore/blob/master/Rails.gitignore">gitignore</a> 中的模版，相关的声明是：</p>
 <pre><code>/log/*
 /tmp/*
 /public/system/*
-</code></pre>
-
-<p>看来问题就出在这里用了通配符 *，把目录下的所有文件而不是目录本身忽略了。因为 git 不允许把空目录加到项目中，<code>git status</code> 和 <code>git ignore</code> 都不会显示这些目录，而作者检测时用的 <code>git ls-files --directory</code> 又会包含未追踪的空目录，就出现了这个提示有改动却找不到的情况。知道问题后解决方案很简单，把 .gitignore 文件中的 <code>xxx/*</code> 都改成 <code>xxx/</code>，或者把 <code>--directory</code> 参数去掉就好了。</p>
+</code></pre><p>看来问题就出在这里用了通配符 *，把目录下的所有文件而不是目录本身忽略了。因为 git 不允许把空目录加到项目中，<code>git status</code> 和 <code>git ignore</code> 都不会显示这些目录，而作者检测时用的 <code>git ls-files --directory</code> 又会包含未追踪的空目录，就出现了这个提示有改动却找不到的情况。知道问题后解决方案很简单，把 .gitignore 文件中的 <code>xxx/*</code> 都改成 <code>xxx/</code>，或者把 <code>--directory</code> 参数去掉就好了。</p>
     </div>
         <div class="cc-license">
       本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.zh">知识共享署名-非商业性使用 3.0 版本许可协议</a>进行许可，欢迎转载，演绎，但是必须保留本文的署名 <a href="https://blog.yxwang.me/2013/01/cleaning-zsh-vcs-status/">zellux</a>（包含链接），且不得用于商业目的。

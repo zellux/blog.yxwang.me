@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Algorithms on Aiur · Zellux 的博客</title>
@@ -26,7 +26,7 @@
       <pubDate>Sat, 17 Sep 2011 00:00:00 +0000</pubDate>
       
       <guid>https://blog.yxwang.me/2011/09/recipe-for-hashing/</guid>
-      <description>最近要给某个类写一个 hash 方法，这个类包括一些整型和字符串属性，需要把它们都放到 hash 中。担心自己想出来的 hash 算法会造成比较严重的冲突，网上搜了一下，发现 Effective Java 中已经介绍过一种简单有效的算法了：  将任一非零常数赋值给 result 找到该类中所有需要包含在 hash 中的属性，并根据它们的类型进行计算 c  对于布尔类型，将它们转换为 0/1 对于 byte, char, short, 和 int 类型，将它们转换为 int 对于长整型 long，计算高位和低位的异或结果 (int) (f ^ (f &amp;gt;&amp;gt;&amp;gt; 32)) 对于 float 类型，采用它的二进制表示，在 Java 中为 Float.floatToIntBits，Ruby 中我估计用 Float.hash 也可以 对于 double 类型，调用 Double.doubleToIntBits 后再次用前面的方法处理得到的 long 类型 对于数组，利用方法 3 合并计算结果 对于其它的对象，递归调用该对象的 hash 方法  将计算结果合并到 result 变量：result = 37 * result + c 返回 result  另外这个博客的域名已经改成了 blog.</description>
+      <description>最近要给某个类写一个 hash 方法，这个类包括一些整型和字符串属性，需要把它们都放到 hash 中。担心自己想出来的 hash 算法会造成比较严重的冲突，网上搜了一下，发现 Effective Java中已经介绍过一种简单有效的算法了：</description>
     </item>
     
     <item>
@@ -39,7 +39,7 @@
 Intructor&amp;rsquo;s Manual 上的解答设计了一个很巧妙的验证策略。假设T为那个巨大的数组，S为辅助栈，那么对于一个键k，如果k存在于这个字典中，则T[k]保存的是 k在S中的位置j，而S[j]则保存了k值。即1 ≤ T[k] ≤ top[S], S[ T[k] ] = k, T [ S[j] ] = j，我们称这个条件为“验证环”。这个设计的关键在于T和S能够互相验证，从而排除了未初始化位置上随机值的干扰。
 还有一个问题就是，键k对应的值v应该怎么保存呢？其实只要维护另外一个和T或者S平行的数组就行了，既然S的元素个数远小于T，选择和S平行即可。
 根据这个验证策略，我们就能设计出词典的基本操作了： 初始化：建立一个大小为0的栈 查找：给定键k，检查 1 ≤ T [k] ≤ top[S] &amp;amp;&amp;amp; S[ T[k] ] = k，如果满足则返回对应值，否则返回NULL 插入：如果键已经存在则直接替换；否则将新的键值入栈，并且维护T[k] ← top[S] 删除：要确保两件事，一是验证环要被破坏，二是栈S的空洞要被填补。通过把栈顶的元素移动到要删除的元素位置，我们能同时确保这两点：
-S[ T[k] ] ← S[ top[S] ] S[ T[k] ] ← S [ top[S] ] T[ S[ T[k] ] ] ← T [k] T[k] ← 0 top[S] ← top[S] − 1  所有操作都能在O(1)时间内完成</description>
+S[ T[k] ] ← S[ top[S] ] S[ T[k] ] ← S [ top[S] ] T[ S[ T[k] ] ] ← T [k] T[k] ← 0 top[S] ← top[S] − 1 所有操作都能在O(1)时间内完成</description>
     </item>
     
     <item>
@@ -49,9 +49,9 @@ S[ T[k] ] ← S[ top[S] ] S[ T[k] ] ← S [ top[S] ] T[ S[ T[k] ] ] ← T [k] T[
       
       <guid>https://blog.yxwang.me/2009/12/chomp-game/</guid>
       <description>把一堆石子排成n行m列，两人轮流从里面取出石子，条件是取出一个石子后所有在它右边和上面的石子也要被取走。谁取走最后一个石子就算输。以3*5的棋盘举例来说，先手取了(2,5)，因此(3,5)也要被取走；后手取了(3,3)，同时也要取走(3,4)。现在棋盘的状态如下（O代表这个位子的石子还没被取走，x代表已经被取走）：
-3 O O x x x 2 O O O O x 1 O O O O O 1 2 3 4 5  接下来先手又取了(2,1)，于是第二排和第三排就一颗石子都不剩了
-3 x x x x x 2 x x x x x 1 O O O O O 1 2 3 4 5  后手取(1,2)
-3 x x x x x 2 x x x x x 1 O x x x x 1 2 3 4 5  接下来先手就只能取最后一个石子了，后手胜。</description>
+3 O O x x x 2 O O O O x 1 O O O O O 1 2 3 4 5 接下来先手又取了(2,1)，于是第二排和第三排就一颗石子都不剩了
+3 x x x x x 2 x x x x x 1 O O O O O 1 2 3 4 5 后手取(1,2)
+3 x x x x x 2 x x x x x 1 O x x x x 1 2 3 4 5 接下来先手就只能取最后一个石子了，后手胜。</description>
     </item>
     
     <item>
@@ -61,9 +61,9 @@ S[ T[k] ] ← S[ top[S] ] S[ T[k] ] ← S [ top[S] ] T[ S[ T[k] ] ] ← T [k] T[
       
       <guid>https://blog.yxwang.me/2009/09/interesting-quines/</guid>
       <description>Quine是指一类能生成自己的程序，例如下面这个C程序运行后就能把自己的源码完整的打印出来：
-char*f=&amp;quot;char*f=%c%s%c;main() {printf(f,34,f,34,10);}%c&amp;quot;; main(){printf(f,34,f,34,10);}  这类程序的构造方法计算理论导引或者其他相关的书籍中都有涉及，这里不再赘述。这个月看到几个Quine的变种，都挺有趣的。
+char*f=&amp;#34;char*f=%c%s%c;main() {printf(f,34,f,34,10);}%c&amp;#34;; main(){printf(f,34,f,34,10);} 这类程序的构造方法计算理论导引或者其他相关的书籍中都有涉及，这里不再赘述。这个月看到几个Quine的变种，都挺有趣的。
 首先是sigfpe构造出来的三阶Quine，这是一个只有两行的Haskell程序：
-q a b c=putStrLn $ b ++ [toEnum 10,&#39;q&#39;,&#39;(&#39;] ++ show b ++ [&#39;,&#39;] ++ show c ++ [&#39;,&#39;] ++ show a ++ [&#39;)&#39;] main=q &amp;quot;q a b c=putStrLn $ b ++ [toEnum 10,&#39;q&#39;,&#39;(&#39;] ++ show b ++ [&#39;,&#39;] ++ show c ++ [&#39;,&#39;] ++ show a ++ [&#39;)&#39;]&amp;quot; &amp;quot;def q(a,b,c):print b+chr(10)+&#39;q(&#39;+repr(b)+&#39;,&#39;+repr(c)+&#39;,&#39;+repr(a)+&#39;)&#39;&amp;quot; &amp;quot;def e(x) return 34.chr+x+34.chr end;def q(a,b,c) print b+10.chr+&#39;main=q &#39;+e(b)+&#39; &#39;+e(c)+&#39; &#39;+e(a)+&#39; &#39;+10.</description>
+q a b c=putStrLn $ b ++ [toEnum 10,&amp;#39;q&amp;#39;,&amp;#39;(&amp;#39;] ++ show b ++ [&amp;#39;,&amp;#39;] ++ show c ++ [&amp;#39;,&amp;#39;] ++ show a ++ [&amp;#39;)&amp;#39;] main=q &amp;#34;q a b c=putStrLn $ b ++ [toEnum 10,&amp;#39;q&amp;#39;,&amp;#39;(&amp;#39;] ++ show b ++ [&amp;#39;,&amp;#39;] ++ show c ++ [&amp;#39;,&amp;#39;] ++ show a ++ [&amp;#39;)&amp;#39;]&amp;#34; &amp;#34;def q(a,b,c):print b+chr(10)+&amp;#39;q(&amp;#39;+repr(b)+&amp;#39;,&amp;#39;+repr(c)+&amp;#39;,&amp;#39;+repr(a)+&amp;#39;)&amp;#39;&amp;#34; &amp;#34;def e(x) return 34.chr+x+34.chr end;def q(a,b,c) print b+10.chr+&amp;#39;main=q &amp;#39;+e(b)+&amp;#39; &amp;#39;+e(c)+&amp;#39; &amp;#39;+e(a)+&amp;#39; &amp;#39;+10.chr end&amp;#34; 这段程序牛逼在哪里呢？运行后这个程序首先会输出一个Python程序，然后再运行这个Python程序会输出一段Ruby代码，最后这个Ruby代码的运行结果是原来的程序。或者说</description>
     </item>
     
     <item>
@@ -72,12 +72,10 @@ q a b c=putStrLn $ b ++ [toEnum 10,&#39;q&#39;,&#39;(&#39;] ++ show b ++ [&#39;,
       <pubDate>Mon, 01 Jun 2009 00:00:00 +0000</pubDate>
       
       <guid>https://blog.yxwang.me/2009/06/two-function-related-interview-questions/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;http://stackoverflow.com/questions/731832/interview-question-ffn-n&#34;&gt;http://stackoverflow.com/questions/731832/interview-question-ffn-n&lt;/a&gt;
-&lt;a href=&#34;http://stackoverflow.com/questions/731832/interview-question-ffn-n&#34;&gt;
-&lt;a href=&#34;http://stackoverflow.com/questions/732485/interview-question-ffx-1-x&#34;&gt;http://stackoverflow.com/questions/732485/interview-question-ffx-1-x&lt;/a&gt;&lt;/a&gt;&lt;/p&gt;
-
+      <description>&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;a href=&#34;http://stackoverflow.com/questions/731832/interview-question-ffn-n&#34;&gt;http://stackoverflow.com/questions/731832/interview-question-ffn-n&lt;/a&gt;&lt;!-- raw HTML omitted --&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;a href=&#34;http://stackoverflow.com/questions/732485/interview-question-ffx-1-x&#34;&gt;http://stackoverflow.com/questions/732485/interview-question-ffx-1-x&lt;/a&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
 &lt;p&gt;问题描述很简单，第一个问题是实现一个函数f，参数为一个带符号的32位整型，使得f(f(x)) = -x，即调用两次后返回的结果为原来的相反数；另一个问题也是实现一个函数g，参数为一个32位浮点，最后使得g(g(x)) = 1/x。如果不能满足所有的情况，就满足尽可能多的情形。&lt;/p&gt;
-
 &lt;p&gt;第二个问题比第一个问题简单一点，目前支持数最高的两个答案如下：&lt;/p&gt;</description>
     </item>
     
@@ -93,7 +91,7 @@ q a b c=putStrLn $ b ++ [toEnum 10,&#39;q&#39;,&#39;(&#39;] ++ show b ++ [&#39;,
 这篇paper的主要工作是通过构造一种多种类的模态逻辑(many-sorted model logic)，来检查网络中验证协议的安全性。
 基础的逻辑分三部分： 原语，如验证双方A和B，以及服务器S，下文用P Q R泛指 密钥，如K_ab代表a和b之间的通讯密钥，K_a代表a的公钥，{K_a}^{-1}代表对应的私钥，下文用K泛指 公式（或者陈述），用N_a, N_b等表示，下文用X Y泛指
 接下来定义以下约定（constructs） P 信任 X: 原语P完全信任X P 看到 X: 有人发送了一条包含X的信息给P，P可以阅读它或者重复它（当然通常是在做了解密操作后） P 说了 X: 原语P发送过一条包含X的信息，同时也可以确定P是相信X的正确性的 P 控制 X: P可以判定X的正确与否。例如生成密钥的服务器通常被默认为拥有对密钥质量的审核权。 X 是新鲜的: 在此之前X没有被发送过。这个事实可以通过绑定一个时间戳或者其他只会使用一次的标记来证明。 P &amp;lt;-K-&amp;gt; Q: P和Q可以通过共享密钥K进行通讯，且这个K是好的，即不会被P Q不信任的原语知道。 K-&amp;gt; P: P拥有K这么一个公钥，且它对应的解密密钥K^{-1}不会被其他不被P信任的原语知道。 P &amp;lt;=X=&amp;gt; Q: X是一个只被P和Q或者P和Q共同信任的原语知道的陈述，只有P和Q可以通过X来相互证明它们各自的身份，X的一个例子就是密码。 {X}_K: X是一个被K加密了的陈述 _Y: 陈述X被Y所绑定，Y可以用来证明发送X的人的身份
-好了，总算把这些约定列完了，然后来看看通过这些约定能推出一些什么东东： 如果 P 相信 (P &amp;lt;-K-&amp;gt; Q), 且 P 看到 {X}_K，那么 P 相信 Q 说了 X。 这个例子很简单，既然P Q有安全的密钥K，那么P看到通过K加密后的X肯定认为就是Q发出的。</description>
+好了，总算把这些约定列完了，然后来看看通过这些约定能推出一些什么东东： 如果 P 相信 (P &amp;lt;-K-&amp;gt; Q), 且 P 看到 {X}_K，那么 P 相信 Q 说了 X。这个例子很简单，既然P Q有安全的密钥K，那么P看到通过K加密后的X肯定认为就是Q发出的。</description>
     </item>
     
     <item>
@@ -111,9 +109,8 @@ q a b c=putStrLn $ b ++ [toEnum 10,&#39;q&#39;,&#39;(&#39;] ++ show b ++ [&#39;,
       <pubDate>Mon, 10 Nov 2008 00:00:00 +0000</pubDate>
       
       <guid>https://blog.yxwang.me/2008/11/godel-escher-bach-1/</guid>
-      <description>哥德尔定理 用比较通俗的英文来说，就是 All consistent axiomatic formulations of number theory include undicidable propositions.
- 图形和衬底也许会不带有完全相同的信息 There exist formal systems whose negative space (set of non-theorems) is not the positive space (set of theorems) of any formal system. 用更technical的说法 There exist recursively enumerable sets which are not recursive. 这里recursively enumerable指能按照typographical规则生成，而recursive则对应域指衬底也是个图形的图形。 由此得出一个结论 There exist formal systems for which there is no typographical decision procedure. 证明很简单，用反证法。如果所有的形式系统都能有typographical的判定方法，那么逐个测试所有的符号串，从而能生成一个非定理集合，与前面的定理矛盾。
- 关于那个数列谜题 {Ai} = 1, 3, 7, 12, 18, 26, 35, 45, 56, 69, &amp;hellip; 既然讲到了衬底自然要考虑这个，负空间数列为 {Bi} = 2, 4, 5, 6, 8, 9, 10, 11, 13, 14, &amp;hellip; An = An-1 + Bn-1</description>
+      <description>  哥德尔定理 用比较通俗的英文来说，就是 All consistent axiomatic formulations of number theory include undicidable propositions.  图形和衬底也许会不带有完全相同的信息 There exist formal systems whose negative space (set of non-theorems) is not the positive space (set of theorems) of any formal system. 用更technical的说法 There exist recursively enumerable sets which are not recursive.这里recursively enumerable指能按照typographical规则生成，而recursive则对应域指衬底也是个图形的图形。 由此得出一个结论 There exist formal systems for which there is no typographical decision procedure.证明很简单，用反证法。如果所有的形式系统都能有typographical的判定方法，那么逐个测试所有的符号串，从而能生成一个非定理集合，与前面的定理矛盾。
+  关于那个数列谜题 {Ai} = 1, 3, 7, 12, 18, 26, 35, 45, 56, 69, &amp;hellip; 既然讲到了衬底自然要考虑这个，负空间数列为 {Bi} = 2, 4, 5, 6, 8, 9, 10, 11, 13, 14, &amp;hellip; An= An-1+ Bn-1  </description>
     </item>
     
     <item>
@@ -137,20 +134,16 @@ S1 * 2 = S2，可得非环部分长度 = n * 环长 - 弧A长
       
       <guid>https://blog.yxwang.me/2008/04/sorting-networks/</guid>
       <description>算法导论第27章，在并行处理的条件下效率很高的排序算法。
-介绍 如下面左图所示，每条横线(wire)代表一个待 比较的数值，竖线(comparator)表示连接的两条横线要做一次比较，并将较小的值放在输出横线的上方，较大的放在下面。排序过程就是从左往右依次 调用各个comparator（在同一位置上的comparator可以同时做） 有图表示了四个数字3, 2, 4, 1在经过这个Sorting Network时的行为。（由于背景为深色，建议点击图片查看）
-
+介绍如下面左图所示，每条横线(wire)代表一个待 比较的数值，竖线(comparator)表示连接的两条横线要做一次比较，并将较小的值放在输出横线的上方，较大的放在下面。排序过程就是从左往右依次 调用各个comparator（在同一位置上的comparator可以同时做） 有图表示了四个数字3, 2, 4, 1在经过这个Sorting Network时的行为。（由于背景为深色，建议点击图片查看）
 下图是一个冒泡排序的Sorting Network表示
-
 可以看到所有的比较都没有并行，效率很低。接下来先介绍一个0-1原理，然后利用它来构造一些比较高效的网络。
-性质 首先是引理27.1： 对 于输入数据A = ，如果某个比较网络(comparison network)的输出是B = ，那么对于任一单调递增的函数f，这个网络能把输入数据f(A) = 变为f(B) = 这个引理的证明很简单，关键在于min(f(x), f(y)) = f(min(x,y))
+性质首先是引理27.1： 对 于输入数据A = &amp;lt;a_1, a_2, .., a_n&amp;gt;，如果某个比较网络(comparison network)的输出是B = &amp;lt;b_1, b_2, &amp;hellip;, b_n&amp;gt;，那么对于任一单调递增的函数f，这个网络能把输入数据f(A) = &amp;lt;f(a_1), f(a_2), &amp;hellip;, f(a_n)&amp;gt;变为f(B) = &amp;lt;f(b_1), f(b_2), &amp;hellip;f(b_3)&amp;gt;
+这个引理的证明很简单，关键在于min(f(x), f(y)) = f(min(x,y))
 接下来就是0-1原理： 一个有n个输入数据的比较网络，如果它能将仅由0和1组成的序列正确的排序（这种输入共有2^n种可能），那么它也能正确的将任意数字组成的序列排序。 证明也不难，利用前面的引理反正即可得到这个定理。
-双调排序 接 下来先考虑双调序列(bitonic sequence)这种特殊情况，所谓双调序列就是先单调递增，后单调递减，或者可以通过环形旋转变化出上述特性的序列，比如和都满足条件（对于后面一种序列，只要把最后的3, 5移到序列开头就行了）。 双调排序(bitonic sorter)有若干步骤，其中有一步叫做half-cleaner，每一次half-cleaner讲数据放到一个深度为1的排序网络中，第i行和第i+n/2行比较(i=1,2,..,n/2)
-
+双调排序接 下来先考虑双调序列(bitonic sequence)这种特殊情况，所谓双调序列就是先单调递增，后单调递减，或者可以通过环形旋转变化出上述特性的序列，比如&amp;lt;1, 4, 6, 8, 3, 2&amp;gt;和&amp;lt;6, 9, 4, 2, 3, 5&amp;gt;都满足条件（对于后面一种序列，只要把最后的3, 5移到序列开头就行了）。 双调排序(bitonic sorter)有若干步骤，其中有一步叫做half-cleaner，每一次half-cleaner讲数据放到一个深度为1的排序网络中，第i行和第i+n/2行比较(i=1,2,..,n/2)
 引理27.3： 做完上述的half-cleaner后，输出的上半部分和下半部分都保持双调的特点，而且上半部分的每个元素都不大于下半部分的任一元素。 分四种情况讨论即可。
 通过递归调用half-cleaner即可完成双调队列的排序。要对n个元素进行双调排序Bitonic-Sorter(n)，首先调用Half-Cleaner(n)，将元素分成上下两部分，接着依次对这两部分执行Bitonic-Sorter(n/2)即可。 调用的深度D(n) = lgn
-归并网络 书上只给出了对0-1序列排序的算法，任意数字的排序算法留作了习题。 合并网络基于这样一个事实：对于两个已经排序了的序列X = 00000111，Y = 00001111，将Y倒过来后和X拼接的结果是一个双调序列。对这个双调序列再做一次Bitonic-Sorter就能有序。 通 过修改Bitonic-Sorter方法的第一步就能实现Merger，关键在于隐式的反转输入的下半部分。Half-Cleaner方法中比较了第i和 第i+n/2两个元素，如果下半部分反转的话就相当于比较第i和第n-i+1个元素。直接继续执行Bitonic-Sorter方法即可，如下图所示。
-
-排序网络 我们已经有了构造一个排序网络所需的工具，接下来介绍一种利用归并网络进行排序的并行版本。 大致方法和传统的归并排序类似，从最小的颗粒开始二分增长，直到整个序列有序。 这样，一共需要lg(n)次Merger，每次归并中需要做lg(i)次Sorter，排序的总深度 D(n) = 0 (n = 1) D(n/2) + lg(n) (n = 2^k且 k&amp;gt;=1) 由Master Method可推出D(n) = big-omega(lg^2(n)) 也就是说理想的并行环境中，n个数可以在O(lg^2(n))时间内完成排序。</description>
+归并网络 书上只给出了对0-1序列排序的算法，任意数字的排序算法留作了习题。 合并网络基于这样一个事实：对于两个已经排序了的序列X = 00000111，Y = 00001111，将Y倒过来后和X拼接的结果是一个双调序列。对这个双调序列再做一次Bitonic-Sorter就能有序。 通 过修改Bitonic-Sorter方法的第一步就能实现Merger，关键在于隐式的反转输入的下半部分。Half-Cleaner方法中比较了第i和 第i+n/2两个元素，如果下半部分反转的话就相当于比较第i和第n-i+1个元素。直接继续执行Bitonic-Sorter方法即可，如下图所示。</description>
     </item>
     
     <item>
@@ -163,10 +156,11 @@ S1 * 2 = S2，可得非环部分长度 = n * 环长 - 弧A长
 先来看看样章上给出的几个算法：
 解法一，每次除二，看是否为奇数，是的话就累计加一，最后这个结果就是二进制表示中1的个数。
 解法二，同样用到一个循环，只是里面的操作用位移操作简化了。
-int Count(int v) { int num = 0; while (v) { num += v &amp;amp; 0x01; v &amp;gt;&amp;gt;= 1; } return num; }  解法三，用到一个巧妙的与操作，v &amp;amp; (v - 1) 每次能消去二进制表示中最后一位 1，利用这个技巧可以减少一定的循环次数。
+int Count(int v) { int num = 0; while (v) { num += v &amp;amp; 0x01; v &amp;gt;&amp;gt;= 1; } return num; } 解法三，用到一个巧妙的与操作，v &amp;amp; (v - 1) 每次能消去二进制表示中最后一位 1，利用这个技巧可以减少一定的循环次数。
 解法四，查表法，因为 8 位整型的范围是 0 - 255，可以直接把结果保存在一张表中，然后查表就行。书上强调这个算法的复杂度为 O(1)。
-int countTable[256] = { 0, 1, 1, 2, 1, ..., 7, 7, 8 }; int Count(int v) { return countTable[v]; }  好了，这就是样章上给出的四种方案，下面谈谈我的看法。
-首先是对算法的衡量上，复杂度真的是唯一的标准吗？尤其对于这种数据规模给定，而且很小的情况下，复杂度其实是个比较次要的因素。</description>
+int countTable[256] = { 0, 1, 1, 2, 1, ..., 7, 7, 8 }; int Count(int v) { return countTable[v]; } 好了，这就是样章上给出的四种方案，下面谈谈我的看法。
+首先是对算法的衡量上，复杂度真的是唯一的标准吗？尤其对于这种数据规模给定，而且很小的情况下，复杂度其实是个比较次要的因素。
+查表法的复杂度为 O(1)，用解法一，循环次数不会超过 8 次，所以时间复杂度也是 O(1)。至于数据规模变大，例如变成 32 位整型，那查表法自然也不合适了。</description>
     </item>
     
   </channel>

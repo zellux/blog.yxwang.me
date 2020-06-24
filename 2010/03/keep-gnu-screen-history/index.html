@@ -11,6 +11,7 @@
     
 
     <title> 记录 GNU screen 中的历史命令 &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -39,7 +40,7 @@
     "articleSection" : "post",
     "name" : "记录 GNU screen 中的历史命令",
     "headline" : "记录 GNU screen 中的历史命令",
-    "description" : "GNU screen中执行的历史命令保存在内存中，默认情况下并不会像在bash中直接执行的命令一样保存在.bash_history中，这在某些场合下带来了一定的不便。\n在superuser上看到一个解决方法，指定历史文件的读写方式为追加，并在每次命令行提示符显示的时候，自动更新bash的历史命令记录。要实现这个方法很简单，只要在.bashrc中加入下面两行代码即可\nshopt -s histappend export PROMPT_COMMAND=\x26quot;history -a; history -n\x26quot;  另外如果之前设置过PROMPT_COMMAND的话，只要在history -a前加入$PROMPT_COMMAND; 就行了。",
+    "description" : "GNU screen中执行的历史命令保存在内存中，默认情况下并不会像在bash中直接执行的命令一样保存在.bash_history中，这在某些场合下带来了一定的不便。\n在superuser上看到一个解决方法，指定历史文件的读写方式为追加，并在每次命令行提示符显示的时候，自动更新bash的历史命令记录。要实现这个方法很简单，只要在.bashrc中加入下面两行代码即可\nshopt -s histappend export PROMPT_COMMAND=\u0026#34;history -a; history -n\u0026#34; 另外如果之前设置过PROMPT_COMMAND的话，只要在history -a前加入$PROMPT_COMMAND;就行了。",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -47,10 +48,10 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2010",
-    "datePublished": "2010-03-01 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2010-03-01 00:00:00 \x2b0000 UTC",
+    "datePublished": "2010-03-01 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2010-03-01 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/2010\/03\/keep-gnu-screen-history\/",
-    "wordCount" : "14",
+    "wordCount" : "13",
     "keywords" : [ "Linux","Shell","Tooling","bash","screen","Blog" ]
 }
 </script>
@@ -94,14 +95,10 @@
 
     <div class="post-content">
       <p>GNU screen中执行的历史命令保存在内存中，默认情况下并不会像在bash中直接执行的命令一样保存在.bash_history中，这在某些场合下带来了一定的不便。</p>
-
-<p>在superuser上看到一个<a href="http://superuser.com/questions/37576/can-history-files-be-unified-in-" target="_blank">解决方法</a>，指定历史文件的读写方式为追加，并在每次命令行提示符显示的时候，自动更新bash的历史命令记录。要实现这个方法很简单，只要在.bashrc中加入下面两行代码即可</p>
-
-<pre><code class="language-bash">shopt -s histappend
-export PROMPT_COMMAND=&quot;history -a; history -n&quot;
-</code></pre>
-
-<p>另外如果之前设置过PROMPT_COMMAND的话，只要在<u>history -a</u>前加入<u>$PROMPT_COMMAND;</u> 就行了。</p>
+<p>在superuser上看到一个<!-- raw HTML omitted -->解决方法<!-- raw HTML omitted -->，指定历史文件的读写方式为追加，并在每次命令行提示符显示的时候，自动更新bash的历史命令记录。要实现这个方法很简单，只要在.bashrc中加入下面两行代码即可</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">shopt -s histappend
+export PROMPT_COMMAND<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;history -a; history -n&#34;</span>
+</code></pre></div><p>另外如果之前设置过PROMPT_COMMAND的话，只要在<!-- raw HTML omitted -->history -a<!-- raw HTML omitted -->前加入<!-- raw HTML omitted -->$PROMPT_COMMAND;<!-- raw HTML omitted --> 就行了。</p>
 
     </div>
         <div class="cc-license">

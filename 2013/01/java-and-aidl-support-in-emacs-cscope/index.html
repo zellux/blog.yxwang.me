@@ -11,6 +11,7 @@
     
 
     <title> 为 Emacs cscope 加入 Java 支持 &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -39,7 +40,7 @@
     "articleSection" : "post",
     "name" : "为 Emacs cscope 加入 Java 支持",
     "headline" : "为 Emacs cscope 加入 Java 支持",
-    "description" : "\x3cp\x3eEmacs 的 xcscope 插件默认不会扫描 Java 文件，另外 Android 源码里有不少 \x3ca href=\x22http:\/\/developer.android.com\/guide\/components\/aidl.html\x22\x3e.aidl\x3c\/a\x3e 的文件，默认也不包含在 xcscope 的扫描范围里。解决这个问题的一个方法是在项目根目录下手动创建 cscope 索引：\x3c\/p\x3e\n\n\x3cpre\x3e\x3ccode class=\x22language-bash\x22\x3e$ find . -name \x26quot;*.java\x26quot; -or -name \x26quot;*.aidl\x26quot; -or -name \x26quot;*.cpp\x26quot; \x26gt; cscope.files\n\n$ cscope -b\n\x3c\/code\x3e\x3c\/pre\x3e",
+    "description" : "\u003cp\u003eEmacs 的 xcscope 插件默认不会扫描 Java 文件，另外 Android 源码里有不少 \u003ca href=\u0022http:\/\/developer.android.com\/guide\/components\/aidl.html\u0022\u003e.aidl\u003c\/a\u003e 的文件，默认也不包含在 xcscope 的扫描范围里。解决这个问题的一个方法是在项目根目录下手动创建 cscope 索引：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre style=\u0022color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4\u0022\u003e\u003ccode class=\u0022language-bash\u0022 data-lang=\u0022bash\u0022\u003e$ find . -name \u003cspan style=\u0022color:#e6db74\u0022\u003e\u0026#34;*.java\u0026#34;\u003c\/span\u003e -or -name \u003cspan style=\u0022color:#e6db74\u0022\u003e\u0026#34;*.aidl\u0026#34;\u003c\/span\u003e -or -name \u003cspan style=\u0022color:#e6db74\u0022\u003e\u0026#34;*.cpp\u0026#34;\u003c\/span\u003e \u0026gt; cscope.files\n\n$ cscope -b\n\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -47,8 +48,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2013",
-    "datePublished": "2013-01-09 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2013-01-09 00:00:00 \x2b0000 UTC",
+    "datePublished": "2013-01-09 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2013-01-09 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/2013\/01\/java-and-aidl-support-in-emacs-cscope\/",
     "wordCount" : "65",
     "keywords" : [ "Emacs","Tooling","Blog" ]
@@ -94,23 +95,14 @@
 
     <div class="post-content">
       <p>Emacs 的 xcscope 插件默认不会扫描 Java 文件，另外 Android 源码里有不少 <a href="http://developer.android.com/guide/components/aidl.html">.aidl</a> 的文件，默认也不包含在 xcscope 的扫描范围里。解决这个问题的一个方法是在项目根目录下手动创建 cscope 索引：</p>
-
-<pre><code class="language-bash">$ find . -name &quot;*.java&quot; -or -name &quot;*.aidl&quot; -or -name &quot;*.cpp&quot; &gt; cscope.files
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ find . -name <span style="color:#e6db74">&#34;*.java&#34;</span> -or -name <span style="color:#e6db74">&#34;*.aidl&#34;</span> -or -name <span style="color:#e6db74">&#34;*.cpp&#34;</span> &gt; cscope.files
 
 $ cscope -b
-</code></pre>
-
-<p>这样做的缺点很明显，索引功能没有做到 Emacs 里，需要单独起一个 shell，比较麻烦。我发现这个问题的本质在于 xcscope 创建索引用的是 <a href="https://github.com/To1ne/xcscope/blob/master/cscope-indexer">cscope-indexer</a> 这个脚本，而 cscope-indexer 默认只会扫描 C/C++ 的源码文件。所以其实只要修改 cscope-indexer，把第 140 行从原来的</p>
-
+</code></pre></div><p>这样做的缺点很明显，索引功能没有做到 Emacs 里，需要单独起一个 shell，比较麻烦。我发现这个问题的本质在于 xcscope 创建索引用的是 <a href="https://github.com/To1ne/xcscope/blob/master/cscope-indexer">cscope-indexer</a> 这个脚本，而 cscope-indexer 默认只会扫描 C/C++ 的源码文件。所以其实只要修改 cscope-indexer，把第 140 行从原来的</p>
 <pre><code>    egrep -i '\.([chly](xx|pp)*|cc|hh)$' | \
-</code></pre>
-
-<p>改成</p>
-
+</code></pre><p>改成</p>
 <pre><code>    egrep -i '\.([chly](xx|pp)*|cc|hh|java|aidl)$' | \
-</code></pre>
-
-<p>之后就能用 <code>C-c s I</code> 在 Emacs 中创建 Android 项目的索引了。</p>
+</code></pre><p>之后就能用 <code>C-c s I</code> 在 Emacs 中创建 Android 项目的索引了。</p>
     </div>
         <div class="cc-license">
       本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.zh">知识共享署名-非商业性使用 3.0 版本许可协议</a>进行许可，欢迎转载，演绎，但是必须保留本文的署名 <a href="https://blog.yxwang.me/2013/01/java-and-aidl-support-in-emacs-cscope/">zellux</a>（包含链接），且不得用于商业目的。

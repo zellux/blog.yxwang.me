@@ -11,6 +11,7 @@
     
 
     <title> ICS Lab 8 - 实现一个简单的代理服务器 &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -47,8 +48,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2008",
-    "datePublished": "2008-06-23 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2008-06-23 00:00:00 \x2b0000 UTC",
+    "datePublished": "2008-06-23 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2008-06-23 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/2008\/06\/ics-lab-8-a-simple-proxy\/",
     "wordCount" : "24",
     "keywords" : [ "Courses","ICS","Lab","Network","Blog" ]
@@ -94,28 +95,17 @@
 
     <div class="post-content">
       <p>折腾了一下午加晚上，看了一堆包后总算把HTTPS协议搞定了，趁热写点心得。</p>
-
 <p>这个Lab很强大，把11 12 13三章的内容全串起来了。</p>
-
 <p>HTTP部分很简单，读个请求头把主机分析出来（有现成的函数），然后把客户端的所有请求传给Web服务器，再把服务器的所有反馈信息传给客户端就行了。另外注意传信息的时候不要使用Rio_readlineb之类的函数，而要用Rio_readnb，否则传图像时会碰到问题。</p>
-
 <p>另外把版本统一成HTTP 1.0能明显的提高代理服务器的速度，具体原因还不清楚，明天再问问。</p>
-
 <p>如果要把这个代理服务器写得健壮一点，要注意各种异常的处理，比如通常浏览器都能发送正确的报头，但是如果有人通过telnet发送了错误的报头也要能够正确的释放内存再结束线程。</p>
-
 <p>然后是线程，这个问题也不大，使用信号量实现互斥锁，另外在即时free资源就好。</p>
-
 <p>最后就是HTTPS协议的处理了，由于没正确理解文档的意思，在这上面花了很多时间，不过倒也接触了不少新东西。</p>
-
 <p>首先是用gdb调试多线程程序，使用info threads查看当前所有线程，然后thread #切换到该线程就能查看那个线程的相关信息了。</p>
-
 <p>然后来说下HTTPS协议的处理。一开始我有个错误的概念，就是代理服务器的责任是把所有客户端的信息转发到服务器端，把所有服务器端的信息转发到客户端，或者说在浏览器的眼中代理服务器和普通的Web服务器没有区别。其实并非如此，在我用OmniPeek截包看了半天后才意识到自己错了 =_=</p>
-
 <p>浏览器不通过代理进行HTTPS连接时，只发送加密后的数据；而通过代理服务器时，先告诉代理服务器相关信息，然后再发送密文。另外，HTTPS的明码报头一般不会像文档中那样只有一行，代理服务器要记得所有的明文都读进来（但不转发给Web服务器），然后回复HTTP/1.0 200 Connection established，最后再负责密文的转发。</p>
-
-<p>HTTPS的数据转发也和HTTP不一样，它需要客户端和服务器端多次的双向数据传输。而默认的read方法在没有信息读取和其他中断发生的时候是会block的。对于这个问题我的解决方法是结合I/O Multiplexing和Non-blocking I/O（搜资料的时候看到过这样处理的效率也比较高，见<a href="http://www.kegel.com/c10k.html）。用fcntl设置两个file">http://www.kegel.com/c10k.html）。用fcntl设置两个file</a> descriptor的模式为O_NONBLOCK，然后再用select/poll实现multiplexing即可。不知道还有没有更好的方法。</p>
-
-<p>另外测试HTTPS时建议使用<a href="https://mail.google.com，文档中的两个网页貌似firefox都打不开的。">https://mail.google.com，文档中的两个网页貌似firefox都打不开的。</a></p>
+<p>HTTPS的数据转发也和HTTP不一样，它需要客户端和服务器端多次的双向数据传输。而默认的read方法在没有信息读取和其他中断发生的时候是会block的。对于这个问题我的解决方法是结合I/O Multiplexing和Non-blocking I/O（搜资料的时候看到过这样处理的效率也比较高，见http://www.kegel.com/c10k.html）。用fcntl设置两个file descriptor的模式为O_NONBLOCK，然后再用select/poll实现multiplexing即可。不知道还有没有更好的方法。</p>
+<p>另外测试HTTPS时建议使用https://mail.google.com，文档中的两个网页貌似firefox都打不开的。</p>
 
     </div>
         <div class="cc-license">

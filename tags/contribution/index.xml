@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Contribution on Aiur · Zellux 的博客</title>
@@ -17,8 +17,7 @@
       <pubDate>Sat, 04 Apr 2009 00:00:00 +0000</pubDate>
       
       <guid>https://blog.yxwang.me/2009/04/emacs-bug-contribution/</guid>
-      <description>http://emacsbugs.donarmstrong.com/cgi-bin/bugreport.cgi?bug=2800
-Emacs在窗口过窄时使用minibuffer的auto-complete功能会挂掉，就把这bug报告上去了。负责人貌似是MIT的物理系毕业的博士？敬仰下。
+      <description>http://emacsbugs.donarmstrong.com/cgi-bin/bugreport.cgi?bug=2800Emacs在窗口过窄时使用minibuffer的auto-complete功能会挂掉，就把这bug报告上去了。负责人貌似是MIT的物理系毕业的博士？敬仰下。
 从后面回复来看，似乎这个bug emacs22里也有，应该还是蛮常见的呀，为啥之前没人report呢@@
 不管怎么说，总算也给Emacs出了份力，嘿嘿。</description>
     </item>

@@ -10,7 +10,8 @@
     <meta name="keywords" content="">
     
 
-    <title> 《Ruby Programming Language》笔记 &middot; Aiur · Zellux 的博客 </title>
+    <title> 《Ruby Programming Language》 Reading Notes &middot; Aiur · Zellux 的博客 </title>
+    <link rel="stylesheet" href="https://use.typekit.net/vuh8sti.css">
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -37,9 +38,9 @@
          "@id": "https:\/\/blog.yxwang.me\/"
     },
     "articleSection" : "notes",
-    "name" : "《Ruby Programming Language》笔记",
-    "headline" : "《Ruby Programming Language》笔记",
-    "description" : "Chapter 3 Datatypes and Objects \x26quot;360 degrees=#{2*Math::PI} radians\x26quot; # \x26quot;360 degrees=6.28318530717959 radians\x26quot; $salutation = \x27hello\x27 # Define a global variable \x26quot;#$salutation world\x26quot; # Use it in a double-quoted string \x26quot;My phone #: 555-1234\x26quot; # No escape needed \x26quot;Use \\#{ to interpolate expressions\x26quot; # Escape #{ with backslash  Ruby will create a new object for each iteration. For efficiency, you should avoid using literals within loops.\nThe \x26lt;\x26lt; operator appends its second operand to its first.",
+    "name" : "《Ruby Programming Language》 Reading Notes",
+    "headline" : "《Ruby Programming Language》 Reading Notes",
+    "description" : "Chapter 3 Datatypes and Objects \u0026#34;360 degrees=#{2*Math::PI}radians\u0026#34; # \u0026#34;360 degrees=6.28318530717959 radians\u0026#34; $salutation = \u0026#39;hello\u0026#39; # Define a global variable \u0026#34;#$salutationworld\u0026#34; # Use it in a double-quoted string \u0026#34;My phone #: 555-1234\u0026#34; # No escape needed \u0026#34;Use \\#{ to interpolate expressions\u0026#34; # Escape #{ with backslash Ruby will create a new object for each iteration. For efficiency, you should avoid using literals within loops.\nThe \u0026laquo; operator appends its second operand to its first.",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -47,10 +48,10 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "0001",
-    "datePublished": "0001-01-01 00:00:00 \x2b0000 UTC",
-    "dateModified" : "0001-01-01 00:00:00 \x2b0000 UTC",
+    "datePublished": "0001-01-01 00:00:00 \u002b0000 UTC",
+    "dateModified" : "0001-01-01 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/notes\/programming\/ruby-programming-language\/",
-    "wordCount" : "1012",
+    "wordCount" : "1010",
     "keywords" : [ "Blog" ]
 }
 </script>
@@ -76,124 +77,70 @@
   </div>
 </nav>
 
-    <div class="container">
+    <div class="container lang-en">
 
 
 <div class="content">
   <div class="posts">
     <div class="post">
-      <h1 class="post-title"><a href="https://blog.yxwang.me/notes/programming/ruby-programming-language/">《Ruby Programming Language》笔记</a></h1>
+      <h1 class="post-title"><a href="https://blog.yxwang.me/notes/programming/ruby-programming-language/">《Ruby Programming Language》 Reading Notes</a></h1>
       <div class="post-content">
-        
-
-<h2 id="chapter-3-datatypes-and-objects">Chapter 3 Datatypes and Objects</h2>
-
-<pre><code class="language-ruby">&quot;360 degrees=#{2*Math::PI} radians&quot; # &quot;360 degrees=6.28318530717959 radians&quot;
-$salutation = 'hello' # Define a global variable
-&quot;#$salutation world&quot; # Use it in a double-quoted string
-&quot;My phone #: 555-1234&quot; # No escape needed
-&quot;Use \#{ to interpolate expressions&quot; # Escape #{ with backslash
-</code></pre>
-
-<p>Ruby will create a new object for each iteration. For efficiency, you should avoid using literals within loops.</p>
-
-<p>The &lt;&lt; operator appends its second operand to its first. This operator is very different from +; it alters the lefthand operand rather than creating and returning a new object.</p>
-
+        <h2 id="chapter-3-datatypes-and-objects">Chapter 3 Datatypes and Objects</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#e6db74">&#34;360 degrees=</span><span style="color:#e6db74">#{</span><span style="color:#ae81ff">2</span><span style="color:#f92672">*</span><span style="color:#66d9ef">Math</span><span style="color:#f92672">::</span><span style="color:#66d9ef">PI</span><span style="color:#e6db74">}</span><span style="color:#e6db74"> radians&#34;</span> <span style="color:#75715e"># &#34;360 degrees=6.28318530717959 radians&#34;</span>
+$salutation <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;hello&#39;</span> <span style="color:#75715e"># Define a global variable</span>
+<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">#$salutation</span><span style="color:#e6db74"> world&#34;</span> <span style="color:#75715e"># Use it in a double-quoted string</span>
+<span style="color:#e6db74">&#34;My phone #: 555-1234&#34;</span> <span style="color:#75715e"># No escape needed</span>
+<span style="color:#e6db74">&#34;Use </span><span style="color:#ae81ff">\#</span><span style="color:#e6db74">{ to interpolate expressions&#34;</span> <span style="color:#75715e"># Escape #{ with backslash</span>
+</code></pre></div><p>Ruby will create a new object for each iteration. For efficiency, you should avoid using literals within loops.</p>
+<p>The &laquo; operator appends its second operand to its first. This operator is very different from +; it alters the lefthand operand rather than creating and returning a new object.</p>
 <p>To alter individual characters of a string, simply use brackets on the lefthand ide of an assignment expression.</p>
-
 <p>In general, Symbol objects work more efficiently as hash keys than strings do.</p>
-
 <p>Two-dot range: the range is inclusive and the end value is part of the range</p>
-
 <p>Three-dot range: the range is exclusive and the end value is not part of the range</p>
-
 <p>You can convert a String to a Symbol using the intern or to_sym methods.</p>
-
 <p>Ruby’s convention of == and equal() is just about the opposite of Java’s.</p>
-
 <p>Any object may be frozen by calling its freeze method. A frozen object becomes immutable.</p>
-
 <h2 id="chapter-5-statements-and-control-structures">Chapter 5 Statements and Control Structures</h2>
-
 <p>The if modifier has very low precedence and binds more loosely than the assignment operator.</p>
-
 <p>The following two lines of code are different:</p>
-
-<pre><code class="language-ruby">y = x.invert if x.respond_to? :invert
-y = (x.invert if x.respond_to? :invert)
-</code></pre>
-
-<p>The inject method behaves like foldr in Haskell and reduce in Python.</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">y <span style="color:#f92672">=</span> x<span style="color:#f92672">.</span>invert <span style="color:#66d9ef">if</span> x<span style="color:#f92672">.</span>respond_to? <span style="color:#e6db74">:invert</span>
+y <span style="color:#f92672">=</span> (x<span style="color:#f92672">.</span>invert <span style="color:#66d9ef">if</span> x<span style="color:#f92672">.</span>respond_to? <span style="color:#e6db74">:invert</span>)
+</code></pre></div><p>The inject method behaves like foldr in Haskell and reduce in Python.</p>
 <p>A fundamental issue is deciding which party controls the iteration, the iterator or the client that uses the iterator. When the client controls the iteration, the iterator is called an external iterator, and when the iterator controls it, the iterator is an internal iterator.</p>
-
 <p>If you want to return more than one value in a block, you can use next instead of return.</p>
-
 <p>Most Ruby programmers omit return when it is not necessary. Instead of writing <code>return x</code> as the last line of a method, they would simply write x.</p>
-
 <p>When next is used within a block, it causes the block to exit immediately, returning control to the iterator method, which may then begin a new iteration by invoking the block again.</p>
-
 <p>Compute factorial of x, or use 0 if the method raises an exception: <code>y = factorial(x) rescue 0</code></p>
-
 <p>Fibers can be thought of as independent paths of execution within a single thread of execution. Unlike threads, however, there is no scheduler to transfer control among fibers; fibers must explicitly schedule themselves with transfer.</p>
-
 <h2 id="chapter-6-methods-procs-lambdas-and-closures">Chapter 6 Methods, Procs, Lambdas, and Closures</h2>
-
 <p>An important feature of procs and lambdas is that they are closures: they retain access to the local variables that were in scope when they were defined, even when the proc or lambda is invoked from a different scope.</p>
-
 <p>Block arguments prefixed with ampersands must really be the last one. Because blocks are passed unusually in method invocations, named block arguments are different and do not interfere with array or hash parameters in which the brackets and braces have been omitted.</p>
-
 <p>When &amp; is used before a Proc object in a method invocation, it treats the Proc as if it was an ordinary block following the invocation.</p>
-
-<pre><code class="language-ruby">a, b = [1,2,3], [4,5] # Start with some data.
-summation = Proc.new {|total,x| total+x } # A Proc object for summations.
-sum = a.inject(0, &amp;summation) # =&gt; 6
-sum = b.inject(sum, &amp;summation) # =&gt; 15
-</code></pre>
-
-<p>In Ruby 1.9, the Symbol class defines a to_proc method, allowing symbols to be prefixed with &amp; and passed to iterators. When a symbol is passed like this, it is assumed to be the name of a method.</p>
-
-<pre><code class="language-ruby">words = ['and', 'but', 'car'] # An array of words
-uppercase = words.map &amp;:upcase # Convert to uppercase with String.upcase
-upper = words.map {|w| w.upcase } # This is the equivalent code with a block
-</code></pre>
-
-<p>Ruby 1.9 syntax allows lambdas to be declared with argument defaults, just as methods can be:</p>
-
-<pre><code class="language-ruby">zoom = -&gt;(x,y,factor=2) { [x*factor, y*factor] }
-</code></pre>
-
-<p>The Proc class also defines the array access operator to work the same way as call.</p>
-
-<pre><code class="language-ruby">f = Proc.new {|x,y| 1.0/(1.0/x + 1.0/y) }
-z = f[x,y]
-</code></pre>
-
-<p>Ruby 1.9 offers an additional way to invoke a Proc object; as an alternative to square brackets, you can use parentheses prefixed with a period:</p>
-
-<pre><code class="language-ruby">z = f.(x,y)
-</code></pre>
-
-<h2 id="chapter-7-classes-and-modules">Chapter 7 Classes and Modules</h2>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">a, b <span style="color:#f92672">=</span> <span style="color:#f92672">[</span><span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span><span style="color:#f92672">]</span>, <span style="color:#f92672">[</span><span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span><span style="color:#f92672">]</span> <span style="color:#75715e"># Start with some data.</span>
+summation <span style="color:#f92672">=</span> <span style="color:#66d9ef">Proc</span><span style="color:#f92672">.</span>new {<span style="color:#f92672">|</span>total,x<span style="color:#f92672">|</span> total<span style="color:#f92672">+</span>x } <span style="color:#75715e"># A Proc object for summations.</span>
+sum <span style="color:#f92672">=</span> a<span style="color:#f92672">.</span>inject(<span style="color:#ae81ff">0</span>, <span style="color:#f92672">&amp;</span>summation) <span style="color:#75715e"># =&gt; 6</span>
+sum <span style="color:#f92672">=</span> b<span style="color:#f92672">.</span>inject(sum, <span style="color:#f92672">&amp;</span>summation) <span style="color:#75715e"># =&gt; 15</span>
+</code></pre></div><p>In Ruby 1.9, the Symbol class defines a to_proc method, allowing symbols to be prefixed with &amp; and passed to iterators. When a symbol is passed like this, it is assumed to be the name of a method.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">words <span style="color:#f92672">=</span> <span style="color:#f92672">[</span><span style="color:#e6db74">&#39;and&#39;</span>, <span style="color:#e6db74">&#39;but&#39;</span>, <span style="color:#e6db74">&#39;car&#39;</span><span style="color:#f92672">]</span> <span style="color:#75715e"># An array of words</span>
+uppercase <span style="color:#f92672">=</span> words<span style="color:#f92672">.</span>map <span style="color:#f92672">&amp;</span><span style="color:#e6db74">:upcase</span> <span style="color:#75715e"># Convert to uppercase with String.upcase</span>
+upper <span style="color:#f92672">=</span> words<span style="color:#f92672">.</span>map {<span style="color:#f92672">|</span>w<span style="color:#f92672">|</span> w<span style="color:#f92672">.</span>upcase } <span style="color:#75715e"># This is the equivalent code with a block</span>
+</code></pre></div><p>Ruby 1.9 syntax allows lambdas to be declared with argument defaults, just as methods can be:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">zoom <span style="color:#f92672">=</span> <span style="color:#f92672">-&gt;</span>(x,y,factor<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>) { <span style="color:#f92672">[</span>x<span style="color:#f92672">*</span>factor, y<span style="color:#f92672">*</span>factor<span style="color:#f92672">]</span> }
+</code></pre></div><p>The Proc class also defines the array access operator to work the same way as call.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">f <span style="color:#f92672">=</span> <span style="color:#66d9ef">Proc</span><span style="color:#f92672">.</span>new {<span style="color:#f92672">|</span>x,y<span style="color:#f92672">|</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">.</span><span style="color:#ae81ff">0</span><span style="color:#f92672">/</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">.</span><span style="color:#ae81ff">0</span><span style="color:#f92672">/</span>x <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">.</span><span style="color:#ae81ff">0</span><span style="color:#f92672">/</span>y) }
+z <span style="color:#f92672">=</span> f<span style="color:#f92672">[</span>x,y<span style="color:#f92672">]</span>
+</code></pre></div><p>Ruby 1.9 offers an additional way to invoke a Proc object; as an alternative to square brackets, you can use parentheses prefixed with a period:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">z <span style="color:#f92672">=</span> f<span style="color:#f92672">.</span>(x,y)
+</code></pre></div><h2 id="chapter-7-classes-and-modules">Chapter 7 Classes and Modules</h2>
 <p>When the initialize method is invoked, self holds an instance of the Point class. But the code outside of that method is executed as part of the definition of the Point class.</p>
-
 <p>If we want the expression <code>2*p</code> to return the same result as <code>p*2</code>, we can define a coerce method.</p>
-
 <p>A protected method defined by a class C may be invoked on an object o by a method in an object p if and only if the classes of o and p are both subclasses of, or equal to, the class C.</p>
-
 <p>To invoke the private utility method defined in the previous code, you can use the send method, or you can use instance_eval to evaluate a block in the context of the object.</p>
-
 <p>Class methods can also be defined using self instead of the class name.</p>
-
 <p>Class variables have names that begin with <code>@@</code>.</p>
-
 <p>Remember that public, private, and protected apply only to methods in Ruby. Instance and class variables are encapsulated and effectively private, and constants are effectively public.</p>
-
 <p>The upshot is that, in Ruby, you should only subclass when you are familiar with the implementation of the superclass. If you only want to depend on the public API of a class and not on its implementation, then you should extend the functionality of the class by encapsulating and delegating to it, not by inheriting from it.</p>
-
 <p>Class#new, is an instance method, and the other, Class::new, is a class method.</p>
-
 <p>Class is a subclass of Module. This means that all classes are modules, but not all modules are classes. Classes can be used as namespaces, just as modules can. Classes cannot, however, be used as mixins.</p>
 
       </div>

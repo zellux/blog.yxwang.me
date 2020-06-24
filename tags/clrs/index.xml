@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>CLRS on Aiur · Zellux 的博客</title>
@@ -21,7 +21,7 @@
 Intructor&amp;rsquo;s Manual 上的解答设计了一个很巧妙的验证策略。假设T为那个巨大的数组，S为辅助栈，那么对于一个键k，如果k存在于这个字典中，则T[k]保存的是 k在S中的位置j，而S[j]则保存了k值。即1 ≤ T[k] ≤ top[S], S[ T[k] ] = k, T [ S[j] ] = j，我们称这个条件为“验证环”。这个设计的关键在于T和S能够互相验证，从而排除了未初始化位置上随机值的干扰。
 还有一个问题就是，键k对应的值v应该怎么保存呢？其实只要维护另外一个和T或者S平行的数组就行了，既然S的元素个数远小于T，选择和S平行即可。
 根据这个验证策略，我们就能设计出词典的基本操作了： 初始化：建立一个大小为0的栈 查找：给定键k，检查 1 ≤ T [k] ≤ top[S] &amp;amp;&amp;amp; S[ T[k] ] = k，如果满足则返回对应值，否则返回NULL 插入：如果键已经存在则直接替换；否则将新的键值入栈，并且维护T[k] ← top[S] 删除：要确保两件事，一是验证环要被破坏，二是栈S的空洞要被填补。通过把栈顶的元素移动到要删除的元素位置，我们能同时确保这两点：
-S[ T[k] ] ← S[ top[S] ] S[ T[k] ] ← S [ top[S] ] T[ S[ T[k] ] ] ← T [k] T[k] ← 0 top[S] ← top[S] − 1  所有操作都能在O(1)时间内完成</description>
+S[ T[k] ] ← S[ top[S] ] S[ T[k] ] ← S [ top[S] ] T[ S[ T[k] ] ] ← T [k] T[k] ← 0 top[S] ← top[S] − 1 所有操作都能在O(1)时间内完成</description>
     </item>
     
   </channel>

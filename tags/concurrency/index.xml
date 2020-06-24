@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Concurrency on Aiur · Zellux 的博客</title>
@@ -17,12 +17,11 @@
       <pubDate>Mon, 20 Apr 2009 00:00:00 +0000</pubDate>
       
       <guid>https://blog.yxwang.me/2009/04/ppopp-08-fastforward/</guid>
-      <description>FastForward for Efficient Pipeline Parallelism http://systems.cs.colorado.edu/~moseleyt/publications/giacomoni-2008-ppopp-ff.pdf
-这篇paper介绍了一种针对多核访问优化的队列， 主要的特点： 1. Lock-free 2. Single-producer/single-consumer 3. Cache-optimized
-经典的Lamport的lock-free的队列实现可以用下面的伪代码来表述（同样只适用于单一生产者/单一消费者的情形）：
-enqueue_nonblock(data) { if (NEXT(head) == tail) { return EWOULDBLOCK; } buffer[head] = data; head = NEXT(head); return 0; } dequeue_nonblock(data) { (head == tail) { return EWOULDBLOCK; } data = buffer[tail]; tail = NEXT(tail); return 0; }  这种实现尽管做到了lock-free，但是存在几个问题，首先是它只适用于sequential consistency内存模型，在relaxed consistency的内存模型里可能会出现类似于Double-Checked Lock(http://techblog.zellux.czm.cn/?p=30)的问题，当然这个问题可以通过插fence指令来解决；第二个问题是这篇paper着重解决的，就是enqueue和dequeue这两个操作都用到了tail和head这两个全局变量，导致多核在读取/修改这两个变量时的为了保证cache coherency会频繁的进行cache的更新，从而导致cache line threading，降低了效率。
+      <description>FastForward for Efficient Pipeline Parallelism http://systems.cs.colorado.edu/~moseleyt/publications/giacomoni-2008-ppopp-ff.pdf这篇paper介绍了一种针对多核访问优化的队列， 主要的特点：
+ Lock-free Single-producer/single-consumer Cache-optimized  经典的Lamport的lock-free的队列实现可以用下面的伪代码来表述（同样只适用于单一生产者/单一消费者的情形）：
+enqueue_nonblock(data) { if (NEXT(head) == tail) { return EWOULDBLOCK; } buffer[head] = data; head = NEXT(head); return 0; } dequeue_nonblock(data) { (head == tail) { return EWOULDBLOCK; } data = buffer[tail]; tail = NEXT(tail); return 0; } 这种实现尽管做到了lock-free，但是存在几个问题，首先是它只适用于sequential consistency内存模型，在relaxed consistency的内存模型里可能会出现类似于Double-Checked Lock(http://techblog.zellux.czm.cn/?p=30)的问题，当然这个问题可以通过插fence指令来解决；第二个问题是这篇paper着重解决的，就是enqueue和dequeue这两个操作都用到了tail和head这两个全局变量，导致多核在读取/修改这两个变量时的为了保证cache coherency会频繁的进行cache的更新，从而导致cache line threading，降低了效率。
 接下来看FastForward的实现：
-enqueue_nonblock(data) { if (NULL != buffer[head]) { return EWOULDBLOCK; } buffer[head] = data; head = NEXT(head); return 0; } dequeue_nonblock(data) { data = buffer[tail]; if (NULL == data) { return EWOULDBLOCK; } buffer[tail] = NULL; tail = NEXT(tail); return 0; }  这个版本的队列实现粗看和Lamport的那个区别很小，而实际上这里解决了一个重要的问题：解除了head和tail的共享问题。dequeue操作只需要关心tail，enqueue操作只关心head，这样两个变量就变成CPU本地的资源了，不需要做任何同步。当然这个实现同样局限于sequential consistency，不过加fence保证顺序的overhead不大。最后测试中这个版本的单次操作比Lamport的快3.</description>
+enqueue_nonblock(data) { if (NULL != buffer[head]) { return EWOULDBLOCK; } buffer[head] = data; head = NEXT(head); return 0; } dequeue_nonblock(data) { data = buffer[tail]; if (NULL == data) { return EWOULDBLOCK; } buffer[tail] = NULL; tail = NEXT(tail); return 0; } 这个版本的队列实现粗看和Lamport的那个区别很小，而实际上这里解决了一个重要的问题：解除了head和tail的共享问题。dequeue操作只需要关心tail，enqueue操作只关心head，这样两个变量就变成CPU本地的资源了，不需要做任何同步。当然这个实现同样局限于sequential consistency，不过加fence保证顺序的overhead不大。最后测试中这个版本的单次操作比Lamport的快3.</description>
     </item>
     
     <item>
@@ -31,9 +30,7 @@ enqueue_nonblock(data) { if (NULL != buffer[head]) { return EWOULDBLOCK; } buffe
       <pubDate>Thu, 09 Apr 2009 00:00:00 +0000</pubDate>
       
       <guid>https://blog.yxwang.me/2009/04/cgo-09-multi-race/</guid>
-      <description>Double-Checked Lock是一个常见的由于程序员把内存模型默认为sequential momery consistency导致的问题，具体见我去年写的一篇博文http://techblog.iamzellux.com/2008/07/singleton-pattern-and-double-checked-lock/
-虽然Java 5解决了这个问题，但是C++等语言中这个问题依然存在，依然有很多因为程序员假设sequential consistency而编译器做了错误的指令调度后导致的bug，见http://www.newsmth.net/bbscon.php?bid=335&amp;amp;id=250203
-CGO 09的这篇paper Detecting and Eliminating Potential Violations of Sequential Consistency for Concurrent C/C++ Programs针对这个问题进行了深入研究，通过加fence指令的方法解决了因编译器的指令调度造成的违背程序员原义的问题，可以在http://ppi.fudan.edu.cn/yuelu_duan下载到。没有认真读过，俺在这里就不误人子弟了 O.O</description>
+      <description>Double-Checked Lock是一个常见的由于程序员把内存模型默认为sequential momery consistency导致的问题，具体见我去年写的一篇博文http://techblog.iamzellux.com/2008/07/singleton-pattern-and-double-checked-lock/虽然Java 5解决了这个问题，但是C++等语言中这个问题依然存在，依然有很多因为程序员假设sequential consistency而编译器做了错误的指令调度后导致的bug，见http://www.newsmth.net/bbscon.php?bid=335&amp;amp;id=250203CGO 09的这篇paper Detecting and Eliminating Potential Violations of Sequential Consistency for Concurrent C/C++ Programs针对这个问题进行了深入研究，通过加fence指令的方法解决了因编译器的指令调度造成的违背程序员原义的问题，可以在http://ppi.fudan.edu.cn/yuelu_duan下载到。没有认真读过，俺在这里就不误人子弟了 O.O</description>
     </item>
     
     <item>
@@ -42,8 +39,7 @@ CGO 09的这篇paper Detecting and Eliminating Potential Violations of Sequentia
       <pubDate>Sun, 30 Nov 2008 00:00:00 +0000</pubDate>
       
       <guid>https://blog.yxwang.me/2008/11/finding-and-reproducing-heisenbugs-in-concurrent-programs/</guid>
-      <description>Finding and Reproducing Heisenbugs in Concurrent Programs
-OSDI &amp;lsquo;08上微软研究院发的paper，针对并发编程中难以发现的bug问题。
+      <description>Finding and Reproducing Heisenbugs in Concurrent ProgramsOSDI &amp;lsquo;08上微软研究院发的paper，针对并发编程中难以发现的bug问题。
 paper的内容主要分两大块。
 一是如何在发现bug的时候记录下线程的运行先后(thread interleaving)，途径是在线程API和用户程序多写一层wrapper functions，这里还有一些其他的问题，比如只记录下了thread interleaving的话出现data race怎么解决等。
 另外一块内容是如何遍历出给定程序运行后所能产生的结果的集合，加入这个能实现的话那就能把所有隐藏的bug都找出来了。但是这个搜索空间很大，是指数级的，的一个结论就是：给定一个程序有n个的线程，所有线程共完成k条指令，那么c次占先调度后线程的排列情况数的复杂度是$$k^{c}$$的，所以在实现遍历代码的时候必须有效的降低k和c的值。</description>
@@ -58,12 +54,12 @@ paper的内容主要分两大块。
       <description>看 OOP 教材时，书里提到了一个双检测锁定（Double-Checked Lock, DCL）的问题，但是没有更多介绍，只是说这是一个和底层内存机制有关的漏洞。查阅了下相关资料，对这个问题大致有了点了解。
 从头开始说吧。
 在多线程的情况下Singleton模式会遇到不少问题，一个简单的例子
-class Singleton { private static Singleton instance = null; public static Singleton instance() { if (instance == null) { instance = new Singleton(); } return instance; } }  假设这样一个场景，有两个线程调用 Singleton.instance()，首先线程一判断 instance 是否等于 null，判断完后一瞬间虚拟机把线程二调度为运行线程，线程二再次判断 instance 是否为 null，然后创建一个Singleton 实例，线程二的时间片用完后，线程一被唤醒，接下来它依然会创建一个新的 Singleton 实例，导致两次调用范围的对象不同。
+class Singleton { private static Singleton instance = null; public static Singleton instance() { if (instance == null) { instance = new Singleton(); } return instance; } } 假设这样一个场景，有两个线程调用 Singleton.instance()，首先线程一判断 instance 是否等于 null，判断完后一瞬间虚拟机把线程二调度为运行线程，线程二再次判断 instance 是否为 null，然后创建一个Singleton 实例，线程二的时间片用完后，线程一被唤醒，接下来它依然会创建一个新的 Singleton 实例，导致两次调用范围的对象不同。
 最简单的方法自然是在类被载入时就初始化这个对象：
-private static Singleton instance = new Singleton();  JLS (Java Language Specification) 中规定了一个类只会被初始化一次，所以这样做肯定是没问题的。
+private static Singleton instance = new Singleton(); JLS (Java Language Specification) 中规定了一个类只会被初始化一次，所以这样做肯定是没问题的。
 但是如果要实现延迟初始化（Lazy initialization），比如这个实例初始化时的参数要在运行期才能确定，应该怎么做呢？
 依然有最简单的方法：使用 synchronized 关键字修饰初始化方法：
-public synchronized static Singleton instance() { if (instance == null) { instance = new Singleton(); } return instance; }  然而引入 synchronized 关键字后，产生了一个性能问题：多个线程同时访问这个方法时，会因为同步原语而导致每次只有一个线程执行这段代码，影响程序性能。而事实上初始化完毕后只需要简单的返回 instance 的引用就行了。</description>
+public synchronized static Singleton instance() { if (instance == null) { instance = new Singleton(); } return instance; } 然而引入 synchronized 关键字后，产生了一个性能问题：多个线程同时访问这个方法时，会因为同步原语而导致每次只有一个线程执行这段代码，影响程序性能。而事实上初始化完毕后只需要简单的返回 instance 的引用就行了。</description>
     </item>
     
   </channel>

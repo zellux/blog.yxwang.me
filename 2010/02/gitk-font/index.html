@@ -11,6 +11,7 @@
     
 
     <title> 优化 gitk 的字体显示 &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -39,7 +40,7 @@
     "articleSection" : "post",
     "name" : "优化 gitk 的字体显示",
     "headline" : "优化 gitk 的字体显示",
-    "description" : "gitk是用Tcl\/Tk写的工具，默认使用Tk 8.4，不支持抗锯齿，因此字体显示很难看。好在Tk 8.5支持了部分抗锯齿字体，修改gitk使用Tk 8.5后显示效果会好一点。\n以Ubuntu为例，安装tk8.5包后，编辑\/usr\/bin\/gitk文件，把开头调用wish的那行\nexec \/usr\/bin\/wish \x26quot;$0\x26quot; -- \x26quot;$@\x26quot;  改成\nexec \/usr\/bin\/wish8.5 \x26quot;$0\x26quot; -- \x26quot;$@\x26quot;  这样就能在gitk中开启抗锯齿了，虽然效果还不是很好。另外qgit也是一个不错的选择。\n参考链接：http:\/\/navarra.ca\/?p=44",
+    "description" : "gitk是用Tcl\/Tk写的工具，默认使用Tk 8.4，不支持抗锯齿，因此字体显示很难看。好在Tk 8.5支持了部分抗锯齿字体，修改gitk使用Tk 8.5后显示效果会好一点。\n以Ubuntu为例，安装tk8.5包后，编辑\/usr\/bin\/gitk文件，把开头调用wish的那行\nexec \/usr\/bin\/wish \u0026#34;$0\u0026#34; -- \u0026#34;$@\u0026#34; 改成\nexec \/usr\/bin\/wish8.5 \u0026#34;$0\u0026#34; -- \u0026#34;$@\u0026#34; 这样就能在gitk中开启抗锯齿了，虽然效果还不是很好。另外qgit也是一个不错的选择。",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -47,8 +48,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2010",
-    "datePublished": "2010-02-14 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2010-02-14 00:00:00 \x2b0000 UTC",
+    "datePublished": "2010-02-14 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2010-02-14 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/2010\/02\/gitk-font\/",
     "wordCount" : "18",
     "keywords" : [ "Fonts","Git","Tooling","git","Blog" ]
@@ -94,20 +95,12 @@
 
     <div class="post-content">
       <p>gitk是用Tcl/Tk写的工具，默认使用Tk 8.4，不支持抗锯齿，因此字体显示很难看。好在Tk 8.5支持了部分抗锯齿字体，修改gitk使用Tk 8.5后显示效果会好一点。</p>
-
 <p>以Ubuntu为例，安装tk8.5包后，编辑/usr/bin/gitk文件，把开头调用wish的那行</p>
-
-<pre><code class="language-bash">exec /usr/bin/wish &quot;$0&quot; -- &quot;$@&quot;
-</code></pre>
-
-<p>改成</p>
-
-<pre><code class="language-bash">exec /usr/bin/wish8.5 &quot;$0&quot; -- &quot;$@&quot;
-</code></pre>
-
-<p>这样就能在gitk中开启抗锯齿了，虽然效果还不是很好。另外<a href="http://digilander.libero.it/mcostalba/" target="_blank">qgit</a>也是一个不错的选择。</p>
-
-<p>参考链接：<a href="http://navarra.ca/?p=44" target="_blank"><a href="http://navarra.ca/?p=44">http://navarra.ca/?p=44</a></a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">exec /usr/bin/wish <span style="color:#e6db74">&#34;</span>$0<span style="color:#e6db74">&#34;</span> -- <span style="color:#e6db74">&#34;</span>$@<span style="color:#e6db74">&#34;</span>
+</code></pre></div><p>改成</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">exec /usr/bin/wish8.5 <span style="color:#e6db74">&#34;</span>$0<span style="color:#e6db74">&#34;</span> -- <span style="color:#e6db74">&#34;</span>$@<span style="color:#e6db74">&#34;</span>
+</code></pre></div><p>这样就能在gitk中开启抗锯齿了，虽然效果还不是很好。另外<!-- raw HTML omitted -->qgit<!-- raw HTML omitted -->也是一个不错的选择。</p>
+<p>参考链接：<!-- raw HTML omitted --><a href="http://navarra.ca/?p=44">http://navarra.ca/?p=44</a><!-- raw HTML omitted --></p>
 
     </div>
         <div class="cc-license">

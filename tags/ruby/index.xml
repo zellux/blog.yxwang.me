@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Ruby on Aiur · Zellux 的博客</title>
@@ -18,7 +18,6 @@
       
       <guid>https://blog.yxwang.me/2013/02/view-ruby-source-in-shell/</guid>
       <description>&lt;p&gt;如果要查看 ActiveRecord 的 update_attribute 函数的源代码，一个比较常见的方法是直接在 Rails 源码中搜索 &lt;code&gt;def update_attribute&lt;/code&gt;。博客 &lt;a href=&#34;http://pragmaticstudio.com/blog&#34;&gt;The Pragmatic Studio&lt;/a&gt; 介绍了一个更方便的技巧，在 Ruby 命令行中就能启动编辑器直接访问。&lt;/p&gt;
-
 &lt;p&gt;通过 &lt;a href=&#34;http://rdoc.info/stdlib/core/Object:method&#34;&gt;Object#method&lt;/a&gt; 方法可以获得 update_attribute 方法的对象，而 &lt;a href=&#34;http://rdoc.info/stdlib/core/Method:source_location&#34;&gt;Method#source_location&lt;/a&gt; 则返回这个方法定义的文件和位置。有了这个信息后，就能启动编辑器查看源代码了：&lt;/p&gt;</description>
     </item>
     
@@ -29,11 +28,11 @@
       
       <guid>https://blog.yxwang.me/2011/11/options-for-render/</guid>
       <description>:content_type 设置返回内容的 MIME 类型
-render :file =&amp;gt; filename, :content_type =&amp;gt; &#39;application/rss&#39;  :layout 指定 layout
+render :file =&amp;gt; filename, :content_type =&amp;gt; &amp;#39;application/rss&amp;#39; :layout 指定 layout
 :status 指定返回的 HTTP 代码
 :location 指定 HTTP 头中的 Location 字段
 Rails 生成的 controller 代码中，create.json 方法在生成对象后会将 Location 设置为新生成对象的 json 地址：
-respond_to do |format| if @item.save format.html { redirect_to @item, notice: &#39;Item was successfully created.&#39; } format.json { render json: @item, status: :created, location: @item } else format.html { render action: &amp;quot;new&amp;quot; } format.json { render json: @item.</description>
+respond_to do |format| if @item.save format.html { redirect_to @item, notice: &amp;#39;Item was successfully created.&amp;#39; } format.json { render json: @item, status: :created, location: @item } else format.html { render action: &amp;#34;new&amp;#34; } format.json { render json: @item.errors, status: :unprocessable_entity } end end 参考：http://guides.</description>
     </item>
     
     <item>
@@ -44,8 +43,8 @@ respond_to do |format| if @item.save format.html { redirect_to @item, notice: &#
       <guid>https://blog.yxwang.me/2011/11/skip-specs-by-tags/</guid>
       <description>有些测试比较耗时间，而且很少被修改，如果能在测试的时候跳过它们就能让 spec 快不少。
 跳过测试的方法很简单，spec 的 describe 方法可以给对应的测试加上标签，例如
-describe SalesController, :slow =&amp;gt; true do # specs end  接下来只要在 spec/spec_helper.rb 中声明跳过这个标签即可：
-RSpec.configure do |config| config.filter_run_excluding :slow =&amp;gt; true end  与 filter_run_excluding 相反的是 filter_run，指定会被运行的标签，不包含在这个列表中的测试将被忽略。
+describe SalesController, :slow =&amp;gt; true do # specs end 接下来只要在 spec/spec_helper.rb 中声明跳过这个标签即可：
+RSpec.configure do |config| config.filter_run_excluding :slow =&amp;gt; true end 与 filter_run_excluding 相反的是 filter_run，指定会被运行的标签，不包含在这个列表中的测试将被忽略。
 参考：http://www.dixis.com/?p=283</description>
     </item>
     

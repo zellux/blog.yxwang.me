@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Quine on Aiur · Zellux 的博客</title>
@@ -18,9 +18,9 @@
       
       <guid>https://blog.yxwang.me/2009/09/interesting-quines/</guid>
       <description>Quine是指一类能生成自己的程序，例如下面这个C程序运行后就能把自己的源码完整的打印出来：
-char*f=&amp;quot;char*f=%c%s%c;main() {printf(f,34,f,34,10);}%c&amp;quot;; main(){printf(f,34,f,34,10);}  这类程序的构造方法计算理论导引或者其他相关的书籍中都有涉及，这里不再赘述。这个月看到几个Quine的变种，都挺有趣的。
+char*f=&amp;#34;char*f=%c%s%c;main() {printf(f,34,f,34,10);}%c&amp;#34;; main(){printf(f,34,f,34,10);} 这类程序的构造方法计算理论导引或者其他相关的书籍中都有涉及，这里不再赘述。这个月看到几个Quine的变种，都挺有趣的。
 首先是sigfpe构造出来的三阶Quine，这是一个只有两行的Haskell程序：
-q a b c=putStrLn $ b ++ [toEnum 10,&#39;q&#39;,&#39;(&#39;] ++ show b ++ [&#39;,&#39;] ++ show c ++ [&#39;,&#39;] ++ show a ++ [&#39;)&#39;] main=q &amp;quot;q a b c=putStrLn $ b ++ [toEnum 10,&#39;q&#39;,&#39;(&#39;] ++ show b ++ [&#39;,&#39;] ++ show c ++ [&#39;,&#39;] ++ show a ++ [&#39;)&#39;]&amp;quot; &amp;quot;def q(a,b,c):print b+chr(10)+&#39;q(&#39;+repr(b)+&#39;,&#39;+repr(c)+&#39;,&#39;+repr(a)+&#39;)&#39;&amp;quot; &amp;quot;def e(x) return 34.chr+x+34.chr end;def q(a,b,c) print b+10.chr+&#39;main=q &#39;+e(b)+&#39; &#39;+e(c)+&#39; &#39;+e(a)+&#39; &#39;+10.</description>
+q a b c=putStrLn $ b ++ [toEnum 10,&amp;#39;q&amp;#39;,&amp;#39;(&amp;#39;] ++ show b ++ [&amp;#39;,&amp;#39;] ++ show c ++ [&amp;#39;,&amp;#39;] ++ show a ++ [&amp;#39;)&amp;#39;] main=q &amp;#34;q a b c=putStrLn $ b ++ [toEnum 10,&amp;#39;q&amp;#39;,&amp;#39;(&amp;#39;] ++ show b ++ [&amp;#39;,&amp;#39;] ++ show c ++ [&amp;#39;,&amp;#39;] ++ show a ++ [&amp;#39;)&amp;#39;]&amp;#34; &amp;#34;def q(a,b,c):print b+chr(10)+&amp;#39;q(&amp;#39;+repr(b)+&amp;#39;,&amp;#39;+repr(c)+&amp;#39;,&amp;#39;+repr(a)+&amp;#39;)&amp;#39;&amp;#34; &amp;#34;def e(x) return 34.chr+x+34.chr end;def q(a,b,c) print b+10.chr+&amp;#39;main=q &amp;#39;+e(b)+&amp;#39; &amp;#39;+e(c)+&amp;#39; &amp;#39;+e(a)+&amp;#39; &amp;#39;+10.chr end&amp;#34; 这段程序牛逼在哪里呢？运行后这个程序首先会输出一个Python程序，然后再运行这个Python程序会输出一段Ruby代码，最后这个Ruby代码的运行结果是原来的程序。或者说</description>
     </item>
     
   </channel>

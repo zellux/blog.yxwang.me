@@ -11,6 +11,7 @@
     
 
     <title> ISCA 09 - Multi-Execution &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -39,7 +40,7 @@
     "articleSection" : "post",
     "name" : "ISCA 09 - Multi-Execution",
     "headline" : "ISCA 09 - Multi-Execution",
-    "description" : "Multi-Execution: Multicore Caching for Data-Similar Executions\n这篇paper针对以multi-execution这种模式运行的程序提出了一种新的cache手段。\n所谓multi-execution，指的是同时运行同一个程序的多个进程，而它们的输入数据又互不相同。这种模式在machine-learning领域比较常见，一些相对独立的learner可以以并行的方式被训练，而它们的结果可以通过一种叫做boosting的方式合并起来。给我的感觉似乎有点像mapreduce？\n然后呢，作者们发现以这种方式运行的程序进程的数据有很大一部分是相同的，在合并cache数据上可以做一下文章，节省cache的使用。\n于是这篇paper提出了一种叫做mergeable cache的架构，用于代替传统的L2 cache，L1 cache还是传统的cache架构。首先假设相同的数据的虚拟地址往往也是相同的（应该去掉了address space randomization的影响），以类似Page Coloring的策略进行物理页的分配，使得不同进程同一虚拟地址所对应的物理页都是相邻的。然后把虚拟地址的头9位作为cache tag，再为每个cache line记录一个bit vector用以表示某个processor的数据是否保存在这条cache line中。于是L2 cache hit当且仅当： 1. 虚拟地址的头9位等于cache line的tag 2. cache line中的bit vector的processor对应的位被置上\n另外为了简化cache策略，L1和L2的数据内容是互斥的，或者说一段被cache的数据要么在L1，要么在L2，不可能同时存在于两者中。这样一来L2就只有从L1淘汰出来的数据了，而L2中的数据修改分三步完成： 1. 把数据从L2中标记为不存在（对应processor的bit vector位置0） 2. 数据进入L1 3. 修改数据\n这就是这篇paper提出的cache架构的主要内容，后面的evaluation部分做的也很不错。从数据中可以看出合并的cache里面dirty cache占了比较大的比例，从而说明简单的copy-on-write策略的效果不会很好，因为copy-on-write只能合并clean cache。最后平均的speedup提升在2.5x左右，很不错。但是对于数据无关的并行程序运行，会产生一定的overhead，此时可以选择传统的L2 cache机制。",
+    "description" : "Multi-Execution: Multicore Caching for Data-Similar Executions\n这篇paper针对以multi-execution这种模式运行的程序提出了一种新的cache手段。\n所谓multi-execution，指的是同时运行同一个程序的多个进程，而它们的输入数据又互不相同。这种模式在machine-learning领域比较常见，一些相对独立的learner可以以并行的方式被训练，而它们的结果可以通过一种叫做boosting的方式合并起来。给我的感觉似乎有点像mapreduce？\n然后呢，作者们发现以这种方式运行的程序进程的数据有很大一部分是相同的，在合并cache数据上可以做一下文章，节省cache的使用。\n于是这篇paper提出了一种叫做mergeable cache的架构，用于代替传统的L2 cache，L1 cache还是传统的cache架构。首先假设相同的数据的虚拟地址往往也是相同的（应该去掉了address space randomization的影响），以类似Page Coloring的策略进行物理页的分配，使得不同进程同一虚拟地址所对应的物理页都是相邻的。然后把虚拟地址的头9位作为cache tag，再为每个cache line记录一个bit vector用以表示某个processor的数据是否保存在这条cache line中。于是L2 cache hit当且仅当：\n 虚拟地址的头9位等于cache line的tag cache line中的bit vector的processor对应的位被置上  另外为了简化cache策略，L1和L2的数据内容是互斥的，或者说一段被cache的数据要么在L1，要么在L2，不可能同时存在于两者中。这样一来L2就只有从L1淘汰出来的数据了，而L2中的数据修改分三步完成：\n 把数据从L2中标记为不存在（对应processor的bit vector位置0） 数据进入L1 修改数据  这就是这篇paper提出的cache架构的主要内容，后面的evaluation部分做的也很不错。从数据中可以看出合并的cache里面dirty cache占了比较大的比例，从而说明简单的copy-on-write策略的效果不会很好，因为copy-on-write只能合并clean cache。最后平均的speedup提升在2.5x左右，很不错。但是对于数据无关的并行程序运行，会产生一定的overhead，此时可以选择传统的L2 cache机制。",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -47,10 +48,10 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2009",
-    "datePublished": "2009-05-12 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2009-05-12 00:00:00 \x2b0000 UTC",
+    "datePublished": "2009-05-12 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2009-05-12 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/2009\/05\/isca-09-multi-execution\/",
-    "wordCount" : "41",
+    "wordCount" : "36",
     "keywords" : [ "Cache","Computer System","ISCA","Memory Management","Paper","Blog" ]
 }
 </script>
@@ -94,22 +95,20 @@
 
     <div class="post-content">
       <p>Multi-Execution: Multicore Caching for Data-Similar Executions</p>
-
 <p>这篇paper针对以multi-execution这种模式运行的程序提出了一种新的cache手段。</p>
-
 <p>所谓multi-execution，指的是同时运行同一个程序的多个进程，而它们的输入数据又互不相同。这种模式在machine-learning领域比较常见，一些相对独立的learner可以以并行的方式被训练，而它们的结果可以通过一种叫做boosting的方式合并起来。给我的感觉似乎有点像mapreduce？</p>
-
 <p>然后呢，作者们发现以这种方式运行的程序进程的数据有很大一部分是相同的，在合并cache数据上可以做一下文章，节省cache的使用。</p>
-
-<p>于是这篇paper提出了一种叫做mergeable cache的架构，用于代替传统的L2 cache，L1 cache还是传统的cache架构。首先<strong>假设相同的数据的虚拟地址往往也是相同的</strong>（应该去掉了address space randomization的影响），以类似<a href="http://techblog.iamzellux.com/2009/05/page-coloring/" target="_blank">Page Coloring</a>的策略进行物理页的分配，使得不同进程同一虚拟地址所对应的物理页都是相邻的。然后把虚拟地址的头9位作为cache tag，再为每个cache line记录一个bit vector用以表示某个processor的数据是否保存在这条cache line中。于是L2 cache hit当且仅当：
-1. 虚拟地址的头9位等于cache line的tag
-2. cache line中的bit vector的processor对应的位被置上</p>
-
-<p>另外为了简化cache策略，<strong>L1和L2的数据内容是互斥的</strong>，或者说一段被cache的数据要么在L1，要么在L2，不可能同时存在于两者中。这样一来L2就只有从L1淘汰出来的数据了，而L2中的数据修改分三步完成：
-1. 把数据从L2中标记为不存在（对应processor的bit vector位置0）
-2. 数据进入L1
-3. 修改数据</p>
-
+<p>于是这篇paper提出了一种叫做mergeable cache的架构，用于代替传统的L2 cache，L1 cache还是传统的cache架构。首先<!-- raw HTML omitted -->假设相同的数据的虚拟地址往往也是相同的<!-- raw HTML omitted -->（应该去掉了address space randomization的影响），以类似<!-- raw HTML omitted -->Page Coloring<!-- raw HTML omitted -->的策略进行物理页的分配，使得不同进程同一虚拟地址所对应的物理页都是相邻的。然后把虚拟地址的头9位作为cache tag，再为每个cache line记录一个bit vector用以表示某个processor的数据是否保存在这条cache line中。于是L2 cache hit当且仅当：</p>
+<ol>
+<li>虚拟地址的头9位等于cache line的tag</li>
+<li>cache line中的bit vector的processor对应的位被置上</li>
+</ol>
+<p>另外为了简化cache策略，<!-- raw HTML omitted -->L1和L2的数据内容是互斥的<!-- raw HTML omitted -->，或者说一段被cache的数据要么在L1，要么在L2，不可能同时存在于两者中。这样一来L2就只有从L1淘汰出来的数据了，而L2中的数据修改分三步完成：</p>
+<ol>
+<li>把数据从L2中标记为不存在（对应processor的bit vector位置0）</li>
+<li>数据进入L1</li>
+<li>修改数据</li>
+</ol>
 <p>这就是这篇paper提出的cache架构的主要内容，后面的evaluation部分做的也很不错。从数据中可以看出合并的cache里面dirty cache占了比较大的比例，从而说明简单的copy-on-write策略的效果不会很好，因为copy-on-write只能合并clean cache。最后平均的speedup提升在2.5x左右，很不错。但是对于数据无关的并行程序运行，会产生一定的overhead，此时可以选择传统的L2 cache机制。</p>
 
     </div>

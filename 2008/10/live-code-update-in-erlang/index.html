@@ -11,6 +11,7 @@
     
 
     <title> Live Code Update in Erlang &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -39,7 +40,7 @@
     "articleSection" : "post",
     "name" : "Live Code Update in Erlang",
     "headline" : "Live Code Update in Erlang",
-    "description" : "http:\/\/bc.tech.coop\/blog\/070713.html\nJoe Armstrong的原话 Live code upgrading is one of the things Erlang was designed for.\n一个最简单的例子\nloop(Fun, State) receive {From, {rpc, Tag, Q}} -\x26gt; {Reply, State1} = Fun(Q, State), From ! {Tag, Reply}, loop(Fun, State1); {code_upgrade, Fun1} -\x26gt; loop(Fun1, State) end.  使用时只要发送一个{code_update, Fun1}消息即可 在实际的项目中，live code update需要在一个进程的稳定状态中进行。好在有Erlang天生的分布式特性，结点i进行更新时其他结点可以接管这个结点的任务，直到结点i更新成功，再进行下一个结点的更新。这个形式和结点的crash处理有点类似。于是Erlang中live updating的实际难点在于 1. How to suspend the system and put it into a stable state 2. How to replicate the stable state 3. How to restart from a stable state 4.",
+    "description" : "http:\/\/bc.tech.coop\/blog\/070713.htmlJoe Armstrong的原话 Live code upgrading is one of the things Erlang was designed for.\n一个最简单的例子\nloop(Fun, State) receive {From, {rpc, Tag, Q}} -\u0026gt; {Reply, State1} = Fun(Q, State), From ! {Tag, Reply}, loop(Fun, State1); {code_upgrade, Fun1} -\u0026gt; loop(Fun1, State) end. 使用时只要发送一个{code_update, Fun1}消息即可 在实际的项目中，live code update需要在一个进程的稳定状态中进行。好在有Erlang天生的分布式特性，结点i进行更新时其他结点可以接管这个结点的任务，直到结点i更新成功，再进行下一个结点的更新。这个形式和结点的crash处理有点类似。于是Erlang中live updating的实际难点在于\n How to suspend the system and put it into a stable state How to replicate the stable state How to restart from a stable state How to detect failure How to upgrade and downgrade the stable state  另外http:\/\/www.",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -47,10 +48,10 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2008",
-    "datePublished": "2008-10-16 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2008-10-16 00:00:00 \x2b0000 UTC",
+    "datePublished": "2008-10-16 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2008-10-16 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/2008\/10\/live-code-update-in-erlang\/",
-    "wordCount" : "91",
+    "wordCount" : "85",
     "keywords" : [ "Erlang","Live Updating","Programming","Programming Languages","Blog" ]
 }
 </script>
@@ -93,34 +94,30 @@
 </span>
 
     <div class="post-content">
-      <p><a href="http://bc.tech.coop/blog/070713.html" target="_blank"><a href="http://bc.tech.coop/blog/070713.html">http://bc.tech.coop/blog/070713.html</a></a></p>
-
+      <p><!-- raw HTML omitted --><a href="http://bc.tech.coop/blog/070713.html">http://bc.tech.coop/blog/070713.html</a><!-- raw HTML omitted --></p>
 <p>Joe Armstrong的原话 Live code upgrading is one of the things Erlang was designed for.</p>
-
 <p>一个最简单的例子</p>
-
-<pre><code class="language-erlang">
-loop(Fun, State)
-    receive
-        {From, {rpc, Tag, Q}} -&gt;
-               {Reply, State1} = Fun(Q, State),
-               From !  {Tag, Reply},
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-erlang" data-lang="erlang">
+<span style="color:#a6e22e">loop</span>(Fun, State)
+    <span style="color:#66d9ef">receive</span>
+        {From, {rpc, Tag, Q}} <span style="color:#f92672">-&gt;</span>
+               {Reply, State1} <span style="color:#f92672">=</span> Fun(Q, State),
+               From <span style="color:#f92672">!</span>  {Tag, Reply},
                loop(Fun, State1);
-        {code_upgrade, Fun1} -&gt;
+        {code_upgrade, Fun1} <span style="color:#f92672">-&gt;</span>
                loop(Fun1, State)
-     end.
+     <span style="color:#66d9ef">end</span>.
 
-</code></pre>
-
-<p>使用时只要发送一个{code_update, Fun1}消息即可
-在实际的项目中，live code update需要在一个进程的稳定状态中进行。好在有Erlang天生的分布式特性，结点i进行更新时其他结点可以接管这个结点的任务，直到结点i更新成功，再进行下一个结点的更新。这个形式和结点的crash处理有点类似。于是Erlang中live updating的实际难点在于
-1.  How to suspend the system and put it into a stable state
-2. How to replicate the stable state
-3. How to restart from a stable state
-4. How to detect failure
-5. How to upgrade and downgrade the stable state</p>
-
-<p>另外<a href="http://www.erlang.org/doc/man/code.html#12" target="_blank"><a href="http://www.erlang.org/doc/man/code.html#12">http://www.erlang.org/doc/man/code.html#12</a></a>介绍了Erlang中的Code Server模块。</p>
+</code></pre></div><p>使用时只要发送一个{code_update, Fun1}消息即可
+在实际的项目中，live code update需要在一个进程的稳定状态中进行。好在有Erlang天生的分布式特性，结点i进行更新时其他结点可以接管这个结点的任务，直到结点i更新成功，再进行下一个结点的更新。这个形式和结点的crash处理有点类似。于是Erlang中live updating的实际难点在于</p>
+<ol>
+<li>How to suspend the system and put it into a stable state</li>
+<li>How to replicate the stable state</li>
+<li>How to restart from a stable state</li>
+<li>How to detect failure</li>
+<li>How to upgrade and downgrade the stable state</li>
+</ol>
+<p>另外<!-- raw HTML omitted --><a href="http://www.erlang.org/doc/man/code.html#12">http://www.erlang.org/doc/man/code.html#12</a><!-- raw HTML omitted -->介绍了Erlang中的Code Server模块。</p>
 
     </div>
         <div class="cc-license">

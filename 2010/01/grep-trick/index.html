@@ -11,6 +11,7 @@
     
 
     <title> 使用 grep 查找进程的技巧 &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -39,7 +40,7 @@
     "articleSection" : "post",
     "name" : "使用 grep 查找进程的技巧",
     "headline" : "使用 grep 查找进程的技巧",
-    "description" : "使用grep在ps aux的输出结果中查找进程的时候经常会把grep进程本身也找出来，比如查找emacs进程：\n$ ps aux | grep emacs wyx 7090 0.0 0.0 3336 796 pts\/2 S\x2b 04:49 0:00 grep emacs wyx 10128 0.1 4.9 66904 50388 pts\/3 S\x2b Jan21 2:21 emacs  一个常见的防止grep进程出现的方法就是在后面再加一个grep -v grep：\n$ ps aux | grep emacs | grep -v grep wyx 10128 0.1 4.9 66904 50388 pts\/3 S\x2b Jan21 2:21 emacs  今天在Santosa的博客上看到了另一个巧妙的做法，使用grep [e]macs来搜索emacs这个进程：\n$ ps aux | grep [e]macs wyx 10128 0.1 4.9 66904 50388 pts\/3 S\x2b Jan21 2:21 emacs  为什么会有这样的效果，知道grep正则中[]的作用后想一想就能明白啦。很有意思的trick，虽然说它比| grep -v grep也未必方便多少，因为后者能通过alias简化输入。",
+    "description" : "使用grep在ps aux的输出结果中查找进程的时候经常会把grep进程本身也找出来，比如查找emacs进程：\n$ ps aux | grep emacs wyx 7090 0.0 0.0 3336 796 pts\/2 S\u002b 04:49 0:00 grep emacs wyx 10128 0.1 4.9 66904 50388 pts\/3 S\u002b Jan21 2:21 emacs 一个常见的防止grep进程出现的方法就是在后面再加一个grep -v grep：\n$ ps aux | grep emacs | grep -v grep wyx 10128 0.1 4.9 66904 50388 pts\/3 S\u002b Jan21 2:21 emacs 今天在Santosa的博客上看到了另一个巧妙的做法，使用grep [e]macs来搜索emacs这个进程：\n$ ps aux | grep [e]macs wyx 10128 0.1 4.9 66904 50388 pts\/3 S\u002b Jan21 2:21 emacs 为什么会有这样的效果，知道grep正则中[]的作用后想一想就能明白啦。很有意思的trick，虽然说它比| grep -v grep也未必方便多少，因为后者能通过alias简化输入。",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -47,8 +48,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2010",
-    "datePublished": "2010-01-21 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2010-01-21 00:00:00 \x2b0000 UTC",
+    "datePublished": "2010-01-21 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2010-01-21 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/2010\/01\/grep-trick\/",
     "wordCount" : "78",
     "keywords" : [ "Grep","Linux","Shell","Tooling","grep","Blog" ]
@@ -94,25 +95,16 @@
 
     <div class="post-content">
       <p>使用grep在ps aux的输出结果中查找进程的时候经常会把grep进程本身也找出来，比如查找emacs进程：</p>
-
-<pre><code class="language-bash">$ ps aux | grep emacs
-wyx   7090  0.0  0.0   3336   796 pts/2 S+ 04:49 0:00 grep emacs
-wyx  10128  0.1  4.9  66904 50388 pts/3 S+ Jan21 2:21 emacs
-</code></pre>
-
-<p>一个常见的防止grep进程出现的方法就是在后面再加一个grep -v grep：</p>
-
-<pre><code class="language-bash">$ ps aux | grep emacs | grep -v grep
-wyx  10128  0.1  4.9  66904 50388 pts/3 S+ Jan21 2:21 emacs
-</code></pre>
-
-<p>今天在<a href="http://the-hydra.blogspot.com/2010/01/grep-string-anyone.html" target="_blank">Santosa的博客</a>上看到了另一个巧妙的做法，使用grep [e]macs来搜索emacs这个进程：</p>
-
-<pre><code class="language-bash">$ ps aux | grep [e]macs
-wyx  10128  0.1  4.9  66904 50388 pts/3 S+ Jan21 2:21 emacs
-</code></pre>
-
-<p>为什么会有这样的效果，知道grep正则中[]的作用后想一想就能明白啦。很有意思的trick，虽然说它比<code>| grep -v grep</code>也未必方便多少，因为后者能通过alias简化输入。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ ps aux | grep emacs
+wyx   <span style="color:#ae81ff">7090</span>  0.0  0.0   <span style="color:#ae81ff">3336</span>   <span style="color:#ae81ff">796</span> pts/2 S+ 04:49 0:00 grep emacs
+wyx  <span style="color:#ae81ff">10128</span>  0.1  4.9  <span style="color:#ae81ff">66904</span> <span style="color:#ae81ff">50388</span> pts/3 S+ Jan21 2:21 emacs
+</code></pre></div><p>一个常见的防止grep进程出现的方法就是在后面再加一个grep -v grep：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ ps aux | grep emacs | grep -v grep
+wyx  <span style="color:#ae81ff">10128</span>  0.1  4.9  <span style="color:#ae81ff">66904</span> <span style="color:#ae81ff">50388</span> pts/3 S+ Jan21 2:21 emacs
+</code></pre></div><p>今天在<!-- raw HTML omitted -->Santosa的博客<!-- raw HTML omitted -->上看到了另一个巧妙的做法，使用grep [e]macs来搜索emacs这个进程：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ ps aux | grep <span style="color:#f92672">[</span>e<span style="color:#f92672">]</span>macs
+wyx  <span style="color:#ae81ff">10128</span>  0.1  4.9  <span style="color:#ae81ff">66904</span> <span style="color:#ae81ff">50388</span> pts/3 S+ Jan21 2:21 emacs
+</code></pre></div><p>为什么会有这样的效果，知道grep正则中[]的作用后想一想就能明白啦。很有意思的trick，虽然说它比<code>| grep -v grep</code>也未必方便多少，因为后者能通过alias简化输入。</p>
 
     </div>
         <div class="cc-license">

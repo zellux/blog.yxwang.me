@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>S&amp;amp;P on Aiur · Zellux 的博客</title>
@@ -25,9 +25,9 @@
 这里实现防范措施的一个难点在于，Web应用把生成HTML的返回给浏览器后，就不参与浏览器的HTML解析工作了。这样浏览器就不知道哪部分出现脚本是安全的，哪部分出现是不安全的。
 BluePrint就着眼于这个点，提出了一种让Web应用“参与”HTML解析工作的设计。下面通过论文里面的一个例子，简单介绍下它的防范机制。
 假如一位恶意的用户在一个博客上上传了这样一段含有恶意代码的留言：
-&amp;lt;p&amp;gt; Here is a page you might find &amp;lt;b &amp;quot;&amp;quot;&amp;quot;&amp;gt;&amp;lt;script&amp;gt;doEvil(. . .)&amp;lt;/script&amp;gt;&amp;quot;&amp;gt;very&amp;lt;/b&amp;gt; interesting: &amp;lt;a href=&amp;quot; &amp;amp;#14; javasc&amp;amp;#x0A;ript:doEvil(. . .);&amp;quot;&amp;gt; Link&amp;lt;/a&amp;gt; &amp;lt;/p&amp;gt;&amp;lt;p style=&amp;quot;nop:expres/*xss*/sion(doEvil(. . .))&amp;quot;&amp;gt; Respectfully, Eve &amp;lt;/p&amp;gt;  可以看到，这段代码里包含了很多可能引发脚本执行的代码，而要在服务器端把这些所有隐藏的攻击可能找出来是一件比较困难的事。那么BluePrint是怎么在不知道这段代码是否含有恶意代码的前提下处理的呢？
+&amp;lt;p&amp;gt; Here is a page you might find &amp;lt;b &amp;#34;&amp;#34;&amp;#34;&amp;gt;&amp;lt;script&amp;gt;doEvil(. . .)&amp;lt;/script&amp;gt;&amp;#34;&amp;gt;very&amp;lt;/b&amp;gt; interesting: &amp;lt;a href=&amp;#34; &amp;amp;#14; javasc&amp;amp;#x0A;ript:doEvil(. . .);&amp;#34;&amp;gt; Link&amp;lt;/a&amp;gt; &amp;lt;/p&amp;gt;&amp;lt;p style=&amp;#34;nop:expres/*xss*/sion(doEvil(. . .))&amp;#34;&amp;gt; Respectfully, Eve &amp;lt;/p&amp;gt; 可以看到，这段代码里包含了很多可能引发脚本执行的代码，而要在服务器端把这些所有隐藏的攻击可能找出来是一件比较困难的事。那么BluePrint是怎么在不知道这段代码是否含有恶意代码的前提下处理的呢？
 首先，这种由用户上传的不可信的字符串会先在服务器端被解析成一棵树，就像HTML在浏览器中被解析一样，这棵HTML解析树可以用一些简单的DOM API来生成，例如appendChild, createElement等。这些描述如何生成HTML解析树的方法会和数据值（URL、标签属性等）一起，通过特殊的编码（Base64）传递给浏览器。例如上面这段代码，最后在浏览器接收到的HTML中，会变成这样：
-&amp;lt;code style=&amp;quot;display:none;&amp;quot; id=&amp;quot;__bp1&amp;quot;&amp;gt; =Enk/sCkhlcmUgaXMgYSBwYWdlIHlvdSBta... =SkKICAgICI+dmVyeQ===C/k/QIGhlbHBmd... =ECg===C/Enk/gCiAgUmVzcGVjdGZ1bGx5L... &amp;lt;/code&amp;gt;&amp;lt;script id=&amp;quot;__bp1s&amp;quot;&amp;gt; __bp__.cxPCData(&amp;quot;__bp1&amp;quot;, &amp;quot;__bp1s&amp;quot;); &amp;lt;/script&amp;gt;  在浏览器端，这段特殊的代码会被JS库解析成自定义的命令和数据格式，并由前面提到的DOM API动态生成这些HTML结点，从而达到和传统的方式一样的显示效果。当然可信的HTML代码，例如文章正文，还是按传统的方式传输的。</description>
+&amp;lt;code style=&amp;#34;display:none;&amp;#34; id=&amp;#34;__bp1&amp;#34;&amp;gt; =Enk/sCkhlcmUgaXMgYSBwYWdlIHlvdSBta... =SkKICAgICI+dmVyeQ===C/k/QIGhlbHBmd... =ECg===C/Enk/gCiAgUmVzcGVjdGZ1bGx5L... &amp;lt;/code&amp;gt;&amp;lt;script id=&amp;#34;__bp1s&amp;#34;&amp;gt; __bp__.cxPCData(&amp;#34;__bp1&amp;#34;, &amp;#34;__bp1s&amp;#34;); &amp;lt;/script&amp;gt; 在浏览器端，这段特殊的代码会被JS库解析成自定义的命令和数据格式，并由前面提到的DOM API动态生成这些HTML结点，从而达到和传统的方式一样的显示效果。当然可信的HTML代码，例如文章正文，还是按传统的方式传输的。</description>
     </item>
     
   </channel>

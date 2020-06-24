@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Emacs on Aiur · Zellux 的博客</title>
@@ -18,11 +18,10 @@
       
       <guid>https://blog.yxwang.me/2013/01/java-and-aidl-support-in-emacs-cscope/</guid>
       <description>&lt;p&gt;Emacs 的 xcscope 插件默认不会扫描 Java 文件，另外 Android 源码里有不少 &lt;a href=&#34;http://developer.android.com/guide/components/aidl.html&#34;&gt;.aidl&lt;/a&gt; 的文件，默认也不包含在 xcscope 的扫描范围里。解决这个问题的一个方法是在项目根目录下手动创建 cscope 索引：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ find . -name &amp;quot;*.java&amp;quot; -or -name &amp;quot;*.aidl&amp;quot; -or -name &amp;quot;*.cpp&amp;quot; &amp;gt; cscope.files
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ find . -name &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;*.java&amp;#34;&lt;/span&gt; -or -name &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;*.aidl&amp;#34;&lt;/span&gt; -or -name &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;*.cpp&amp;#34;&lt;/span&gt; &amp;gt; cscope.files
 
 $ cscope -b
-&lt;/code&gt;&lt;/pre&gt;</description>
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
     </item>
     
     <item>
@@ -32,8 +31,8 @@ $ cscope -b
       
       <guid>https://blog.yxwang.me/2011/07/full-screen-emacs-in-lion/</guid>
       <description>前几天给我的 MacBook Pro 装上了 Lion，不过原来的 Emacs 并不支持在 Lion 下全屏运行。github 上搜了下发现已经有让 Emacs 支持全屏模式的补丁了，Homebrew 中这个补丁也已经被吸收。
-直接用 brew install emacs &amp;ndash;cocoa &amp;ndash;srgb 似乎会碰到编译错误：
-Finding pointers to doc strings... Finding pointers to doc strings...done Dumping under the name emacs unexec: cannot write section __data --- List of All Regions --- address size prot maxp --- List of Regions to be Dumped --- address size prot maxp --- Header Information --- Magic = 0xfeedfacf CPUType = 16777223 CPUSubType = -2147483645 FileType = 0x2 NCmds = 20 SizeOfCmds = 3464 Flags = 0x00200085 Highest address of load commands in input file: 0x5dd000 Lowest offset of all sections in __TEXT segment: 0x22f0 --- List of Load Commands in Input File ---  github issues 上已经有人报告这个问题了，解决方法也很简单，运行 brew edit emacs 打开 emacs 的安装脚本，在 def install 的后面加上两行：</description>
+直接用 brew install emacs &amp;ndash;cocoa &amp;ndash;srgb似乎会碰到编译错误：
+Finding pointers to doc strings... Finding pointers to doc strings...done Dumping under the name emacs unexec: cannot write section __data --- List of All Regions --- address size prot maxp --- List of Regions to be Dumped --- address size prot maxp --- Header Information --- Magic = 0xfeedfacf CPUType = 16777223 CPUSubType = -2147483645 FileType = 0x2 NCmds = 20 SizeOfCmds = 3464 Flags = 0x00200085 Highest address of load commands in input file: 0x5dd000 Lowest offset of all sections in __TEXT segment: 0x22f0 --- List of Load Commands in Input File --- github issues 上已经有人报告这个问题了，解决方法也很简单，运行 brew edit emacs打开 emacs 的安装脚本，在 def install的后面加上两行：</description>
     </item>
     
     <item>
@@ -44,11 +43,10 @@ Finding pointers to doc strings... Finding pointers to doc strings...done Dumpin
       <guid>https://blog.yxwang.me/2010/02/bind-cscope-to-ecb/</guid>
       <description>前几天试用了下ECB，非常喜欢它的定义列表和文件浏览历史的功能。但是却发现了另外一个问题：使用ECB之前我把整个窗口分成左右两块，左边是代码，右边是cscope的查找结果，现在开启ECB之后就不能再切一块窗口给cscope用了。
 感谢stackoverflow上的sanitynic，给出了自定义ECB窗口的参考。现在俺终于能把cscope窗口绑定到屏幕左下角啦。
-
 自定义ECB layout其实也挺方便的，上图对应的配置为
-(ecb-layout-define &amp;quot;my-cscope-layout&amp;quot; left nil (ecb-set-methods-buffer) (ecb-split-ver 0.5 t) (other-window 1) (ecb-set-history-buffer) (ecb-split-ver 0.25 t) (other-window 1) (ecb-set-cscope-buffer)) (defecb-window-dedicator ecb-set-cscope-buffer &amp;quot; *ECB cscope-buf*&amp;quot; (switch-to-buffer &amp;quot;*cscope*&amp;quot;)) (setq ecb-layout-name &amp;quot;my-cscope-layout&amp;quot;) ;; Disable buckets so that history buffer can display more entries (setq ecb-history-make-buckets &#39;never)  my-cscope-layout这个layout左边窗口分为三部分，最上面的函数列表占一半高度，中间为历史文件列表，下面为cscope的查找结果，它们各占四分之一的高度。
+(ecb-layout-define &amp;#34;my-cscope-layout&amp;#34; left nil (ecb-set-methods-buffer) (ecb-split-ver 0.5 t) (other-window 1) (ecb-set-history-buffer) (ecb-split-ver 0.25 t) (other-window 1) (ecb-set-cscope-buffer)) (defecb-window-dedicator ecb-set-cscope-buffer &amp;#34; *ECB cscope-buf*&amp;#34; (switch-to-buffer &amp;#34;*cscope*&amp;#34;)) (setq ecb-layout-name &amp;#34;my-cscope-layout&amp;#34;) ;; Disable buckets so that history buffer can display more entries (setq ecb-history-make-buckets &amp;#39;never) my-cscope-layout这个layout左边窗口分为三部分，最上面的函数列表占一半高度，中间为历史文件列表，下面为cscope的查找结果，它们各占四分之一的高度。
 另外再简单提下cscope插件的安装和配置，使用前需确认当前系统已经安装了cscope，另外要有cscope-indexer这个脚本。在cscope/contrib目录下找到一个xcscope.el，复制到Emacs的插件目录中，并在Emacs初始化文件中加入
-(require &#39;xcscope)  即可。某些发行版的包里面似乎没有cscope-indexer和xcscope.el，直接从网上下一个好了。
+(require &amp;#39;xcscope) 即可。某些发行版的包里面似乎没有cscope-indexer和xcscope.el，直接从网上下一个好了。
 几个常用的快捷键：
  C-c s I 建立cscope索引 C-c s a 设置搜索目录 C-c s d 查找定义 C-c s s 查找字符串 C-c s c 查找调用者 C-c s n 下一个查找结果 C-c s p 上一个查找结果  更多的快捷键可以在 C-h b 跳转的帮助页面的 cscope-minor-mode 区找到。</description>
     </item>
@@ -61,9 +59,8 @@ Finding pointers to doc strings... Finding pointers to doc strings...done Dumpin
       <guid>https://blog.yxwang.me/2010/02/configuring-semantic/</guid>
       <description>semantic是cedet的组件之一，它可以对程序做语义分析，结合company等其他插件，可以实现自动补全菜单等功能。
 之前用semantic+company写MIT 6.828的lab时几乎不需要什么特殊的设置就能直接用，这次拿来改Xen的代码的时候却出现了semantic无法找到符号定义的问题，究其原因在于MIT 6.828的目录结构相对简单，头文件都在inc/目录下，而Xen的头文件在多个目录下，而且做预处理时还要加上Makefile里定义的一些预定义宏。今天参考了Alex Ott的这篇文章终于成功地让semantic支持Xen的代码分析了：
-
 这里分享一下和项目相关的一些设置，semantic安装等问题请参考网上的其他文章。也可以参考我的配置文件http://code.google.com/p/zellux-emacs-conf/source/browse/my-cc-mode.el，cscope ecb semantic和company等配置都在这个文件里了，不过有点混乱。
-;; Danimoth-specified configurations (add-to-list &#39;semanticdb-project-roots &amp;quot;~/danimoth/xen&amp;quot;) (setq semanticdb-project-roots (list (expand-file-name &amp;quot;/&amp;quot;))) (setq danimoth-base-dir &amp;quot;/home/wyx/danimoth&amp;quot;) (add-to-list &#39;auto-mode-alist (cons danimoth-base-dir &#39;c++-mode)) (add-to-list &#39;auto-mode-alist (cons danimoth-base-dir &#39;c-mode)) (add-to-list &#39;semantic-lex-c-preprocessor-symbol-file (concat danimoth-base-dir &amp;quot;/xen/include/config.h&amp;quot;)) (add-to-list &#39;semantic-lex-c-preprocessor-symbol-file (concat danimoth-base-dir &amp;quot;/xen/include/asm-x86/config.h&amp;quot;)) (ede-cpp-root-project &amp;quot;Danimoth&amp;quot; :name &amp;quot;Danimoth&amp;quot; ;; Any file at root directory of the project :file &amp;quot;~/danimoth/xen/Makefile&amp;quot; ;; Relative to the project&#39;s root directory :include-path &#39;(&amp;quot;/&amp;quot; &amp;quot;/include/asm-x86&amp;quot; &amp;quot;/include/xen&amp;quot; &amp;quot;/include/public&amp;quot; &amp;quot;/include/acpi&amp;quot; &amp;quot;/arch/x86/cpu/&amp;quot; ) ;; Pre-definds macro for preprocessing :spp-table &#39;((&amp;quot;__XEN__&amp;quot; .</description>
+;; Danimoth-specified configurations (add-to-list &amp;#39;semanticdb-project-roots &amp;#34;~/danimoth/xen&amp;#34;) (setq semanticdb-project-roots (list (expand-file-name &amp;#34;/&amp;#34;))) (setq danimoth-base-dir &amp;#34;/home/wyx/danimoth&amp;#34;) (add-to-list &amp;#39;auto-mode-alist (cons danimoth-base-dir &amp;#39;c++-mode)) (add-to-list &amp;#39;auto-mode-alist (cons danimoth-base-dir &amp;#39;c-mode)) (add-to-list &amp;#39;semantic-lex-c-preprocessor-symbol-file (concat danimoth-base-dir &amp;#34;/xen/include/config.h&amp;#34;)) (add-to-list &amp;#39;semantic-lex-c-preprocessor-symbol-file (concat danimoth-base-dir &amp;#34;/xen/include/asm-x86/config.h&amp;#34;)) (ede-cpp-root-project &amp;#34;Danimoth&amp;#34; :name &amp;#34;Danimoth&amp;#34; ;; Any file at root directory of the project :file &amp;#34;~/danimoth/xen/Makefile&amp;#34; ;; Relative to the project&amp;#39;s root directory :include-path &amp;#39;(&amp;#34;/&amp;#34; &amp;#34;/include/asm-x86&amp;#34; &amp;#34;/include/xen&amp;#34; &amp;#34;/include/public&amp;#34; &amp;#34;/include/acpi&amp;#34; &amp;#34;/arch/x86/cpu/&amp;#34; ) ;; Pre-definds macro for preprocessing :spp-table &amp;#39;((&amp;#34;__XEN__&amp;#34; .</description>
     </item>
     
     <item>
@@ -73,18 +70,13 @@ Finding pointers to doc strings... Finding pointers to doc strings...done Dumpin
       
       <guid>https://blog.yxwang.me/2010/02/ecb-beginning/</guid>
       <description>终端下的效果图（Windows 7下使用pietty远登）
-
-下载
-http://ecb.sourceforge.net/downloads.html CVS或者压缩包都可以，当然也可以通过各发行版的包管理器安装。
-安装
-在.emacs中加入
-;; ECB configurations (add-to-list &#39;load-path &amp;quot;~/emacs/ecb-2.40&amp;quot;) (add-to-list &#39;load-path &amp;quot;~/emacs/cedet-1.0pre6/eieio&amp;quot;) (add-to-list &#39;load-path &amp;quot;~/emacs/cedet-1.0pre6/semantic&amp;quot;) (add-to-list &#39;load-path &amp;quot;~/emacs/cedet-1.0pre6/speedbar&amp;quot;) (setq semantic-load-turn-everything-on t) (require &#39;semantic-load) (require &#39;ecb-autoloads)  运行Emacs后执行ecb-byte-compile，并重启Emacs（我这里不重启的话执行ecb-active后会报错）。
-使用
-第一次使用时先要设置项目目录，M-x customize-variable  ecb-source-path ，在这里加上你的项目根目录。
+下载http://ecb.sourceforge.net/downloads.htmlCVS或者压缩包都可以，当然也可以通过各发行版的包管理器安装。
+安装在.emacs中加入
+;; ECB configurations (add-to-list &amp;#39;load-path &amp;#34;~/emacs/ecb-2.40&amp;#34;) (add-to-list &amp;#39;load-path &amp;#34;~/emacs/cedet-1.0pre6/eieio&amp;#34;) (add-to-list &amp;#39;load-path &amp;#34;~/emacs/cedet-1.0pre6/semantic&amp;#34;) (add-to-list &amp;#39;load-path &amp;#34;~/emacs/cedet-1.0pre6/speedbar&amp;#34;) (setq semantic-load-turn-everything-on t) (require &amp;#39;semantic-load) (require &amp;#39;ecb-autoloads) 运行Emacs后执行ecb-byte-compile，并重启Emacs（我这里不重启的话执行ecb-active后会报错）。
+使用第一次使用时先要设置项目目录，M-x customize-variable ecb-source-path ，在这里加上你的项目根目录。
 接下来使用M-x ecb-active就能激活ECB了，成功激活后Emacs窗口会被切成左右两半。左边的几个窗口依次显示：目录，当前目录下的文件，当前文件中的函数/全局变量等定义，文件浏览历史。如果打开了一个源文件后函数定义窗口里面是空的，有可能是因为这个项目过大cedet尚未完成对它的分析，闲置一段时间后就能看到文件里的定义。
 ECB提供了方便在这些窗口间切换的快捷键：
-切换到目录窗口 Ctrl-c . g d 切换到函数/方法窗口 Ctrl-c . g m 切换到文件窗口 Ctrl-c . g s 切换到历史窗口 Ctrl-c . g h 切换到上一个编辑窗口 Ctrl-c . g l
-最基本的使用就是这样，Ctrl-C . h可以看到更详细的帮助信息。</description>
+切换到目录窗口 Ctrl-c . g d切换到函数/方法窗口 Ctrl-c . g m切换到文件窗口 Ctrl-c . g s切换到历史窗口 Ctrl-c . g h切换到上一个编辑窗口 Ctrl-c . g l最基本的使用就是这样，Ctrl-C . h可以看到更详细的帮助信息。</description>
     </item>
     
     <item>
@@ -108,9 +100,9 @@ ECB提供了方便在这些窗口间切换的快捷键：
       <description>Company的全写是complete everything，它只是一个补全的前端，会自动调用semantic等后端插件。
 新版的Company可以从它的官方主页(http://nschum.de/src/emacs/company-mode/)下载到，也可以从ELPA下载安装这个插件。
 使用这个插件时只要在.emacs中加入
-(add-to-list &#39;load-path &amp;quot;/path/to/company&amp;quot;) (autoload &#39;company-mode &amp;quot;company&amp;quot; nil t)  然后Emacs中使用M-x company-mode启动company模式即可。
+(add-to-list &amp;#39;load-path &amp;#34;/path/to/company&amp;#34;) (autoload &amp;#39;company-mode &amp;#34;company&amp;#34; nil t) 然后Emacs中使用M-x company-mode启动company模式即可。
 具体的按键可以在company.el中看到
-(defvar company-active-map (let ((keymap (make-sparse-keymap))) (define-key keymap &amp;quot;\e\e\e&amp;quot; &#39;company-abort) (define-key keymap &amp;quot;\C-g&amp;quot; &#39;company-abort) (define-key keymap (kbd &amp;quot;M-n&amp;quot;) &#39;company-select-next) (define-key keymap (kbd &amp;quot;M-p&amp;quot;) &#39;company-select-previous) (define-key keymap (kbd &amp;quot;&amp;quot;) &#39;company-select-next) (define-key keymap (kbd &amp;quot;&amp;quot;) &#39;company-select-previous) (define-key keymap [down-mouse-1] &#39;ignore) (define-key keymap [down-mouse-3] &#39;ignore) (define-key keymap [mouse-1] &#39;company-complete-mouse) (define-key keymap [mouse-3] &#39;company-select-mouse) (define-key keymap [up-mouse-1] &#39;ignore) (define-key keymap [up-mouse-3] &#39;ignore) (define-key keymap &amp;quot;\C-m&amp;quot; &#39;company-complete-selection) (define-key keymap &amp;quot;\t&amp;quot; &#39;company-complete-common) (define-key keymap (kbd &amp;quot;&amp;quot;) &#39;company-show-doc-buffer) (define-key keymap &amp;quot;\C-w&amp;quot; &#39;company-show-location) (define-key keymap &amp;quot;\C-s&amp;quot; &#39;company-search-candidates) (define-key keymap &amp;quot;\C-\M-s&amp;quot; &#39;company-filter-candidates) (dotimes (i 10) (define-key keymap (vector (+ (aref (kbd &amp;quot;M-0&amp;quot;) 0) i)) `(lambda () (interactive) (company-complete-number ,i)))) keymap) &amp;quot;Keymap that is enabled during an active completion.</description>
+(defvar company-active-map (let ((keymap (make-sparse-keymap))) (define-key keymap &amp;#34;\e\e\e&amp;#34; &amp;#39;company-abort) (define-key keymap &amp;#34;\C-g&amp;#34; &amp;#39;company-abort) (define-key keymap (kbd &amp;#34;M-n&amp;#34;) &amp;#39;company-select-next) (define-key keymap (kbd &amp;#34;M-p&amp;#34;) &amp;#39;company-select-previous) (define-key keymap (kbd &amp;#34;&amp;#34;) &amp;#39;company-select-next) (define-key keymap (kbd &amp;#34;&amp;#34;) &amp;#39;company-select-previous) (define-key keymap [down-mouse-1] &amp;#39;ignore) (define-key keymap [down-mouse-3] &amp;#39;ignore) (define-key keymap [mouse-1] &amp;#39;company-complete-mouse) (define-key keymap [mouse-3] &amp;#39;company-select-mouse) (define-key keymap [up-mouse-1] &amp;#39;ignore) (define-key keymap [up-mouse-3] &amp;#39;ignore) (define-key keymap &amp;#34;\C-m&amp;#34; &amp;#39;company-complete-selection) (define-key keymap &amp;#34;\t&amp;#34; &amp;#39;company-complete-common) (define-key keymap (kbd &amp;#34;&amp;#34;) &amp;#39;company-show-doc-buffer) (define-key keymap &amp;#34;\C-w&amp;#34; &amp;#39;company-show-location) (define-key keymap &amp;#34;\C-s&amp;#34; &amp;#39;company-search-candidates) (define-key keymap &amp;#34;\C-\M-s&amp;#34; &amp;#39;company-filter-candidates) (dotimes (i 10) (define-key keymap (vector (+ (aref (kbd &amp;#34;M-0&amp;#34;) 0) i)) `(lambda () (interactive) (company-complete-number ,i)))) keymap) &amp;#34;Keymap that is enabled during an active completion.</description>
     </item>
     
     <item>
@@ -123,11 +115,10 @@ ECB提供了方便在这些窗口间切换的快捷键：
 Windows下有个很方便的改键工具 remapkey，xp安装盘自带。
 Mac OS X系统中改键也很方便，10.4以上版本的OSX中可以直接在Keyboard Preference里找到修改键位映射的选项。
 Linux下的改键我知道两种方法，一种是修改xorg.conf文件，把里面的键盘设备设置改成
-Section &amp;quot;InputDevice&amp;quot; Identifier &amp;quot;Generic Keyboard&amp;quot; Driver &amp;quot;kbd&amp;quot; Option &amp;quot;CoreKeyboard&amp;quot; Option &amp;quot;XkbRules&amp;quot; &amp;quot;xorg&amp;quot; Option &amp;quot;XkbModel&amp;quot; &amp;quot;pc104&amp;quot; Option &amp;quot;XkbLayout&amp;quot; &amp;quot;us&amp;quot; Option &amp;quot;XkbOptions&amp;quot; &amp;quot;ctrl:swapcaps&amp;quot; EndSection  另一种是使用xmodmap这个工具，具体可以参见这篇文章 Changing your caps lock into Ctrl in X，这里简单介绍下
-修改前记得先备份当前的键位映射，xmodmap -pke &amp;gt; xmodmap.backup
-接下来运行
-xmodmap -e &#39;keycode 66 = Control_L&#39; xmodmap -e &#39;clear Lock&#39; xmodmap -e &#39;add Control = Control_L&#39;  这样就修改了Caps Lock的键位映射而不需要重启x，如果要在每次启动时自动修改Caps Lock键的映射，可以新建/修改一个.Xmodmap或者.xmodmap的文件，在里面加入
-keycode 66 = Control_L clear Lock add Control = Control_L    </description>
+Section &amp;#34;InputDevice&amp;#34; Identifier &amp;#34;Generic Keyboard&amp;#34; Driver &amp;#34;kbd&amp;#34; Option &amp;#34;CoreKeyboard&amp;#34; Option &amp;#34;XkbRules&amp;#34; &amp;#34;xorg&amp;#34; Option &amp;#34;XkbModel&amp;#34; &amp;#34;pc104&amp;#34; Option &amp;#34;XkbLayout&amp;#34; &amp;#34;us&amp;#34; Option &amp;#34;XkbOptions&amp;#34; &amp;#34;ctrl:swapcaps&amp;#34; EndSection 另一种是使用xmodmap这个工具，具体可以参见这篇文章 Changing your caps lock into Ctrl in X，这里简单介绍下
+修改前记得先备份当前的键位映射，xmodmap -pke &amp;gt; xmodmap.backup接下来运行
+xmodmap -e &amp;#39;keycode 66 = Control_L&amp;#39; xmodmap -e &amp;#39;clear Lock&amp;#39; xmodmap -e &amp;#39;add Control = Control_L&amp;#39; 这样就修改了Caps Lock的键位映射而不需要重启x，如果要在每次启动时自动修改Caps Lock键的映射，可以新建/修改一个.Xmodmap或者.xmodmap的文件，在里面加入
+keycode 66 = Control_L clear Lock add Control = Control_L </description>
     </item>
     
     <item>
@@ -136,9 +127,8 @@ keycode 66 = Control_L clear Lock add Control = Control_L    </description>
       <pubDate>Wed, 29 Apr 2009 00:00:00 +0000</pubDate>
       
       <guid>https://blog.yxwang.me/2009/04/using-mouse-in-emacs-within-terminal/</guid>
-      <description>http://linux.about.com/od/emacs_doc/a/emacsdoc567.htm
-M-x xterm-mouse-mode 开启鼠标支持，操作的时候按住shift能恢复到之前的xterm鼠标模式
-M-x mouse-wheel-mode 开启滚轮支持
+      <description>http://linux.about.com/od/emacs_doc/a/emacsdoc567.htmM-x xterm-mouse-mode开启鼠标支持，操作的时候按住shift能恢复到之前的xterm鼠标模式
+M-x mouse-wheel-mode开启滚轮支持
 一些相关的参数： mouse-drag-copy-region 选中后自动复制 mouse-wheel-scroll-amount 每次滚动的行数 mouse-wheel-follow-mouse 滚动位置 mouse-wheel-progressive-speed 滚动速度</description>
     </item>
     
@@ -148,8 +138,7 @@ M-x mouse-wheel-mode 开启滚轮支持
       <pubDate>Sat, 04 Apr 2009 00:00:00 +0000</pubDate>
       
       <guid>https://blog.yxwang.me/2009/04/emacs-bug-contribution/</guid>
-      <description>http://emacsbugs.donarmstrong.com/cgi-bin/bugreport.cgi?bug=2800
-Emacs在窗口过窄时使用minibuffer的auto-complete功能会挂掉，就把这bug报告上去了。负责人貌似是MIT的物理系毕业的博士？敬仰下。
+      <description>http://emacsbugs.donarmstrong.com/cgi-bin/bugreport.cgi?bug=2800Emacs在窗口过窄时使用minibuffer的auto-complete功能会挂掉，就把这bug报告上去了。负责人貌似是MIT的物理系毕业的博士？敬仰下。
 从后面回复来看，似乎这个bug emacs22里也有，应该还是蛮常见的呀，为啥之前没人report呢@@
 不管怎么说，总算也给Emacs出了份力，嘿嘿。</description>
     </item>
@@ -162,9 +151,9 @@ Emacs在窗口过窄时使用minibuffer的auto-complete功能会挂掉，就把�
       <guid>https://blog.yxwang.me/2009/02/emacs-tramp/</guid>
       <description>很好用的东东，可以方便的打开需要root权限或是远程服务器上的文件。
 统一的url格式是 /method:usr@machine:port/path/to.file，这种方式需要在载入tramp前设置tramp-syntax
-(setq tramp-syntax &#39;url) (require &#39;tramp)  也可以用(setq tramp-default-method &amp;ldquo;scp&amp;rdquo;) 指定默认的访问方法，这样就不需要/method://了
+(setq tramp-syntax &amp;#39;url) (require &amp;#39;tramp) 也可以用(setq tramp-default-method &amp;ldquo;scp&amp;rdquo;) 指定默认的访问方法，这样就不需要/method://了
 以我现在的org日程管理为例，个人日程文件保存在机房的73号机上，实验室电脑和寝室电脑上的电脑只要通过tramp远程访问这个org文件即可：
-(setq org-agenda-files (list &amp;quot;/scp:wyx@10.132.140.73:/home/wyx/notes/lab.org&amp;quot;))  </description>
+(setq org-agenda-files (list &amp;#34;/scp:wyx@10.132.140.73:/home/wyx/notes/lab.org&amp;#34;)) </description>
     </item>
     
   </channel>

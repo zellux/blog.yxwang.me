@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Closure on Aiur · Zellux 的博客</title>
@@ -18,7 +18,7 @@
       
       <guid>https://blog.yxwang.me/2008/10/python-inner-function-binding/</guid>
       <description>BBS上的一个帖子，问题是
-def a(): def b(): x += 1 x = 1 print &amp;quot;a: &amp;quot;, x b() print &amp;quot;b: &amp;quot;, x def c(): def d(): x[0] = [4] x = [3] print &amp;quot;c: &amp;quot;, x[0] d() print &amp;quot;d: &amp;quot;, x[0]  运行a()会报UnboundLocalError: local variable &amp;lsquo;x&amp;rsquo; referenced before assignment 但是运行c()会正确地显示3和4。
+def a(): def b(): x += 1 x = 1 print &amp;#34;a: &amp;#34;, x b() print &amp;#34;b: &amp;#34;, x def c(): def d(): x[0] = [4] x = [3] print &amp;#34;c: &amp;#34;, x[0] d() print &amp;#34;d: &amp;#34;, x[0] 运行a()会报UnboundLocalError: local variable &amp;lsquo;x&amp;rsquo; referenced before assignment 但是运行c()会正确地显示3和4。
 原因在于原因在于CPython实现closure的方式和常见的functional language不同，采用了flat closures实现。
 &amp;ldquo;If a name is bound anywhere within a code block, all uses of the name within the block are treated as references to the current block.</description>
     </item>

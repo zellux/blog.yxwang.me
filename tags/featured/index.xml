@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Featured on Aiur · Zellux 的博客</title>
@@ -34,12 +34,12 @@ Linear page table 很好的解决了这两个问题。它的实现很简单，�
       <description>看 OOP 教材时，书里提到了一个双检测锁定（Double-Checked Lock, DCL）的问题，但是没有更多介绍，只是说这是一个和底层内存机制有关的漏洞。查阅了下相关资料，对这个问题大致有了点了解。
 从头开始说吧。
 在多线程的情况下Singleton模式会遇到不少问题，一个简单的例子
-class Singleton { private static Singleton instance = null; public static Singleton instance() { if (instance == null) { instance = new Singleton(); } return instance; } }  假设这样一个场景，有两个线程调用 Singleton.instance()，首先线程一判断 instance 是否等于 null，判断完后一瞬间虚拟机把线程二调度为运行线程，线程二再次判断 instance 是否为 null，然后创建一个Singleton 实例，线程二的时间片用完后，线程一被唤醒，接下来它依然会创建一个新的 Singleton 实例，导致两次调用范围的对象不同。
+class Singleton { private static Singleton instance = null; public static Singleton instance() { if (instance == null) { instance = new Singleton(); } return instance; } } 假设这样一个场景，有两个线程调用 Singleton.instance()，首先线程一判断 instance 是否等于 null，判断完后一瞬间虚拟机把线程二调度为运行线程，线程二再次判断 instance 是否为 null，然后创建一个Singleton 实例，线程二的时间片用完后，线程一被唤醒，接下来它依然会创建一个新的 Singleton 实例，导致两次调用范围的对象不同。
 最简单的方法自然是在类被载入时就初始化这个对象：
-private static Singleton instance = new Singleton();  JLS (Java Language Specification) 中规定了一个类只会被初始化一次，所以这样做肯定是没问题的。
+private static Singleton instance = new Singleton(); JLS (Java Language Specification) 中规定了一个类只会被初始化一次，所以这样做肯定是没问题的。
 但是如果要实现延迟初始化（Lazy initialization），比如这个实例初始化时的参数要在运行期才能确定，应该怎么做呢？
 依然有最简单的方法：使用 synchronized 关键字修饰初始化方法：
-public synchronized static Singleton instance() { if (instance == null) { instance = new Singleton(); } return instance; }  然而引入 synchronized 关键字后，产生了一个性能问题：多个线程同时访问这个方法时，会因为同步原语而导致每次只有一个线程执行这段代码，影响程序性能。而事实上初始化完毕后只需要简单的返回 instance 的引用就行了。</description>
+public synchronized static Singleton instance() { if (instance == null) { instance = new Singleton(); } return instance; } 然而引入 synchronized 关键字后，产生了一个性能问题：多个线程同时访问这个方法时，会因为同步原语而导致每次只有一个线程执行这段代码，影响程序性能。而事实上初始化完毕后只需要简单的返回 instance 的引用就行了。</description>
     </item>
     
     <item>
@@ -52,10 +52,11 @@ public synchronized static Singleton instance() { if (instance == null) { instan
 先来看看样章上给出的几个算法：
 解法一，每次除二，看是否为奇数，是的话就累计加一，最后这个结果就是二进制表示中1的个数。
 解法二，同样用到一个循环，只是里面的操作用位移操作简化了。
-int Count(int v) { int num = 0; while (v) { num += v &amp;amp; 0x01; v &amp;gt;&amp;gt;= 1; } return num; }  解法三，用到一个巧妙的与操作，v &amp;amp; (v - 1) 每次能消去二进制表示中最后一位 1，利用这个技巧可以减少一定的循环次数。
+int Count(int v) { int num = 0; while (v) { num += v &amp;amp; 0x01; v &amp;gt;&amp;gt;= 1; } return num; } 解法三，用到一个巧妙的与操作，v &amp;amp; (v - 1) 每次能消去二进制表示中最后一位 1，利用这个技巧可以减少一定的循环次数。
 解法四，查表法，因为 8 位整型的范围是 0 - 255，可以直接把结果保存在一张表中，然后查表就行。书上强调这个算法的复杂度为 O(1)。
-int countTable[256] = { 0, 1, 1, 2, 1, ..., 7, 7, 8 }; int Count(int v) { return countTable[v]; }  好了，这就是样章上给出的四种方案，下面谈谈我的看法。
-首先是对算法的衡量上，复杂度真的是唯一的标准吗？尤其对于这种数据规模给定，而且很小的情况下，复杂度其实是个比较次要的因素。</description>
+int countTable[256] = { 0, 1, 1, 2, 1, ..., 7, 7, 8 }; int Count(int v) { return countTable[v]; } 好了，这就是样章上给出的四种方案，下面谈谈我的看法。
+首先是对算法的衡量上，复杂度真的是唯一的标准吗？尤其对于这种数据规模给定，而且很小的情况下，复杂度其实是个比较次要的因素。
+查表法的复杂度为 O(1)，用解法一，循环次数不会超过 8 次，所以时间复杂度也是 O(1)。至于数据规模变大，例如变成 32 位整型，那查表法自然也不合适了。</description>
     </item>
     
   </channel>

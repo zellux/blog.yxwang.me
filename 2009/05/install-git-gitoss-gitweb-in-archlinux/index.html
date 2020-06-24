@@ -11,6 +11,7 @@
     
 
     <title> ArchLinux 下安装 git, gitosis, gitweb 服务 &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -39,7 +40,7 @@
     "articleSection" : "post",
     "name" : "ArchLinux 下安装 git, gitosis, gitweb 服务",
     "headline" : "ArchLinux 下安装 git, gitosis, gitweb 服务",
-    "description" : "参考文章：\n[1] http:\/\/hokietux.net\/blog\/?p=58 [2] http:\/\/scie.nti.st\/2007\/11\/14\/hosting-git-repositories-the-easy-and-secure-way [3] http:\/\/www.nkuttler.de\/2009\/04\/06\/git-clone-ssh-could-not-resolve-hostname\/\n git  很简单，直接用pacman安装即可 sudo pacman -S git\n gitosis  gitosis是一个方便管理git仓库的工具，安装方法：\n1) 从yaourt或者aur下载安装gitosis-git包 http:\/\/aur.archlinux.org\/packages.php?ID=23419\n2) 新建git用户 sudo useradd \x26ndash;system \x26ndash;shell \/bin\/sh \x26ndash;comment \x26lsquo;git version control\x26rsquo;\x26ndash;user-group \x26ndash;home-dir \/home\/git\/ git\n3) 将开发用户的rsa公钥导入gitosis，（没有公钥的话请先运行ssh-keygen -t rsa生成） sudo -H -u git gitosis-init \x26lt; ~\/.ssh\/id_rsa.pub\n4) 如果以上步骤没有问题，那么运行 git clone ssh:\/\/git@hostname\/gitosis-admin.git 后应该就能看到gitosis-admin.git这个目录了\n5) 新建项目、添加用户等操作参见[2]，这里不再赘述\n gitweb  事实上ArchLinux中安装的git包自带了gitweb，可以用which gitweb搜到，一般默认在\/usr\/share\/gitweb。下面假设我的http根目录为\/home\/httpd\n1) 将\/usr\/share\/gitweb下的文件复制到\/home\/httpd\/cgi-bin（其实似乎只要gitweb.cgi就够了）  sudo cp -R \/usr\/share\/gitweb \/home\/httpd\/cgi-bin\/ \n2) \/usr\/share\/gitweb下的.",
+    "description" : "参考文章：\n[1] http:\/\/hokietux.net\/blog\/?p=58[2] http:\/\/scie.nti.st\/2007\/11\/14\/hosting-git-repositories-the-easy-and-secure-way[3] http:\/\/www.nkuttler.de\/2009\/04\/06\/git-clone-ssh-could-not-resolve-hostname\/ git  很简单，直接用pacman安装即可 sudo pacman -S git\ngitosis  gitosis是一个方便管理git仓库的工具，安装方法：\n  从yaourt或者aur下载安装gitosis-git包 http:\/\/aur.archlinux.org\/packages.php?ID=23419\n  新建git用户 sudo useradd \u0026ndash;system \u0026ndash;shell \/bin\/sh \u0026ndash;comment \u0026lsquo;git version control\u0026rsquo;\u0026ndash;user-group \u0026ndash;home-dir \/home\/git\/ git  将开发用户的rsa公钥导入gitosis，（没有公钥的话请先运行ssh-keygen -t rsa生成） sudo -H -u git gitosis-init \u0026lt; ~\/.ssh\/id_rsa.pub  如果以上步骤没有问题，那么运行git clone ssh:\/\/git@hostname\/gitosis-admin.git后应该就能看到gitosis-admin.git这个目录了\n  新建项目、添加用户等操作参见[2]，这里不再赘述\n  gitweb  事实上ArchLinux中安装的git包自带了gitweb，可以用which gitweb搜到，一般默认在\/usr\/share\/gitweb。下面假设我的http根目录为\/home\/httpd\n  将\/usr\/share\/gitweb下的文件复制到\/home\/httpd\/cgi-bin（其实似乎只要gitweb.cgi就够了） sudo cp -R \/usr\/share\/gitweb \/home\/httpd\/cgi-bin\/   \/usr\/share\/gitweb下的.css和.png复制到\/home\/httpd\/html\/git\/\n  修改或创建\/etc\/gitweb.",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -47,10 +48,10 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2009",
-    "datePublished": "2009-05-26 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2009-05-26 00:00:00 \x2b0000 UTC",
+    "datePublished": "2009-05-26 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2009-05-26 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/2009\/05\/install-git-gitoss-gitweb-in-archlinux\/",
-    "wordCount" : "159",
+    "wordCount" : "145",
     "keywords" : [ "ArchLinux","Git","Server","Tooling","git","Blog" ]
 }
 </script>
@@ -94,68 +95,72 @@
 
     <div class="post-content">
       <p>参考文章：</p>
-
-<p>[1] <a href="http://hokietux.net/blog/?p=58" target="_blank"><a href="http://hokietux.net/blog/?p=58">http://hokietux.net/blog/?p=58</a></a>
-[2] <a href="http://scie.nti.st/2007/11/14/hosting-git-repositories-the-easy-and-secure-way" target="_blank"><a href="http://scie.nti.st/2007/11/14/hosting-git-repositories-the-easy-and-secure-way">http://scie.nti.st/2007/11/14/hosting-git-repositories-the-easy-and-secure-way</a></a>
-[3] <a href="http://www.nkuttler.de/2009/04/06/git-clone-ssh-could-not-resolve-hostname/" target="_blank"><a href="http://www.nkuttler.de/2009/04/06/git-clone-ssh-could-not-resolve-hostname/">http://www.nkuttler.de/2009/04/06/git-clone-ssh-could-not-resolve-hostname/</a></a></p>
-
+<p>[1] <!-- raw HTML omitted --><a href="http://hokietux.net/blog/?p=58">http://hokietux.net/blog/?p=58</a><!-- raw HTML omitted -->
+[2] <!-- raw HTML omitted --><a href="http://scie.nti.st/2007/11/14/hosting-git-repositories-the-easy-and-secure-way">http://scie.nti.st/2007/11/14/hosting-git-repositories-the-easy-and-secure-way</a><!-- raw HTML omitted -->
+[3] <!-- raw HTML omitted --><a href="http://www.nkuttler.de/2009/04/06/git-clone-ssh-could-not-resolve-hostname/">http://www.nkuttler.de/2009/04/06/git-clone-ssh-could-not-resolve-hostname/</a><!-- raw HTML omitted --></p>
 <ol>
 <li>git</li>
 </ol>
-
 <p>很简单，直接用pacman安装即可
 sudo pacman -S git</p>
-
-<ol>
+<ol start="2">
 <li>gitosis</li>
 </ol>
-
 <p>gitosis是一个方便管理git仓库的工具，安装方法：</p>
-
-<p>1) 从yaourt或者aur下载安装gitosis-git包 <a href="http://aur.archlinux.org/packages.php?ID=23419">http://aur.archlinux.org/packages.php?ID=23419</a></p>
-
-<p>2) 新建git用户
-<u>sudo useradd &ndash;system &ndash;shell /bin/sh &ndash;comment &lsquo;git version control&rsquo;&ndash;user-group &ndash;home-dir /home/git/ git</u></p>
-
-<p>3) 将开发用户的rsa公钥导入gitosis，（没有公钥的话请先运行<u>ssh-keygen -t rsa</u>生成）
-<u>sudo -H -u git gitosis-init &lt; ~/.ssh/id_rsa.pub</u></p>
-
-<p>4) 如果以上步骤没有问题，那么运行<u>
-git clone ssh://git@hostname/gitosis-admin.git</u>
-后应该就能看到gitosis-admin.git这个目录了</p>
-
-<p>5) 新建项目、添加用户等操作参见[2]，这里不再赘述</p>
-
 <ol>
+<li>
+<p>从yaourt或者aur下载安装gitosis-git包 <a href="http://aur.archlinux.org/packages.php?ID=23419">http://aur.archlinux.org/packages.php?ID=23419</a></p>
+</li>
+<li>
+<p>新建git用户
+<!-- raw HTML omitted -->sudo useradd &ndash;system &ndash;shell /bin/sh &ndash;comment &lsquo;git version control&rsquo;&ndash;user-group &ndash;home-dir /home/git/ git<!-- raw HTML omitted --></p>
+</li>
+<li>
+<p>将开发用户的rsa公钥导入gitosis，（没有公钥的话请先运行<!-- raw HTML omitted -->ssh-keygen -t rsa<!-- raw HTML omitted -->生成）
+<!-- raw HTML omitted -->sudo -H -u git gitosis-init &lt; ~/.ssh/id_rsa.pub<!-- raw HTML omitted --></p>
+</li>
+<li>
+<p>如果以上步骤没有问题，那么运行<!-- raw HTML omitted -->
+git clone ssh://git@hostname/gitosis-admin.git<!-- raw HTML omitted -->
+后应该就能看到gitosis-admin.git这个目录了</p>
+</li>
+<li>
+<p>新建项目、添加用户等操作参见[2]，这里不再赘述</p>
+</li>
+</ol>
+<ol start="3">
 <li>gitweb</li>
 </ol>
-
 <p>事实上ArchLinux中安装的git包自带了gitweb，可以用which gitweb搜到，一般默认在/usr/share/gitweb。下面假设我的http根目录为/home/httpd</p>
-
-<p>1) 将/usr/share/gitweb下的文件复制到/home/httpd/cgi-bin（其实似乎只要gitweb.cgi就够了） <u>
+<ol>
+<li>
+<p>将/usr/share/gitweb下的文件复制到/home/httpd/cgi-bin（其实似乎只要gitweb.cgi就够了） <!-- raw HTML omitted -->
 sudo cp -R /usr/share/gitweb /home/httpd/cgi-bin/
-</u></p>
-
-<p>2) /usr/share/gitweb下的.css和.png复制到/home/httpd/html/git/</p>
-
-<p>3) 修改或创建/etc/gitweb.conf，具体配置如下</p>
-
-<pre><code class="language-text"># git命令的地址
-$GIT = &quot;/usr/bin/git&quot;;
+<!-- raw HTML omitted --></p>
+</li>
+<li>
+<p>/usr/share/gitweb下的.css和.png复制到/home/httpd/html/git/</p>
+</li>
+<li>
+<p>修改或创建/etc/gitweb.conf，具体配置如下</p>
+</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text"># git命令的地址
+$GIT = &#34;/usr/bin/git&#34;;
 
 # 项目仓库地址
-$projectroot = &quot;/home/git/repositories&quot;;
+$projectroot = &#34;/home/git/repositories&#34;;
 
 # 网页显示相关的文件，我把它们都放在了/home/httpd/html/git/下
-$stylesheet = &quot;/git/gitweb.css&quot;;
-$logo = &quot;/git/git-logo.png&quot;;
-$favicon = &quot;/git/git-favicon.png&quot;;
+$stylesheet = &#34;/git/gitweb.css&#34;;
+$logo = &#34;/git/git-logo.png&#34;;
+$favicon = &#34;/git/git-favicon.png&#34;;
 
 # 首页显示的站点名
-$site_name = &quot;ZelluX's Git Trees&quot;;
+$site_name = &#34;ZelluX&#39;s Git Trees&#34;;
 
 # 项目信息中显示的地址，
-@git_base_url_list = (&quot;ssh://git\@hostname&quot;);
+@git_base_url_list = (&#34;ssh://git\@hostname&#34;);
 
 # 网页中项目说明的显示长度
 $projects_list_description_width = 50;
@@ -164,33 +169,32 @@ $projects_list_description_width = 50;
 # 那么hello这个项目就会显示在项目列表上。
 # 但是似乎每次pull或者push操作都会导致git把这个它认为多余的文件删掉，不知道有没有其他的解决方案。
 # 把这行注释掉就允许所有的项目显示在网页上。
-$export_ok = &quot;git-daemon-export-ok&quot;;
+$export_ok = &#34;git-daemon-export-ok&#34;;
 
-$feature{'pathinfo'}{'default'} = [1];
+$feature{&#39;pathinfo&#39;}{&#39;default&#39;} = [1];
 
-$feature{'blame'}{'default'} = [1];
-$feature{'blame'}{'override'} = [1];
+$feature{&#39;blame&#39;}{&#39;default&#39;} = [1];
+$feature{&#39;blame&#39;}{&#39;override&#39;} = [1];
 
-$feature{'pickaxe'}{'default'} = [1];
-$feature{'pickaxe'}{'override'} = [1];
+$feature{&#39;pickaxe&#39;}{&#39;default&#39;} = [1];
+$feature{&#39;pickaxe&#39;}{&#39;override&#39;} = [1];
 
-$feature{'snapshot'}{'default'} = [1];
-$feature{'snapshot'}{'override'} = [1];
+$feature{&#39;snapshot&#39;}{&#39;default&#39;} = [1];
+$feature{&#39;snapshot&#39;}{&#39;override&#39;} = [1];
 
-$feature{'search'}{'default'} = [1];
+$feature{&#39;search&#39;}{&#39;default&#39;} = [1];
 
-$feature{'grep'}{'default'} = [1];
-$feature{'grep'}{'override'} = [1];
-</code></pre>
-
-<p>4) 在apache的配置中增加以下内容 /etc/httpd/conf/httpd.conf，这里我没有用VirtualHost机制，只加了行URL重写规则，VirtualHost的配置方法参见[1]</p>
-
-<pre><code class="language-text">
+$feature{&#39;grep&#39;}{&#39;default&#39;} = [1];
+$feature{&#39;grep&#39;}{&#39;override&#39;} = [1];
+</code></pre></div><ol start="4">
+<li>在apache的配置中增加以下内容 /etc/httpd/conf/httpd.conf，这里我没有用VirtualHost机制，只加了行URL重写规则，VirtualHost的配置方法参见[1]</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">
 RewriteEngine on
 RewriteRule ^/gitweb/(.*) /cgi-bin/gitweb.cgi/$1 [L,PT]
-</code></pre>
-
-<p>5) 重启apache后应该就能访问 <a href="http://hostname/gitweb/">http://hostname/gitweb/</a> 了，如果提示Project not found，请确认apache能访问git的仓库目录，并且相应的项目目录下有git-daemon-export-ok这个文件。</p>
+</code></pre></div><ol start="5">
+<li>重启apache后应该就能访问 http://hostname/gitweb/ 了，如果提示Project not found，请确认apache能访问git的仓库目录，并且相应的项目目录下有git-daemon-export-ok这个文件。</li>
+</ol>
 
     </div>
         <div class="cc-license">

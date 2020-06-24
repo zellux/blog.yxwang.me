@@ -11,6 +11,7 @@
     
 
     <title> 转用 octopress 了 &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -39,7 +40,7 @@
     "articleSection" : "post",
     "name" : "转用 octopress 了",
     "headline" : "转用 octopress 了",
-    "description" : "jekyll 是一个静态博客生成工具，可配置性很强。但是它的配置对于初学者不是很友好，没有现成的模版，需要自己从头搭一个。octopress 大大简化了这一配置过程，在 jekyll 的基础上提供了一个默认主题，以及一些常用的插件。\nWhy 在 github 上捣鼓了一阵子 octopress 后，决定把原来的 wordpress 博客的数据转移到这个 octopress 博客上了。相对于 wordpress，octopress 的优点在于：\n 支持 Markdown 语法。Markdown 是 github、stackoverflow 上的默认标记语言，写笔记我也一直用这个。Mac 平台上有不少好用的 Markdown 编辑器，例如收费的 Byword，免费的 Mou，这些工具都增加了写日志时的愉悦感。\n 静态。对主页空间没有要求，甚至放到 github pages 上都可以。静态页面如果要加评论，可以考虑 disqus 等第三方 JS 工具。\n 对内嵌代码支持很好。内置了 pygments ，这里有一份支持语言的列表。值得一提的是 octopress 还支持内嵌 Gist。\n 日志文件都在本地，而且是纯文本，管理很方便（可以用 git），也不用担心租用的服务器数据丢失等问题。\n rake new_post; rake gen_deploy 这样写博客很过瘾 :)\n  How 关于 wordpress 到 octopress 的数据转移，本文结尾的两篇参考文章已经说得很详细了，这里再补充几点：\n 编码：jekyll 的 wordpressdotcom.rb 用了 yaml 库生成博客文章的 meta 信息，碰到中文标题会出现乱码，换用 ya2yaml 后问题解决。",
+    "description" : "jekyll 是一个静态博客生成工具，可配置性很强。但是它的配置对于初学者不是很友好，没有现成的模版，需要自己从头搭一个。octopress 大大简化了这一配置过程，在 jekyll 的基础上提供了一个默认主题，以及一些常用的插件。\nWhy 在 github 上捣鼓了一阵子 octopress 后，决定把原来的 wordpress 博客的数据转移到这个 octopress 博客上了。相对于 wordpress，octopress 的优点在于：\n  支持 Markdown 语法。Markdown 是 github、stackoverflow 上的默认标记语言，写笔记我也一直用这个。Mac 平台上有不少好用的 Markdown 编辑器，例如收费的 Byword，免费的 Mou，这些工具都增加了写日志时的愉悦感。\n  静态。对主页空间没有要求，甚至放到 github pages 上都可以。静态页面如果要加评论，可以考虑 disqus 等第三方 JS 工具。\n  对内嵌代码支持很好。内置了 pygments ，这里有一份支持语言的列表。值得一提的是 octopress 还支持内嵌 Gist。\n  日志文件都在本地，而且是纯文本，管理很方便（可以用 git），也不用担心租用的服务器数据丢失等问题。\n  rake new_post; rake gen_deploy 这样写博客很过瘾 :)\n  How 关于 wordpress 到 octopress 的数据转移，本文结尾的两篇参考文章已经说得很详细了，这里再补充几点：\n  编码：jekyll 的 wordpressdotcom.",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -47,8 +48,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2011",
-    "datePublished": "2011-11-29 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2011-11-29 00:00:00 \x2b0000 UTC",
+    "datePublished": "2011-11-29 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2011-11-29 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/2011\/11\/migrated-to-octopress\/",
     "wordCount" : "126",
     "keywords" : [ "Meta","Meta-blogging","Octopress","Blog" ]
@@ -93,52 +94,56 @@
 </span>
 
     <div class="post-content">
-      
-
-<p><a href="https://github.com/mojombo/jekyll">jekyll</a> 是一个静态博客生成工具，可配置性很强。但是它的配置对于初学者不是很友好，没有现成的模版，需要自己从头搭一个。<a href="http://octopress.org/">octopress</a> 大大简化了这一配置过程，在 jekyll 的基础上提供了一个默认主题，以及一些常用的插件。</p>
-
+      <p><a href="https://github.com/mojombo/jekyll">jekyll</a> 是一个静态博客生成工具，可配置性很强。但是它的配置对于初学者不是很友好，没有现成的模版，需要自己从头搭一个。<a href="http://octopress.org/">octopress</a> 大大简化了这一配置过程，在 jekyll 的基础上提供了一个默认主题，以及一些常用的插件。</p>
 <h3 id="why">Why</h3>
-
 <p>在 github 上捣鼓了一阵子 octopress 后，决定把原来的 wordpress 博客的数据转移到这个 octopress 博客上了。相对于 wordpress，octopress 的优点在于：</p>
-
 <ul>
-<li><p>支持 <a href="http://daringfireball.net/projects/markdown/">Markdown</a> 语法。Markdown 是 github、stackoverflow 上的默认标记语言，写笔记我也一直用这个。Mac 平台上有不少好用的 Markdown 编辑器，例如收费的 <a href="http://bywordapp.com/">Byword</a>，免费的 <a href="http://mouapp.com/">Mou</a>，这些工具都增加了写日志时的愉悦感。</p></li>
-
-<li><p>静态。对主页空间没有要求，甚至放到 github pages 上都可以。静态页面如果要加评论，可以考虑 <a href="http://www.disqus.com/">disqus</a> 等第三方 JS 工具。</p></li>
-
-<li><p>对内嵌代码支持很好。内置了 <a href="http://pygments.org/">pygments</a> ，这里有一份支持语言的<a href="http://pygments.org/languages/">列表</a>。值得一提的是 octopress 还支持内嵌 Gist。</p></li>
-
-<li><p>日志文件都在本地，而且是纯文本，管理很方便（可以用 git），也不用担心租用的服务器数据丢失等问题。</p></li>
-
-<li><p><code>rake new_post; rake gen_deploy</code> 这样写博客很过瘾 :)</p></li>
+<li>
+<p>支持 <a href="http://daringfireball.net/projects/markdown/">Markdown</a> 语法。Markdown 是 github、stackoverflow 上的默认标记语言，写笔记我也一直用这个。Mac 平台上有不少好用的 Markdown 编辑器，例如收费的 <a href="http://bywordapp.com/">Byword</a>，免费的 <a href="http://mouapp.com/">Mou</a>，这些工具都增加了写日志时的愉悦感。</p>
+</li>
+<li>
+<p>静态。对主页空间没有要求，甚至放到 github pages 上都可以。静态页面如果要加评论，可以考虑 <a href="http://www.disqus.com/">disqus</a> 等第三方 JS 工具。</p>
+</li>
+<li>
+<p>对内嵌代码支持很好。内置了 <a href="http://pygments.org/">pygments</a> ，这里有一份支持语言的<a href="http://pygments.org/languages/">列表</a>。值得一提的是 octopress 还支持内嵌 Gist。</p>
+</li>
+<li>
+<p>日志文件都在本地，而且是纯文本，管理很方便（可以用 git），也不用担心租用的服务器数据丢失等问题。</p>
+</li>
+<li>
+<p><code>rake new_post; rake gen_deploy</code> 这样写博客很过瘾 :)</p>
+</li>
 </ul>
-
 <h2 id="how">How</h2>
-
 <p>关于 wordpress 到 octopress 的数据转移，本文结尾的两篇参考文章已经说得很详细了，这里再补充几点：</p>
-
 <ul>
-<li><p>编码：jekyll 的 wordpressdotcom.rb 用了 yaml 库生成博客文章的 meta 信息，碰到中文标题会出现乱码，换用 <a href="https://github.com/rkj/ya2yaml">ya2yaml</a> 后问题解决。</p></li>
-
-<li><p>博客图片：把原来的 wp-content 目录复制过来，再统一改下路径即可。</p></li>
-
-<li><p>文章格式：wordpress 导出的文章内容格式比较特殊，不是标准的 HTML，因为它的换行都是有意义的，考虑到这点我就把文章保存成 .markdown 后缀了，效果也不错。Vito 的博客上还介绍了 <a href="https://github.com/cousine/downmark_it">downmark_it</a> 这个把 HTML 转成 Markdown 的工具。</p></li>
-
-<li><p>评论：用了 disqus，它还支持导入 wordpress 上过去的评论。</p></li>
-
-<li><p>代码高亮：之前博客用的是一个基于 JS 的 <a href="http://alexgorbatchev.com/SyntaxHighlighter/">SyntexHighlighter</a>，octopress 自带了 pygments 作为语法高亮工具，两者高亮标记不一样，需要用 nokogiri 转换下。</p></li>
-
-<li><p>RSS：虽然 octopress 自带了生成 Atom 的插件，但是只能生成一个，而之前博客的 /feed/ 和 /rss.xml 都有人订阅，所以得在 nginx 配置里加了几条重写规则保证这些 URL 都有效。</p></li>
-
-<li><p>主题：octopress 支持用 <a href="http://sass-lang.com/">SCSS</a> 自定义主题。现在这个用的主题还是默认的，改天再考虑要不要把原来的主题也移植过来。</p></li>
-
-<li><p>写作：建议在 Rakefile 的 new_post 方法结尾启动 Markdown 编辑器打开新生成的文件，这样就免去手动查找的麻烦了。</p></li>
+<li>
+<p>编码：jekyll 的 wordpressdotcom.rb 用了 yaml 库生成博客文章的 meta 信息，碰到中文标题会出现乱码，换用 <a href="https://github.com/rkj/ya2yaml">ya2yaml</a> 后问题解决。</p>
+</li>
+<li>
+<p>博客图片：把原来的 wp-content 目录复制过来，再统一改下路径即可。</p>
+</li>
+<li>
+<p>文章格式：wordpress 导出的文章内容格式比较特殊，不是标准的 HTML，因为它的换行都是有意义的，考虑到这点我就把文章保存成 .markdown 后缀了，效果也不错。Vito 的博客上还介绍了 <a href="https://github.com/cousine/downmark_it">downmark_it</a> 这个把 HTML 转成 Markdown 的工具。</p>
+</li>
+<li>
+<p>评论：用了 disqus，它还支持导入 wordpress 上过去的评论。</p>
+</li>
+<li>
+<p>代码高亮：之前博客用的是一个基于 JS 的 <a href="http://alexgorbatchev.com/SyntaxHighlighter/">SyntexHighlighter</a>，octopress 自带了 pygments 作为语法高亮工具，两者高亮标记不一样，需要用 nokogiri 转换下。</p>
+</li>
+<li>
+<p>RSS：虽然 octopress 自带了生成 Atom 的插件，但是只能生成一个，而之前博客的 /feed/ 和 /rss.xml 都有人订阅，所以得在 nginx 配置里加了几条重写规则保证这些 URL 都有效。</p>
+</li>
+<li>
+<p>主题：octopress 支持用 <a href="http://sass-lang.com/">SCSS</a> 自定义主题。现在这个用的主题还是默认的，改天再考虑要不要把原来的主题也移植过来。</p>
+</li>
+<li>
+<p>写作：建议在 Rakefile 的 new_post 方法结尾启动 Markdown 编辑器打开新生成的文件，这样就免去手动查找的麻烦了。</p>
+</li>
 </ul>
-
 <p>这个是<a href="https://gist.github.com/1403202">修改后的 wordpressdotcom.rb</a>，根据我的博客的情况加了一些特殊情况的处理，有同样需求的朋友可以参考下。</p>
-
 <p>参考：</p>
-
 <ul>
 <li><a href="https://github.com/mojombo/jekyll/wiki/Blog-Migrations">jekyll 的 wiki</a></li>
 <li><a href="http://vitobotta.com/how-to-migrate-from-wordpress-to-jekyll/">Vito 的博客日志</a></li>

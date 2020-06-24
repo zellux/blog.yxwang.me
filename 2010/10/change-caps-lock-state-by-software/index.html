@@ -11,6 +11,7 @@
     
 
     <title> 软件修改 Caps Lock 状态 &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -39,7 +40,7 @@
     "articleSection" : "post",
     "name" : "软件修改 Caps Lock 状态",
     "headline" : "软件修改 Caps Lock 状态",
-    "description" : "我经常使用的几台电脑中的Caps Lock 键都被我改成了 Ctrl 键，这样修改以后用起 Emacs 来就顺手多了。\n最近在 Windows 上用 VMware Remote Control 远登虚拟机调试内核的时候，问题就出来了：可能是这个浏览器插件的 bug，有时键盘的 Caps Lock 会被莫名打开。然后我的这个键盘键位又比较少，不想再让 Caps Lock 键替换另一个用得更少的按键了，于是想到了软件关闭的方法。\n搜了下 Stackoverflow 找到个很好用的 Python 库SendKeys，只要两行代码就能在 Windows 下模拟 Caps Lock 按键了：\nimport SendKeys SendKeys.SendKeys(\x26quot;{CAPSLOCK}\x26quot;)  另外在 Linux 要模拟按键，可以直接访问 \/dev\/console：\nimport fcntl import os KDSETLED = 0x4B32 console_fd = os.open(\x27\/dev\/console\x27, os.O_NOCTTY) # Turn on caps lock fcntl.ioctl(console_fd, KDSETLED, 0x04) # Turn off caps lock fcntl.ioctl(console_fd, KDSETLED, 0)  原问题地址",
+    "description" : "我经常使用的几台电脑中的Caps Lock 键都被我改成了 Ctrl 键，这样修改以后用起 Emacs 来就顺手多了。\n最近在 Windows 上用 VMware Remote Control 远登虚拟机调试内核的时候，问题就出来了：可能是这个浏览器插件的 bug，有时键盘的 Caps Lock 会被莫名打开。然后我的这个键盘键位又比较少，不想再让 Caps Lock 键替换另一个用得更少的按键了，于是想到了软件关闭的方法。\n搜了下 Stackoverflow 找到个很好用的 Python 库SendKeys，只要两行代码就能在 Windows 下模拟 Caps Lock 按键了：\nimport SendKeys SendKeys.SendKeys(\u0026#34;{CAPSLOCK}\u0026#34;) 另外在 Linux 要模拟按键，可以直接访问 \/dev\/console：\nimport fcntl import os KDSETLED = 0x4B32 console_fd = os.open(\u0026#39;\/dev\/console\u0026#39;, os.O_NOCTTY) # Turn on caps lock fcntl.ioctl(console_fd, KDSETLED, 0x04) # Turn off caps lock fcntl.ioctl(console_fd, KDSETLED, 0) 原问题地址",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -47,8 +48,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2010",
-    "datePublished": "2010-10-19 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2010-10-19 00:00:00 \x2b0000 UTC",
+    "datePublished": "2010-10-19 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2010-10-19 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/2010\/10\/change-caps-lock-state-by-software\/",
     "wordCount" : "66",
     "keywords" : [ "Keyboard","Python","Tooling","Blog" ]
@@ -93,33 +94,25 @@
 </span>
 
     <div class="post-content">
-      <p>我经常使用的几台电脑中的<a href="http://techblog.iamzellux.com/2009/05/caps-lock-to-ctrl/">Caps Lock 键都被我改成了 Ctrl 键</a>，这样修改以后用起 Emacs 来就顺手多了。</p>
-
+      <p>我经常使用的几台电脑中的<!-- raw HTML omitted -->Caps Lock 键都被我改成了 Ctrl 键<!-- raw HTML omitted -->，这样修改以后用起 Emacs 来就顺手多了。</p>
 <p>最近在 Windows 上用 VMware Remote Control 远登虚拟机调试内核的时候，问题就出来了：可能是这个浏览器插件的 bug，有时键盘的 Caps Lock 会被莫名打开。然后我的这个键盘键位又比较少，不想再让 Caps Lock 键替换另一个用得更少的按键了，于是想到了软件关闭的方法。</p>
+<p>搜了下 Stackoverflow 找到个很好用的 Python 库<!-- raw HTML omitted -->SendKeys<!-- raw HTML omitted -->，只要两行代码就能在 Windows 下模拟 Caps Lock 按键了：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> SendKeys
+SendKeys<span style="color:#f92672">.</span>SendKeys(<span style="color:#e6db74">&#34;{CAPSLOCK}&#34;</span>)
+</code></pre></div><p>另外在 Linux 要模拟按键，可以直接访问 /dev/console：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> fcntl
+<span style="color:#f92672">import</span> os
 
-<p>搜了下 Stackoverflow 找到个很好用的 Python 库<a href="http://www.rutherfurd.net/python/sendkeys/">SendKeys</a>，只要两行代码就能在 Windows 下模拟 Caps Lock 按键了：</p>
+KDSETLED <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x4B32</span>
 
-<pre><code class="language-python">import SendKeys
-SendKeys.SendKeys(&quot;{CAPSLOCK}&quot;)
-</code></pre>
+console_fd <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>open(<span style="color:#e6db74">&#39;/dev/console&#39;</span>, os<span style="color:#f92672">.</span>O_NOCTTY)
 
-<p>另外在 Linux 要模拟按键，可以直接访问 /dev/console：</p>
+<span style="color:#75715e"># Turn on caps lock</span>
+fcntl<span style="color:#f92672">.</span>ioctl(console_fd, KDSETLED, <span style="color:#ae81ff">0x04</span>)
 
-<pre><code class="language-python">import fcntl
-import os
-
-KDSETLED = 0x4B32
-
-console_fd = os.open('/dev/console', os.O_NOCTTY)
-
-# Turn on caps lock
-fcntl.ioctl(console_fd, KDSETLED, 0x04)
-
-# Turn off caps lock
-fcntl.ioctl(console_fd, KDSETLED, 0)
-</code></pre>
-
-<p><a href="http://stackoverflow.com/questions/2171408/how-to-change-caps-lock-status-without-key-press">原问题地址</a></p>
+<span style="color:#75715e"># Turn off caps lock</span>
+fcntl<span style="color:#f92672">.</span>ioctl(console_fd, KDSETLED, <span style="color:#ae81ff">0</span>)
+</code></pre></div><p><!-- raw HTML omitted -->原问题地址<!-- raw HTML omitted --></p>
 
     </div>
         <div class="cc-license">

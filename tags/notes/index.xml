@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Notes on Aiur · Zellux 的博客</title>
@@ -72,10 +72,10 @@
       
       <guid>https://blog.yxwang.me/2008/08/os-lab5-debug-notes/</guid>
       <description>还算顺利，不过这个lab蛮无聊的，等有空了把syscall改成类似linux的做法，单一中断号+寄存器选择syscall。
- 最花时间的一个bug是ls返回值没有改成应用程序数，结果一开始一直以为是brk系统调用没写好，最后才发现问题出在这么小的地方。
- brk的逻辑还不是很清楚，尽管通过了简单的测试，但是debug输出的信息显示brk增长的很快，经常是一个页一个页涨的，看来还得查下brk的具体行为。
- 写了个比MAGIC_BREAK好用一点的宏，因为用户态的程序都是按二进制读入的，Simics无法得到函数信息（函数名、当前行数等），利用C99的宏写了个新的INFO_BREAK
-  #define INFO_BREAK \ do { \ lprintf_kern(&amp;quot;break in %s:%d&amp;quot;, __FUNCTION__, __LINE__); \ MAGIC_BREAK; \ } while (0) \  </description>
+  最花时间的一个bug是ls返回值没有改成应用程序数，结果一开始一直以为是brk系统调用没写好，最后才发现问题出在这么小的地方。
+  brk的逻辑还不是很清楚，尽管通过了简单的测试，但是debug输出的信息显示brk增长的很快，经常是一个页一个页涨的，看来还得查下brk的具体行为。
+  写了个比MAGIC_BREAK好用一点的宏，因为用户态的程序都是按二进制读入的，Simics无法得到函数信息（函数名、当前行数等），利用C99的宏写了个新的INFO_BREAK
+  #define INFO_BREAK \ do { \ lprintf_kern(&amp;#34;break in %s:%d&amp;#34;, __FUNCTION__, __LINE__); \ MAGIC_BREAK; \ } while (0) \ </description>
     </item>
     
     <item>
@@ -84,10 +84,10 @@
       <pubDate>Fri, 22 Aug 2008 00:00:00 +0000</pubDate>
       
       <guid>https://blog.yxwang.me/2008/08/bugs-related-to-my-fork/</guid>
-      <description> 系统调用 fork() 用Simics跟踪一条条汇编分析页表映射、寄存器值还真是体力活啊。。
- 实现 Copy On Write 时，如果某一个用户态页面有多个进程共享，其中一个进程修改该页面时需要创建一个新的页面。一开始偶忘了把原来页面的内容复制到新的页面了 =_= 另外由于新的页面要代替老的页面，或者说它们的物理地址不同，但虚拟地址相同，我的方法是在内核态开辟一个大小为一个页面的空间作为中转。
- do_fork函数中，子进程复制父进程的页表的同时会把父进程页表项置为不可写，注意最后要flush tlb。因为一开始没有flush tlb，导致最后用户态fork返回以后读取的信息来自于tlb，直接改写了共享页面中fork的返回地址，导致切换到子进程时fork的返回地址丢失。这个bug让我郁闷了两三个小时。。
- 使用两次fork时，第二次fork返回的pid会被改掉。查了下发现为用户空间分配物理页面的代码里居然在分配好以后没有把对应的struct置为已使用，结果导致第二个子进程COW创建新页面时得到了原来的父进程页面，改写了父进程页面内容。
+      <description>系统调用 fork() 用Simics跟踪一条条汇编分析页表映射、寄存器值还真是体力活啊。。
+  实现 Copy On Write 时，如果某一个用户态页面有多个进程共享，其中一个进程修改该页面时需要创建一个新的页面。一开始偶忘了把原来页面的内容复制到新的页面了 =_= 另外由于新的页面要代替老的页面，或者说它们的物理地址不同，但虚拟地址相同，我的方法是在内核态开辟一个大小为一个页面的空间作为中转。
+  do_fork函数中，子进程复制父进程的页表的同时会把父进程页表项置为不可写，注意最后要flush tlb。因为一开始没有flush tlb，导致最后用户态fork返回以后读取的信息来自于tlb，直接改写了共享页面中fork的返回地址，导致切换到子进程时fork的返回地址丢失。这个bug让我郁闷了两三个小时。。
+  使用两次fork时，第二次fork返回的pid会被改掉。查了下发现为用户空间分配物理页面的代码里居然在分配好以后没有把对应的struct置为已使用，结果导致第二个子进程COW创建新页面时得到了原来的父进程页面，改写了父进程页面内容。
   系统调用 exec()  清空页表的用户空间映射的函数一开始写得yts，bug到处都是，比如free的时候没使用指向内存块首地址的指针，记录内存地址的变量没有累加。 exec传递给内核态的两个参数必须先在内核态保存一个副本，否则清空用户态页表后就无法得到这两个参数信息了。 分配给用户态的页面必须先清零，一方面考虑到安全性，另一方面不清零会隐藏一些潜在的bug。一开始我没有在内核执行exec的时候完整的复制所有的参数，而是直接指向了原进程的内存空间，由于清空页表后再次申请新页表时得到了原来的页面，结果正好原来那个保存参数的页面和新进程的该页面重合了 =_= 于是浪费了不少时间在这个bug上  </description>
     </item>
     

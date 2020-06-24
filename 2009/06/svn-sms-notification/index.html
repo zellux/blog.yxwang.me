@@ -11,6 +11,7 @@
     
 
     <title> SVN 更新短信通知脚本 &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -39,7 +40,7 @@
     "articleSection" : "post",
     "name" : "SVN 更新短信通知脚本",
     "headline" : "SVN 更新短信通知脚本",
-    "description" : "主要功能：开发人员执行svn commit后自动将开发人id、修订版本号和日志内容通过短信的方式通知所有人。\n首先修改svn服务器对应项目目录hook\/post-commit文件\n#!\/bin\/bash export LANG=en_US.utf8 REPOS=\x26quot;$1\x26quot; REV=\x26quot;$2\x26quot; cd \/home\/svn\/repositories\/sebank\/hooks .\/sms.py commit $REPOS $REV  注意别忘了这里的export LANG，我一开始测试的时候发现中文一直有乱码，后来才意识到shell的环境变量里缺这个。 hook\/sms.py\n#!\/usr\/bin\/python # -*- coding: utf-8 -*- import sys, urllib, os from subprocess import * user = \x27your mobile number\x27 pword = \x27fetion password\x27 phone = [ \x2713764444444\x27, \x2713813333333\x27, ] repo = sys.argv[2] rev = sys.argv[3] cmdlog = \x27svnlook log -r %s %s\x27%(rev, repo) cmdauthor = \x27svnlook author -r %s %s\x27%(rev, repo) log = Popen(cmdlog, stdout=PIPE, shell=True).",
+    "description" : "主要功能：开发人员执行svn commit后自动将开发人id、修订版本号和日志内容通过短信的方式通知所有人。\n首先修改svn服务器对应项目目录hook\/post-commit文件\n#!\/bin\/bash  export LANG=en_US.utf8 REPOS=\u0026#34;$1\u0026#34; REV=\u0026#34;$2\u0026#34; cd \/home\/svn\/repositories\/sebank\/hooks .\/sms.py commit $REPOS $REV 注意别忘了这里的export LANG，我一开始测试的时候发现中文一直有乱码，后来才意识到shell的环境变量里缺这个。 hook\/sms.py\n#!\/usr\/bin\/python # -*- coding: utf-8 -*- import sys, urllib, os from subprocess import * user = \u0026#39;your mobile number\u0026#39; pword = \u0026#39;fetion password\u0026#39; phone = [ \u0026#39;13764444444\u0026#39;, \u0026#39;13813333333\u0026#39;, ] repo = sys.argv[2] rev = sys.argv[3] cmdlog = \u0026#39;svnlook log -r %s%s\u0026#39;%(rev, repo) cmdauthor = \u0026#39;svnlook author -r %s%s\u0026#39;%(rev, repo) log = Popen(cmdlog, stdout=PIPE, shell=True).",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -47,10 +48,10 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2009",
-    "datePublished": "2009-06-16 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2009-06-16 00:00:00 \x2b0000 UTC",
+    "datePublished": "2009-06-16 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2009-06-16 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/2009\/06\/svn-sms-notification\/",
-    "wordCount" : "115",
+    "wordCount" : "112",
     "keywords" : [ "Scripting","Tooling","svn","Blog" ]
 }
 </script>
@@ -94,52 +95,45 @@
 
     <div class="post-content">
       <p>主要功能：开发人员执行svn commit后自动将开发人id、修订版本号和日志内容通过短信的方式通知所有人。</p>
-
 <p>首先修改svn服务器对应项目目录hook/post-commit文件</p>
-
-<pre><code class="language-bash">#!/bin/bash
-
-export LANG=en_US.utf8
-REPOS=&quot;$1&quot;
-REV=&quot;$2&quot;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/bash
+</span><span style="color:#75715e"></span>
+export LANG<span style="color:#f92672">=</span>en_US.utf8
+REPOS<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$1<span style="color:#e6db74">&#34;</span>
+REV<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$2<span style="color:#e6db74">&#34;</span>
 
 cd /home/svn/repositories/sebank/hooks
 ./sms.py commit $REPOS $REV
-</code></pre>
-
-<p>注意别忘了这里的export LANG，我一开始测试的时候发现中文一直有乱码，后来才意识到shell的环境变量里缺这个。
+</code></pre></div><p>注意别忘了这里的export LANG，我一开始测试的时候发现中文一直有乱码，后来才意识到shell的环境变量里缺这个。
 hook/sms.py</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#!/usr/bin/python</span>
+<span style="color:#75715e"># -*- coding: utf-8 -*-</span>
 
-<pre><code class="language-python">#!/usr/bin/python
-# -*- coding: utf-8 -*-
+<span style="color:#f92672">import</span> sys<span style="color:#f92672">,</span> urllib<span style="color:#f92672">,</span> os
+<span style="color:#f92672">from</span> subprocess <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
 
-import sys, urllib, os
-from subprocess import *
-
-user = 'your mobile number'
-pword = 'fetion password'
-phone = [
-        '13764444444',
-        '13813333333',
+user <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;your mobile number&#39;</span>
+pword <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;fetion password&#39;</span>
+phone <span style="color:#f92672">=</span> [
+        <span style="color:#e6db74">&#39;13764444444&#39;</span>,
+        <span style="color:#e6db74">&#39;13813333333&#39;</span>,
         ]
 
-repo = sys.argv[2]
-rev = sys.argv[3]
-cmdlog = 'svnlook log -r %s %s'%(rev, repo)
-cmdauthor = 'svnlook author -r %s %s'%(rev, repo)
-log = Popen(cmdlog, stdout=PIPE, shell=True).stdout.read().strip()
-author = Popen(cmdauthor, stdout=PIPE, shell=True).stdout.read().strip()
+repo <span style="color:#f92672">=</span> sys<span style="color:#f92672">.</span>argv[<span style="color:#ae81ff">2</span>]
+rev <span style="color:#f92672">=</span> sys<span style="color:#f92672">.</span>argv[<span style="color:#ae81ff">3</span>]
+cmdlog <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;svnlook log -r </span><span style="color:#e6db74">%s</span><span style="color:#e6db74"> </span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">%</span>(rev, repo)
+cmdauthor <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;svnlook author -r </span><span style="color:#e6db74">%s</span><span style="color:#e6db74"> </span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">%</span>(rev, repo)
+log <span style="color:#f92672">=</span> Popen(cmdlog, stdout<span style="color:#f92672">=</span>PIPE, shell<span style="color:#f92672">=</span>True)<span style="color:#f92672">.</span>stdout<span style="color:#f92672">.</span>read()<span style="color:#f92672">.</span>strip()
+author <span style="color:#f92672">=</span> Popen(cmdauthor, stdout<span style="color:#f92672">=</span>PIPE, shell<span style="color:#f92672">=</span>True)<span style="color:#f92672">.</span>stdout<span style="color:#f92672">.</span>read()<span style="color:#f92672">.</span>strip()
 
-msg = 'sebank #%s %s: %s' % (rev, author, log)
+msg <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;sebank #</span><span style="color:#e6db74">%s</span><span style="color:#e6db74"> </span><span style="color:#e6db74">%s</span><span style="color:#e6db74">: </span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span> (rev, author, log)
 
-for number in phone:
-    url = 'http://sms.api.bz/fetion.php?username=%s&amp;password=%s&amp;sendto=%s&amp;message=%s' % (user, pword, number, urllib.quote_plus(msg))
-    cmd = 'curl &quot;%s&quot;' % url
-    send = Popen(cmd, shell=True, stdout=PIPE, stderr=PIPE)
-    send.wait()
-</code></pre>
-
-<p>这里user是发送者的手机号，且该用户的飞信好友需包含其他用户，pword为飞信密码，phone为用户手机号码列表。
+<span style="color:#66d9ef">for</span> number <span style="color:#f92672">in</span> phone:
+    url <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;http://sms.api.bz/fetion.php?username=</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&amp;password=</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&amp;sendto=</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&amp;message=</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span> (user, pword, number, urllib<span style="color:#f92672">.</span>quote_plus(msg))
+    cmd <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;curl &#34;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#34;&#39;</span> <span style="color:#f92672">%</span> url
+    send <span style="color:#f92672">=</span> Popen(cmd, shell<span style="color:#f92672">=</span>True, stdout<span style="color:#f92672">=</span>PIPE, stderr<span style="color:#f92672">=</span>PIPE)
+    send<span style="color:#f92672">.</span>wait()
+</code></pre></div><p>这里user是发送者的手机号，且该用户的飞信好友需包含其他用户，pword为飞信密码，phone为用户手机号码列表。
 最后设置下这两个文件的权限，保证http/svn用户能执行即可。另外由于sms.py中飞信密码是明文保存的，注意控制它的读权限。</p>
 
     </div>

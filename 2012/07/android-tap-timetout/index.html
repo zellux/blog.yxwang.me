@@ -11,6 +11,7 @@
     
 
     <title> Android 中点击事件的判断 &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -39,7 +40,7 @@
     "articleSection" : "post",
     "name" : "Android 中点击事件的判断",
     "headline" : "Android 中点击事件的判断",
-    "description" : "\x3cp\x3e最近实验室做的一个东西会向 Android 应用快速注入一系列触屏事件，模拟用户的点击。但是我们发现当按下和弹起的 MotionEvent 之间时间间隔过小（例如小于 100ms）时，会导致该事件被忽略。看了代码后发现 Android 中按下和弹起之间时间间隔要在 115ms 以上才会被认为是一个点击事件。这里结合 Android 的源码分析一下点击事件的产生过程。\x3c\/p\x3e",
+    "description" : "\u003cp\u003e最近实验室做的一个东西会向 Android 应用快速注入一系列触屏事件，模拟用户的点击。但是我们发现当按下和弹起的 MotionEvent 之间时间间隔过小（例如小于 100ms）时，会导致该事件被忽略。看了代码后发现 Android 中按下和弹起之间时间间隔要在 115ms 以上才会被认为是一个点击事件。这里结合 Android 的源码分析一下点击事件的产生过程。\u003c\/p\u003e",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -47,8 +48,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2012",
-    "datePublished": "2012-07-21 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2012-07-21 00:00:00 \x2b0000 UTC",
+    "datePublished": "2012-07-21 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2012-07-21 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/2012\/07\/android-tap-timetout\/",
     "wordCount" : "169",
     "keywords" : [ "Android","Computer System","Mobile","Blog" ]
@@ -94,46 +95,35 @@
 
     <div class="post-content">
       <p>最近实验室做的一个东西会向 Android 应用快速注入一系列触屏事件，模拟用户的点击。但是我们发现当按下和弹起的 MotionEvent 之间时间间隔过小（例如小于 100ms）时，会导致该事件被忽略。看了代码后发现 Android 中按下和弹起之间时间间隔要在 115ms 以上才会被认为是一个点击事件。这里结合 Android 的源码分析一下点击事件的产生过程。</p>
-
 <p>当用户触摸屏幕后，底层驱动会将这一事件包装成一个 <a href="https://github.com/android/platform_frameworks_base/blob/froyo/core/java/android/view/MotionEvent.java">MotionEvent</a> 对象，传递给 <a href="https://github.com/android/platform_frameworks_base/blob/froyo/services/java/com/android/server/WindowManagerService.java">WindowsManagerService</a>。后者维护了一个事件队列，会将事件分发给正获得焦点的控件，其中，dispatchPointer 方法负责将触屏事件发送给当前活动窗口(Window)。每一个 Window 都有一个 <a href="https://github.com/android/platform_frameworks_base/blob/froyo/core/java/android/view/ViewRoot.java">ViewRoot</a> 实例接收来自 WindowManagerService 的消息。活动窗口的 ViewRoot 在 handleMessage 方法中接收了这一触屏事件后，就会调用最上层的 View 对象的 dispatchTouchEvent 方法。和大多数图形系统一样，Android 中的 view 也是以树状结构组织的，事件会从最上层依次向下层传递，直到某一结点能处理这一事件为止。</p>
-
 <p><a href="https://github.com/android/platform_frameworks_base/blob/froyo/core/java/android/view/View.java">View</a> 对象的 onTouchEvent 负责处理触屏事件，这里也是点击事件产生的地方，下面这段代码创建了一个点击事件，并把它添加到事件链中，在触屏事件处理完成后再执行。</p>
-
-<pre><code class="language-java">// Only perform take click actions if we were in the pressed state
-if (!focusTaken) {
-    // Use a Runnable and post this rather than calling
-    // performClick directly. This lets other visual state
-    // of the view update before click actions start.
-    if (mPerformClick == null) {
-        mPerformClick = new PerformClick();
-    }
-    if (!post(mPerformClick)) {
-        performClick();
-    }
-}
-</code></pre>
-
-<p>而在前面的判断条件可以看到，这一点击事件创建的前提是 mPrivateFlags 的 PRESSED 位和 PREPRESSED 位同时被置上 (<a href="https://github.com/android/platform_frameworks_base/blob/froyo/core/java/android/view/View.java#L4300">View.java</a>)：</p>
-
-<pre><code class="language-java">boolean prepressed = (mPrivateFlags &amp; PREPRESSED) != 0;
-if ((mPrivateFlags &amp; PRESSED) != 0 || prepressed) {
-    ...
-}
-</code></pre>
-
-<p>接着看触屏按下事件的处理 (<a href="https://github.com/android/platform_frameworks_base/blob/froyo/core/java/android/view/View.java#L4343">View.java</a>)：</p>
-
-<pre><code class="language-java">case MotionEvent.ACTION_DOWN:
-    if (mPendingCheckForTap == null) {
-        mPendingCheckForTap = new CheckForTap();
-    }
-    mPrivateFlags |= PREPRESSED;
-    mHasPerformedLongPress = false;
-    postDelayed(mPendingCheckForTap, ViewConfiguration.getTapTimeout());
-    break;
-</code></pre>
-
-<p>mPrivateFlags 的 PREPRESSED 位会被立即置上，另外 postDelayed 方法会在经过 ViewConfiguration.getTapTimeout() 时间后，执行一个 CheckForTap 的实例，看来这就是我们要找的东西了。CheckForTap 是一个很简单的 Runnable 对象，它所做的就是把 mPrivateFlags 中除了 PREPRESSED 的位都清零，再把 PRESSED 位置上，并注册一个长按事件的检测对象。而 <a href="https://github.com/android/platform_frameworks_base/blob/froyo/core/java/android/view/ViewConfiguration.java#L294">ViewConfiguration.getTapTimeout()</a> 的默认值便是 115ms。注释中还说明了这个延时的用意在于区分滑动操作和点击操作，如果触屏区域在这一时间内没有移动，这个操作才会被识别成点击。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75715e">// Only perform take click actions if we were in the pressed state
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">if</span> <span style="color:#f92672">(!</span>focusTaken<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    <span style="color:#75715e">// Use a Runnable and post this rather than calling
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// performClick directly. This lets other visual state
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// of the view update before click actions start.
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>mPerformClick <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        mPerformClick <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> PerformClick<span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(!</span>post<span style="color:#f92672">(</span>mPerformClick<span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
+        performClick<span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>而在前面的判断条件可以看到，这一点击事件创建的前提是 mPrivateFlags 的 PRESSED 位和 PREPRESSED 位同时被置上 (<a href="https://github.com/android/platform_frameworks_base/blob/froyo/core/java/android/view/View.java#L4300">View.java</a>)：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">boolean</span> prepressed <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>mPrivateFlags <span style="color:#f92672">&amp;</span> PREPRESSED<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> 0<span style="color:#f92672">;</span>
+<span style="color:#66d9ef">if</span> <span style="color:#f92672">((</span>mPrivateFlags <span style="color:#f92672">&amp;</span> PRESSED<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> 0 <span style="color:#f92672">||</span> prepressed<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    <span style="color:#f92672">...</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>接着看触屏按下事件的处理 (<a href="https://github.com/android/platform_frameworks_base/blob/froyo/core/java/android/view/View.java#L4343">View.java</a>)：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">case</span> MotionEvent<span style="color:#f92672">.</span><span style="color:#a6e22e">ACTION_DOWN</span><span style="color:#f92672">:</span>
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>mPendingCheckForTap <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        mPendingCheckForTap <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> CheckForTap<span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span>
+    mPrivateFlags <span style="color:#f92672">|=</span> PREPRESSED<span style="color:#f92672">;</span>
+    mHasPerformedLongPress <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">;</span>
+    postDelayed<span style="color:#f92672">(</span>mPendingCheckForTap<span style="color:#f92672">,</span> ViewConfiguration<span style="color:#f92672">.</span><span style="color:#a6e22e">getTapTimeout</span><span style="color:#f92672">());</span>
+    <span style="color:#66d9ef">break</span><span style="color:#f92672">;</span>
+</code></pre></div><p>mPrivateFlags 的 PREPRESSED 位会被立即置上，另外 postDelayed 方法会在经过 ViewConfiguration.getTapTimeout() 时间后，执行一个 CheckForTap 的实例，看来这就是我们要找的东西了。CheckForTap 是一个很简单的 Runnable 对象，它所做的就是把 mPrivateFlags 中除了 PREPRESSED 的位都清零，再把 PRESSED 位置上，并注册一个长按事件的检测对象。而 <a href="https://github.com/android/platform_frameworks_base/blob/froyo/core/java/android/view/ViewConfiguration.java#L294">ViewConfiguration.getTapTimeout()</a> 的默认值便是 115ms。注释中还说明了这个延时的用意在于区分滑动操作和点击操作，如果触屏区域在这一时间内没有移动，这个操作才会被识别成点击。</p>
     </div>
         <div class="cc-license">
       本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.zh">知识共享署名-非商业性使用 3.0 版本许可协议</a>进行许可，欢迎转载，演绎，但是必须保留本文的署名 <a href="https://blog.yxwang.me/2012/07/android-tap-timetout/">zellux</a>（包含链接），且不得用于商业目的。

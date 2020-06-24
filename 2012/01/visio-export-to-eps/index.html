@@ -11,6 +11,7 @@
     
 
     <title> 转换 Visio 图片为 EPS 格式 &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -39,7 +40,7 @@
     "articleSection" : "post",
     "name" : "转换 Visio 图片为 EPS 格式",
     "headline" : "转换 Visio 图片为 EPS 格式",
-    "description" : "\x3cp\x3eWindows 7 及 Visio 2010 下验证可行：\x3c\/p\x3e\n\n\x3cul\x3e\n\x3cli\x3e添加本地打印机，类型选择 Generic -\x26gt; MS Publisher Color Printer\x3c\/li\x3e\n\x3cli\x3e在 Visio 中打印，选择新添加的打印机，选中 Print to file，点 Properties -\x26gt; Advanced\x3c\/li\x3e\n\x3cli\x3eDocument Options -\x26gt; PostScript Options -\x26gt; PostScript Output Option 中，选择 Encapsulated PostScript (EPS)\x3c\/li\x3e\n\x3cli\x3e保存时别忘了加后缀名 .eps\x3c\/li\x3e\n\x3c\/ul\x3e",
+    "description" : "\u003cp\u003eWindows 7 及 Visio 2010 下验证可行：\u003c\/p\u003e\n\u003cul\u003e\n\u003cli\u003e添加本地打印机，类型选择 Generic -\u0026gt; MS Publisher Color Printer\u003c\/li\u003e\n\u003cli\u003e在 Visio 中打印，选择新添加的打印机，选中 Print to file，点 Properties -\u0026gt; Advanced\u003c\/li\u003e\n\u003cli\u003eDocument Options -\u0026gt; PostScript Options -\u0026gt; PostScript Output Option 中，选择 Encapsulated PostScript (EPS)\u003c\/li\u003e\n\u003cli\u003e保存时别忘了加后缀名 .eps\u003c\/li\u003e\n\u003c\/ul\u003e",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -47,8 +48,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2012",
-    "datePublished": "2012-01-02 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2012-01-02 00:00:00 \x2b0000 UTC",
+    "datePublished": "2012-01-02 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2012-01-02 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/2012\/01\/visio-export-to-eps\/",
     "wordCount" : "51",
     "keywords" : [ "EPS","Tooling","Visio","Blog" ]
@@ -94,20 +95,15 @@
 
     <div class="post-content">
       <p>Windows 7 及 Visio 2010 下验证可行：</p>
-
 <ul>
 <li>添加本地打印机，类型选择 Generic -&gt; MS Publisher Color Printer</li>
 <li>在 Visio 中打印，选择新添加的打印机，选中 Print to file，点 Properties -&gt; Advanced</li>
 <li>Document Options -&gt; PostScript Options -&gt; PostScript Output Option 中，选择 Encapsulated PostScript (EPS)</li>
 <li>保存时别忘了加后缀名 .eps</li>
 </ul>
-
 <p>这样输出的 EPS 文件的边框是整个 A4 页面，需要用 epstool 把它们周围的白边框去掉：</p>
-
 <pre><code>epstool --copy --bbox figure.eps figure-fixed.eps
-</code></pre>
-
-<p>epstool 在常见的几个软件源中应该都能找到。</p>
+</code></pre><p>epstool 在常见的几个软件源中应该都能找到。</p>
     </div>
         <div class="cc-license">
       本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.zh">知识共享署名-非商业性使用 3.0 版本许可协议</a>进行许可，欢迎转载，演绎，但是必须保留本文的署名 <a href="https://blog.yxwang.me/2012/01/visio-export-to-eps/">zellux</a>（包含链接），且不得用于商业目的。

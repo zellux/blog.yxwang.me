@@ -11,6 +11,7 @@
     
 
     <title> Singleton 模式与双检测锁定(DCL) &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -39,7 +40,7 @@
     "articleSection" : "post",
     "name" : "Singleton 模式与双检测锁定(DCL)",
     "headline" : "Singleton 模式与双检测锁定(DCL)",
-    "description" : "看 OOP 教材时，书里提到了一个双检测锁定（Double-Checked Lock, DCL）的问题，但是没有更多介绍，只是说这是一个和底层内存机制有关的漏洞。查阅了下相关资料，对这个问题大致有了点了解。\n从头开始说吧。\n在多线程的情况下Singleton模式会遇到不少问题，一个简单的例子\nclass Singleton { private static Singleton instance = null; public static Singleton instance() { if (instance == null) { instance = new Singleton(); } return instance; } }  假设这样一个场景，有两个线程调用 Singleton.instance()，首先线程一判断 instance 是否等于 null，判断完后一瞬间虚拟机把线程二调度为运行线程，线程二再次判断 instance 是否为 null，然后创建一个Singleton 实例，线程二的时间片用完后，线程一被唤醒，接下来它依然会创建一个新的 Singleton 实例，导致两次调用范围的对象不同。\n最简单的方法自然是在类被载入时就初始化这个对象：\nprivate static Singleton instance = new Singleton();  JLS (Java Language Specification) 中规定了一个类只会被初始化一次，所以这样做肯定是没问题的。\n但是如果要实现延迟初始化（Lazy initialization），比如这个实例初始化时的参数要在运行期才能确定，应该怎么做呢？\n依然有最简单的方法：使用 synchronized 关键字修饰初始化方法：\npublic synchronized static Singleton instance() { if (instance == null) { instance = new Singleton(); } return instance; }  然而引入 synchronized 关键字后，产生了一个性能问题：多个线程同时访问这个方法时，会因为同步原语而导致每次只有一个线程执行这段代码，影响程序性能。而事实上初始化完毕后只需要简单的返回 instance 的引用就行了。",
+    "description" : "看 OOP 教材时，书里提到了一个双检测锁定（Double-Checked Lock, DCL）的问题，但是没有更多介绍，只是说这是一个和底层内存机制有关的漏洞。查阅了下相关资料，对这个问题大致有了点了解。\n从头开始说吧。\n在多线程的情况下Singleton模式会遇到不少问题，一个简单的例子\nclass Singleton { private static Singleton instance = null; public static Singleton instance() { if (instance == null) { instance = new Singleton(); } return instance; } } 假设这样一个场景，有两个线程调用 Singleton.instance()，首先线程一判断 instance 是否等于 null，判断完后一瞬间虚拟机把线程二调度为运行线程，线程二再次判断 instance 是否为 null，然后创建一个Singleton 实例，线程二的时间片用完后，线程一被唤醒，接下来它依然会创建一个新的 Singleton 实例，导致两次调用范围的对象不同。\n最简单的方法自然是在类被载入时就初始化这个对象：\nprivate static Singleton instance = new Singleton(); JLS (Java Language Specification) 中规定了一个类只会被初始化一次，所以这样做肯定是没问题的。\n但是如果要实现延迟初始化（Lazy initialization），比如这个实例初始化时的参数要在运行期才能确定，应该怎么做呢？\n依然有最简单的方法：使用 synchronized 关键字修饰初始化方法：\npublic synchronized static Singleton instance() { if (instance == null) { instance = new Singleton(); } return instance; } 然而引入 synchronized 关键字后，产生了一个性能问题：多个线程同时访问这个方法时，会因为同步原语而导致每次只有一个线程执行这段代码，影响程序性能。而事实上初始化完毕后只需要简单的返回 instance 的引用就行了。",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -47,8 +48,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2008",
-    "datePublished": "2008-07-04 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2008-07-04 00:00:00 \x2b0000 UTC",
+    "datePublished": "2008-07-04 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2008-07-04 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/2008\/07\/singleton-pattern-and-double-checked-lock\/",
     "wordCount" : "324",
     "keywords" : [ "Concurrency","Design Patterns","Featured","Java","Programming Languages","Blog" ]
@@ -94,121 +95,82 @@
 
     <div class="post-content">
       <p>看 OOP 教材时，书里提到了一个双检测锁定（Double-Checked Lock, DCL）的问题，但是没有更多介绍，只是说这是一个和底层内存机制有关的漏洞。查阅了下相关资料，对这个问题大致有了点了解。</p>
-
 <p>从头开始说吧。</p>
-
 <p>在多线程的情况下Singleton模式会遇到不少问题，一个简单的例子</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Singleton</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> Singleton instance <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
 
-<pre><code class="language-java">class Singleton {
-    private static Singleton instance = null;
-
-    public static Singleton instance() {
-        if (instance == null) {
-            instance = new Singleton();
-        }
-        return instance;
-    }
-}
-</code></pre>
-
-<p>假设这样一个场景，有两个线程调用 Singleton.instance()，首先线程一判断 instance 是否等于 null，判断完后一瞬间虚拟机把线程二调度为运行线程，线程二再次判断 instance 是否为 null，然后创建一个Singleton 实例，线程二的时间片用完后，线程一被唤醒，接下来它依然会创建一个新的 Singleton 实例，导致两次调用范围的对象不同。</p>
-
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> Singleton <span style="color:#a6e22e">instance</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>instance <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            instance <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Singleton<span style="color:#f92672">();</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#66d9ef">return</span> instance<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>假设这样一个场景，有两个线程调用 Singleton.instance()，首先线程一判断 instance 是否等于 null，判断完后一瞬间虚拟机把线程二调度为运行线程，线程二再次判断 instance 是否为 null，然后创建一个Singleton 实例，线程二的时间片用完后，线程一被唤醒，接下来它依然会创建一个新的 Singleton 实例，导致两次调用范围的对象不同。</p>
 <p>最简单的方法自然是在类被载入时就初始化这个对象：</p>
-
-<pre><code class="language-java">private static Singleton instance = new Singleton();
-</code></pre>
-
-<p>JLS (Java Language Specification) 中规定了一个类只会被初始化一次，所以这样做肯定是没问题的。</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> Singleton instance <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Singleton<span style="color:#f92672">();</span>
+</code></pre></div><p>JLS (Java Language Specification) 中规定了一个类只会被初始化一次，所以这样做肯定是没问题的。</p>
 <p>但是如果要实现延迟初始化（Lazy initialization），比如这个实例初始化时的参数要在运行期才能确定，应该怎么做呢？</p>
-
 <p>依然有最简单的方法：使用 synchronized 关键字修饰初始化方法：</p>
-
-<pre><code class="language-java">public synchronized static Singleton instance() {
-    if (instance == null) {
-        instance = new Singleton();
-    }
-    return instance;
-}
-</code></pre>
-
-<p>然而引入 synchronized 关键字后，产生了一个性能问题：多个线程同时访问这个方法时，会因为同步原语而导致每次只有一个线程执行这段代码，影响程序性能。而事实上初始化完毕后只需要简单的返回 instance 的引用就行了。</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">synchronized</span> <span style="color:#66d9ef">static</span> Singleton <span style="color:#a6e22e">instance</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>instance <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        instance <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Singleton<span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#66d9ef">return</span> instance<span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>然而引入 synchronized 关键字后，产生了一个性能问题：多个线程同时访问这个方法时，会因为同步原语而导致每次只有一个线程执行这段代码，影响程序性能。而事实上初始化完毕后只需要简单的返回 instance 的引用就行了。</p>
 <p>于是有人提出了 DCL 解决这个问题，这是一个看似有效的解决方法：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Singleton</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> Singleton instance <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">;</span>
 
-<pre><code class="language-java">class Singleton {
-    private static Singleton instance = null ;
-
-    public static Singleton instance() {
-        if (instance == null ) {
-            synchronized (this) {
-                if (instance == null)
-                    instance = new Singleton();
-            }
-        }
-        return instance;
-    }
-}
-</code></pre>
-
-<p>用一篇 JavaWorld 上的文章的标题来评论这种做法就是 smart, but broken。来看原因：</p>
-
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> Singleton <span style="color:#a6e22e">instance</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>instance <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">synchronized</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">this</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>instance <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span>
+                    instance <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Singleton<span style="color:#f92672">();</span>
+            <span style="color:#f92672">}</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#66d9ef">return</span> instance<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>用一篇 JavaWorld 上的文章的标题来评论这种做法就是 smart, but broken。来看原因：</p>
 <p>Java 编译器为了提高程序性能会进行指令调度，CPU 在执行指令时同样出于性能会乱序执行（至少现在用的大多数通用处理器都是 out-of-order 的），另外 cache 的存在也会改变数据回写内存时的顺序[2]。而 JMM (Java Memory Model, 见[1]) 则指出所有的这些优化都是允许的，只要运行结果和严格按顺序执行所得的结果一样即可。</p>
-
 <p>Java 假设每个线程都跑在自己的处理器上，享有自己的内存，和共享的主存交互。注意即使在单核上这种模型也是有意义的，考虑到 cache 和寄存器会保存部分临时变量。理论上每个线程修改自己的内存后，必须立即更新对应的主存内容。但是 Java 设计师们认为这种约束会影响程序性能，他们试着创造了一套让程序跑得更快、但又保证线程之间的交互与预期一致的内存模型。</p>
-
 <p>synchronized 关键字便是其中一把利器。事实上，synchronized 块的实现和 Linux 中的信号量（semaphore）还是有区别的，前者过程中锁的获得和释放都会都会引发一次 Memory Barrier 来强制线程本地内存和主存之间的同步。通过这个机制，Java 中的同步机制保证了 synchronized 块中指令的原子性。</p>
-
 <p>好了，回过头来看 DCL 问题。看起来访问一个未同步的 instance 字段不会产生什么问题，我们再次来假设一个场景：</p>
-
 <p>线程一进入同步块，执行 <code>instance = new Singleton();</code> 线程二刚开始执行 <code>getResource();</code></p>
-
 <p>按照顺序的话，接下来应该执行的步骤是</p>
-
 <ol>
 <li>分配新的Singleton对象的内存</li>
 <li>调用Singleton的构造器，初始化成员字段</li>
 <li>instance被赋为指向新的对象的引用。</li>
 </ol>
-
 <p>前面说过，编译器或处理器都为了提高性能都有可能进行指令的乱序执行，线程一的真正执行步骤可能是</p>
-
 <ol>
 <li>分配内存</li>
 <li>instance指向新对象</li>
 <li>初始化新实例。</li>
 </ol>
-
 <p>如果线程二在 2 完成后 3 执行前被唤醒，它看到了一个不为 null 的 instance，就把这个引用返回，而这个引用指向的对象其实可能还没有完成初始化过程。</p>
-
 <p>错误发生的一种情形就是这样，关于更详细的编译器指令调度导致的问题，可以参看这个网页 [4]。</p>
-
 <p>[3] 中提供了一个编译器指令调度的证据：<code>instance = new Singleton();</code> 这条命令在 Symantec JIT 中被编译成</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-nasm" data-lang="nasm"><span style="color:#960050;background-color:#1e0010">0206106</span><span style="color:#a6e22e">A</span>   mov  eax,<span style="color:#ae81ff">0F97E78h</span>
+<span style="color:#960050;background-color:#1e0010">0206106</span><span style="color:#a6e22e">F</span>   call <span style="color:#ae81ff">01</span>F6B210                  <span style="color:#75715e">; 分配空间</span>
+<span style="color:#960050;background-color:#1e0010">02061074</span>   <span style="color:#a6e22e">mov</span>  <span style="color:#66d9ef">dword</span> ptr [ebp],eax       <span style="color:#75715e">; EBP中保存了instance的地址</span>
 
-<pre><code class="language-nasm">0206106A   mov  eax,0F97E78h
-0206106F   call 01F6B210                  ; 分配空间
-02061074   mov  dword ptr [ebp],eax       ; EBP中保存了instance的地址
+<span style="color:#960050;background-color:#1e0010">02061077</span>   <span style="color:#a6e22e">mov</span>  ecx,<span style="color:#66d9ef">dword</span> ptr [eax]       <span style="color:#75715e">; 解引用，获得新的指针地址</span>
 
-02061077   mov  ecx,dword ptr [eax]       ; 解引用，获得新的指针地址
-
-02061079   mov  dword ptr [ecx],100h      ; 接下来四行是inline后的构造器
-0206107F   mov  dword ptr [ecx+4],200h
-02061086   mov  dword ptr [ecx+8],400h
-0206108D   mov  dword ptr [ecx+0Ch],0F84030h
-</code></pre>
-
-<p>可以看到，赋值完成在初始化之前，而这是 JLS 允许的。</p>
-
+<span style="color:#960050;background-color:#1e0010">02061079</span>   <span style="color:#a6e22e">mov</span>  <span style="color:#66d9ef">dword</span> ptr [ecx],<span style="color:#ae81ff">100h</span>      <span style="color:#75715e">; 接下来四行是inline后的构造器</span>
+<span style="color:#960050;background-color:#1e0010">0206107</span><span style="color:#a6e22e">F</span>   mov  <span style="color:#66d9ef">dword</span> ptr [ecx<span style="color:#f92672">+</span><span style="color:#ae81ff">4</span>],<span style="color:#ae81ff">200h</span>
+<span style="color:#960050;background-color:#1e0010">02061086</span>   <span style="color:#a6e22e">mov</span>  <span style="color:#66d9ef">dword</span> ptr [ecx<span style="color:#f92672">+</span><span style="color:#ae81ff">8</span>],<span style="color:#ae81ff">400h</span>
+<span style="color:#960050;background-color:#1e0010">0206108</span><span style="color:#a6e22e">D</span>   mov  <span style="color:#66d9ef">dword</span> ptr [ecx<span style="color:#f92672">+</span><span style="color:#ae81ff">0Ch</span>],<span style="color:#ae81ff">0F84030h</span>
+</code></pre></div><p>可以看到，赋值完成在初始化之前，而这是 JLS 允许的。</p>
 <p>另一种情形是，假设线程一安稳地完成 Singleton 对象的初始化，退出了同步块，并同步了和本地内存和主存。线程二来了，看到一个非空的引用，拿走。注意线程二没有执行一个 Read Barrier，因为它根本就没进后面的同步块。所以很有可能此时它看到的数据是陈旧的。</p>
-
 <p>还有很多人根据已知的几种提出了一个又一个fix的方法，但最终还是出现了更多的问题。可以参阅 [3] 中的介绍。</p>
-
 <p>[5] 中还说明了即使把 instance 字段声明为 volatile 还是无法避免错误的原因。</p>
-
 <p>好在 JDK 5 中以及修复了这个问题，将变量申明为 volatile 就可以避免编译器或 CPU 做乱序调度。而在 JDK 1.4 及更早的版本，安全的 Singleton 的构造一般只有两种方法，一是在类载入时就创建该实例，二是使用性能较差的 synchronized 方法。</p>
-
 <p>参考资料：</p>
-
 <ol>
 <li>Java Language Specification, Second Edition, 第17章介绍了Java 中线程和内存交互关系的具体细节。</li>
 <li>out-of-order与cache的介绍可以参阅Computer System, A Programmer&rsquo;s Perspective 的第四、五章。</li>

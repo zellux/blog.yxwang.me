@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>TRAMP on Aiur · Zellux 的博客</title>
@@ -19,9 +19,9 @@
       <guid>https://blog.yxwang.me/2009/02/emacs-tramp/</guid>
       <description>很好用的东东，可以方便的打开需要root权限或是远程服务器上的文件。
 统一的url格式是 /method:usr@machine:port/path/to.file，这种方式需要在载入tramp前设置tramp-syntax
-(setq tramp-syntax &#39;url) (require &#39;tramp)  也可以用(setq tramp-default-method &amp;ldquo;scp&amp;rdquo;) 指定默认的访问方法，这样就不需要/method://了
+(setq tramp-syntax &amp;#39;url) (require &amp;#39;tramp) 也可以用(setq tramp-default-method &amp;ldquo;scp&amp;rdquo;) 指定默认的访问方法，这样就不需要/method://了
 以我现在的org日程管理为例，个人日程文件保存在机房的73号机上，实验室电脑和寝室电脑上的电脑只要通过tramp远程访问这个org文件即可：
-(setq org-agenda-files (list &amp;quot;/scp:wyx@10.132.140.73:/home/wyx/notes/lab.org&amp;quot;))  </description>
+(setq org-agenda-files (list &amp;#34;/scp:wyx@10.132.140.73:/home/wyx/notes/lab.org&amp;#34;)) </description>
     </item>
     
   </channel>

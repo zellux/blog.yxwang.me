@@ -11,6 +11,7 @@
     
 
     <title> 高速缓冲器页着色 (Page Coloring) &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -39,7 +40,7 @@
     "articleSection" : "post",
     "name" : "高速缓冲器页着色 (Page Coloring)",
     "headline" : "高速缓冲器页着色 (Page Coloring)",
-    "description" : " 读 Multi-Execution (ISCA ’09) 的时候看到的名词，中文叫做高速缓冲器页着色，有点拗口，还是用英文术语好了。\n早期的处理器缓存都是映射虚拟内存的，这样带来两个问题，一是进程切换等场合下需要清空缓存，二是由于多个虚拟地址可能指向同一个物理地址，因此会出现缓存中数据别名的问题(data aliasing)。\n于是现代的处理器更多的通过物理地址进行数据缓存，这也引入了另一个问题，虚拟内存中看到的相邻的两块数据在缓存中很有可能是不相邻的，如果操作系统分配物理页时不考虑这点就会影响性能。\n举例来说，假设CPU能缓存4个物理页，缓存策略是 CS:APP 中提到的最简单的方式，即第n号缓存只用于物理页号除4余数为n的物理页(n=0,1,2,3)，比如第2号缓存对应于2,6,10,..号页面。现在用户为页面号为0的虚拟页申请空间，操作系统把第16号物理页分配给它；接下来用户又为页面号为1的虚拟页申请空间，而17-19号物理页已经用掉，此时操作系统就不应该分配20号物理页给它，因为20号物理页和16号物理页占用同一个缓存地区，假设用户程序的局部性(locality)很好的话这样的分配方式会产生比较严重的抖动(thrashing)，影响系统缓存的性能。所以操作系统应该分配21号物理页给它，而保证这种分配策略的方式就是为每个页标记不同的颜色，并使得同一时间使用的页面颜色尽可能的不同。\n参考资料  http:\/\/en.wikipedia.org\/wiki\/CPU_cache http:\/\/www.freebsd.org\/doc\/en\/articles\/vm-design\/page-coloring-optimizations.html  ",
+    "description" : "读 Multi-Execution (ISCA ’09) 的时候看到的名词，中文叫做高速缓冲器页着色，有点拗口，还是用英文术语好了。\n早期的处理器缓存都是映射虚拟内存的，这样带来两个问题，一是进程切换等场合下需要清空缓存，二是由于多个虚拟地址可能指向同一个物理地址，因此会出现缓存中数据别名的问题(data aliasing)。\n于是现代的处理器更多的通过物理地址进行数据缓存，这也引入了另一个问题，虚拟内存中看到的相邻的两块数据在缓存中很有可能是不相邻的，如果操作系统分配物理页时不考虑这点就会影响性能。\n举例来说，假设CPU能缓存4个物理页，缓存策略是 CS:APP 中提到的最简单的方式，即第n号缓存只用于物理页号除4余数为n的物理页(n=0,1,2,3)，比如第2号缓存对应于2,6,10,..号页面。现在用户为页面号为0的虚拟页申请空间，操作系统把第16号物理页分配给它；接下来用户又为页面号为1的虚拟页申请空间，而17-19号物理页已经用掉，此时操作系统就不应该分配20号物理页给它，因为20号物理页和16号物理页占用同一个缓存地区，假设用户程序的局部性(locality)很好的话这样的分配方式会产生比较严重的抖动(thrashing)，影响系统缓存的性能。所以操作系统应该分配21号物理页给它，而保证这种分配策略的方式就是为每个页标记不同的颜色，并使得同一时间使用的页面颜色尽可能的不同。\n参考资料  http:\/\/en.wikipedia.org\/wiki\/CPU_cache http:\/\/www.freebsd.org\/doc\/en\/articles\/vm-design\/page-coloring-optimizations.html  ",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -47,8 +48,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2009",
-    "datePublished": "2009-05-11 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2009-05-11 00:00:00 \x2b0000 UTC",
+    "datePublished": "2009-05-11 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2009-05-11 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/2009\/05\/page-coloring\/",
     "wordCount" : "14",
     "keywords" : [ "Computer System","Memory Management","Page Table","Blog" ]
@@ -93,18 +94,11 @@
 </span>
 
     <div class="post-content">
-      
-
-<p>读 <a href="/2009/05/isca-09-multi-execution/">Multi-Execution (ISCA ’09)</a> 的时候看到的名词，中文叫做高速缓冲器页着色，有点拗口，还是用英文术语好了。</p>
-
+      <p>读 <a href="/2009/05/isca-09-multi-execution/">Multi-Execution (ISCA ’09)</a> 的时候看到的名词，中文叫做高速缓冲器页着色，有点拗口，还是用英文术语好了。</p>
 <p>早期的处理器缓存都是映射虚拟内存的，这样带来两个问题，一是进程切换等场合下需要清空缓存，二是由于多个虚拟地址可能指向同一个物理地址，因此会出现缓存中数据别名的问题(data aliasing)。</p>
-
 <p>于是现代的处理器更多的通过物理地址进行数据缓存，这也引入了另一个问题，虚拟内存中看到的相邻的两块数据在缓存中很有可能是不相邻的，如果操作系统分配物理页时不考虑这点就会影响性能。</p>
-
 <p>举例来说，假设CPU能缓存4个物理页，缓存策略是 CS:APP 中提到的最简单的方式，即第n号缓存只用于物理页号除4余数为n的物理页(n=0,1,2,3)，比如第2号缓存对应于2,6,10,..号页面。现在用户为页面号为0的虚拟页申请空间，操作系统把第16号物理页分配给它；接下来用户又为页面号为1的虚拟页申请空间，而17-19号物理页已经用掉，此时操作系统就不应该分配20号物理页给它，因为20号物理页和16号物理页占用同一个缓存地区，假设用户程序的局部性(locality)很好的话这样的分配方式会产生比较严重的抖动(thrashing)，影响系统缓存的性能。所以操作系统应该分配21号物理页给它，而保证这种分配策略的方式就是为每个页标记不同的颜色，并使得同一时间使用的页面颜色尽可能的不同。</p>
-
 <h3 id="参考资料">参考资料</h3>
-
 <ul>
 <li><a href="http://en.wikipedia.org/wiki/CPU_cache">http://en.wikipedia.org/wiki/CPU_cache</a></li>
 <li><a href="http://www.freebsd.org/doc/en/articles/vm-design/page-coloring-optimizations.html">http://www.freebsd.org/doc/en/articles/vm-design/page-coloring-optimizations.html</a></li>

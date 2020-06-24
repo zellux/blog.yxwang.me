@@ -11,6 +11,7 @@
     
 
     <title> gcc 中设置特定代码块的优化级别 &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -39,7 +40,7 @@
     "articleSection" : "post",
     "name" : "gcc 中设置特定代码块的优化级别",
     "headline" : "gcc 中设置特定代码块的优化级别",
-    "description" : "今天碰到一个gcc优化相关的问题，为了让一个页变成脏页（页表中dirty位被置上），需要执行下面这段代码：\nuint32_t *page; \/\/ ... page[0] = page[0];  最后一行代码很有可能被gcc优化掉，因为这段代码看起来没有任何实际的作用。那么如何防止gcc对这段代码做优化呢？\n设置gcc编译时优化级别为-O0肯定是不合适的，这样对程序性能影响会比较大。stackoverflow上的Dietrich Epp给出了一个强制类型转换的方案：\n((unsigned char volatile *)page)[0] = page[0];  通过volatile关键字禁止gcc的优化，和我之前采用的方法类似。\nPlow同学给出了另一个利用gcc 4.4特性的方法：\n#pragma GCC push_options #pragma GCC optimize (\x26quot;O0\x26quot;) your code #pragma GCC pop_options  这里用到了gcc 4.4的特性Function Specific Option Pragmas，在特定代码前保存当前的编译选项，然后对特定的代码使用O0优化级别，最后再恢复之前保存的编译选项。\n俺觉得这个特性有些场合下挺好用的，在这里分享下，虽然因为编译器版本问题最后我还是用了前面一种方法。",
+    "description" : "今天碰到一个gcc优化相关的问题，为了让一个页变成脏页（页表中dirty位被置上），需要执行下面这段代码：\nuint32_t *page; \/\/ ... page[0] = page[0]; 最后一行代码很有可能被gcc优化掉，因为这段代码看起来没有任何实际的作用。那么如何防止gcc对这段代码做优化呢？\n设置gcc编译时优化级别为-O0肯定是不合适的，这样对程序性能影响会比较大。stackoverflow上的Dietrich Epp给出了一个强制类型转换的方案：\n((unsigned char volatile *)page)[0] = page[0]; 通过volatile关键字禁止gcc的优化，和我之前采用的方法类似。\nPlow同学给出了另一个利用gcc 4.4特性的方法：\n#pragma GCC push_options #pragma GCC optimize (\u0026#34;O0\u0026#34;)  your code #pragma GCC pop_options 这里用到了gcc 4.4的特性Function Specific Option Pragmas，在特定代码前保存当前的编译选项，然后对特定的代码使用O0优化级别，最后再恢复之前保存的编译选项。\n俺觉得这个特性有些场合下挺好用的，在这里分享下，虽然因为编译器版本问题最后我还是用了前面一种方法。",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -47,8 +48,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2010",
-    "datePublished": "2010-02-08 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2010-02-08 00:00:00 \x2b0000 UTC",
+    "datePublished": "2010-02-08 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2010-02-08 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/2010\/02\/code-specific-optimizations-in-gcc\/",
     "wordCount" : "38",
     "keywords" : [ "GCC","Programming","gcc","Blog" ]
@@ -94,33 +95,21 @@
 
     <div class="post-content">
       <p>今天碰到一个gcc优化相关的问题，为了让一个页变成脏页（页表中dirty位被置上），需要执行下面这段代码：</p>
-
-<pre><code class="language-c">uint32_t *page;
-// ...
-page[0] = page[0];
-</code></pre>
-
-<p>最后一行代码很有可能被gcc优化掉，因为这段代码看起来没有任何实际的作用。那么如何防止gcc对这段代码做优化呢？</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">uint32_t <span style="color:#f92672">*</span>page;
+<span style="color:#75715e">// ...
+</span><span style="color:#75715e"></span>page[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> page[<span style="color:#ae81ff">0</span>];
+</code></pre></div><p>最后一行代码很有可能被gcc优化掉，因为这段代码看起来没有任何实际的作用。那么如何防止gcc对这段代码做优化呢？</p>
 <p>设置gcc编译时优化级别为-O0肯定是不合适的，这样对程序性能影响会比较大。stackoverflow上的Dietrich Epp给出了一个强制类型转换的方案：</p>
-
-<pre><code class="language-c">((unsigned char volatile *)page)[0] = page[0];
-</code></pre>
-
-<p>通过volatile关键字禁止gcc的优化，和我之前采用的方法类似。</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">((<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span> <span style="color:#66d9ef">volatile</span> <span style="color:#f92672">*</span>)page)[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> page[<span style="color:#ae81ff">0</span>];
+</code></pre></div><p>通过volatile关键字禁止gcc的优化，和我之前采用的方法类似。</p>
 <p>Plow同学给出了另一个利用gcc 4.4特性的方法：</p>
-
-<pre><code class="language-c">#pragma GCC push_options
-#pragma GCC optimize (&quot;O0&quot;)
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">#pragma GCC push_options
+</span><span style="color:#75715e">#pragma GCC optimize (&#34;O0&#34;)
+</span><span style="color:#75715e"></span>
 your code
 
-#pragma GCC pop_options
-</code></pre>
-
-<p>这里用到了gcc 4.4的特性<a href="http://gcc.gnu.org/onlinedocs/gcc-4.4.2/gcc/Function-Specific-Option-Pragmas.html" target="_blank">Function Specific Option Pragmas</a>，在特定代码前保存当前的编译选项，然后对特定的代码使用O0优化级别，最后再恢复之前保存的编译选项。</p>
-
+<span style="color:#75715e">#pragma GCC pop_options
+</span></code></pre></div><p>这里用到了gcc 4.4的特性<!-- raw HTML omitted -->Function Specific Option Pragmas<!-- raw HTML omitted -->，在特定代码前保存当前的编译选项，然后对特定的代码使用O0优化级别，最后再恢复之前保存的编译选项。</p>
 <p>俺觉得这个特性有些场合下挺好用的，在这里分享下，虽然因为编译器版本问题最后我还是用了前面一种方法。</p>
 
     </div>

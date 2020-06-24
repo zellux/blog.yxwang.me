@@ -11,6 +11,7 @@
     
 
     <title> 几个有趣的 Quine 变种 &middot; Aiur · Zellux 的博客 </title>
+    
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
@@ -18,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.9d45622fec7b2cd2951a999932cee68b646d2042591570a54846f1b9c85b69aa.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -39,7 +40,7 @@
     "articleSection" : "post",
     "name" : "几个有趣的 Quine 变种",
     "headline" : "几个有趣的 Quine 变种",
-    "description" : "Quine是指一类能生成自己的程序，例如下面这个C程序运行后就能把自己的源码完整的打印出来：\nchar*f=\x26quot;char*f=%c%s%c;main() {printf(f,34,f,34,10);}%c\x26quot;; main(){printf(f,34,f,34,10);}  这类程序的构造方法计算理论导引或者其他相关的书籍中都有涉及，这里不再赘述。这个月看到几个Quine的变种，都挺有趣的。\n首先是sigfpe构造出来的三阶Quine，这是一个只有两行的Haskell程序：\nq a b c=putStrLn $ b \x2b\x2b [toEnum 10,\x27q\x27,\x27(\x27] \x2b\x2b show b \x2b\x2b [\x27,\x27] \x2b\x2b show c \x2b\x2b [\x27,\x27] \x2b\x2b show a \x2b\x2b [\x27)\x27] main=q \x26quot;q a b c=putStrLn $ b \x2b\x2b [toEnum 10,\x27q\x27,\x27(\x27] \x2b\x2b show b \x2b\x2b [\x27,\x27] \x2b\x2b show c \x2b\x2b [\x27,\x27] \x2b\x2b show a \x2b\x2b [\x27)\x27]\x26quot; \x26quot;def q(a,b,c):print b\x2bchr(10)\x2b\x27q(\x27\x2brepr(b)\x2b\x27,\x27\x2brepr(c)\x2b\x27,\x27\x2brepr(a)\x2b\x27)\x27\x26quot; \x26quot;def e(x) return 34.chr\x2bx\x2b34.chr end;def q(a,b,c) print b\x2b10.chr\x2b\x27main=q \x27\x2be(b)\x2b\x27 \x27\x2be(c)\x2b\x27 \x27\x2be(a)\x2b\x27 \x27\x2b10.",
+    "description" : "Quine是指一类能生成自己的程序，例如下面这个C程序运行后就能把自己的源码完整的打印出来：\nchar*f=\u0026#34;char*f=%c%s%c;main() {printf(f,34,f,34,10);}%c\u0026#34;; main(){printf(f,34,f,34,10);} 这类程序的构造方法计算理论导引或者其他相关的书籍中都有涉及，这里不再赘述。这个月看到几个Quine的变种，都挺有趣的。\n首先是sigfpe构造出来的三阶Quine，这是一个只有两行的Haskell程序：\nq a b c=putStrLn $ b \u002b\u002b [toEnum 10,\u0026#39;q\u0026#39;,\u0026#39;(\u0026#39;] \u002b\u002b show b \u002b\u002b [\u0026#39;,\u0026#39;] \u002b\u002b show c \u002b\u002b [\u0026#39;,\u0026#39;] \u002b\u002b show a \u002b\u002b [\u0026#39;)\u0026#39;] main=q \u0026#34;q a b c=putStrLn $ b \u002b\u002b [toEnum 10,\u0026#39;q\u0026#39;,\u0026#39;(\u0026#39;] \u002b\u002b show b \u002b\u002b [\u0026#39;,\u0026#39;] \u002b\u002b show c \u002b\u002b [\u0026#39;,\u0026#39;] \u002b\u002b show a \u002b\u002b [\u0026#39;)\u0026#39;]\u0026#34; \u0026#34;def q(a,b,c):print b\u002bchr(10)\u002b\u0026#39;q(\u0026#39;\u002brepr(b)\u002b\u0026#39;,\u0026#39;\u002brepr(c)\u002b\u0026#39;,\u0026#39;\u002brepr(a)\u002b\u0026#39;)\u0026#39;\u0026#34; \u0026#34;def e(x) return 34.chr\u002bx\u002b34.chr end;def q(a,b,c) print b\u002b10.chr\u002b\u0026#39;main=q \u0026#39;\u002be(b)\u002b\u0026#39; \u0026#39;\u002be(c)\u002b\u0026#39; \u0026#39;\u002be(a)\u002b\u0026#39; \u0026#39;\u002b10.chr end\u0026#34; 这段程序牛逼在哪里呢？运行后这个程序首先会输出一个Python程序，然后再运行这个Python程序会输出一段Ruby代码，最后这个Ruby代码的运行结果是原来的程序。或者说",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -47,8 +48,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2009",
-    "datePublished": "2009-09-28 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2009-09-28 00:00:00 \x2b0000 UTC",
+    "datePublished": "2009-09-28 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2009-09-28 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/2009\/09\/interesting-quines\/",
     "wordCount" : "83",
     "keywords" : [ "Algorithms","C","Quine","Blog" ]
@@ -93,31 +94,20 @@
 </span>
 
     <div class="post-content">
-      <p><a href="http://en.wikipedia.org/wiki/Quine_%28computing%29" target="_blank">Quine</a>是指一类能生成自己的程序，例如下面这个C程序运行后就能把自己的源码完整的打印出来：</p>
+      <p><!-- raw HTML omitted -->Quine<!-- raw HTML omitted -->是指一类能生成自己的程序，例如下面这个C程序运行后就能把自己的源码完整的打印出来：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">char</span><span style="color:#f92672">*</span>f<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;char*f=%c%s%c;main()</span>
+{printf(f,<span style="color:#ae81ff">34</span>,f,<span style="color:#ae81ff">34</span>,<span style="color:#ae81ff">10</span>);}<span style="color:#f92672">%</span>c<span style="color:#e6db74">&#34;;</span>
+main(){printf(f,<span style="color:#ae81ff">34</span>,f,<span style="color:#ae81ff">34</span>,<span style="color:#ae81ff">10</span>);}
+</code></pre></div><p>这类程序的构造方法<!-- raw HTML omitted -->计算理论导引<!-- raw HTML omitted -->或者其他相关的书籍中都有涉及，这里不再赘述。这个月看到几个Quine的变种，都挺有趣的。</p>
+<p>首先是sigfpe构造出来的<!-- raw HTML omitted -->三阶Quine<!-- raw HTML omitted -->，这是一个只有两行的Haskell程序：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#a6e22e">q</span> a b c<span style="color:#f92672">=</span>putStrLn <span style="color:#f92672">$</span> b <span style="color:#f92672">++</span> [toEnum <span style="color:#ae81ff">10</span>,<span style="color:#e6db74">&#39;q&#39;</span>,<span style="color:#e6db74">&#39;(&#39;</span>] <span style="color:#f92672">++</span> show b <span style="color:#f92672">++</span> [<span style="color:#e6db74">&#39;,&#39;</span>] <span style="color:#f92672">++</span> show c <span style="color:#f92672">++</span> [<span style="color:#e6db74">&#39;,&#39;</span>] <span style="color:#f92672">++</span> show a <span style="color:#f92672">++</span> [<span style="color:#e6db74">&#39;)&#39;</span>]
+<span style="color:#a6e22e">main</span><span style="color:#f92672">=</span>q <span style="color:#e6db74">&#34;q a b c=putStrLn $ b ++ [toEnum 10,&#39;q&#39;,&#39;(&#39;] ++ show b ++ [&#39;,&#39;] ++ show c ++ [&#39;,&#39;] ++ show a ++ [&#39;)&#39;]&#34;</span> <span style="color:#e6db74">&#34;def q(a,b,c):print b+chr(10)+&#39;q(&#39;+repr(b)+&#39;,&#39;+repr(c)+&#39;,&#39;+repr(a)+&#39;)&#39;&#34;</span> <span style="color:#e6db74">&#34;def e(x) return 34.chr+x+34.chr end;def q(a,b,c) print b+10.chr+&#39;main=q &#39;+e(b)+&#39; &#39;+e(c)+&#39; &#39;+e(a)+&#39; &#39;+10.chr end&#34;</span>
 
-<pre><code class="language-c">char*f=&quot;char*f=%c%s%c;main()
-{printf(f,34,f,34,10);}%c&quot;;
-main(){printf(f,34,f,34,10);}
-</code></pre>
-
-<p>这类程序的构造方法<a href="http://www.douban.com/subject/1444980/" target="_blank">计算理论导引</a>或者其他相关的书籍中都有涉及，这里不再赘述。这个月看到几个Quine的变种，都挺有趣的。</p>
-
-<p>首先是sigfpe构造出来的<a href="http://blog.sigfpe.com/2008/02/third-order-quine-in-three-languages.html" target="_blank">三阶Quine</a>，这是一个只有两行的Haskell程序：</p>
-
-<pre><code class="language-haskell">q a b c=putStrLn $ b ++ [toEnum 10,'q','('] ++ show b ++ [','] ++ show c ++ [','] ++ show a ++ [')']
-main=q &quot;q a b c=putStrLn $ b ++ [toEnum 10,'q','('] ++ show b ++ [','] ++ show c ++ [','] ++ show a ++ [')']&quot; &quot;def q(a,b,c):print b+chr(10)+'q('+repr(b)+','+repr(c)+','+repr(a)+')'&quot; &quot;def e(x) return 34.chr+x+34.chr end;def q(a,b,c) print b+10.chr+'main=q '+e(b)+' '+e(c)+' '+e(a)+' '+10.chr end&quot;
-
-</code></pre>
-
-<p>这段程序牛逼在哪里呢？运行后这个程序首先会输出一个Python程序，然后再运行这个Python程序会输出一段Ruby代码，最后这个Ruby代码的运行结果是原来的程序。或者说</p>
-
+</code></pre></div><p>这段程序牛逼在哪里呢？运行后这个程序首先会输出一个Python程序，然后再运行这个Python程序会输出一段Ruby代码，最后这个Ruby代码的运行结果是原来的程序。或者说</p>
 <p>$ runhaskell quine.hs | python | ruby</p>
-
 <p>的运行结果就是这段程序本身。</p>
-
-<p>另外两个Quine变种都和zip有关。一个是<a href="http://initiative.yo2.cn/archives/642588" target="_blank">解压得到自己的gzip文件</a>；<a href="http://steike.com/code/useless/zip-file-quine/" target="_blank">另一个</a>看起来更强大一点（不过是真的“更强大”吗？），解压自己能得到一个图片和自己本身，基于lz77算法。</p>
-
-<p>两个zip quine的下载地址分别是<a href="http://upload-001.yo2cdn.com/wp-content/uploads/74/7487/2009/09/selfgz.rar" target="_blank"><a href="http://upload-001.yo2cdn.com/wp-content/uploads/74/7487/2009/09/selfgz.rar">http://upload-001.yo2cdn.com/wp-content/uploads/74/7487/2009/09/selfgz.rar</a></a>和<a href="http://steike.com/code/useless/zip-file-quine/" target="_blank"><a href="http://steike.com/code/useless/zip-file-quine/droste.zip">http://steike.com/code/useless/zip-file-quine/droste.zip</a></a>。</p>
+<p>另外两个Quine变种都和zip有关。一个是<!-- raw HTML omitted -->解压得到自己的gzip文件<!-- raw HTML omitted -->；<!-- raw HTML omitted -->另一个<!-- raw HTML omitted -->看起来更强大一点（不过是真的“更强大”吗？），解压自己能得到一个图片和自己本身，基于lz77算法。</p>
+<p>两个zip quine的下载地址分别是<!-- raw HTML omitted --><a href="http://upload-001.yo2cdn.com/wp-content/uploads/74/7487/2009/09/selfgz.rar">http://upload-001.yo2cdn.com/wp-content/uploads/74/7487/2009/09/selfgz.rar</a><!-- raw HTML omitted -->和<!-- raw HTML omitted --><a href="http://steike.com/code/useless/zip-file-quine/droste.zip">http://steike.com/code/useless/zip-file-quine/droste.zip</a><!-- raw HTML omitted -->。</p>
 
     </div>
         <div class="cc-license">

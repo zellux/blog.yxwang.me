@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>EuroSys on Aiur · Zellux 的博客</title>
@@ -23,7 +23,7 @@
 首先是原来就作为 ret 指令用的 0xc3 代码。注意 return-oriented 之所以成功一大原因就是 ret 指令在返回时不会检查栈上的返回地址是否正确。要保证这一点，需要引入一个间接跳转层。传统的调用过程是调用者把返回地址压入栈上，然后被调用函数返回时从栈上得到返回地址并返回。现在我们加入一个新的跳转表，这张表里记录了所有的返回地址，而且它不在栈上，因此不能被攻击者修改。当调用者调用函数时，把返回地址在表中的序号压入栈上；函数返回时，从栈上读出地址序号，再查表得到实际地址，然后返回。通过引入这样一层额外的地址转换机制，攻击者就不能通过修改栈上返回地址让函数返回到任意地址了。
 接下来我们要解决其他指令引入的 0xc3，这里面也分几类情况。首先是由于寄存器分配引起的。例如 movl %rax, %rbx 对应的机器码是 48 89 c3，这边就有个 0xc3。对于这一类代码，只需要在编译器做寄存器分配时把有可能产生 0xc3 的情况排除掉即可。
 另一类是代码中直接使用了 0xc3 作为直接数。这种情况需要对代码进行适当的修补，以 cmp $0xc3, %ecx 为例，0xc3 这个直接数可以通过 0xc4 - 1 得到，于是这条指令可以被修改为：
-mov $0xc4, %reg dec %reg cmp %reg, %ecx  到这里所有包含 0xc3 的代码都已经被修改成具有同等功能的不包含 0xc3 的版本了，也就彻底杜绝了 ret 指令被用来做 return-oriented 攻击的可能。对具体实现细节有兴趣的同学可以读一下这篇论文，作者借助 LLVM 生成了一个没有 0xc3 的 FreeBSD 内核。</description>
+mov $0xc4, %reg dec %reg cmp %reg, %ecx 到这里所有包含 0xc3 的代码都已经被修改成具有同等功能的不包含 0xc3 的版本了，也就彻底杜绝了 ret 指令被用来做 return-oriented 攻击的可能。对具体实现细节有兴趣的同学可以读一下这篇论文，作者借助 LLVM 生成了一个没有 0xc3 的 FreeBSD 内核。</description>
     </item>
     
     <item>
@@ -47,11 +47,8 @@ mov $0xc4, %reg dec %reg cmp %reg, %ecx  到这里所有包含 0xc3 的代码都
       <pubDate>Wed, 28 May 2008 00:00:00 +0000</pubDate>
       
       <guid>https://blog.yxwang.me/2008/05/application-level-isolation-and-recovery-with-solitude/</guid>
-      <description>Application-Level Isolation and Recovery with Solitude
-Shvetank Jain, Fareha Shafique, Vladan Djeric, Ashvin Goel
-Department of Electrical and Computer Engineering, University of Toronto
-http://portal.acm.org/citation.cfm?id=1357010.1352603
-引入一个新的文件系统层(Isolation File System)将安全可信的基础文件系统和不可信的环境（如网上下载的文件等）隔离开来，并对不可信的环境中做出的改动加以记录，一旦发现问题就能即使恢复。</description>
+      <description>Application-Level Isolation and Recovery with SolitudeShvetank Jain, Fareha Shafique, Vladan Djeric, Ashvin Goel
+Department of Electrical and Computer Engineering, University of Torontohttp://portal.acm.org/citation.cfm?id=1357010.1352603引入一个新的文件系统层(Isolation File System)将安全可信的基础文件系统和不可信的环境（如网上下载的文件等）隔离开来，并对不可信的环境中做出的改动加以记录，一旦发现问题就能即使恢复。</description>
     </item>
     
   </channel>

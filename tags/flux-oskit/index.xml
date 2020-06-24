@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Flux OSKit on Aiur · Zellux 的博客</title>
@@ -19,7 +19,7 @@
       <guid>https://blog.yxwang.me/2008/08/smalloc-vs-malloc/</guid>
       <description>s前缀的malloc函数（包括smalloc、smemalign等）不记录分配块的大小，比较节省空间，但是要求用户在用sfree释放内存的时候指定被释放的内存块大小。
 malloc则和libc中的同名函数很相似。
-整个分配信息（包括哪些块已被使用）都记录在malloc_lmm这个全局变量中，内存被分为若干个region，每个region中有若干个nodes，这些信息可以通过lmm_dump查看（需要include ）。
+整个分配信息（包括哪些块已被使用）都记录在malloc_lmm这个全局变量中，内存被分为若干个region，每个region中有若干个nodes，这些信息可以通过lmm_dump查看（需要include &amp;lt;lmm.public.h&amp;gt;）。
 smemalign很适合分配需要页对齐的内存块，因为如果使用memalign分配的话，每个页面就需要多用8字节的空间来记录当前块的大小了（保存在每个内存块的前面），会产生大量内存碎片。</description>
     </item>
     
@@ -41,9 +41,9 @@ smemalign很适合分配需要页对齐的内存块，因为如果使用memalign
       
       <guid>https://blog.yxwang.me/2008/08/export-symbols-in-asm/</guid>
       <description>Linux 2.4.18的linux/linkage.h文件定义了若干相关的宏
-#define SYMBOL_NAME(X) X #ifdef __STDC__ #define SYMBOL_NAME_LABEL(X) X##: #else #define SYMBOL_NAME_LABEL(X) X/**/: #endif #define __ALIGN .align 16,0x90 #define __ALIGN_STR &amp;quot;.align 16,0x90&amp;quot; #define ALIGN __ALIGN #define ALIGN_STR __ALIGN_STR #define ENTRY(name) .globl SYMBOL_NAME(name); ALIGN; SYMBOL_NAME_LABEL(name)  用ENTRY(name)就能定义函数了。后来发现Flux OSKit中本来就提供了类似功能的宏，定义在inc/asm.h中。
+#define SYMBOL_NAME(X) X #ifdef __STDC__ #define SYMBOL_NAME_LABEL(X) X##: #else #define SYMBOL_NAME_LABEL(X) X/**/: #endif  #define __ALIGN .align 16,0x90 #define __ALIGN_STR &amp;#34;.align 16,0x90&amp;#34;  #define ALIGN __ALIGN #define ALIGN_STR __ALIGN_STR  #define ENTRY(name)  .globl SYMBOL_NAME(name); ALIGN; SYMBOL_NAME_LABEL(name) 用ENTRY(name)就能定义函数了。后来发现Flux OSKit中本来就提供了类似功能的宏，定义在inc/asm.h中。
 使用的时候需要再写一个c语言的wrapper function（至少2.4.18里面是这么做的）
-asmlinkage void ret_from_fork(void) __asm__(&amp;quot;ret_from_fork&amp;quot;);  </description>
+asmlinkage void ret_from_fork(void) __asm__(&amp;#34;ret_from_fork&amp;#34;); </description>
     </item>
     
   </channel>

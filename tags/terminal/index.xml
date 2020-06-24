@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>terminal on Aiur · Zellux 的博客</title>
@@ -17,9 +17,8 @@
       <pubDate>Wed, 29 Apr 2009 00:00:00 +0000</pubDate>
       
       <guid>https://blog.yxwang.me/2009/04/using-mouse-in-emacs-within-terminal/</guid>
-      <description>http://linux.about.com/od/emacs_doc/a/emacsdoc567.htm
-M-x xterm-mouse-mode 开启鼠标支持，操作的时候按住shift能恢复到之前的xterm鼠标模式
-M-x mouse-wheel-mode 开启滚轮支持
+      <description>http://linux.about.com/od/emacs_doc/a/emacsdoc567.htmM-x xterm-mouse-mode开启鼠标支持，操作的时候按住shift能恢复到之前的xterm鼠标模式
+M-x mouse-wheel-mode开启滚轮支持
 一些相关的参数： mouse-drag-copy-region 选中后自动复制 mouse-wheel-scroll-amount 每次滚动的行数 mouse-wheel-follow-mouse 滚动位置 mouse-wheel-progressive-speed 滚动速度</description>
     </item>
     

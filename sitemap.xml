@@ -2,7 +2,19 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   
+  <url>
+    <loc>https://blog.yxwang.me/</loc>
+    <lastmod>2019-07-21T20:54:27-07:00</lastmod>
+    
+  </url>
   
+  
+  
+  <url>
+    <loc>https://blog.yxwang.me/categories/</loc>
+    <lastmod>2019-07-21T20:54:27-07:00</lastmod>
+    
+  </url>
   
   
   
@@ -14,13 +26,43 @@
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/life/</loc>
+    <lastmod>2019-07-21T20:54:27-07:00</lastmod>
+    
+  </url>
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/categories/life/</loc>
+    <lastmod>2019-07-21T20:54:27-07:00</lastmod>
+    
+  </url>
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/post/</loc>
+    <lastmod>2019-07-21T20:54:27-07:00</lastmod>
+    
+  </url>
   
+  
+  
+  <url>
+    <loc>https://blog.yxwang.me/tags/smarthome/</loc>
+    <lastmod>2019-07-21T20:54:27-07:00</lastmod>
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://blog.yxwang.me/tags/</loc>
+    <lastmod>2019-07-21T20:54:27-07:00</lastmod>
+    
+  </url>
   
   
   
@@ -32,17 +74,59 @@
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/autonomy/</loc>
+    <lastmod>2019-03-29T16:03:45-07:00</lastmod>
+    
+  </url>
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/computer-vision/</loc>
+    <lastmod>2019-03-29T16:03:45-07:00</lastmod>
+    
+  </url>
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/categories/computer-vision/</loc>
+    <lastmod>2019-03-29T16:03:45-07:00</lastmod>
+    
+  </url>
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/deep-learning/</loc>
+    <lastmod>2019-03-29T16:03:45-07:00</lastmod>
+    
+  </url>
   
   
+  
+  <url>
+    <loc>https://blog.yxwang.me/tags/paper/</loc>
+    <lastmod>2019-03-29T16:03:45-07:00</lastmod>
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://blog.yxwang.me/tags/research/</loc>
+    <lastmod>2019-03-29T16:03:45-07:00</lastmod>
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://blog.yxwang.me/tags/vias/</loc>
+    <lastmod>2018-10-30T21:35:07-07:00</lastmod>
+    
+  </url>
   
   
   
@@ -54,11 +138,35 @@
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/courses/</loc>
+    <lastmod>2018-08-07T00:56:13-07:00</lastmod>
+    
+  </url>
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/notes/</loc>
+    <lastmod>2018-08-07T00:56:13-07:00</lastmod>
+    
+  </url>
   
   
+  
+  <url>
+    <loc>https://blog.yxwang.me/tags/robotics/</loc>
+    <lastmod>2018-08-07T00:56:13-07:00</lastmod>
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://blog.yxwang.me/categories/robotics/</loc>
+    <lastmod>2018-08-07T00:56:13-07:00</lastmod>
+    
+  </url>
   
   
   
@@ -94,6 +202,12 @@
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/categories/cooking/</loc>
+    <lastmod>2018-07-21T15:14:53-07:00</lastmod>
+    
+  </url>
+  
   
   
   <url>
@@ -104,9 +218,27 @@
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/algorithms/</loc>
+    <lastmod>2018-07-14T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/categories/algorithms/</loc>
+    <lastmod>2018-07-14T00:00:00+00:00</lastmod>
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://blog.yxwang.me/tags/math/</loc>
+    <lastmod>2018-07-14T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
   
@@ -134,7 +266,19 @@
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/tooling/</loc>
+    <lastmod>2014-02-13T00:00:00+00:00</lastmod>
+    
+  </url>
   
+  
+  
+  <url>
+    <loc>https://blog.yxwang.me/categories/tooling/</loc>
+    <lastmod>2014-02-13T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
   
@@ -146,7 +290,19 @@
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/alfred/</loc>
+    <lastmod>2013-08-21T00:00:00+00:00</lastmod>
+    
+  </url>
   
+  
+  
+  <url>
+    <loc>https://blog.yxwang.me/tags/mac/</loc>
+    <lastmod>2013-08-21T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
   
@@ -157,6 +313,12 @@
   </url>
   
   
+  
+  <url>
+    <loc>https://blog.yxwang.me/tags/travel/</loc>
+    <lastmod>2013-07-14T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
   
@@ -176,9 +338,27 @@
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/programming/</loc>
+    <lastmod>2013-02-14T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/categories/programming/</loc>
+    <lastmod>2013-02-14T00:00:00+00:00</lastmod>
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://blog.yxwang.me/tags/ruby/</loc>
+    <lastmod>2013-02-14T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
   
@@ -190,6 +370,12 @@
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/zsh/</loc>
+    <lastmod>2013-01-24T00:00:00+00:00</lastmod>
+    
+  </url>
+  
   
   
   <url>
@@ -199,6 +385,12 @@
   </url>
   
   
+  
+  <url>
+    <loc>https://blog.yxwang.me/tags/emacs/</loc>
+    <lastmod>2013-01-09T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
   
@@ -210,6 +402,12 @@
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/rails/</loc>
+    <lastmod>2013-01-04T00:00:00+00:00</lastmod>
+    
+  </url>
+  
   
   
   <url>
@@ -220,11 +418,35 @@
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/meta/</loc>
+    <lastmod>2012-12-31T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/categories/meta/</loc>
+    <lastmod>2012-12-31T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
+  
+  <url>
+    <loc>https://blog.yxwang.me/tags/meta-blogging/</loc>
+    <lastmod>2012-12-31T00:00:00+00:00</lastmod>
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://blog.yxwang.me/tags/octopress/</loc>
+    <lastmod>2012-12-31T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
   
@@ -235,6 +457,12 @@
   </url>
   
   
+  
+  <url>
+    <loc>https://blog.yxwang.me/tags/career/</loc>
+    <lastmod>2012-12-26T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
   
@@ -286,9 +514,27 @@
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/computer-system/</loc>
+    <lastmod>2012-08-09T17:37:12+00:00</lastmod>
+    
+  </url>
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/categories/computer-system/</loc>
+    <lastmod>2012-08-09T17:37:12+00:00</lastmod>
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://blog.yxwang.me/tags/distributed/</loc>
+    <lastmod>2012-08-09T17:37:12+00:00</lastmod>
+    
+  </url>
   
   
   
@@ -300,6 +546,12 @@
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/things/</loc>
+    <lastmod>2012-08-02T00:00:00+00:00</lastmod>
+    
+  </url>
+  
   
   
   <url>
@@ -309,6 +561,12 @@
   </url>
   
   
+  
+  <url>
+    <loc>https://blog.yxwang.me/tags/android/</loc>
+    <lastmod>2012-07-21T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
   
@@ -320,7 +578,19 @@
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/mobile/</loc>
+    <lastmod>2012-07-21T00:00:00+00:00</lastmod>
+    
+  </url>
   
+  
+  
+  <url>
+    <loc>https://blog.yxwang.me/tags/scala/</loc>
+    <lastmod>2012-06-30T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
   
@@ -332,6 +602,12 @@
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/storage/</loc>
+    <lastmod>2012-06-11T00:00:00+00:00</lastmod>
+    
+  </url>
+  
   
   
   <url>
@@ -342,7 +618,19 @@
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/git/</loc>
+    <lastmod>2012-03-28T00:00:00+00:00</lastmod>
+    
+  </url>
   
+  
+  
+  <url>
+    <loc>https://blog.yxwang.me/tags/shell/</loc>
+    <lastmod>2012-03-28T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
   
@@ -354,7 +642,19 @@
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/ruby-on-rails/</loc>
+    <lastmod>2012-02-18T00:00:00+00:00</lastmod>
+    
+  </url>
   
+  
+  
+  <url>
+    <loc>https://blog.yxwang.me/tags/web-development/</loc>
+    <lastmod>2012-02-18T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
   
@@ -366,7 +666,19 @@
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/eps/</loc>
+    <lastmod>2012-01-02T00:00:00+00:00</lastmod>
+    
+  </url>
   
+  
+  
+  <url>
+    <loc>https://blog.yxwang.me/tags/visio/</loc>
+    <lastmod>2012-01-02T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
   
@@ -378,7 +690,19 @@
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/games/</loc>
+    <lastmod>2011-12-05T00:00:00+00:00</lastmod>
+    
+  </url>
   
+  
+  
+  <url>
+    <loc>https://blog.yxwang.me/tags/starcraft/</loc>
+    <lastmod>2011-12-05T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
   
@@ -406,6 +730,20 @@
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/2011/11/options-for-render/</loc>
+    <lastmod>2011-11-20T00:00:00+00:00</lastmod>
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://blog.yxwang.me/tags/rest/</loc>
+    <lastmod>2011-11-20T00:00:00+00:00</lastmod>
+    
+  </url>
+  
   
   
   <url>
@@ -417,12 +755,10 @@
   
   
   <url>
-    <loc>https://blog.yxwang.me/2011/11/options-for-render/</loc>
+    <loc>https://blog.yxwang.me/tags/rspec/</loc>
     <lastmod>2011-11-20T00:00:00+00:00</lastmod>
     
   </url>
-  
-  
   
   
   
@@ -434,6 +770,12 @@
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/hash/</loc>
+    <lastmod>2011-09-17T00:00:00+00:00</lastmod>
+    
+  </url>
+  
   
   
   <url>
@@ -444,11 +786,35 @@
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/lion/</loc>
+    <lastmod>2011-07-28T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/mac-os-x/</loc>
+    <lastmod>2011-07-28T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
+  
+  <url>
+    <loc>https://blog.yxwang.me/tags/max-os-x/</loc>
+    <lastmod>2011-07-28T00:00:00+00:00</lastmod>
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://blog.yxwang.me/tags/tools/</loc>
+    <lastmod>2011-07-28T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
   
@@ -460,11 +826,35 @@
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/growl/</loc>
+    <lastmod>2011-03-02T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/linux/</loc>
+    <lastmod>2011-03-02T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
+  
+  <url>
+    <loc>https://blog.yxwang.me/tags/python/</loc>
+    <lastmod>2011-03-02T00:00:00+00:00</lastmod>
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://blog.yxwang.me/tags/scripting/</loc>
+    <lastmod>2011-03-02T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
   
@@ -476,11 +866,35 @@
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/eurosys/</loc>
+    <lastmod>2011-01-16T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/llvm/</loc>
+    <lastmod>2011-01-16T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
+  
+  <url>
+    <loc>https://blog.yxwang.me/tags/return-oriented/</loc>
+    <lastmod>2011-01-16T00:00:00+00:00</lastmod>
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://blog.yxwang.me/tags/security/</loc>
+    <lastmod>2011-01-16T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
   
@@ -500,6 +914,12 @@
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/keyboard/</loc>
+    <lastmod>2010-10-19T00:00:00+00:00</lastmod>
+    
+  </url>
+  
   
   
   <url>
@@ -510,9 +930,27 @@
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/assembly/</loc>
+    <lastmod>2010-08-25T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/computer-languages/</loc>
+    <lastmod>2010-08-25T00:00:00+00:00</lastmod>
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://blog.yxwang.me/tags/gcc/</loc>
+    <lastmod>2010-08-25T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
   
@@ -524,6 +962,12 @@
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/proxy/</loc>
+    <lastmod>2010-05-14T00:00:00+00:00</lastmod>
+    
+  </url>
+  
   
   
   <url>
@@ -534,7 +978,19 @@
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/sampp/</loc>
+    <lastmod>2010-03-03T00:00:00+00:00</lastmod>
+    
+  </url>
   
+  
+  
+  <url>
+    <loc>https://blog.yxwang.me/tags/xss/</loc>
+    <lastmod>2010-03-03T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
   
@@ -546,7 +1002,19 @@
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/bash/</loc>
+    <lastmod>2010-03-01T00:00:00+00:00</lastmod>
+    
+  </url>
   
+  
+  
+  <url>
+    <loc>https://blog.yxwang.me/tags/screen/</loc>
+    <lastmod>2010-03-01T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
   
@@ -558,9 +1026,35 @@
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/lisp/</loc>
+    <lastmod>2010-02-24T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/programming-languages/</loc>
+    <lastmod>2010-02-24T00:00:00+00:00</lastmod>
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://blog.yxwang.me/tags/scheme/</loc>
+    <lastmod>2010-02-24T00:00:00+00:00</lastmod>
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://blog.yxwang.me/tags/sicp/</loc>
+    <lastmod>2010-02-24T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
   
@@ -572,7 +1066,11 @@
   
   
   
-  
+  <url>
+    <loc>https://blog.yxwang.me/tags/fonts/</loc>
+    <lastmod>2010-02-14T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
   
@@ -584,7 +1082,19 @@
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/featured/</loc>
+    <lastmod>2010-02-09T00:00:00+00:00</lastmod>
+    
+  </url>
   
+  
+  
+  <url>
+    <loc>https://blog.yxwang.me/tags/kernel/</loc>
+    <lastmod>2010-02-09T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
   
@@ -604,7 +1114,19 @@
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/cscope/</loc>
+    <lastmod>2010-02-07T00:00:00+00:00</lastmod>
+    
+  </url>
   
+  
+  
+  <url>
+    <loc>https://blog.yxwang.me/tags/ecb/</loc>
+    <lastmod>2010-02-07T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
   
@@ -616,6 +1138,12 @@
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/clrs/</loc>
+    <lastmod>2010-02-04T00:00:00+00:00</lastmod>
+    
+  </url>
+  
   
   
   <url>
@@ -625,6 +1153,12 @@
   </url>
   
   
+  
+  <url>
+    <loc>https://blog.yxwang.me/tags/cedet/</loc>
+    <lastmod>2010-02-03T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
   
@@ -644,6 +1178,12 @@
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/c/</loc>
+    <lastmod>2010-01-28T00:00:00+00:00</lastmod>
+    
+  </url>
+  
   
   
   <url>
@@ -653,6 +1193,12 @@
   </url>
   
   
+  
+  <url>
+    <loc>https://blog.yxwang.me/tags/linking/</loc>
+    <lastmod>2010-01-26T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
   
@@ -672,6 +1218,12 @@
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/grep/</loc>
+    <lastmod>2010-01-21T00:00:00+00:00</lastmod>
+    
+  </url>
+  
   
   
   <url>
@@ -682,9 +1234,27 @@
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/debug/</loc>
+    <lastmod>2009-12-17T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/makefile/</loc>
+    <lastmod>2009-12-17T00:00:00+00:00</lastmod>
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://blog.yxwang.me/tags/ubuntu/</loc>
+    <lastmod>2009-12-17T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
   
@@ -696,6 +1266,12 @@
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/xen/</loc>
+    <lastmod>2009-12-17T00:00:00+00:00</lastmod>
+    
+  </url>
+  
   
   
   <url>
@@ -706,6 +1282,12 @@
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/game-theory/</loc>
+    <lastmod>2009-12-13T00:00:00+00:00</lastmod>
+    
+  </url>
+  
   
   
   <url>
@@ -715,6 +1297,12 @@
   </url>
   
   
+  
+  <url>
+    <loc>https://blog.yxwang.me/tags/latex/</loc>
+    <lastmod>2009-11-30T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
   
@@ -734,7 +1322,19 @@
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/hardware/</loc>
+    <lastmod>2009-10-23T00:00:00+00:00</lastmod>
+    
+  </url>
   
+  
+  
+  <url>
+    <loc>https://blog.yxwang.me/tags/troubleshooting/</loc>
+    <lastmod>2009-10-23T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
   
@@ -746,6 +1346,12 @@
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/quine/</loc>
+    <lastmod>2009-09-28T00:00:00+00:00</lastmod>
+    
+  </url>
+  
   
   
   <url>
@@ -755,6 +1361,12 @@
   </url>
   
   
+  
+  <url>
+    <loc>https://blog.yxwang.me/tags/dreamhost/</loc>
+    <lastmod>2009-09-26T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
   
@@ -766,11 +1378,35 @@
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/php/</loc>
+    <lastmod>2009-09-26T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/software/</loc>
+    <lastmod>2009-09-26T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
+  
+  <url>
+    <loc>https://blog.yxwang.me/tags/rootkit/</loc>
+    <lastmod>2009-08-12T00:00:00+00:00</lastmod>
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://blog.yxwang.me/tags/usenix/</loc>
+    <lastmod>2009-08-12T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
   
@@ -790,11 +1426,25 @@
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/firefox/</loc>
+    <lastmod>2009-07-01T00:00:00+00:00</lastmod>
+    
+  </url>
+  
   
   
   <url>
     <loc>https://blog.yxwang.me/2009/07/firefox-close-windows-with-last-tab/</loc>
     <lastmod>2009-07-01T00:00:00+00:00</lastmod>
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://blog.yxwang.me/tags/svn/</loc>
+    <lastmod>2009-06-16T00:00:00+00:00</lastmod>
     
   </url>
   
@@ -808,7 +1458,11 @@
   
   
   
-  
+  <url>
+    <loc>https://blog.yxwang.me/tags/cloud-computing/</loc>
+    <lastmod>2009-06-09T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
   
@@ -828,6 +1482,12 @@
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/interview/</loc>
+    <lastmod>2009-06-01T00:00:00+00:00</lastmod>
+    
+  </url>
+  
   
   
   <url>
@@ -838,7 +1498,19 @@
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/debugging/</loc>
+    <lastmod>2009-05-27T00:00:00+00:00</lastmod>
+    
+  </url>
   
+  
+  
+  <url>
+    <loc>https://blog.yxwang.me/tags/vmware/</loc>
+    <lastmod>2009-05-27T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
   
@@ -850,6 +1522,12 @@
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/archlinux/</loc>
+    <lastmod>2009-05-26T00:00:00+00:00</lastmod>
+    
+  </url>
+  
   
   
   <url>
@@ -860,9 +1538,27 @@
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/server/</loc>
+    <lastmod>2009-05-26T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/cache/</loc>
+    <lastmod>2009-05-12T00:00:00+00:00</lastmod>
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://blog.yxwang.me/tags/isca/</loc>
+    <lastmod>2009-05-12T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
   
@@ -874,7 +1570,19 @@
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/memory-management/</loc>
+    <lastmod>2009-05-12T00:00:00+00:00</lastmod>
+    
+  </url>
   
+  
+  
+  <url>
+    <loc>https://blog.yxwang.me/tags/page-table/</loc>
+    <lastmod>2009-05-11T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
   
@@ -894,6 +1602,12 @@
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/installation/</loc>
+    <lastmod>2009-05-05T00:00:00+00:00</lastmod>
+    
+  </url>
+  
   
   
   <url>
@@ -912,6 +1626,12 @@
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/terminal/</loc>
+    <lastmod>2009-04-29T00:00:00+00:00</lastmod>
+    
+  </url>
+  
   
   
   <url>
@@ -922,9 +1642,27 @@
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/concurrency/</loc>
+    <lastmod>2009-04-20T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/data-structure/</loc>
+    <lastmod>2009-04-20T00:00:00+00:00</lastmod>
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://blog.yxwang.me/tags/ppopp/</loc>
+    <lastmod>2009-04-20T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
   
@@ -936,6 +1674,12 @@
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/joke/</loc>
+    <lastmod>2009-04-10T00:00:00+00:00</lastmod>
+    
+  </url>
+  
   
   
   <url>
@@ -945,6 +1689,12 @@
   </url>
   
   
+  
+  <url>
+    <loc>https://blog.yxwang.me/tags/cgo/</loc>
+    <lastmod>2009-04-09T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
   
@@ -956,7 +1706,19 @@
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/dcl/</loc>
+    <lastmod>2009-04-09T00:00:00+00:00</lastmod>
+    
+  </url>
   
+  
+  
+  <url>
+    <loc>https://blog.yxwang.me/tags/sosp/</loc>
+    <lastmod>2009-04-08T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
   
@@ -976,7 +1738,19 @@
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/virtualization/</loc>
+    <lastmod>2009-04-08T00:00:00+00:00</lastmod>
+    
+  </url>
   
+  
+  
+  <url>
+    <loc>https://blog.yxwang.me/tags/asplos/</loc>
+    <lastmod>2009-04-07T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
   
@@ -988,7 +1762,19 @@
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/cerberus/</loc>
+    <lastmod>2009-04-07T00:00:00+00:00</lastmod>
+    
+  </url>
   
+  
+  
+  <url>
+    <loc>https://blog.yxwang.me/tags/flash-disk/</loc>
+    <lastmod>2009-04-07T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
   
@@ -1000,6 +1786,12 @@
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/architecture/</loc>
+    <lastmod>2009-04-06T00:00:00+00:00</lastmod>
+    
+  </url>
+  
   
   
   <url>
@@ -1010,7 +1802,19 @@
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/tocs/</loc>
+    <lastmod>2009-04-06T00:00:00+00:00</lastmod>
+    
+  </url>
   
+  
+  
+  <url>
+    <loc>https://blog.yxwang.me/tags/contribution/</loc>
+    <lastmod>2009-04-04T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
   
@@ -1029,6 +1833,12 @@
   </url>
   
   
+  
+  <url>
+    <loc>https://blog.yxwang.me/tags/mathematics/</loc>
+    <lastmod>2009-03-18T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
   
@@ -1072,6 +1882,20 @@
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/tramp/</loc>
+    <lastmod>2009-02-09T00:00:00+00:00</lastmod>
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://blog.yxwang.me/tags/faq/</loc>
+    <lastmod>2009-01-08T00:00:00+00:00</lastmod>
+    
+  </url>
+  
   
   
   <url>
@@ -1082,7 +1906,11 @@
   
   
   
-  
+  <url>
+    <loc>https://blog.yxwang.me/tags/osdi/</loc>
+    <lastmod>2008-11-30T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
   
@@ -1102,9 +1930,27 @@
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/books/</loc>
+    <lastmod>2008-11-11T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/formal-language/</loc>
+    <lastmod>2008-11-11T00:00:00+00:00</lastmod>
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://blog.yxwang.me/tags/geb/</loc>
+    <lastmod>2008-11-11T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
   
@@ -1123,6 +1969,12 @@
   </url>
   
   
+  
+  <url>
+    <loc>https://blog.yxwang.me/tags/feg/</loc>
+    <lastmod>2008-11-08T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
   
@@ -1150,7 +2002,19 @@
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/closure/</loc>
+    <lastmod>2008-10-17T00:00:00+00:00</lastmod>
+    
+  </url>
   
+  
+  
+  <url>
+    <loc>https://blog.yxwang.me/tags/endnote/</loc>
+    <lastmod>2008-10-17T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
   
@@ -1162,6 +2026,12 @@
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/zotero/</loc>
+    <lastmod>2008-10-17T00:00:00+00:00</lastmod>
+    
+  </url>
+  
   
   
   <url>
@@ -1171,6 +2041,12 @@
   </url>
   
   
+  
+  <url>
+    <loc>https://blog.yxwang.me/tags/erlang/</loc>
+    <lastmod>2008-10-16T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
   
@@ -1182,7 +2058,27 @@
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/live-updating/</loc>
+    <lastmod>2008-10-16T00:00:00+00:00</lastmod>
+    
+  </url>
   
+  
+  
+  <url>
+    <loc>https://blog.yxwang.me/tags/acm-queue/</loc>
+    <lastmod>2008-10-13T00:00:00+00:00</lastmod>
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://blog.yxwang.me/tags/distributed-system/</loc>
+    <lastmod>2008-10-13T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
   
@@ -1191,8 +2087,6 @@
     <lastmod>2008-10-13T00:00:00+00:00</lastmod>
     
   </url>
-  
-  
   
   
   
@@ -1212,6 +2106,12 @@
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/linked-list/</loc>
+    <lastmod>2008-09-08T00:00:00+00:00</lastmod>
+    
+  </url>
+  
   
   
   <url>
@@ -1222,9 +2122,27 @@
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/categories/courses/</loc>
+    <lastmod>2008-09-01T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/lab/</loc>
+    <lastmod>2008-09-01T00:00:00+00:00</lastmod>
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://blog.yxwang.me/tags/os/</loc>
+    <lastmod>2008-09-01T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
   
@@ -1243,6 +2161,12 @@
   </url>
   
   
+  
+  <url>
+    <loc>https://blog.yxwang.me/tags/flux-oskit/</loc>
+    <lastmod>2008-08-24T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
   
@@ -1278,6 +2202,12 @@
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/memory/</loc>
+    <lastmod>2008-07-19T00:00:00+00:00</lastmod>
+    
+  </url>
+  
   
   
   <url>
@@ -1288,9 +2218,27 @@
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/design-patterns/</loc>
+    <lastmod>2008-07-04T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/categories/featured/</loc>
+    <lastmod>2008-07-04T00:00:00+00:00</lastmod>
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://blog.yxwang.me/tags/java/</loc>
+    <lastmod>2008-07-04T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
   
@@ -1302,6 +2250,12 @@
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/ics/</loc>
+    <lastmod>2008-06-23T00:00:00+00:00</lastmod>
+    
+  </url>
+  
   
   
   <url>
@@ -1312,6 +2266,12 @@
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/network/</loc>
+    <lastmod>2008-06-23T00:00:00+00:00</lastmod>
+    
+  </url>
+  
   
   
   <url>
@@ -1321,6 +2281,12 @@
   </url>
   
   
+  
+  <url>
+    <loc>https://blog.yxwang.me/tags/malloc/</loc>
+    <lastmod>2008-06-16T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
   
@@ -1348,6 +2314,12 @@
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/parallel-computing/</loc>
+    <lastmod>2008-04-23T00:00:00+00:00</lastmod>
+    
+  </url>
+  
   
   
   <url>
@@ -1358,6 +2330,12 @@
   
   
   
+  <url>
+    <loc>https://blog.yxwang.me/tags/tcs/</loc>
+    <lastmod>2008-04-23T00:00:00+00:00</lastmod>
+    
+  </url>
+  
   
   
   <url>
@@ -1367,6 +2345,12 @@
   </url>
   
   
+  
+  <url>
+    <loc>https://blog.yxwang.me/tags/bit-hacking/</loc>
+    <lastmod>2008-04-15T00:00:00+00:00</lastmod>
+    
+  </url>
   
   
   
@@ -1403,6 +2387,14 @@
   
   
   <url>
+    <loc>https://blog.yxwang.me/tags/gdb/</loc>
+    <lastmod>2007-11-20T00:00:00+00:00</lastmod>
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://blog.yxwang.me/2007/11/ics-lab2/</loc>
     <lastmod>2007-11-20T00:00:00+00:00</lastmod>
     
@@ -1410,11 +2402,10 @@
   
   
   
-  
-  
-  
-  
-  
+  <url>
+    <loc>https://blog.yxwang.me/notes/open-course/deep-learning/</loc>
+    
+  </url>
   
   
   
@@ -1427,6 +2418,20 @@
   
   <url>
     <loc>https://blog.yxwang.me/archive/</loc>
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://blog.yxwang.me/notes/open-course/money-and-banking/</loc>
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://blog.yxwang.me/notes/open-course/money-and-banking/week1/</loc>
     
   </url>
   
@@ -1452,6 +2457,11 @@
   </url>
   
   
+  
+  <url>
+    <loc>https://blog.yxwang.me/pages/</loc>
+    
+  </url>
   
   
   
