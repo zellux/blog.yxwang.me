@@ -19,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.3f7fceb38fa32fbb9c798ab89fa80e5660bf6635d4bcd89dc5824721b6308d80.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -97,7 +97,7 @@
       <p>这一周的内容和地图有关，最后的作业就是通过传感器的数据创建一个地图。</p>
 <h2 id="地图类型">地图类型</h2>
 <p>常见的题目类型有三种：</p>
-<ol type="1">
+<ol style="list-style-type: decimal">
 <li>度量地图 (Metric Map)：地点用坐标表示，例如用经纬度表示地点的世界地图。</li>
 <li>拓扑地图 (Topological Map)：表示地点之间的逻辑关系，例如图论中图的概念，以及地铁图。</li>
 <li>语义地图 (Semantic Map)：用标签描述的地图，通过位置关系描述被标记的地点，例如景点游览图。</li>
@@ -105,9 +105,10 @@
 <p>在现实中绘制地图有几个难点，一是测量误差会导致坐标不精确，二是设备本身需要不断地移动才能绘制，三是地图本身是对现实世界的反应，会不断的变化。</p>
 <h2 id="占据栅格地图-occupancy-grid-map">占据栅格地图 (Occupancy Grid Map)</h2>
 <p>栅格地图用二维栅格表示整个环境，每个栅格都有一个概率值表示这个栅格是否有物体存在。绘制栅格地图常用的设备之一是测距传感器，通过发出激光并测量接受反射所用的时间，传感器可以了解前方障碍物的大致距离。</p>
-<figure>
-<img src="/images/2018-08/sonar-sweep.png" alt="测距传感器" /><figcaption>测距传感器</figcaption>
-</figure>
+<div class="figure">
+<img src="/images/2018-08/sonar-sweep.png" alt="测距传感器" />
+<p class="caption">测距传感器</p>
+</div>
 <p>如图所示，传感器本身测量存在误差，我们只能认为在传感器正前方给定距离处有一定几率存在障碍物。对于这种测量有误差的环境，我们再次引入贝叶斯模型描述。记 <span class="math inline">\(p(m_{x, y})\)</span> 为 (x, y) 格中存在障碍物的概率的先验知识，根据测量的设备模型我们可以得到条件概率 <span class="math inline">\(p(z | m_{x,y})\)</span>。<span class="math inline">\(p(z=1|m_{x,y}=1)\)</span> 就代表栅格中有障碍物，且检测成功的概率，而 <span class="math inline">\(p(z=1|m_{x,y}=0)\)</span> 则代表栅格中不存在障碍物，但是却检测到障碍的概率（假阳性）。</p>
 <p>根据贝叶斯公式，我们可以得到测量之后的后验概率 <span class="math display">\[
 p(m_{x,y}|z) = \frac{p(z | m_{x,y}) p(m_{x,y})}{p(z)}
@@ -123,9 +124,10 @@ Odd(m_{x,y} = 1 | z) = \frac{p(m_{x,y} = 1 | z)}{p(m_{x,y} = 0 | z)} = \frac{p(z
 \log odd(m_{x,y} = 1 | z) = \log{odd\ meas} + \log odd(m_{x,y} = 1)
 \]</span> 如果用 <span class="math inline">\(\log{odd}\)</span> 表示栅格的状态，这一状态可以简单的通过加减来维护。当检测到障碍物时，该栅格的 <span class="math inline">\(\log{odd}\)</span> 增加 <span class="math inline">\(\frac{p(z=1 | m_{x,y} = 1)}{p(z=1 | m_{x,y} = 0)}\)</span>，没有检测到障碍物时，该栅格的 <span class="math inline">\(\log{odd}\)</span> 减少 <span class="math inline">\(\frac{p(z=0 | m_{x,y} = 0)}{p(z=0 | m_{x,y} = 1)}\)</span>。初始状态为 0，即 <span class="math inline">\(odd = 1\)</span>。</p>
 <p>下图为一个具体的例子，第一个栅格地图为 t1 时刻的状态，做了一次探测后，经过的空闲栅格的 <span class="math inline">\(\log{odd}\)</span> 减少 0.7（这个值由传感器决定），而最后的障碍物所在格的 <span class="math inline">\(\log{odd}\)</span> 增加了 0.9。第三个栅格地图为 t2 时刻更新后的状态。</p>
-<figure>
-<img src="/images/2018-08/mapping-log-odd.png" alt="log odd 更新例子" /><figcaption>log odd 更新例子</figcaption>
-</figure>
+<div class="figure">
+<img src="/images/2018-08/mapping-log-odd.png" alt="log odd 更新例子" />
+<p class="caption">log odd 更新例子</p>
+</div>
 <h2 id="三维地图">三维地图</h2>
 <p>常见的三维传感器：</p>
 <ul>
@@ -143,7 +145,7 @@ Odd(m_{x,y} = 1 | z) = \frac{p(m_{x,y} = 1 | z)}{p(m_{x,y} = 0 | z)} = \frac{p(z
 </ul>
 <h2 id="作业">作业</h2>
 <p>这次的作业是根据一组 Lidar 测量结果绘制一个二维地图。输入包含四个参数（这里 K 为扫描总次数，N 为 Lidar 光线数）：</p>
-<ol type="1">
+<ol style="list-style-type: decimal">
 <li>t 数组记录每组数据的时间点，大小为 <span class="math inline">\(1 \times K\)</span>。</li>
 <li>ranges 数组记录每次测试各条激光线测得的距离，大小为 <span class="math inline">\(N \times K\)</span>。</li>
 <li>scanAngels 数组记录每条激光线相对机身的转角，大小为 <span class="math inline">\(N \times 1\)</span>，每次测试时这个转角不会变化。</li>
@@ -151,9 +153,10 @@ Odd(m_{x,y} = 1 | z) = \frac{p(m_{x,y} = 1 | z)}{p(m_{x,y} = 0 | z)} = \frac{p(z
 </ol>
 <p>我实现的方法没有用向量并行，用了两层循环依次处理每次测试的各条光线。在 i7 6700K 上大概 25 秒可以跑完最终测试，测试程序里会提到整个过程可能要五分钟，性能差一点的机器这个时间里面应该也能跑完了。</p>
 <p>最后跑地图的时候，注意 <code>example_test.m</code> 里传给 <code>occGridMapping</code> 的参数只取了前 1000 次测量结果，所以要制作完整地图要把这个限制去掉。另外文档里面坐标转换时用了 <code>ceil</code>，我在本地测试时只能拿到 27/30 分，换成 <code>round</code> 就能到满分了。</p>
-<figure>
-<img src="/images/2018-08/slam-w3-map.png" alt="最终生成的地图" /><figcaption>最终生成的地图</figcaption>
-</figure>
+<div class="figure">
+<img src="/images/2018-08/slam-w3-map.png" alt="最终生成的地图" />
+<p class="caption">最终生成的地图</p>
+</div>
 <h2 id="全课程的笔记链接">全课程的笔记链接</h2>
 <ul>
 <li>Robotics Estimation and Learning 的<a href="https://www.coursera.org/learn/robotics-learning/">课程主页</a></li>

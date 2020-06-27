@@ -17,7 +17,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.3f7fceb38fa32fbb9c798ab89fa80e5660bf6635d4bcd89dc5824721b6308d80.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -45,9 +45,9 @@
     "publisher": "zellux",
     "accountablePerson" : "",
     "copyrightHolder" : "",
-    "copyrightYear" : "2019",
-    "datePublished": "2019-07-21 20:54:27 -0700 PDT",
-    "dateModified" : "2019-07-21 20:54:27 -0700 PDT",
+    "copyrightYear" : "2020",
+    "datePublished": "2020-06-27 01:36:00 \u002b0000 UTC",
+    "dateModified" : "2020-06-27 01:36:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/post\/",
     "wordCount" : "0",
     "keywords" : [ "Blog" ]
@@ -81,6 +81,39 @@
 <div class="content">
   <div class="posts">
      
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2011/11/skip-specs-by-tags/">rspec 跳过指定测试</a></h2>
+      <span class="post-date">Nov 20, 2011</span>
+      
+      <span class="post-tags">
+	
+	#<a href="https://blog.yxwang.me/tags/programming">Programming</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/rails">Rails</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/rspec">Rspec</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/ruby">Ruby</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/ruby-on-rails">Ruby on Rails</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/web-development">Web Development</a>&nbsp;
+	
+      </span>
+      
+      
+      
+      <div class="summary">
+	有些测试比较耗时间，而且很少被修改，如果能在测试的时候跳过它们就能让 spec 快不少。
+跳过测试的方法很简单，spec 的 describe 方法可以给对应的测试加上标签，例如
+describe SalesController, :slow =&gt; true do # specs end 接下来只要在 spec/spec_helper.rb 中声明跳过这个标签即可：
+RSpec.configure do |config| config.filter_run_excluding :slow =&gt; true end 与 filter_run_excluding 相反的是 filter_run，指定会被运行的标签，不包含在这个列表中的测试将被忽略。
+参考：http://www.dixis.com/?p=283
+	<a class="read-more" href="/2011/11/skip-specs-by-tags/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
     <div class="post">
       <h2 class="post-title"><a href="https://blog.yxwang.me/2011/09/recipe-for-hashing/">一个简单有效的 hash 算法</a></h2>
       <span class="post-date">Sep 17, 2011</span>
@@ -351,35 +384,6 @@ BluePrint就着眼于这个点，提出了一种让Web应用“参与”HTML解�
 首先，这种由用户上传的不可信的字符串会先在服务器端被解析成一棵树，就像HTML在浏览器中被解析一样，这棵HTML解析树可以用一些简单的DOM API来生成，例如appendChild, createElement等。这些描述如何生成HTML解析树的方法会和数据值（URL、标签属性等）一起，通过特殊的编码（Base64）传递给浏览器。例如上面这段代码，最后在浏览器接收到的HTML中，会变成这样：
 &lt;code style=&#34;display:none;&#34; id=&#34;__bp1&#34;&gt; =Enk/sCkhlcmUgaXMgYSBwYWdlIHlvdSBta... =SkKICAgICI+dmVyeQ===C/k/QIGhlbHBmd... =ECg===C/Enk/gCiAgUmVzcGVjdGZ1bGx5L... &lt;/code&gt;&lt;script id=&#34;__bp1s&#34;&gt; __bp__.cxPCData(&#34;__bp1&#34;, &#34;__bp1s&#34;); &lt;/script&gt; 在浏览器端，这段特殊的代码会被JS库解析成自定义的命令和数据格式，并由前面提到的DOM API动态生成这些HTML结点，从而达到和传统的方式一样的显示效果。当然可信的HTML代码，例如文章正文，还是按传统的方式传输的。
 	<a class="read-more" href="/2010/03/blueprint/">阅读全文 →</a>
-      </div>
-      
-    </div>
-    
-    <div class="post">
-      <h2 class="post-title"><a href="https://blog.yxwang.me/2010/03/keep-gnu-screen-history/">记录 GNU screen 中的历史命令</a></h2>
-      <span class="post-date">Mar 1, 2010</span>
-      
-      <span class="post-tags">
-	
-	#<a href="https://blog.yxwang.me/tags/linux">Linux</a>&nbsp;
-	
-	#<a href="https://blog.yxwang.me/tags/shell">Shell</a>&nbsp;
-	
-	#<a href="https://blog.yxwang.me/tags/tooling">Tooling</a>&nbsp;
-	
-	#<a href="https://blog.yxwang.me/tags/bash">bash</a>&nbsp;
-	
-	#<a href="https://blog.yxwang.me/tags/screen">screen</a>&nbsp;
-	
-      </span>
-      
-      
-      
-      <div class="summary">
-	GNU screen中执行的历史命令保存在内存中，默认情况下并不会像在bash中直接执行的命令一样保存在.bash_history中，这在某些场合下带来了一定的不便。
-在superuser上看到一个解决方法，指定历史文件的读写方式为追加，并在每次命令行提示符显示的时候，自动更新bash的历史命令记录。要实现这个方法很简单，只要在.bashrc中加入下面两行代码即可
-shopt -s histappend export PROMPT_COMMAND=&#34;history -a; history -n&#34; 另外如果之前设置过PROMPT_COMMAND的话，只要在history -a前加入$PROMPT_COMMAND;就行了。
-	<a class="read-more" href="/2010/03/keep-gnu-screen-history/">阅读全文 →</a>
       </div>
       
     </div>

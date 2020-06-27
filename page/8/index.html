@@ -18,7 +18,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.3f7fceb38fa32fbb9c798ab89fa80e5660bf6635d4bcd89dc5824721b6308d80.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -46,9 +46,9 @@
     "publisher": "zellux",
     "accountablePerson" : "",
     "copyrightHolder" : "",
-    "copyrightYear" : "2019",
-    "datePublished": "2019-07-21 20:54:27 -0700 PDT",
-    "dateModified" : "2019-07-21 20:54:27 -0700 PDT",
+    "copyrightYear" : "2020",
+    "datePublished": "2020-06-27 01:36:00 \u002b0000 UTC",
+    "dateModified" : "2020-06-27 01:36:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/",
     "wordCount" : "0",
     "keywords" : [ "Blog" ]
@@ -82,6 +82,35 @@
 <div class="content index">
   <div class="posts">
      
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2009/09/compile-php5-on-dreamhost/">Dreamhost 上编译 php5</a></h2>
+      <span class="post-meta">
+  <time datetime='Sat, Sep 26, 2009' data-updated="true" itemprop="datePublished">Sat, Sep 26, 2009</time>
+  
+  <span class="post-categories">
+    •
+	<a href="https://blog.yxwang.me/categories/tooling">Tooling</a>
+  </span>
+  
+</span>
+
+      
+      <div class="summary">
+        Dreamhost提供的php有不少限制，昨天折腾了一个晚上终于成功地在自己的虚拟主机上编译了php5。
+Why用下来，发现使用自己编译的php5有这么几个好处：
+  可以自定义内存分配上限，默认只有32M，通过wordpress安装插件的时候经常出现内存不够的问题。
+  上传文件大小限制也能改，默认只有2M，基本没法通过wordpress传音乐之类的比较大的文件。
+  使用自己的php后解释执行的进程uid也是自己了，这样就避免了很多nobody用户访问/修改/增加文件所带来的问题。
+  How to compile 编译和安装的大部分步骤可以参考http://wiki.dreamhost.com/index.php/Installing_PHP5，这里补充一点我碰到的问题和解决方法。
+因为我这台dreamhost虚拟主机用的是x86_64，而通过下载的php5的configure文件默认查找的是/usr/lib/下面的共享库，通过&ndash;with-libdir=lib64设置查找路径后却无法找到openssl库了，于是我用了个很山寨的方法，把configure脚本里查找libmysqlclient时的路径临时改成了/usr/lib64，然后再改回/usr/lib。
+安装脚本开头定义的几个包的名字可能也要修改下，如果下载出现错误的话去上级目录看下最新的包的名字是什么就行了。另外脚本中解压.Z和.tar.gz文件用的是uncompress命令，似乎在我的这个主机上没有安装，改成tar zxf就行了。
+How to use最后说下编译成功后怎么使用，具体方法那个网页上也讲过了，只要把编译后的php.cgi放到/cgi-bin/下然后改下.htaccess即可。
+对于子域名，比如我这个techblog.iamzellux.com，参照网页上的说明把整个cgi-bin用符号链接的方式link到子域名的根目录下是最方便的方案，当然别忘了修改.htaccess。
+	<a class="read-more" href="/2009/09/compile-php5-on-dreamhost/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
     <div class="post">
       <h2 class="post-title"><a href="https://blog.yxwang.me/2009/08/return-oriented-rookit/">基于函数调用栈的 rootkit</a></h2>
       <span class="post-meta">
@@ -301,32 +330,6 @@ gitosis  gitosis是一个方便管理git仓库的工具，安装方法：
   将/usr/share/gitweb下的文件复制到/home/httpd/cgi-bin（其实似乎只要gitweb.cgi就够了） sudo cp -R /usr/share/gitweb /home/httpd/cgi-bin/   /usr/share/gitweb下的.css和.png复制到/home/httpd/html/git/
   修改或创建/etc/gitweb.
 	<a class="read-more" href="/2009/05/install-git-gitoss-gitweb-in-archlinux/">阅读全文 →</a>
-      </div>
-      
-    </div>
-    
-    <div class="post">
-      <h2 class="post-title"><a href="https://blog.yxwang.me/2009/05/isca-09-multi-execution/">ISCA 09 - Multi-Execution</a></h2>
-      <span class="post-meta">
-  <time datetime='Tue, May 12, 2009' data-updated="true" itemprop="datePublished">Tue, May 12, 2009</time>
-  
-  <span class="post-categories">
-    •
-	<a href="https://blog.yxwang.me/categories/computer-system">Computer System</a>
-  </span>
-  
-</span>
-
-      
-      <div class="summary">
-        Multi-Execution: Multicore Caching for Data-Similar Executions
-这篇paper针对以multi-execution这种模式运行的程序提出了一种新的cache手段。
-所谓multi-execution，指的是同时运行同一个程序的多个进程，而它们的输入数据又互不相同。这种模式在machine-learning领域比较常见，一些相对独立的learner可以以并行的方式被训练，而它们的结果可以通过一种叫做boosting的方式合并起来。给我的感觉似乎有点像mapreduce？
-然后呢，作者们发现以这种方式运行的程序进程的数据有很大一部分是相同的，在合并cache数据上可以做一下文章，节省cache的使用。
-于是这篇paper提出了一种叫做mergeable cache的架构，用于代替传统的L2 cache，L1 cache还是传统的cache架构。首先假设相同的数据的虚拟地址往往也是相同的（应该去掉了address space randomization的影响），以类似Page Coloring的策略进行物理页的分配，使得不同进程同一虚拟地址所对应的物理页都是相邻的。然后把虚拟地址的头9位作为cache tag，再为每个cache line记录一个bit vector用以表示某个processor的数据是否保存在这条cache line中。于是L2 cache hit当且仅当：
- 虚拟地址的头9位等于cache line的tag cache line中的bit vector的processor对应的位被置上  另外为了简化cache策略，L1和L2的数据内容是互斥的，或者说一段被cache的数据要么在L1，要么在L2，不可能同时存在于两者中。这样一来L2就只有从L1淘汰出来的数据了，而L2中的数据修改分三步完成：
- 把数据从L2中标记为不存在（对应processor的bit vector位置0） 数据进入L1 修改数据  这就是这篇paper提出的cache架构的主要内容，后面的evaluation部分做的也很不错。从数据中可以看出合并的cache里面dirty cache占了比较大的比例，从而说明简单的copy-on-write策略的效果不会很好，因为copy-on-write只能合并clean cache。最后平均的speedup提升在2.5x左右，很不错。但是对于数据无关的并行程序运行，会产生一定的overhead，此时可以选择传统的L2 cache机制。
-	<a class="read-more" href="/2009/05/isca-09-multi-execution/">阅读全文 →</a>
       </div>
       
     </div>

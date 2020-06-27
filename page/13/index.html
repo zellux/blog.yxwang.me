@@ -18,7 +18,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.3f7fceb38fa32fbb9c798ab89fa80e5660bf6635d4bcd89dc5824721b6308d80.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -46,9 +46,9 @@
     "publisher": "zellux",
     "accountablePerson" : "",
     "copyrightHolder" : "",
-    "copyrightYear" : "2019",
-    "datePublished": "2019-07-21 20:54:27 -0700 PDT",
-    "dateModified" : "2019-07-21 20:54:27 -0700 PDT",
+    "copyrightYear" : "2020",
+    "datePublished": "2020-06-27 01:36:00 \u002b0000 UTC",
+    "dateModified" : "2020-06-27 01:36:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/",
     "wordCount" : "0",
     "keywords" : [ "Blog" ]
@@ -82,6 +82,28 @@
 <div class="content index">
   <div class="posts">
      
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2008/08/trap_state-in-flux-oskit/">Flux OSKit 中 trap_state 的存放位置</a></h2>
+      <span class="post-meta">
+  <time datetime='Wed, Aug 20, 2008' data-updated="true" itemprop="datePublished">Wed, Aug 20, 2008</time>
+  
+  <span class="post-categories">
+    •
+	<a href="https://blog.yxwang.me/categories/courses">Courses</a>
+  </span>
+  
+</span>
+
+      
+      <div class="summary">
+        写fork函数的时候发现实际传给trap handler的ts地址和用(struct trap_state *) (KSTACK_TOP(old))) - 1
+计算出来的结果不一样，后者比前者小0x10。另外ts的实际地址加上ts的大小(92个字节)后就超出了内核栈的范围。
+/* * This structure corresponds to the state of user registers * as saved upon kernel trap/interrupt entry. * As always, it is only a default implementation; * a well-optimized kernel will probably want to override it * with something that allows better optimization. */ struct trap_state { /* Saved segment registers */ unsigned int	gs; unsigned int	fs; unsigned int	es; unsigned int	ds; /* PUSHA register state frame */ unsigned int	edi; unsigned int	esi; unsigned int	ebp; unsigned int	cr2;	/* we save cr2 over esp for page faults */ unsigned int	ebx; unsigned int	edx; unsigned int	ecx; unsigned int	eax; /* Processor trap number, 0-31.
+	<a class="read-more" href="/2008/08/trap_state-in-flux-oskit/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
     <div class="post">
       <h2 class="post-title"><a href="https://blog.yxwang.me/2008/08/export-symbols-in-asm/">汇编文件中导出函数符号</a></h2>
       <span class="post-meta">
@@ -333,29 +355,6 @@ VMBR还可以用VMI帮助理解目标系统软件级的抽象信息，VMI可以�
 通过递归调用half-cleaner即可完成双调队列的排序。要对n个元素进行双调排序Bitonic-Sorter(n)，首先调用Half-Cleaner(n)，将元素分成上下两部分，接着依次对这两部分执行Bitonic-Sorter(n/2)即可。 调用的深度D(n) = lgn
 归并网络 书上只给出了对0-1序列排序的算法，任意数字的排序算法留作了习题。 合并网络基于这样一个事实：对于两个已经排序了的序列X = 00000111，Y = 00001111，将Y倒过来后和X拼接的结果是一个双调序列。对这个双调序列再做一次Bitonic-Sorter就能有序。 通 过修改Bitonic-Sorter方法的第一步就能实现Merger，关键在于隐式的反转输入的下半部分。Half-Cleaner方法中比较了第i和 第i+n/2两个元素，如果下半部分反转的话就相当于比较第i和第n-i+1个元素。直接继续执行Bitonic-Sorter方法即可，如下图所示。
 	<a class="read-more" href="/2008/04/sorting-networks/">阅读全文 →</a>
-      </div>
-      
-    </div>
-    
-    <div class="post">
-      <h2 class="post-title"><a href="https://blog.yxwang.me/2008/04/streamware/">ASPLOS 08 - Streamware</a></h2>
-      <span class="post-meta">
-  <time datetime='Wed, Apr 16, 2008' data-updated="true" itemprop="datePublished">Wed, Apr 16, 2008</time>
-  
-  <span class="post-categories">
-    •
-	<a href="https://blog.yxwang.me/categories/computer-system">Computer System</a>
-  </span>
-  
-</span>
-
-      
-      <div class="summary">
-        Streamware: Programming General-Purpose Multicore Processors Using Streams
-Jayanth Gummaraju, Joel Coburn, Yoshio Turner, Mendel Rosenblum
-ASPLOS 08上的文章 http://portal.acm.org/citation.cfm?id=1353534.1346319提出了一个通用的多核平台，支持Cell CUDA Brook等多种体系结构，用户只需使用这个平台统一提供的API。
-另外还加入了cache hierarchy的管理，能很好的安排各级cache保存的内容，以至于某个测试结果中单核的情况下用了Streamware的程序比不用的程序跑得还快。
-	<a class="read-more" href="/2008/04/streamware/">阅读全文 →</a>
       </div>
       
     </div>

@@ -17,7 +17,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.3f7fceb38fa32fbb9c798ab89fa80e5660bf6635d4bcd89dc5824721b6308d80.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -45,9 +45,9 @@
     "publisher": "zellux",
     "accountablePerson" : "",
     "copyrightHolder" : "",
-    "copyrightYear" : "2019",
-    "datePublished": "2019-07-21 20:54:27 -0700 PDT",
-    "dateModified" : "2019-07-21 20:54:27 -0700 PDT",
+    "copyrightYear" : "2020",
+    "datePublished": "2020-06-27 01:36:00 \u002b0000 UTC",
+    "dateModified" : "2020-06-27 01:36:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/post\/",
     "wordCount" : "0",
     "keywords" : [ "Blog" ]
@@ -81,6 +81,34 @@
 <div class="content">
   <div class="posts">
      
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2010/01/force-int-0x80-for-syscall/">强制程序使用int 0x80做系统调用</a></h2>
+      <span class="post-date">Jan 26, 2010</span>
+      
+      <span class="post-tags">
+	
+	#<a href="https://blog.yxwang.me/tags/assembly">Assembly</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/c">C</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/computer-system">Computer System</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/linking">linking</a>&nbsp;
+	
+      </span>
+      
+      
+      
+      <div class="summary">
+	因为大多数情况下程序都是通过libc间接地发出系统调用的，所以只要编译一个只使用int 0x80的glibc库，然后在执行程序的时候用LD_LIBRARY_PATH或其他方法指定使用新编译的glibc库即可。
+以glibc-2.9, Linux i386为例，在sysdeps/unix/sysv/linux/i386/syscall.S中可以看到
+ENTRY (syscall) PUSHARGS_6 /* Save register contents. */ _DOARGS_6(44) /* Load arguments. */ movl 20(%esp), %eax /* Load syscall number into %eax. */ ENTER_KERNEL /* Do the system call. */ POPARGS_6 /* Restore register contents. */ cmpl $-4095, %eax /* Check %eax for error. */ jae SYSCALL_ERROR_LABEL /* Jump to error handler if error. */ 这里使用了ENTER_KERNEL这个宏做系统调用，接下来在sysdeps/unix/sysv/linux/i386/sysdep.h里可以找到这个宏的定义
+/* The original calling convention for system calls on Linux/i386 is to use int $0x80.
+	<a class="read-more" href="/2010/01/force-int-0x80-for-syscall/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
     <div class="post">
       <h2 class="post-title"><a href="https://blog.yxwang.me/2010/01/git-completion/">Git 命令行自动补全</a></h2>
       <span class="post-date">Jan 25, 2010</span>
@@ -318,40 +346,6 @@ char*f=&#34;char*f=%c%s%c;main() {printf(f,34,f,34,10);}%c&#34;; main(){printf(f
 首先是sigfpe构造出来的三阶Quine，这是一个只有两行的Haskell程序：
 q a b c=putStrLn $ b ++ [toEnum 10,&#39;q&#39;,&#39;(&#39;] ++ show b ++ [&#39;,&#39;] ++ show c ++ [&#39;,&#39;] ++ show a ++ [&#39;)&#39;] main=q &#34;q a b c=putStrLn $ b ++ [toEnum 10,&#39;q&#39;,&#39;(&#39;] ++ show b ++ [&#39;,&#39;] ++ show c ++ [&#39;,&#39;] ++ show a ++ [&#39;)&#39;]&#34; &#34;def q(a,b,c):print b+chr(10)+&#39;q(&#39;+repr(b)+&#39;,&#39;+repr(c)+&#39;,&#39;+repr(a)+&#39;)&#39;&#34; &#34;def e(x) return 34.chr+x+34.chr end;def q(a,b,c) print b+10.chr+&#39;main=q &#39;+e(b)+&#39; &#39;+e(c)+&#39; &#39;+e(a)+&#39; &#39;+10.chr end&#34; 这段程序牛逼在哪里呢？运行后这个程序首先会输出一个Python程序，然后再运行这个Python程序会输出一段Ruby代码，最后这个Ruby代码的运行结果是原来的程序。或者说
 	<a class="read-more" href="/2009/09/interesting-quines/">阅读全文 →</a>
-      </div>
-      
-    </div>
-    
-    <div class="post">
-      <h2 class="post-title"><a href="https://blog.yxwang.me/2009/09/compile-php5-on-dreamhost/">Dreamhost 上编译 php5</a></h2>
-      <span class="post-date">Sep 26, 2009</span>
-      
-      <span class="post-tags">
-	
-	#<a href="https://blog.yxwang.me/tags/dreamhost">DreamHost</a>&nbsp;
-	
-	#<a href="https://blog.yxwang.me/tags/php">PHP</a>&nbsp;
-	
-	#<a href="https://blog.yxwang.me/tags/software">Software</a>&nbsp;
-	
-	#<a href="https://blog.yxwang.me/tags/tooling">Tooling</a>&nbsp;
-	
-      </span>
-      
-      
-      
-      <div class="summary">
-	Dreamhost提供的php有不少限制，昨天折腾了一个晚上终于成功地在自己的虚拟主机上编译了php5。
-Why用下来，发现使用自己编译的php5有这么几个好处：
-  可以自定义内存分配上限，默认只有32M，通过wordpress安装插件的时候经常出现内存不够的问题。
-  上传文件大小限制也能改，默认只有2M，基本没法通过wordpress传音乐之类的比较大的文件。
-  使用自己的php后解释执行的进程uid也是自己了，这样就避免了很多nobody用户访问/修改/增加文件所带来的问题。
-  How to compile 编译和安装的大部分步骤可以参考http://wiki.dreamhost.com/index.php/Installing_PHP5，这里补充一点我碰到的问题和解决方法。
-因为我这台dreamhost虚拟主机用的是x86_64，而通过下载的php5的configure文件默认查找的是/usr/lib/下面的共享库，通过&ndash;with-libdir=lib64设置查找路径后却无法找到openssl库了，于是我用了个很山寨的方法，把configure脚本里查找libmysqlclient时的路径临时改成了/usr/lib64，然后再改回/usr/lib。
-安装脚本开头定义的几个包的名字可能也要修改下，如果下载出现错误的话去上级目录看下最新的包的名字是什么就行了。另外脚本中解压.Z和.tar.gz文件用的是uncompress命令，似乎在我的这个主机上没有安装，改成tar zxf就行了。
-How to use最后说下编译成功后怎么使用，具体方法那个网页上也讲过了，只要把编译后的php.cgi放到/cgi-bin/下然后改下.htaccess即可。
-对于子域名，比如我这个techblog.iamzellux.com，参照网页上的说明把整个cgi-bin用符号链接的方式link到子域名的根目录下是最方便的方案，当然别忘了修改.htaccess。
-	<a class="read-more" href="/2009/09/compile-php5-on-dreamhost/">阅读全文 →</a>
       </div>
       
     </div>

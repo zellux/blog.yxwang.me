@@ -17,7 +17,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.3f7fceb38fa32fbb9c798ab89fa80e5660bf6635d4bcd89dc5824721b6308d80.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -45,9 +45,9 @@
     "publisher": "zellux",
     "accountablePerson" : "",
     "copyrightHolder" : "",
-    "copyrightYear" : "2019",
-    "datePublished": "2019-07-21 20:54:27 -0700 PDT",
-    "dateModified" : "2019-07-21 20:54:27 -0700 PDT",
+    "copyrightYear" : "2020",
+    "datePublished": "2020-06-27 01:36:00 \u002b0000 UTC",
+    "dateModified" : "2020-06-27 01:36:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/post\/",
     "wordCount" : "0",
     "keywords" : [ "Blog" ]
@@ -81,6 +81,34 @@
 <div class="content">
   <div class="posts">
      
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2008/10/sync-between-zotero-and-endnote/">Zotero与Endnote的互相导入</a></h2>
+      <span class="post-date">Oct 17, 2008</span>
+      
+      <span class="post-tags">
+	
+	#<a href="https://blog.yxwang.me/tags/endnote">Endnote</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/software">Software</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/tooling">Tooling</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/zotero">Zotero</a>&nbsp;
+	
+      </span>
+      
+      
+      
+      <div class="summary">
+	<p>两者配合，更完美的知识管理方案</p>
+<p><!-- raw HTML omitted --><a href="http://hi.baidu.com/qq303520912/blog/item/de5cba082db83e36e924889e.html">http://hi.baidu.com/qq303520912/blog/item/de5cba082db83e36e924889e.html</a><!-- raw HTML omitted --></p>
+<p>Endnote是目前国内科研人员使用最多的文献管理软件，功能最完备，各数据库或大学图书馆等和它的兼容也是最好。它的Filter和style也最为丰富，而且可以自己创建修改。看看周围的人，大部分都是Endnote的用户。 　　Zotero作为一个新的文件管理系统，与Endnote相比还是稚嫩了些，特别对于国内数据库的支持不佳，更是限制了它的应用。</p>
+<p>不过，Zotero作为Firefox浏览器的插件，还是有一些特别之处。</p>
+	<a class="read-more" href="/2008/10/sync-between-zotero-and-endnote/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
     <div class="post">
       <h2 class="post-title"><a href="https://blog.yxwang.me/2008/10/live-code-update-in-erlang/">Live Code Update in Erlang</a></h2>
       <span class="post-date">Oct 16, 2008</span>
@@ -330,33 +358,6 @@ smemalign很适合分配需要页对齐的内存块，因为如果使用memalign
   使用两次fork时，第二次fork返回的pid会被改掉。查了下发现为用户空间分配物理页面的代码里居然在分配好以后没有把对应的struct置为已使用，结果导致第二个子进程COW创建新页面时得到了原来的父进程页面，改写了父进程页面内容。
   系统调用 exec()  清空页表的用户空间映射的函数一开始写得yts，bug到处都是，比如free的时候没使用指向内存块首地址的指针，记录内存地址的变量没有累加。 exec传递给内核态的两个参数必须先在内核态保存一个副本，否则清空用户态页表后就无法得到这两个参数信息了。 分配给用户态的页面必须先清零，一方面考虑到安全性，另一方面不清零会隐藏一些潜在的bug。一开始我没有在内核执行exec的时候完整的复制所有的参数，而是直接指向了原进程的内存空间，由于清空页表后再次申请新页表时得到了原来的页面，结果正好原来那个保存参数的页面和新进程的该页面重合了 =_= 于是浪费了不少时间在这个bug上  
 	<a class="read-more" href="/2008/08/bugs-related-to-my-fork/">阅读全文 →</a>
-      </div>
-      
-    </div>
-    
-    <div class="post">
-      <h2 class="post-title"><a href="https://blog.yxwang.me/2008/08/trap_state-in-flux-oskit/">Flux OSKit 中 trap_state 的存放位置</a></h2>
-      <span class="post-date">Aug 20, 2008</span>
-      
-      <span class="post-tags">
-	
-	#<a href="https://blog.yxwang.me/tags/courses">Courses</a>&nbsp;
-	
-	#<a href="https://blog.yxwang.me/tags/flux-oskit">Flux OSKit</a>&nbsp;
-	
-	#<a href="https://blog.yxwang.me/tags/lab">Lab</a>&nbsp;
-	
-	#<a href="https://blog.yxwang.me/tags/os">OS</a>&nbsp;
-	
-      </span>
-      
-      
-      
-      <div class="summary">
-	写fork函数的时候发现实际传给trap handler的ts地址和用(struct trap_state *) (KSTACK_TOP(old))) - 1
-计算出来的结果不一样，后者比前者小0x10。另外ts的实际地址加上ts的大小(92个字节)后就超出了内核栈的范围。
-/* * This structure corresponds to the state of user registers * as saved upon kernel trap/interrupt entry. * As always, it is only a default implementation; * a well-optimized kernel will probably want to override it * with something that allows better optimization. */ struct trap_state { /* Saved segment registers */ unsigned int	gs; unsigned int	fs; unsigned int	es; unsigned int	ds; /* PUSHA register state frame */ unsigned int	edi; unsigned int	esi; unsigned int	ebp; unsigned int	cr2;	/* we save cr2 over esp for page faults */ unsigned int	ebx; unsigned int	edx; unsigned int	ecx; unsigned int	eax; /* Processor trap number, 0-31.
-	<a class="read-more" href="/2008/08/trap_state-in-flux-oskit/">阅读全文 →</a>
       </div>
       
     </div>

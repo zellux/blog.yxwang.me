@@ -18,7 +18,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.3f7fceb38fa32fbb9c798ab89fa80e5660bf6635d4bcd89dc5824721b6308d80.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -46,9 +46,9 @@
     "publisher": "zellux",
     "accountablePerson" : "",
     "copyrightHolder" : "",
-    "copyrightYear" : "2019",
-    "datePublished": "2019-07-21 20:54:27 -0700 PDT",
-    "dateModified" : "2019-07-21 20:54:27 -0700 PDT",
+    "copyrightYear" : "2020",
+    "datePublished": "2020-06-27 01:36:00 \u002b0000 UTC",
+    "dateModified" : "2020-06-27 01:36:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/",
     "wordCount" : "0",
     "keywords" : [ "Blog" ]
@@ -82,6 +82,30 @@
 <div class="content index">
   <div class="posts">
      
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2009/02/emacs-tramp/">Emacs tramp</a></h2>
+      <span class="post-meta">
+  <time datetime='Mon, Feb 9, 2009' data-updated="true" itemprop="datePublished">Mon, Feb 9, 2009</time>
+  
+  <span class="post-categories">
+    •
+	<a href="https://blog.yxwang.me/categories/tooling">Tooling</a>
+  </span>
+  
+</span>
+
+      
+      <div class="summary">
+        很好用的东东，可以方便的打开需要root权限或是远程服务器上的文件。
+统一的url格式是 /method:usr@machine:port/path/to.file，这种方式需要在载入tramp前设置tramp-syntax
+(setq tramp-syntax &#39;url) (require &#39;tramp) 也可以用(setq tramp-default-method &ldquo;scp&rdquo;) 指定默认的访问方法，这样就不需要/method://了
+以我现在的org日程管理为例，个人日程文件保存在机房的73号机上，实验室电脑和寝室电脑上的电脑只要通过tramp远程访问这个org文件即可：
+(setq org-agenda-files (list &#34;/scp:wyx@10.132.140.73:/home/wyx/notes/lab.org&#34;)) 
+	<a class="read-more" href="/2009/02/emacs-tramp/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
     <div class="post">
       <h2 class="post-title"><a href="https://blog.yxwang.me/2009/01/terminal-ctrl-s/">PieTTY 中按 Ctrl&#43;S 导致挂起的问题解决</a></h2>
       <span class="post-meta">
@@ -286,29 +310,6 @@ def a(): def b(): x += 1 x = 1 print &#34;a: &#34;, x b() print &#34;b: &#34;, x
 原因在于原因在于CPython实现closure的方式和常见的functional language不同，采用了flat closures实现。
 &ldquo;If a name is bound anywhere within a code block, all uses of the name within the block are treated as references to the current block.
 	<a class="read-more" href="/2008/10/python-inner-function-binding/">阅读全文 →</a>
-      </div>
-      
-    </div>
-    
-    <div class="post">
-      <h2 class="post-title"><a href="https://blog.yxwang.me/2008/10/sync-between-zotero-and-endnote/">Zotero与Endnote的互相导入</a></h2>
-      <span class="post-meta">
-  <time datetime='Fri, Oct 17, 2008' data-updated="true" itemprop="datePublished">Fri, Oct 17, 2008</time>
-  
-  <span class="post-categories">
-    •
-	<a href="https://blog.yxwang.me/categories/tooling">Tooling</a>
-  </span>
-  
-</span>
-
-      
-      <div class="summary">
-        <p>两者配合，更完美的知识管理方案</p>
-<p><!-- raw HTML omitted --><a href="http://hi.baidu.com/qq303520912/blog/item/de5cba082db83e36e924889e.html">http://hi.baidu.com/qq303520912/blog/item/de5cba082db83e36e924889e.html</a><!-- raw HTML omitted --></p>
-<p>Endnote是目前国内科研人员使用最多的文献管理软件，功能最完备，各数据库或大学图书馆等和它的兼容也是最好。它的Filter和style也最为丰富，而且可以自己创建修改。看看周围的人，大部分都是Endnote的用户。 　　Zotero作为一个新的文件管理系统，与Endnote相比还是稚嫩了些，特别对于国内数据库的支持不佳，更是限制了它的应用。</p>
-<p>不过，Zotero作为Firefox浏览器的插件，还是有一些特别之处。</p>
-	<a class="read-more" href="/2008/10/sync-between-zotero-and-endnote/">阅读全文 →</a>
       </div>
       
     </div>

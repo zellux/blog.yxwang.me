@@ -19,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.3f7fceb38fa32fbb9c798ab89fa80e5660bf6635d4bcd89dc5824721b6308d80.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -102,18 +102,18 @@
 <li>代数余子式 (cofactor) <span class="math inline">\(A_{ij} = (-1)^{i+j}M_{ij}\)</span></li>
 <li>行列式按行展开：<span class="math inline">\(D = a_{i1}A_{i1} + a_{i2}A_{i2} + \cdots + a_{in}A_{in}\)</span></li>
 <li>行列式按列展开：<span class="math inline">\(D = a_{1j}A_{1j} + a_{2j}A_{2j} + \cdots + a_{nj}A_{nj}\)</span></li>
-<li>克拉默法则 (Cramer’s rule)：如果线性方程组的系数行列式不等于零，那么方程组有唯一解 <span class="math inline">\(x_1 = \frac{D_1}{D}, x_2 = \frac{D_2}{D}, \cdots, x_n = \frac{D_n}{D}\)</span>， 其中 <span class="math inline">\(D_j\)</span> 是把系数行列式 D 中第 j 列的元素用方程组右端的常数项代替后得到的 n 阶行列式。</li>
+<li>克拉默法则 (Cramer's rule)：如果线性方程组的系数行列式不等于零，那么方程组有唯一解 <span class="math inline">\(x_1 = \frac{D_1}{D}, x_2 = \frac{D_2}{D}, \cdots, x_n = \frac{D_n}{D}\)</span>， 其中 <span class="math inline">\(D_j\)</span> 是把系数行列式 D 中第 j 列的元素用方程组右端的常数项代替后得到的 n 阶行列式。</li>
 </ul>
 <h2 id="矩阵及其运算">矩阵及其运算</h2>
 <ul>
 <li>伴随矩阵 (adjugate matrix) <span class="math display">\[
-adj(A) = \begin{bmatrix}
-A_{11} &amp; A_{21} &amp; \cdots &amp; A_{n1} \\
-A_{12} &amp; A_{22} &amp; \cdots &amp; A_{n2} \\
-\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
-A_{1n} &amp; A_{2n} &amp; \cdots &amp; A_{nn} \\
-\end{bmatrix}
-\]</span></li>
+  adj(A) = \begin{bmatrix}
+  A_{11} &amp; A_{21} &amp; \cdots &amp; A_{n1} \\
+  A_{12} &amp; A_{22} &amp; \cdots &amp; A_{n2} \\
+  \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+  A_{1n} &amp; A_{2n} &amp; \cdots &amp; A_{nn} \\
+  \end{bmatrix}
+  \]</span></li>
 </ul>
 <p>其中 <span class="math inline">\(A_{ij}\)</span> 为代数余子式</p>
 <ul>
@@ -160,12 +160,10 @@ A_{1n} &amp; A_{2n} &amp; \cdots &amp; A_{nn} \\
 <h2 id="迹">迹</h2>
 <ul>
 <li>迹 (trace) 定义为矩阵对焦元素之和：<span class="math inline">\(\text{Tr}(A) = \sum_i A_{i,i}\)</span></li>
-<li>迹的一些特性：
-<ul>
+<li>迹的一些特性：</li>
 <li><span class="math inline">\(\text{Tr}(A) = \text{Tr}(A^T)\)</span></li>
 <li><span class="math inline">\(\text{Tr}(ABC) = \text{Tr}(CAB) = \text{Tr}(BCA)\)</span></li>
 <li><span class="math inline">\(\text{Tr}(AB) = \text{Tr}(BA)\)</span> （如果乘法可行）</li>
-</ul></li>
 </ul>
 
     </div>

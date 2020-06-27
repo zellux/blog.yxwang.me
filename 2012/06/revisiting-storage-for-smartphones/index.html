@@ -19,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.3f7fceb38fa32fbb9c798ab89fa80e5660bf6635d4bcd89dc5824721b6308d80.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -40,7 +40,7 @@
     "articleSection" : "post",
     "name" : "存储是移动应用性能的瓶颈？",
     "headline" : "存储是移动应用性能的瓶颈？",
-    "description" : "\u003cp\u003e\u003ca href=\u0022https:\/\/www.usenix.org\/comment\/260\u0022\u003eRevisiting Storage for Smartphones\u003c\/a\u003e 是今年 FAST 会议上的最佳论文，这篇论文提出了一个违背直觉的观点，很有意思。这里简单介绍一下这篇论文的内容，有兴趣的朋友可以直接访问前面的链接下载原文或是观看现场录像。\u003c\/p\u003e\n\u003cp\u003e\u003c!-- raw HTML omitted --\u003e\u003c!-- raw HTML omitted --\u003e\u003c!-- raw HTML omitted --\u003e\u003c\/p\u003e\n\u003cp\u003e传统的观点认为，移动应用性能的主要瓶颈在网络和 CPU，而闪存的读写速率明显高于网络传输速度，不会成为性能的瓶颈。然而，根据上图作者给出的关于移动存储性能的图例（纵坐标单位为 Mbps，本文图片均来自演讲 slides 和原论文），我们可以看到，虽然移动存储顺序读写的性能明显高于 wifi 和 3G，但是随机写的性能却比它们差很多，因此移动存储成为应用性能瓶颈是完全有可能的。\u003c\/p\u003e",
+    "description" : "\u003cp\u003e\u003ca href=\u0022https:\/\/www.usenix.org\/comment\/260\u0022\u003eRevisiting Storage for Smartphones\u003c\/a\u003e 是今年 FAST 会议上的最佳论文，这篇论文提出了一个违背直觉的观点，很有意思。这里简单介绍一下这篇论文的内容，有兴趣的朋友可以直接访问前面的链接下载原文或是观看现场录像。\u003c\/p\u003e\n\u003ca data-fancybox=\u0022gallery\u0022  data-caption=\u0022移动存储性能\u0022 href=\/images\/2012-06\/mobile-flash-throughtput.png \u003e\u003cimg src=\/images\/2012-06\/mobile-flash-throughtput.png  \/\u003e\u003c\/a\u003e\n\n\u003cp\u003e传统的观点认为，移动应用性能的主要瓶颈在网络和 CPU，而闪存的读写速率明显高于网络传输速度，不会成为性能的瓶颈。然而，根据上图作者给出的关于移动存储性能的图例（纵坐标单位为 Mbps，本文图片均来自演讲 slides 和原论文），我们可以看到，虽然移动存储顺序读写的性能明显高于 wifi 和 3G，但是随机写的性能却比它们差很多，因此移动存储成为应用性能瓶颈是完全有可能的。\u003c\/p\u003e",
     "inLanguage" : "en-US",
     "author" : "zellux",
     "creator" : "zellux",
@@ -95,13 +95,16 @@
 
     <div class="post-content">
       <p><a href="https://www.usenix.org/comment/260">Revisiting Storage for Smartphones</a> 是今年 FAST 会议上的最佳论文，这篇论文提出了一个违背直觉的观点，很有意思。这里简单介绍一下这篇论文的内容，有兴趣的朋友可以直接访问前面的链接下载原文或是观看现场录像。</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<a data-fancybox="gallery"  data-caption="移动存储性能" href=/images/2012-06/mobile-flash-throughtput.png ><img src=/images/2012-06/mobile-flash-throughtput.png  /></a>
+
 <p>传统的观点认为，移动应用性能的主要瓶颈在网络和 CPU，而闪存的读写速率明显高于网络传输速度，不会成为性能的瓶颈。然而，根据上图作者给出的关于移动存储性能的图例（纵坐标单位为 Mbps，本文图片均来自演讲 slides 和原论文），我们可以看到，虽然移动存储顺序读写的性能明显高于 wifi 和 3G，但是随机写的性能却比它们差很多，因此移动存储成为应用性能瓶颈是完全有可能的。</p>
 <p>为了证明移动存储的确会给应用带来不小的性能影响，作者在 Nexus One 上尝试了多个应用，并测试它们在使用不同配置时的性能表现。</p>
 <p>下图为一个浏览器应用的测试结果（基于 WebKit，测试了 50 个网站）。左侧柱状图展示了使用不同价位的存储卡时，该测试的性能表现。可以看到，不同存储卡的带来的性能影响非常大，Kingston 甚至产生了 20 倍左右的性能差别。另外值得注意的是，图中蓝色柱子表示的是在 wifi 条件下的性能，灰色柱子表示的是通过 USB 连接电脑网络时的性能。右侧柱状图中可以看到，USB 连接网络的性能比 wifi 连接快 10 倍左右，即使如此，左图中蓝色柱和灰色柱的差别不大，从而可以看出网络提升 10 倍后对总的性能影响还是不大（不过我觉得这里 wifi 连接的速度已经很快了，可能加一个 3G 的测试会更公平一点）。</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<a data-fancybox="gallery"  data-caption="WebBench 性能" href=/images/2012-06/webbench.png ><img src=/images/2012-06/webbench.png  /></a>
+
 <p>作者还测试了 Facebook、地图、邮件、安装程序等应用在不同配置下的表现，均得出了好的闪存卡能明显提升应用速度的结论。</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<a data-fancybox="gallery"  href=/images/2012-06/webbench-optimize.png ><img src=/images/2012-06/webbench-optimize.png  /></a>
+
 <p>既然存储卡的性能影响这么大，有没有优化的空间呢？上图是作者关于浏览器优化的一些测试。浏览器保存在磁盘上的数据主要有两种，一种是缓存，以 write-back 的方式写到磁盘；另一种是缓存索引等数据，以同步的方式写到磁盘的 SQLite 数据库文件中。上图中可以看到，把浏览器的缓存放在内存中对性能提升并不大（A），把数据库文件放到内存中则能明显提升应用的性能（B），而如果把数据库文件的写操作改成异步的方式，也能提升应用的性能（D）。由此可见，SQLite 数据库操作是影响应用性能的主要原因。应用使用 SQLite 数据库有时只是为了方便，而不需要它保证一定的可靠性。同时可以看出 SQLite 的写操作是相当随机的。</p>
 <p>最后作者还给出了一些可能的优化的方案，例如使用 RAID，采用<a href="http://en.wikipedia.org/wiki/Log-structured_file_system">日志式文件系统</a>，或是由应用指定异步/同步操作等。不过这些都不是这篇论文的重点了。可以预见的是，这篇论文挖了一个好坑，将来肯定会有更多的论文研究如何提高闪存上移动应用存储的性能。</p>
     </div>

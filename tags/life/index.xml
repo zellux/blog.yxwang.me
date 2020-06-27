@@ -6,10 +6,19 @@
     <description>Recent content in Life on Aiur · Zellux 的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 21 Jul 2019 20:54:27 -0700</lastBuildDate>
+    <lastBuildDate>Sat, 27 Jun 2020 01:36:00 +0000</lastBuildDate>
     
 	<atom:link href="https://blog.yxwang.me/tags/life/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>组装一台家用服务器机架</title>
+      <link>https://blog.yxwang.me/2020/06/server-rack/</link>
+      <pubDate>Sat, 27 Jun 2020 01:36:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2020/06/server-rack/</guid>
+      <description>最近因为新冠病毒长期宅在家里，决定开始一个很早就想做的项目：搭一个服务器机架。前后花了不少时间，很多时间用在了发现缺少某个零件，或者发现买错了某个零件，重新下单等待造成的。于是决定写一篇博客介绍下用到的设备和配件，给有兴趣自己搭一个的朋友做参考。</description>
+    </item>
     
     <item>
       <title>DIY 洗衣机完成通知</title>
@@ -53,7 +62,7 @@
       <pubDate>Sun, 14 Jul 2013 00:00:00 +0000</pubDate>
       
       <guid>https://blog.yxwang.me/2013/07/dusit-thani-maldives/</guid>
-      <description>&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;</description>
+      <description>&lt;a data-fancybox=&#34;gallery&#34;  href=https://blog.yxwang.me/images/2013-07/maldives-tree.jpg &gt;&lt;img src=https://blog.yxwang.me/images/2013-07/maldives-tree.jpg  width=&#34;560&#34; /&gt;&lt;/a&gt;</description>
     </item>
     
     <item>

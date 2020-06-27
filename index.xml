@@ -6,10 +6,54 @@
     <description>Recent content on Aiur · Zellux 的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 21 Jul 2019 20:54:27 -0700</lastBuildDate>
+    <lastBuildDate>Sat, 27 Jun 2020 01:36:00 +0000</lastBuildDate>
     
         <atom:link href="https://blog.yxwang.me/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>组装一台家用服务器机架</title>
+      <link>https://blog.yxwang.me/2020/06/server-rack/</link>
+      <pubDate>Sat, 27 Jun 2020 01:36:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2020/06/server-rack/</guid>
+      <description>&lt;p&gt;最近因为新冠病毒长期宅在家里，决定开始一个很早就想做的项目：搭一个服务器机架。前后花了不少时间，很多时间用在了发现缺少某个零件，或者发现买错了某个零件，重新下单等待造成的。于是决定写一篇博客介绍下用到的设备和配件，给有兴趣自己搭一个的朋友做参考。&lt;/p&gt;
+&lt;a data-fancybox=&#34;gallery&#34;  data-caption=&#34;Rack 最终效果图&#34; href=https://blog.yxwang.me/images/2020-06/rack.jpg &gt;&lt;img src=https://blog.yxwang.me/images/2020-06/rack.jpg  width=&#34;420&#34; /&gt;&lt;/a&gt;
+
+&lt;h2 id=&#34;机架&#34;&gt;机架&lt;/h2&gt;
+&lt;p&gt;我选择的机架是 &lt;a href=&#34;https://amzn.to/31mTMl5&#34;&gt;Raising 的 15U 机架&lt;/a&gt;。这个机架优点是够结实，深度可变，价格也比 StarTech 的便宜一点。如果预算足够可以考虑买 StarTech 的机架（&lt;a href=&#34;https://amzn.to/31kr7gK&#34;&gt;12U&lt;/a&gt;, &lt;a href=&#34;https://smile.amazon.com/dp/B00O6GNLQE/ref=emc_b_5_t&#34;&gt;25U&lt;/a&gt;）。这里 U 是用来衡量机架中组件高度的单位，1U 约等于 43.66 毫米。机架上每个 U 的高度都会对应的三个孔，如下图所示。&lt;/p&gt;
+&lt;a data-fancybox=&#34;gallery&#34;  data-caption=&#34;Rack Unit 单位&#34; href=https://blog.yxwang.me/images/2020-06/server-rack-ru.png &gt;&lt;img src=https://blog.yxwang.me/images/2020-06/server-rack-ru.png  width=&#34;420&#34; /&gt;&lt;/a&gt;
+
+&lt;p&gt;因为我有不少没法直接固定在机架上的设备，得把它们放在隔板上。我一共买了四块隔板：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://amzn.to/3eEvRS2&#34;&gt;AC Infinity 1U 隔板&lt;/a&gt;：深度为 10&amp;rdquo; 。&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://amzn.to/2YA7Fe2&#34;&gt;StarTech 2U 隔板&lt;/a&gt;：深度为 16&amp;rdquo;。就是底部放 NAS 的这块了。&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.ebay.com/itm/2Pack-Cantilever-Server-Shelf-Vented-Shelves-Rack-Mount-19-1U-12-300mm-Deep/161965986929&#34;&gt;2 x Raising 1U 隔板&lt;/a&gt;：深度为 12&amp;rdquo;。做工上的确比 AC Infinity 1U 差一点，但是一块 AC Infinity 1U 的价格几乎可以买两块 Raising 1U 了。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;此外出于美观考虑还可以买挡板，&lt;a href=&#34;https://amzn.to/2BMohGd&#34;&gt;StarTech 的 1U 挡板&lt;/a&gt;就挺好。&lt;/p&gt;
+&lt;h2 id=&#34;网线&#34;&gt;网线&lt;/h2&gt;
+&lt;p&gt;配线架（Patch Panel）可以让前面板的网线看起来干净清爽。它的背面连接各种设备的背部网线口，正面用短网线连接路由器和其他网线口在正面的设备。网上大多数的配线架都是一面连 CAT 5/6 网线，另一面是打线柱，很少有两面都是网线口的配线架。于是我买了两条 &lt;a href=&#34;https://amzn.to/2YzFrA0&#34;&gt;TRENDnet 1U 24 口空白网络配线架&lt;/a&gt;，加上 48 个两端都是网线口的 &lt;a href=&#34;https://amzn.to/3dD0N3M&#34;&gt;Keystone&lt;/a&gt;。这个 Keystone 从用户评论来看，以太网供电（PoE）和网速都不会受到影响。&lt;/p&gt;
+&lt;p&gt;过长的网线用在前面板也不好看，我先试了 1ft (30cm) 的&lt;a href=&#34;https://amzn.to/2ZgUHB1&#34;&gt; Monoprice 网线&lt;/a&gt;，装上以后还是觉得网线太长。后来换成了 &lt;a href=&#34;https://amzn.to/3igBOqC&#34;&gt;0.5ft (15cm) 的 网线&lt;/a&gt;，看起来干净好多。&lt;/p&gt;
+&lt;h2 id=&#34;设备&#34;&gt;设备&lt;/h2&gt;
+&lt;p&gt;设备选择方面，我只是把原有的监控设备和服务器搬了过来，放在了层板上。犹豫过要不要买一个机架式服务器，但是考虑到机架式服务器的耗电量，加上已经有了视频监控机和独立 NAS，最后还是买了个翻新的 &lt;a href=&#34;https://amzn.to/31kwBYL&#34;&gt;HP EliteDesk i7-4785T&lt;/a&gt; 用来跑智能家居服务和 Unifi Controller。除了 HP 以外，Dell 和 Lenovo 都有类似的微主机，买一个二手的很适合当智能家居服务器。另外推荐使用 Intel T 系列的 CPU，专门为了省电设计。&lt;/p&gt;
+&lt;p&gt;机架上的一些其他设备：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://amzn.to/2Nwjr2G&#34;&gt;StarTech 1U 条形插座&lt;/a&gt;：带过载保护，单一开关控制所有插口。&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://amzn.to/2YC7oao&#34;&gt;Netgear 16 口交换机 (JGS516PE)&lt;/a&gt;：其中 8 个口支持 PoE，配合 &lt;a href=&#34;https://amzn.to/3g3fqit&#34;&gt;Unifi 的无线路由&lt;/a&gt;。用了三年了，非常稳定。&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://amzn.to/3eOQ9YU&#34;&gt;Unifi 安全网关&lt;/a&gt;：配合服务器上跑的 Unifi Controller，可以远程配置 /  监控家庭网络。&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://amzn.to/3eDKnJP&#34;&gt;Samsung SmartThings 中控&lt;/a&gt;：我买的第一个智能家居中控，现在主要用 Home Assistant，但是部分智能家居设备还是通过 SmartThings 中控 + MQTT 的方式连接刀 Home Assistant 上。&lt;/li&gt;
+&lt;li&gt;Mac mini (2010 年中)：曾经的智能家居中控，买了 EliteDesk 后 Mac mini 处于闲置状态。&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://amzn.to/2CMrmXB&#34;&gt;LaView 监控录像机&lt;/a&gt;：买了一整套监控录像机 + 摄像头。它的风扇噪音有点大，是目前机架的主要噪音来源。&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.qnap.com/en-us/product/ts-853a&#34;&gt;Qnap TS-853 NAS&lt;/a&gt;：最多可以放八个硬盘。数据备份中心，同时跑了 Owncloud 同步服务和 Plex 视频播放。如果没买这个 NAS 的话我可能会直接上机架式服务器。&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://amzn.to/3i6A6bi&#34;&gt;Arlo 视频监控机&lt;/a&gt;：另外一套视频监控设备。Arlo 的好处是可以选择用电池不连电源。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;具体的智能家居和监控的使用这篇文章就不细谈了，对它们感兴趣的朋友，可以参考我的另外两篇博文：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.yxwang.me/2017/03/remodel-smart-home/&#34;&gt;智能家居之计划篇&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.yxwang.me/2017/10/smart-home-2/&#34;&gt;智能家居之实践篇&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>DIY 洗衣机完成通知</title>
@@ -96,21 +140,24 @@
 &lt;p&gt;无人驾驶场景中的大多数的目标物体都处在同一地面上，非常适合 BEV。相比正视图，BEV 中的目标在不同位置大小固定，我们可以用已知的常见物体大小优化检测效果。对于 BEV 模型来说，主要的问题在于如何选择最终图像的特征，如何生成的图像中做出精确的检测。此文旨在介绍 BEV 检测相关的模型 Pixor 和 HDNet。&lt;/p&gt;
 &lt;h2 id=&#34;pixor&#34;&gt;Pixor&lt;/h2&gt;
 &lt;p&gt;Pixor 是 Uber ATG 的 Bin Yang 等人在 &lt;a href=&#34;http://openaccess.thecvf.com/content_cvpr_2018/html/Yang_PIXOR_Real-Time_3D_CVPR_2018_paper.html&#34;&gt;CVPR 18&lt;/a&gt; 上提出的 BEV 检测模型。在特征生成方面，Pixor 把整个点云切成了 L x W x H 个小方格，每个小方格用 0 或 1 表示这个方格内是否有激光点存在，接着沿高度方向把三维特征压缩到一个二维平面，每个压缩后的二维方格就有了 H 个特征表示这个方格上的不同高度是否有点存在。此外 Pixor 还计算了落在每个方格中激光点的平均强度作为额外的特征，最终拿到了一个分辨率为 L x W、包含 H + 1 个特征通道的图像。&lt;/p&gt;
-&lt;figure&gt;
-&lt;img src=&#34;https://blog.yxwang.me/images/2019-03/pixor-layers.png&#34; alt=&#34;Pixor 结构&#34; /&gt;&lt;figcaption&gt;Pixor 结构&lt;/figcaption&gt;
-&lt;/figure&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;https://blog.yxwang.me/images/2019-03/pixor-layers.png&#34; alt=&#34;Pixor 结构&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;Pixor 结构&lt;/p&gt;
+&lt;/div&gt;
 &lt;p&gt;检测方面，Pixor 采用了基于 &lt;a href=&#34;https://arxiv.org/abs/1708.02002&#34;&gt;RetinaNet&lt;/a&gt; 的 one-stage 的结构，如上图所示（这里用了&lt;a href=&#34;http://www.cs.toronto.edu/~byang/projects/pixor/pixor_poster.pdf&#34;&gt;海报&lt;/a&gt;上的截图，和论文中的有一些细小的差别）。网络里面用了 ResNet 和类似 FPN 的结构。FPN 结构输出的特征图经过一个头部网络后，直接生成对每个像素点的分类和 bounding box 的回归结果。&lt;/p&gt;
 &lt;p&gt;优化目标方面，分类目标用了 RetinaNet 中的 focal loss，回归目标用了 smoooth L1。论文中回归目标有笔误，按照海报和 &lt;a href=&#34;http://www.cs.toronto.edu/~byang/projects/pixor/pixor_faq.txt&#34;&gt;FAQ&lt;/a&gt; 的说法应该是 &lt;span class=&#34;math inline&#34;&gt;\(\{ \cos 2\theta, \sin 2\theta, dx, dy, \log W, \log L \}\)&lt;/span&gt;。这里巧妙的用了 &lt;span class=&#34;math inline&#34;&gt;\(2 \theta\)&lt;/span&gt; 的三角函数作为车头朝向的回归目标，因为车辆是往前还是往后开这个问题会在 tracker 中处理，在检测的时候只要知道车身线的偏离角度就行了，至于这个角度是 5° 还是 185° 影响不大。&lt;/p&gt;
 &lt;p&gt;整个网络的运行速度非常快，在 Titan XP 上可以在 35 毫秒内完成。除此之外论文还测试了不同 backbone 网络和头部网络特征层共享的不同选择，做了模型简化测试 (ablation study)，感兴趣的朋友可以细读。&lt;/p&gt;
 &lt;h2 id=&#34;hdnet&#34;&gt;HDNet&lt;/h2&gt;
 &lt;p&gt;Pixor 沿高度方向把整个点云切成不同的高度区间，例如 Kitti 数据集上 -2.5 到 1 米之间的点会被分成 35 片，这个区间之外的点会被忽略。当地面坡度较大时，远处的点很容易被排除在外。为了解决这个问题，Bin Yang 等人提出了把高精地图作为额外特征的方案，发表在 &lt;a href=&#34;https://eng.uber.com/research/hdnet-exploiting-hd-maps-for-3d-object-detection/&#34;&gt;CoRL 18&lt;/a&gt; 上。&lt;/p&gt;
-&lt;figure&gt;
-&lt;img src=&#34;https://blog.yxwang.me/images/2019-03/hdnet-map.png&#34; alt=&#34;HDNet 中的地图信息&#34; /&gt;&lt;figcaption&gt;HDNet 中的地图信息&lt;/figcaption&gt;
-&lt;/figure&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;https://blog.yxwang.me/images/2019-03/hdnet-map.png&#34; alt=&#34;HDNet 中的地图信息&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;HDNet 中的地图信息&lt;/p&gt;
+&lt;/div&gt;
 &lt;p&gt;如图所示，HDNet 的核心思路在于引入了高精地图信息，从而可以把地面「摊平」（图 b），并提供道路语义信息帮助检测（图 d）。网络结构和 Pixor 非常相似，采用了 FPN，并把 Pixor 中的反卷积层换成了更高效的双线性插值层。&lt;/p&gt;
-&lt;figure&gt;
-&lt;img src=&#34;https://blog.yxwang.me/images/2019-03/hdnet-net.png&#34; alt=&#34;HDNet 结构&#34; /&gt;&lt;figcaption&gt;HDNet 结构&lt;/figcaption&gt;
-&lt;/figure&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;https://blog.yxwang.me/images/2019-03/hdnet-net.png&#34; alt=&#34;HDNet 结构&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;HDNet 结构&lt;/p&gt;
+&lt;/div&gt;
 &lt;p&gt;为了提高模型的稳定性，确保在缺失地图信息或者地图不准确的情况下仍然有较好的检测结果，作者会在训练模型时随机去除地图信息，并提出了通过 Lidar 扫描结果在线生成地图的方案。&lt;/p&gt;
 &lt;h2 id=&#34;小结&#34;&gt;小结&lt;/h2&gt;
 &lt;p&gt;本文介绍了两篇近期的基于纯激光雷达数据的 BEV 检测论文。基于纯激光雷达的模型非常适合车辆的检测，但对于行人检测的精度并不理想，往往需要借助图像提供额外的信息。在接下来的博客中我会和大家一起分享更多的相关研究，同时也欢迎各位提出不同的意见。&lt;/p&gt;
@@ -173,15 +220,17 @@ e_o = \theta r_o
 &lt;p&gt;这种方法用车辆本身的坐标系统记录位置，虽然实现起来简单但是测量精度非常局限于测量误差。例如上例中轮子打滑或事漂移都会导致结果不准确。更成熟的方案需要结合地图信息。&lt;/p&gt;
 &lt;h2 id=&#34;地图定位-map-registration&#34;&gt;地图定位 (Map Registration)&lt;/h2&gt;
 &lt;p&gt;可以用下面三张图来来介绍地图定位问题，左图是当前的区域地图，中间是激光测距传感器得到的结果，地图定位的目的就是根据传感器返回的结果判断机器人当前坐标和朝向，右图就是一个理想的结果。&lt;/p&gt;
-&lt;p&gt;&lt;a data-fancybox=&#34;gallery&#34;  data-caption=&#34;地图定位&#34; href=https://blog.yxwang.me/images/2018-08/slam-map-registraion.png &gt;&lt;img src=https://blog.yxwang.me/images/2018-08/slam-map-registraion.png  width=&#34;480&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a data-fancybox=&#34;gallery&#34;  data-caption=&#34;地图定位&#34; href=https://blog.yxwang.me/images/2018-08/slam-map-registraion-2.png &gt;&lt;img src=https://blog.yxwang.me/images/2018-08/slam-map-registraion-2.png  width=&#34;240&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;a data-fancybox=&#34;gallery&#34;  data-caption=&#34;地图定位&#34; href=https://blog.yxwang.me/images/2018-08/slam-map-registraion.png &gt;&lt;img src=https://blog.yxwang.me/images/2018-08/slam-map-registraion.png  width=&#34;480&#34; /&gt;&lt;/a&gt;
+
+&lt;a data-fancybox=&#34;gallery&#34;  data-caption=&#34;地图定位&#34; href=https://blog.yxwang.me/images/2018-08/slam-map-registraion-2.png &gt;&lt;img src=https://blog.yxwang.me/images/2018-08/slam-map-registraion-2.png  width=&#34;240&#34; /&gt;&lt;/a&gt;
+
 &lt;p&gt;配合第三周讲的占据栅格地图障碍物的概率 &lt;span class=&#34;math inline&#34;&gt;\(m(x, y)\)&lt;/span&gt;，我们可以定义最佳定位结果应该满足 &lt;span class=&#34;math display&#34;&gt;\[
 \max_p \sum_r \delta(p_x + r\cos(p_{\theta} + r_{\theta}), p_y + r\sin(p_{\theta} + r_{\theta})) \cdot{m(x,y)}
 \]&lt;/span&gt; 接下来介绍两种解决地图定位的方法。&lt;/p&gt;
 &lt;h2 id=&#34;粒子滤波-particle-filters&#34;&gt;粒子滤波 (Particle Filters)&lt;/h2&gt;
 &lt;p&gt;粒子滤波（有没有觉得这个术语的中文翻译很科幻）又称为序列蒙特卡洛 (Sequential Monte Carlo)，是一种非参数 (non-parametric) 模型。它用一系列样本（粒子）表示可能性分布。每一个粒子都是方差接近于 0 的高斯分布，这种分布又被称为狄拉克δ函数 (Dirac Delta)，采用这个分布好处之一是可以把连续数学中的工具应用到离散的结果中。&lt;/p&gt;
 &lt;p&gt;在地图定位问题中，粒子的状态代表位置和朝向，同时每个粒子分别有自己的权重。初始状态的粒子滤波分布由一开始的假设决定，可能是均匀分布，也可能是以某个点为中心的高斯分布。初始化完成后，重复以下步骤更新粒子的分布：&lt;/p&gt;
-&lt;ol type=&#34;1&#34;&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
 &lt;li&gt;根据里程计的信息更新粒子的状态。&lt;/li&gt;
 &lt;li&gt;由于里程计本事有不确定，更新每个粒子状态的时候可以加入里程计带入的噪音，通常也是一个高斯分布。&lt;/li&gt;
 &lt;li&gt;从每个粒子更新后带噪音的分布中采样。&lt;/li&gt;
@@ -192,9 +241,10 @@ e_o = \theta r_o
 &lt;/ol&gt;
 &lt;h2 id=&#34;迭代最近点-iterative-closest-point&#34;&gt;迭代最近点 (Iterative Closest Point)&lt;/h2&gt;
 &lt;p&gt;粒子滤波的缺点之一在于高维度中，需要大量的粒子才能保证理想的分布。ICP 算法可以更好的适应高维度的场景。&lt;/p&gt;
-&lt;p&gt;&lt;a data-fancybox=&#34;gallery&#34;  data-caption=&#34;ICP&#34; href=https://blog.yxwang.me/images/2018-08/slam-icp.png &gt;&lt;img src=https://blog.yxwang.me/images/2018-08/slam-icp.png  width=&#34;360&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;a data-fancybox=&#34;gallery&#34;  data-caption=&#34;ICP&#34; href=https://blog.yxwang.me/images/2018-08/slam-icp.png &gt;&lt;img src=https://blog.yxwang.me/images/2018-08/slam-icp.png  width=&#34;360&#34; /&gt;&lt;/a&gt;
+
 &lt;p&gt;如图所示，ICP 的目的在于已知测量结果和地图，要求出左侧测量结果如何旋转移动后，可以和右侧的地图局部吻合。这里主要有两个问题，一是旋转和移动矩阵，二是测量点和地图点的对应关系。具体的 ICP 算法可以参考&lt;a href=&#34;http://post.queensu.ca/~sdb2/PAPERS/PAMI-3DLS-1987.pdf&#34;&gt;这篇论文&lt;/a&gt;，它的大致思路和&lt;a href=&#34;https://blog.yxwang.me/2018/07/robotics-slam-week1/&#34;&gt;第一周&lt;/a&gt;提到的解高斯混合模型的 EM 算法很接近：&lt;/p&gt;
-&lt;ol type=&#34;1&#34;&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
 &lt;li&gt;初始化旋转 (R) 和移动 (t) 矩阵。&lt;/li&gt;
 &lt;li&gt;固定 R 和 t，优化点的对应关系：&lt;span class=&#34;math inline&#34;&gt;\(y_i = \argmin_{y_j \in Y} \Vert x_i - y_j \Vert\)&lt;/span&gt;。&lt;/li&gt;
 &lt;li&gt;固定点的对应关系，优化 R 和 t：&lt;span class=&#34;math inline&#34;&gt;\(R, t = \argmin \sum_{x_i, y_i \in C} \Vert d(x_i, y_i) \Vert ^2\)&lt;/span&gt;。&lt;/li&gt;
@@ -227,7 +277,7 @@ e_o = \theta r_o
       <description>&lt;p&gt;这一周的内容和地图有关，最后的作业就是通过传感器的数据创建一个地图。&lt;/p&gt;
 &lt;h2 id=&#34;地图类型&#34;&gt;地图类型&lt;/h2&gt;
 &lt;p&gt;常见的题目类型有三种：&lt;/p&gt;
-&lt;ol type=&#34;1&#34;&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
 &lt;li&gt;度量地图 (Metric Map)：地点用坐标表示，例如用经纬度表示地点的世界地图。&lt;/li&gt;
 &lt;li&gt;拓扑地图 (Topological Map)：表示地点之间的逻辑关系，例如图论中图的概念，以及地铁图。&lt;/li&gt;
 &lt;li&gt;语义地图 (Semantic Map)：用标签描述的地图，通过位置关系描述被标记的地点，例如景点游览图。&lt;/li&gt;
@@ -235,9 +285,10 @@ e_o = \theta r_o
 &lt;p&gt;在现实中绘制地图有几个难点，一是测量误差会导致坐标不精确，二是设备本身需要不断地移动才能绘制，三是地图本身是对现实世界的反应，会不断的变化。&lt;/p&gt;
 &lt;h2 id=&#34;占据栅格地图-occupancy-grid-map&#34;&gt;占据栅格地图 (Occupancy Grid Map)&lt;/h2&gt;
 &lt;p&gt;栅格地图用二维栅格表示整个环境，每个栅格都有一个概率值表示这个栅格是否有物体存在。绘制栅格地图常用的设备之一是测距传感器，通过发出激光并测量接受反射所用的时间，传感器可以了解前方障碍物的大致距离。&lt;/p&gt;
-&lt;figure&gt;
-&lt;img src=&#34;https://blog.yxwang.me/images/2018-08/sonar-sweep.png&#34; alt=&#34;测距传感器&#34; /&gt;&lt;figcaption&gt;测距传感器&lt;/figcaption&gt;
-&lt;/figure&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;https://blog.yxwang.me/images/2018-08/sonar-sweep.png&#34; alt=&#34;测距传感器&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;测距传感器&lt;/p&gt;
+&lt;/div&gt;
 &lt;p&gt;如图所示，传感器本身测量存在误差，我们只能认为在传感器正前方给定距离处有一定几率存在障碍物。对于这种测量有误差的环境，我们再次引入贝叶斯模型描述。记 &lt;span class=&#34;math inline&#34;&gt;\(p(m_{x, y})\)&lt;/span&gt; 为 (x, y) 格中存在障碍物的概率的先验知识，根据测量的设备模型我们可以得到条件概率 &lt;span class=&#34;math inline&#34;&gt;\(p(z | m_{x,y})\)&lt;/span&gt;。&lt;span class=&#34;math inline&#34;&gt;\(p(z=1|m_{x,y}=1)\)&lt;/span&gt; 就代表栅格中有障碍物，且检测成功的概率，而 &lt;span class=&#34;math inline&#34;&gt;\(p(z=1|m_{x,y}=0)\)&lt;/span&gt; 则代表栅格中不存在障碍物，但是却检测到障碍的概率（假阳性）。&lt;/p&gt;
 &lt;p&gt;根据贝叶斯公式，我们可以得到测量之后的后验概率 &lt;span class=&#34;math display&#34;&gt;\[
 p(m_{x,y}|z) = \frac{p(z | m_{x,y}) p(m_{x,y})}{p(z)}
@@ -253,9 +304,10 @@ Odd(m_{x,y} = 1 | z) = \frac{p(m_{x,y} = 1 | z)}{p(m_{x,y} = 0 | z)} = \frac{p(z
 \log odd(m_{x,y} = 1 | z) = \log{odd\ meas} + \log odd(m_{x,y} = 1)
 \]&lt;/span&gt; 如果用 &lt;span class=&#34;math inline&#34;&gt;\(\log{odd}\)&lt;/span&gt; 表示栅格的状态，这一状态可以简单的通过加减来维护。当检测到障碍物时，该栅格的 &lt;span class=&#34;math inline&#34;&gt;\(\log{odd}\)&lt;/span&gt; 增加 &lt;span class=&#34;math inline&#34;&gt;\(\frac{p(z=1 | m_{x,y} = 1)}{p(z=1 | m_{x,y} = 0)}\)&lt;/span&gt;，没有检测到障碍物时，该栅格的 &lt;span class=&#34;math inline&#34;&gt;\(\log{odd}\)&lt;/span&gt; 减少 &lt;span class=&#34;math inline&#34;&gt;\(\frac{p(z=0 | m_{x,y} = 0)}{p(z=0 | m_{x,y} = 1)}\)&lt;/span&gt;。初始状态为 0，即 &lt;span class=&#34;math inline&#34;&gt;\(odd = 1\)&lt;/span&gt;。&lt;/p&gt;
 &lt;p&gt;下图为一个具体的例子，第一个栅格地图为 t1 时刻的状态，做了一次探测后，经过的空闲栅格的 &lt;span class=&#34;math inline&#34;&gt;\(\log{odd}\)&lt;/span&gt; 减少 0.7（这个值由传感器决定），而最后的障碍物所在格的 &lt;span class=&#34;math inline&#34;&gt;\(\log{odd}\)&lt;/span&gt; 增加了 0.9。第三个栅格地图为 t2 时刻更新后的状态。&lt;/p&gt;
-&lt;figure&gt;
-&lt;img src=&#34;https://blog.yxwang.me/images/2018-08/mapping-log-odd.png&#34; alt=&#34;log odd 更新例子&#34; /&gt;&lt;figcaption&gt;log odd 更新例子&lt;/figcaption&gt;
-&lt;/figure&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;https://blog.yxwang.me/images/2018-08/mapping-log-odd.png&#34; alt=&#34;log odd 更新例子&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;log odd 更新例子&lt;/p&gt;
+&lt;/div&gt;
 &lt;h2 id=&#34;三维地图&#34;&gt;三维地图&lt;/h2&gt;
 &lt;p&gt;常见的三维传感器：&lt;/p&gt;
 &lt;ul&gt;
@@ -273,7 +325,7 @@ Odd(m_{x,y} = 1 | z) = \frac{p(m_{x,y} = 1 | z)}{p(m_{x,y} = 0 | z)} = \frac{p(z
 &lt;/ul&gt;
 &lt;h2 id=&#34;作业&#34;&gt;作业&lt;/h2&gt;
 &lt;p&gt;这次的作业是根据一组 Lidar 测量结果绘制一个二维地图。输入包含四个参数（这里 K 为扫描总次数，N 为 Lidar 光线数）：&lt;/p&gt;
-&lt;ol type=&#34;1&#34;&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
 &lt;li&gt;t 数组记录每组数据的时间点，大小为 &lt;span class=&#34;math inline&#34;&gt;\(1 \times K\)&lt;/span&gt;。&lt;/li&gt;
 &lt;li&gt;ranges 数组记录每次测试各条激光线测得的距离，大小为 &lt;span class=&#34;math inline&#34;&gt;\(N \times K\)&lt;/span&gt;。&lt;/li&gt;
 &lt;li&gt;scanAngels 数组记录每条激光线相对机身的转角，大小为 &lt;span class=&#34;math inline&#34;&gt;\(N \times 1\)&lt;/span&gt;，每次测试时这个转角不会变化。&lt;/li&gt;
@@ -281,9 +333,10 @@ Odd(m_{x,y} = 1 | z) = \frac{p(m_{x,y} = 1 | z)}{p(m_{x,y} = 0 | z)} = \frac{p(z
 &lt;/ol&gt;
 &lt;p&gt;我实现的方法没有用向量并行，用了两层循环依次处理每次测试的各条光线。在 i7 6700K 上大概 25 秒可以跑完最终测试，测试程序里会提到整个过程可能要五分钟，性能差一点的机器这个时间里面应该也能跑完了。&lt;/p&gt;
 &lt;p&gt;最后跑地图的时候，注意 &lt;code&gt;example_test.m&lt;/code&gt; 里传给 &lt;code&gt;occGridMapping&lt;/code&gt; 的参数只取了前 1000 次测量结果，所以要制作完整地图要把这个限制去掉。另外文档里面坐标转换时用了 &lt;code&gt;ceil&lt;/code&gt;，我在本地测试时只能拿到 27/30 分，换成 &lt;code&gt;round&lt;/code&gt; 就能到满分了。&lt;/p&gt;
-&lt;figure&gt;
-&lt;img src=&#34;https://blog.yxwang.me/images/2018-08/slam-w3-map.png&#34; alt=&#34;最终生成的地图&#34; /&gt;&lt;figcaption&gt;最终生成的地图&lt;/figcaption&gt;
-&lt;/figure&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;https://blog.yxwang.me/images/2018-08/slam-w3-map.png&#34; alt=&#34;最终生成的地图&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;最终生成的地图&lt;/p&gt;
+&lt;/div&gt;
 &lt;h2 id=&#34;全课程的笔记链接&#34;&gt;全课程的笔记链接&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;Robotics Estimation and Learning 的&lt;a href=&#34;https://www.coursera.org/learn/robotics-learning/&#34;&gt;课程主页&lt;/a&gt;&lt;/li&gt;
@@ -303,7 +356,7 @@ Odd(m_{x,y} = 1 | z) = \frac{p(m_{x,y} = 1 | z)}{p(m_{x,y} = 0 | z)} = \frac{p(z
       <description>&lt;p&gt;这一周主要讲卡尔曼滤波 (Kalman Filter)，视频讲得比较简略，slides 做得里也有不少错误。最后看了一些其他网站的文章和视频才有了比较深刻的理解。参考资料推荐在本文结尾。&lt;/p&gt;
 &lt;h2 id=&#34;卡尔曼滤波-kf&#34;&gt;卡尔曼滤波 KF&lt;/h2&gt;
 &lt;p&gt;卡尔曼滤波可以从一系列包含噪音的观测数据中，估计出每个时间点系统的状态。KF 有几个基本假设：&lt;/p&gt;
-&lt;ol type=&#34;1&#34;&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
 &lt;li&gt;当前状态只和前一状态有关，且和前一状态线性相关，即 &lt;span class=&#34;math inline&#34;&gt;\(x_{t+1}=A_t x_{t} + B_t u_t + \epsilon_t\)&lt;/span&gt;，这里 &lt;span class=&#34;math inline&#34;&gt;\(x_t\)&lt;/span&gt; 是状态向量，&lt;span class=&#34;math inline&#34;&gt;\(u_t\)&lt;/span&gt; 为控制向量，&lt;span class=&#34;math inline&#34;&gt;\(\epsilon_t\)&lt;/span&gt; 是均值为 0 的高斯分布噪音。&lt;/li&gt;
 &lt;li&gt;测量结果和状态线性相关：&lt;span class=&#34;math inline&#34;&gt;\(z_t = C_t x_t + \delta_t\)&lt;/span&gt;。这里 &lt;span class=&#34;math inline&#34;&gt;\(z_t\)&lt;/span&gt; 是测量结果的向量，&lt;span class=&#34;math inline&#34;&gt;\(\delta_t\)&lt;/span&gt; 表示测量噪音。&lt;/li&gt;
 &lt;li&gt;最初状态也呈正态分布。&lt;/li&gt;
@@ -379,9 +432,10 @@ K = P \frac{\partial{h^T}}{\partial{x}} (\frac{\partial{h}}{\partial{x}} P_t \fr
 \]&lt;/span&gt;&lt;/p&gt;
 &lt;h2 id=&#34;无迹卡尔曼滤波-unscented-kalman-filter&#34;&gt;无迹卡尔曼滤波 (Unscented Kalman Filter)&lt;/h2&gt;
 &lt;p&gt;EKF 的局限之一在于只是对非线性的变换做了近似，用泰勒级数展开后取一阶项，容易产生导致较大的误差。UKF 采用了确定性的取样方法来近似高斯分布，这个取样方法又被称为无迹变换 (Unscented Transformation)。&lt;/p&gt;
-&lt;figure&gt;
-&lt;img src=&#34;https://blog.yxwang.me/images/2018-07/ukf-mapping.png&#34; alt=&#34;UKF 取样&#34; /&gt;&lt;figcaption&gt;UKF 取样&lt;/figcaption&gt;
-&lt;/figure&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;https://blog.yxwang.me/images/2018-07/ukf-mapping.png&#34; alt=&#34;UKF 取样&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;UKF 取样&lt;/p&gt;
+&lt;/div&gt;
 &lt;h3 id=&#34;unscented-transformation&#34;&gt;Unscented Transformation&lt;/h3&gt;
 &lt;p&gt;UT 可以用来计算非线形变换后随机变量的分布情况。考虑 L 维随机变量 &lt;strong&gt;x&lt;/strong&gt; 和非线性的函数 &lt;span class=&#34;math inline&#34;&gt;\(\pmb{y} = f(\pmb{x})​\)&lt;/span&gt;，假设 &lt;strong&gt;x&lt;/strong&gt; 的均值为 &lt;span class=&#34;math inline&#34;&gt;\(\bar{\pmb{x}}​\)&lt;/span&gt;，协方差矩阵 &lt;span class=&#34;math inline&#34;&gt;\(P_x​\)&lt;/span&gt;。为了计算 &lt;span class=&#34;math inline&#34;&gt;\(\pmb{y}​\)&lt;/span&gt; 的分布情况，我们根据下面三个式子创造一个维数为 2L + 1 的 sigma 矩阵 &lt;span class=&#34;math inline&#34;&gt;\(\pmb{\mathcal{X}}​\)&lt;/span&gt;： &lt;span class=&#34;math display&#34;&gt;\[
 \begin{align}
@@ -404,9 +458,10 @@ W_0^{(c)} &amp;amp;= \lambda / (L + \lambda) + (1 - \alpha^2 + \beta) \\
 W_0^{(c)} &amp;amp;= W_0^{(m)} = 1 / \{ 2(L + \lambda) \} &amp;amp; i = 1, \dots, 2L.
 \end{align}
 \]&lt;/span&gt; 下图很好地解释了上述几个式子的变换过程&lt;/p&gt;
-&lt;figure&gt;
-&lt;img src=&#34;https://blog.yxwang.me/images/2018-07/ukf-sigma-matrix.png&#34; alt=&#34;UT 的图形解释&#34; /&gt;&lt;figcaption&gt;UT 的图形解释&lt;/figcaption&gt;
-&lt;/figure&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;https://blog.yxwang.me/images/2018-07/ukf-sigma-matrix.png&#34; alt=&#34;UT 的图形解释&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;UT 的图形解释&lt;/p&gt;
+&lt;/div&gt;
 &lt;h3 id=&#34;unscented-kalman-filter&#34;&gt;Unscented Kalman Filter&lt;/h3&gt;
 &lt;p&gt;接下来回到 UKF。介绍了 UT 之后 UKF 就容易多了。首先构造一个包含初始状态和噪音的矩阵 &lt;span class=&#34;math inline&#34;&gt;\(\pmb{x}_k^{\alpha} = [\pmb{x}_k^T \pmb{v}_k^T \pmb{n}_k^T ]^T\)&lt;/span&gt;，这里三个向量分别为状态向量、控制向量和噪音向量。接下来对这个矩阵应用无迹变换获得 sigma 矩阵 &lt;span class=&#34;math inline&#34;&gt;\(\mathcal{X}_k^{\alpha}\)&lt;/span&gt;，之后就回到了普通 KF 过程。具体的状态转移公式可以参考本文结尾参考资料《Kalman Filtering and Neural Networks》一书中的章节。&lt;/p&gt;
 &lt;h2 id=&#34;作业&#34;&gt;作业&lt;/h2&gt;
@@ -515,9 +570,10 @@ p(x) = \sum_{k=1}^K w_k g_k (\pmb{x}|\pmb{u}_k, \Sigma_k)
 z_k^i = \frac{g_k(\pmb{x}_i) | \pmb{u}_k, \Sigma_k}{\sum_{k=1}^K g_k(\pmb{x}_i) | \pmb{u}_k, \Sigma_k}
 \]&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(z_k^i\)&lt;/span&gt; 的表示第 i 个观测数据中，第 k 个高斯函数占全体的比重，直观表示如下图&lt;/p&gt;
-&lt;figure&gt;
-&lt;img src=&#34;https://blog.yxwang.me/images/2018-07/gmm-em-z-graph.png&#34; alt=&#34;z_k^i 的直观表示&#34; /&gt;&lt;figcaption&gt;&lt;span class=&#34;math inline&#34;&gt;\(z_k^i\)&lt;/span&gt; 的直观表示&lt;/figcaption&gt;
-&lt;/figure&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;https://blog.yxwang.me/images/2018-07/gmm-em-z-graph.png&#34; alt=&#34;z_k^i 的直观表示&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;&lt;span class=&#34;math inline&#34;&gt;\(z_k^i\)&lt;/span&gt; 的直观表示&lt;/p&gt;
+&lt;/div&gt;
 &lt;p&gt;均值向量和协方差矩阵可以通过 &lt;span class=&#34;math inline&#34;&gt;\(z_k\)&lt;/span&gt; 估计 &lt;span class=&#34;math display&#34;&gt;\[
 \begin{align}
 \hat{\pmb{\mu}}_k &amp;amp;= \frac{1}{z_k} \sum_{i=1}{N} z_k^i \pmb{x}_i \\
@@ -526,7 +582,7 @@ z_k &amp;amp;= \sum_{i=1}^N z_k^i
 \end{align}
 \]&lt;/span&gt;&lt;/p&gt;
 &lt;h3 id=&#34;em-法具体过程&#34;&gt;EM 法具体过程&lt;/h3&gt;
-&lt;ol type=&#34;1&#34;&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
 &lt;li&gt;初始化 &lt;span class=&#34;math inline&#34;&gt;\(\pmb{\mu}\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(\Sigma\)&lt;/span&gt;&lt;/li&gt;
 &lt;li&gt;固定 &lt;span class=&#34;math inline&#34;&gt;\(\pmb{\mu}\)&lt;/span&gt; 和 &lt;span class=&#34;math inline&#34;&gt;\(\Sigma\)&lt;/span&gt;，并更新 &lt;span class=&#34;math inline&#34;&gt;\(z_k^i\)&lt;/span&gt; 的值 (E-step)&lt;/li&gt;
 &lt;li&gt;固定 &lt;span class=&#34;math inline&#34;&gt;\(z_k^i\)&lt;/span&gt;，并更新 &lt;span class=&#34;math inline&#34;&gt;\(\pmb{\mu}\)&lt;/span&gt; 和 &lt;span class=&#34;math inline&#34;&gt;\(\Sigma\)&lt;/span&gt; 的值 (M-step)&lt;/li&gt;
@@ -550,7 +606,8 @@ z_k &amp;amp;= \sum_{i=1}^N z_k^i
       <guid>https://blog.yxwang.me/2018/07/sous-vide-lobster/</guid>
       <description>&lt;p&gt;Prime Day 的时候入了一套 Sous Vide （真空低温烹饪，读作 soo veed）装备，周末在家尝试了龙虾，味道很不错。&lt;/p&gt;
 &lt;p&gt;先上最后的效果图：&lt;/p&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;a data-fancybox=&#34;gallery&#34;  data-caption=&#34;成品&#34; href=https://blog.yxwang.me/images/2018-07/sous-vide-lobster-final.jpg &gt;&lt;img src=https://blog.yxwang.me/images/2018-07/sous-vide-lobster-final.jpg  width=&#34;360&#34; /&gt;&lt;/a&gt;
+
 &lt;p&gt;烹饪过程并不麻烦，只是中间低温煮的时间比较长，具体步骤如下：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;剪开龙虾壳&lt;/li&gt;
@@ -562,13 +619,23 @@ z_k &amp;amp;= \sum_{i=1}^N z_k^i
 &lt;li&gt;再次加上黄油后用火焰喷枪烧烤龙虾外层，完成&lt;a href=&#34;https://zh.wikipedia.org/wiki/%E7%BE%8E%E6%8B%89%E5%BE%B7%E5%8F%8D%E5%BA%94&#34;&gt;美拉德反应&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;加胡椒和葱，摆盘&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a data-fancybox=&#34;gallery&#34;  data-caption=&#34;Costco 买的龙虾&#34; href=https://blog.yxwang.me/images/2018-07/sous-vide-lobster-1.jpg &gt;&lt;img src=https://blog.yxwang.me/images/2018-07/sous-vide-lobster-1.jpg  width=&#34;120&#34; /&gt;&lt;/a&gt;
+
+&lt;a data-fancybox=&#34;gallery&#34;  data-caption=&#34;剪开龙虾壳，把肉从壳里推出&#34; href=https://blog.yxwang.me/images/2018-07/sous-vide-lobster-2.jpg &gt;&lt;img src=https://blog.yxwang.me/images/2018-07/sous-vide-lobster-2.jpg  width=&#34;120&#34; /&gt;&lt;/a&gt;
+
+&lt;a data-fancybox=&#34;gallery&#34;  data-caption=&#34;在肉中加入盐和胡椒&#34; href=https://blog.yxwang.me/images/2018-07/sous-vide-lobster-3.jpg &gt;&lt;img src=https://blog.yxwang.me/images/2018-07/sous-vide-lobster-3.jpg  width=&#34;120&#34; /&gt;&lt;/a&gt;
+
 &lt;!-- raw HTML omitted --&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;a data-fancybox=&#34;gallery&#34;  data-caption=&#34;放入袋中，加上黄油和柠檬，把袋抽成真空&#34; href=https://blog.yxwang.me/images/2018-07/sous-vide-lobster-5.jpg &gt;&lt;img src=https://blog.yxwang.me/images/2018-07/sous-vide-lobster-5.jpg  width=&#34;120&#34; /&gt;&lt;/a&gt;
+
+&lt;a data-fancybox=&#34;gallery&#34;  data-caption=&#34;用 Sous Vide 控制水温在 140°F (60 °C)，放入龙虾煮 1 小时&#34; href=https://blog.yxwang.me/images/2018-07/sous-vide-lobster-6.jpg &gt;&lt;img src=https://blog.yxwang.me/images/2018-07/sous-vide-lobster-6.jpg  width=&#34;120&#34; /&gt;&lt;/a&gt;
+
+&lt;a data-fancybox=&#34;gallery&#34;  data-caption=&#34;1 小时后取出龙虾，把袋口剪开，龙虾放在烤架上&#34; href=https://blog.yxwang.me/images/2018-07/sous-vide-lobster-7.jpg &gt;&lt;img src=https://blog.yxwang.me/images/2018-07/sous-vide-lobster-7.jpg  width=&#34;120&#34; /&gt;&lt;/a&gt;
+
+&lt;a data-fancybox=&#34;gallery&#34;  data-caption=&#34;用 Sous Vide 控制水温在 140°F (60 °C)，放入龙虾煮 1 小时&#34; href=https://blog.yxwang.me/images/2018-07/sous-vide-lobster-8.jpg &gt;&lt;img src=https://blog.yxwang.me/images/2018-07/sous-vide-lobster-8.jpg  width=&#34;120&#34; /&gt;&lt;/a&gt;
+&lt;/p&gt;
 &lt;h2 id=&#34;装备--工具篇&#34;&gt;装备 / 工具篇&lt;/h2&gt;
 &lt;p&gt;这里用到的工具有&lt;/p&gt;
 &lt;ul&gt;
@@ -602,18 +669,18 @@ z_k &amp;amp;= \sum_{i=1}^N z_k^i
 &lt;li&gt;代数余子式 (cofactor) &lt;span class=&#34;math inline&#34;&gt;\(A_{ij} = (-1)^{i+j}M_{ij}\)&lt;/span&gt;&lt;/li&gt;
 &lt;li&gt;行列式按行展开：&lt;span class=&#34;math inline&#34;&gt;\(D = a_{i1}A_{i1} + a_{i2}A_{i2} + \cdots + a_{in}A_{in}\)&lt;/span&gt;&lt;/li&gt;
 &lt;li&gt;行列式按列展开：&lt;span class=&#34;math inline&#34;&gt;\(D = a_{1j}A_{1j} + a_{2j}A_{2j} + \cdots + a_{nj}A_{nj}\)&lt;/span&gt;&lt;/li&gt;
-&lt;li&gt;克拉默法则 (Cramer’s rule)：如果线性方程组的系数行列式不等于零，那么方程组有唯一解 &lt;span class=&#34;math inline&#34;&gt;\(x_1 = \frac{D_1}{D}, x_2 = \frac{D_2}{D}, \cdots, x_n = \frac{D_n}{D}\)&lt;/span&gt;， 其中 &lt;span class=&#34;math inline&#34;&gt;\(D_j\)&lt;/span&gt; 是把系数行列式 D 中第 j 列的元素用方程组右端的常数项代替后得到的 n 阶行列式。&lt;/li&gt;
+&lt;li&gt;克拉默法则 (Cramer&#39;s rule)：如果线性方程组的系数行列式不等于零，那么方程组有唯一解 &lt;span class=&#34;math inline&#34;&gt;\(x_1 = \frac{D_1}{D}, x_2 = \frac{D_2}{D}, \cdots, x_n = \frac{D_n}{D}\)&lt;/span&gt;， 其中 &lt;span class=&#34;math inline&#34;&gt;\(D_j\)&lt;/span&gt; 是把系数行列式 D 中第 j 列的元素用方程组右端的常数项代替后得到的 n 阶行列式。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;矩阵及其运算&#34;&gt;矩阵及其运算&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;伴随矩阵 (adjugate matrix) &lt;span class=&#34;math display&#34;&gt;\[
-adj(A) = \begin{bmatrix}
-A_{11} &amp;amp; A_{21} &amp;amp; \cdots &amp;amp; A_{n1} \\
-A_{12} &amp;amp; A_{22} &amp;amp; \cdots &amp;amp; A_{n2} \\
-\vdots &amp;amp; \vdots &amp;amp; \ddots &amp;amp; \vdots \\
-A_{1n} &amp;amp; A_{2n} &amp;amp; \cdots &amp;amp; A_{nn} \\
-\end{bmatrix}
-\]&lt;/span&gt;&lt;/li&gt;
+  adj(A) = \begin{bmatrix}
+  A_{11} &amp;amp; A_{21} &amp;amp; \cdots &amp;amp; A_{n1} \\
+  A_{12} &amp;amp; A_{22} &amp;amp; \cdots &amp;amp; A_{n2} \\
+  \vdots &amp;amp; \vdots &amp;amp; \ddots &amp;amp; \vdots \\
+  A_{1n} &amp;amp; A_{2n} &amp;amp; \cdots &amp;amp; A_{nn} \\
+  \end{bmatrix}
+  \]&lt;/span&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;其中 &lt;span class=&#34;math inline&#34;&gt;\(A_{ij}\)&lt;/span&gt; 为代数余子式&lt;/p&gt;
 &lt;ul&gt;
@@ -660,12 +727,10 @@ A_{1n} &amp;amp; A_{2n} &amp;amp; \cdots &amp;amp; A_{nn} \\
 &lt;h2 id=&#34;迹&#34;&gt;迹&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;迹 (trace) 定义为矩阵对焦元素之和：&lt;span class=&#34;math inline&#34;&gt;\(\text{Tr}(A) = \sum_i A_{i,i}\)&lt;/span&gt;&lt;/li&gt;
-&lt;li&gt;迹的一些特性：
-&lt;ul&gt;
+&lt;li&gt;迹的一些特性：&lt;/li&gt;
 &lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\text{Tr}(A) = \text{Tr}(A^T)\)&lt;/span&gt;&lt;/li&gt;
 &lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\text{Tr}(ABC) = \text{Tr}(CAB) = \text{Tr}(BCA)\)&lt;/span&gt;&lt;/li&gt;
 &lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\text{Tr}(AB) = \text{Tr}(BA)\)&lt;/span&gt; （如果乘法可行）&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
     </item>
@@ -683,13 +748,16 @@ A_{1n} &amp;amp; A_{2n} &amp;amp; \cdots &amp;amp; A_{nn} \\
 &lt;p&gt;一开始用的是 &lt;a href=&#34;https://www.smartthings.com/&#34;&gt;SmartThings&lt;/a&gt;，尝试了 &lt;a href=&#34;http://homeassistant.io/&#34;&gt;Home Assistant&lt;/a&gt; 之后就决定改用它了。HA 相对于 ST 有不少优势，首先 ST 的大部分需要联网才能工作，增加了额外的不稳定因素和延迟；同时 HA 是开源的 Python 项目，可定制性比 ST 高很多，例如可以把所有状态变化记录到第三方数据库，支持 FloorPlan 等强大的插件。&lt;/p&gt;
 &lt;p&gt;HA 本身只是个软件，并不直接支持 Z-Wave 和 Zigbee 等协议。我选了 &lt;a href=&#34;http://amzn.to/2kT6oNf&#34;&gt;Aeotec Z-Stick Gen5&lt;/a&gt; 用来接收 Z-Wave 的信号，家里 Zigbee 的设备不多，需要的时候也可以用 ST 通过 MQTT 传给 HA。&lt;/p&gt;
 &lt;p&gt;下图就是 Home Assistant 的面板截图，可以设置多个场景方便控制。比如我在睡觉前会看一眼 Security 确保门都锁好，以及其他监控正常。
-&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;a data-fancybox=&#34;gallery&#34;  data-caption=&#34;Home Assistant&#34; href=https://blog.yxwang.me/images/2017-10/smart-home-ha-tab.png &gt;&lt;img src=https://blog.yxwang.me/images/2017-10/smart-home-ha-tab.png  width=&#34;840&#34; /&gt;&lt;/a&gt;
+&lt;/p&gt;
 &lt;h3 id=&#34;数据库和监控&#34;&gt;数据库和监控&lt;/h3&gt;
 &lt;p&gt;Home Assistant 默认会把所有的事件信息保存在 SQLite 数据库里，并不适合长时间保存，而且没法简单的导出给其他应用。我把所有的事件信息都保存到了 InfluxDB 里，在前端搭了一个 Grafana 做监控面板。&lt;/p&gt;
 &lt;p&gt;HA 对 InfluxDB 的支持很好，参考&lt;a href=&#34;https://home-assistant.io/components/influxdb/&#34;&gt;官方文档&lt;/a&gt;就能搞定，设置好以后所有的传感器更新、开关变化等信号都会保存到 InfluxDB 里。下图就是温度、湿度和占空传感器的一个 Grafana 页面。
-&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;a data-fancybox=&#34;gallery&#34;  data-caption=&#34;房间监控&#34; href=https://blog.yxwang.me/images/2017-10/smart-home-sensor.png &gt;&lt;img src=https://blog.yxwang.me/images/2017-10/smart-home-sensor.png  width=&#34;840&#34; /&gt;&lt;/a&gt;
+&lt;/p&gt;
 &lt;p&gt;以及 Unifi AP 的信号监控页面，借用了网上的一个 &lt;a href=&#34;https://grafana.com/dashboards/1486&#34;&gt;Grafana 模版&lt;/a&gt;
-&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;a data-fancybox=&#34;gallery&#34;  data-caption=&#34;无线信号监控&#34; href=https://blog.yxwang.me/images/2017-10/smart-home-unifi-snmp.png &gt;&lt;img src=https://blog.yxwang.me/images/2017-10/smart-home-unifi-snmp.png  width=&#34;840&#34; /&gt;&lt;/a&gt;
+&lt;/p&gt;
 &lt;h2 id=&#34;传感器&#34;&gt;传感器&lt;/h2&gt;
 &lt;p&gt;传感器可以用来监控房间的温度、湿度，是否有人，以及门窗是否关好等。接下来介绍一下我研究过的几款传感器。&lt;/p&gt;
 &lt;h3 id=&#34;ecobee-room-sensorhttpswwwecobeecomroom-sensors&#34;&gt;&lt;a href=&#34;https://www.ecobee.com/room-sensors/&#34;&gt;Ecobee Room Sensor&lt;/a&gt;&lt;/h3&gt;
@@ -745,9 +813,11 @@ A_{1n} &amp;amp; A_{2n} &amp;amp; \cdots &amp;amp; A_{nn} \\
 &lt;p&gt;发短信的平台，配合 HA 的自动脚本很好用。比如我的设置里有一条规则是外门超过 5 分钟以上没锁就发短信提醒自己。正常的推送量用 Twilio 很便宜，价格大概是 $0.0075 一条，所以我都没有设置 HA 的推送平台。&lt;/p&gt;
 &lt;h2 id=&#34;one-more-thing-floorplan&#34;&gt;One More Thing: Floorplan&lt;/h2&gt;
 &lt;p&gt;最近在折腾的一个叫 &lt;a href=&#34;https://github.com/pkozul/ha-floorplan&#34;&gt;Floorplan&lt;/a&gt; 的 HA 插件，顾名思义就是让所有的智能设备显示在一个平面图上方便控制。
-&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;a data-fancybox=&#34;gallery&#34;  data-caption=&#34;Floorplan&#34; href=https://blog.yxwang.me/images/2017-10/smart-home-floorplan.png &gt;&lt;img src=https://blog.yxwang.me/images/2017-10/smart-home-floorplan.png  width=&#34;840&#34; /&gt;&lt;/a&gt;
+&lt;/p&gt;
 &lt;p&gt;这是我目前的效果图，现在只加入了灯光、占空和温度信息，点击对应的房间可以控制这个房间的灯光。接下来打算在左侧放一排全局控制的按键，把弄一个平板挂到墙上，就可以在进家和出门的时候方便的控制全屋设备了。类似下图的效果（&lt;a href=&#34;http://www.vmwareinfo.com/2017/07/visualizing-smart-home-using-home.html&#34;&gt;图片来源&lt;/a&gt;）。
-&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;</description>
+&lt;a data-fancybox=&#34;gallery&#34;  data-caption=&#34;Floorplan&#34; href=https://blog.yxwang.me/images/2017-10/floor-plan-demo.jpg &gt;&lt;img src=https://blog.yxwang.me/images/2017-10/floor-plan-demo.jpg  width=&#34;540&#34; /&gt;&lt;/a&gt;
+&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -847,20 +917,25 @@ A_{1n} &amp;amp; A_{2n} &amp;amp; \cdots &amp;amp; A_{nn} \\
       <pubDate>Sun, 14 Jul 2013 00:00:00 +0000</pubDate>
       
       <guid>https://blog.yxwang.me/2013/07/dusit-thani-maldives/</guid>
-      <description>&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+      <description>&lt;a data-fancybox=&#34;gallery&#34;  href=https://blog.yxwang.me/images/2013-07/maldives-tree.jpg &gt;&lt;img src=https://blog.yxwang.me/images/2013-07/maldives-tree.jpg  width=&#34;560&#34; /&gt;&lt;/a&gt;
+
 &lt;h2 id=&#34;选岛和费用&#34;&gt;选岛和费用&lt;/h2&gt;
 &lt;p&gt;我们选岛时参考的分类主要是&lt;a href=&#34;http://mal-dives.taobao.com&#34;&gt;一家淘宝店&lt;/a&gt;和&lt;a href=&#34;http://www.mdvoo.com/z/maldives_xuandao/&#34;&gt;马尔代夫DIY的选岛页面&lt;/a&gt;，最后也是找了后者帮忙订机票和酒店。&lt;/p&gt;
 &lt;p&gt;因为老婆想要住好点的酒店，我又想浮潜，综合考虑这两个因素后我们选择了 Dusit Thani（都喜天阙岛），四晚豪水 + 水飞 + 早晚餐一共每人 23000 元。&lt;/p&gt;
 &lt;p&gt;关于住宿，我看到不少代理都给出了两沙两水的配置，这样其实很折腾，中间还要搬一次家。另外 Dusit 岛上的水屋也分普水（Water Villa）和豪水（Ocean Villa），前者在退潮的时候就会变成沙屋，建议大家还是选择四晚豪水，毕竟相比总价两者差不了多少钱。&lt;/p&gt;
 &lt;p&gt;另外四晚住下来我们都觉得时间有点短，应该选择住五晚或者六晚。&lt;/p&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;a data-fancybox=&#34;gallery&#34;  data-caption=&#34;私人泳池&#34; href=https://blog.yxwang.me/images/2013-07/maldives-private-pool.jpg &gt;&lt;img src=https://blog.yxwang.me/images/2013-07/maldives-private-pool.jpg  width=&#34;540&#34; /&gt;&lt;/a&gt;
+
+&lt;a data-fancybox=&#34;gallery&#34;  data-caption=&#34;Ocean Villa&#34; href=https://blog.yxwang.me/images/2013-07/maldives-villas.jpg &gt;&lt;img src=https://blog.yxwang.me/images/2013-07/maldives-villas.jpg  width=&#34;540&#34; /&gt;&lt;/a&gt;
+
 &lt;h2 id=&#34;美佳航空&#34;&gt;美佳航空&lt;/h2&gt;
 &lt;p&gt;出发前几天在网上搜美佳航空的评价，发现这个航空很不靠谱，在微博上搜索「美佳航空」的结果除了广告几乎都是抱怨。北京机场出发的美佳航班在&lt;a href=&#34;http://weibo.com/2650088287/zF0DN52fp&#34;&gt;7月1号&lt;/a&gt;和&lt;a href=&#34;http://weibo.com/1225043874/zDXKU9FRP&#34;&gt;7月8号&lt;/a&gt;都有过七八个小时的延误。所以建议大家如果去马代的话尽量不要选择这个航空公司。&lt;/p&gt;
 &lt;p&gt;不过我们在美佳航空的体验还不错，往返航班都是准点的。通过旅行社顺利申请到了蜜月蛋糕，去程航班上空姐还会给每人发一个可爱多。&lt;/p&gt;
 &lt;h2 id=&#34;浮潜&#34;&gt;浮潜&lt;/h2&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a data-fancybox=&#34;gallery&#34;  data-caption=&#34;这里海龟还挺常见的，两次出海都遇到了&#34; href=https://blog.yxwang.me/images/2013-07/maldives-turtle.jpg &gt;&lt;img src=https://blog.yxwang.me/images/2013-07/maldives-turtle.jpg  width=&#34;420&#34; /&gt;&lt;/a&gt;
+
+&lt;a data-fancybox=&#34;gallery&#34;  href=https://blog.yxwang.me/images/2013-07/maldives-fish.jpg &gt;&lt;img src=https://blog.yxwang.me/images/2013-07/maldives-fish.jpg  width=&#34;420&#34; /&gt;&lt;/a&gt;
+&lt;/p&gt;
 &lt;p&gt;岛上潜水中心可以免费租浮潜装备，但是得先上它们的浮潜课，浮潜课每人 55 美元。另外潜水中心还可以租借水下相机（Sony TX10），一小时 25 美元。浮潜的时候还可以请教练帮忙照相，他会潜入水中近距离拍摄。&lt;/p&gt;
 &lt;p&gt;岛上的浮潜面罩都是平光镜，高度近视的朋友还是去淘宝上买一副近视面罩吧。另外如果觉得租借的呼吸管不太卫生，也可以自带。脚蹼就没必要自带了。&lt;/p&gt;
 &lt;h2 id=&#34;其他&#34;&gt;其他&lt;/h2&gt;
@@ -875,7 +950,7 @@ A_{1n} &amp;amp; A_{2n} &amp;amp; \cdots &amp;amp; A_{nn} \\
 &lt;li&gt;&lt;strong&gt;SPA&lt;/strong&gt;：岛上的 Devarana Spa 是在树上，来了 Dusit 就一定要试一试。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;结账&lt;/strong&gt;：岛上消费都只需要留个房间号，最后一晚管家会把账单送到房间。记得好好过一遍账单，我们的账单有两笔有问题的支出，第二天结账的时候和管家说一下就好。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;</description>
+&lt;a data-fancybox=&#34;gallery&#34;  data-caption=&#34;无边泳池&#34; href=https://blog.yxwang.me/images/2013-07/maldives-pool.jpg &gt;&lt;img src=https://blog.yxwang.me/images/2013-07/maldives-pool.jpg  width=&#34;540&#34; /&gt;&lt;/a&gt;</description>
     </item>
     
     <item>
@@ -885,8 +960,10 @@ A_{1n} &amp;amp; A_{2n} &amp;amp; \cdots &amp;amp; A_{nn} \\
       
       <guid>https://blog.yxwang.me/2013/06/zhihu-daily-for-kindle/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;http://daily.zhihu.com/&#34;&gt;知乎日报&lt;/a&gt;每天都会更新有意思的问答。我比较习惯用 Kindle 看这样的文章，就写了一个 calibre 的&lt;a href=&#34;https://gist.github.com/zellux/5844688&#34;&gt;插件&lt;/a&gt;抓取每天的内容。&lt;/p&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a data-fancybox=&#34;gallery&#34;  href=https://blog.yxwang.me/images/2013-06/zhihu-kindle-1.jpg &gt;&lt;img src=https://blog.yxwang.me/images/2013-06/zhihu-kindle-1.jpg  width=&#34;300&#34; /&gt;&lt;/a&gt;
+
+&lt;a data-fancybox=&#34;gallery&#34;  href=https://blog.yxwang.me/images/2013-06/zhihu-kindle-2.jpg &gt;&lt;img src=https://blog.yxwang.me/images/2013-06/zhihu-kindle-2.jpg  width=&#34;300&#34; /&gt;&lt;/a&gt;
+&lt;/p&gt;
 &lt;h3 id=&#34;插件使用说明&#34;&gt;插件使用说明&lt;/h3&gt;
 &lt;ol&gt;
 &lt;li&gt;下载 &lt;a href=&#34;http://calibre-ebook.com/download&#34;&gt;calibre&lt;/a&gt;。&lt;/li&gt;
@@ -1255,7 +1332,8 @@ task &lt;span style=&#34;color:#e6db74&#34;&gt;:generate&lt;/span&gt; &lt;span s
 &lt;li&gt;如果用华夏银行卡的话只取里拉就好了，我全程没有用过欧元。&lt;/li&gt;
 &lt;li&gt;十里拉纸币很有意思，乍一看还以为上面有人打过草稿，字迹还挺清秀的。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;a data-fancybox=&#34;gallery&#34;  href=https://blog.yxwang.me/images/2012-10/tenlira.jpg &gt;&lt;img src=https://blog.yxwang.me/images/2012-10/tenlira.jpg  /&gt;&lt;/a&gt;
+
 &lt;h2 id=&#34;移动应用&#34;&gt;移动应用&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;推荐 &lt;a href=&#34;http://stay.com&#34;&gt;stay.com&lt;/a&gt; 的移动应用，免费，有伊斯坦布尔的离线地图和景点推荐。&lt;/li&gt;
@@ -1315,7 +1393,8 @@ task &lt;span style=&#34;color:#e6db74&#34;&gt;:generate&lt;/span&gt; &lt;span s
 &lt;li&gt;我们坐的 8 人 Rainbow Baloons 要价 120 欧，有人在大巴站附近的代理那 105 欧买到。&lt;/li&gt;
 &lt;li&gt;红线线路的景点可以自己完成。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;a data-fancybox=&#34;gallery&#34;  data-caption=&#34;日出时的热气球&#34; href=https://blog.yxwang.me/images/2012-10/balloons.jpg &gt;&lt;img src=https://blog.yxwang.me/images/2012-10/balloons.jpg  /&gt;&lt;/a&gt;
+
 &lt;h3 id=&#34;购物&#34;&gt;购物&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;绿线会带你去几个购物点，这些地方的东西性价比很高，建议多买点。&lt;/li&gt;
@@ -1345,7 +1424,8 @@ task &lt;span style=&#34;color:#e6db74&#34;&gt;:generate&lt;/span&gt; &lt;span s
 &lt;li&gt;最后照片和视频加起来一共 80 里拉，有点贵，但是也值，可以试试还价。&lt;/li&gt;
 &lt;li&gt;我们坐的滑翔伞是 150 里拉，同行的只要 130 里拉，找代理订的。不过找代理的时候要确定包含的项目，同行有人订了 125 里拉的滑翔伞，结果发现还要自己花 25 里拉租车上山。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;a data-fancybox=&#34;gallery&#34;  href=https://blog.yxwang.me/images/2012-10/paragliding.jpg &gt;&lt;img src=https://blog.yxwang.me/images/2012-10/paragliding.jpg  /&gt;&lt;/a&gt;
+
 &lt;h3 id=&#34;鱼市&#34;&gt;鱼市&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;有当地人可以帮你以比较便宜的价格买到海鲜。&lt;/li&gt;
@@ -1370,7 +1450,8 @@ task &lt;span style=&#34;color:#e6db74&#34;&gt;:generate&lt;/span&gt; &lt;span s
 &lt;li&gt;这里懂英语的人相对旅游城市也少一点，沟通起来会比较吃力。好在当地人都很热情，多花点时间就好。&lt;/li&gt;
 &lt;li&gt;Bursa 主要景点都分布在一条大马路两边的小支路上，而大马路上有好几站小巴站，可以说这里的交通非常方便。但是你要先从旅馆老板或者别人那打听到目的地的站名是啥。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;a data-fancybox=&#34;gallery&#34;  data-caption=&#34;İskender 的烤肉&#34; href=https://blog.yxwang.me/images/2012-10/iskender.jpg &gt;&lt;img src=https://blog.yxwang.me/images/2012-10/iskender.jpg  width=&#34;480&#34; /&gt;&lt;/a&gt;
+
 &lt;h3 id=&#34;住宿-3&#34;&gt;住宿&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;由于旅游业不发达，这里廉价住宿不多，我们住的是 Lonely Planet 上提到的 Otel Güneş，人均 35 里拉一晚。&lt;/li&gt;
@@ -1516,13 +1597,16 @@ def apply(x: S): T
       
       <guid>https://blog.yxwang.me/2012/06/revisiting-storage-for-smartphones/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;https://www.usenix.org/comment/260&#34;&gt;Revisiting Storage for Smartphones&lt;/a&gt; 是今年 FAST 会议上的最佳论文，这篇论文提出了一个违背直觉的观点，很有意思。这里简单介绍一下这篇论文的内容，有兴趣的朋友可以直接访问前面的链接下载原文或是观看现场录像。&lt;/p&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;a data-fancybox=&#34;gallery&#34;  data-caption=&#34;移动存储性能&#34; href=https://blog.yxwang.me/images/2012-06/mobile-flash-throughtput.png &gt;&lt;img src=https://blog.yxwang.me/images/2012-06/mobile-flash-throughtput.png  /&gt;&lt;/a&gt;
+
 &lt;p&gt;传统的观点认为，移动应用性能的主要瓶颈在网络和 CPU，而闪存的读写速率明显高于网络传输速度，不会成为性能的瓶颈。然而，根据上图作者给出的关于移动存储性能的图例（纵坐标单位为 Mbps，本文图片均来自演讲 slides 和原论文），我们可以看到，虽然移动存储顺序读写的性能明显高于 wifi 和 3G，但是随机写的性能却比它们差很多，因此移动存储成为应用性能瓶颈是完全有可能的。&lt;/p&gt;
 &lt;p&gt;为了证明移动存储的确会给应用带来不小的性能影响，作者在 Nexus One 上尝试了多个应用，并测试它们在使用不同配置时的性能表现。&lt;/p&gt;
 &lt;p&gt;下图为一个浏览器应用的测试结果（基于 WebKit，测试了 50 个网站）。左侧柱状图展示了使用不同价位的存储卡时，该测试的性能表现。可以看到，不同存储卡的带来的性能影响非常大，Kingston 甚至产生了 20 倍左右的性能差别。另外值得注意的是，图中蓝色柱子表示的是在 wifi 条件下的性能，灰色柱子表示的是通过 USB 连接电脑网络时的性能。右侧柱状图中可以看到，USB 连接网络的性能比 wifi 连接快 10 倍左右，即使如此，左图中蓝色柱和灰色柱的差别不大，从而可以看出网络提升 10 倍后对总的性能影响还是不大（不过我觉得这里 wifi 连接的速度已经很快了，可能加一个 3G 的测试会更公平一点）。&lt;/p&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;a data-fancybox=&#34;gallery&#34;  data-caption=&#34;WebBench 性能&#34; href=https://blog.yxwang.me/images/2012-06/webbench.png &gt;&lt;img src=https://blog.yxwang.me/images/2012-06/webbench.png  /&gt;&lt;/a&gt;
+
 &lt;p&gt;作者还测试了 Facebook、地图、邮件、安装程序等应用在不同配置下的表现，均得出了好的闪存卡能明显提升应用速度的结论。&lt;/p&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;a data-fancybox=&#34;gallery&#34;  href=https://blog.yxwang.me/images/2012-06/webbench-optimize.png &gt;&lt;img src=https://blog.yxwang.me/images/2012-06/webbench-optimize.png  /&gt;&lt;/a&gt;
+
 &lt;p&gt;既然存储卡的性能影响这么大，有没有优化的空间呢？上图是作者关于浏览器优化的一些测试。浏览器保存在磁盘上的数据主要有两种，一种是缓存，以 write-back 的方式写到磁盘；另一种是缓存索引等数据，以同步的方式写到磁盘的 SQLite 数据库文件中。上图中可以看到，把浏览器的缓存放在内存中对性能提升并不大（A），把数据库文件放到内存中则能明显提升应用的性能（B），而如果把数据库文件的写操作改成异步的方式，也能提升应用的性能（D）。由此可见，SQLite 数据库操作是影响应用性能的主要原因。应用使用 SQLite 数据库有时只是为了方便，而不需要它保证一定的可靠性。同时可以看出 SQLite 的写操作是相当随机的。&lt;/p&gt;
 &lt;p&gt;最后作者还给出了一些可能的优化的方案，例如使用 RAID，采用&lt;a href=&#34;http://en.wikipedia.org/wiki/Log-structured_file_system&#34;&gt;日志式文件系统&lt;/a&gt;，或是由应用指定异步/同步操作等。不过这些都不是这篇论文的重点了。可以预见的是，这篇论文挖了一个好坑，将来肯定会有更多的论文研究如何提高闪存上移动应用存储的性能。&lt;/p&gt;</description>
     </item>

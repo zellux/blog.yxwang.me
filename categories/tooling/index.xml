@@ -38,8 +38,10 @@
       
       <guid>https://blog.yxwang.me/2013/06/zhihu-daily-for-kindle/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;http://daily.zhihu.com/&#34;&gt;知乎日报&lt;/a&gt;每天都会更新有意思的问答。我比较习惯用 Kindle 看这样的文章，就写了一个 calibre 的&lt;a href=&#34;https://gist.github.com/zellux/5844688&#34;&gt;插件&lt;/a&gt;抓取每天的内容。&lt;/p&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;a data-fancybox=&#34;gallery&#34;  href=https://blog.yxwang.me/images/2013-06/zhihu-kindle-1.jpg &gt;&lt;img src=https://blog.yxwang.me/images/2013-06/zhihu-kindle-1.jpg  width=&#34;300&#34; /&gt;&lt;/a&gt;
+
+&lt;a data-fancybox=&#34;gallery&#34;  href=https://blog.yxwang.me/images/2013-06/zhihu-kindle-2.jpg &gt;&lt;img src=https://blog.yxwang.me/images/2013-06/zhihu-kindle-2.jpg  width=&#34;300&#34; /&gt;&lt;/a&gt;
+&lt;/p&gt;</description>
     </item>
     
     <item>

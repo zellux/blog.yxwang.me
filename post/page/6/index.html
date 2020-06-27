@@ -17,7 +17,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.3f7fceb38fa32fbb9c798ab89fa80e5660bf6635d4bcd89dc5824721b6308d80.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -45,9 +45,9 @@
     "publisher": "zellux",
     "accountablePerson" : "",
     "copyrightHolder" : "",
-    "copyrightYear" : "2019",
-    "datePublished": "2019-07-21 20:54:27 -0700 PDT",
-    "dateModified" : "2019-07-21 20:54:27 -0700 PDT",
+    "copyrightYear" : "2020",
+    "datePublished": "2020-06-27 01:36:00 \u002b0000 UTC",
+    "dateModified" : "2020-06-27 01:36:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/post\/",
     "wordCount" : "0",
     "keywords" : [ "Blog" ]
@@ -81,6 +81,35 @@
 <div class="content">
   <div class="posts">
      
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2010/03/keep-gnu-screen-history/">记录 GNU screen 中的历史命令</a></h2>
+      <span class="post-date">Mar 1, 2010</span>
+      
+      <span class="post-tags">
+	
+	#<a href="https://blog.yxwang.me/tags/linux">Linux</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/shell">Shell</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/tooling">Tooling</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/bash">bash</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/screen">screen</a>&nbsp;
+	
+      </span>
+      
+      
+      
+      <div class="summary">
+	GNU screen中执行的历史命令保存在内存中，默认情况下并不会像在bash中直接执行的命令一样保存在.bash_history中，这在某些场合下带来了一定的不便。
+在superuser上看到一个解决方法，指定历史文件的读写方式为追加，并在每次命令行提示符显示的时候，自动更新bash的历史命令记录。要实现这个方法很简单，只要在.bashrc中加入下面两行代码即可
+shopt -s histappend export PROMPT_COMMAND=&#34;history -a; history -n&#34; 另外如果之前设置过PROMPT_COMMAND的话，只要在history -a前加入$PROMPT_COMMAND;就行了。
+	<a class="read-more" href="/2010/03/keep-gnu-screen-history/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
     <div class="post">
       <h2 class="post-title"><a href="https://blog.yxwang.me/2010/02/the-sicp-picture-language/">SICP 里提到的画图语言</a></h2>
       <span class="post-date">Feb 24, 2010</span>
@@ -332,34 +361,6 @@ ECB提供了方便在这些窗口间切换的快捷键：
 至于面积和直径的计算，F在会在每一个_展开的地方减一，这样就得到了圆的面积。直径的计算要展开几行代码才能看得更清楚：
 F--&gt;00 || F-OO--; -F--&gt;00 || F-OO--; -F--&gt;00 || F-OO--; -F--&gt;00 || F-OO--; F--&gt;00 || F-OO--; -F--&gt;00 || F-OO--; -F--&gt;00 || F-OO--; -F--&gt;00 || F-OO--; -F--&gt;00 || F-OO--; -F--&gt;00 || F-OO--; -F--&gt;00 || F-OO--; -F--&gt;00 || F-OO--; -F--&gt;00 || F-OO--; 这是用cpp展开圆形前两行代码的结果，因为或运算的特殊性，F- OO- -只会在每一段的第一行执行，所以OO- -执行的次数就等于圆的直径了。
 	<a class="read-more" href="/2010/01/obfuscated-c/">阅读全文 →</a>
-      </div>
-      
-    </div>
-    
-    <div class="post">
-      <h2 class="post-title"><a href="https://blog.yxwang.me/2010/01/force-int-0x80-for-syscall/">强制程序使用int 0x80做系统调用</a></h2>
-      <span class="post-date">Jan 26, 2010</span>
-      
-      <span class="post-tags">
-	
-	#<a href="https://blog.yxwang.me/tags/assembly">Assembly</a>&nbsp;
-	
-	#<a href="https://blog.yxwang.me/tags/c">C</a>&nbsp;
-	
-	#<a href="https://blog.yxwang.me/tags/computer-system">Computer System</a>&nbsp;
-	
-	#<a href="https://blog.yxwang.me/tags/linking">linking</a>&nbsp;
-	
-      </span>
-      
-      
-      
-      <div class="summary">
-	因为大多数情况下程序都是通过libc间接地发出系统调用的，所以只要编译一个只使用int 0x80的glibc库，然后在执行程序的时候用LD_LIBRARY_PATH或其他方法指定使用新编译的glibc库即可。
-以glibc-2.9, Linux i386为例，在sysdeps/unix/sysv/linux/i386/syscall.S中可以看到
-ENTRY (syscall) PUSHARGS_6 /* Save register contents. */ _DOARGS_6(44) /* Load arguments. */ movl 20(%esp), %eax /* Load syscall number into %eax. */ ENTER_KERNEL /* Do the system call. */ POPARGS_6 /* Restore register contents. */ cmpl $-4095, %eax /* Check %eax for error. */ jae SYSCALL_ERROR_LABEL /* Jump to error handler if error. */ 这里使用了ENTER_KERNEL这个宏做系统调用，接下来在sysdeps/unix/sysv/linux/i386/sysdep.h里可以找到这个宏的定义
-/* The original calling convention for system calls on Linux/i386 is to use int $0x80.
-	<a class="read-more" href="/2010/01/force-int-0x80-for-syscall/">阅读全文 →</a>
       </div>
       
     </div>

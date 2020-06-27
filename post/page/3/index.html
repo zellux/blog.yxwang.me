@@ -17,7 +17,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.3f7fceb38fa32fbb9c798ab89fa80e5660bf6635d4bcd89dc5824721b6308d80.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -45,9 +45,9 @@
     "publisher": "zellux",
     "accountablePerson" : "",
     "copyrightHolder" : "",
-    "copyrightYear" : "2019",
-    "datePublished": "2019-07-21 20:54:27 -0700 PDT",
-    "dateModified" : "2019-07-21 20:54:27 -0700 PDT",
+    "copyrightYear" : "2020",
+    "datePublished": "2020-06-27 01:36:00 \u002b0000 UTC",
+    "dateModified" : "2020-06-27 01:36:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/post\/",
     "wordCount" : "0",
     "keywords" : [ "Blog" ]
@@ -81,6 +81,34 @@
 <div class="content">
   <div class="posts">
      
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2012/12/multiple-feeds-in-octopress/">为 Octopress 添加多个 Atom 地址</a></h2>
+      <span class="post-date">Dec 31, 2012</span>
+      
+      <span class="post-tags">
+	
+	#<a href="https://blog.yxwang.me/tags/meta">Meta</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/meta-blogging">Meta-blogging</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/octopress">Octopress</a>&nbsp;
+	
+      </span>
+      
+      
+      
+      <div class="summary">
+	<p>博客最早用的是 wordpress，首页上提供的 Atom 源是 /feed/。迁移到 Octopress 后，Atom 源地址变成了 /atom.xml。在 Google Reader 里看到订阅 /feed/ 的读者还是有不少的，用默认的地址这些读者就收不到博客更新了。</p>
+<p>一个方法是改服务器的配置文件，以我之前使用的 nginx 为例，在相应站点的配置中增加一项 /feed/，把所有对它的访问重定向到 /atom.xml 即可：</p>
+<pre><code>location = /feed/ {
+    rewrite ^(.*)$ http://blog.yxwang.me/atom.xml;
+}
+</code></pre>
+	<a class="read-more" href="/2012/12/multiple-feeds-in-octopress/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
     <div class="post">
       <h2 class="post-title"><a href="https://blog.yxwang.me/2012/12/job-hunting-in-usa-3/">北美求职记（三）：Hulu &amp; Twitter</a></h2>
       <span class="post-date">Dec 26, 2012</span>
@@ -307,34 +335,6 @@
       <div class="summary">
 	<p>最近实验室做的一个东西会向 Android 应用快速注入一系列触屏事件，模拟用户的点击。但是我们发现当按下和弹起的 MotionEvent 之间时间间隔过小（例如小于 100ms）时，会导致该事件被忽略。看了代码后发现 Android 中按下和弹起之间时间间隔要在 115ms 以上才会被认为是一个点击事件。这里结合 Android 的源码分析一下点击事件的产生过程。</p>
 	<a class="read-more" href="/2012/07/android-tap-timetout/">阅读全文 →</a>
-      </div>
-      
-    </div>
-    
-    <div class="post">
-      <h2 class="post-title"><a href="https://blog.yxwang.me/2012/06/variances-in-scala/">Scala 中的协变和逆变</a></h2>
-      <span class="post-date">Jun 30, 2012</span>
-      
-      <span class="post-tags">
-	
-	#<a href="https://blog.yxwang.me/tags/programming">Programming</a>&nbsp;
-	
-	#<a href="https://blog.yxwang.me/tags/scala">Scala</a>&nbsp;
-	
-      </span>
-      
-      
-      
-      <div class="summary">
-	<h2 id="java-数组">Java 数组</h2>
-<p>先来看一个 Java 中的例子，Java 中的数组是协变的。也就是说，一个 String 数组(String[])是可以被当成 Object 数组(Object[])处理的：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">String<span style="color:#f92672">[]</span> a1 <span style="color:#f92672">=</span> <span style="color:#f92672">{</span> <span style="color:#e6db74">&#34;abc&#34;</span> <span style="color:#f92672">};</span>
-Object<span style="color:#f92672">[]</span> a2 <span style="color:#f92672">=</span> a1<span style="color:#f92672">;</span>
-</code></pre></div><p>这种协变虽然在读取数组内容时不会有问题（a1 数组中的 String 元素可以被当成 Object 使用），但是修改数组内容时就会出现无法在编译期检测出来的错误了：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">a2<span style="color:#f92672">[</span>0<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Integer<span style="color:#f92672">(</span>17<span style="color:#f92672">)</span>
-String s  <span style="color:#f92672">=</span> a1<span style="color:#f92672">[</span>0<span style="color:#f92672">]</span>  <span style="color:#75715e">// java.lang.ArrayStoreException
-</span></code></pre></div>
-	<a class="read-more" href="/2012/06/variances-in-scala/">阅读全文 →</a>
       </div>
       
     </div>
