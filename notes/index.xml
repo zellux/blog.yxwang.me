@@ -23,6 +23,15 @@ Course 1 Neural Networks and Deep Learning Logistic Regression as a Neural Netwo
     </item>
     
     <item>
+      <title>Economics of Money and Banking</title>
+      <link>https://blog.yxwang.me/notes/money-and-banking/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/notes/money-and-banking/</guid>
+      <description>These are notes for Coursera course Economics of Money and Banking by Prof. Perry Mehrling. They are downloaded from the professor&#39;s personal website (www.perrymehrling.com), which might not be accessible at the moment.  Notes are taught in an order similar to the Coursera version, except that they are grouped into different lectures. Week 1: Introduction  What is a Bank, a Shadow Bank, a Central Bank? Notes   The Four Prices of Money Notes  Hierarchy of Financial Instruments Hierarchy of Financial Institutions Dynamics of the Hierarchy Discipline and Elasticity, Currency Principle and Banking Principle History of Market Makers Managing the Hierarchy  Reading: Allyn Young Download  Week 2: Introduction, continued  Money and the State: Domestic Notes   Reading: The Vision of Hyman P.</description>
+    </item>
+    
+    <item>
       <title>Game Theory - Stanford</title>
       <link>https://blog.yxwang.me/notes/open-course/game-theory/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -67,7 +76,7 @@ Quizlet 上的学习卡片集 这个列表是我根据提取的数据制作的 Q
       
       <guid>https://blog.yxwang.me/notes/open-course/robotics-estimation-and-learning/</guid>
       <description>卡尔曼滤波 (Kalman Filter) 这一周的视频质量很一般，slides 做得也不仔细有不少错误。最后看了一些其他网站的文章和视频才有了比较深刻的理解，本文结尾有推荐资料。
-KF 模型  以匀速运动的动力学模型为例 状态 \(x_{t+1}=A x_t + B u_t\)，\(u_t\) 为外部影响 观测结果 \(z_t = C x_t\) \(x_t\) 和 \(z_t\) 都有测量误差 状态 \(x_{t+1}\) 仅包含位置和速度：\(x_{t+1} := \begin{bmatrix}v &amp;amp; \frac{dv}{dt}\end{bmatrix}\) 动力学模型可以通过矩阵 A 描述，\(A = \begin{bmatrix}1 &amp;amp; dt \\ 0 &amp;amp; 1 \end{bmatrix}\)  基于动力学的贝叶斯模型 \[ p(x_{t+1}|x_t) = Ap(x_t) \\ p(z_t|x_t) = Cp(x_t) \]
+KF 模型  以匀速运动的动力学模型为例  状态 \(x_{t+1}=A x_t + B u_t\)，\(u_t\) 为外部影响 观测结果 \(z_t = C x_t\) \(x_t\) 和 \(z_t\) 都有测量误差 状态 \(x_{t+1}\) 仅包含位置和速度：\(x_{t+1} := \begin{bmatrix}v &amp;amp; \frac{dv}{dt}\end{bmatrix}\) 动力学模型可以通过矩阵 A 描述，\(A = \begin{bmatrix}1 &amp;amp; dt \\ 0 &amp;amp; 1 \end{bmatrix}\)   基于动力学的贝叶斯模型 \[ p(x_{t+1}|x_t) = Ap(x_t) \\ p(z_t|x_t) = Cp(x_t) \]
 加入运动和观测的误差 \[ p(x_{t+1}|x_t) = Ap(x_t)+v_m \\ p(z_t|x_t) = Cp(x_t)+v_0 \]
 假设误差基于高斯分布 \[ p(x_{t+1}|x_t) = A\mathcal{N}(x_t, P_t) + \mathcal{N}(0, \Sigma_m) \\ p(z_t|x_t) = C\mathcal{N}(x_t, P_t) + \mathcal{N}(0, \Sigma_0) \]</description>
     </item>
@@ -167,7 +176,7 @@ Lección 2 单词和发音  d 在停顿后的词首或者词内和词组内的 n
       
       <guid>https://blog.yxwang.me/notes/linear-algebra/</guid>
       <description>线性代数学习笔记，主要参考了同济大学的《线性代数》和 《Deep Learning》 的第二章。
-行列式  行列式 (determinant) 与它的转置行列式相等。\(D^T = D\) 余子式 (minor)：在 n 阶行列式中，把 \((i, j)\) 元 \(a_{ij}\) 所在的第 \(i\) 行和第 \(j\) 列划去后留下的 \(n - 1\) 阶行列式叫做 \((i, j)\) 元 \(a_{ij}\) 的余子式，记作 \(M_{ij}\) 代数余子式 (cofactor) \(A_{ij} = (-1)^{i+j}M_{ij}\) 行列式按行展开：\(D = a_{i1}A_{i1} + a_{i2}A_{i2} + \cdots + a_{in}A_{in}\) 行列式按列展开：\(D = a_{1j}A_{1j} + a_{2j}A_{2j} + \cdots + a_{nj}A_{nj}\) 克拉默法则 (Cramer&#39;s rule)：如果线性方程组的系数行列式不等于零，那么方程组有唯一解 \(x_1 = \frac{D_1}{D}, x_2 = \frac{D_2}{D}, \cdots, x_n = \frac{D_n}{D}\)， 其中 \(D_j\) 是把系数行列式 D 中第 j 列的元素用方程组右端的常数项代替后得到的 n 阶行列式。  矩阵及其运算  伴随矩阵 (adjugate matrix) \[ adj(A) = \begin{bmatrix} A_{11} &amp;amp; A_{21} &amp;amp; \cdots &amp;amp; A_{n1} \\ A_{12} &amp;amp; A_{22} &amp;amp; \cdots &amp;amp; A_{n2} \\ \vdots &amp;amp; \vdots &amp;amp; \ddots &amp;amp; \vdots \\ A_{1n} &amp;amp; A_{2n} &amp;amp; \cdots &amp;amp; A_{nn} \\ \end{bmatrix} \]  其中 \(A_{ij}\) 为代数余子式</description>
+行列式  行列式 (determinant) 与它的转置行列式相等。\(D^T = D\) 余子式 (minor)：在 n 阶行列式中，把 \((i, j)\) 元 \(a_{ij}\) 所在的第 \(i\) 行和第 \(j\) 列划去后留下的 \(n - 1\) 阶行列式叫做 \((i, j)\) 元 \(a_{ij}\) 的余子式，记作 \(M_{ij}\) 代数余子式 (cofactor) \(A_{ij} = (-1)^{i+j}M_{ij}\) 行列式按行展开：\(D = a_{i1}A_{i1} + a_{i2}A_{i2} + \cdots + a_{in}A_{in}\) 行列式按列展开：\(D = a_{1j}A_{1j} + a_{2j}A_{2j} + \cdots + a_{nj}A_{nj}\) 克拉默法则 (Cramer’s rule)：如果线性方程组的系数行列式不等于零，那么方程组有唯一解 \(x_1 = \frac{D_1}{D}, x_2 = \frac{D_2}{D}, \cdots, x_n = \frac{D_n}{D}\)， 其中 \(D_j\) 是把系数行列式 D 中第 j 列的元素用方程组右端的常数项代替后得到的 n 阶行列式。  矩阵及其运算  伴随矩阵 (adjugate matrix) \[ adj(A) = \begin{bmatrix} A_{11} &amp;amp; A_{21} &amp;amp; \cdots &amp;amp; A_{n1} \\ A_{12} &amp;amp; A_{22} &amp;amp; \cdots &amp;amp; A_{n2} \\ \vdots &amp;amp; \vdots &amp;amp; \ddots &amp;amp; \vdots \\ A_{1n} &amp;amp; A_{2n} &amp;amp; \cdots &amp;amp; A_{nn} \\ \end{bmatrix} \]  其中 \(A_{ij}\) 为代数余子式</description>
     </item>
     
   </channel>

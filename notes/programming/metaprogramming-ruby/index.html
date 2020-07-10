@@ -19,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.d986684ab585867681cde1f1f3d183ba8c773d00b5a9c2444ad3f76e90805b0b.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -84,6 +84,41 @@
   <div class="posts">
     <div class="post">
       <h1 class="post-title"><a href="https://blog.yxwang.me/notes/programming/metaprogramming-ruby/">《Metaprogramming Ruby》笔记</a></h1>
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#一ruby-对象模型">一、Ruby 对象模型</a></li>
+    <li><a href="#二方法">二、方法</a>
+      <ul>
+        <li><a href="#动态定义方法">动态定义方法</a></li>
+        <li><a href="#blank-slate">Blank Slate</a></li>
+      </ul>
+    </li>
+    <li><a href="#三block">三、Block</a>
+      <ul>
+        <li><a href="#scope-gate">Scope Gate</a></li>
+        <li><a href="#-符号">&amp; 符号</a></li>
+        <li><a href="#blockproclambda-和-method">Block、Proc、Lambda 和 Method</a></li>
+      </ul>
+    </li>
+    <li><a href="#四类定义">四、类定义</a>
+      <ul>
+        <li><a href="#self">self</a></li>
+        <li><a href="#类变量">类变量</a></li>
+        <li><a href="#eigenclass">eigenclass</a></li>
+        <li><a href="#ruby-对象模型">Ruby 对象模型</a></li>
+        <li><a href="#方法重命名">方法重命名</a></li>
+      </ul>
+    </li>
+    <li><a href="#五编写代码的代码">五、编写代码的代码</a>
+      <ul>
+        <li><a href="#binding-对象">Binding 对象</a></li>
+        <li><a href="#taint-tracking">Taint Tracking</a></li>
+        <li><a href="#hooks">Hooks</a></li>
+      </ul>
+    </li>
+    <li><a href="#代码分析">代码分析</a></li>
+  </ul>
+</nav>
       <div class="post-content">
         <h1 id="ruby-元编程">Ruby 元编程</h1>
 <h2 id="一ruby-对象模型">一、Ruby 对象模型</h2>

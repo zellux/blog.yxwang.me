@@ -19,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.d986684ab585867681cde1f1f3d183ba8c773d00b5a9c2444ad3f76e90805b0b.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -115,7 +115,7 @@ e_o = \theta r_o
 <h2 id="粒子滤波-particle-filters">粒子滤波 (Particle Filters)</h2>
 <p>粒子滤波（有没有觉得这个术语的中文翻译很科幻）又称为序列蒙特卡洛 (Sequential Monte Carlo)，是一种非参数 (non-parametric) 模型。它用一系列样本（粒子）表示可能性分布。每一个粒子都是方差接近于 0 的高斯分布，这种分布又被称为狄拉克δ函数 (Dirac Delta)，采用这个分布好处之一是可以把连续数学中的工具应用到离散的结果中。</p>
 <p>在地图定位问题中，粒子的状态代表位置和朝向，同时每个粒子分别有自己的权重。初始状态的粒子滤波分布由一开始的假设决定，可能是均匀分布，也可能是以某个点为中心的高斯分布。初始化完成后，重复以下步骤更新粒子的分布：</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>根据里程计的信息更新粒子的状态。</li>
 <li>由于里程计本事有不确定，更新每个粒子状态的时候可以加入里程计带入的噪音，通常也是一个高斯分布。</li>
 <li>从每个粒子更新后带噪音的分布中采样。</li>
@@ -129,7 +129,7 @@ e_o = \theta r_o
 <a data-fancybox="gallery"  data-caption="ICP" href=/images/2018-08/slam-icp.png ><img src=/images/2018-08/slam-icp.png  width="360" /></a>
 
 <p>如图所示，ICP 的目的在于已知测量结果和地图，要求出左侧测量结果如何旋转移动后，可以和右侧的地图局部吻合。这里主要有两个问题，一是旋转和移动矩阵，二是测量点和地图点的对应关系。具体的 ICP 算法可以参考<a href="http://post.queensu.ca/~sdb2/PAPERS/PAMI-3DLS-1987.pdf">这篇论文</a>，它的大致思路和<a href="/2018/07/robotics-slam-week1/">第一周</a>提到的解高斯混合模型的 EM 算法很接近：</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>初始化旋转 (R) 和移动 (t) 矩阵。</li>
 <li>固定 R 和 t，优化点的对应关系：<span class="math inline">\(y_i = \argmin_{y_j \in Y} \Vert x_i - y_j \Vert\)</span>。</li>
 <li>固定点的对应关系，优化 R 和 t：<span class="math inline">\(R, t = \argmin \sum_{x_i, y_i \in C} \Vert d(x_i, y_i) \Vert ^2\)</span>。</li>

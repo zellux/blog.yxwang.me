@@ -140,24 +140,21 @@
 &lt;p&gt;无人驾驶场景中的大多数的目标物体都处在同一地面上，非常适合 BEV。相比正视图，BEV 中的目标在不同位置大小固定，我们可以用已知的常见物体大小优化检测效果。对于 BEV 模型来说，主要的问题在于如何选择最终图像的特征，如何生成的图像中做出精确的检测。此文旨在介绍 BEV 检测相关的模型 Pixor 和 HDNet。&lt;/p&gt;
 &lt;h2 id=&#34;pixor&#34;&gt;Pixor&lt;/h2&gt;
 &lt;p&gt;Pixor 是 Uber ATG 的 Bin Yang 等人在 &lt;a href=&#34;http://openaccess.thecvf.com/content_cvpr_2018/html/Yang_PIXOR_Real-Time_3D_CVPR_2018_paper.html&#34;&gt;CVPR 18&lt;/a&gt; 上提出的 BEV 检测模型。在特征生成方面，Pixor 把整个点云切成了 L x W x H 个小方格，每个小方格用 0 或 1 表示这个方格内是否有激光点存在，接着沿高度方向把三维特征压缩到一个二维平面，每个压缩后的二维方格就有了 H 个特征表示这个方格上的不同高度是否有点存在。此外 Pixor 还计算了落在每个方格中激光点的平均强度作为额外的特征，最终拿到了一个分辨率为 L x W、包含 H + 1 个特征通道的图像。&lt;/p&gt;
-&lt;div class=&#34;figure&#34;&gt;
-&lt;img src=&#34;https://blog.yxwang.me/images/2019-03/pixor-layers.png&#34; alt=&#34;Pixor 结构&#34; /&gt;
-&lt;p class=&#34;caption&#34;&gt;Pixor 结构&lt;/p&gt;
-&lt;/div&gt;
+&lt;figure&gt;
+&lt;img src=&#34;https://blog.yxwang.me/images/2019-03/pixor-layers.png&#34; alt=&#34;Pixor 结构&#34; /&gt;&lt;figcaption&gt;Pixor 结构&lt;/figcaption&gt;
+&lt;/figure&gt;
 &lt;p&gt;检测方面，Pixor 采用了基于 &lt;a href=&#34;https://arxiv.org/abs/1708.02002&#34;&gt;RetinaNet&lt;/a&gt; 的 one-stage 的结构，如上图所示（这里用了&lt;a href=&#34;http://www.cs.toronto.edu/~byang/projects/pixor/pixor_poster.pdf&#34;&gt;海报&lt;/a&gt;上的截图，和论文中的有一些细小的差别）。网络里面用了 ResNet 和类似 FPN 的结构。FPN 结构输出的特征图经过一个头部网络后，直接生成对每个像素点的分类和 bounding box 的回归结果。&lt;/p&gt;
 &lt;p&gt;优化目标方面，分类目标用了 RetinaNet 中的 focal loss，回归目标用了 smoooth L1。论文中回归目标有笔误，按照海报和 &lt;a href=&#34;http://www.cs.toronto.edu/~byang/projects/pixor/pixor_faq.txt&#34;&gt;FAQ&lt;/a&gt; 的说法应该是 &lt;span class=&#34;math inline&#34;&gt;\(\{ \cos 2\theta, \sin 2\theta, dx, dy, \log W, \log L \}\)&lt;/span&gt;。这里巧妙的用了 &lt;span class=&#34;math inline&#34;&gt;\(2 \theta\)&lt;/span&gt; 的三角函数作为车头朝向的回归目标，因为车辆是往前还是往后开这个问题会在 tracker 中处理，在检测的时候只要知道车身线的偏离角度就行了，至于这个角度是 5° 还是 185° 影响不大。&lt;/p&gt;
 &lt;p&gt;整个网络的运行速度非常快，在 Titan XP 上可以在 35 毫秒内完成。除此之外论文还测试了不同 backbone 网络和头部网络特征层共享的不同选择，做了模型简化测试 (ablation study)，感兴趣的朋友可以细读。&lt;/p&gt;
 &lt;h2 id=&#34;hdnet&#34;&gt;HDNet&lt;/h2&gt;
 &lt;p&gt;Pixor 沿高度方向把整个点云切成不同的高度区间，例如 Kitti 数据集上 -2.5 到 1 米之间的点会被分成 35 片，这个区间之外的点会被忽略。当地面坡度较大时，远处的点很容易被排除在外。为了解决这个问题，Bin Yang 等人提出了把高精地图作为额外特征的方案，发表在 &lt;a href=&#34;https://eng.uber.com/research/hdnet-exploiting-hd-maps-for-3d-object-detection/&#34;&gt;CoRL 18&lt;/a&gt; 上。&lt;/p&gt;
-&lt;div class=&#34;figure&#34;&gt;
-&lt;img src=&#34;https://blog.yxwang.me/images/2019-03/hdnet-map.png&#34; alt=&#34;HDNet 中的地图信息&#34; /&gt;
-&lt;p class=&#34;caption&#34;&gt;HDNet 中的地图信息&lt;/p&gt;
-&lt;/div&gt;
+&lt;figure&gt;
+&lt;img src=&#34;https://blog.yxwang.me/images/2019-03/hdnet-map.png&#34; alt=&#34;HDNet 中的地图信息&#34; /&gt;&lt;figcaption&gt;HDNet 中的地图信息&lt;/figcaption&gt;
+&lt;/figure&gt;
 &lt;p&gt;如图所示，HDNet 的核心思路在于引入了高精地图信息，从而可以把地面「摊平」（图 b），并提供道路语义信息帮助检测（图 d）。网络结构和 Pixor 非常相似，采用了 FPN，并把 Pixor 中的反卷积层换成了更高效的双线性插值层。&lt;/p&gt;
-&lt;div class=&#34;figure&#34;&gt;
-&lt;img src=&#34;https://blog.yxwang.me/images/2019-03/hdnet-net.png&#34; alt=&#34;HDNet 结构&#34; /&gt;
-&lt;p class=&#34;caption&#34;&gt;HDNet 结构&lt;/p&gt;
-&lt;/div&gt;
+&lt;figure&gt;
+&lt;img src=&#34;https://blog.yxwang.me/images/2019-03/hdnet-net.png&#34; alt=&#34;HDNet 结构&#34; /&gt;&lt;figcaption&gt;HDNet 结构&lt;/figcaption&gt;
+&lt;/figure&gt;
 &lt;p&gt;为了提高模型的稳定性，确保在缺失地图信息或者地图不准确的情况下仍然有较好的检测结果，作者会在训练模型时随机去除地图信息，并提出了通过 Lidar 扫描结果在线生成地图的方案。&lt;/p&gt;
 &lt;h2 id=&#34;小结&#34;&gt;小结&lt;/h2&gt;
 &lt;p&gt;本文介绍了两篇近期的基于纯激光雷达数据的 BEV 检测论文。基于纯激光雷达的模型非常适合车辆的检测，但对于行人检测的精度并不理想，往往需要借助图像提供额外的信息。在接下来的博客中我会和大家一起分享更多的相关研究，同时也欢迎各位提出不同的意见。&lt;/p&gt;
@@ -230,7 +227,7 @@ e_o = \theta r_o
 &lt;h2 id=&#34;粒子滤波-particle-filters&#34;&gt;粒子滤波 (Particle Filters)&lt;/h2&gt;
 &lt;p&gt;粒子滤波（有没有觉得这个术语的中文翻译很科幻）又称为序列蒙特卡洛 (Sequential Monte Carlo)，是一种非参数 (non-parametric) 模型。它用一系列样本（粒子）表示可能性分布。每一个粒子都是方差接近于 0 的高斯分布，这种分布又被称为狄拉克δ函数 (Dirac Delta)，采用这个分布好处之一是可以把连续数学中的工具应用到离散的结果中。&lt;/p&gt;
 &lt;p&gt;在地图定位问题中，粒子的状态代表位置和朝向，同时每个粒子分别有自己的权重。初始状态的粒子滤波分布由一开始的假设决定，可能是均匀分布，也可能是以某个点为中心的高斯分布。初始化完成后，重复以下步骤更新粒子的分布：&lt;/p&gt;
-&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;ol type=&#34;1&#34;&gt;
 &lt;li&gt;根据里程计的信息更新粒子的状态。&lt;/li&gt;
 &lt;li&gt;由于里程计本事有不确定，更新每个粒子状态的时候可以加入里程计带入的噪音，通常也是一个高斯分布。&lt;/li&gt;
 &lt;li&gt;从每个粒子更新后带噪音的分布中采样。&lt;/li&gt;
@@ -244,7 +241,7 @@ e_o = \theta r_o
 &lt;a data-fancybox=&#34;gallery&#34;  data-caption=&#34;ICP&#34; href=https://blog.yxwang.me/images/2018-08/slam-icp.png &gt;&lt;img src=https://blog.yxwang.me/images/2018-08/slam-icp.png  width=&#34;360&#34; /&gt;&lt;/a&gt;
 
 &lt;p&gt;如图所示，ICP 的目的在于已知测量结果和地图，要求出左侧测量结果如何旋转移动后，可以和右侧的地图局部吻合。这里主要有两个问题，一是旋转和移动矩阵，二是测量点和地图点的对应关系。具体的 ICP 算法可以参考&lt;a href=&#34;http://post.queensu.ca/~sdb2/PAPERS/PAMI-3DLS-1987.pdf&#34;&gt;这篇论文&lt;/a&gt;，它的大致思路和&lt;a href=&#34;https://blog.yxwang.me/2018/07/robotics-slam-week1/&#34;&gt;第一周&lt;/a&gt;提到的解高斯混合模型的 EM 算法很接近：&lt;/p&gt;
-&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;ol type=&#34;1&#34;&gt;
 &lt;li&gt;初始化旋转 (R) 和移动 (t) 矩阵。&lt;/li&gt;
 &lt;li&gt;固定 R 和 t，优化点的对应关系：&lt;span class=&#34;math inline&#34;&gt;\(y_i = \argmin_{y_j \in Y} \Vert x_i - y_j \Vert\)&lt;/span&gt;。&lt;/li&gt;
 &lt;li&gt;固定点的对应关系，优化 R 和 t：&lt;span class=&#34;math inline&#34;&gt;\(R, t = \argmin \sum_{x_i, y_i \in C} \Vert d(x_i, y_i) \Vert ^2\)&lt;/span&gt;。&lt;/li&gt;
@@ -277,7 +274,7 @@ e_o = \theta r_o
       <description>&lt;p&gt;这一周的内容和地图有关，最后的作业就是通过传感器的数据创建一个地图。&lt;/p&gt;
 &lt;h2 id=&#34;地图类型&#34;&gt;地图类型&lt;/h2&gt;
 &lt;p&gt;常见的题目类型有三种：&lt;/p&gt;
-&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;ol type=&#34;1&#34;&gt;
 &lt;li&gt;度量地图 (Metric Map)：地点用坐标表示，例如用经纬度表示地点的世界地图。&lt;/li&gt;
 &lt;li&gt;拓扑地图 (Topological Map)：表示地点之间的逻辑关系，例如图论中图的概念，以及地铁图。&lt;/li&gt;
 &lt;li&gt;语义地图 (Semantic Map)：用标签描述的地图，通过位置关系描述被标记的地点，例如景点游览图。&lt;/li&gt;
@@ -285,10 +282,9 @@ e_o = \theta r_o
 &lt;p&gt;在现实中绘制地图有几个难点，一是测量误差会导致坐标不精确，二是设备本身需要不断地移动才能绘制，三是地图本身是对现实世界的反应，会不断的变化。&lt;/p&gt;
 &lt;h2 id=&#34;占据栅格地图-occupancy-grid-map&#34;&gt;占据栅格地图 (Occupancy Grid Map)&lt;/h2&gt;
 &lt;p&gt;栅格地图用二维栅格表示整个环境，每个栅格都有一个概率值表示这个栅格是否有物体存在。绘制栅格地图常用的设备之一是测距传感器，通过发出激光并测量接受反射所用的时间，传感器可以了解前方障碍物的大致距离。&lt;/p&gt;
-&lt;div class=&#34;figure&#34;&gt;
-&lt;img src=&#34;https://blog.yxwang.me/images/2018-08/sonar-sweep.png&#34; alt=&#34;测距传感器&#34; /&gt;
-&lt;p class=&#34;caption&#34;&gt;测距传感器&lt;/p&gt;
-&lt;/div&gt;
+&lt;figure&gt;
+&lt;img src=&#34;https://blog.yxwang.me/images/2018-08/sonar-sweep.png&#34; alt=&#34;测距传感器&#34; /&gt;&lt;figcaption&gt;测距传感器&lt;/figcaption&gt;
+&lt;/figure&gt;
 &lt;p&gt;如图所示，传感器本身测量存在误差，我们只能认为在传感器正前方给定距离处有一定几率存在障碍物。对于这种测量有误差的环境，我们再次引入贝叶斯模型描述。记 &lt;span class=&#34;math inline&#34;&gt;\(p(m_{x, y})\)&lt;/span&gt; 为 (x, y) 格中存在障碍物的概率的先验知识，根据测量的设备模型我们可以得到条件概率 &lt;span class=&#34;math inline&#34;&gt;\(p(z | m_{x,y})\)&lt;/span&gt;。&lt;span class=&#34;math inline&#34;&gt;\(p(z=1|m_{x,y}=1)\)&lt;/span&gt; 就代表栅格中有障碍物，且检测成功的概率，而 &lt;span class=&#34;math inline&#34;&gt;\(p(z=1|m_{x,y}=0)\)&lt;/span&gt; 则代表栅格中不存在障碍物，但是却检测到障碍的概率（假阳性）。&lt;/p&gt;
 &lt;p&gt;根据贝叶斯公式，我们可以得到测量之后的后验概率 &lt;span class=&#34;math display&#34;&gt;\[
 p(m_{x,y}|z) = \frac{p(z | m_{x,y}) p(m_{x,y})}{p(z)}
@@ -304,10 +300,9 @@ Odd(m_{x,y} = 1 | z) = \frac{p(m_{x,y} = 1 | z)}{p(m_{x,y} = 0 | z)} = \frac{p(z
 \log odd(m_{x,y} = 1 | z) = \log{odd\ meas} + \log odd(m_{x,y} = 1)
 \]&lt;/span&gt; 如果用 &lt;span class=&#34;math inline&#34;&gt;\(\log{odd}\)&lt;/span&gt; 表示栅格的状态，这一状态可以简单的通过加减来维护。当检测到障碍物时，该栅格的 &lt;span class=&#34;math inline&#34;&gt;\(\log{odd}\)&lt;/span&gt; 增加 &lt;span class=&#34;math inline&#34;&gt;\(\frac{p(z=1 | m_{x,y} = 1)}{p(z=1 | m_{x,y} = 0)}\)&lt;/span&gt;，没有检测到障碍物时，该栅格的 &lt;span class=&#34;math inline&#34;&gt;\(\log{odd}\)&lt;/span&gt; 减少 &lt;span class=&#34;math inline&#34;&gt;\(\frac{p(z=0 | m_{x,y} = 0)}{p(z=0 | m_{x,y} = 1)}\)&lt;/span&gt;。初始状态为 0，即 &lt;span class=&#34;math inline&#34;&gt;\(odd = 1\)&lt;/span&gt;。&lt;/p&gt;
 &lt;p&gt;下图为一个具体的例子，第一个栅格地图为 t1 时刻的状态，做了一次探测后，经过的空闲栅格的 &lt;span class=&#34;math inline&#34;&gt;\(\log{odd}\)&lt;/span&gt; 减少 0.7（这个值由传感器决定），而最后的障碍物所在格的 &lt;span class=&#34;math inline&#34;&gt;\(\log{odd}\)&lt;/span&gt; 增加了 0.9。第三个栅格地图为 t2 时刻更新后的状态。&lt;/p&gt;
-&lt;div class=&#34;figure&#34;&gt;
-&lt;img src=&#34;https://blog.yxwang.me/images/2018-08/mapping-log-odd.png&#34; alt=&#34;log odd 更新例子&#34; /&gt;
-&lt;p class=&#34;caption&#34;&gt;log odd 更新例子&lt;/p&gt;
-&lt;/div&gt;
+&lt;figure&gt;
+&lt;img src=&#34;https://blog.yxwang.me/images/2018-08/mapping-log-odd.png&#34; alt=&#34;log odd 更新例子&#34; /&gt;&lt;figcaption&gt;log odd 更新例子&lt;/figcaption&gt;
+&lt;/figure&gt;
 &lt;h2 id=&#34;三维地图&#34;&gt;三维地图&lt;/h2&gt;
 &lt;p&gt;常见的三维传感器：&lt;/p&gt;
 &lt;ul&gt;
@@ -325,7 +320,7 @@ Odd(m_{x,y} = 1 | z) = \frac{p(m_{x,y} = 1 | z)}{p(m_{x,y} = 0 | z)} = \frac{p(z
 &lt;/ul&gt;
 &lt;h2 id=&#34;作业&#34;&gt;作业&lt;/h2&gt;
 &lt;p&gt;这次的作业是根据一组 Lidar 测量结果绘制一个二维地图。输入包含四个参数（这里 K 为扫描总次数，N 为 Lidar 光线数）：&lt;/p&gt;
-&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;ol type=&#34;1&#34;&gt;
 &lt;li&gt;t 数组记录每组数据的时间点，大小为 &lt;span class=&#34;math inline&#34;&gt;\(1 \times K\)&lt;/span&gt;。&lt;/li&gt;
 &lt;li&gt;ranges 数组记录每次测试各条激光线测得的距离，大小为 &lt;span class=&#34;math inline&#34;&gt;\(N \times K\)&lt;/span&gt;。&lt;/li&gt;
 &lt;li&gt;scanAngels 数组记录每条激光线相对机身的转角，大小为 &lt;span class=&#34;math inline&#34;&gt;\(N \times 1\)&lt;/span&gt;，每次测试时这个转角不会变化。&lt;/li&gt;
@@ -333,10 +328,9 @@ Odd(m_{x,y} = 1 | z) = \frac{p(m_{x,y} = 1 | z)}{p(m_{x,y} = 0 | z)} = \frac{p(z
 &lt;/ol&gt;
 &lt;p&gt;我实现的方法没有用向量并行，用了两层循环依次处理每次测试的各条光线。在 i7 6700K 上大概 25 秒可以跑完最终测试，测试程序里会提到整个过程可能要五分钟，性能差一点的机器这个时间里面应该也能跑完了。&lt;/p&gt;
 &lt;p&gt;最后跑地图的时候，注意 &lt;code&gt;example_test.m&lt;/code&gt; 里传给 &lt;code&gt;occGridMapping&lt;/code&gt; 的参数只取了前 1000 次测量结果，所以要制作完整地图要把这个限制去掉。另外文档里面坐标转换时用了 &lt;code&gt;ceil&lt;/code&gt;，我在本地测试时只能拿到 27/30 分，换成 &lt;code&gt;round&lt;/code&gt; 就能到满分了。&lt;/p&gt;
-&lt;div class=&#34;figure&#34;&gt;
-&lt;img src=&#34;https://blog.yxwang.me/images/2018-08/slam-w3-map.png&#34; alt=&#34;最终生成的地图&#34; /&gt;
-&lt;p class=&#34;caption&#34;&gt;最终生成的地图&lt;/p&gt;
-&lt;/div&gt;
+&lt;figure&gt;
+&lt;img src=&#34;https://blog.yxwang.me/images/2018-08/slam-w3-map.png&#34; alt=&#34;最终生成的地图&#34; /&gt;&lt;figcaption&gt;最终生成的地图&lt;/figcaption&gt;
+&lt;/figure&gt;
 &lt;h2 id=&#34;全课程的笔记链接&#34;&gt;全课程的笔记链接&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;Robotics Estimation and Learning 的&lt;a href=&#34;https://www.coursera.org/learn/robotics-learning/&#34;&gt;课程主页&lt;/a&gt;&lt;/li&gt;
@@ -356,7 +350,7 @@ Odd(m_{x,y} = 1 | z) = \frac{p(m_{x,y} = 1 | z)}{p(m_{x,y} = 0 | z)} = \frac{p(z
       <description>&lt;p&gt;这一周主要讲卡尔曼滤波 (Kalman Filter)，视频讲得比较简略，slides 做得里也有不少错误。最后看了一些其他网站的文章和视频才有了比较深刻的理解。参考资料推荐在本文结尾。&lt;/p&gt;
 &lt;h2 id=&#34;卡尔曼滤波-kf&#34;&gt;卡尔曼滤波 KF&lt;/h2&gt;
 &lt;p&gt;卡尔曼滤波可以从一系列包含噪音的观测数据中，估计出每个时间点系统的状态。KF 有几个基本假设：&lt;/p&gt;
-&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;ol type=&#34;1&#34;&gt;
 &lt;li&gt;当前状态只和前一状态有关，且和前一状态线性相关，即 &lt;span class=&#34;math inline&#34;&gt;\(x_{t+1}=A_t x_{t} + B_t u_t + \epsilon_t\)&lt;/span&gt;，这里 &lt;span class=&#34;math inline&#34;&gt;\(x_t\)&lt;/span&gt; 是状态向量，&lt;span class=&#34;math inline&#34;&gt;\(u_t\)&lt;/span&gt; 为控制向量，&lt;span class=&#34;math inline&#34;&gt;\(\epsilon_t\)&lt;/span&gt; 是均值为 0 的高斯分布噪音。&lt;/li&gt;
 &lt;li&gt;测量结果和状态线性相关：&lt;span class=&#34;math inline&#34;&gt;\(z_t = C_t x_t + \delta_t\)&lt;/span&gt;。这里 &lt;span class=&#34;math inline&#34;&gt;\(z_t\)&lt;/span&gt; 是测量结果的向量，&lt;span class=&#34;math inline&#34;&gt;\(\delta_t\)&lt;/span&gt; 表示测量噪音。&lt;/li&gt;
 &lt;li&gt;最初状态也呈正态分布。&lt;/li&gt;
@@ -432,10 +426,9 @@ K = P \frac{\partial{h^T}}{\partial{x}} (\frac{\partial{h}}{\partial{x}} P_t \fr
 \]&lt;/span&gt;&lt;/p&gt;
 &lt;h2 id=&#34;无迹卡尔曼滤波-unscented-kalman-filter&#34;&gt;无迹卡尔曼滤波 (Unscented Kalman Filter)&lt;/h2&gt;
 &lt;p&gt;EKF 的局限之一在于只是对非线性的变换做了近似，用泰勒级数展开后取一阶项，容易产生导致较大的误差。UKF 采用了确定性的取样方法来近似高斯分布，这个取样方法又被称为无迹变换 (Unscented Transformation)。&lt;/p&gt;
-&lt;div class=&#34;figure&#34;&gt;
-&lt;img src=&#34;https://blog.yxwang.me/images/2018-07/ukf-mapping.png&#34; alt=&#34;UKF 取样&#34; /&gt;
-&lt;p class=&#34;caption&#34;&gt;UKF 取样&lt;/p&gt;
-&lt;/div&gt;
+&lt;figure&gt;
+&lt;img src=&#34;https://blog.yxwang.me/images/2018-07/ukf-mapping.png&#34; alt=&#34;UKF 取样&#34; /&gt;&lt;figcaption&gt;UKF 取样&lt;/figcaption&gt;
+&lt;/figure&gt;
 &lt;h3 id=&#34;unscented-transformation&#34;&gt;Unscented Transformation&lt;/h3&gt;
 &lt;p&gt;UT 可以用来计算非线形变换后随机变量的分布情况。考虑 L 维随机变量 &lt;strong&gt;x&lt;/strong&gt; 和非线性的函数 &lt;span class=&#34;math inline&#34;&gt;\(\pmb{y} = f(\pmb{x})​\)&lt;/span&gt;，假设 &lt;strong&gt;x&lt;/strong&gt; 的均值为 &lt;span class=&#34;math inline&#34;&gt;\(\bar{\pmb{x}}​\)&lt;/span&gt;，协方差矩阵 &lt;span class=&#34;math inline&#34;&gt;\(P_x​\)&lt;/span&gt;。为了计算 &lt;span class=&#34;math inline&#34;&gt;\(\pmb{y}​\)&lt;/span&gt; 的分布情况，我们根据下面三个式子创造一个维数为 2L + 1 的 sigma 矩阵 &lt;span class=&#34;math inline&#34;&gt;\(\pmb{\mathcal{X}}​\)&lt;/span&gt;： &lt;span class=&#34;math display&#34;&gt;\[
 \begin{align}
@@ -458,10 +451,9 @@ W_0^{(c)} &amp;amp;= \lambda / (L + \lambda) + (1 - \alpha^2 + \beta) \\
 W_0^{(c)} &amp;amp;= W_0^{(m)} = 1 / \{ 2(L + \lambda) \} &amp;amp; i = 1, \dots, 2L.
 \end{align}
 \]&lt;/span&gt; 下图很好地解释了上述几个式子的变换过程&lt;/p&gt;
-&lt;div class=&#34;figure&#34;&gt;
-&lt;img src=&#34;https://blog.yxwang.me/images/2018-07/ukf-sigma-matrix.png&#34; alt=&#34;UT 的图形解释&#34; /&gt;
-&lt;p class=&#34;caption&#34;&gt;UT 的图形解释&lt;/p&gt;
-&lt;/div&gt;
+&lt;figure&gt;
+&lt;img src=&#34;https://blog.yxwang.me/images/2018-07/ukf-sigma-matrix.png&#34; alt=&#34;UT 的图形解释&#34; /&gt;&lt;figcaption&gt;UT 的图形解释&lt;/figcaption&gt;
+&lt;/figure&gt;
 &lt;h3 id=&#34;unscented-kalman-filter&#34;&gt;Unscented Kalman Filter&lt;/h3&gt;
 &lt;p&gt;接下来回到 UKF。介绍了 UT 之后 UKF 就容易多了。首先构造一个包含初始状态和噪音的矩阵 &lt;span class=&#34;math inline&#34;&gt;\(\pmb{x}_k^{\alpha} = [\pmb{x}_k^T \pmb{v}_k^T \pmb{n}_k^T ]^T\)&lt;/span&gt;，这里三个向量分别为状态向量、控制向量和噪音向量。接下来对这个矩阵应用无迹变换获得 sigma 矩阵 &lt;span class=&#34;math inline&#34;&gt;\(\mathcal{X}_k^{\alpha}\)&lt;/span&gt;，之后就回到了普通 KF 过程。具体的状态转移公式可以参考本文结尾参考资料《Kalman Filtering and Neural Networks》一书中的章节。&lt;/p&gt;
 &lt;h2 id=&#34;作业&#34;&gt;作业&lt;/h2&gt;
@@ -570,10 +562,9 @@ p(x) = \sum_{k=1}^K w_k g_k (\pmb{x}|\pmb{u}_k, \Sigma_k)
 z_k^i = \frac{g_k(\pmb{x}_i) | \pmb{u}_k, \Sigma_k}{\sum_{k=1}^K g_k(\pmb{x}_i) | \pmb{u}_k, \Sigma_k}
 \]&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(z_k^i\)&lt;/span&gt; 的表示第 i 个观测数据中，第 k 个高斯函数占全体的比重，直观表示如下图&lt;/p&gt;
-&lt;div class=&#34;figure&#34;&gt;
-&lt;img src=&#34;https://blog.yxwang.me/images/2018-07/gmm-em-z-graph.png&#34; alt=&#34;z_k^i 的直观表示&#34; /&gt;
-&lt;p class=&#34;caption&#34;&gt;&lt;span class=&#34;math inline&#34;&gt;\(z_k^i\)&lt;/span&gt; 的直观表示&lt;/p&gt;
-&lt;/div&gt;
+&lt;figure&gt;
+&lt;img src=&#34;https://blog.yxwang.me/images/2018-07/gmm-em-z-graph.png&#34; alt=&#34;z_k^i 的直观表示&#34; /&gt;&lt;figcaption&gt;&lt;span class=&#34;math inline&#34;&gt;\(z_k^i\)&lt;/span&gt; 的直观表示&lt;/figcaption&gt;
+&lt;/figure&gt;
 &lt;p&gt;均值向量和协方差矩阵可以通过 &lt;span class=&#34;math inline&#34;&gt;\(z_k\)&lt;/span&gt; 估计 &lt;span class=&#34;math display&#34;&gt;\[
 \begin{align}
 \hat{\pmb{\mu}}_k &amp;amp;= \frac{1}{z_k} \sum_{i=1}{N} z_k^i \pmb{x}_i \\
@@ -582,7 +573,7 @@ z_k &amp;amp;= \sum_{i=1}^N z_k^i
 \end{align}
 \]&lt;/span&gt;&lt;/p&gt;
 &lt;h3 id=&#34;em-法具体过程&#34;&gt;EM 法具体过程&lt;/h3&gt;
-&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;ol type=&#34;1&#34;&gt;
 &lt;li&gt;初始化 &lt;span class=&#34;math inline&#34;&gt;\(\pmb{\mu}\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(\Sigma\)&lt;/span&gt;&lt;/li&gt;
 &lt;li&gt;固定 &lt;span class=&#34;math inline&#34;&gt;\(\pmb{\mu}\)&lt;/span&gt; 和 &lt;span class=&#34;math inline&#34;&gt;\(\Sigma\)&lt;/span&gt;，并更新 &lt;span class=&#34;math inline&#34;&gt;\(z_k^i\)&lt;/span&gt; 的值 (E-step)&lt;/li&gt;
 &lt;li&gt;固定 &lt;span class=&#34;math inline&#34;&gt;\(z_k^i\)&lt;/span&gt;，并更新 &lt;span class=&#34;math inline&#34;&gt;\(\pmb{\mu}\)&lt;/span&gt; 和 &lt;span class=&#34;math inline&#34;&gt;\(\Sigma\)&lt;/span&gt; 的值 (M-step)&lt;/li&gt;
@@ -669,18 +660,18 @@ z_k &amp;amp;= \sum_{i=1}^N z_k^i
 &lt;li&gt;代数余子式 (cofactor) &lt;span class=&#34;math inline&#34;&gt;\(A_{ij} = (-1)^{i+j}M_{ij}\)&lt;/span&gt;&lt;/li&gt;
 &lt;li&gt;行列式按行展开：&lt;span class=&#34;math inline&#34;&gt;\(D = a_{i1}A_{i1} + a_{i2}A_{i2} + \cdots + a_{in}A_{in}\)&lt;/span&gt;&lt;/li&gt;
 &lt;li&gt;行列式按列展开：&lt;span class=&#34;math inline&#34;&gt;\(D = a_{1j}A_{1j} + a_{2j}A_{2j} + \cdots + a_{nj}A_{nj}\)&lt;/span&gt;&lt;/li&gt;
-&lt;li&gt;克拉默法则 (Cramer&#39;s rule)：如果线性方程组的系数行列式不等于零，那么方程组有唯一解 &lt;span class=&#34;math inline&#34;&gt;\(x_1 = \frac{D_1}{D}, x_2 = \frac{D_2}{D}, \cdots, x_n = \frac{D_n}{D}\)&lt;/span&gt;， 其中 &lt;span class=&#34;math inline&#34;&gt;\(D_j\)&lt;/span&gt; 是把系数行列式 D 中第 j 列的元素用方程组右端的常数项代替后得到的 n 阶行列式。&lt;/li&gt;
+&lt;li&gt;克拉默法则 (Cramer’s rule)：如果线性方程组的系数行列式不等于零，那么方程组有唯一解 &lt;span class=&#34;math inline&#34;&gt;\(x_1 = \frac{D_1}{D}, x_2 = \frac{D_2}{D}, \cdots, x_n = \frac{D_n}{D}\)&lt;/span&gt;， 其中 &lt;span class=&#34;math inline&#34;&gt;\(D_j\)&lt;/span&gt; 是把系数行列式 D 中第 j 列的元素用方程组右端的常数项代替后得到的 n 阶行列式。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;矩阵及其运算&#34;&gt;矩阵及其运算&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;伴随矩阵 (adjugate matrix) &lt;span class=&#34;math display&#34;&gt;\[
-  adj(A) = \begin{bmatrix}
-  A_{11} &amp;amp; A_{21} &amp;amp; \cdots &amp;amp; A_{n1} \\
-  A_{12} &amp;amp; A_{22} &amp;amp; \cdots &amp;amp; A_{n2} \\
-  \vdots &amp;amp; \vdots &amp;amp; \ddots &amp;amp; \vdots \\
-  A_{1n} &amp;amp; A_{2n} &amp;amp; \cdots &amp;amp; A_{nn} \\
-  \end{bmatrix}
-  \]&lt;/span&gt;&lt;/li&gt;
+adj(A) = \begin{bmatrix}
+A_{11} &amp;amp; A_{21} &amp;amp; \cdots &amp;amp; A_{n1} \\
+A_{12} &amp;amp; A_{22} &amp;amp; \cdots &amp;amp; A_{n2} \\
+\vdots &amp;amp; \vdots &amp;amp; \ddots &amp;amp; \vdots \\
+A_{1n} &amp;amp; A_{2n} &amp;amp; \cdots &amp;amp; A_{nn} \\
+\end{bmatrix}
+\]&lt;/span&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;其中 &lt;span class=&#34;math inline&#34;&gt;\(A_{ij}\)&lt;/span&gt; 为代数余子式&lt;/p&gt;
 &lt;ul&gt;
@@ -727,10 +718,12 @@ z_k &amp;amp;= \sum_{i=1}^N z_k^i
 &lt;h2 id=&#34;迹&#34;&gt;迹&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;迹 (trace) 定义为矩阵对焦元素之和：&lt;span class=&#34;math inline&#34;&gt;\(\text{Tr}(A) = \sum_i A_{i,i}\)&lt;/span&gt;&lt;/li&gt;
-&lt;li&gt;迹的一些特性：&lt;/li&gt;
+&lt;li&gt;迹的一些特性：
+&lt;ul&gt;
 &lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\text{Tr}(A) = \text{Tr}(A^T)\)&lt;/span&gt;&lt;/li&gt;
 &lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\text{Tr}(ABC) = \text{Tr}(CAB) = \text{Tr}(BCA)\)&lt;/span&gt;&lt;/li&gt;
 &lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\text{Tr}(AB) = \text{Tr}(BA)\)&lt;/span&gt; （如果乘法可行）&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
     </item>

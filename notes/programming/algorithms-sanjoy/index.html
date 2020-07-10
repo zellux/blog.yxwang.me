@@ -19,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.d986684ab585867681cde1f1f3d183ba8c773d00b5a9c2444ad3f76e90805b0b.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -84,6 +84,7 @@
   <div class="posts">
     <div class="post">
       <h1 class="post-title"><a href="https://blog.yxwang.me/notes/programming/algorithms-sanjoy/">《Algorithms》笔记</a></h1>
+      
       <div class="post-content">
         <h2 id="algorithms-with-numbers">1. Algorithms with numbers</h2>
 <p>设计 Hash 函数一般要考虑两个因素，一是它的随机性，即保证数据分布均匀；二是它的一致性，即对于同一份数据每次都要获得相同的结果。</p>
@@ -100,7 +101,7 @@ A(-x_i) = A_e(x_{i}^{2}) - x_iA_o(x_{i}^{2})
 <h2 id="decompositions-of-graphs">3. Decompositions of graphs</h2>
 <h3 id="强连通分量">强连通分量</h3>
 <p>DFS 其实并不需要从根节点开始搜素，因为当子节点先被遍历后，接下来自然会遍历它的父节点。</p>
-<p>关于用 DFS 检测有向图中的强连通分量，关键的理论依据在于书上的性质 3：对于两个强连通分量 C 和 C'，如果有一条边从 C 上的点通向 C' 上的点，则 C 中点的 post 值的最大值肯定比 C' 中的最大值更大。证明：如果 DFS 先访问了 C，然后再访问 C'，那么在离开 C 中最后一个顶点前，C' 的所有顶点都肯定已经被访问过了；如果 C' 被先访问，那么在 C' 中所有顶点访问完成之前，C 中的任一结点都不会被访问到，DFS 在遍历完 C 中结点后就会寻找下一个没有被访问过的连通分量，这里面包括 C。</p>
+<p>关于用 DFS 检测有向图中的强连通分量，关键的理论依据在于书上的性质 3：对于两个强连通分量 C 和 C’，如果有一条边从 C 上的点通向 C’ 上的点，则 C 中点的 post 值的最大值肯定比 C’ 中的最大值更大。证明：如果 DFS 先访问了 C，然后再访问 C’，那么在离开 C 中最后一个顶点前，C’ 的所有顶点都肯定已经被访问过了；如果 C’ 被先访问，那么在 C’ 中所有顶点访问完成之前，C 中的任一结点都不会被访问到，DFS 在遍历完 C 中结点后就会寻找下一个没有被访问过的连通分量，这里面包括 C。</p>
 <p>性质 3 换句话说，就是可以根据顶点 post 值的最大值，将不同强连通分量由高到低排序后，得到的就是这些连通分量的拓扑序列，排在最前的强连通分量也就是源（source）所在的强连通分量。但是我们需要的是汇（sink）所在的强连通分量，为了得到这个结果，可以先在图 G 的逆向图上跑一遍 DFS，从而获得逆向图中源所在的强连通分量，亦即原图中汇所在的强连通分量。遍历汇所在的强连通分量后（遍历时不会访问到其他强连通分量），删除这一强连通分量，继续遍历下一个汇所在的分量，多次遍历后就能找出所有的强连通分量了。</p>
 <h2 id="paths-in-graphs">4. Paths in graphs</h2>
 <h3 id="单源最短路径">单源最短路径</h3>
@@ -137,7 +138,7 @@ A(-x_i) = A_e(x_{i}^{2}) - x_iA_o(x_{i}^{2})
 <p>对于有 n 个变量的线性规划问题，至少要 n 个方程才能确定一个顶点。而如果定义两个顶点的方程里有 n - 1 个是相同的，那么这两个顶点相邻。</p>
 <h3 id="多维空间中的单纯形法">多维空间中的单纯形法</h3>
 <p>大致过程主要是两步：</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>查看当前顶点是否已经最优；</li>
 <li>如果不是，则往下一个顶点移动。</li>
 </ol>
@@ -146,7 +147,7 @@ A(-x_i) = A_e(x_{i}^{2}) - x_iA_o(x_{i}^{2})
 <p>电路求值的问题是指，给定一个由与、或、非构成的电路和它的输入，问最终的输出结果是真还是假。</p>
 <p>这个问题可以规约到线性规划，每一个门都可以被若干个不等式表达，例如 c = OR(a, b) 就等价于 <span class="math inline">\(x_c \geq x_a, x_c \geq x_b, x_c \leq x_a = x_b\)</span>。同时，任何一个 P 问题都可以规约到电路求值（计算机本身就是由电路实现的），因此所有的 P 问题都可以规约到线性规划问题。此外，如果给线性规划问题加一个限制，要求所有的变量都是整数，就成了整数规划问题，它是一个 NPC 问题。</p>
 <h2 id="np-complete-problems">8. NP-complete problems</h2>
-<p>证明一个问题是 NPC 问题通常分两个步骤，一是证明它是 NP 问题，这一点可以通过证明它是多项式时间内可证的就行；二是证明某一个 NPC 问题可以规约到它。这里有一个问题，第一个 NPC 问题是怎么来的呢？<a href="http://en.wikipedia.org/wiki/Cook%27s_theorem">Cook's theorem</a> 证明了 SAT 是一个 NPC 问题，因为任何一个非确定性图灵机都能被编码成一个二进制的式子，而这个图灵机接收某一串输入当且仅当这个式子是可满足的。</p>
+<p>证明一个问题是 NPC 问题通常分两个步骤，一是证明它是 NP 问题，这一点可以通过证明它是多项式时间内可证的就行；二是证明某一个 NPC 问题可以规约到它。这里有一个问题，第一个 NPC 问题是怎么来的呢？<a href="http://en.wikipedia.org/wiki/Cook%27s_theorem">Cook’s theorem</a> 证明了 SAT 是一个 NPC 问题，因为任何一个非确定性图灵机都能被编码成一个二进制的式子，而这个图灵机接收某一串输入当且仅当这个式子是可满足的。</p>
 <p>NP 问题除了 NPC 和 P 问题之外，剩下的问题既不能被证明可以在多项式内解决，也无法从其他 NPC 问题规约而来。经典的例子就是图的同构判断和质因数分解问题。</p>
 <p>这一章内容和之前看过的《Introduction to the Theory of Computation》的后半部分很像，主要介绍了几个 NPC 问题和它们之间相互规约的方法。</p>
 <h2 id="coping-with-np-completeness">9. Coping with NP-completeness</h2>

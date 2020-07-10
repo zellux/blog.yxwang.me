@@ -19,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.d986684ab585867681cde1f1f3d183ba8c773d00b5a9c2444ad3f76e90805b0b.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -84,6 +84,26 @@
   <div class="posts">
     <div class="post">
       <h1 class="post-title"><a href="https://blog.yxwang.me/notes/programming/programming-scala/">《Programming Scala》笔记</a></h1>
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#数组取值">数组取值</a></li>
+        <li><a href="#tuple-取值">tuple 取值</a></li>
+        <li><a href="#换行符">换行符</a></li>
+        <li><a href="#静态成员">静态成员</a></li>
+        <li><a href="#闭包closure">闭包（closure）</a></li>
+        <li><a href="#括号互用">括号互用</a></li>
+        <li><a href="#currying">Currying</a></li>
+        <li><a href="#命名空间">命名空间</a></li>
+        <li><a href="#覆盖override">覆盖（Override）</a></li>
+        <li><a href="#trait">trait</a></li>
+        <li><a href="#模式匹配pattern-matching">模式匹配（Pattern Matching）</a></li>
+        <li><a href="#type-erasure-的限制">Type Erasure 的限制</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
       <div class="post-content">
         <h3 id="数组取值">数组取值</h3>
 <p>Scala 中可以通过 Array.apply()、Map.apply() 等方法获得这些容器中存储的值，而小括号则是 apply 方法的一个语法糖。所以 <code>myArray(i)</code> 等价于 <code>myArray.apply(i)</code>。</p>

@@ -19,7 +19,7 @@
 
     
     
-    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.8097b1b68c7bb8339555a7c54bb1b0ce1a6f4e909cefac88b2c27c56b700c922.css">
+    <link rel="stylesheet" href="https://blog.yxwang.me/css/slim.min.d986684ab585867681cde1f1f3d183ba8c773d00b5a9c2444ad3f76e90805b0b.css">
     
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
     
@@ -97,7 +97,7 @@
       <p>这一周主要讲卡尔曼滤波 (Kalman Filter)，视频讲得比较简略，slides 做得里也有不少错误。最后看了一些其他网站的文章和视频才有了比较深刻的理解。参考资料推荐在本文结尾。</p>
 <h2 id="卡尔曼滤波-kf">卡尔曼滤波 KF</h2>
 <p>卡尔曼滤波可以从一系列包含噪音的观测数据中，估计出每个时间点系统的状态。KF 有几个基本假设：</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>当前状态只和前一状态有关，且和前一状态线性相关，即 <span class="math inline">\(x_{t+1}=A_t x_{t} + B_t u_t + \epsilon_t\)</span>，这里 <span class="math inline">\(x_t\)</span> 是状态向量，<span class="math inline">\(u_t\)</span> 为控制向量，<span class="math inline">\(\epsilon_t\)</span> 是均值为 0 的高斯分布噪音。</li>
 <li>测量结果和状态线性相关：<span class="math inline">\(z_t = C_t x_t + \delta_t\)</span>。这里 <span class="math inline">\(z_t\)</span> 是测量结果的向量，<span class="math inline">\(\delta_t\)</span> 表示测量噪音。</li>
 <li>最初状态也呈正态分布。</li>
@@ -173,10 +173,9 @@ K = P \frac{\partial{h^T}}{\partial{x}} (\frac{\partial{h}}{\partial{x}} P_t \fr
 \]</span></p>
 <h2 id="无迹卡尔曼滤波-unscented-kalman-filter">无迹卡尔曼滤波 (Unscented Kalman Filter)</h2>
 <p>EKF 的局限之一在于只是对非线性的变换做了近似，用泰勒级数展开后取一阶项，容易产生导致较大的误差。UKF 采用了确定性的取样方法来近似高斯分布，这个取样方法又被称为无迹变换 (Unscented Transformation)。</p>
-<div class="figure">
-<img src="/images/2018-07/ukf-mapping.png" alt="UKF 取样" />
-<p class="caption">UKF 取样</p>
-</div>
+<figure>
+<img src="/images/2018-07/ukf-mapping.png" alt="UKF 取样" /><figcaption>UKF 取样</figcaption>
+</figure>
 <h3 id="unscented-transformation">Unscented Transformation</h3>
 <p>UT 可以用来计算非线形变换后随机变量的分布情况。考虑 L 维随机变量 <strong>x</strong> 和非线性的函数 <span class="math inline">\(\pmb{y} = f(\pmb{x})​\)</span>，假设 <strong>x</strong> 的均值为 <span class="math inline">\(\bar{\pmb{x}}​\)</span>，协方差矩阵 <span class="math inline">\(P_x​\)</span>。为了计算 <span class="math inline">\(\pmb{y}​\)</span> 的分布情况，我们根据下面三个式子创造一个维数为 2L + 1 的 sigma 矩阵 <span class="math inline">\(\pmb{\mathcal{X}}​\)</span>： <span class="math display">\[
 \begin{align}
@@ -199,10 +198,9 @@ W_0^{(c)} &amp;= \lambda / (L + \lambda) + (1 - \alpha^2 + \beta) \\
 W_0^{(c)} &amp;= W_0^{(m)} = 1 / \{ 2(L + \lambda) \} &amp; i = 1, \dots, 2L.
 \end{align}
 \]</span> 下图很好地解释了上述几个式子的变换过程</p>
-<div class="figure">
-<img src="/images/2018-07/ukf-sigma-matrix.png" alt="UT 的图形解释" />
-<p class="caption">UT 的图形解释</p>
-</div>
+<figure>
+<img src="/images/2018-07/ukf-sigma-matrix.png" alt="UT 的图形解释" /><figcaption>UT 的图形解释</figcaption>
+</figure>
 <h3 id="unscented-kalman-filter">Unscented Kalman Filter</h3>
 <p>接下来回到 UKF。介绍了 UT 之后 UKF 就容易多了。首先构造一个包含初始状态和噪音的矩阵 <span class="math inline">\(\pmb{x}_k^{\alpha} = [\pmb{x}_k^T \pmb{v}_k^T \pmb{n}_k^T ]^T\)</span>，这里三个向量分别为状态向量、控制向量和噪音向量。接下来对这个矩阵应用无迹变换获得 sigma 矩阵 <span class="math inline">\(\mathcal{X}_k^{\alpha}\)</span>，之后就回到了普通 KF 过程。具体的状态转移公式可以参考本文结尾参考资料《Kalman Filtering and Neural Networks》一书中的章节。</p>
 <h2 id="作业">作业</h2>
