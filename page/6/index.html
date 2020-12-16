@@ -47,8 +47,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2020",
-    "datePublished": "2020-06-27 01:36:00 \u002b0000 UTC",
-    "dateModified" : "2020-06-27 01:36:00 \u002b0000 UTC",
+    "datePublished": "2020-12-16 00:59:00 \u002b0000 UTC",
+    "dateModified" : "2020-12-16 00:59:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/",
     "wordCount" : "0",
     "keywords" : [ "Blog" ]
@@ -82,6 +82,36 @@
 <div class="content index">
   <div class="posts">
      
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2010/03/blueprint/">跨站脚本攻击和 BluePrint</a></h2>
+      <span class="post-meta">
+  <time datetime='Wed, Mar 3, 2010' data-updated="true" itemprop="datePublished">Wed, Mar 3, 2010</time>
+  
+  <span class="post-categories">
+    •
+	<a href="https://blog.yxwang.me/categories/computer-system">Computer System</a>
+  </span>
+  
+</span>
+
+      
+      <div class="summary">
+        Blueprint: Robust prevention of cross-site scripting attacks for existing browsers
+这篇论文提出了一种防范是跨站脚本攻击(XSS)的新的方法，发在IEEE S&amp;P 2009上，作者是UIUC的Mike Ter Louw。
+所谓跨站脚本攻击，简单地说就是在网页中注入非法的脚本代码，从而达到攻击的效果。比较著名的例子有当年在MySpace上泛滥的Samy蠕虫，通过特殊的脚本注入手段，每一位访问Samy主页的用户，他们的主页都会被修改加上一段Samy is my hero文字，并且他们的主页也会被植入攻击代码，从而把这段脚本扩散给更多的用户。
+通常防范跨站脚本攻击的方式有两种。一种做在服务器端，为每一段用户上传的内容做检查，并剔除恶意代码。但这种方式很难保证能过滤掉所有的恶意字符串，一方面攻击方法防不甚防，有兴趣的朋友可以参考下XSS Cheat Sheet，上面给出了很多一般人很难想到的攻击代码的组合方式。另一方面由于现在大多数论坛和博客都支持一些基本的文本修饰标签，所以简单的标签剔除或者重新编码都不可行。
+另一种方法是做在浏览器端，但是由于浏览器无法区分某一段脚本到底是来源于不可信的用户还是可信的站点，所以这种方法实现起来也有很大的困难。
+这里实现防范措施的一个难点在于，Web应用把生成HTML的返回给浏览器后，就不参与浏览器的HTML解析工作了。这样浏览器就不知道哪部分出现脚本是安全的，哪部分出现是不安全的。
+BluePrint就着眼于这个点，提出了一种让Web应用“参与”HTML解析工作的设计。下面通过论文里面的一个例子，简单介绍下它的防范机制。
+假如一位恶意的用户在一个博客上上传了这样一段含有恶意代码的留言：
+&lt;p&gt; Here is a page you might find &lt;b &#34;&#34;&#34;&gt;&lt;script&gt;doEvil(. . .)&lt;/script&gt;&#34;&gt;very&lt;/b&gt; interesting: &lt;a href=&#34; &amp;#14; javasc&amp;#x0A;ript:doEvil(. . .);&#34;&gt; Link&lt;/a&gt; &lt;/p&gt;&lt;p style=&#34;nop:expres/*xss*/sion(doEvil(. . .))&#34;&gt; Respectfully, Eve &lt;/p&gt; 可以看到，这段代码里包含了很多可能引发脚本执行的代码，而要在服务器端把这些所有隐藏的攻击可能找出来是一件比较困难的事。那么BluePrint是怎么在不知道这段代码是否含有恶意代码的前提下处理的呢？
+首先，这种由用户上传的不可信的字符串会先在服务器端被解析成一棵树，就像HTML在浏览器中被解析一样，这棵HTML解析树可以用一些简单的DOM API来生成，例如appendChild, createElement等。这些描述如何生成HTML解析树的方法会和数据值（URL、标签属性等）一起，通过特殊的编码（Base64）传递给浏览器。例如上面这段代码，最后在浏览器接收到的HTML中，会变成这样：
+&lt;code style=&#34;display:none;&#34; id=&#34;__bp1&#34;&gt; =Enk/sCkhlcmUgaXMgYSBwYWdlIHlvdSBta... =SkKICAgICI+dmVyeQ===C/k/QIGhlbHBmd... =ECg===C/Enk/gCiAgUmVzcGVjdGZ1bGx5L... &lt;/code&gt;&lt;script id=&#34;__bp1s&#34;&gt; __bp__.cxPCData(&#34;__bp1&#34;, &#34;__bp1s&#34;); &lt;/script&gt; 在浏览器端，这段特殊的代码会被JS库解析成自定义的命令和数据格式，并由前面提到的DOM API动态生成这些HTML结点，从而达到和传统的方式一样的显示效果。当然可信的HTML代码，例如文章正文，还是按传统的方式传输的。
+	<a class="read-more" href="/2010/03/blueprint/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
     <div class="post">
       <h2 class="post-title"><a href="https://blog.yxwang.me/2010/03/keep-gnu-screen-history/">记录 GNU screen 中的历史命令</a></h2>
       <span class="post-meta">
@@ -301,29 +331,6 @@ S[ T[k] ] ← S[ top[S] ] S[ T[k] ] ← S [ top[S] ] T[ S[ T[k] ] ] ← T [k] T[
 ECB提供了方便在这些窗口间切换的快捷键：
 切换到目录窗口 Ctrl-c . g d切换到函数/方法窗口 Ctrl-c . g m切换到文件窗口 Ctrl-c . g s切换到历史窗口 Ctrl-c . g h切换到上一个编辑窗口 Ctrl-c . g l最基本的使用就是这样，Ctrl-C . h可以看到更详细的帮助信息。
 	<a class="read-more" href="/2010/02/ecb-beginning/">阅读全文 →</a>
-      </div>
-      
-    </div>
-    
-    <div class="post">
-      <h2 class="post-title"><a href="https://blog.yxwang.me/2010/01/obfuscated-c/">这样也能算圆周率</a></h2>
-      <span class="post-meta">
-  <time datetime='Thu, Jan 28, 2010' data-updated="true" itemprop="datePublished">Thu, Jan 28, 2010</time>
-  
-  <span class="post-categories">
-    •
-	<a href="https://blog.yxwang.me/categories/programming">Programming</a>
-  </span>
-  
-</span>
-
-      
-      <div class="summary">
-        reddit programming版面最近的热帖，下面这个程序输出的结果是一个近似的圆周率(3.156)。
-#define _ F--&gt;00 || F-OO--; long F=00,OO=00; main(){F_OO();printf(&#34;%1.3f\n&#34;, 4.*-F/OO/OO);}F_OO() { _-_-_-_ _-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_ _-_-_-_ } 乍看下这个程序有点莫名其妙，分析一下宏后就知道它的方法了。两个全局变量F和OO分别记录 圆的面积和直径 的相反数，根据4*面积/直径/直径就能得到近似的圆周率了。
-至于面积和直径的计算，F在会在每一个_展开的地方减一，这样就得到了圆的面积。直径的计算要展开几行代码才能看得更清楚：
-F--&gt;00 || F-OO--; -F--&gt;00 || F-OO--; -F--&gt;00 || F-OO--; -F--&gt;00 || F-OO--; F--&gt;00 || F-OO--; -F--&gt;00 || F-OO--; -F--&gt;00 || F-OO--; -F--&gt;00 || F-OO--; -F--&gt;00 || F-OO--; -F--&gt;00 || F-OO--; -F--&gt;00 || F-OO--; -F--&gt;00 || F-OO--; -F--&gt;00 || F-OO--; 这是用cpp展开圆形前两行代码的结果，因为或运算的特殊性，F- OO- -只会在每一段的第一行执行，所以OO- -执行的次数就等于圆的直径了。
-	<a class="read-more" href="/2010/01/obfuscated-c/">阅读全文 →</a>
       </div>
       
     </div>

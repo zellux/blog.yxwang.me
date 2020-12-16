@@ -6,10 +6,117 @@
     <description>Recent content on Aiur · Zellux 的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sat, 27 Jun 2020 01:36:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 16 Dec 2020 00:59:00 +0000</lastBuildDate>
     
         <atom:link href="https://blog.yxwang.me/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Notes on ARK&#39;s In the Know (Episode 10)</title>
+      <link>https://blog.yxwang.me/2020/06/server-rack/</link>
+      <pubDate>Wed, 16 Dec 2020 00:59:00 +0000</pubDate>
+      
+      <guid>https://blog.yxwang.me/2020/06/server-rack/</guid>
+      <description>&lt;p&gt;Original video: &lt;a href=&#34;https://www.youtube.com/watch?v=WCBUhQ6jJoM&#34;&gt;https://www.youtube.com/watch?v=WCBUhQ6jJoM&lt;/a&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Monetary policy
+&lt;ol&gt;
+&lt;li&gt;M2 up 25% YoY, velocity of money is falling
+&lt;ol&gt;
+&lt;li&gt;Two reasons why velocity might stop, and becomes overdrive
+&lt;ol&gt;
+&lt;li&gt;(Good reason) Confidence in economy (business and consumers) are rising very high, not all time high yet&lt;/li&gt;
+&lt;li&gt;(Not a good reason) When inflation and interest rate goes up, velocity of money can go up too; we don&amp;rsquo;t think about inflation will be a problem&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;Fiscal policy
+&lt;ol&gt;
+&lt;li&gt;Fiscal policy package will occur&lt;/li&gt;
+&lt;li&gt;Election
+&lt;ol&gt;
+&lt;li&gt;Some degree of gridlock situation
+&lt;ol&gt;
+&lt;li&gt;The republican will hold majority in senate&lt;/li&gt;
+&lt;li&gt;In the house more republicans have won than anticipated&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;Republicans might bring along some democrats to their view
+&lt;ol&gt;
+&lt;li&gt;A little better than gridlock in policy making&lt;/li&gt;
+&lt;li&gt;Still more conservative than expected&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;Economy
+&lt;ol&gt;
+&lt;li&gt;Inventory starts building again&lt;/li&gt;
+&lt;li&gt;Expect an extremely strong holiday season
+&lt;ol&gt;
+&lt;li&gt;JPM credit card payment +15% YoY on Black Friday long weekend&lt;/li&gt;
+&lt;li&gt;S&amp;amp;P 500 average for September +9%
+&lt;ol&gt;
+&lt;li&gt;Retail usually follows&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;12/4 Employment report
+&lt;ol&gt;
+&lt;li&gt;Weaker than expected&lt;/li&gt;
+&lt;li&gt;Household employment was down&lt;/li&gt;
+&lt;li&gt;Tech is flat, maybe due to productivity improvement&lt;/li&gt;
+&lt;li&gt;Significant drop in manufacture
+&lt;ol&gt;
+&lt;li&gt;Can be explained by inventory going up&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;Average week earnings YoY Growth rate accelerated&lt;/li&gt;
+&lt;li&gt;Saving rate dropped but is still high by historical standards&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;Durable goods report reinforces surging of capital spending&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;Market
+&lt;ol&gt;
+&lt;li&gt;Copper broke out relative to gold
+&lt;ol&gt;
+&lt;li&gt;Market cycle signals&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;10 year treasury bonds rate might increase
+&lt;ol&gt;
+&lt;li&gt;Would hurt fixed income investors&lt;/li&gt;
+&lt;li&gt;Not problematic for equity investors
+&lt;ol&gt;
+&lt;li&gt;Shift from fixed income to equity is still long overdue&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;Continued outflows of equity, inflows of fixed income, $1.2T difference in between
+&lt;ol&gt;
+&lt;li&gt;A signal of no bubble in equity&lt;/li&gt;
+&lt;li&gt;Until a shifting of flows between fixed income and equity&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;Individual investors (AAII) indexes are very high
+&lt;ol&gt;
+&lt;li&gt;Maybe a signal of some sort of correction&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
     
     <item>
       <title>组装一台家用服务器机架</title>

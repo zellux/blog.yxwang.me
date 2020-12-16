@@ -46,8 +46,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2020",
-    "datePublished": "2020-06-27 01:36:00 \u002b0000 UTC",
-    "dateModified" : "2020-06-27 01:36:00 \u002b0000 UTC",
+    "datePublished": "2020-12-16 00:59:00 \u002b0000 UTC",
+    "dateModified" : "2020-12-16 00:59:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/post\/",
     "wordCount" : "0",
     "keywords" : [ "Blog" ]
@@ -81,6 +81,37 @@
 <div class="content">
   <div class="posts">
      
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2008/08/bugs-related-to-my-fork/">OS Lab 4 Debugging Notes</a></h2>
+      <span class="post-date">Aug 22, 2008</span>
+      
+      <span class="post-tags">
+	
+	#<a href="https://blog.yxwang.me/tags/courses">Courses</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/debugging">Debugging</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/lab">Lab</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/notes">Notes</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/os">OS</a>&nbsp;
+	
+      </span>
+      
+      
+      
+      <div class="summary">
+	系统调用 fork() 用Simics跟踪一条条汇编分析页表映射、寄存器值还真是体力活啊。。
+  实现 Copy On Write 时，如果某一个用户态页面有多个进程共享，其中一个进程修改该页面时需要创建一个新的页面。一开始偶忘了把原来页面的内容复制到新的页面了 =_= 另外由于新的页面要代替老的页面，或者说它们的物理地址不同，但虚拟地址相同，我的方法是在内核态开辟一个大小为一个页面的空间作为中转。
+  do_fork函数中，子进程复制父进程的页表的同时会把父进程页表项置为不可写，注意最后要flush tlb。因为一开始没有flush tlb，导致最后用户态fork返回以后读取的信息来自于tlb，直接改写了共享页面中fork的返回地址，导致切换到子进程时fork的返回地址丢失。这个bug让我郁闷了两三个小时。。
+  使用两次fork时，第二次fork返回的pid会被改掉。查了下发现为用户空间分配物理页面的代码里居然在分配好以后没有把对应的struct置为已使用，结果导致第二个子进程COW创建新页面时得到了原来的父进程页面，改写了父进程页面内容。
+  系统调用 exec()  清空页表的用户空间映射的函数一开始写得yts，bug到处都是，比如free的时候没使用指向内存块首地址的指针，记录内存地址的变量没有累加。 exec传递给内核态的两个参数必须先在内核态保存一个副本，否则清空用户态页表后就无法得到这两个参数信息了。 分配给用户态的页面必须先清零，一方面考虑到安全性，另一方面不清零会隐藏一些潜在的bug。一开始我没有在内核执行exec的时候完整的复制所有的参数，而是直接指向了原进程的内存空间，由于清空页表后再次申请新页表时得到了原来的页面，结果正好原来那个保存参数的页面和新进程的该页面重合了 =_= 于是浪费了不少时间在这个bug上  
+	<a class="read-more" href="/2008/08/bugs-related-to-my-fork/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
     <div class="post">
       <h2 class="post-title"><a href="https://blog.yxwang.me/2008/08/trap_state-in-flux-oskit/">Flux OSKit 中 trap_state 的存放位置</a></h2>
       <span class="post-date">Aug 20, 2008</span>
@@ -377,39 +408,6 @@ VMBR还可以用VMI帮助理解目标系统软件级的抽象信息，VMI可以�
 3.4 Maintaining Control这块主要讲了对系统重启、关闭的处理。
 系统要求重启时，VMBR总是尽可能的通过重启guest os来完成，这样就能最大化的掌握控制权。
 	<a class="read-more" href="/2008/05/subvirt-implementing-malware-with-virtual-machines/">阅读全文 →</a>
-      </div>
-      
-    </div>
-    
-    <div class="post">
-      <h2 class="post-title"><a href="https://blog.yxwang.me/2008/04/sorting-networks/">Sorting Networks</a></h2>
-      <span class="post-date">Apr 23, 2008</span>
-      
-      <span class="post-tags">
-	
-	#<a href="https://blog.yxwang.me/tags/algorithms">Algorithms</a>&nbsp;
-	
-	#<a href="https://blog.yxwang.me/tags/parallel-computing">Parallel Computing</a>&nbsp;
-	
-	#<a href="https://blog.yxwang.me/tags/tcs">TCS</a>&nbsp;
-	
-      </span>
-      
-      
-      
-      <div class="summary">
-	算法导论第27章，在并行处理的条件下效率很高的排序算法。
-介绍如下面左图所示，每条横线(wire)代表一个待 比较的数值，竖线(comparator)表示连接的两条横线要做一次比较，并将较小的值放在输出横线的上方，较大的放在下面。排序过程就是从左往右依次 调用各个comparator（在同一位置上的comparator可以同时做） 有图表示了四个数字3, 2, 4, 1在经过这个Sorting Network时的行为。（由于背景为深色，建议点击图片查看）
-下图是一个冒泡排序的Sorting Network表示
-可以看到所有的比较都没有并行，效率很低。接下来先介绍一个0-1原理，然后利用它来构造一些比较高效的网络。
-性质首先是引理27.1： 对 于输入数据A = &lt;a_1, a_2, .., a_n&gt;，如果某个比较网络(comparison network)的输出是B = &lt;b_1, b_2, &hellip;, b_n&gt;，那么对于任一单调递增的函数f，这个网络能把输入数据f(A) = &lt;f(a_1), f(a_2), &hellip;, f(a_n)&gt;变为f(B) = &lt;f(b_1), f(b_2), &hellip;f(b_3)&gt;
-这个引理的证明很简单，关键在于min(f(x), f(y)) = f(min(x,y))
-接下来就是0-1原理： 一个有n个输入数据的比较网络，如果它能将仅由0和1组成的序列正确的排序（这种输入共有2^n种可能），那么它也能正确的将任意数字组成的序列排序。 证明也不难，利用前面的引理反正即可得到这个定理。
-双调排序接 下来先考虑双调序列(bitonic sequence)这种特殊情况，所谓双调序列就是先单调递增，后单调递减，或者可以通过环形旋转变化出上述特性的序列，比如&lt;1, 4, 6, 8, 3, 2&gt;和&lt;6, 9, 4, 2, 3, 5&gt;都满足条件（对于后面一种序列，只要把最后的3, 5移到序列开头就行了）。 双调排序(bitonic sorter)有若干步骤，其中有一步叫做half-cleaner，每一次half-cleaner讲数据放到一个深度为1的排序网络中，第i行和第i+n/2行比较(i=1,2,..,n/2)
-引理27.3： 做完上述的half-cleaner后，输出的上半部分和下半部分都保持双调的特点，而且上半部分的每个元素都不大于下半部分的任一元素。 分四种情况讨论即可。
-通过递归调用half-cleaner即可完成双调队列的排序。要对n个元素进行双调排序Bitonic-Sorter(n)，首先调用Half-Cleaner(n)，将元素分成上下两部分，接着依次对这两部分执行Bitonic-Sorter(n/2)即可。 调用的深度D(n) = lgn
-归并网络 书上只给出了对0-1序列排序的算法，任意数字的排序算法留作了习题。 合并网络基于这样一个事实：对于两个已经排序了的序列X = 00000111，Y = 00001111，将Y倒过来后和X拼接的结果是一个双调序列。对这个双调序列再做一次Bitonic-Sorter就能有序。 通 过修改Bitonic-Sorter方法的第一步就能实现Merger，关键在于隐式的反转输入的下半部分。Half-Cleaner方法中比较了第i和 第i+n/2两个元素，如果下半部分反转的话就相当于比较第i和第n-i+1个元素。直接继续执行Bitonic-Sorter方法即可，如下图所示。
-	<a class="read-more" href="/2008/04/sorting-networks/">阅读全文 →</a>
       </div>
       
     </div>
