@@ -47,8 +47,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2020",
-    "datePublished": "2020-12-16 00:59:00 \u002b0000 UTC",
-    "dateModified" : "2020-12-16 00:59:00 \u002b0000 UTC",
+    "datePublished": "2020-06-27 01:36:00 \u002b0000 UTC",
+    "dateModified" : "2020-06-27 01:36:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/",
     "wordCount" : "0",
     "keywords" : [ "Blog" ]
@@ -82,29 +82,6 @@
 <div class="content index">
   <div class="posts">
      
-    <div class="post">
-      <h2 class="post-title"><a href="https://blog.yxwang.me/2008/10/python-inner-function-binding/">Python中inner function的binding处理</a></h2>
-      <span class="post-meta">
-  <time datetime='Fri, Oct 17, 2008' data-updated="true" itemprop="datePublished">Fri, Oct 17, 2008</time>
-  
-  <span class="post-categories">
-    •
-	<a href="https://blog.yxwang.me/categories/programming">Programming</a>
-  </span>
-  
-</span>
-
-      
-      <div class="summary">
-        BBS上的一个帖子，问题是
-def a(): def b(): x += 1 x = 1 print &#34;a: &#34;, x b() print &#34;b: &#34;, x def c(): def d(): x[0] = [4] x = [3] print &#34;c: &#34;, x[0] d() print &#34;d: &#34;, x[0] 运行a()会报UnboundLocalError: local variable &lsquo;x&rsquo; referenced before assignment 但是运行c()会正确地显示3和4。
-原因在于原因在于CPython实现closure的方式和常见的functional language不同，采用了flat closures实现。
-&ldquo;If a name is bound anywhere within a code block, all uses of the name within the block are treated as references to the current block.
-	<a class="read-more" href="/2008/10/python-inner-function-binding/">阅读全文 →</a>
-      </div>
-      
-    </div>
-    
     <div class="post">
       <h2 class="post-title"><a href="https://blog.yxwang.me/2008/10/sync-between-zotero-and-endnote/">Zotero与Endnote的互相导入</a></h2>
       <span class="post-meta">
@@ -316,6 +293,30 @@ malloc则和libc中的同名函数很相似。
 整个分配信息（包括哪些块已被使用）都记录在malloc_lmm这个全局变量中，内存被分为若干个region，每个region中有若干个nodes，这些信息可以通过lmm_dump查看（需要include &lt;lmm.public.h&gt;）。
 smemalign很适合分配需要页对齐的内存块，因为如果使用memalign分配的话，每个页面就需要多用8字节的空间来记录当前块的大小了（保存在每个内存块的前面），会产生大量内存碎片。
 	<a class="read-more" href="/2008/08/smalloc-vs-malloc/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2008/08/bugs-related-to-my-fork/">OS Lab 4 Debugging Notes</a></h2>
+      <span class="post-meta">
+  <time datetime='Fri, Aug 22, 2008' data-updated="true" itemprop="datePublished">Fri, Aug 22, 2008</time>
+  
+  <span class="post-categories">
+    •
+	<a href="https://blog.yxwang.me/categories/courses">Courses</a>
+  </span>
+  
+</span>
+
+      
+      <div class="summary">
+        系统调用 fork() 用Simics跟踪一条条汇编分析页表映射、寄存器值还真是体力活啊。。
+  实现 Copy On Write 时，如果某一个用户态页面有多个进程共享，其中一个进程修改该页面时需要创建一个新的页面。一开始偶忘了把原来页面的内容复制到新的页面了 =_= 另外由于新的页面要代替老的页面，或者说它们的物理地址不同，但虚拟地址相同，我的方法是在内核态开辟一个大小为一个页面的空间作为中转。
+  do_fork函数中，子进程复制父进程的页表的同时会把父进程页表项置为不可写，注意最后要flush tlb。因为一开始没有flush tlb，导致最后用户态fork返回以后读取的信息来自于tlb，直接改写了共享页面中fork的返回地址，导致切换到子进程时fork的返回地址丢失。这个bug让我郁闷了两三个小时。。
+  使用两次fork时，第二次fork返回的pid会被改掉。查了下发现为用户空间分配物理页面的代码里居然在分配好以后没有把对应的struct置为已使用，结果导致第二个子进程COW创建新页面时得到了原来的父进程页面，改写了父进程页面内容。
+  系统调用 exec()  清空页表的用户空间映射的函数一开始写得yts，bug到处都是，比如free的时候没使用指向内存块首地址的指针，记录内存地址的变量没有累加。 exec传递给内核态的两个参数必须先在内核态保存一个副本，否则清空用户态页表后就无法得到这两个参数信息了。 分配给用户态的页面必须先清零，一方面考虑到安全性，另一方面不清零会隐藏一些潜在的bug。一开始我没有在内核执行exec的时候完整的复制所有的参数，而是直接指向了原进程的内存空间，由于清空页表后再次申请新页表时得到了原来的页面，结果正好原来那个保存参数的页面和新进程的该页面重合了 =_= 于是浪费了不少时间在这个bug上  
+	<a class="read-more" href="/2008/08/bugs-related-to-my-fork/">阅读全文 →</a>
       </div>
       
     </div>

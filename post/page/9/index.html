@@ -46,8 +46,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2020",
-    "datePublished": "2020-12-16 00:59:00 \u002b0000 UTC",
-    "dateModified" : "2020-12-16 00:59:00 \u002b0000 UTC",
+    "datePublished": "2020-06-27 01:36:00 \u002b0000 UTC",
+    "dateModified" : "2020-06-27 01:36:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/post\/",
     "wordCount" : "0",
     "keywords" : [ "Blog" ]
@@ -81,41 +81,6 @@
 <div class="content">
   <div class="posts">
      
-    <div class="post">
-      <h2 class="post-title"><a href="https://blog.yxwang.me/2009/05/install-git-gitoss-gitweb-in-archlinux/">ArchLinux 下安装 git, gitosis, gitweb 服务</a></h2>
-      <span class="post-date">May 26, 2009</span>
-      
-      <span class="post-tags">
-	
-	#<a href="https://blog.yxwang.me/tags/archlinux">ArchLinux</a>&nbsp;
-	
-	#<a href="https://blog.yxwang.me/tags/git">Git</a>&nbsp;
-	
-	#<a href="https://blog.yxwang.me/tags/server">Server</a>&nbsp;
-	
-	#<a href="https://blog.yxwang.me/tags/tooling">Tooling</a>&nbsp;
-	
-	#<a href="https://blog.yxwang.me/tags/git">git</a>&nbsp;
-	
-      </span>
-      
-      
-      
-      <div class="summary">
-	参考文章：
-[1] http://hokietux.net/blog/?p=58[2] http://scie.nti.st/2007/11/14/hosting-git-repositories-the-easy-and-secure-way[3] http://www.nkuttler.de/2009/04/06/git-clone-ssh-could-not-resolve-hostname/ git  很简单，直接用pacman安装即可 sudo pacman -S git
-gitosis  gitosis是一个方便管理git仓库的工具，安装方法：
-  从yaourt或者aur下载安装gitosis-git包 http://aur.archlinux.org/packages.php?ID=23419
-  新建git用户 sudo useradd &ndash;system &ndash;shell /bin/sh &ndash;comment &lsquo;git version control&rsquo;&ndash;user-group &ndash;home-dir /home/git/ git  将开发用户的rsa公钥导入gitosis，（没有公钥的话请先运行ssh-keygen -t rsa生成） sudo -H -u git gitosis-init &lt; ~/.ssh/id_rsa.pub  如果以上步骤没有问题，那么运行git clone ssh://git@hostname/gitosis-admin.git后应该就能看到gitosis-admin.git这个目录了
-  新建项目、添加用户等操作参见[2]，这里不再赘述
-  gitweb  事实上ArchLinux中安装的git包自带了gitweb，可以用which gitweb搜到，一般默认在/usr/share/gitweb。下面假设我的http根目录为/home/httpd
-  将/usr/share/gitweb下的文件复制到/home/httpd/cgi-bin（其实似乎只要gitweb.cgi就够了） sudo cp -R /usr/share/gitweb /home/httpd/cgi-bin/   /usr/share/gitweb下的.css和.png复制到/home/httpd/html/git/
-  修改或创建/etc/gitweb.
-	<a class="read-more" href="/2009/05/install-git-gitoss-gitweb-in-archlinux/">阅读全文 →</a>
-      </div>
-      
-    </div>
-    
     <div class="post">
       <h2 class="post-title"><a href="https://blog.yxwang.me/2009/05/isca-09-multi-execution/">ISCA 09 - Multi-Execution</a></h2>
       <span class="post-date">May 12, 2009</span>
@@ -367,6 +332,47 @@ I work with Guido now and I&rsquo;m conflicted. I&rsquo;m still conditioned to s
       <div class="summary">
 	Double-Checked Lock是一个常见的由于程序员把内存模型默认为sequential momery consistency导致的问题，具体见我去年写的一篇博文http://techblog.iamzellux.com/2008/07/singleton-pattern-and-double-checked-lock/虽然Java 5解决了这个问题，但是C++等语言中这个问题依然存在，依然有很多因为程序员假设sequential consistency而编译器做了错误的指令调度后导致的bug，见http://www.newsmth.net/bbscon.php?bid=335&amp;id=250203CGO 09的这篇paper Detecting and Eliminating Potential Violations of Sequential Consistency for Concurrent C/C++ Programs针对这个问题进行了深入研究，通过加fence指令的方法解决了因编译器的指令调度造成的违背程序员原义的问题，可以在http://ppi.fudan.edu.cn/yuelu_duan下载到。没有认真读过，俺在这里就不误人子弟了 O.O
 	<a class="read-more" href="/2009/04/cgo-09-multi-race/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2009/04/disco-running-commodity-operating-systems-on-scalable-multiprocessors/">SOSP 97 - Disco</a></h2>
+      <span class="post-date">Apr 8, 2009</span>
+      
+      <span class="post-tags">
+	
+	#<a href="https://blog.yxwang.me/tags/computer-system">Computer System</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/paper">Paper</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/research">Research</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/sosp">SOSP</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/vmware">VMware</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/virtualization">Virtualization</a>&nbsp;
+	
+      </span>
+      
+      
+      
+      <div class="summary">
+	趁还在编译内核的时候把以前写过的东西都转过来，今年寒假读的 (SOSP &lsquo;97)
+Disco: running commodity operating systems on scalable multiprocessors 很早的一篇paper，发表的第二年Rosenblum就创办了VMWare。这篇paper介绍了一个跑在 FLASH机器上的虚拟机Disco，FLASH的架构是实验性质的cache coherent non-uniform memory architechure(ccNUMA)。
+传统的VMM在实现上主要有三个问题
+ overhead，例如特权指令需要由VMM模拟 资源管理，缺乏对资源配置的细粒度的了解，导致资源分布不均（如调度一个没有价值的计算任务） 通讯和共享，不同虚拟机是不是应该简单的看成是享有相同硬件资源的完全独立的操作系统？  实现细节 1. 虚拟CPU Disco虚拟CPU时是把指令放到物理CPU上直接执行的。当调度到某个虚拟CPU时，Disco就把物理机的寄存器设置为虚拟机的寄存器并跳转到相应的PC。
+直接执行的好处在于大多数操作能获得和在真机上跑一样的效率，而难点在于处理不能直接放到真机上运行的指令，如修改tlb，访问物理内存等。
+Disco为每个虚拟CPU记录了一个类似于传统操作系统中process table entry的数据结构。为了模拟特权指令，Disco还在这个数据结构中维持了虚拟CPU的特权寄存器和tlb的内容。
+在MIPS处理器上，Disco运行在kernel mode掌握着对硬件的完全控制；控制器交给虚拟机的操作系统时，Disco把CPU置为supervisor mode；当进入user mode时取消。Supervisor模式允许操作系统访问受保护的内存区域(supervisor segment)，但仍不能执行特权指令，也不能访问物理内存。诸如page fault的trap发生时，vmm会捕获到这个异常，修改相应的特权寄存器并跳转到虚拟机的trap vector。
+2.虚拟内存 Disco增加了一层物理地址到机器地址的转换。虚拟机使用从0开始的物理地址，大小和为虚拟机的内存相等，Disco把这些物理地址映射到了 FLASH的40位机器地址上。这种映射的实现借助于MIPS处理器的software-reloaded TLB，当操作系统尝试在TLB中插入一个virtual-to-physical的映射时，Disco会把这里的physical address改成对应的machine address，这样之后通过这条TLB记录的地址访问就不需要再经过VMM的处理了，没有额外的overhead。
+为了方便计算TLB地址，Disco为每个虚拟机记录了一个pmap数据结构，每个pmap结构对应着虚拟机的一个物理页。pmap包含了一个指向 机器内存的引用，以及指向虚拟地址的映射（虚拟地址可能有多个，原文中用了复数形式），这主要用于页面被VMM回收时TLB的重置。另外MIPS处理器为 每个TLB记录标记了一个地址空间标识符（ASID, address space identifier），用来防止context switch时不必要的TLB刷新。Disco为了简单化处理，就在物理CPU被调度为另一个虚拟CPU时刷新TLB，这样ASID就能直接使用虚拟机提 供的了。
+这样的处理带来了性能问题，由于TLB在虚拟CPU切换时会被刷新，带来了额外的TLB miss，而TLB miss由于需要被模拟，它的代价很大。为了减少这种性能影响，Disco维持了一个virtual-to-machine的二级软TLB，TLB miss发生的时候首先查看软TLB有没有相关的记录，如果找不到再交给虚拟机上的操作系统去处理。这种处理的影响就是虚拟机所看到的TLB会比实际 CPU的TLB大很多。
+3. NUMA 内存管理 不怎么熟悉NUMA，这部分先粗读了，大致思想是通过动态的页面转移和复制维持locality，从而避免remote cache miss。
+4. 虚拟IO设备 增加特殊的设备驱动是最清晰的实现方法，每个Disco设备都定义了一个monitor call，供设备驱动传参调用。对于支持DMA操作的设备，Disco也需要截获这些DMA请求并转换为相应的machine address。对于仅有一个虚拟机访问的设备，Disco只要保证访问的排外性并翻译DMA请求即可，而不需要虚拟IO资源。截获所有DMA操作的一个 好处是Disco可以在虚拟机间共享磁盘和内存资源。
+5. Copy-on-write disks DMA请求被截获时，如果请求的磁盘块已经在内存里了，就不需要再访问磁盘。如果请求的大小正好是虚拟机页面大小的整数倍，直接把对应的物理页映射 到虚拟机里就行，另外考虑到以后可能会修改这部分内存，需要将那些页面设为read-only，从而实现copy-on-write，同时这些处理对虚拟 机完全透明的。
+	<a class="read-more" href="/2009/04/disco-running-commodity-operating-systems-on-scalable-multiprocessors/">阅读全文 →</a>
       </div>
       
     </div>

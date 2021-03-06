@@ -47,8 +47,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2020",
-    "datePublished": "2020-12-16 00:59:00 \u002b0000 UTC",
-    "dateModified" : "2020-12-16 00:59:00 \u002b0000 UTC",
+    "datePublished": "2020-06-27 01:36:00 \u002b0000 UTC",
+    "dateModified" : "2020-06-27 01:36:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/",
     "wordCount" : "0",
     "keywords" : [ "Blog" ]
@@ -82,29 +82,6 @@
 <div class="content index">
   <div class="posts">
      
-    <div class="post">
-      <h2 class="post-title"><a href="https://blog.yxwang.me/2009/09/interesting-quines/">几个有趣的 Quine 变种</a></h2>
-      <span class="post-meta">
-  <time datetime='Mon, Sep 28, 2009' data-updated="true" itemprop="datePublished">Mon, Sep 28, 2009</time>
-  
-  <span class="post-categories">
-    •
-	<a href="https://blog.yxwang.me/categories/algorithms">Algorithms</a>
-  </span>
-  
-</span>
-
-      
-      <div class="summary">
-        Quine是指一类能生成自己的程序，例如下面这个C程序运行后就能把自己的源码完整的打印出来：
-char*f=&#34;char*f=%c%s%c;main() {printf(f,34,f,34,10);}%c&#34;; main(){printf(f,34,f,34,10);} 这类程序的构造方法计算理论导引或者其他相关的书籍中都有涉及，这里不再赘述。这个月看到几个Quine的变种，都挺有趣的。
-首先是sigfpe构造出来的三阶Quine，这是一个只有两行的Haskell程序：
-q a b c=putStrLn $ b ++ [toEnum 10,&#39;q&#39;,&#39;(&#39;] ++ show b ++ [&#39;,&#39;] ++ show c ++ [&#39;,&#39;] ++ show a ++ [&#39;)&#39;] main=q &#34;q a b c=putStrLn $ b ++ [toEnum 10,&#39;q&#39;,&#39;(&#39;] ++ show b ++ [&#39;,&#39;] ++ show c ++ [&#39;,&#39;] ++ show a ++ [&#39;)&#39;]&#34; &#34;def q(a,b,c):print b+chr(10)+&#39;q(&#39;+repr(b)+&#39;,&#39;+repr(c)+&#39;,&#39;+repr(a)+&#39;)&#39;&#34; &#34;def e(x) return 34.chr+x+34.chr end;def q(a,b,c) print b+10.chr+&#39;main=q &#39;+e(b)+&#39; &#39;+e(c)+&#39; &#39;+e(a)+&#39; &#39;+10.chr end&#34; 这段程序牛逼在哪里呢？运行后这个程序首先会输出一个Python程序，然后再运行这个Python程序会输出一段Ruby代码，最后这个Ruby代码的运行结果是原来的程序。或者说
-	<a class="read-more" href="/2009/09/interesting-quines/">阅读全文 →</a>
-      </div>
-      
-    </div>
-    
     <div class="post">
       <h2 class="post-title"><a href="https://blog.yxwang.me/2009/09/compile-php5-on-dreamhost/">Dreamhost 上编译 php5</a></h2>
       <span class="post-meta">
@@ -325,6 +302,34 @@ https://support.mozilla.com/tiki-view_forum_thread.php?locale=zh-CN&amp;comments
   修改虚拟机的grub启动参数，以我的/boot/menu/lst为例
   title Xen 3.3.0 / Debian GNU/Linux, kernel 2.6.18.8-xen root (hd0,0) kernel /boot/xen-3.3.0.gz com1=115200,8n1 loglvl=all guest_loglvl=all console_to_ring console=com1,vga sync_console module /boot/vmlinuz-2.6.18.8-xen root=/dev/sda1 ro console=tty0 savedefault 重启虚拟机，即可在之前指定的文件中(Host机上的/opt/vmware/Virtual Machines/debian-xen/serial-port.log)中看到虚拟机的输出信息了。  
 	<a class="read-more" href="/2009/05/debug-xen-with-vmware-serial-port/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2009/05/install-git-gitoss-gitweb-in-archlinux/">ArchLinux 下安装 git, gitosis, gitweb 服务</a></h2>
+      <span class="post-meta">
+  <time datetime='Tue, May 26, 2009' data-updated="true" itemprop="datePublished">Tue, May 26, 2009</time>
+  
+  <span class="post-categories">
+    •
+	<a href="https://blog.yxwang.me/categories/tooling">Tooling</a>
+  </span>
+  
+</span>
+
+      
+      <div class="summary">
+        参考文章：
+[1] http://hokietux.net/blog/?p=58[2] http://scie.nti.st/2007/11/14/hosting-git-repositories-the-easy-and-secure-way[3] http://www.nkuttler.de/2009/04/06/git-clone-ssh-could-not-resolve-hostname/ git  很简单，直接用pacman安装即可 sudo pacman -S git
+gitosis  gitosis是一个方便管理git仓库的工具，安装方法：
+  从yaourt或者aur下载安装gitosis-git包 http://aur.archlinux.org/packages.php?ID=23419
+  新建git用户 sudo useradd &ndash;system &ndash;shell /bin/sh &ndash;comment &lsquo;git version control&rsquo;&ndash;user-group &ndash;home-dir /home/git/ git  将开发用户的rsa公钥导入gitosis，（没有公钥的话请先运行ssh-keygen -t rsa生成） sudo -H -u git gitosis-init &lt; ~/.ssh/id_rsa.pub  如果以上步骤没有问题，那么运行git clone ssh://git@hostname/gitosis-admin.git后应该就能看到gitosis-admin.git这个目录了
+  新建项目、添加用户等操作参见[2]，这里不再赘述
+  gitweb  事实上ArchLinux中安装的git包自带了gitweb，可以用which gitweb搜到，一般默认在/usr/share/gitweb。下面假设我的http根目录为/home/httpd
+  将/usr/share/gitweb下的文件复制到/home/httpd/cgi-bin（其实似乎只要gitweb.cgi就够了） sudo cp -R /usr/share/gitweb /home/httpd/cgi-bin/   /usr/share/gitweb下的.css和.png复制到/home/httpd/html/git/
+  修改或创建/etc/gitweb.
+	<a class="read-more" href="/2009/05/install-git-gitoss-gitweb-in-archlinux/">阅读全文 →</a>
       </div>
       
     </div>

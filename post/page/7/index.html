@@ -46,8 +46,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2020",
-    "datePublished": "2020-12-16 00:59:00 \u002b0000 UTC",
-    "dateModified" : "2020-12-16 00:59:00 \u002b0000 UTC",
+    "datePublished": "2020-06-27 01:36:00 \u002b0000 UTC",
+    "dateModified" : "2020-06-27 01:36:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/post\/",
     "wordCount" : "0",
     "keywords" : [ "Blog" ]
@@ -81,30 +81,6 @@
 <div class="content">
   <div class="posts">
      
-    <div class="post">
-      <h2 class="post-title"><a href="https://blog.yxwang.me/2010/01/obfuscated-c/">这样也能算圆周率</a></h2>
-      <span class="post-date">Jan 28, 2010</span>
-      
-      <span class="post-tags">
-	
-	#<a href="https://blog.yxwang.me/tags/c">C</a>&nbsp;
-	
-	#<a href="https://blog.yxwang.me/tags/programming">Programming</a>&nbsp;
-	
-      </span>
-      
-      
-      
-      <div class="summary">
-	reddit programming版面最近的热帖，下面这个程序输出的结果是一个近似的圆周率(3.156)。
-#define _ F--&gt;00 || F-OO--; long F=00,OO=00; main(){F_OO();printf(&#34;%1.3f\n&#34;, 4.*-F/OO/OO);}F_OO() { _-_-_-_ _-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_ _-_-_-_ } 乍看下这个程序有点莫名其妙，分析一下宏后就知道它的方法了。两个全局变量F和OO分别记录 圆的面积和直径 的相反数，根据4*面积/直径/直径就能得到近似的圆周率了。
-至于面积和直径的计算，F在会在每一个_展开的地方减一，这样就得到了圆的面积。直径的计算要展开几行代码才能看得更清楚：
-F--&gt;00 || F-OO--; -F--&gt;00 || F-OO--; -F--&gt;00 || F-OO--; -F--&gt;00 || F-OO--; F--&gt;00 || F-OO--; -F--&gt;00 || F-OO--; -F--&gt;00 || F-OO--; -F--&gt;00 || F-OO--; -F--&gt;00 || F-OO--; -F--&gt;00 || F-OO--; -F--&gt;00 || F-OO--; -F--&gt;00 || F-OO--; -F--&gt;00 || F-OO--; 这是用cpp展开圆形前两行代码的结果，因为或运算的特殊性，F- OO- -只会在每一段的第一行执行，所以OO- -执行的次数就等于圆的直径了。
-	<a class="read-more" href="/2010/01/obfuscated-c/">阅读全文 →</a>
-      </div>
-      
-    </div>
-    
     <div class="post">
       <h2 class="post-title"><a href="https://blog.yxwang.me/2010/01/force-int-0x80-for-syscall/">强制程序使用int 0x80做系统调用</a></h2>
       <span class="post-date">Jan 26, 2010</span>
@@ -344,6 +320,32 @@ remake也是个不错的选择：“remakeis a patched and modernized version of
 	这周买了块西数的1T硬盘，用来放各种美剧/高清电影。装好进入Win7后提示检测到新硬盘，然后进入磁盘管理一看发现磁盘大小只有31兆，重启进入BIOS看到的磁盘容量是0MB。换了一台电脑问题依然存在。
 于是求助superuser，发现了这篇文章http://www.pcstats.com/articleview.cfm?articleid=1139&amp;page=12，貌似是LBA(Logical Block Addressing)相关的问题，下载了个HDD Capacity Restore Tool修复后问题解决。
 	<a class="read-more" href="/2009/10/only-31m-disk-space-detected/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2009/09/interesting-quines/">几个有趣的 Quine 变种</a></h2>
+      <span class="post-date">Sep 28, 2009</span>
+      
+      <span class="post-tags">
+	
+	#<a href="https://blog.yxwang.me/tags/algorithms">Algorithms</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/c">C</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/quine">Quine</a>&nbsp;
+	
+      </span>
+      
+      
+      
+      <div class="summary">
+	Quine是指一类能生成自己的程序，例如下面这个C程序运行后就能把自己的源码完整的打印出来：
+char*f=&#34;char*f=%c%s%c;main() {printf(f,34,f,34,10);}%c&#34;; main(){printf(f,34,f,34,10);} 这类程序的构造方法计算理论导引或者其他相关的书籍中都有涉及，这里不再赘述。这个月看到几个Quine的变种，都挺有趣的。
+首先是sigfpe构造出来的三阶Quine，这是一个只有两行的Haskell程序：
+q a b c=putStrLn $ b ++ [toEnum 10,&#39;q&#39;,&#39;(&#39;] ++ show b ++ [&#39;,&#39;] ++ show c ++ [&#39;,&#39;] ++ show a ++ [&#39;)&#39;] main=q &#34;q a b c=putStrLn $ b ++ [toEnum 10,&#39;q&#39;,&#39;(&#39;] ++ show b ++ [&#39;,&#39;] ++ show c ++ [&#39;,&#39;] ++ show a ++ [&#39;)&#39;]&#34; &#34;def q(a,b,c):print b+chr(10)+&#39;q(&#39;+repr(b)+&#39;,&#39;+repr(c)+&#39;,&#39;+repr(a)+&#39;)&#39;&#34; &#34;def e(x) return 34.chr+x+34.chr end;def q(a,b,c) print b+10.chr+&#39;main=q &#39;+e(b)+&#39; &#39;+e(c)+&#39; &#39;+e(a)+&#39; &#39;+10.chr end&#34; 这段程序牛逼在哪里呢？运行后这个程序首先会输出一个Python程序，然后再运行这个Python程序会输出一段Ruby代码，最后这个Ruby代码的运行结果是原来的程序。或者说
+	<a class="read-more" href="/2009/09/interesting-quines/">阅读全文 →</a>
       </div>
       
     </div>

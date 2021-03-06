@@ -46,8 +46,8 @@
     "accountablePerson" : "",
     "copyrightHolder" : "",
     "copyrightYear" : "2020",
-    "datePublished": "2020-12-16 00:59:00 \u002b0000 UTC",
-    "dateModified" : "2020-12-16 00:59:00 \u002b0000 UTC",
+    "datePublished": "2020-06-27 01:36:00 \u002b0000 UTC",
+    "dateModified" : "2020-06-27 01:36:00 \u002b0000 UTC",
     "url" : "https:\/\/blog.yxwang.me\/post\/",
     "wordCount" : "0",
     "keywords" : [ "Blog" ]
@@ -81,33 +81,6 @@
 <div class="content">
   <div class="posts">
      
-    <div class="post">
-      <h2 class="post-title"><a href="https://blog.yxwang.me/2013/01/order-of-formats-in-response-to-does-matter/">Rails 中关于 respond_to 不同格式的顺序</a></h2>
-      <span class="post-date">Jan 4, 2013</span>
-      
-      <span class="post-tags">
-	
-	#<a href="https://blog.yxwang.me/tags/programming">Programming</a>&nbsp;
-	
-	#<a href="https://blog.yxwang.me/tags/rails">Rails</a>&nbsp;
-	
-      </span>
-      
-      
-      
-      <div class="summary">
-	<p>以前没注意过 Rails controller 中 respond_to 的格式顺序，后来碰到了一个诡异的 bug，才发现这里的顺序对程序行为是有影响的。bug 的现象是用某个应用商店桌面端浏览网站时，会出现返回 JSON 而不是网页的情况。由于当时报告错误的用户给出的 bug 描述是「点击链接后出现乱码」，导致 debug 一开始没找对方向，废了不少功夫才解决这个问题。</p>
-<p>问题就出在不同格式的声明先后上，有问题的代码是：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">respond_to <span style="color:#66d9ef">do</span> <span style="color:#f92672">|</span>format<span style="color:#f92672">|</span>
-  format<span style="color:#f92672">.</span>json { render <span style="color:#e6db74">json</span>: @items }
-  format<span style="color:#f92672">.</span>html
-<span style="color:#66d9ef">end</span>
-</code></pre></div>
-	<a class="read-more" href="/2013/01/order-of-formats-in-response-to-does-matter/">阅读全文 →</a>
-      </div>
-      
-    </div>
-    
     <div class="post">
       <h2 class="post-title"><a href="https://blog.yxwang.me/2012/12/multiple-feeds-in-octopress/">为 Octopress 添加多个 Atom 地址</a></h2>
       <span class="post-date">Dec 31, 2012</span>
@@ -339,6 +312,29 @@
 好在 Things Cloud 同步走的是 HTTPS 协议，所以恢复方法也很简单，换用一个没有被污染的 DNS 服务器就好。对于越狱了的机器，也可以直接修改 iOS 上的 /etc/hosts 文件，在里面添加下面两行地址。
 203.208.46.161 multithreaded.thingscloud.appspot.com 203.208.46.161 thingscloud.appspot.com 
 	<a class="read-more" href="/2012/08/fix-things-cloud/">阅读全文 →</a>
+      </div>
+      
+    </div>
+    
+    <div class="post">
+      <h2 class="post-title"><a href="https://blog.yxwang.me/2012/07/android-tap-timetout/">Android 中点击事件的判断</a></h2>
+      <span class="post-date">Jul 21, 2012</span>
+      
+      <span class="post-tags">
+	
+	#<a href="https://blog.yxwang.me/tags/android">Android</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/computer-system">Computer System</a>&nbsp;
+	
+	#<a href="https://blog.yxwang.me/tags/mobile">Mobile</a>&nbsp;
+	
+      </span>
+      
+      
+      
+      <div class="summary">
+	<p>最近实验室做的一个东西会向 Android 应用快速注入一系列触屏事件，模拟用户的点击。但是我们发现当按下和弹起的 MotionEvent 之间时间间隔过小（例如小于 100ms）时，会导致该事件被忽略。看了代码后发现 Android 中按下和弹起之间时间间隔要在 115ms 以上才会被认为是一个点击事件。这里结合 Android 的源码分析一下点击事件的产生过程。</p>
+	<a class="read-more" href="/2012/07/android-tap-timetout/">阅读全文 →</a>
       </div>
       
     </div>
